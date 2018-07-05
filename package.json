@@ -1,0 +1,26 @@
+{
+  "name": "otwclient",
+  "version": "1.0.0",
+  "description": "OpenTibiaWebClient",
+  "main": "init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gesior.pl (Jerzy Skalski)",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^1.11.3",
+    "jqueryui": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^2.0.40",
+    "@types/jqueryui": "^1.11.32",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015-native-modules": "^6.9.4",
+    "ts-loader": "2.0.1",
+    "typescript": "2.2.1",
+    "webpack": "^2.2.1",
+    "path": "*"
+  }
+}
