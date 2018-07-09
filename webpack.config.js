@@ -2,13 +2,13 @@ let webpack = require('webpack');
 let path = require('path');
 
 let babelOptions =  {
-  "presets": "es2015"
+  "presets": ["es2015", "stage-0"]
 };
 
 module.exports = {
   entry:
   {
-    index: './init.ts'
+    index: ['babel-polyfill', './init.ts']
   },
   output: {
     filename: '[name].js',

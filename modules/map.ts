@@ -1,13 +1,14 @@
-import {AwareRange, Light} from "./structures";
 import {Creature} from "./creature";
 import {Tile} from "./tile";
 import {Position} from "./position";
 import {Thing} from "./thing";
+import {AwareRange} from "./structures/awarerange";
+import {Light} from "./structures/light";
 
 export class Map {
+    m_tiles
     m_centralPosition: Position;
     m_awareRange: AwareRange = new AwareRange();
-    tmpCreature = new Creature();
 
     getTile(position: Position): Tile {
         return new Tile();
@@ -18,7 +19,7 @@ export class Map {
     }
 
     getCreatureById(id: number): Creature {
-        return this.tmpCreature;
+        return new Creature();
     }
 
 
@@ -42,18 +43,22 @@ export class Map {
     }
 
     removeThing(thing: Thing) {
-        return false;
+        return true;
     }
 
     setLight(light: Light) {
 
     }
 
-    getThing(pos: Position, stackpos: number) {
-
+    getThing(pos: Position, stackpos: number): Thing {
+        return new Creature();
     }
 
     removeCreatureById(removeId: number) {
+        
+    }
+
+    addCreature(creature: any) {
         
     }
 }

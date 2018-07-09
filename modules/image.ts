@@ -1,6 +1,7 @@
 import {error} from "./log";
 import {Color} from "./color";
-import {Point, Size} from "./structures";
+import {Size} from "./structures/size";
+import {Point} from "./structures/point";
 
 export class Image {
     blit(point: Point, image: Image) {

@@ -1,4 +1,3 @@
-import {Light, MarketData, Point, Size} from "./structures";
 import {LightView} from "./lightview";
 import {Tile} from "./tile";
 import {Container} from "./container";
@@ -9,6 +8,10 @@ import {Position} from "./position";
 import {error} from "./log";
 import {g_things} from "./thingtypemanager";
 import {Animator} from "./animator";
+import {Point} from "./structures/point";
+import {Size} from "./structures/size";
+import {Light} from "./structures/light";
+import {MarketData} from "./structures/marketdata";
 
 
 export class Thing {
@@ -126,7 +129,7 @@ export class Thing {
     }
 
     rawGetThingType(): ThingType {
-        return g_things.getNullThingType();
+        return this.getThingType();
     }
 
     getSize(): Size {

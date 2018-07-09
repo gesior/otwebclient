@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Otc;
+export var Otc;
 (function (Otc) {
     Otc[Otc["TILE_PIXELS"] = 32] = "TILE_PIXELS";
     Otc[Otc["MAX_ELEVATION"] = 24] = "MAX_ELEVATION";
@@ -16,8 +14,8 @@ var Otc;
     Otc[Otc["MAX_STATIC_TEXT_WIDTH"] = 200] = "MAX_STATIC_TEXT_WIDTH";
     Otc[Otc["MAX_AUTOWALK_STEPS_RETRY"] = 10] = "MAX_AUTOWALK_STEPS_RETRY";
     Otc[Otc["MAX_AUTOWALK_DIST"] = 127] = "MAX_AUTOWALK_DIST";
-})(Otc = exports.Otc || (exports.Otc = {}));
-var DrawFlags;
+})(Otc || (Otc = {}));
+export var DrawFlags;
 (function (DrawFlags) {
     DrawFlags[DrawFlags["DrawGround"] = 1] = "DrawGround";
     DrawFlags[DrawFlags["DrawGroundBorders"] = 2] = "DrawGroundBorders";
@@ -37,8 +35,8 @@ var DrawFlags;
     DrawFlags[DrawFlags["DrawManaBar"] = 32768] = "DrawManaBar";
     DrawFlags[DrawFlags["DrawWalls"] = 12] = "DrawWalls";
     DrawFlags[DrawFlags["DrawEverything"] = 65535] = "DrawEverything";
-})(DrawFlags = exports.DrawFlags || (exports.DrawFlags = {}));
-var DatOpts;
+})(DrawFlags || (DrawFlags = {}));
+export var DatOpts;
 (function (DatOpts) {
     DatOpts[DatOpts["DatGround"] = 0] = "DatGround";
     DatOpts[DatOpts["DatGroundClip"] = 1] = "DatGroundClip";
@@ -75,8 +73,8 @@ var DatOpts;
     DatOpts[DatOpts["DatCloth"] = 32] = "DatCloth";
     DatOpts[DatOpts["DatAnimation"] = 33] = "DatAnimation";
     DatOpts[DatOpts["DatLastOpt"] = 255] = "DatLastOpt";
-})(DatOpts = exports.DatOpts || (exports.DatOpts = {}));
-var InventorySlot;
+})(DatOpts || (DatOpts = {}));
+export var InventorySlot;
 (function (InventorySlot) {
     InventorySlot[InventorySlot["InventorySlotHead"] = 1] = "InventorySlotHead";
     InventorySlot[InventorySlot["InventorySlotNecklace"] = 2] = "InventorySlotNecklace";
@@ -94,8 +92,8 @@ var InventorySlot;
     InventorySlot[InventorySlot["InventorySlotExt3"] = 14] = "InventorySlotExt3";
     InventorySlot[InventorySlot["InventorySlotExt4"] = 15] = "InventorySlotExt4";
     InventorySlot[InventorySlot["LastInventorySlot"] = 16] = "LastInventorySlot";
-})(InventorySlot = exports.InventorySlot || (exports.InventorySlot = {}));
-var Statistic;
+})(InventorySlot || (InventorySlot = {}));
+export var Statistic;
 (function (Statistic) {
     Statistic[Statistic["Health"] = 0] = "Health";
     Statistic[Statistic["MaxHealth"] = 1] = "MaxHealth";
@@ -110,8 +108,8 @@ var Statistic;
     Statistic[Statistic["Soul"] = 10] = "Soul";
     Statistic[Statistic["Stamina"] = 11] = "Stamina";
     Statistic[Statistic["LastStatistic"] = 12] = "LastStatistic";
-})(Statistic = exports.Statistic || (exports.Statistic = {}));
-var Skill;
+})(Statistic || (Statistic = {}));
+export var Skill;
 (function (Skill) {
     Skill[Skill["Fist"] = 0] = "Fist";
     Skill[Skill["Club"] = 1] = "Club";
@@ -127,8 +125,8 @@ var Skill;
     Skill[Skill["ManaLeechChance"] = 11] = "ManaLeechChance";
     Skill[Skill["ManaLeechAmount"] = 12] = "ManaLeechAmount";
     Skill[Skill["LastSkill"] = 13] = "LastSkill";
-})(Skill = exports.Skill || (exports.Skill = {}));
-var Direction;
+})(Skill || (Skill = {}));
+export var Direction;
 (function (Direction) {
     Direction[Direction["North"] = 0] = "North";
     Direction[Direction["East"] = 1] = "East";
@@ -139,8 +137,8 @@ var Direction;
     Direction[Direction["SouthWest"] = 6] = "SouthWest";
     Direction[Direction["NorthWest"] = 7] = "NorthWest";
     Direction[Direction["InvalidDirection"] = 8] = "InvalidDirection";
-})(Direction = exports.Direction || (exports.Direction = {}));
-var FluidsColor;
+})(Direction || (Direction = {}));
+export var FluidsColor;
 (function (FluidsColor) {
     FluidsColor[FluidsColor["FluidTransparent"] = 0] = "FluidTransparent";
     FluidsColor[FluidsColor["FluidBlue"] = 1] = "FluidBlue";
@@ -150,8 +148,8 @@ var FluidsColor;
     FluidsColor[FluidsColor["FluidYellow"] = 5] = "FluidYellow";
     FluidsColor[FluidsColor["FluidWhite"] = 6] = "FluidWhite";
     FluidsColor[FluidsColor["FluidPurple"] = 7] = "FluidPurple";
-})(FluidsColor = exports.FluidsColor || (exports.FluidsColor = {}));
-var FluidsType;
+})(FluidsColor || (FluidsColor = {}));
+export var FluidsType;
 (function (FluidsType) {
     FluidsType[FluidsType["FluidNone"] = 0] = "FluidNone";
     FluidsType[FluidsType["FluidWater"] = 1] = "FluidWater";
@@ -171,26 +169,26 @@ var FluidsType;
     FluidsType[FluidsType["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
     FluidsType[FluidsType["FluidTea"] = 16] = "FluidTea";
     FluidsType[FluidsType["FluidMead"] = 17] = "FluidMead";
-})(FluidsType = exports.FluidsType || (exports.FluidsType = {}));
-var FightModes;
+})(FluidsType || (FluidsType = {}));
+export var FightModes;
 (function (FightModes) {
     FightModes[FightModes["FightOffensive"] = 1] = "FightOffensive";
     FightModes[FightModes["FightBalanced"] = 2] = "FightBalanced";
     FightModes[FightModes["FightDefensive"] = 3] = "FightDefensive";
-})(FightModes = exports.FightModes || (exports.FightModes = {}));
-var ChaseModes;
+})(FightModes || (FightModes = {}));
+export var ChaseModes;
 (function (ChaseModes) {
     ChaseModes[ChaseModes["DontChase"] = 0] = "DontChase";
     ChaseModes[ChaseModes["ChaseOpponent"] = 1] = "ChaseOpponent";
-})(ChaseModes = exports.ChaseModes || (exports.ChaseModes = {}));
-var PVPModes;
+})(ChaseModes || (ChaseModes = {}));
+export var PVPModes;
 (function (PVPModes) {
     PVPModes[PVPModes["WhiteDove"] = 0] = "WhiteDove";
     PVPModes[PVPModes["WhiteHand"] = 1] = "WhiteHand";
     PVPModes[PVPModes["YellowHand"] = 2] = "YellowHand";
     PVPModes[PVPModes["RedFist"] = 3] = "RedFist";
-})(PVPModes = exports.PVPModes || (exports.PVPModes = {}));
-var PlayerSkulls;
+})(PVPModes || (PVPModes = {}));
+export var PlayerSkulls;
 (function (PlayerSkulls) {
     PlayerSkulls[PlayerSkulls["SkullNone"] = 0] = "SkullNone";
     PlayerSkulls[PlayerSkulls["SkullYellow"] = 1] = "SkullYellow";
@@ -199,9 +197,9 @@ var PlayerSkulls;
     PlayerSkulls[PlayerSkulls["SkullRed"] = 4] = "SkullRed";
     PlayerSkulls[PlayerSkulls["SkullBlack"] = 5] = "SkullBlack";
     PlayerSkulls[PlayerSkulls["SkullOrange"] = 6] = "SkullOrange";
-})(PlayerSkulls = exports.PlayerSkulls || (exports.PlayerSkulls = {}));
+})(PlayerSkulls || (PlayerSkulls = {}));
 ;
-var PlayerShields;
+export var PlayerShields;
 (function (PlayerShields) {
     PlayerShields[PlayerShields["ShieldNone"] = 0] = "ShieldNone";
     PlayerShields[PlayerShields["ShieldWhiteYellow"] = 1] = "ShieldWhiteYellow";
@@ -215,8 +213,8 @@ var PlayerShields;
     PlayerShields[PlayerShields["ShieldBlueNoSharedExp"] = 9] = "ShieldBlueNoSharedExp";
     PlayerShields[PlayerShields["ShieldYellowNoSharedExp"] = 10] = "ShieldYellowNoSharedExp";
     PlayerShields[PlayerShields["ShieldGray"] = 11] = "ShieldGray"; // 11 member of another party
-})(PlayerShields = exports.PlayerShields || (exports.PlayerShields = {}));
-var PlayerEmblems;
+})(PlayerShields || (PlayerShields = {}));
+export var PlayerEmblems;
 (function (PlayerEmblems) {
     PlayerEmblems[PlayerEmblems["EmblemNone"] = 0] = "EmblemNone";
     PlayerEmblems[PlayerEmblems["EmblemGreen"] = 1] = "EmblemGreen";
@@ -224,16 +222,16 @@ var PlayerEmblems;
     PlayerEmblems[PlayerEmblems["EmblemBlue"] = 3] = "EmblemBlue";
     PlayerEmblems[PlayerEmblems["EmblemMember"] = 4] = "EmblemMember";
     PlayerEmblems[PlayerEmblems["EmblemOther"] = 5] = "EmblemOther";
-})(PlayerEmblems = exports.PlayerEmblems || (exports.PlayerEmblems = {}));
-var CreatureIcons;
+})(PlayerEmblems || (PlayerEmblems = {}));
+export var CreatureIcons;
 (function (CreatureIcons) {
     CreatureIcons[CreatureIcons["NpcIconNone"] = 0] = "NpcIconNone";
     CreatureIcons[CreatureIcons["NpcIconChat"] = 1] = "NpcIconChat";
     CreatureIcons[CreatureIcons["NpcIconTrade"] = 2] = "NpcIconTrade";
     CreatureIcons[CreatureIcons["NpcIconQuest"] = 3] = "NpcIconQuest";
     CreatureIcons[CreatureIcons["NpcIconTradeQuest"] = 4] = "NpcIconTradeQuest";
-})(CreatureIcons = exports.CreatureIcons || (exports.CreatureIcons = {}));
-var PlayerStates;
+})(CreatureIcons || (CreatureIcons = {}));
+export var PlayerStates;
 (function (PlayerStates) {
     PlayerStates[PlayerStates["IconNone"] = 0] = "IconNone";
     PlayerStates[PlayerStates["IconPoison"] = 1] = "IconPoison";
@@ -253,8 +251,8 @@ var PlayerStates;
     PlayerStates[PlayerStates["IconPz"] = 16384] = "IconPz";
     PlayerStates[PlayerStates["IconBleeding"] = 32768] = "IconBleeding";
     PlayerStates[PlayerStates["IconHungry"] = 65536] = "IconHungry";
-})(PlayerStates = exports.PlayerStates || (exports.PlayerStates = {}));
-var MessageMode;
+})(PlayerStates || (PlayerStates = {}));
+export var MessageMode;
 (function (MessageMode) {
     MessageMode[MessageMode["MessageNone"] = 0] = "MessageNone";
     MessageMode[MessageMode["MessageSay"] = 1] = "MessageSay";
@@ -311,8 +309,8 @@ var MessageMode;
     MessageMode[MessageMode["MessageNpcFromStartBlock"] = 51] = "MessageNpcFromStartBlock";
     MessageMode[MessageMode["LastMessage"] = 52] = "LastMessage";
     MessageMode[MessageMode["MessageInvalid"] = 255] = "MessageInvalid";
-})(MessageMode = exports.MessageMode || (exports.MessageMode = {}));
-var GameFeature;
+})(MessageMode || (MessageMode = {}));
+export var GameFeature;
 (function (GameFeature) {
     GameFeature[GameFeature["GameProtocolChecksum"] = 1] = "GameProtocolChecksum";
     GameFeature[GameFeature["GameAccountNames"] = 2] = "GameAccountNames";
@@ -389,23 +387,23 @@ var GameFeature;
     GameFeature[GameFeature["GameIngameStoreServiceType"] = 75] = "GameIngameStoreServiceType";
     GameFeature[GameFeature["GameAdditionalSkills"] = 76] = "GameAdditionalSkills";
     GameFeature[GameFeature["LastGameFeature"] = 101] = "LastGameFeature";
-})(GameFeature = exports.GameFeature || (exports.GameFeature = {}));
-var PathFindResult;
+})(GameFeature || (GameFeature = {}));
+export var PathFindResult;
 (function (PathFindResult) {
     PathFindResult[PathFindResult["PathFindResultOk"] = 0] = "PathFindResultOk";
     PathFindResult[PathFindResult["PathFindResultSamePosition"] = 1] = "PathFindResultSamePosition";
     PathFindResult[PathFindResult["PathFindResultImpossible"] = 2] = "PathFindResultImpossible";
     PathFindResult[PathFindResult["PathFindResultTooFar"] = 3] = "PathFindResultTooFar";
     PathFindResult[PathFindResult["PathFindResultNoWay"] = 4] = "PathFindResultNoWay";
-})(PathFindResult = exports.PathFindResult || (exports.PathFindResult = {}));
-var PathFindFlags;
+})(PathFindResult || (PathFindResult = {}));
+export var PathFindFlags;
 (function (PathFindFlags) {
     PathFindFlags[PathFindFlags["PathFindAllowNotSeenTiles"] = 1] = "PathFindAllowNotSeenTiles";
     PathFindFlags[PathFindFlags["PathFindAllowCreatures"] = 2] = "PathFindAllowCreatures";
     PathFindFlags[PathFindFlags["PathFindAllowNonPathable"] = 4] = "PathFindAllowNonPathable";
     PathFindFlags[PathFindFlags["PathFindAllowNonWalkable"] = 8] = "PathFindAllowNonWalkable";
-})(PathFindFlags = exports.PathFindFlags || (exports.PathFindFlags = {}));
-var AutomapFlags;
+})(PathFindFlags || (PathFindFlags = {}));
+export var AutomapFlags;
 (function (AutomapFlags) {
     AutomapFlags[AutomapFlags["MapMarkTick"] = 0] = "MapMarkTick";
     AutomapFlags[AutomapFlags["MapMarkQuestion"] = 1] = "MapMarkQuestion";
@@ -427,21 +425,21 @@ var AutomapFlags;
     AutomapFlags[AutomapFlags["MapMarkRedWest"] = 17] = "MapMarkRedWest";
     AutomapFlags[AutomapFlags["MapMarkGreenNorth"] = 18] = "MapMarkGreenNorth";
     AutomapFlags[AutomapFlags["MapMarkGreenSouth"] = 19] = "MapMarkGreenSouth";
-})(AutomapFlags = exports.AutomapFlags || (exports.AutomapFlags = {}));
-var VipState;
+})(AutomapFlags || (AutomapFlags = {}));
+export var VipState;
 (function (VipState) {
     VipState[VipState["VipStateOffline"] = 0] = "VipStateOffline";
     VipState[VipState["VipStateOnline"] = 1] = "VipStateOnline";
     VipState[VipState["VipStatePending"] = 2] = "VipStatePending";
-})(VipState = exports.VipState || (exports.VipState = {}));
-var SpeedFormula;
+})(VipState || (VipState = {}));
+export var SpeedFormula;
 (function (SpeedFormula) {
     SpeedFormula[SpeedFormula["SpeedFormulaA"] = 0] = "SpeedFormulaA";
     SpeedFormula[SpeedFormula["SpeedFormulaB"] = 1] = "SpeedFormulaB";
     SpeedFormula[SpeedFormula["SpeedFormulaC"] = 2] = "SpeedFormulaC";
     SpeedFormula[SpeedFormula["LastSpeedFormula"] = 3] = "LastSpeedFormula";
-})(SpeedFormula = exports.SpeedFormula || (exports.SpeedFormula = {}));
-var Blessings;
+})(SpeedFormula || (SpeedFormula = {}));
+export var Blessings;
 (function (Blessings) {
     Blessings[Blessings["BlessingNone"] = 0] = "BlessingNone";
     Blessings[Blessings["BlessingAdventurer"] = 1] = "BlessingAdventurer";
@@ -450,18 +448,18 @@ var Blessings;
     Blessings[Blessings["BlessingFireOfSuns"] = 8] = "BlessingFireOfSuns";
     Blessings[Blessings["BlessingWisdomOfSolitude"] = 16] = "BlessingWisdomOfSolitude";
     Blessings[Blessings["BlessingSparkOfPhoenix"] = 32] = "BlessingSparkOfPhoenix";
-})(Blessings = exports.Blessings || (exports.Blessings = {}));
-var DeathType;
+})(Blessings || (Blessings = {}));
+export var DeathType;
 (function (DeathType) {
     DeathType[DeathType["DeathRegular"] = 0] = "DeathRegular";
     DeathType[DeathType["DeathBlessed"] = 1] = "DeathBlessed";
-})(DeathType = exports.DeathType || (exports.DeathType = {}));
-var StoreProductTypes;
+})(DeathType || (DeathType = {}));
+export var StoreProductTypes;
 (function (StoreProductTypes) {
     StoreProductTypes[StoreProductTypes["ProductTypeOther"] = 0] = "ProductTypeOther";
     StoreProductTypes[StoreProductTypes["ProductTypeNameChange"] = 1] = "ProductTypeNameChange";
-})(StoreProductTypes = exports.StoreProductTypes || (exports.StoreProductTypes = {}));
-var StoreErrorTypes;
+})(StoreProductTypes || (StoreProductTypes = {}));
+export var StoreErrorTypes;
 (function (StoreErrorTypes) {
     StoreErrorTypes[StoreErrorTypes["StoreNoError"] = -1] = "StoreNoError";
     StoreErrorTypes[StoreErrorTypes["StorePurchaseError"] = 0] = "StorePurchaseError";
@@ -469,21 +467,21 @@ var StoreErrorTypes;
     StoreErrorTypes[StoreErrorTypes["StoreHistoryError"] = 2] = "StoreHistoryError";
     StoreErrorTypes[StoreErrorTypes["StoreTransferError"] = 3] = "StoreTransferError";
     StoreErrorTypes[StoreErrorTypes["StoreInformation"] = 4] = "StoreInformation";
-})(StoreErrorTypes = exports.StoreErrorTypes || (exports.StoreErrorTypes = {}));
-var StoreStates;
+})(StoreErrorTypes || (StoreErrorTypes = {}));
+export var StoreStates;
 (function (StoreStates) {
     StoreStates[StoreStates["StateNone"] = 0] = "StateNone";
     StoreStates[StoreStates["StateNew"] = 1] = "StateNew";
     StoreStates[StoreStates["StateSale"] = 2] = "StateSale";
     StoreStates[StoreStates["StateTimed"] = 3] = "StateTimed";
-})(StoreStates = exports.StoreStates || (exports.StoreStates = {}));
-var FrameGroupType;
+})(StoreStates || (StoreStates = {}));
+export var FrameGroupType;
 (function (FrameGroupType) {
     FrameGroupType[FrameGroupType["FrameGroupDefault"] = 0] = "FrameGroupDefault";
     FrameGroupType[FrameGroupType["FrameGroupIdle"] = 0] = "FrameGroupIdle";
     FrameGroupType[FrameGroupType["FrameGroupMoving"] = 1] = "FrameGroupMoving";
-})(FrameGroupType = exports.FrameGroupType || (exports.FrameGroupType = {}));
-var ThingCategory;
+})(FrameGroupType || (FrameGroupType = {}));
+export var ThingCategory;
 (function (ThingCategory) {
     ThingCategory[ThingCategory["ThingCategoryItem"] = 0] = "ThingCategoryItem";
     ThingCategory[ThingCategory["ThingCategoryCreature"] = 1] = "ThingCategoryCreature";
@@ -491,8 +489,8 @@ var ThingCategory;
     ThingCategory[ThingCategory["ThingCategoryMissile"] = 3] = "ThingCategoryMissile";
     ThingCategory[ThingCategory["ThingInvalidCategory"] = 4] = "ThingInvalidCategory";
     ThingCategory[ThingCategory["ThingLastCategory"] = 4] = "ThingLastCategory";
-})(ThingCategory = exports.ThingCategory || (exports.ThingCategory = {}));
-var ThingAttr;
+})(ThingCategory || (ThingCategory = {}));
+export var ThingAttr;
 (function (ThingAttr) {
     ThingAttr[ThingAttr["ThingAttrGround"] = 0] = "ThingAttrGround";
     ThingAttr[ThingAttr["ThingAttrGroundBorder"] = 1] = "ThingAttrGroundBorder";
@@ -539,23 +537,23 @@ var ThingAttr;
     ThingAttr[ThingAttr["ThingAttrNoMoveAnimation"] = 253] = "ThingAttrNoMoveAnimation";
     ThingAttr[ThingAttr["ThingAttrChargeable"] = 254] = "ThingAttrChargeable";
     ThingAttr[ThingAttr["ThingLastAttr"] = 255] = "ThingLastAttr";
-})(ThingAttr = exports.ThingAttr || (exports.ThingAttr = {}));
-var SpriteMask;
+})(ThingAttr || (ThingAttr = {}));
+export var SpriteMask;
 (function (SpriteMask) {
     SpriteMask[SpriteMask["SpriteMaskRed"] = 1] = "SpriteMaskRed";
     SpriteMask[SpriteMask["SpriteMaskGreen"] = 2] = "SpriteMaskGreen";
     SpriteMask[SpriteMask["SpriteMaskBlue"] = 3] = "SpriteMaskBlue";
     SpriteMask[SpriteMask["SpriteMaskYellow"] = 4] = "SpriteMaskYellow";
-})(SpriteMask = exports.SpriteMask || (exports.SpriteMask = {}));
-var AnimationPhase;
+})(SpriteMask || (SpriteMask = {}));
+export var AnimationPhase;
 (function (AnimationPhase) {
     AnimationPhase[AnimationPhase["AnimPhaseAutomatic"] = -1] = "AnimPhaseAutomatic";
     AnimationPhase[AnimationPhase["AnimPhaseRandom"] = 254] = "AnimPhaseRandom";
     AnimationPhase[AnimationPhase["AnimPhaseAsync"] = 255] = "AnimPhaseAsync";
-})(AnimationPhase = exports.AnimationPhase || (exports.AnimationPhase = {}));
-var AnimationDirection;
+})(AnimationPhase || (AnimationPhase = {}));
+export var AnimationDirection;
 (function (AnimationDirection) {
     AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
     AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
-})(AnimationDirection = exports.AnimationDirection || (exports.AnimationDirection = {}));
+})(AnimationDirection || (AnimationDirection = {}));
 //# sourceMappingURL=const.js.map

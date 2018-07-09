@@ -1,5 +1,7 @@
+import {Thing} from "./thing";
 
-export class StaticText {
-
-
+export class StaticText extends Thing {
+    isStaticText() {
+        return true;
+    }
 }

@@ -1,1 +1,1 @@
-{"version":3,"file":"statictext.js","sourceRoot":"","sources":["statictext.ts"],"names":[],"mappings":";;AACA;IAAA;IAGA,CAAC;IAAD,iBAAC;AAAD,CAAC,AAHD,IAGC;AAHY,gCAAU"}
+{"version":3,"file":"statictext.js","sourceRoot":"","sources":["statictext.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,EAAC,MAAM,SAAS,CAAC;AAE9B,MAAM,iBAAkB,SAAQ,KAAK;IACjC,YAAY;QACR,OAAO,IAAI,CAAC;IAChB,CAAC;CACJ"}

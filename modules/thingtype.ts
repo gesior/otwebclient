@@ -1,5 +1,4 @@
 import {FrameGroupType, GameFeature, Otc, ThingAttr, ThingCategory} from "./constants/const";
-import {Light, MarketData, Point, Rect, Size, Texture, ThingTypeAttribs} from "./structures";
 import {g_game} from "./game";
 import {InputFile} from "./inputfile";
 import {error} from "./log";
@@ -8,6 +7,13 @@ import {Animator} from "./animator";
 import {Image} from "./image";
 import {Color} from "./color";
 import {g_sprites} from "./spritemanager";
+import {ThingTypeAttribs} from "./structures/thingtypeattribs";
+import {Size} from "./structures/size";
+import {Point} from "./structures/point";
+import {Texture} from "./structures/texture";
+import {Rect} from "./structures/rect";
+import {MarketData} from "./structures/marketdata";
+import {Light} from "./structures/light";
 
 export class ThingType {
     static maskColors = [Color.red, Color.green, Color.blue, Color.yellow];
@@ -31,8 +37,8 @@ export class ThingType {
     m_opacity: number;
     m_customImage: string;
 
-    m_spritesIndex: number[];
-    m_textures: Texture[];
+    m_spritesIndex: number[] = [];
+    m_textures: Texture[] = [];
     m_texturesFramesRects: Rect[][];
     m_texturesFramesOriginRects: Rect[][];
     m_texturesFramesOffsets: Point[][];
@@ -42,7 +48,9 @@ export class ThingType {
         this.m_id = clientId;
         this.m_category = category;
 
-        let count = 0, attr = -1;
+        //console.log('load', clientId, fin.getReadPos(), fin.data.buffer.slice(fin.getReadPos()));
+        let count = 0;
+        let attr = -1;
         let done = false;
         for (let i = 0; i < ThingAttr.ThingLastAttr; ++i) {
             count++;
@@ -121,6 +129,7 @@ export class ThingType {
 
             switch (attr) {
                 case ThingAttr.ThingAttrDisplacement: {
+                    this.m_displacement = new Point(0, 0);
                     if (g_game.getClientVersion() >= 755) {
                         this.m_displacement.x = fin.getU16();
                         this.m_displacement.y = fin.getU16();
@@ -178,6 +187,7 @@ export class ThingType {
         this.m_animationPhases = 0;
         let totalSpritesCount = 0;
 
+        //console.log(this.m_attribs.attribs);
         for (let i = 0; i < groupCount; ++i) {
             let frameGroupType = FrameGroupType.FrameGroupDefault;
             if (hasFrameGroups)
@@ -212,12 +222,14 @@ export class ThingType {
             let totalSprites = this.m_size.area() * this.m_layers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ * groupAnimationsPhases;
 
             if ((totalSpritesCount + totalSprites) > 4096)
-                error("a thing type has more than 4096 sprites");
+                error("a thing type has more than 4096 sprites", totalSprites, totalSpritesCount, this.m_size.area(), this.m_layers, this.m_numPatternX, this.m_numPatternY, this.m_numPatternZ, groupAnimationsPhases);
 
             //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
+            this.m_spritesIndex = [];
             for (let i = totalSpritesCount; i < (totalSpritesCount + totalSprites); i++)
                 this.m_spritesIndex[i] = g_game.getFeature(GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
 
+            //console.log('spr', this.m_spritesIndex);
             totalSpritesCount += totalSprites;
         }
         /*
@@ -347,7 +359,7 @@ export class ThingType {
     }
 
     isOnBottom(): boolean {
-        return this.m_attribs.has(ThingAttr.ThingAttrOnBottom);
+        return this.m_attribs.has(ThingAttr.ThingAttrWritable);
     }
 
     isOnTop(): boolean {

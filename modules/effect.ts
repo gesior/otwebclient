@@ -1,9 +1,10 @@
-import {Point, Timer} from "./structures";
 import {Thing} from "./thing";
 import {LightView} from "./lightview";
 import {ThingType} from "./thingtype";
 import {g_things} from "./thingtypemanager";
 import {ThingCategory} from "./constants/const";
+import {Timer} from "./structures/timer";
+import {Point} from "./structures/point";
 
 export class Effect extends Thing {
     public static readonly EFFECT_TICKS_PER_FRAME = 75
@@ -11,6 +12,10 @@ export class Effect extends Thing {
     m_animationTimer: Timer = new Timer();
     m_phaseDuration: number;
     m_id: number;
+
+    isEffect() {
+        return true;
+    }
 
     drawEffect(dest: Point, scaleFactor, animate: boolean, offsetX: number = 0, offsetY: number = 0, lightView: LightView = null) {
         if (this.m_id == 0)
@@ -31,22 +36,18 @@ export class Effect extends Thing {
         this.rawGetThingType().draw(dest, scaleFactor, 0, xPattern, yPattern, 0, animationPhase, lightView);
     }
 
+    getId(): number {
+        return this.m_id;
+    }
+
     setId(id: number) {
         if (!g_things.isValidDatId(id, ThingCategory.ThingCategoryEffect))
             id = 0;
         this.m_id = id;
     }
 
-    getId(): number {
-        return this.m_id;
-    }
-
     asEffect(): Effect {
         return this;
-    }
-
-    isEffect() {
-        return true;
     }
 
     getThingType(): ThingType {

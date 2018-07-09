@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var StaticText = /** @class */ (function () {
-    function StaticText() {
+import { Thing } from "./thing";
+export class StaticText extends Thing {
+    isStaticText() {
+        return true;
     }
-    return StaticText;
-}());
-exports.StaticText = StaticText;
+}
 //# sourceMappingURL=statictext.js.map

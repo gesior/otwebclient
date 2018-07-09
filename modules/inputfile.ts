@@ -1,7 +1,7 @@
 import {log} from './log';
 
 export class InputFile {
-    private data: DataView;
+    public data: DataView;
     private offset: number;
     private size: number;
 

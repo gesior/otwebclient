@@ -1,31 +1,26 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = require("./map");
-var game_1 = require("./game");
-var log_1 = require("./log");
-var thingtypemanager_1 = require("./thingtypemanager");
-var Thing = /** @class */ (function () {
-    function Thing() {
+import { g_map } from "./map";
+import { g_game } from "./game";
+import { error } from "./log";
+import { g_things } from "./thingtypemanager";
+export class Thing {
+    draw(dest, scaleFactor, animate, lightView = null) {
     }
-    Thing.prototype.draw = function (dest, scaleFactor, animate, lightView) {
-        if (lightView === void 0) { lightView = null; }
-    };
-    Thing.prototype.setId = function (id) {
-    };
-    Thing.prototype.setPosition = function (position) {
+    setId(id) {
+    }
+    setPosition(position) {
         if (this.m_position == position)
             return;
-        var oldPos = this.m_position;
+        let oldPos = this.m_position;
         this.m_position = position;
         this.onPositionChange(this.m_position, oldPos);
-    };
-    Thing.prototype.getId = function () {
+    }
+    getId() {
         return 0;
-    };
-    Thing.prototype.getPosition = function () {
+    }
+    getPosition() {
         return this.m_position;
-    };
-    Thing.prototype.getStackPriority = function () {
+    }
+    getStackPriority() {
         if (this.isGround())
             return 0;
         else if (this.isGroundBorder())
@@ -38,253 +33,251 @@ var Thing = /** @class */ (function () {
             return 4;
         else // common items
             return 5;
-    };
-    Thing.prototype.getTile = function () {
-        return map_1.g_map.getTile(this.m_position);
-    };
-    Thing.prototype.getParentContainer = function () {
+    }
+    getTile() {
+        return g_map.getTile(this.m_position);
+    }
+    getParentContainer() {
         if (this.m_position.x == 0xffff && this.m_position.y & 0x40) {
-            var containerId = this.m_position.y ^ 0x40;
-            return game_1.g_game.getContainer(containerId);
+            let containerId = this.m_position.y ^ 0x40;
+            return g_game.getContainer(containerId);
         }
         return null;
-    };
-    Thing.prototype.getStackPos = function () {
+    }
+    getStackPos() {
         if (this.m_position.x == 65535 && this.isItem()) // is inside a container
             return this.m_position.z;
         else {
-            var tile = this.getTile();
+            let tile = this.getTile();
             if (tile)
                 return tile.getThingStackPos(this);
             else
-                log_1.error("got a thing with invalid stackpos");
+                error("got a thing with invalid stackpos");
         }
         return -1;
-    };
-    Thing.prototype.isItem = function () {
+    }
+    isItem() {
         return false;
-    };
-    Thing.prototype.isEffect = function () {
+    }
+    isEffect() {
         return false;
-    };
-    Thing.prototype.isMissile = function () {
+    }
+    isMissile() {
         return false;
-    };
-    Thing.prototype.isCreature = function () {
+    }
+    isCreature() {
         return false;
-    };
-    Thing.prototype.isNpc = function () {
+    }
+    isNpc() {
         return false;
-    };
-    Thing.prototype.isMonster = function () {
+    }
+    isMonster() {
         return false;
-    };
-    Thing.prototype.isPlayer = function () {
+    }
+    isPlayer() {
         return false;
-    };
-    Thing.prototype.isLocalPlayer = function () {
+    }
+    isLocalPlayer() {
         return false;
-    };
-    Thing.prototype.isAnimatedText = function () {
+    }
+    isAnimatedText() {
         return false;
-    };
-    Thing.prototype.isStaticText = function () {
+    }
+    isStaticText() {
         return false;
-    };
+    }
     // type shortcuts
-    Thing.prototype.getThingType = function () {
-        return thingtypemanager_1.g_things.getNullThingType();
-    };
-    Thing.prototype.rawGetThingType = function () {
-        return thingtypemanager_1.g_things.getNullThingType();
-    };
-    Thing.prototype.getSize = function () {
+    getThingType() {
+        return g_things.getNullThingType();
+    }
+    rawGetThingType() {
+        return this.getThingType();
+    }
+    getSize() {
         return this.rawGetThingType().getSize();
-    };
-    Thing.prototype.getWidth = function () {
+    }
+    getWidth() {
         return this.rawGetThingType().getWidth();
-    };
-    Thing.prototype.getHeight = function () {
+    }
+    getHeight() {
         return this.rawGetThingType().getHeight();
-    };
-    Thing.prototype.getDisplacement = function () {
+    }
+    getDisplacement() {
         return this.rawGetThingType().getDisplacement();
-    };
-    Thing.prototype.getDisplacementX = function () {
+    }
+    getDisplacementX() {
         return this.rawGetThingType().getDisplacementX();
-    };
-    Thing.prototype.getDisplacementY = function () {
+    }
+    getDisplacementY() {
         return this.rawGetThingType().getDisplacementY();
-    };
-    Thing.prototype.getExactSize = function (layer, xPattern, yPattern, zPattern, animationPhase) {
+    }
+    getExactSize(layer, xPattern, yPattern, zPattern, animationPhase) {
         return this.rawGetThingType().getExactSize(layer, xPattern, yPattern, zPattern, animationPhase);
-    };
-    Thing.prototype.getLayers = function () {
+    }
+    getLayers() {
         return this.rawGetThingType().getLayers();
-    };
-    Thing.prototype.getNumPatternX = function () {
+    }
+    getNumPatternX() {
         return this.rawGetThingType().getNumPatternX();
-    };
-    Thing.prototype.getNumPatternY = function () {
+    }
+    getNumPatternY() {
         return this.rawGetThingType().getNumPatternY();
-    };
-    Thing.prototype.getNumPatternZ = function () {
+    }
+    getNumPatternZ() {
         return this.rawGetThingType().getNumPatternZ();
-    };
-    Thing.prototype.getAnimationPhases = function () {
+    }
+    getAnimationPhases() {
         return this.rawGetThingType().getAnimationPhases();
-    };
-    Thing.prototype.getAnimator = function () {
+    }
+    getAnimator() {
         return this.rawGetThingType().getAnimator();
-    };
-    Thing.prototype.getGroundSpeed = function () {
+    }
+    getGroundSpeed() {
         return this.rawGetThingType().getGroundSpeed();
-    };
-    Thing.prototype.getMaxTextLength = function () {
+    }
+    getMaxTextLength() {
         return this.rawGetThingType().getMaxTextLength();
-    };
-    Thing.prototype.getLight = function () {
+    }
+    getLight() {
         return this.rawGetThingType().getLight();
-    };
-    Thing.prototype.getMinimapColor = function () {
+    }
+    getMinimapColor() {
         return this.rawGetThingType().getMinimapColor();
-    };
-    Thing.prototype.getLensHelp = function () {
+    }
+    getLensHelp() {
         return this.rawGetThingType().getLensHelp();
-    };
-    Thing.prototype.getClothSlot = function () {
+    }
+    getClothSlot() {
         return this.rawGetThingType().getClothSlot();
-    };
-    Thing.prototype.getElevation = function () {
+    }
+    getElevation() {
         return this.rawGetThingType().getElevation();
-    };
-    Thing.prototype.isGround = function () {
+    }
+    isGround() {
         return this.rawGetThingType().isGround();
-    };
-    Thing.prototype.isGroundBorder = function () {
+    }
+    isGroundBorder() {
         return this.rawGetThingType().isGroundBorder();
-    };
-    Thing.prototype.isOnBottom = function () {
+    }
+    isOnBottom() {
         return this.rawGetThingType().isOnBottom();
-    };
-    Thing.prototype.isOnTop = function () {
+    }
+    isOnTop() {
         return this.rawGetThingType().isOnTop();
-    };
-    Thing.prototype.isContainer = function () {
+    }
+    isContainer() {
         return this.rawGetThingType().isContainer();
-    };
-    Thing.prototype.isStackable = function () {
+    }
+    isStackable() {
         return this.rawGetThingType().isStackable();
-    };
-    Thing.prototype.isForceUse = function () {
+    }
+    isForceUse() {
         return this.rawGetThingType().isForceUse();
-    };
-    Thing.prototype.isMultiUse = function () {
+    }
+    isMultiUse() {
         return this.rawGetThingType().isMultiUse();
-    };
-    Thing.prototype.isWritable = function () {
+    }
+    isWritable() {
         return this.rawGetThingType().isWritable();
-    };
-    Thing.prototype.isChargeable = function () {
+    }
+    isChargeable() {
         return this.rawGetThingType().isChargeable();
-    };
-    Thing.prototype.isWritableOnce = function () {
+    }
+    isWritableOnce() {
         return this.rawGetThingType().isWritableOnce();
-    };
-    Thing.prototype.isFluidContainer = function () {
+    }
+    isFluidContainer() {
         return this.rawGetThingType().isFluidContainer();
-    };
-    Thing.prototype.isSplash = function () {
+    }
+    isSplash() {
         return this.rawGetThingType().isSplash();
-    };
-    Thing.prototype.isNotWalkable = function () {
+    }
+    isNotWalkable() {
         return this.rawGetThingType().isNotWalkable();
-    };
-    Thing.prototype.isNotMoveable = function () {
+    }
+    isNotMoveable() {
         return this.rawGetThingType().isNotMoveable();
-    };
-    Thing.prototype.blockProjectile = function () {
+    }
+    blockProjectile() {
         return this.rawGetThingType().blockProjectile();
-    };
-    Thing.prototype.isNotPathable = function () {
+    }
+    isNotPathable() {
         return this.rawGetThingType().isNotPathable();
-    };
-    Thing.prototype.isPickupable = function () {
+    }
+    isPickupable() {
         return this.rawGetThingType().isPickupable();
-    };
-    Thing.prototype.isHangable = function () {
+    }
+    isHangable() {
         return this.rawGetThingType().isHangable();
-    };
-    Thing.prototype.isHookSouth = function () {
+    }
+    isHookSouth() {
         return this.rawGetThingType().isHookSouth();
-    };
-    Thing.prototype.isHookEast = function () {
+    }
+    isHookEast() {
         return this.rawGetThingType().isHookEast();
-    };
-    Thing.prototype.isRotateable = function () {
+    }
+    isRotateable() {
         return this.rawGetThingType().isRotateable();
-    };
-    Thing.prototype.hasLight = function () {
+    }
+    hasLight() {
         return this.rawGetThingType().hasLight();
-    };
-    Thing.prototype.isDontHide = function () {
+    }
+    isDontHide() {
         return this.rawGetThingType().isDontHide();
-    };
-    Thing.prototype.isTranslucent = function () {
+    }
+    isTranslucent() {
         return this.rawGetThingType().isTranslucent();
-    };
-    Thing.prototype.hasDisplacement = function () {
+    }
+    hasDisplacement() {
         return this.rawGetThingType().hasDisplacement();
-    };
-    Thing.prototype.hasElevation = function () {
+    }
+    hasElevation() {
         return this.rawGetThingType().hasElevation();
-    };
-    Thing.prototype.isLyingCorpse = function () {
+    }
+    isLyingCorpse() {
         return this.rawGetThingType().isLyingCorpse();
-    };
-    Thing.prototype.isAnimateAlways = function () {
+    }
+    isAnimateAlways() {
         return this.rawGetThingType().isAnimateAlways();
-    };
-    Thing.prototype.hasMiniMapColor = function () {
+    }
+    hasMiniMapColor() {
         return this.rawGetThingType().hasMiniMapColor();
-    };
-    Thing.prototype.hasLensHelp = function () {
+    }
+    hasLensHelp() {
         return this.rawGetThingType().hasLensHelp();
-    };
-    Thing.prototype.isFullGround = function () {
+    }
+    isFullGround() {
         return this.rawGetThingType().isFullGround();
-    };
-    Thing.prototype.isIgnoreLook = function () {
+    }
+    isIgnoreLook() {
         return this.rawGetThingType().isIgnoreLook();
-    };
-    Thing.prototype.isCloth = function () {
+    }
+    isCloth() {
         return this.rawGetThingType().isCloth();
-    };
-    Thing.prototype.isMarketable = function () {
+    }
+    isMarketable() {
         return this.rawGetThingType().isMarketable();
-    };
-    Thing.prototype.isUsable = function () {
+    }
+    isUsable() {
         return this.rawGetThingType().isUsable();
-    };
-    Thing.prototype.isWrapable = function () {
+    }
+    isWrapable() {
         return this.rawGetThingType().isWrapable();
-    };
-    Thing.prototype.isUnwrapable = function () {
+    }
+    isUnwrapable() {
         return this.rawGetThingType().isUnwrapable();
-    };
-    Thing.prototype.isTopEffect = function () {
+    }
+    isTopEffect() {
         return this.rawGetThingType().isTopEffect();
-    };
-    Thing.prototype.getMarketData = function () {
+    }
+    getMarketData() {
         return this.rawGetThingType().getMarketData();
-    };
-    Thing.prototype.onPositionChange = function (newPos, oldPos) {
-    };
-    Thing.prototype.onAppear = function () {
-    };
-    Thing.prototype.onDisappear = function () {
-    };
-    return Thing;
-}());
-exports.Thing = Thing;
+    }
+    onPositionChange(newPos, oldPos) {
+    }
+    onAppear() {
+    }
+    onDisappear() {
+    }
+}
 //# sourceMappingURL=thing.js.map

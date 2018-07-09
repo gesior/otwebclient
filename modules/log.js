@@ -1,23 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = require("jquery");
-var log = function () {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
-    }
+let log = function (...v) {
     console.log.apply(this, v);
-    $('#status').text(v.join(','));
+    //$('#status').text(v.join(','));
 };
-exports.log = log;
-var error = function () {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
-    }
+let error = function (...v) {
     console.error.apply(this, v);
-    console.log.apply(this, [new Error().stack]);
-    $('#status').text(v.join(','));
+    //$('#status').text(v.join(','));
 };
-exports.error = error;
+export class Log {
+    static log(...v) {
+        console.log.apply(this, v);
+        //$('#status').text(v.join(','));
+    }
+    static debug(...v) {
+        console.log.apply(this, v);
+        //$('#status').text(v.join(','));
+    }
+    static error(...v) {
+        console.error.apply(this, v);
+        //$('#status').text(v.join(','));
+    }
+}
+export { log, error };
 //# sourceMappingURL=log.js.map

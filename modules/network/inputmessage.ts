@@ -7,9 +7,9 @@ export class InputMessage {
     private size: number;
 
     constructor(msg: DataView) {
-        this.data = new DataView(msg.buffer.slice(8));
+        this.data = new DataView(msg.buffer.slice(0));
         this.offset = 0;
-        this.size = msg.getUint8(6) + msg.getUint8(7) * 256;
+        this.size = this.data.byteLength;
     }
 
 
@@ -33,6 +33,15 @@ export class InputMessage {
 
     getU64(): number {
         return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+    }
+
+    getDouble() {
+        if (this.offset === this.size)
+            throw new Error("Koniec pakietu");
+
+        let v = this.data.getFloat64(this.offset);
+        this.offset += 8;
+        return v;
     }
 
     getString(): string {
@@ -86,14 +95,5 @@ export class InputMessage {
 
     validateChecksum(): boolean {
         return true;
-    }
-
-    getDouble() {
-        if (this.offset === this.size)
-            throw new Error("Koniec pakietu");
-
-        let v = this.data.getFloat64(this.offset);
-        this.offset += 8;
-        return v;
     }
 }

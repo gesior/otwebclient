@@ -1,4 +1,5 @@
 import {JSPack} from "../jspack";
+import {error} from "../log";
 
 export class OutputMessage {
     private static packer = (new JSPack());
@@ -35,7 +36,7 @@ export class OutputMessage {
     }
 
     writeChecksum() {
-        throw new Error('unimplemented');
+        //error('writeChecksum not implemented');
     }
 
     writeMessageSize() {

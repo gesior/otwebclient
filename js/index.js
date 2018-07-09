@@ -1,12 +1,5347 @@
-webpackJsonp([0],[
-/* 0 */
+webpackJsonp([0],{
+
+/***/ 133:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var Otc;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Player = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(68);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Player = exports.Player = function (_Creature) {
+    _inherits(Player, _Creature);
+
+    function Player() {
+        _classCallCheck(this, Player);
+
+        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+    }
+
+    _createClass(Player, [{
+        key: 'isPlayer',
+        value: function isPlayer() {
+            return true;
+        }
+    }]);
+
+    return Player;
+}(_creature.Creature);
+
+/***/ }),
+
+/***/ 134:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AwareRange = exports.AwareRange = function () {
+    function AwareRange() {
+        _classCallCheck(this, AwareRange);
+
+        this.top = 6;
+        this.right = 9;
+        this.bottom = 7;
+        this.left = 8;
+    }
+
+    _createClass(AwareRange, [{
+        key: "horizontal",
+        value: function horizontal() {
+            return this.left + this.right + 1;
+        }
+    }, {
+        key: "vertical",
+        value: function vertical() {
+            return this.top + this.bottom + 1;
+        }
+    }]);
+
+    return AwareRange;
+}();
+
+/***/ }),
+
+/***/ 135:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Image = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _log = __webpack_require__(32);
+
+var _color = __webpack_require__(97);
+
+var _size = __webpack_require__(136);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Image = exports.Image = function () {
+    _createClass(Image, [{
+        key: "blit",
+        value: function blit(point, image) {}
+    }, {
+        key: "overwriteMask",
+        value: function overwriteMask(color) {
+            var insideColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _color.Color.white;
+            var outsideColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _color.Color.alpha;
+        }
+    }]);
+
+    function Image(size) {
+        _classCallCheck(this, Image);
+
+        if (size instanceof _size.Size) {} else if (typeof size == 'number') {}
+    }
+
+    _createClass(Image, [{
+        key: "setId",
+        value: function setId(id) {}
+    }], [{
+        key: "load",
+        value: function load(path) {
+            (0, _log.error)('load image', path);
+            return null;
+        }
+    }]);
+
+    return Image;
+}();
+
+/***/ }),
+
+/***/ 136:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Size = exports.Size = function () {
+    function Size() {
+        var wd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+        var ht = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+
+        _classCallCheck(this, Size);
+
+        this.wd = wd;
+        this.ht = ht;
+    }
+
+    _createClass(Size, [{
+        key: "add",
+        value: function add(size) {
+            return new Size(this.wd + size.wd, this.ht + size.ht);
+        }
+    }, {
+        key: "sub",
+        value: function sub(size) {
+            return new Size(this.wd - size.wd, this.ht - size.ht);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Size(this.wd * ratio, this.ht * ratio);
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.wd == 0 && this.ht == 0;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.wd < 1 || this.ht < 1;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return this.wd >= 0 && this.ht >= 0;
+        }
+    }, {
+        key: "width",
+        value: function width() {
+            return this.wd;
+        }
+    }, {
+        key: "height",
+        value: function height() {
+            return this.ht;
+        }
+    }, {
+        key: "resize",
+        value: function resize(w, h) {
+            this.wd = w;
+            this.ht = h;
+        }
+    }, {
+        key: "setWidth",
+        value: function setWidth(w) {
+            this.wd = w;
+        }
+    }, {
+        key: "setHeight",
+        value: function setHeight(h) {
+            this.ht = h;
+        }
+    }, {
+        key: "ratio",
+        value: function ratio() {
+            return this.wd / this.ht;
+        }
+    }, {
+        key: "area",
+        value: function area() {
+            return this.wd * this.ht;
+        }
+    }]);
+
+    return Size;
+}();
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Light = exports.Light = function Light() {
+    _classCallCheck(this, Light);
+
+    this.intensity = 0;
+    this.color = 215;
+};
+
+/***/ }),
+
+/***/ 138:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Position = exports.Position = function () {
+    function Position() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+        _classCallCheck(this, Position);
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    _createClass(Position, [{
+        key: "translated",
+        value: function translated(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+    }]);
+
+    return Position;
+}();
+
+/***/ }),
+
+/***/ 139:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(140);
+module.exports = __webpack_require__(342);
+
+
+/***/ }),
+
+/***/ 32:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var log = function log() {
+    for (var _len = arguments.length, v = Array(_len), _key = 0; _key < _len; _key++) {
+        v[_key] = arguments[_key];
+    }
+
+    console.log.apply(this, v);
+    //$('#status').text(v.join(','));
+};
+var error = function error() {
+    for (var _len2 = arguments.length, v = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        v[_key2] = arguments[_key2];
+    }
+
+    console.error.apply(this, v);
+    //$('#status').text(v.join(','));
+};
+
+var Log = exports.Log = function () {
+    function Log() {
+        _classCallCheck(this, Log);
+    }
+
+    _createClass(Log, null, [{
+        key: "log",
+        value: function log() {
+            for (var _len3 = arguments.length, v = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                v[_key3] = arguments[_key3];
+            }
+
+            console.log.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }, {
+        key: "debug",
+        value: function debug() {
+            for (var _len4 = arguments.length, v = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                v[_key4] = arguments[_key4];
+            }
+
+            console.log.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }, {
+        key: "error",
+        value: function error() {
+            for (var _len5 = arguments.length, v = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+                v[_key5] = arguments[_key5];
+            }
+
+            console.error.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }]);
+
+    return Log;
+}();
+
+exports.log = log;
+exports.error = error;
+
+/***/ }),
+
+/***/ 342:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _jquery = __webpack_require__(343);
+
+var $ = _interopRequireWildcard(_jquery);
+
+var _const = __webpack_require__(43);
+
+var _game = __webpack_require__(67);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+//import 'jqueryui';
+
+var x = _const.Otc.MAX_AUTOWALK_DIST;
+//g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+console.log($);
+function test() {
+    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _game.g_game.setClientVersion(854);
+                        console.log('load');
+                        _context.next = 4;
+                        return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+
+                    case 4:
+                        console.log('login');
+                        _game.g_game.login('', '', 'GOD Spider Local');
+
+                    case 6:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+}
+test();
+
+/***/ }),
+
+/***/ 344:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.LocalPlayer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _player = __webpack_require__(133);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LocalPlayer = exports.LocalPlayer = function (_Player) {
+    _inherits(LocalPlayer, _Player);
+
+    function LocalPlayer() {
+        _classCallCheck(this, LocalPlayer);
+
+        return _possibleConstructorReturn(this, (LocalPlayer.__proto__ || Object.getPrototypeOf(LocalPlayer)).apply(this, arguments));
+    }
+
+    _createClass(LocalPlayer, [{
+        key: 'isLocalPlayer',
+        value: function isLocalPlayer() {
+            return true;
+        }
+    }, {
+        key: 'setBlessings',
+        value: function setBlessings(blessings) {}
+    }]);
+
+    return LocalPlayer;
+}(_player.Player);
+
+/***/ }),
+
+/***/ 345:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: 'return' outside of function (320:4)\n\n\u001b[0m \u001b[90m 318 | \u001b[39m\u001b[33mTile\u001b[39m\u001b[33m.\u001b[39m\u001b[33mMAX_THINGS\u001b[39m \u001b[33m=\u001b[39m \u001b[35m10\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 319 | \u001b[39m{\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 320 | \u001b[39m    \u001b[36mreturn\u001b[39m m_flags \u001b[33m&\u001b[39m \u001b[33mTILESTATE_TRANSLUECENT_LIGHT\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 321 | \u001b[39m}\n \u001b[90m 322 | \u001b[39mbool\u001b[33m;\u001b[39m\n \u001b[90m 323 | \u001b[39mmustHookSouth()\u001b[33m;\u001b[39m\u001b[0m\n");
+
+/***/ }),
+
+/***/ 346:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ThingType = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(43);
+
+var _game = __webpack_require__(67);
+
+var _log = __webpack_require__(32);
+
+var _animator = __webpack_require__(347);
+
+var _image = __webpack_require__(135);
+
+var _color = __webpack_require__(97);
+
+var _spritemanager = __webpack_require__(348);
+
+var _thingtypeattribs = __webpack_require__(349);
+
+var _size = __webpack_require__(136);
+
+var _point = __webpack_require__(350);
+
+var _texture = __webpack_require__(351);
+
+var _rect = __webpack_require__(352);
+
+var _marketdata = __webpack_require__(353);
+
+var _light = __webpack_require__(137);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ThingType = exports.ThingType = function () {
+    function ThingType() {
+        _classCallCheck(this, ThingType);
+
+        this.m_attribs = new _thingtypeattribs.ThingTypeAttribs();
+        this.m_spritesIndex = [];
+        this.m_textures = [];
+    }
+
+    _createClass(ThingType, [{
+        key: "unserialize",
+        value: function unserialize(clientId, category, fin) {
+            this.m_null = false;
+            this.m_id = clientId;
+            this.m_category = category;
+            //console.log('load', clientId, fin.getReadPos(), fin.data.buffer.slice(fin.getReadPos()));
+            var count = 0;
+            var attr = -1;
+            var done = false;
+            for (var i = 0; i < _const.ThingAttr.ThingLastAttr; ++i) {
+                count++;
+                attr = fin.getU8();
+                if (attr == _const.ThingAttr.ThingLastAttr) {
+                    done = true;
+                    break;
+                }
+                if (_game.g_game.getClientVersion() >= 1000) {
+                    /* In 10.10+ all attributes from 16 and up were
+                     * incremented by 1 to make space for 16 as
+                     * "No Movement Animation" flag.
+                     */
+                    if (attr == 16) attr = _const.ThingAttr.ThingAttrNoMoveAnimation;else if (attr > 16) attr -= 1;
+                } else if (_game.g_game.getClientVersion() >= 860) {
+                    /* Default attribute values follow
+                     * the format of 8.6-9.86.
+                     * Therefore no changes here.
+                     */
+                } else if (_game.g_game.getClientVersion() >= 780) {
+                    /* In 7.80-8.54 all attributes from 8 and higher were
+                     * incremented by 1 to make space for 8 as
+                     * "Item Charges" flag.
+                     */
+                    if (attr == 8) {
+                        this.m_attribs.set(_const.ThingAttr.ThingAttrChargeable, true);
+                        continue;
+                    } else if (attr > 8) attr -= 1;
+                } else if (_game.g_game.getClientVersion() >= 755) {
+                    /* In 7.55-7.72 attributes 23 is "Floor Change". */
+                    if (attr == 23) attr = _const.ThingAttr.ThingAttrFloorChange;
+                } else if (_game.g_game.getClientVersion() >= 740) {
+                    /* In 7.4-7.5 attribute "Ground Border" did not exist
+                     * attributes 1-15 have to be adjusted.
+                     * Several other changes in the format.
+                     */
+                    if (attr > 0 && attr <= 15) attr += 1;else if (attr == 16) attr = _const.ThingAttr.ThingAttrLight;else if (attr == 17) attr = _const.ThingAttr.ThingAttrFloorChange;else if (attr == 18) attr = _const.ThingAttr.ThingAttrFullGround;else if (attr == 19) attr = _const.ThingAttr.ThingAttrElevation;else if (attr == 20) attr = _const.ThingAttr.ThingAttrDisplacement;else if (attr == 22) attr = _const.ThingAttr.ThingAttrMinimapColor;else if (attr == 23) attr = _const.ThingAttr.ThingAttrRotateable;else if (attr == 24) attr = _const.ThingAttr.ThingAttrLyingCorpse;else if (attr == 25) attr = _const.ThingAttr.ThingAttrHangable;else if (attr == 26) attr = _const.ThingAttr.ThingAttrHookSouth;else if (attr == 27) attr = _const.ThingAttr.ThingAttrHookEast;else if (attr == 28) attr = _const.ThingAttr.ThingAttrAnimateAlways;
+                    /* "Multi Use" and "Force Use" are swapped */
+                    if (attr == _const.ThingAttr.ThingAttrMultiUse) attr = _const.ThingAttr.ThingAttrForceUse;else if (attr == _const.ThingAttr.ThingAttrForceUse) attr = _const.ThingAttr.ThingAttrMultiUse;
+                }
+                switch (attr) {
+                    case _const.ThingAttr.ThingAttrDisplacement:
+                        {
+                            this.m_displacement = new _point.Point(0, 0);
+                            if (_game.g_game.getClientVersion() >= 755) {
+                                this.m_displacement.x = fin.getU16();
+                                this.m_displacement.y = fin.getU16();
+                            } else {
+                                this.m_displacement.x = 8;
+                                this.m_displacement.y = 8;
+                            }
+                            this.m_attribs.set(attr, true);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrLight:
+                        {
+                            var light = new _light.Light();
+                            light.intensity = fin.getU16();
+                            light.color = fin.getU16();
+                            this.m_attribs.set(attr, light);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrMarket:
+                        {
+                            var market = new _marketdata.MarketData();
+                            market.category = fin.getU16();
+                            market.tradeAs = fin.getU16();
+                            market.showAs = fin.getU16();
+                            market.name = fin.getString();
+                            market.restrictVocation = fin.getU16();
+                            market.requiredLevel = fin.getU16();
+                            this.m_attribs.set(attr, market);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrElevation:
+                        {
+                            this.m_elevation = fin.getU16();
+                            this.m_attribs.set(attr, this.m_elevation);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrUsable:
+                    case _const.ThingAttr.ThingAttrGround:
+                    case _const.ThingAttr.ThingAttrWritable:
+                    case _const.ThingAttr.ThingAttrWritableOnce:
+                    case _const.ThingAttr.ThingAttrMinimapColor:
+                    case _const.ThingAttr.ThingAttrCloth:
+                    case _const.ThingAttr.ThingAttrLensHelp:
+                        this.m_attribs.set(attr, fin.getU16());
+                        break;
+                    default:
+                        this.m_attribs.set(attr, true);
+                        break;
+                }
+            }
+            if (!done) (0, _log.error)("corrupt data (id: %d, category: %d, count: %d, lastAttr: %d)", this.m_id, this.m_category, count, attr);
+            var hasFrameGroups = category == _const.ThingCategory.ThingCategoryCreature && _game.g_game.getFeature(_const.GameFeature.GameIdleAnimations);
+            var groupCount = hasFrameGroups ? fin.getU8() : 1;
+            this.m_animationPhases = 0;
+            var totalSpritesCount = 0;
+            //console.log(this.m_attribs.attribs);
+            for (var _i = 0; _i < groupCount; ++_i) {
+                var frameGroupType = _const.FrameGroupType.FrameGroupDefault;
+                if (hasFrameGroups) frameGroupType = fin.getU8();
+                var width = fin.getU8();
+                var height = fin.getU8();
+                this.m_size = new _size.Size(width, height);
+                if (width > 1 || height > 1) {
+                    this.m_realSize = fin.getU8();
+                    this.m_exactSize = Math.min(this.m_realSize, Math.max(width * 32, height * 32));
+                } else this.m_exactSize = 32;
+                this.m_layers = fin.getU8();
+                this.m_numPatternX = fin.getU8();
+                this.m_numPatternY = fin.getU8();
+                if (_game.g_game.getClientVersion() >= 755) this.m_numPatternZ = fin.getU8();else this.m_numPatternZ = 1;
+                var groupAnimationsPhases = fin.getU8();
+                this.m_animationPhases += groupAnimationsPhases;
+                if (groupAnimationsPhases > 1 && _game.g_game.getFeature(_const.GameFeature.GameEnhancedAnimations)) {
+                    this.m_animator = new _animator.Animator();
+                    this.m_animator.unserialize(groupAnimationsPhases, fin);
+                }
+                var totalSprites = this.m_size.area() * this.m_layers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ * groupAnimationsPhases;
+                if (totalSpritesCount + totalSprites > 4096) (0, _log.error)("a thing type has more than 4096 sprites", totalSprites, totalSpritesCount, this.m_size.area(), this.m_layers, this.m_numPatternX, this.m_numPatternY, this.m_numPatternZ, groupAnimationsPhases);
+                //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
+                this.m_spritesIndex = [];
+                for (var _i2 = totalSpritesCount; _i2 < totalSpritesCount + totalSprites; _i2++) {
+                    this.m_spritesIndex[_i2] = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
+                } //console.log('spr', this.m_spritesIndex);
+                totalSpritesCount += totalSprites;
+            }
+            /*
+                    this.m_textures.resize(m_animationPhases);
+                    this.m_texturesFramesRects.resize(m_animationPhases);
+                    this.m_texturesFramesOriginRects.resize(m_animationPhases);
+                    this.m_texturesFramesOffsets.resize(m_animationPhases);
+            */
+        }
+    }, {
+        key: "draw",
+        value: function draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase) {
+            /*todo*/
+
+            var lightView = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return this.m_category;
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.m_null;
+        }
+    }, {
+        key: "hasAttr",
+        value: function hasAttr(attr) {
+            return this.m_attribs.has(attr);
+        }
+    }, {
+        key: "getSize",
+        value: function getSize() {
+            return this.m_size;
+        }
+    }, {
+        key: "getWidth",
+        value: function getWidth() {
+            return this.m_size.width();
+        }
+    }, {
+        key: "getHeight",
+        value: function getHeight() {
+            return this.m_size.height();
+        }
+    }, {
+        key: "getExactSize",
+        value: function getExactSize() {
+            var layer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+            var xPattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+            var yPattern = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+            var zPattern = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+            var animationPhase = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+
+            /* todo */
+            return 0;
+        }
+    }, {
+        key: "getRealSize",
+        value: function getRealSize() {
+            return this.m_realSize;
+        }
+    }, {
+        key: "getLayers",
+        value: function getLayers() {
+            return this.m_layers;
+        }
+    }, {
+        key: "getNumPatternX",
+        value: function getNumPatternX() {
+            return this.m_numPatternX;
+        }
+    }, {
+        key: "getNumPatternY",
+        value: function getNumPatternY() {
+            return this.m_numPatternY;
+        }
+    }, {
+        key: "getNumPatternZ",
+        value: function getNumPatternZ() {
+            return this.m_numPatternZ;
+        }
+    }, {
+        key: "getAnimationPhases",
+        value: function getAnimationPhases() {
+            return this.m_animationPhases;
+        }
+    }, {
+        key: "getAnimator",
+        value: function getAnimator() {
+            return this.m_animator;
+        }
+    }, {
+        key: "getDisplacement",
+        value: function getDisplacement() {
+            return this.m_displacement;
+        }
+    }, {
+        key: "getDisplacementX",
+        value: function getDisplacementX() {
+            return this.getDisplacement().x;
+        }
+    }, {
+        key: "getDisplacementY",
+        value: function getDisplacementY() {
+            return this.getDisplacement().y;
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            return this.m_elevation;
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrGround);
+        }
+    }, {
+        key: "getMaxTextLength",
+        value: function getMaxTextLength() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce) ? this.m_attribs.get(_const.ThingAttr.ThingAttrWritableOnce) : this.m_attribs.get(_const.ThingAttr.ThingAttrWritable);
+        }
+    }, {
+        key: "getLight",
+        value: function getLight() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrLight);
+        }
+    }, {
+        key: "getMinimapColor",
+        value: function getMinimapColor() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrMinimapColor);
+        }
+    }, {
+        key: "getLensHelp",
+        value: function getLensHelp() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrLensHelp);
+        }
+    }, {
+        key: "getClothSlot",
+        value: function getClothSlot() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrCloth);
+        }
+    }, {
+        key: "getMarketData",
+        value: function getMarketData() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrMarket);
+        }
+    }, {
+        key: "isGround",
+        value: function isGround() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrGround);
+        }
+    }, {
+        key: "isGroundBorder",
+        value: function isGroundBorder() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrGroundBorder);
+        }
+    }, {
+        key: "isOnBottom",
+        value: function isOnBottom() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritable);
+        }
+    }, {
+        key: "isOnTop",
+        value: function isOnTop() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnTop);
+        }
+    }, {
+        key: "isContainer",
+        value: function isContainer() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrContainer);
+        }
+    }, {
+        key: "isStackable",
+        value: function isStackable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrStackable);
+        }
+    }, {
+        key: "isForceUse",
+        value: function isForceUse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrForceUse);
+        }
+    }, {
+        key: "isMultiUse",
+        value: function isMultiUse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMultiUse);
+        }
+    }, {
+        key: "isWritable",
+        value: function isWritable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritable);
+        }
+    }, {
+        key: "isChargeable",
+        value: function isChargeable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrChargeable);
+        }
+    }, {
+        key: "isWritableOnce",
+        value: function isWritableOnce() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce);
+        }
+    }, {
+        key: "isFluidContainer",
+        value: function isFluidContainer() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrFluidContainer);
+        }
+    }, {
+        key: "isSplash",
+        value: function isSplash() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrSplash);
+        }
+    }, {
+        key: "isNotWalkable",
+        value: function isNotWalkable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotWalkable);
+        }
+    }, {
+        key: "isNotMoveable",
+        value: function isNotMoveable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotMoveable);
+        }
+    }, {
+        key: "blockProjectile",
+        value: function blockProjectile() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrBlockProjectile);
+        }
+    }, {
+        key: "isNotPathable",
+        value: function isNotPathable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPathable);
+        }
+    }, {
+        key: "isPickupable",
+        value: function isPickupable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrPickupable);
+        }
+    }, {
+        key: "isHangable",
+        value: function isHangable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHangable);
+        }
+    }, {
+        key: "isHookSouth",
+        value: function isHookSouth() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookSouth);
+        }
+    }, {
+        key: "isHookEast",
+        value: function isHookEast() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookEast);
+        }
+    }, {
+        key: "isRotateable",
+        value: function isRotateable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrRotateable);
+        }
+    }, {
+        key: "hasLight",
+        value: function hasLight() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLight);
+        }
+    }, {
+        key: "isDontHide",
+        value: function isDontHide() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrDontHide);
+        }
+    }, {
+        key: "isTranslucent",
+        value: function isTranslucent() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrTranslucent);
+        }
+    }, {
+        key: "hasDisplacement",
+        value: function hasDisplacement() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrDisplacement);
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrElevation);
+        }
+    }, {
+        key: "isLyingCorpse",
+        value: function isLyingCorpse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLyingCorpse);
+        }
+    }, {
+        key: "isAnimateAlways",
+        value: function isAnimateAlways() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrAnimateAlways);
+        }
+    }, {
+        key: "hasMiniMapColor",
+        value: function hasMiniMapColor() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMinimapColor);
+        }
+    }, {
+        key: "hasLensHelp",
+        value: function hasLensHelp() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLensHelp);
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrFullGround);
+        }
+    }, {
+        key: "isIgnoreLook",
+        value: function isIgnoreLook() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLook);
+        }
+    }, {
+        key: "isCloth",
+        value: function isCloth() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrCloth);
+        }
+    }, {
+        key: "isMarketable",
+        value: function isMarketable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMarket);
+        }
+    }, {
+        key: "isUsable",
+        value: function isUsable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrUsable);
+        }
+    }, {
+        key: "isWrapable",
+        value: function isWrapable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWrapable);
+        }
+    }, {
+        key: "isUnwrapable",
+        value: function isUnwrapable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrUnwrapable);
+        }
+    }, {
+        key: "isTopEffect",
+        value: function isTopEffect() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrTopEffect);
+        }
+    }, {
+        key: "getSprites",
+        value: function getSprites() {
+            return this.m_spritesIndex;
+        }
+        // additional
+
+    }, {
+        key: "getOpacity",
+        value: function getOpacity() {
+            return this.m_opacity;
+        }
+    }, {
+        key: "isNotPreWalkable",
+        value: function isNotPreWalkable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPreWalkable);
+        }
+    }, {
+        key: "setPathable",
+        value: function setPathable(v) {
+            if (v == true) this.m_attribs.remove(_const.ThingAttr.ThingAttrNotPathable);else this.m_attribs.set(_const.ThingAttr.ThingAttrNotPathable, true);
+        }
+    }, {
+        key: "getTexture",
+        value: function getTexture(animationPhase) {
+            var animationPhaseTexture = this.m_textures[animationPhase];
+            if (!animationPhaseTexture) {
+                var useCustomImage = false;
+                if (animationPhase == 0 && !(this.m_customImage.length == 0)) useCustomImage = true;
+                // we don't need layers in common items, they will be pre-drawn
+                var textureLayers = 1;
+                var numLayers = this.m_layers;
+                if (this.m_category == _const.ThingCategory.ThingCategoryCreature && numLayers >= 2) {
+                    // 5 layers: outfit base, red mask, green mask, blue mask, yellow mask
+                    textureLayers = 5;
+                    numLayers = 5;
+                }
+                var indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
+                var textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
+                var fullImage = void 0;
+                if (useCustomImage) fullImage = _image.Image.load(this.m_customImage);else fullImage = new _image.Image(textureSize.mul(_const.Otc.TILE_PIXELS));
+                /*
+                        m_texturesFramesRects[animationPhase].resize(indexSize);
+                        m_texturesFramesOriginRects[animationPhase].resize(indexSize);
+                        m_texturesFramesOffsets[animationPhase].resize(indexSize);
+                */
+                for (var z = 0; z < this.m_numPatternZ; ++z) {
+                    for (var y = 0; y < this.m_numPatternY; ++y) {
+                        for (var x = 0; x < this.m_numPatternX; ++x) {
+                            for (var l = 0; l < numLayers; ++l) {
+                                var spriteMask = this.m_category == _const.ThingCategory.ThingCategoryCreature && l > 0;
+                                var frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
+                                var framePos = new _point.Point(frameIndex % (textureSize.width() / this.m_size.width()) * this.m_size.width() * _const.Otc.TILE_PIXELS, frameIndex / (textureSize.width() / this.m_size.width()) * this.m_size.height() * _const.Otc.TILE_PIXELS);
+                                if (!useCustomImage) {
+                                    for (var h = 0; h < this.m_size.height(); ++h) {
+                                        for (var w = 0; w < this.m_size.width(); ++w) {
+                                            var spriteIndex = this.getSpriteIndex(w, h, spriteMask ? 1 : l, x, y, z, animationPhase);
+                                            var spriteImage = _spritemanager.g_sprites.getSpriteImage(this.m_spritesIndex[spriteIndex]);
+                                            if (spriteImage) {
+                                                if (spriteMask) {
+                                                    spriteImage.overwriteMask(ThingType.maskColors[l - 1]);
+                                                }
+                                                var spritePos = new _point.Point((this.m_size.width() - w - 1) * _const.Otc.TILE_PIXELS, (this.m_size.height() - h - 1) * _const.Otc.TILE_PIXELS);
+                                                fullImage.blit(framePos.add(spritePos), spriteImage);
+                                            }
+                                        }
+                                    }
+                                }
+                                var drawRect = new _rect.Rect(framePos.add(new _point.Point(this.m_size.width(), this.m_size.height())).mul(_const.Otc.TILE_PIXELS).sub(new _point.Point(1, 1)), framePos);
+                                for (var _x7 = framePos.x; _x7 < framePos.x + this.m_size.width() * _const.Otc.TILE_PIXELS; ++_x7) {
+                                    for (var _y = framePos.y; _y < framePos.y + this.m_size.height() * _const.Otc.TILE_PIXELS; ++_y) {
+                                        /*
+                                        uint8 *p = fullImage->getPixel(x,y);
+                                        if(p[3] != 0x00) {
+                                            drawRect.setTop   (std::min<int>(y, (int)drawRect.top()));
+                                            drawRect.setLeft  (std::min<int>(x, (int)drawRect.left()));
+                                            drawRect.setBottom(std::max<int>(y, (int)drawRect.bottom()));
+                                            drawRect.setRight (std::max<int>(x, (int)drawRect.right()));
+                                        }
+                                        */
+                                    }
+                                }
+                                /*
+                                                        m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
+                                                        m_texturesFramesOriginRects[animationPhase][frameIndex] = Rect(framePos, Size(m_size.width(), m_size.height()) * Otc::TILE_PIXELS);
+                                                        m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft() - framePos;
+                                                        */
+                            }
+                        }
+                    }
+                }
+                animationPhaseTexture = new _texture.Texture(fullImage, true);
+                //animationPhaseTexture->setSmooth(true);
+            }
+            return animationPhaseTexture;
+        }
+    }, {
+        key: "getBestTextureDimension",
+        value: function getBestTextureDimension(w, h, count) {
+            /*todo*/
+            return new _size.Size(w, h);
+        }
+    }, {
+        key: "getSpriteIndex",
+        value: function getSpriteIndex(w, h, l, x, y, z, a) {
+            var index = (((((a % this.m_animationPhases * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x) * this.m_layers + l) * this.m_size.height() + h) * this.m_size.width() + w;
+            if (index < this.m_spritesIndex.length) {
+                throw new Error('index < this.m_spritesIndex.length');
+            }
+            return index;
+        }
+    }, {
+        key: "getTextureIndex",
+        value: function getTextureIndex(l, x, y, z) {
+            return ((l * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x;
+        }
+    }]);
+
+    return ThingType;
+}();
+
+ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue, _color.Color.yellow];
+
+/***/ }),
+
+/***/ 347:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Animator = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(43);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Animator = exports.Animator = function () {
+    function Animator() {
+        _classCallCheck(this, Animator);
+
+        this.m_animationPhases = 0;
+        this.m_startPhase = 0;
+        this.m_loopCount = 0;
+        this.m_async = false;
+        this.m_phaseDurations = [];
+        this.m_currentDuration = 0;
+        this.m_currentDirection = _const.AnimationDirection.AnimDirForward;
+        this.m_currentLoop = 0;
+        this.m_lastPhaseTicks = 0;
+        this.m_isComplete = false;
+        this.m_phase = 0;
+    }
+
+    _createClass(Animator, [{
+        key: "unserialize",
+        value: function unserialize(animationPhases, fin) {
+            this.m_animationPhases = animationPhases;
+            this.m_async = fin.getU8() == 0;
+            this.m_loopCount = fin.get32();
+            this.m_startPhase = fin.get8();
+            for (var i = 0; i < this.m_animationPhases; ++i) {
+                var minimum = fin.getU32();
+                var maximum = fin.getU32();
+                this.m_phaseDurations.push([minimum, maximum]);
+            }
+            /*
+            m_phase = getStartPhase();
+             assert(m_animationPhases == (int)m_phaseDurations.size());
+            assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
+            */
+        }
+    }]);
+
+    return Animator;
+}();
+
+/***/ }),
+
+/***/ 348:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_sprites = exports.SpriteManager = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _image = __webpack_require__(135);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SpriteManager = exports.SpriteManager = function () {
+    function SpriteManager() {
+        _classCallCheck(this, SpriteManager);
+
+        this.m_loaded = false;
+        this.m_signature = 0;
+        this.m_spritesCount = 0;
+        this.m_spritesOffset = 0;
+        this.m_spritesFile = null;
+    }
+
+    _createClass(SpriteManager, [{
+        key: "getSpriteImage",
+        value: function getSpriteImage(id) {
+            return new _image.Image(0);
+        }
+    }]);
+
+    return SpriteManager;
+}();
+
+var g_sprites = new SpriteManager();
+exports.g_sprites = g_sprites;
+
+/***/ }),
+
+/***/ 349:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
+    function ThingTypeAttribs() {
+        _classCallCheck(this, ThingTypeAttribs);
+
+        this.attribs = {};
+    }
+
+    _createClass(ThingTypeAttribs, [{
+        key: "has",
+        value: function has(attr) {
+            return this.attribs.hasOwnProperty(attr.toString());
+        }
+    }, {
+        key: "get",
+        value: function get(attr) {
+            return this.attribs[attr];
+        }
+    }, {
+        key: "set",
+        value: function set(attr, value) {
+            //console.log(attr, value);
+            this.attribs[attr] = value;
+        }
+    }, {
+        key: "remove",
+        value: function remove(attr) {
+            delete this.attribs[attr];
+        }
+    }]);
+
+    return ThingTypeAttribs;
+}();
+
+/***/ }),
+
+/***/ 350:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Point = exports.Point = function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: "add",
+        value: function add(point) {
+            return new Point(this.x + point.x, this.y + point.y);
+        }
+    }, {
+        key: "sub",
+        value: function sub(point) {
+            return new Point(this.x - point.x, this.y - point.y);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Point(this.x * ratio, this.y * ratio);
+        }
+    }]);
+
+    return Point;
+}();
+
+/***/ }),
+
+/***/ 351:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Texture = exports.Texture = function Texture(image) {
+    var buildMipmaps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var compress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    _classCallCheck(this, Texture);
+
+    this.m_id = 0;
+    this.m_time = 0;
+    this.m_hasMipmaps = false;
+    this.m_smooth = false;
+    this.m_upsideDown = false;
+    this.m_repeat = false;
+};
+
+/***/ }),
+
+/***/ 352:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Rect = exports.Rect = function Rect(p1, p2) {
+    _classCallCheck(this, Rect);
+};
+
+/***/ }),
+
+/***/ 353:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MarketData = exports.MarketData = function MarketData() {
+  _classCallCheck(this, MarketData);
+};
+
+/***/ }),
+
+/***/ 354:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_resources = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputfile = __webpack_require__(355);
+
+var _log = __webpack_require__(32);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
+    }
+
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
+
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+
+                                console.log('r', response);
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 10:
+                                _context2.prev = 10;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 14:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[1, 10]]);
+            }));
+        }
+    }]);
+
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
+
+/***/ }),
+
+/***/ 355:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var InputFile = exports.InputFile = function () {
+    function InputFile(msg) {
+        _classCallCheck(this, InputFile);
+
+        this.data = msg;
+        this.offset = 0;
+        this.size = msg.byteLength;
+    }
+
+    _createClass(InputFile, [{
+        key: "getU8",
+        value: function getU8() {
+            if (this.offset === this.size) throw new Error("Koniec pliku");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "get8",
+        value: function get8() {
+            if (this.offset === this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "get16",
+        value: function get16() {
+            if (this.offset === this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt16(this.offset);
+            this.offset += 2;
+            return v;
+        }
+    }, {
+        key: "get32",
+        value: function get32() {
+            if (this.offset === this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt32(this.offset);
+            this.offset += 4;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }, {
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
+        }
+    }]);
+
+    return InputFile;
+}();
+
+/***/ }),
+
+/***/ 356:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ProtocolGame = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _protocol = __webpack_require__(357);
+
+var _game = __webpack_require__(67);
+
+var _const = __webpack_require__(43);
+
+var _log = __webpack_require__(32);
+
+var _outputmessage = __webpack_require__(359);
+
+var _proto = __webpack_require__(361);
+
+var _outfit = __webpack_require__(362);
+
+var _thing = __webpack_require__(44);
+
+var _position = __webpack_require__(138);
+
+var _item = __webpack_require__(363);
+
+var _statictext = __webpack_require__(364);
+
+var _thingtypemanager = __webpack_require__(69);
+
+var _map = __webpack_require__(96);
+
+var _effect = __webpack_require__(365);
+
+var _animatedtext = __webpack_require__(368);
+
+var _missile = __webpack_require__(369);
+
+var _color2 = __webpack_require__(97);
+
+var _player = __webpack_require__(133);
+
+var _light = __webpack_require__(137);
+
+var _npc = __webpack_require__(370);
+
+var _monster = __webpack_require__(371);
+
+var _awarerange = __webpack_require__(134);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
+    _inherits(ProtocolGame, _Protocol);
+
+    function ProtocolGame(game) {
+        _classCallCheck(this, ProtocolGame);
+
+        var _this = _possibleConstructorReturn(this, (ProtocolGame.__proto__ || Object.getPrototypeOf(ProtocolGame)).call(this));
+
+        _this.m_localPlayer = null;
+        _this.m_gameInitialized = false;
+        _this.m_mapKnown = false;
+        return _this;
+    }
+
+    _createClass(ProtocolGame, [{
+        key: "login",
+        value: function login(accountName, accountPassword, host, port, characterName, authenticatorToken, sessionKey) {
+            this.m_firstRecv = false;
+            this.m_accountName = accountName;
+            this.m_accountPassword = accountPassword;
+            this.m_authenticatorToken = authenticatorToken;
+            this.m_sessionKey = sessionKey;
+            this.m_characterName = characterName;
+            this.connect(host, port);
+        }
+    }, {
+        key: "onConnect",
+        value: function onConnect() {
+            this.m_firstRecv = true;
+            _get(ProtocolGame.prototype.__proto__ || Object.getPrototypeOf(ProtocolGame.prototype), "onConnect", this).call(this, null);
+            this.m_localPlayer = _game.g_game.getLocalPlayer();
+            if (_game.g_game.getFeature(_const.GameFeature.GameProtocolChecksum)) this.enableChecksum();
+            if (!_game.g_game.getFeature(_const.GameFeature.GameChallengeOnLogin)) this.sendLoginPacket(0, 0);
+        }
+    }, {
+        key: "onRecv",
+        value: function onRecv(inputMessage) {
+            _log.Log.debug("Game onRecv", inputMessage);
+            /*todo checksum, msgsize etc. why is it wrong*/
+            if (this.m_firstRecv) {
+                this.m_firstRecv = false;
+            }
+            if (_game.g_game.getFeature(_const.GameFeature.GameMessageSizeCheck)) {
+                var size = inputMessage.getU16();
+                if (size != inputMessage.getUnreadSize()) {
+                    _log.Log.error("invalid message size", size, inputMessage.getUnreadSize(), inputMessage);
+                    return;
+                }
+            }
+            this.parseMessage(inputMessage);
+        }
+    }, {
+        key: "onError",
+        value: function onError(evt) {
+            _game.g_game.processConnectionError();
+            this.disconnect();
+        }
+    }, {
+        key: "sendLoginPacket",
+        value: function sendLoginPacket(challengeTimestamp, challengeRandom) {
+            var msg = new _outputmessage.OutputMessage();
+            msg.addU8(_proto.Proto.ClientPendingGame);
+            msg.addU16(_game.g_game.getOs());
+            msg.addU16(_game.g_game.getProtocolVersion());
+            msg.addU8(0); // is GM
+            msg.addString(this.m_accountName);
+            msg.addString(this.m_characterName);
+            msg.addString(this.m_accountPassword);
+            msg.addU8(0); // RSA start
+            msg.addU32(challengeTimestamp);
+            msg.addU8(challengeRandom);
+            if (_game.g_game.getFeature(_const.GameFeature.GameProtocolChecksum)) this.enableChecksum();
+            this.send(msg);
+            if (_game.g_game.getFeature(_const.GameFeature.GameLoginPacketEncryption)) this.enableXteaEncryption();
+        }
+    }, {
+        key: "parseMessage",
+        value: function parseMessage(msg) {
+            var opcode = -1;
+            var prevOpcode = -1;
+            try {
+                while (msg.getUnreadSize() > 0) {
+                    opcode = msg.getU8();
+                    _log.Log.debug('opcode', prevOpcode, opcode);
+                    if (!_game.g_game.getFeature(_const.GameFeature.GameLoginPending)) {
+                        if (!this.m_gameInitialized && opcode > _proto.Proto.GameServerFirstGameOpcode) {
+                            //g_game.processGameStart();
+                            this.m_gameInitialized = true;
+                        }
+                    }
+                    /*
+                    // try to parse in lua first
+                    int readPos = msg.getReadPos();
+                    if(callLuaField<bool>("onOpcode", opcode, msg))
+                        continue;
+                    else
+                        msg.setReadPos(readPos); // restore read pos
+                    */
+                    switch (opcode) {
+                        case _proto.Proto.GameServerLoginOrPendingState:
+                            /*
+                            if(g_game.getFeature(GameFeature.GameLoginPending))
+                                this.parsePendingGame(msg);
+                            else
+                            */
+                            this.parseLogin(msg);
+                            break;
+                        case _proto.Proto.GameServerGMActions:
+                            this.parseGMActions(msg);
+                            break;
+                        case _proto.Proto.GameServerUpdateNeeded:
+                            this.parseUpdateNeeded(msg);
+                            break;
+                        case _proto.Proto.GameServerLoginError:
+                            this.parseLoginError(msg);
+                            break;
+                        case _proto.Proto.GameServerLoginAdvice:
+                            this.parseLoginAdvice(msg);
+                            break;
+                        case _proto.Proto.GameServerLoginWait:
+                            this.parseLoginWait(msg);
+                            break;
+                        case _proto.Proto.GameServerLoginToken:
+                            this.parseLoginToken(msg);
+                            break;
+                        case _proto.Proto.GameServerPing:
+                        case _proto.Proto.GameServerPingBack:
+                            if (opcode == _proto.Proto.GameServerPing && _game.g_game.getFeature(_const.GameFeature.GameClientPing) || opcode == _proto.Proto.GameServerPingBack && !_game.g_game.getFeature(_const.GameFeature.GameClientPing)) this.parsePingBack(msg);else this.parsePing(msg);
+                            break;
+                        case _proto.Proto.GameServerChallenge:
+                            this.parseChallenge(msg);
+                            break;
+                        case _proto.Proto.GameServerDeath:
+                            this.parseDeath(msg);
+                            break;
+                        case _proto.Proto.GameServerFullMap:
+                            this.parseMapDescription(msg);
+                            break;
+                        case _proto.Proto.GameServerMapTopRow:
+                            this.parseMapMoveNorth(msg);
+                            break;
+                        case _proto.Proto.GameServerMapRightRow:
+                            this.parseMapMoveEast(msg);
+                            break;
+                        case _proto.Proto.GameServerMapBottomRow:
+                            this.parseMapMoveSouth(msg);
+                            break;
+                        case _proto.Proto.GameServerMapLeftRow:
+                            this.parseMapMoveWest(msg);
+                            break;
+                        case _proto.Proto.GameServerUpdateTile:
+                            this.parseUpdateTile(msg);
+                            break;
+                        case _proto.Proto.GameServerCreateOnMap:
+                            this.parseTileAddThing(msg);
+                            break;
+                        case _proto.Proto.GameServerChangeOnMap:
+                            this.parseTileTransformThing(msg);
+                            break;
+                        case _proto.Proto.GameServerDeleteOnMap:
+                            this.parseTileRemoveThing(msg);
+                            break;
+                        case _proto.Proto.GameServerMoveCreature:
+                            this.parseCreatureMove(msg);
+                            break;
+                        case _proto.Proto.GameServerOpenContainer:
+                            this.parseOpenContainer(msg);
+                            break;
+                        case _proto.Proto.GameServerCloseContainer:
+                            this.parseCloseContainer(msg);
+                            break;
+                        case _proto.Proto.GameServerCreateContainer:
+                            this.parseContainerAddItem(msg);
+                            break;
+                        case _proto.Proto.GameServerChangeInContainer:
+                            this.parseContainerUpdateItem(msg);
+                            break;
+                        case _proto.Proto.GameServerDeleteInContainer:
+                            this.parseContainerRemoveItem(msg);
+                            break;
+                        case _proto.Proto.GameServerSetInventory:
+                            this.parseAddInventoryItem(msg);
+                            break;
+                        case _proto.Proto.GameServerDeleteInventory:
+                            this.parseRemoveInventoryItem(msg);
+                            break;
+                        case _proto.Proto.GameServerOpenNpcTrade:
+                            this.parseOpenNpcTrade(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerGoods:
+                            this.parsePlayerGoods(msg);
+                            break;
+                        case _proto.Proto.GameServerCloseNpcTrade:
+                            this.parseCloseNpcTrade(msg);
+                            break;
+                        case _proto.Proto.GameServerOwnTrade:
+                            this.parseOwnTrade(msg);
+                            break;
+                        case _proto.Proto.GameServerCounterTrade:
+                            this.parseCounterTrade(msg);
+                            break;
+                        case _proto.Proto.GameServerCloseTrade:
+                            this.parseCloseTrade(msg);
+                            break;
+                        case _proto.Proto.GameServerAmbient:
+                            this.parseWorldLight(msg);
+                            break;
+                        case _proto.Proto.GameServerGraphicalEffect:
+                            this.parseMagicEffect(msg);
+                            break;
+                        case _proto.Proto.GameServerTextEffect:
+                            this.parseAnimatedText(msg);
+                            break;
+                        case _proto.Proto.GameServerMissleEffect:
+                            this.parseDistanceMissile(msg);
+                            break;
+                        case _proto.Proto.GameServerMarkCreature:
+                            this.parseCreatureMark(msg);
+                            break;
+                        case _proto.Proto.GameServerTrappers:
+                            this.parseTrappers(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureHealth:
+                            this.parseCreatureHealth(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureLight:
+                            this.parseCreatureLight(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureOutfit:
+                            this.parseCreatureOutfit(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureSpeed:
+                            this.parseCreatureSpeed(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureSkull:
+                            this.parseCreatureSkulls(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureParty:
+                            this.parseCreatureShields(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureUnpass:
+                            this.parseCreatureUnpass(msg);
+                            break;
+                        case _proto.Proto.GameServerEditText:
+                            this.parseEditText(msg);
+                            break;
+                        case _proto.Proto.GameServerEditList:
+                            this.parseEditList(msg);
+                            break;
+                        // PROTOCOL>=1038
+                        case _proto.Proto.GameServerPremiumTrigger:
+                            this.parsePremiumTrigger(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerData:
+                            this.parsePlayerStats(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerSkills:
+                            this.parsePlayerSkills(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerState:
+                            this.parsePlayerState(msg);
+                            break;
+                        case _proto.Proto.GameServerClearTarget:
+                            this.parsePlayerCancelAttack(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerModes:
+                            this.parsePlayerModes(msg);
+                            break;
+                        case _proto.Proto.GameServerTalk:
+                            this.parseTalk(msg);
+                            break;
+                        case _proto.Proto.GameServerChannels:
+                            this.parseChannelList(msg);
+                            break;
+                        case _proto.Proto.GameServerOpenChannel:
+                            this.parseOpenChannel(msg);
+                            break;
+                        case _proto.Proto.GameServerOpenPrivateChannel:
+                            this.parseOpenPrivateChannel(msg);
+                            break;
+                        case _proto.Proto.GameServerRuleViolationChannel:
+                            this.parseRuleViolationChannel(msg);
+                            break;
+                        case _proto.Proto.GameServerRuleViolationRemove:
+                            this.parseRuleViolationRemove(msg);
+                            break;
+                        case _proto.Proto.GameServerRuleViolationCancel:
+                            this.parseRuleViolationCancel(msg);
+                            break;
+                        case _proto.Proto.GameServerRuleViolationLock:
+                            this.parseRuleViolationLock(msg);
+                            break;
+                        case _proto.Proto.GameServerOpenOwnChannel:
+                            this.parseOpenOwnPrivateChannel(msg);
+                            break;
+                        case _proto.Proto.GameServerCloseChannel:
+                            this.parseCloseChannel(msg);
+                            break;
+                        case _proto.Proto.GameServerTextMessage:
+                            this.parseTextMessage(msg);
+                            break;
+                        case _proto.Proto.GameServerCancelWalk:
+                            this.parseCancelWalk(msg);
+                            break;
+                        case _proto.Proto.GameServerWalkWait:
+                            this.parseWalkWait(msg);
+                            break;
+                        case _proto.Proto.GameServerFloorChangeUp:
+                            this.parseFloorChangeUp(msg);
+                            break;
+                        case _proto.Proto.GameServerFloorChangeDown:
+                            this.parseFloorChangeDown(msg);
+                            break;
+                        case _proto.Proto.GameServerChooseOutfit:
+                            this.parseOpenOutfitWindow(msg);
+                            break;
+                        case _proto.Proto.GameServerVipAdd:
+                            this.parseVipAdd(msg);
+                            break;
+                        case _proto.Proto.GameServerVipState:
+                            this.parseVipState(msg);
+                            break;
+                        case _proto.Proto.GameServerVipLogout:
+                            this.parseVipLogout(msg);
+                            break;
+                        case _proto.Proto.GameServerTutorialHint:
+                            this.parseTutorialHint(msg);
+                            break;
+                        case _proto.Proto.GameServerAutomapFlag:
+                            this.parseAutomapFlag(msg);
+                            break;
+                        case _proto.Proto.GameServerQuestLog:
+                            this.parseQuestLog(msg);
+                            break;
+                        case _proto.Proto.GameServerQuestLine:
+                            this.parseQuestLine(msg);
+                            break;
+                        // PROTOCOL>=870
+                        case _proto.Proto.GameServerSpellDelay:
+                            this.parseSpellCooldown(msg);
+                            break;
+                        case _proto.Proto.GameServerSpellGroupDelay:
+                            this.parseSpellGroupCooldown(msg);
+                            break;
+                        case _proto.Proto.GameServerMultiUseDelay:
+                            this.parseMultiUseCooldown(msg);
+                            break;
+                        // PROTOCOL>=910
+                        case _proto.Proto.GameServerChannelEvent:
+                            this.parseChannelEvent(msg);
+                            break;
+                        case _proto.Proto.GameServerItemInfo:
+                            this.parseItemInfo(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerInventory:
+                            this.parsePlayerInventory(msg);
+                            break;
+                        // PROTOCOL>=950
+                        case _proto.Proto.GameServerPlayerDataBasic:
+                            this.parsePlayerInfo(msg);
+                            break;
+                        // PROTOCOL>=970
+                        case _proto.Proto.GameServerModalDialog:
+                            this.parseModalDialog(msg);
+                            break;
+                        // PROTOCOL>=980
+                        case _proto.Proto.GameServerLoginSuccess:
+                            this.parseLogin(msg);
+                            break;
+                        case _proto.Proto.GameServerEnterGame:
+                            this.parseEnterGame(msg);
+                            break;
+                        case _proto.Proto.GameServerPlayerHelpers:
+                            this.parsePlayerHelpers(msg);
+                            break;
+                        // PROTOCOL>=1000
+                        case _proto.Proto.GameServerCreatureMarks:
+                            this.parseCreaturesMark(msg);
+                            break;
+                        case _proto.Proto.GameServerCreatureType:
+                            this.parseCreatureType(msg);
+                            break;
+                        // PROTOCOL>=1055
+                        case _proto.Proto.GameServerBlessings:
+                            this.parseBlessings(msg);
+                            break;
+                        case _proto.Proto.GameServerUnjustifiedStats:
+                            this.parseUnjustifiedStats(msg);
+                            break;
+                        case _proto.Proto.GameServerPvpSituations:
+                            this.parsePvpSituations(msg);
+                            break;
+                        case _proto.Proto.GameServerPreset:
+                            this.parsePreset(msg);
+                            break;
+                        // PROTOCOL>=1080
+                        case _proto.Proto.GameServerCoinBalanceUpdating:
+                            this.parseCoinBalanceUpdating(msg);
+                            break;
+                        case _proto.Proto.GameServerCoinBalance:
+                            this.parseCoinBalance(msg);
+                            break;
+                        case _proto.Proto.GameServerRequestPurchaseData:
+                            this.parseRequestPurchaseData(msg);
+                            break;
+                        case _proto.Proto.GameServerStoreCompletePurchase:
+                            this.parseCompleteStorePurchase(msg);
+                            break;
+                        case _proto.Proto.GameServerStoreOffers:
+                            this.parseStoreOffers(msg);
+                            break;
+                        case _proto.Proto.GameServerStoreTransactionHistory:
+                            this.parseStoreTransactionHistory(msg);
+                            break;
+                        case _proto.Proto.GameServerStoreError:
+                            this.parseStoreError(msg);
+                            break;
+                        case _proto.Proto.GameServerStore:
+                            this.parseStore(msg);
+                            break;
+                        // PROTOCOL>=1097
+                        case _proto.Proto.GameServerStoreButtonIndicators:
+                            this.parseStoreButtonIndicators(msg);
+                            break;
+                        case _proto.Proto.GameServerSetStoreDeepLink:
+                            this.parseSetStoreDeepLink(msg);
+                            break;
+                        // otclient ONLY
+                        case _proto.Proto.GameServerExtendedOpcode:
+                            this.parseExtendedOpcode(msg);
+                            break;
+                        case _proto.Proto.GameServerChangeMapAwareRange:
+                            this.parseChangeMapAwareRange(msg);
+                            break;
+                        default:
+                            _log.Log.error("unhandled opcode %d", opcode);
+                            break;
+                    }
+                    prevOpcode = opcode;
+                }
+            } catch (e) {
+                _log.Log.error("ProtocolGame parse message exception (%d bytes unread, last opcode is %d, prev opcode is %d): %s", msg.getUnreadSize(), opcode, prevOpcode, e);
+            }
+        }
+    }, {
+        key: "sendPingBack",
+        value: function sendPingBack() {
+            console.log('sendPingBack');
+            var msg = new _outputmessage.OutputMessage();
+            msg.addU8(_proto.Proto.ClientPingBack);
+            this.send(msg);
+        }
+    }, {
+        key: "parseLogin",
+        value: function parseLogin(msg) {
+            var playerId = msg.getU32();
+            var serverBeat = msg.getU16();
+            var canReportBugs = msg.getU8();
+            if (_game.g_game.getClientVersion() >= 1054) msg.getU8(); // can change pvp frame option
+            if (_game.g_game.getClientVersion() >= 1058) {
+                var expertModeEnabled = msg.getU8();
+                //g_game.setExpertPvpMode(expertModeEnabled);
+            }
+            if (_game.g_game.getFeature(_const.GameFeature.GameIngameStore)) {
+                // URL to ingame store images
+                msg.getString();
+                // premium coin package size
+                // e.g you can only buy packs of 25, 50, 75, .. coins in the market
+                msg.getU16();
+            }
+            this.m_localPlayer.setId(playerId);
+            _log.Log.error('local pid', playerId);
+            //g_game.setServerBeat(serverBeat);
+            //g_game.setCanReportBugs(canReportBugs);
+            //g_game.processLogin();
+        }
+    }, {
+        key: "parsePendingGame",
+        value: function parsePendingGame(msg) {
+            //set player to pending game state
+            //g_game.processPendingGame();
+        }
+    }, {
+        key: "parseEnterGame",
+        value: function parseEnterGame(msg) {
+            //set player to entered game state
+            //g_game.processEnterGame();
+            if (!this.m_gameInitialized) {
+                //g_game.processGameStart();
+                this.m_gameInitialized = true;
+            }
+        }
+    }, {
+        key: "parseStoreButtonIndicators",
+        value: function parseStoreButtonIndicators(msg) {
+            msg.getU8(); // unknown
+            msg.getU8(); // unknown
+        }
+    }, {
+        key: "parseSetStoreDeepLink",
+        value: function parseSetStoreDeepLink(msg) {
+            var currentlyFeaturedServiceType = msg.getU8();
+        }
+    }, {
+        key: "parseBlessings",
+        value: function parseBlessings(msg) {
+            var blessings = msg.getU16();
+            this.m_localPlayer.setBlessings(blessings);
+        }
+    }, {
+        key: "parsePreset",
+        value: function parsePreset(msg) {
+            var preset = msg.getU32();
+        }
+    }, {
+        key: "parseRequestPurchaseData",
+        value: function parseRequestPurchaseData(msg) {
+            var transactionId = msg.getU32();
+            var productType = msg.getU8();
+        }
+    }, {
+        key: "parseStore",
+        value: function parseStore(msg) {
+            this.parseCoinBalance(msg);
+            // Parse all categories
+            var count = msg.getU16();
+            for (var i = 0; i < count; i++) {
+                var category = msg.getString();
+                var description = msg.getString();
+                var highlightState = 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameIngameStoreHighlights)) highlightState = msg.getU8();
+                var icons = [];
+                var iconCount = msg.getU8();
+                for (var _i = 0; _i < iconCount; _i++) {
+                    var icon = msg.getString();
+                    icons.push(icon);
+                }
+                // If this is a valid category name then
+                // the category we just parsed is a child of that
+                var parentCategory = msg.getString();
+            }
+        }
+    }, {
+        key: "parseCoinBalance",
+        value: function parseCoinBalance(msg) {
+            var update = msg.getU8() == 1;
+            var coins = -1;
+            var transferableCoins = -1;
+            if (update) {
+                // amount of coins that can be used to buy prodcuts
+                // in the ingame store
+                coins = msg.getU32();
+                // amount of coins that can be sold in market
+                // or be transfered to another player
+                transferableCoins = msg.getU32();
+            }
+        }
+    }, {
+        key: "parseCoinBalanceUpdating",
+        value: function parseCoinBalanceUpdating(msg) {
+            // coin balance can be updating and might not be accurate
+            var isUpdating = msg.getU8() == 1;
+        }
+    }, {
+        key: "parseCompleteStorePurchase",
+        value: function parseCompleteStorePurchase(msg) {
+            // not used
+            msg.getU8();
+            var message = msg.getString();
+            var coins = msg.getU32();
+            var transferableCoins = msg.getU32();
+            _log.Log.debug("Purchase Complete: %s", message);
+        }
+    }, {
+        key: "parseStoreTransactionHistory",
+        value: function parseStoreTransactionHistory(msg) {
+            var currentPage = void 0;
+            if (_game.g_game.getClientVersion() <= 1096) {
+                currentPage = msg.getU16();
+                var hasNextPage = msg.getU8() == 1;
+            } else {
+                currentPage = msg.getU32();
+                var pageCount = msg.getU32();
+            }
+            var entries = msg.getU8();
+            for (var i = 0; i < entries; i++) {
+                var time = msg.getU16();
+                var productType = msg.getU8();
+                var coinChange = msg.getU32();
+                var productName = msg.getString();
+                _log.Log.debug("Time %i, type %i, change %i, product name %s", time, productType, coinChange, productName);
+            }
+        }
+    }, {
+        key: "parseStoreOffers",
+        value: function parseStoreOffers(msg) {
+            var categoryName = msg.getString();
+            var offers = msg.getU16();
+            for (var i = 0; i < offers; i++) {
+                var offerId = msg.getU32();
+                var offerName = msg.getString();
+                var offerDescription = msg.getString();
+                var price = msg.getU32();
+                var highlightState = msg.getU8();
+                if (highlightState == 2 && _game.g_game.getFeature(_const.GameFeature.GameIngameStoreHighlights) && _game.g_game.getClientVersion() >= 1097) {
+                    var saleValidUntilTimestamp = msg.getU32();
+                    var basePrice = msg.getU32();
+                }
+                var disabledState = msg.getU8();
+                var disabledReason = "";
+                if (_game.g_game.getFeature(_const.GameFeature.GameIngameStoreHighlights) && disabledState == 1) {
+                    disabledReason = msg.getString();
+                }
+                var icons = msg.getU8();
+                for (var j = 0; j < icons; j++) {
+                    var icon = msg.getString();
+                }
+                var subOffers = msg.getU16();
+                for (var _j = 0; _j < subOffers; _j++) {
+                    var name = msg.getString();
+                    var description = msg.getString();
+                    var subIcons = msg.getU8();
+                    for (var k = 0; k < subIcons; k++) {
+                        var _icon = msg.getString();
+                    }
+                    var serviceType = msg.getString();
+                }
+            }
+        }
+    }, {
+        key: "parseStoreError",
+        value: function parseStoreError(msg) {
+            var errorType = msg.getU8();
+            var message = msg.getString();
+            _log.Log.error("Store Error: %s [%i]", message, errorType);
+        }
+    }, {
+        key: "parseUnjustifiedStats",
+        value: function parseUnjustifiedStats(msg) {
+            var unjustifiedPoints = void 0;
+            unjustifiedPoints.killsDay = msg.getU8();
+            unjustifiedPoints.killsDayRemaining = msg.getU8();
+            unjustifiedPoints.killsWeek = msg.getU8();
+            unjustifiedPoints.killsWeekRemaining = msg.getU8();
+            unjustifiedPoints.killsMonth = msg.getU8();
+            unjustifiedPoints.killsMonthRemaining = msg.getU8();
+            unjustifiedPoints.skullTime = msg.getU8();
+            //g_game.setUnjustifiedPoints(unjustifiedPoints);
+        }
+    }, {
+        key: "parsePvpSituations",
+        value: function parsePvpSituations(msg) {
+            var openPvpSituations = msg.getU8();
+            //g_game.setOpenPvpSituations(openPvpSituations);
+        }
+    }, {
+        key: "parsePlayerHelpers",
+        value: function parsePlayerHelpers(msg) {
+            var id = msg.getU32();
+            var helpers = msg.getU16();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) {
+                //g_game.processPlayerHelpers(helpers);
+            } else _log.Log.error("could not get creature with id %d", id);
+        }
+    }, {
+        key: "parseGMActions",
+        value: function parseGMActions(msg) {
+            var actions = [];
+            var numViolationReasons = void 0;
+            if (_game.g_game.getClientVersion() >= 850) numViolationReasons = 20;else if (_game.g_game.getClientVersion() >= 840) numViolationReasons = 23;else numViolationReasons = 32;
+            for (var i = 0; i < numViolationReasons; ++i) {
+                actions.push(msg.getU8());
+            }_log.Log.debug(numViolationReasons, actions);
+            //g_game.processGMActions(actions);
+        }
+    }, {
+        key: "parseUpdateNeeded",
+        value: function parseUpdateNeeded(msg) {
+            var signature = msg.getString();
+            //g_game.processUpdateNeeded(signature);
+        }
+    }, {
+        key: "parseLoginError",
+        value: function parseLoginError(msg) {
+            var error = msg.getString();
+            _log.Log.error('login error', error);
+            //g_game.processLoginError(error);
+        }
+    }, {
+        key: "parseLoginAdvice",
+        value: function parseLoginAdvice(msg) {
+            var message = msg.getString();
+            //g_game.processLoginAdvice(message);
+        }
+    }, {
+        key: "parseLoginWait",
+        value: function parseLoginWait(msg) {
+            var message = msg.getString();
+            var time = msg.getU8();
+            //g_game.processLoginWait(message, time);
+        }
+    }, {
+        key: "parseLoginToken",
+        value: function parseLoginToken(msg) {
+            var unknown = msg.getU8() == 0;
+            //g_game.processLoginToken(unknown);
+        }
+    }, {
+        key: "parsePing",
+        value: function parsePing(msg) {
+            this.sendPingBack();
+        }
+    }, {
+        key: "parsePingBack",
+        value: function parsePingBack(msg) {
+            //g_game.processPingBack();
+        }
+    }, {
+        key: "parseChallenge",
+        value: function parseChallenge(msg) {
+            var timestamp = msg.getU32();
+            var random = msg.getU8();
+            this.sendLoginPacket(timestamp, random);
+        }
+    }, {
+        key: "parseDeath",
+        value: function parseDeath(msg) {
+            var penality = 100;
+            var deathType = _const.DeathType.DeathRegular;
+            if (_game.g_game.getFeature(_const.GameFeature.GameDeathType)) deathType = msg.getU8();
+            if (_game.g_game.getFeature(_const.GameFeature.GamePenalityOnDeath) && deathType == _const.DeathType.DeathRegular) penality = msg.getU8();
+            //g_game.processDeath(deathType, penality);
+        }
+    }, {
+        key: "parseMapDescription",
+        value: function parseMapDescription(msg) {
+            var pos = this.getPosition(msg);
+            if (!this.m_mapKnown) this.m_localPlayer.setPosition(pos);
+            _map.g_map.setCentralPosition(pos);
+            _log.Log.debug(this.m_localPlayer, _map.g_map.getCentralPosition());
+            var range = _map.g_map.getAwareRange();
+            this.setMapDescription(msg, pos.x - range.left, pos.y - range.top, pos.z, range.horizontal(), range.vertical());
+            if (!this.m_mapKnown) {
+                this.m_mapKnown = true;
+            }
+            //g_dispatcher.addEvent([] { g_lua.callGlobalField("g_game", "onMapDescription"); });
+        }
+    }, {
+        key: "parseMapMoveNorth",
+        value: function parseMapMoveNorth(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            pos.y--;
+            var range = _map.g_map.getAwareRange();
+            this.setMapDescription(msg, pos.x - range.left, pos.y - range.top, pos.z, range.horizontal(), 1);
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseMapMoveEast",
+        value: function parseMapMoveEast(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            pos.x++;
+            var range = _map.g_map.getAwareRange();
+            this.setMapDescription(msg, pos.x + range.right, pos.y - range.top, pos.z, 1, range.vertical());
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseMapMoveSouth",
+        value: function parseMapMoveSouth(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            pos.y++;
+            var range = _map.g_map.getAwareRange();
+            this.setMapDescription(msg, pos.x - range.left, pos.y + range.bottom, pos.z, range.horizontal(), 1);
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseMapMoveWest",
+        value: function parseMapMoveWest(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            pos.x--;
+            var range = _map.g_map.getAwareRange();
+            this.setMapDescription(msg, pos.x - range.left, pos.y - range.top, pos.z, 1, range.vertical());
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseUpdateTile",
+        value: function parseUpdateTile(msg) {
+            var tilePos = this.getPosition(msg);
+            this.setTileDescription(msg, tilePos);
+        }
+    }, {
+        key: "parseTileAddThing",
+        value: function parseTileAddThing(msg) {
+            var pos = this.getPosition(msg);
+            var stackPos = -1;
+            if (_game.g_game.getClientVersion() >= 841) stackPos = msg.getU8();
+            var thing = this.getThing(msg);
+            _map.g_map.addThing(thing, pos, stackPos);
+        }
+    }, {
+        key: "parseTileTransformThing",
+        value: function parseTileTransformThing(msg) {
+            var thing = this.getMappedThing(msg);
+            var newThing = this.getThing(msg);
+            if (!thing) {
+                _log.Log.error("no thing");
+                return;
+            }
+            var pos = thing.getPosition();
+            var stackpos = thing.getStackPos();
+            if (!_map.g_map.removeThing(thing)) {
+                _log.Log.error("unable to remove thing");
+                return;
+            }
+            _map.g_map.addThing(newThing, pos, stackpos);
+        }
+    }, {
+        key: "parseTileRemoveThing",
+        value: function parseTileRemoveThing(msg) {
+            var thing = this.getMappedThing(msg);
+            if (!thing) {
+                _log.Log.error("no thing");
+                return;
+            }
+            if (!_map.g_map.removeThing(thing)) _log.Log.error("unable to remove thing");
+        }
+    }, {
+        key: "parseCreatureMove",
+        value: function parseCreatureMove(msg) {
+            var thing = this.getMappedThing(msg);
+            var newPos = this.getPosition(msg);
+            if (!thing || !thing.isCreature()) {
+                _log.Log.error("no creature found to move");
+                return;
+            }
+            if (!_map.g_map.removeThing(thing)) {
+                _log.Log.error("unable to remove creature");
+                return;
+            }
+            var creature = thing;
+            creature.allowAppearWalk();
+            _map.g_map.addThing(thing, newPos, -1);
+        }
+    }, {
+        key: "parseOpenContainer",
+        value: function parseOpenContainer(msg) {
+            var containerId = msg.getU8();
+            var containerItem = this.getItem(msg);
+            var name = msg.getString();
+            var capacity = msg.getU8();
+            var hasParent = msg.getU8() != 0;
+            var isUnlocked = true;
+            var hasPages = false;
+            var containerSize = 0;
+            var firstIndex = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameContainerPagination)) {
+                isUnlocked = msg.getU8() != 0; // drag and drop
+                hasPages = msg.getU8() != 0; // pagination
+                containerSize = msg.getU16(); // container size
+                firstIndex = msg.getU16(); // first index
+            }
+            var itemCount = msg.getU8();
+            var items = [];
+            for (var i = 0; i < itemCount; i++) {
+                items[i] = this.getItem(msg);
+            } //g_game.processOpenContainer(containerId, containerItem, name, capacity, hasParent, items, isUnlocked, hasPages, containerSize, firstIndex);
+        }
+    }, {
+        key: "parseCloseContainer",
+        value: function parseCloseContainer(msg) {
+            var containerId = msg.getU8();
+            //g_game.processCloseContainer(containerId);
+        }
+    }, {
+        key: "parseContainerAddItem",
+        value: function parseContainerAddItem(msg) {
+            var containerId = msg.getU8();
+            var slot = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameContainerPagination)) {
+                slot = msg.getU16(); // slot
+            }
+            var item = this.getItem(msg);
+            //g_game.processContainerAddItem(containerId, item, slot);
+        }
+    }, {
+        key: "parseContainerUpdateItem",
+        value: function parseContainerUpdateItem(msg) {
+            var containerId = msg.getU8();
+            var slot = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameContainerPagination)) {
+                slot = msg.getU16();
+            } else {
+                slot = msg.getU8();
+            }
+            var item = this.getItem(msg);
+            //g_game.processContainerUpdateItem(containerId, slot, item);
+        }
+    }, {
+        key: "parseContainerRemoveItem",
+        value: function parseContainerRemoveItem(msg) {
+            var containerId = msg.getU8();
+            var slot = void 0;
+            var lastItem = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameContainerPagination)) {
+                slot = msg.getU16();
+                var itemId = msg.getU16();
+                if (itemId != 0) lastItem = this.getItem(msg, itemId);
+            } else {
+                slot = msg.getU8();
+            }
+            //g_game.processContainerRemoveItem(containerId, slot, lastItem);
+        }
+    }, {
+        key: "parseAddInventoryItem",
+        value: function parseAddInventoryItem(msg) {
+            var slot = msg.getU8();
+            var item = this.getItem(msg);
+            //g_game.processInventoryChange(slot, item);
+        }
+    }, {
+        key: "parseRemoveInventoryItem",
+        value: function parseRemoveInventoryItem(msg) {
+            var slot = msg.getU8();
+            //g_game.processInventoryChange(slot, new Item());
+        }
+    }, {
+        key: "parseOpenNpcTrade",
+        value: function parseOpenNpcTrade(msg) {
+            var items = [];
+            var npcName = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameNameOnNpcTrade)) npcName = msg.getString();
+            var listCount = void 0;
+            if (_game.g_game.getClientVersion() >= 900) listCount = msg.getU16();else listCount = msg.getU8();
+            for (var i = 0; i < listCount; ++i) {
+                var itemId = msg.getU16();
+                var count = msg.getU8();
+                var item = new _item.Item(itemId);
+                item.setCountOrSubType(count);
+                var name = msg.getString();
+                var weight = msg.getU32();
+                var buyPrice = msg.getU32();
+                var sellPrice = msg.getU32();
+                items.push([item, name, weight, buyPrice, sellPrice]);
+            }
+            //g_game.processOpenNpcTrade(items);
+        }
+    }, {
+        key: "parsePlayerGoods",
+        value: function parsePlayerGoods(msg) {
+            var goods = [];
+            var money = void 0;
+            if (_game.g_game.getClientVersion() >= 973) money = msg.getU64();else money = msg.getU32();
+            var size = msg.getU8();
+            for (var i = 0; i < size; i++) {
+                var itemId = msg.getU16();
+                var amount = void 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameDoubleShopSellAmount)) amount = msg.getU16();else amount = msg.getU8();
+                goods.push([new _item.Item(itemId), amount]);
+            }
+            //g_game.processPlayerGoods(money, goods);
+        }
+    }, {
+        key: "parseCloseNpcTrade",
+        value: function parseCloseNpcTrade(msg) {
+            //g_game.processCloseNpcTrade();
+        }
+    }, {
+        key: "parseOwnTrade",
+        value: function parseOwnTrade(msg) {
+            var name = _game.g_game.formatCreatureName(msg.getString());
+            var count = msg.getU8();
+            var items = [];
+            for (var i = 0; i < count; i++) {
+                items[i] = this.getItem(msg);
+            } //g_game.processOwnTrade(name, items);
+        }
+    }, {
+        key: "parseCounterTrade",
+        value: function parseCounterTrade(msg) {
+            var name = _game.g_game.formatCreatureName(msg.getString());
+            var count = msg.getU8();
+            var items = [];
+            for (var i = 0; i < count; i++) {
+                items[i] = this.getItem(msg);
+            } //g_game.processCounterTrade(name, items);
+        }
+    }, {
+        key: "parseCloseTrade",
+        value: function parseCloseTrade(msg) {
+            //g_game.processCloseTrade();
+        }
+    }, {
+        key: "parseWorldLight",
+        value: function parseWorldLight(msg) {
+            var light = new _light.Light();
+            light.intensity = msg.getU8();
+            light.color = msg.getU8();
+            _map.g_map.setLight(light);
+        }
+    }, {
+        key: "parseMagicEffect",
+        value: function parseMagicEffect(msg) {
+            var pos = this.getPosition(msg);
+            var effectId = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMagicEffectU16)) effectId = msg.getU16();else effectId = msg.getU8();
+            if (!_thingtypemanager.g_things.isValidDatId(effectId, _const.ThingCategory.ThingCategoryEffect)) {
+                _log.Log.error("invalid effect id %d", effectId);
+                return;
+            }
+            var effect = new _effect.Effect();
+            effect.setId(effectId);
+            _map.g_map.addThing(effect, pos);
+        }
+    }, {
+        key: "parseAnimatedText",
+        value: function parseAnimatedText(msg) {
+            var position = this.getPosition(msg);
+            var color = msg.getU8();
+            var text = msg.getString();
+            var animatedText = new _animatedtext.AnimatedText();
+            animatedText.setColor(color);
+            animatedText.setText(text);
+            _map.g_map.addThing(animatedText, position);
+        }
+    }, {
+        key: "parseDistanceMissile",
+        value: function parseDistanceMissile(msg) {
+            var fromPos = this.getPosition(msg);
+            var toPos = this.getPosition(msg);
+            var shotId = msg.getU8();
+            if (!_thingtypemanager.g_things.isValidDatId(shotId, _const.ThingCategory.ThingCategoryMissile)) {
+                _log.Log.error("invalid missile id %d", shotId);
+                return;
+            }
+            var missile = new _missile.Missile();
+            missile.setId(shotId);
+            missile.setPath(fromPos, toPos);
+            _map.g_map.addThing(missile, fromPos);
+        }
+    }, {
+        key: "parseCreatureMark",
+        value: function parseCreatureMark(msg) {
+            var id = msg.getU32();
+            var color = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.addTimedSquare(color);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseTrappers",
+        value: function parseTrappers(msg) {
+            var numTrappers = msg.getU8();
+            if (numTrappers > 8) _log.Log.error("too many trappers");
+            for (var i = 0; i < numTrappers; ++i) {
+                var id = msg.getU32();
+                var creature = _map.g_map.getCreatureById(id);
+                if (creature) {
+                    //TODO: set creature as trapper
+                } else _log.Log.error("could not get creature");
+            }
+        }
+    }, {
+        key: "parseCreatureHealth",
+        value: function parseCreatureHealth(msg) {
+            var id = msg.getU32();
+            var healthPercent = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setHealthPercent(healthPercent);
+            // some servers has a bug in get spectators and sends unknown creatures updates
+            // so this code is disabled
+            /*
+            else
+                g_logger.traceError("could not get creature");
+            */
+        }
+    }, {
+        key: "parseCreatureLight",
+        value: function parseCreatureLight(msg) {
+            var id = msg.getU32();
+            var light = new _light.Light();
+            light.intensity = msg.getU8();
+            light.color = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setLight(light);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseCreatureOutfit",
+        value: function parseCreatureOutfit(msg) {
+            var id = msg.getU32();
+            var outfit = this.getOutfit(msg);
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setOutfit(outfit);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseCreatureSpeed",
+        value: function parseCreatureSpeed(msg) {
+            var id = msg.getU32();
+            var baseSpeed = -1;
+            if (_game.g_game.getClientVersion() >= 1059) baseSpeed = msg.getU16();
+            var speed = msg.getU16();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) {
+                creature.setSpeed(speed);
+                if (baseSpeed != -1) creature.setBaseSpeed(baseSpeed);
+            }
+            // some servers has a bug in get spectators and sends unknown creatures updates
+            // so this code is disabled
+            /*
+            else
+                g_logger.traceError("could not get creature");
+            */
+        }
+    }, {
+        key: "parseCreatureSkulls",
+        value: function parseCreatureSkulls(msg) {
+            var id = msg.getU32();
+            var skull = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setSkull(skull);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseCreatureShields",
+        value: function parseCreatureShields(msg) {
+            var id = msg.getU32();
+            var shield = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setShield(shield);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseCreatureUnpass",
+        value: function parseCreatureUnpass(msg) {
+            var id = msg.getU32();
+            var unpass = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setPassable(!unpass);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "parseEditText",
+        value: function parseEditText(msg) {
+            var id = msg.getU32();
+            var itemId = void 0;
+            if (_game.g_game.getClientVersion() >= 1010) {
+                // TODO: processEditText with ItemPtr as parameter
+                var item = this.getItem(msg);
+                itemId = item.getId();
+            } else itemId = msg.getU16();
+            var maxLength = msg.getU16();
+            var text = msg.getString();
+            var writer = msg.getString();
+            var date = "";
+            if (_game.g_game.getFeature(_const.GameFeature.GameWritableDate)) date = msg.getString();
+            //g_game.processEditText(id, itemId, maxLength, text, writer, date);
+        }
+    }, {
+        key: "parseEditList",
+        value: function parseEditList(msg) {
+            var doorId = msg.getU8();
+            var id = msg.getU32();
+            var text = msg.getString();
+            //g_game.processEditList(id, doorId, text);
+        }
+    }, {
+        key: "parsePremiumTrigger",
+        value: function parsePremiumTrigger(msg) {
+            var triggerCount = msg.getU8();
+            var triggers = void 0;
+            for (var i = 0; i < triggerCount; ++i) {
+                triggers.push_back(msg.getU8());
+            }
+            if (_game.g_game.getClientVersion() <= 1096) {
+                var something = msg.getU8() == 1;
+            }
+        }
+    }, {
+        key: "parsePlayerInfo",
+        value: function parsePlayerInfo(msg) {
+            var premium = msg.getU8(); // premium
+            if (_game.g_game.getFeature(_const.GameFeature.GamePremiumExpiration)) {
+                var premiumEx = msg.getU32(); // premium expiration used for premium advertisement
+            }
+            var vocation = msg.getU8(); // vocation
+            var spellCount = msg.getU16();
+            var spells = void 0;
+            for (var i = 0; i < spellCount; ++i) {
+                spells.push(msg.getU8());
+            } // spell id
+            //m_localPlayer.setPremium(premium);
+            //m_localPlayer.setVocation(vocation);
+            //m_localPlayer.setSpells(spells);
+        }
+    }, {
+        key: "parsePlayerStats",
+        value: function parsePlayerStats(msg) {
+            var health = void 0;
+            var maxHealth = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameDoubleHealth)) {
+                health = msg.getU32();
+                maxHealth = msg.getU32();
+            } else {
+                health = msg.getU16();
+                maxHealth = msg.getU16();
+            }
+            var freeCapacity = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameDoubleFreeCapacity)) freeCapacity = msg.getU32() / 100.0;else freeCapacity = msg.getU16() / 100.0;
+            var totalCapacity = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameTotalCapacity)) totalCapacity = msg.getU32() / 100.0;
+            var experience = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameDoubleExperience)) experience = msg.getU64();else experience = msg.getU32();
+            var level = msg.getU16();
+            var levelPercent = msg.getU8();
+            if (_game.g_game.getFeature(_const.GameFeature.GameExperienceBonus)) {
+                if (_game.g_game.getClientVersion() <= 1096) {
+                    var experienceBonus = msg.getDouble();
+                } else {
+                    var baseXpGain = msg.getU16();
+                    var voucherAddend = msg.getU16();
+                    var grindingAddend = msg.getU16();
+                    var storeBoostAddend = msg.getU16();
+                    var huntingBoostFactor = msg.getU16();
+                }
+            }
+            var mana = void 0;
+            var maxMana = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameDoubleHealth)) {
+                mana = msg.getU32();
+                maxMana = msg.getU32();
+            } else {
+                mana = msg.getU16();
+                maxMana = msg.getU16();
+            }
+            var magicLevel = msg.getU8();
+            var baseMagicLevel = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameSkillsBase)) baseMagicLevel = msg.getU8();else baseMagicLevel = magicLevel;
+            var magicLevelPercent = msg.getU8();
+            var soul = msg.getU8();
+            var stamina = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GamePlayerStamina)) stamina = msg.getU16();
+            var baseSpeed = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameSkillsBase)) baseSpeed = msg.getU16();
+            var regeneration = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GamePlayerRegenerationTime)) regeneration = msg.getU16();
+            var training = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameOfflineTrainingTime)) {
+                training = msg.getU16();
+                if (_game.g_game.getClientVersion() >= 1097) {
+                    var remainingStoreXpBoostSeconds = msg.getU16();
+                    var canBuyMoreStoreXpBoosts = msg.getU8();
+                }
+            }
+            /*
+                m_localPlayer.setHealth(health, maxHealth);
+                m_localPlayer.setFreeCapacity(freeCapacity);
+                m_localPlayer.setTotalCapacity(totalCapacity);
+                m_localPlayer.setExperience(experience);
+                m_localPlayer.setLevel(level, levelPercent);
+                m_localPlayer.setMana(mana, maxMana);
+                m_localPlayer.setMagicLevel(magicLevel, magicLevelPercent);
+                m_localPlayer.setBaseMagicLevel(baseMagicLevel);
+                m_localPlayer.setStamina(stamina);
+                m_localPlayer.setSoul(soul);
+                m_localPlayer.setBaseSpeed(baseSpeed);
+                m_localPlayer.setRegenerationTime(regeneration);
+                m_localPlayer.setOfflineTrainingTime(training);
+                */
+        }
+    }, {
+        key: "parsePlayerSkills",
+        value: function parsePlayerSkills(msg) {
+            var lastSkill = _const.Skill.Fishing + 1;
+            if (_game.g_game.getFeature(_const.GameFeature.GameAdditionalSkills)) lastSkill = _const.Skill.LastSkill;
+            for (var skill = 0; skill < lastSkill; skill++) {
+                var level = void 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameDoubleSkills)) level = msg.getU16();else level = msg.getU8();
+                var baseLevel = void 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameSkillsBase)) {
+                    if (_game.g_game.getFeature(_const.GameFeature.GameBaseSkillU16)) baseLevel = msg.getU16();else baseLevel = msg.getU8();
+                } else baseLevel = level;
+                var levelPercent = 0;
+                // Critical, Life Leech and Mana Leech have no level percent
+                if (skill <= _const.Skill.Fishing) levelPercent = msg.getU8();
+                /*
+                    m_localPlayer.setSkill(skill, level, levelPercent);
+                    m_localPlayer.setBaseSkill(skill, baseLevel);
+                    */
+            }
+        }
+    }, {
+        key: "parsePlayerState",
+        value: function parsePlayerState(msg) {
+            var states = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GamePlayerStateU16)) states = msg.getU16();else states = msg.getU8();
+            //m_localPlayer.setStates(states);
+        }
+    }, {
+        key: "parsePlayerCancelAttack",
+        value: function parsePlayerCancelAttack(msg) {
+            var seq = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameAttackSeq)) seq = msg.getU32();
+            //g_game.processAttackCancel(seq);
+        }
+    }, {
+        key: "parsePlayerModes",
+        value: function parsePlayerModes(msg) {
+            var fightMode = msg.getU8();
+            var chaseMode = msg.getU8();
+            var safeMode = msg.getU8();
+            var pvpMode = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GamePVPMode)) pvpMode = msg.getU8();
+            //g_game.processPlayerModes((Otc::FightModes)fightMode, (Otc::ChaseModes)chaseMode, safeMode, (Otc::PVPModes)pvpMode);
+        }
+    }, {
+        key: "parseSpellCooldown",
+        value: function parseSpellCooldown(msg) {
+            var spellId = msg.getU8();
+            var delay = msg.getU32();
+            //g_lua.callGlobalField("g_game", "onSpellCooldown", spellId, delay);
+        }
+    }, {
+        key: "parseSpellGroupCooldown",
+        value: function parseSpellGroupCooldown(msg) {
+            var groupId = msg.getU8();
+            var delay = msg.getU32();
+            //g_lua.callGlobalField("g_game", "onSpellGroupCooldown", groupId, delay);
+        }
+    }, {
+        key: "parseMultiUseCooldown",
+        value: function parseMultiUseCooldown(msg) {
+            var delay = msg.getU32();
+            //g_lua.callGlobalField("g_game", "onMultiUseCooldown", delay);
+        }
+    }, {
+        key: "parseTalk",
+        value: function parseTalk(msg) {
+            if (_game.g_game.getFeature(_const.GameFeature.GameMessageStatements)) msg.getU32(); // channel statement guid
+            var name = _game.g_game.formatCreatureName(msg.getString());
+            var level = 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMessageLevel)) level = msg.getU16();
+            var mode = _game.g_game.translateMessageModeFromServer(msg.getU8());
+            var channelId = 0;
+            var pos = void 0;
+            switch (mode) {
+                case _const.MessageMode.MessageSay:
+                case _const.MessageMode.MessageWhisper:
+                case _const.MessageMode.MessageYell:
+                case _const.MessageMode.MessageMonsterSay:
+                case _const.MessageMode.MessageMonsterYell:
+                case _const.MessageMode.MessageNpcTo:
+                case _const.MessageMode.MessageBarkLow:
+                case _const.MessageMode.MessageBarkLoud:
+                case _const.MessageMode.MessageSpell:
+                case _const.MessageMode.MessageNpcFromStartBlock:
+                    pos = this.getPosition(msg);
+                    break;
+                case _const.MessageMode.MessageChannel:
+                case _const.MessageMode.MessageChannelManagement:
+                case _const.MessageMode.MessageChannelHighlight:
+                case _const.MessageMode.MessageGamemasterChannel:
+                    channelId = msg.getU16();
+                    break;
+                case _const.MessageMode.MessageNpcFrom:
+                case _const.MessageMode.MessagePrivateFrom:
+                case _const.MessageMode.MessageGamemasterBroadcast:
+                case _const.MessageMode.MessageGamemasterPrivateFrom:
+                case _const.MessageMode.MessageRVRAnswer:
+                case _const.MessageMode.MessageRVRContinue:
+                    break;
+                case _const.MessageMode.MessageRVRChannel:
+                    msg.getU32();
+                    break;
+                default:
+                    _log.Log.error("unknown message mode %d", mode);
+                    break;
+            }
+            var text = msg.getString();
+            //g_game.processTalk(name, level, mode, text, channelId, pos);
+        }
+    }, {
+        key: "parseChannelList",
+        value: function parseChannelList(msg) {
+            var count = msg.getU8();
+            var channelList = [];
+            for (var i = 0; i < count; i++) {
+                var id = msg.getU16();
+                var name = msg.getString();
+                channelList.push([id, name]);
+            }
+            //g_game.processChannelList(channelList);
+        }
+    }, {
+        key: "parseOpenChannel",
+        value: function parseOpenChannel(msg) {
+            var channelId = msg.getU16();
+            var name = msg.getString();
+            if (_game.g_game.getFeature(_const.GameFeature.GameChannelPlayerList)) {
+                var joinedPlayers = msg.getU16();
+                for (var i = 0; i < joinedPlayers; ++i) {
+                    _game.g_game.formatCreatureName(msg.getString());
+                } // player name
+                var invitedPlayers = msg.getU16();
+                for (var _i2 = 0; _i2 < invitedPlayers; ++_i2) {
+                    _game.g_game.formatCreatureName(msg.getString());
+                } // player name
+            }
+            //g_game.processOpenChannel(channelId, name);
+        }
+    }, {
+        key: "parseOpenPrivateChannel",
+        value: function parseOpenPrivateChannel(msg) {
+            var name = _game.g_game.formatCreatureName(msg.getString());
+            //g_game.processOpenPrivateChannel(name);
+        }
+    }, {
+        key: "parseOpenOwnPrivateChannel",
+        value: function parseOpenOwnPrivateChannel(msg) {
+            var channelId = msg.getU16();
+            var name = msg.getString();
+            //g_game.processOpenOwnPrivateChannel(channelId, name);
+        }
+    }, {
+        key: "parseCloseChannel",
+        value: function parseCloseChannel(msg) {
+            var channelId = msg.getU16();
+            //g_game.processCloseChannel(channelId);
+        }
+    }, {
+        key: "parseRuleViolationChannel",
+        value: function parseRuleViolationChannel(msg) {
+            var channelId = msg.getU16();
+            //g_game.processRuleViolationChannel(channelId);
+        }
+    }, {
+        key: "parseRuleViolationRemove",
+        value: function parseRuleViolationRemove(msg) {
+            var name = msg.getString();
+            //g_game.processRuleViolationRemove(name);
+        }
+    }, {
+        key: "parseRuleViolationCancel",
+        value: function parseRuleViolationCancel(msg) {
+            var name = msg.getString();
+            //g_game.processRuleViolationCancel(name);
+        }
+    }, {
+        key: "parseRuleViolationLock",
+        value: function parseRuleViolationLock(msg) {
+            //g_game.processRuleViolationLock();
+        }
+    }, {
+        key: "parseTextMessage",
+        value: function parseTextMessage(msg) {
+            var code = msg.getU8();
+            var mode = _game.g_game.translateMessageModeFromServer(code);
+            var text = void 0;
+            switch (mode) {
+                case _const.MessageMode.MessageChannelManagement:
+                    {
+                        var channel = msg.getU16();
+                        text = msg.getString();
+                        break;
+                    }
+                case _const.MessageMode.MessageGuild:
+                case _const.MessageMode.MessagePartyManagement:
+                case _const.MessageMode.MessageParty:
+                    {
+                        var _channel = msg.getU16();
+                        text = msg.getString();
+                        break;
+                    }
+                case _const.MessageMode.MessageDamageDealed:
+                case _const.MessageMode.MessageDamageReceived:
+                case _const.MessageMode.MessageDamageOthers:
+                    {
+                        var pos = this.getPosition(msg);
+                        var value = [];
+                        var color = [];
+                        // physical damage
+                        value[0] = msg.getU32();
+                        color[0] = msg.getU8();
+                        // magic damage
+                        value[1] = msg.getU32();
+                        color[1] = msg.getU8();
+                        text = msg.getString();
+                        for (var i = 0; i < 2; ++i) {
+                            if (value[i] == 0) continue;
+                            var animatedText = new _animatedtext.AnimatedText();
+                            animatedText.setColor(color[i]);
+                            animatedText.setText(value[i]);
+                            _map.g_map.addThing(animatedText, pos);
+                        }
+                        break;
+                    }
+                case _const.MessageMode.MessageHeal:
+                case _const.MessageMode.MessageMana:
+                case _const.MessageMode.MessageExp:
+                case _const.MessageMode.MessageHealOthers:
+                case _const.MessageMode.MessageExpOthers:
+                    {
+                        var _pos = this.getPosition(msg);
+                        var _value = msg.getU32();
+                        var _color = msg.getU8();
+                        text = msg.getString();
+                        var _animatedText = new _animatedtext.AnimatedText();
+                        _animatedText.setColor(_color);
+                        _animatedText.setText(_value.toString());
+                        _map.g_map.addThing(_animatedText, _pos);
+                        break;
+                    }
+                case _const.MessageMode.MessageInvalid:
+                    _log.Log.error("unknown message mode %d", mode);
+                    break;
+                default:
+                    text = msg.getString();
+                    break;
+            }
+            //g_game.processTextMessage(mode, text);
+        }
+    }, {
+        key: "parseCancelWalk",
+        value: function parseCancelWalk(msg) {
+            var direction = msg.getU8();
+            //g_game.processWalkCancel(direction);
+        }
+    }, {
+        key: "parseWalkWait",
+        value: function parseWalkWait(msg) {
+            var millis = msg.getU16();
+            //m_localPlayer.lockWalk(millis);
+        }
+    }, {
+        key: "parseFloorChangeUp",
+        value: function parseFloorChangeUp(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            var range = _map.g_map.getAwareRange();
+            pos.z--;
+            var skip = 0;
+            if (pos.z == _const.Otc.SEA_FLOOR) for (var i = _const.Otc.SEA_FLOOR - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE; i >= 0; i--) {
+                skip = this.setFloorDescription(msg, pos.x - range.left, pos.y - range.top, i, range.horizontal(), range.vertical(), 8 - i, skip);
+            } else if (pos.z > _const.Otc.SEA_FLOOR) skip = this.setFloorDescription(msg, pos.x - range.left, pos.y - range.top, pos.z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, range.horizontal(), range.vertical(), 3, skip);
+            pos.x++;
+            pos.y++;
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseFloorChangeDown",
+        value: function parseFloorChangeDown(msg) {
+            var pos = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMapMovePosition)) pos = this.getPosition(msg);else pos = _map.g_map.getCentralPosition();
+            var range = _map.g_map.getAwareRange();
+            pos.z++;
+            var skip = 0;
+            if (pos.z == _const.Otc.UNDERGROUND_FLOOR) {
+                var j = void 0,
+                    i = void 0;
+                for (i = pos.z, j = -1; i <= pos.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE; ++i, --j) {
+                    skip = this.setFloorDescription(msg, pos.x - range.left, pos.y - range.top, i, range.horizontal(), range.vertical(), j, skip);
+                }
+            } else if (pos.z > _const.Otc.UNDERGROUND_FLOOR && pos.z < _const.Otc.MAX_Z - 1) skip = this.setFloorDescription(msg, pos.x - range.left, pos.y - range.top, pos.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, range.horizontal(), range.vertical(), -3, skip);
+            pos.x--;
+            pos.y--;
+            _map.g_map.setCentralPosition(pos);
+        }
+    }, {
+        key: "parseOpenOutfitWindow",
+        value: function parseOpenOutfitWindow(msg) {
+            var currentOutfit = this.getOutfit(msg);
+            var outfitList = [];
+            if (_game.g_game.getFeature(_const.GameFeature.GameNewOutfitProtocol)) {
+                var outfitCount = msg.getU8();
+                for (var i = 0; i < outfitCount; i++) {
+                    var outfitId = msg.getU16();
+                    var outfitName = msg.getString();
+                    var outfitAddons = msg.getU8();
+                    outfitList.push([outfitId, outfitName, outfitAddons]);
+                }
+            } else {
+                var outfitStart = void 0,
+                    outfitEnd = void 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameLooktypeU16)) {
+                    outfitStart = msg.getU16();
+                    outfitEnd = msg.getU16();
+                } else {
+                    outfitStart = msg.getU8();
+                    outfitEnd = msg.getU8();
+                }
+                for (var _i3 = outfitStart; _i3 <= outfitEnd; _i3++) {
+                    outfitList.push([_i3, "", 0]);
+                }
+            }
+            var mountList = [];
+            if (_game.g_game.getFeature(_const.GameFeature.GamePlayerMounts)) {
+                var mountCount = msg.getU8();
+                for (var _i4 = 0; _i4 < mountCount; ++_i4) {
+                    var mountId = msg.getU16(); // mount type
+                    var mountName = msg.getString(); // mount name
+                    mountList.push([mountId, mountName]);
+                }
+            }
+            //g_game.processOpenOutfitWindow(currentOutfit, outfitList, mountList);
+        }
+    }, {
+        key: "parseVipAdd",
+        value: function parseVipAdd(msg) {
+            var id = void 0,
+                iconId = 0,
+                status = void 0;
+            var name = void 0,
+                desc = "";
+            var notifyLogin = false;
+            id = msg.getU32();
+            name = _game.g_game.formatCreatureName(msg.getString());
+            if (_game.g_game.getFeature(_const.GameFeature.GameAdditionalVipInfo)) {
+                desc = msg.getString();
+                iconId = msg.getU32();
+                notifyLogin = msg.getU8() > 0;
+            }
+            status = msg.getU8();
+            //g_game.processVipAdd(id, name, status, desc, iconId, notifyLogin);
+        }
+    }, {
+        key: "parseVipState",
+        value: function parseVipState(msg) {
+            var id = msg.getU32();
+            if (_game.g_game.getFeature(_const.GameFeature.GameLoginPending)) {
+                var status = msg.getU8();
+                //g_game.processVipStateChange(id, status);
+            } else {
+                    //g_game.processVipStateChange(id, 1);
+                }
+        }
+    }, {
+        key: "parseVipLogout",
+        value: function parseVipLogout(msg) {
+            var id = msg.getU32();
+            //g_game.processVipStateChange(id, 0);
+        }
+    }, {
+        key: "parseTutorialHint",
+        value: function parseTutorialHint(msg) {
+            var id = msg.getU8();
+            //g_game.processTutorialHint(id);
+        }
+    }, {
+        key: "parseAutomapFlag",
+        value: function parseAutomapFlag(msg) {
+            var pos = this.getPosition(msg);
+            var icon = msg.getU8();
+            var description = msg.getString();
+            var remove = false;
+            if (_game.g_game.getFeature(_const.GameFeature.GameMinimapRemove)) remove = msg.getU8() != 0;
+            if (!remove) {
+                //g_game.processAddAutomapFlag(pos, icon, description);
+            } else {
+                    //g_game.processRemoveAutomapFlag(pos, icon, description);
+                }
+        }
+    }, {
+        key: "parseQuestLog",
+        value: function parseQuestLog(msg) {
+            var questList = [];
+            var questsCount = msg.getU16();
+            for (var i = 0; i < questsCount; i++) {
+                var id = msg.getU16();
+                var name = msg.getString();
+                var completed = msg.getU8();
+                questList.push([id, name, completed]);
+            }
+            //g_game.processQuestLog(questList);
+        }
+    }, {
+        key: "parseQuestLine",
+        value: function parseQuestLine(msg) {
+            var questMissions = [];
+            var questId = msg.getU16();
+            var missionCount = msg.getU8();
+            for (var i = 0; i < missionCount; i++) {
+                var missionName = msg.getString();
+                var missionDescrition = msg.getString();
+                questMissions.push([missionName, missionDescrition]);
+            }
+            //g_game.processQuestLine(questId, questMissions);
+        }
+    }, {
+        key: "parseChannelEvent",
+        value: function parseChannelEvent(msg) {
+            msg.getU16(); // channel id
+            _game.g_game.formatCreatureName(msg.getString()); // player name
+            msg.getU8(); // event type
+        }
+    }, {
+        key: "parseItemInfo",
+        value: function parseItemInfo(msg) {
+            var list = [];
+            var size = msg.getU8();
+            for (var i = 0; i < size; ++i) {
+                var item = new _item.Item();
+                item.setId(msg.getU16());
+                item.setCountOrSubType(msg.getU8());
+                var desc = msg.getString();
+                list.push([item, desc]);
+            }
+            //g_lua.callGlobalField("g_game", "onItemInfo", list);
+        }
+    }, {
+        key: "parsePlayerInventory",
+        value: function parsePlayerInventory(msg) {
+            var size = msg.getU16();
+            for (var i = 0; i < size; ++i) {
+                msg.getU16(); // id
+                msg.getU8(); // subtype
+                msg.getU16(); // count
+            }
+        }
+    }, {
+        key: "parseModalDialog",
+        value: function parseModalDialog(msg) {
+            var id = msg.getU32();
+            var title = msg.getString();
+            var message = msg.getString();
+            var sizeButtons = msg.getU8();
+            var buttonList = [];
+            for (var i = 0; i < sizeButtons; ++i) {
+                var value = msg.getString();
+                var _id = msg.getU8();
+                buttonList.push([_id, value]);
+            }
+            var sizeChoices = msg.getU8();
+            var choiceList = void 0;
+            for (var _i5 = 0; _i5 < sizeChoices; ++_i5) {
+                var _value2 = msg.getString();
+                var _id2 = msg.getU8();
+                choiceList.push_back([_id2, _value2]);
+            }
+            var enterButton = void 0,
+                escapeButton = void 0;
+            if (_game.g_game.getClientVersion() > 970) {
+                escapeButton = msg.getU8();
+                enterButton = msg.getU8();
+            } else {
+                enterButton = msg.getU8();
+                escapeButton = msg.getU8();
+            }
+            var priority = msg.getU8() == 0x01;
+            //g_game.processModalDialog(id, title, message, buttonList, enterButton, escapeButton, choiceList, priority);
+        }
+    }, {
+        key: "parseExtendedOpcode",
+        value: function parseExtendedOpcode(msg) {
+            var opcode = msg.getU8();
+            var buffer = msg.getString();
+            /*
+                if(opcode == 0)
+                    m_enableSendExtendedOpcode = true;
+                else if(opcode == 2)
+                    parsePingBack(msg);
+                else {
+                    callLuaField("onExtendedOpcode", opcode, buffer);
+                }
+            */
+        }
+    }, {
+        key: "parseChangeMapAwareRange",
+        value: function parseChangeMapAwareRange(msg) {
+            var xrange = msg.getU8();
+            var yrange = msg.getU8();
+            var range = new _awarerange.AwareRange();
+            range.left = xrange / 2 - (xrange + 1) % 2;
+            range.right = xrange / 2;
+            range.top = yrange / 2 - (yrange + 1) % 2;
+            range.bottom = yrange / 2;
+            _map.g_map.setAwareRange(range);
+            //g_lua.callGlobalField("g_game", "onMapChangeAwareRange", xrange, yrange);
+        }
+    }, {
+        key: "parseCreaturesMark",
+        value: function parseCreaturesMark(msg) {
+            var len = void 0;
+            if (_game.g_game.getClientVersion() >= 1035) {
+                len = 1;
+            } else {
+                len = msg.getU8();
+            }
+            for (var i = 0; i < len; ++i) {
+                var id = msg.getU32();
+                var isPermanent = msg.getU8() != 1;
+                var markType = msg.getU8();
+                var creature = _map.g_map.getCreatureById(id);
+                if (creature) {
+                    if (isPermanent) {
+                        if (markType == 0xff) creature.hideStaticSquare();else creature.showStaticSquare(_color2.Color.from8bit(markType));
+                    } else creature.addTimedSquare(markType);
+                } else _log.Log.error("could not get creature");
+            }
+        }
+    }, {
+        key: "parseCreatureType",
+        value: function parseCreatureType(msg) {
+            var id = msg.getU32();
+            var type = msg.getU8();
+            var creature = _map.g_map.getCreatureById(id);
+            if (creature) creature.setType(type);else _log.Log.error("could not get creature");
+        }
+    }, {
+        key: "setMapDescription",
+        value: function setMapDescription(msg, x, y, z, width, height) {
+            var startz = void 0;
+            var endz = void 0;
+            var zstep = void 0;
+            if (z > _const.Otc.SEA_FLOOR) {
+                startz = z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE;
+                endz = Math.min(z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, _const.Otc.MAX_Z);
+                zstep = 1;
+            } else {
+                startz = _const.Otc.SEA_FLOOR;
+                endz = 0;
+                zstep = -1;
+            }
+            var skip = 0;
+            for (var nz = startz; nz != endz + zstep; nz += zstep) {
+                skip = this.setFloorDescription(msg, x, y, nz, width, height, z - nz, skip);
+            }
+        }
+    }, {
+        key: "setFloorDescription",
+        value: function setFloorDescription(msg, x, y, z, width, height, offset, skip) {
+            _log.Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
+            for (var nx = 0; nx < width; nx++) {
+                for (var ny = 0; ny < height; ny++) {
+                    var tilePos = new _position.Position(x + nx + offset, y + ny + offset, z);
+                    if (skip == 0) skip = this.setTileDescription(msg, tilePos);else {
+                        _log.Log.debug('setFloorDescription - clean', tilePos);
+                        _map.g_map.cleanTile(tilePos);
+                        skip--;
+                    }
+                }
+            }
+            return skip;
+        }
+    }, {
+        key: "setTileDescription",
+        value: function setTileDescription(msg, position) {
+            _log.Log.debug('setTileDescription', position);
+            _map.g_map.cleanTile(position);
+            var gotEffect = false;
+            for (var stackPos = 0; stackPos < 256; stackPos++) {
+                if (msg.peekU16() >= 0xff00) {
+                    _log.Log.debug('setTileDescription SKIP', position, stackPos, msg.peekU16() & 0xff);
+                    return msg.getU16() & 0xff;
+                }
+                if (_game.g_game.getFeature(_const.GameFeature.GameEnvironmentEffect) && !gotEffect) {
+                    msg.getU16(); // environment effect
+                    gotEffect = true;
+                    continue;
+                }
+                if (stackPos > 10) _log.Log.error("too many things, pos=%s, stackpos=%d", position, stackPos);
+                var thing = this.getThing(msg);
+                _map.g_map.addThing(thing, position, stackPos);
+            }
+            return 0;
+        }
+    }, {
+        key: "getOutfit",
+        value: function getOutfit(msg) {
+            var outfit = new _outfit.Outfit();
+            var lookType = void 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameLooktypeU16)) lookType = msg.getU16();else lookType = msg.getU8();
+            if (lookType != 0) {
+                outfit.setCategory(_const.ThingCategory.ThingCategoryCreature);
+                var head = msg.getU8();
+                var body = msg.getU8();
+                var legs = msg.getU8();
+                var feet = msg.getU8();
+                var addons = 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GamePlayerAddons)) addons = msg.getU8();
+                if (!_thingtypemanager.g_things.isValidDatId(lookType, _const.ThingCategory.ThingCategoryCreature)) {
+                    _log.Log.error("invalid outfit looktype %d", lookType);
+                    lookType = 0;
+                }
+                outfit.setId(lookType);
+                outfit.setHead(head);
+                outfit.setBody(body);
+                outfit.setLegs(legs);
+                outfit.setFeet(feet);
+                outfit.setAddons(addons);
+            } else {
+                var lookTypeEx = msg.getU16();
+                if (lookTypeEx == 0) {
+                    outfit.setCategory(_const.ThingCategory.ThingCategoryEffect);
+                    outfit.setAuxId(13); // invisible effect id
+                } else {
+                    if (!_thingtypemanager.g_things.isValidDatId(lookTypeEx, _const.ThingCategory.ThingCategoryItem)) {
+                        _log.Log.error("invalid outfit looktypeex %d", lookTypeEx);
+                        lookTypeEx = 0;
+                    }
+                    outfit.setCategory(_const.ThingCategory.ThingCategoryItem);
+                    outfit.setAuxId(lookTypeEx);
+                }
+            }
+            if (_game.g_game.getFeature(_const.GameFeature.GamePlayerMounts)) {
+                var mount = msg.getU16();
+                outfit.setMount(mount);
+            }
+            return outfit;
+        }
+    }, {
+        key: "getThing",
+        value: function getThing(msg) {
+            var thing = new _thing.Thing();
+            _log.Log.debug('getThing', msg.peekU16());
+            var id = msg.getU16();
+            if (id == 0) _log.Log.error("invalid thing id");else if (id == _proto.Proto.UnknownCreature || id == _proto.Proto.OutdatedCreature || id == _proto.Proto.Creature) thing = this.getCreature(msg, id);else if (id == _proto.Proto.StaticText) thing = this.getStaticText(msg, id);else thing = this.getItem(msg, id);
+            return thing;
+        }
+    }, {
+        key: "getMappedThing",
+        value: function getMappedThing(msg) {
+            var thing = void 0;
+            var x = msg.getU16();
+            if (x != 0xffff) {
+                var pos = new _position.Position();
+                pos.x = x;
+                pos.y = msg.getU16();
+                pos.z = msg.getU8();
+                var stackpos = msg.getU8();
+                thing = _map.g_map.getThing(pos, stackpos);
+                if (!thing) _log.Log.error("no thing at pos:%s, stackpos:%d", pos, stackpos);
+            } else {
+                var id = msg.getU32();
+                thing = _map.g_map.getCreatureById(id);
+                if (!thing) _log.Log.error("no creature with id %u", id);
+            }
+            return thing;
+        }
+    }, {
+        key: "getCreature",
+        value: function getCreature(msg, type) {
+            _log.Log.debug('getCreature', type, msg);
+            if (type == 0) type = msg.getU16();
+            var creature = void 0;
+            var known = type != _proto.Proto.UnknownCreature;
+            if (type == _proto.Proto.OutdatedCreature || type == _proto.Proto.UnknownCreature) {
+                if (known) {
+                    var id = msg.getU32();
+                    creature = _map.g_map.getCreatureById(id);
+                    if (!creature) _log.Log.error("server said that a creature is known, but it's not");
+                } else {
+                    var removeId = msg.getU32();
+                    _map.g_map.removeCreatureById(removeId);
+                    var _id3 = msg.getU32();
+                    var _creatureType = void 0;
+                    if (_game.g_game.getClientVersion() >= 910) _creatureType = msg.getU8();else {
+                        if (_id3 >= _proto.Proto.PlayerStartId && _id3 < _proto.Proto.PlayerEndId) _creatureType = _proto.Proto.CreatureTypePlayer;else if (_id3 >= _proto.Proto.MonsterStartId && _id3 < _proto.Proto.MonsterEndId) _creatureType = _proto.Proto.CreatureTypeMonster;else _creatureType = _proto.Proto.CreatureTypeNpc;
+                    }
+                    var name = _game.g_game.formatCreatureName(msg.getString());
+                    if (_id3 == this.m_localPlayer.getId()) creature = this.m_localPlayer;else if (_creatureType == _proto.Proto.CreatureTypePlayer) {
+                        // fixes a bug server side bug where GameInit is not sent and local player id is unknown
+                        if (this.m_localPlayer.getId() == 0 && name == this.m_localPlayer.getName()) creature = this.m_localPlayer;else creature = new _player.Player();
+                    } else if (_creatureType == _proto.Proto.CreatureTypeMonster) creature = new _monster.Monster();else if (_creatureType == _proto.Proto.CreatureTypeNpc) creature = new _npc.Npc();else _log.Log.error("creature type is invalid");
+                    if (creature) {
+                        creature.setId(_id3);
+                        creature.setName(name);
+                        _map.g_map.addCreature(creature);
+                    }
+                }
+                var healthPercent = msg.getU8();
+                var direction = msg.getU8();
+                var outfit = this.getOutfit(msg);
+                var light = new _light.Light();
+                light.intensity = msg.getU8();
+                light.color = msg.getU8();
+                var speed = msg.getU16();
+                var skull = msg.getU8();
+                var shield = msg.getU8();
+                // emblem is sent only when the creature is not known
+                var emblem = -1;
+                var creatureType = -1;
+                var icon = -1;
+                var unpass = true;
+                var mark = void 0;
+                if (_game.g_game.getFeature(_const.GameFeature.GameCreatureEmblems) && !known) emblem = msg.getU8();
+                if (_game.g_game.getFeature(_const.GameFeature.GameThingMarks)) {
+                    creatureType = msg.getU8();
+                }
+                if (_game.g_game.getFeature(_const.GameFeature.GameCreatureIcons)) {
+                    icon = msg.getU8();
+                }
+                if (_game.g_game.getFeature(_const.GameFeature.GameThingMarks)) {
+                    mark = msg.getU8(); // mark
+                    msg.getU16(); // helpers
+                    if (creature) {
+                        if (mark == 0xff) creature.hideStaticSquare();else creature.showStaticSquare(_color2.Color.from8bit(mark));
+                    }
+                }
+                if (_game.g_game.getClientVersion() >= 854) unpass = msg.getU8() > 0;
+                if (creature) {
+                    creature.setHealthPercent(healthPercent);
+                    creature.setDirection(direction);
+                    creature.setOutfit(outfit);
+                    creature.setSpeed(speed);
+                    creature.setSkull(skull);
+                    creature.setShield(shield);
+                    creature.setPassable(!unpass);
+                    creature.setLight(light);
+                    if (emblem != -1) creature.setEmblem(emblem);
+                    if (creatureType != -1) creature.setType(creatureType);
+                    if (icon != -1) creature.setIcon(icon);
+                    if (creature == this.m_localPlayer && !this.m_localPlayer.isKnown()) this.m_localPlayer.setKnown(true);
+                }
+            } else if (type == _proto.Proto.Creature) {
+                var _id4 = msg.getU32();
+                creature = _map.g_map.getCreatureById(_id4);
+                if (!creature) _log.Log.error("invalid creature");
+                var _direction = msg.getU8();
+                if (creature) creature.turn(_direction);
+                if (_game.g_game.getClientVersion() >= 953) {
+                    var _unpass = msg.getU8();
+                    if (creature) creature.setPassable(!_unpass);
+                }
+            } else {
+                _log.Log.error("invalid creature opcode");
+            }
+            return creature;
+        }
+    }, {
+        key: "getItem",
+        value: function getItem(msg) {
+            var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+            if (id == 0) id = msg.getU16();
+            _log.Log.debug('getItem', id);
+            var item = new _item.Item(id);
+            if (item.getId() == 0) _log.Log.error("unable to create item with invalid id %d", id);
+            if (_game.g_game.getFeature(_const.GameFeature.GameThingMarks)) {
+                msg.getU8(); // mark
+            }
+            if (item.isStackable() || item.isFluidContainer() || item.isSplash() || item.isChargeable()) item.setCountOrSubType(msg.getU8());
+            if (_game.g_game.getFeature(_const.GameFeature.GameItemAnimationPhase)) {
+                if (item.getAnimationPhases() > 1) {
+                    // 0x00 => automatic phase
+                    // 0xFE => random phase
+                    // 0xFF => async phase
+                    msg.getU8();
+                    //item.setPhase(msg.getU8());
+                }
+            }
+            return item;
+        }
+    }, {
+        key: "getStaticText",
+        value: function getStaticText(msg, id) {
+            var colorByte = msg.getU8();
+            var color = _color2.Color.from8bit(colorByte);
+            var fontName = msg.getString();
+            var text = msg.getString();
+            var staticText = new _statictext.StaticText();
+            /*
+            staticText.setText(text);
+            staticText.setFont(fontName);
+            staticText.setColor(color);
+            */
+            return staticText;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition(msg) {
+            var x = msg.getU16();
+            var y = msg.getU16();
+            var z = msg.getU8();
+            return new _position.Position(x, y, z);
+        }
+    }]);
+
+    return ProtocolGame;
+}(_protocol.Protocol);
+
+/***/ }),
+
+/***/ 357:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Protocol = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputmessage = __webpack_require__(358);
+
+var _log = __webpack_require__(32);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Protocol = exports.Protocol = function () {
+    function Protocol() {
+        _classCallCheck(this, Protocol);
+
+        this.m_xteaEncryptionEnabled = false;
+        this.m_checksumEnabled = null;
+        this.m_connection = null;
+        this.m_xteaKey = [];
+    }
+
+    _createClass(Protocol, [{
+        key: "connect",
+        value: function connect(host, port) {
+            var serverUrl = "ws://" + host + ":" + port;
+            this.m_connection = new WebSocket(serverUrl);
+            this.m_connection.binaryType = 'arraybuffer';
+            var protocol = this;
+            this.m_connection.onopen = function (evt) {
+                console.log('m_connectiononopen', evt);
+                protocol.onConnect(evt);
+            };
+            this.m_connection.onerror = function (evt) {
+                console.log('m_connectiononerror', evt);
+                protocol.onError(evt);
+            };
+            this.m_connection.onclose = function (evt) {
+                console.log('m_connectiononclose', evt);
+                protocol.onClose(evt);
+            };
+            this.m_connection.onmessage = function (evt) {
+                console.log('m_connectiononmessage', evt);
+                protocol.internalRecvData(evt);
+            };
+        }
+    }, {
+        key: "onConnect",
+        value: function onConnect(evt) {
+            (0, _log.log)("onConnect", evt);
+        }
+    }, {
+        key: "onRecv",
+        value: function onRecv(inputMessage) {
+            (0, _log.log)("onRecv", inputMessage);
+        }
+    }, {
+        key: "onError",
+        value: function onError(evt) {
+            (0, _log.log)("onError", evt);
+            this.disconnect();
+        }
+    }, {
+        key: "onClose",
+        value: function onClose(evt) {
+            (0, _log.log)("onClose", evt);
+            this.disconnect();
+        }
+    }, {
+        key: "send",
+        value: function send(outputMessage) {
+            if (this.m_xteaEncryptionEnabled) this.xteaEncrypt(outputMessage);
+            if (this.m_checksumEnabled) outputMessage.writeChecksum();
+            outputMessage.writeMessageSize();
+            if (this.m_connection) this.m_connection.send(outputMessage.getBuffer());
+        }
+    }, {
+        key: "internalRecvData",
+        value: function internalRecvData(evt) {
+            if (!this.isConnected()) {
+                (0, _log.error)("received data while disconnected");
+                return;
+            }
+            var inputMessage = new _inputmessage.InputMessage(new DataView(evt.data));
+            if (this.m_checksumEnabled && !inputMessage.validateChecksum()) {
+                (0, _log.error)("got a network message with invalid checksum");
+                return;
+            }
+            if (this.m_checksumEnabled) {
+                // size(2) + checksum(4)
+                inputMessage.skip(6);
+            }
+            if (this.m_xteaEncryptionEnabled) {
+                if (!this.xteaDecrypt(inputMessage)) {
+                    (0, _log.error)("failed to decrypt message");
+                    return;
+                }
+            }
+            this.onRecv(inputMessage);
+        }
+    }, {
+        key: "isConnected",
+        value: function isConnected() {
+            return this.m_connection && this.m_connection.readyState == WebSocket.OPEN;
+        }
+    }, {
+        key: "isConnecting",
+        value: function isConnecting() {
+            return this.m_connection && this.m_connection.readyState == WebSocket.CONNECTING;
+        }
+    }, {
+        key: "disconnect",
+        value: function disconnect() {
+            if (this.m_connection) {
+                this.m_connection.close();
+                this.m_connection = null;
+            }
+        }
+    }, {
+        key: "enableXteaEncryption",
+        value: function enableXteaEncryption() {
+            this.m_xteaEncryptionEnabled = true;
+        }
+    }, {
+        key: "enableChecksum",
+        value: function enableChecksum() {
+            this.m_checksumEnabled = true;
+        }
+    }, {
+        key: "xteaEncrypt",
+        value: function xteaEncrypt(outputMessage) {
+            return true;
+        }
+    }, {
+        key: "xteaDecrypt",
+        value: function xteaDecrypt(inputMessage) {
+            return true;
+        }
+    }, {
+        key: "generateXteaKey",
+        value: function generateXteaKey() {
+            throw new Error('unimplemented');
+        }
+    }, {
+        key: "getXteaKey",
+        value: function getXteaKey() {
+            throw new Error('unimplemented');
+        }
+    }, {
+        key: "setXteaKey",
+        value: function setXteaKey() {
+            throw new Error('unimplemented');
+        }
+    }]);
+
+    return Protocol;
+}();
+
+/***/ }),
+
+/***/ 358:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.InputMessage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _log = __webpack_require__(32);
+
+var _position = __webpack_require__(138);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var InputMessage = exports.InputMessage = function () {
+    function InputMessage(msg) {
+        _classCallCheck(this, InputMessage);
+
+        this.data = new DataView(msg.buffer.slice(0));
+        this.offset = 0;
+        this.size = this.data.byteLength;
+    }
+
+    _createClass(InputMessage, [{
+        key: "getU8",
+        value: function getU8() {
+            //log('InputMessage.getU8', this.offset, this.size);
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "getDouble",
+        value: function getDouble() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getFloat64(this.offset);
+            this.offset += 8;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
+        }
+    }, {
+        key: "skipBytes",
+        value: function skipBytes(byteCount) {
+            (0, _log.log)('InputMessage.skipBytes', this.offset, this.size);
+            if (this.offset + byteCount > this.size) throw new Error("Koniec pakietu");
+            this.offset += byteCount;
+        }
+    }, {
+        key: "skip",
+        value: function skip(bytes) {
+            this.skipBytes(bytes);
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "peekU16",
+        value: function peekU16() {
+            var v = this.getU16();
+            this.offset -= 2;
+            return v;
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }, {
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
+        }
+    }]);
+
+    return InputMessage;
+}();
+
+/***/ }),
+
+/***/ 359:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.OutputMessage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jspack = __webpack_require__(360);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var OutputMessage = exports.OutputMessage = function () {
+    function OutputMessage() {
+        _classCallCheck(this, OutputMessage);
+
+        this.data = [];
+    }
+
+    _createClass(OutputMessage, [{
+        key: 'addU8',
+        value: function addU8(v) {
+            v = v % 256;
+            this.data = this.data.concat(OutputMessage.packer.Pack('B', [v]));
+        }
+    }, {
+        key: 'addU16',
+        value: function addU16(v) {
+            v = v % (256 * 256);
+            this.data = this.data.concat(OutputMessage.packer.Pack('<H', [v]));
+        }
+    }, {
+        key: 'addU32',
+        value: function addU32(v) {
+            v = v % (256 * 256 * 256 * 256);
+            this.data = this.data.concat(OutputMessage.packer.Pack('<I', [v]));
+        }
+    }, {
+        key: 'addU64',
+        value: function addU64(v) {
+            throw new Error('unimplemented');
+        }
+    }, {
+        key: 'addString',
+        value: function addString(v) {
+            this.data = this.data.concat(OutputMessage.packer.Pack('<H', [v.length]));
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = v[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var c = _step.value;
+
+                    this.data = this.data.concat(OutputMessage.packer.Pack('s', [c]));
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+        }
+    }, {
+        key: 'writeChecksum',
+        value: function writeChecksum() {
+            //error('writeChecksum not implemented');
+        }
+    }, {
+        key: 'writeMessageSize',
+        value: function writeMessageSize() {
+            this.data = OutputMessage.packer.Pack('<H', [this.data.length]).concat(this.data);
+        }
+    }, {
+        key: 'getBuffer',
+        value: function getBuffer() {
+            return new Uint8Array(this.data).buffer; //OutputMessage.packer.Pack('<H', [this.data.length]).concat(this.data);
+        }
+    }]);
+
+    return OutputMessage;
+}();
+
+OutputMessage.packer = new _jspack.JSPack();
+
+/***/ }),
+
+/***/ 360:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/*!
+ *  Copyright © 2008 Fair Oaks Labs, Inc.
+ *  All rights reserved.
+ */
+// Utility object:  Encode/Decode C-style binary primitives to/from octet arrays
+function JSPack() {
+    // Module-level (private) variables
+    var el,
+        bBE = false,
+        m = this;
+    // Raw byte arrays
+    m._DeArray = function (a, p, l) {
+        return [a.slice(p, p + l)];
+    };
+    m._EnArray = function (a, p, l, v) {
+        for (var i = 0; i < l; a[p + i] = v[i] ? v[i] : 0, i++) {}
+    };
+    // ASCII characters
+    m._DeChar = function (a, p) {
+        return String.fromCharCode(a[p]);
+    };
+    m._EnChar = function (a, p, v) {
+        a[p] = v.charCodeAt(0);
+    };
+    // Little-endian (un)signed N-byte integers
+    m._DeInt = function (a, p) {
+        var lsb = bBE ? el.len - 1 : 0,
+            nsb = bBE ? -1 : 1,
+            stop = lsb + nsb * el.len,
+            rv,
+            i,
+            f;
+        for (rv = 0, i = lsb, f = 1; i != stop; rv += a[p + i] * f, i += nsb, f *= 256) {}
+        if (el.bSigned && rv & Math.pow(2, el.len * 8 - 1)) {
+            rv -= Math.pow(2, el.len * 8);
+        }
+        return rv;
+    };
+    m._EnInt = function (a, p, v) {
+        var lsb = bBE ? el.len - 1 : 0,
+            nsb = bBE ? -1 : 1,
+            stop = lsb + nsb * el.len,
+            i;
+        v = v < el.min ? el.min : v > el.max ? el.max : v;
+        for (i = lsb; i != stop; a[p + i] = v & 0xff, i += nsb, v >>= 8) {}
+    };
+    // ASCII character strings
+    m._DeString = function (a, p, l) {
+        for (var rv = new Array(l), i = 0; i < l; rv[i] = String.fromCharCode(a[p + i]), i++) {}
+        return rv.join('');
+    };
+    m._EnString = function (a, p, l, v) {
+        for (var t, i = 0; i < l; a[p + i] = (t = v.charCodeAt(i)) ? t : 0, i++) {}
+    };
+    // Little-endian N-bit IEEE 754 floating point
+    m._De754 = function (a, p) {
+        var s, e, m, i, d, nBits, mLen, eLen, eBias, eMax;
+        mLen = el.mLen, eLen = el.len * 8 - el.mLen - 1, eMax = (1 << eLen) - 1, eBias = eMax >> 1;
+        i = bBE ? 0 : el.len - 1;
+        d = bBE ? 1 : -1;
+        s = a[p + i];
+        i += d;
+        nBits = -7;
+        for (e = s & (1 << -nBits) - 1, s >>= -nBits, nBits += eLen; nBits > 0; e = e * 256 + a[p + i], i += d, nBits -= 8) {}
+        for (m = e & (1 << -nBits) - 1, e >>= -nBits, nBits += mLen; nBits > 0; m = m * 256 + a[p + i], i += d, nBits -= 8) {}
+        switch (e) {
+            case 0:
+                // Zero, or denormalized number
+                e = 1 - eBias;
+                break;
+            case eMax:
+                // NaN, or +/-Infinity
+                return m ? NaN : (s ? -1 : 1) * Infinity;
+            default:
+                // Normalized number
+                m = m + Math.pow(2, mLen);
+                e = e - eBias;
+                break;
+        }
+        return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
+    };
+    m._En754 = function (a, p, v) {
+        var s, e, m, i, d, c, mLen, eLen, eBias, eMax;
+        mLen = el.mLen, eLen = el.len * 8 - el.mLen - 1, eMax = (1 << eLen) - 1, eBias = eMax >> 1;
+        s = v < 0 ? 1 : 0;
+        v = Math.abs(v);
+        if (isNaN(v) || v == Infinity) {
+            m = isNaN(v) ? 1 : 0;
+            e = eMax;
+        } else {
+            e = Math.floor(Math.log(v) / Math.LN2); // Calculate log2 of the value
+            if (v * (c = Math.pow(2, -e)) < 1) {
+                e--;
+                c *= 2;
+            } // Math.log() isn't 100% reliable
+            // Round by adding 1/2 the significand's LSD
+            if (e + eBias >= 1) {
+                v += el.rt / c;
+            } // Normalized:  mLen significand digits
+            else {
+                    v += el.rt * Math.pow(2, 1 - eBias);
+                } // Denormalized:  <= mLen significand digits
+            if (v * c >= 2) {
+                e++;
+                c /= 2;
+            } // Rounding can increment the exponent
+            if (e + eBias >= eMax) {
+                // Overflow
+                m = 0;
+                e = eMax;
+            } else if (e + eBias >= 1) {
+                // Normalized - term order matters, as Math.pow(2, 52-e) and v*Math.pow(2, 52) can overflow
+                m = (v * c - 1) * Math.pow(2, mLen);
+                e = e + eBias;
+            } else {
+                // Denormalized - also catches the '0' case, somewhat by chance
+                m = v * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
+                e = 0;
+            }
+        }
+        for (i = bBE ? el.len - 1 : 0, d = bBE ? -1 : 1; mLen >= 8; a[p + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+        for (e = e << mLen | m, eLen += mLen; eLen > 0; a[p + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+        a[p + i - d] |= s * 128;
+    };
+    // Class data
+    m._sPattern = '(\\d+)?([AxcbBhHsfdiIlL])';
+    m._lenLut = {
+        'A': 1,
+        'x': 1,
+        'c': 1,
+        'b': 1,
+        'B': 1,
+        'h': 2,
+        'H': 2,
+        's': 1,
+        'f': 4,
+        'd': 8,
+        'i': 4,
+        'I': 4,
+        'l': 4,
+        'L': 4
+    };
+    m._elLut = {
+        'A': { en: m._EnArray, de: m._DeArray },
+        's': { en: m._EnString, de: m._DeString },
+        'c': { en: m._EnChar, de: m._DeChar },
+        'b': { en: m._EnInt, de: m._DeInt, len: 1, bSigned: true, min: -Math.pow(2, 7), max: Math.pow(2, 7) - 1 },
+        'B': { en: m._EnInt, de: m._DeInt, len: 1, bSigned: false, min: 0, max: Math.pow(2, 8) - 1 },
+        'h': { en: m._EnInt, de: m._DeInt, len: 2, bSigned: true, min: -Math.pow(2, 15), max: Math.pow(2, 15) - 1 },
+        'H': { en: m._EnInt, de: m._DeInt, len: 2, bSigned: false, min: 0, max: Math.pow(2, 16) - 1 },
+        'i': { en: m._EnInt, de: m._DeInt, len: 4, bSigned: true, min: -Math.pow(2, 31), max: Math.pow(2, 31) - 1 },
+        'I': { en: m._EnInt, de: m._DeInt, len: 4, bSigned: false, min: 0, max: Math.pow(2, 32) - 1 },
+        'l': { en: m._EnInt, de: m._DeInt, len: 4, bSigned: true, min: -Math.pow(2, 31), max: Math.pow(2, 31) - 1 },
+        'L': { en: m._EnInt, de: m._DeInt, len: 4, bSigned: false, min: 0, max: Math.pow(2, 32) - 1 },
+        'f': { en: m._En754, de: m._De754, len: 4, mLen: 23, rt: Math.pow(2, -24) - Math.pow(2, -77) },
+        'd': { en: m._En754, de: m._De754, len: 8, mLen: 52, rt: 0 }
+    };
+    // Unpack a series of n elements of size s from array a at offset p with fxn
+    m._UnpackSeries = function (n, s, a, p) {
+        for (var fxn = el.de, rv = [], i = 0; i < n; rv.push(fxn(a, p + i * s)), i++) {}
+        return rv;
+    };
+    // Pack a series of n elements of size s from array v at offset i to array a at offset p with fxn
+    m._PackSeries = function (n, s, a, p, v, i) {
+        for (var fxn = el.en, o = 0; o < n; fxn(a, p + o * s, v[i + o]), o++) {}
+    };
+    // Unpack the octet array a, beginning at offset p, according to the fmt string
+    m.Unpack = function (fmt, a, p) {
+        // Set the private bBE flag based on the format string - assume big-endianness
+        bBE = fmt.charAt(0) != '<';
+        p = p ? p : 0;
+        var re = new RegExp(this._sPattern, 'g'),
+            m,
+            n,
+            s,
+            rv = [];
+        while (m = re.exec(fmt)) {
+            n = m[1] == undefined || m[1] == '' ? 1 : parseInt(m[1]);
+            s = this._lenLut[m[2]];
+            if (p + n * s > a.length) {
+                return undefined;
+            }
+            switch (m[2]) {
+                case 'A':
+                case 's':
+                    rv.push(this._elLut[m[2]].de(a, p, n));
+                    break;
+                case 'c':
+                case 'b':
+                case 'B':
+                case 'h':
+                case 'H':
+                case 'i':
+                case 'I':
+                case 'l':
+                case 'L':
+                case 'f':
+                case 'd':
+                    el = this._elLut[m[2]];
+                    rv.push(this._UnpackSeries(n, s, a, p));
+                    break;
+            }
+            p += n * s;
+        }
+        return Array.prototype.concat.apply([], rv);
+    };
+    // Pack the supplied values into the octet array a, beginning at offset p, according to the fmt string
+    m.PackTo = function (fmt, a, p, values) {
+        // Set the private bBE flag based on the format string - assume big-endianness
+        bBE = fmt.charAt(0) != '<';
+        var re = new RegExp(this._sPattern, 'g'),
+            m,
+            n,
+            s,
+            i = 0,
+            j;
+        while (m = re.exec(fmt)) {
+            n = m[1] == undefined || m[1] == '' ? 1 : parseInt(m[1]);
+            s = this._lenLut[m[2]];
+            if (p + n * s > a.length) {
+                return false;
+            }
+            switch (m[2]) {
+                case 'A':
+                case 's':
+                    if (i + 1 > values.length) {
+                        return false;
+                    }
+                    this._elLut[m[2]].en(a, p, n, values[i]);
+                    i += 1;
+                    break;
+                case 'c':
+                case 'b':
+                case 'B':
+                case 'h':
+                case 'H':
+                case 'i':
+                case 'I':
+                case 'l':
+                case 'L':
+                case 'f':
+                case 'd':
+                    el = this._elLut[m[2]];
+                    if (i + n > values.length) {
+                        return false;
+                    }
+                    this._PackSeries(n, s, a, p, values, i);
+                    i += n;
+                    break;
+                case 'x':
+                    for (j = 0; j < n; j++) {
+                        a[p + j] = 0;
+                    }
+                    break;
+            }
+            p += n * s;
+        }
+        return a;
+    };
+    // Pack the supplied values into a new octet array, according to the fmt string
+    m.Pack = function (fmt, values) {
+        return this.PackTo(fmt, new Array(this.CalcLength(fmt)), 0, values);
+    };
+    // Determine the number of bytes represented by the format string
+    m.CalcLength = function (fmt) {
+        var re = new RegExp(this._sPattern, 'g'),
+            m,
+            sum = 0;
+        while (m = re.exec(fmt)) {
+            sum += (m[1] == undefined || m[1] == '' ? 1 : parseInt(m[1])) * this._lenLut[m[2]];
+        }
+        return sum;
+    };
+}
+;
+exports.JSPack = JSPack;
+
+/***/ }),
+
+/***/ 361:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Proto;
+(function (Proto) {
+    Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
+    Proto[Proto["LoginServerMotd"] = 20] = "LoginServerMotd";
+    Proto[Proto["LoginServerUpdateNeeded"] = 30] = "LoginServerUpdateNeeded";
+    Proto[Proto["LoginServerCharacterList"] = 100] = "LoginServerCharacterList";
+    Proto[Proto["StaticText"] = 96] = "StaticText";
+    Proto[Proto["UnknownCreature"] = 97] = "UnknownCreature";
+    Proto[Proto["OutdatedCreature"] = 98] = "OutdatedCreature";
+    Proto[Proto["Creature"] = 99] = "Creature";
+    Proto[Proto["GameServerLoginOrPendingState"] = 10] = "GameServerLoginOrPendingState";
+    Proto[Proto["GameServerGMActions"] = 11] = "GameServerGMActions";
+    Proto[Proto["GameServerEnterGame"] = 15] = "GameServerEnterGame";
+    Proto[Proto["GameServerUpdateNeeded"] = 17] = "GameServerUpdateNeeded";
+    Proto[Proto["GameServerLoginError"] = 20] = "GameServerLoginError";
+    Proto[Proto["GameServerLoginAdvice"] = 21] = "GameServerLoginAdvice";
+    Proto[Proto["GameServerLoginWait"] = 22] = "GameServerLoginWait";
+    Proto[Proto["GameServerLoginSuccess"] = 23] = "GameServerLoginSuccess";
+    Proto[Proto["GameServerLoginToken"] = 24] = "GameServerLoginToken";
+    Proto[Proto["GameServerStoreButtonIndicators"] = 25] = "GameServerStoreButtonIndicators";
+    Proto[Proto["GameServerPingBack"] = 29] = "GameServerPingBack";
+    Proto[Proto["GameServerPing"] = 30] = "GameServerPing";
+    Proto[Proto["GameServerChallenge"] = 31] = "GameServerChallenge";
+    Proto[Proto["GameServerDeath"] = 40] = "GameServerDeath";
+    Proto[Proto["GameServerFirstGameOpcode"] = 50] = "GameServerFirstGameOpcode";
+    Proto[Proto["GameServerExtendedOpcode"] = 50] = "GameServerExtendedOpcode";
+    Proto[Proto["GameServerChangeMapAwareRange"] = 51] = "GameServerChangeMapAwareRange";
+    Proto[Proto["GameServerFullMap"] = 100] = "GameServerFullMap";
+    Proto[Proto["GameServerMapTopRow"] = 101] = "GameServerMapTopRow";
+    Proto[Proto["GameServerMapRightRow"] = 102] = "GameServerMapRightRow";
+    Proto[Proto["GameServerMapBottomRow"] = 103] = "GameServerMapBottomRow";
+    Proto[Proto["GameServerMapLeftRow"] = 104] = "GameServerMapLeftRow";
+    Proto[Proto["GameServerUpdateTile"] = 105] = "GameServerUpdateTile";
+    Proto[Proto["GameServerCreateOnMap"] = 106] = "GameServerCreateOnMap";
+    Proto[Proto["GameServerChangeOnMap"] = 107] = "GameServerChangeOnMap";
+    Proto[Proto["GameServerDeleteOnMap"] = 108] = "GameServerDeleteOnMap";
+    Proto[Proto["GameServerMoveCreature"] = 109] = "GameServerMoveCreature";
+    Proto[Proto["GameServerOpenContainer"] = 110] = "GameServerOpenContainer";
+    Proto[Proto["GameServerCloseContainer"] = 111] = "GameServerCloseContainer";
+    Proto[Proto["GameServerCreateContainer"] = 112] = "GameServerCreateContainer";
+    Proto[Proto["GameServerChangeInContainer"] = 113] = "GameServerChangeInContainer";
+    Proto[Proto["GameServerDeleteInContainer"] = 114] = "GameServerDeleteInContainer";
+    Proto[Proto["GameServerSetInventory"] = 120] = "GameServerSetInventory";
+    Proto[Proto["GameServerDeleteInventory"] = 121] = "GameServerDeleteInventory";
+    Proto[Proto["GameServerOpenNpcTrade"] = 122] = "GameServerOpenNpcTrade";
+    Proto[Proto["GameServerPlayerGoods"] = 123] = "GameServerPlayerGoods";
+    Proto[Proto["GameServerCloseNpcTrade"] = 124] = "GameServerCloseNpcTrade";
+    Proto[Proto["GameServerOwnTrade"] = 125] = "GameServerOwnTrade";
+    Proto[Proto["GameServerCounterTrade"] = 126] = "GameServerCounterTrade";
+    Proto[Proto["GameServerCloseTrade"] = 127] = "GameServerCloseTrade";
+    Proto[Proto["GameServerAmbient"] = 130] = "GameServerAmbient";
+    Proto[Proto["GameServerGraphicalEffect"] = 131] = "GameServerGraphicalEffect";
+    Proto[Proto["GameServerTextEffect"] = 132] = "GameServerTextEffect";
+    Proto[Proto["GameServerMissleEffect"] = 133] = "GameServerMissleEffect";
+    Proto[Proto["GameServerMarkCreature"] = 134] = "GameServerMarkCreature";
+    Proto[Proto["GameServerTrappers"] = 135] = "GameServerTrappers";
+    Proto[Proto["GameServerCreatureHealth"] = 140] = "GameServerCreatureHealth";
+    Proto[Proto["GameServerCreatureLight"] = 141] = "GameServerCreatureLight";
+    Proto[Proto["GameServerCreatureOutfit"] = 142] = "GameServerCreatureOutfit";
+    Proto[Proto["GameServerCreatureSpeed"] = 143] = "GameServerCreatureSpeed";
+    Proto[Proto["GameServerCreatureSkull"] = 144] = "GameServerCreatureSkull";
+    Proto[Proto["GameServerCreatureParty"] = 145] = "GameServerCreatureParty";
+    Proto[Proto["GameServerCreatureUnpass"] = 146] = "GameServerCreatureUnpass";
+    Proto[Proto["GameServerCreatureMarks"] = 147] = "GameServerCreatureMarks";
+    Proto[Proto["GameServerPlayerHelpers"] = 148] = "GameServerPlayerHelpers";
+    Proto[Proto["GameServerCreatureType"] = 149] = "GameServerCreatureType";
+    Proto[Proto["GameServerEditText"] = 150] = "GameServerEditText";
+    Proto[Proto["GameServerEditList"] = 151] = "GameServerEditList";
+    Proto[Proto["GameServerBlessings"] = 156] = "GameServerBlessings";
+    Proto[Proto["GameServerPreset"] = 157] = "GameServerPreset";
+    Proto[Proto["GameServerPremiumTrigger"] = 158] = "GameServerPremiumTrigger";
+    Proto[Proto["GameServerPlayerDataBasic"] = 159] = "GameServerPlayerDataBasic";
+    Proto[Proto["GameServerPlayerData"] = 160] = "GameServerPlayerData";
+    Proto[Proto["GameServerPlayerSkills"] = 161] = "GameServerPlayerSkills";
+    Proto[Proto["GameServerPlayerState"] = 162] = "GameServerPlayerState";
+    Proto[Proto["GameServerClearTarget"] = 163] = "GameServerClearTarget";
+    Proto[Proto["GameServerPlayerModes"] = 167] = "GameServerPlayerModes";
+    Proto[Proto["GameServerSpellDelay"] = 164] = "GameServerSpellDelay";
+    Proto[Proto["GameServerSpellGroupDelay"] = 165] = "GameServerSpellGroupDelay";
+    Proto[Proto["GameServerMultiUseDelay"] = 166] = "GameServerMultiUseDelay";
+    Proto[Proto["GameServerSetStoreDeepLink"] = 168] = "GameServerSetStoreDeepLink";
+    Proto[Proto["GameServerTalk"] = 170] = "GameServerTalk";
+    Proto[Proto["GameServerChannels"] = 171] = "GameServerChannels";
+    Proto[Proto["GameServerOpenChannel"] = 172] = "GameServerOpenChannel";
+    Proto[Proto["GameServerOpenPrivateChannel"] = 173] = "GameServerOpenPrivateChannel";
+    Proto[Proto["GameServerRuleViolationChannel"] = 174] = "GameServerRuleViolationChannel";
+    Proto[Proto["GameServerRuleViolationRemove"] = 175] = "GameServerRuleViolationRemove";
+    Proto[Proto["GameServerRuleViolationCancel"] = 176] = "GameServerRuleViolationCancel";
+    Proto[Proto["GameServerRuleViolationLock"] = 177] = "GameServerRuleViolationLock";
+    Proto[Proto["GameServerOpenOwnChannel"] = 178] = "GameServerOpenOwnChannel";
+    Proto[Proto["GameServerCloseChannel"] = 179] = "GameServerCloseChannel";
+    Proto[Proto["GameServerTextMessage"] = 180] = "GameServerTextMessage";
+    Proto[Proto["GameServerCancelWalk"] = 181] = "GameServerCancelWalk";
+    Proto[Proto["GameServerWalkWait"] = 182] = "GameServerWalkWait";
+    Proto[Proto["GameServerUnjustifiedStats"] = 183] = "GameServerUnjustifiedStats";
+    Proto[Proto["GameServerPvpSituations"] = 184] = "GameServerPvpSituations";
+    Proto[Proto["GameServerFloorChangeUp"] = 190] = "GameServerFloorChangeUp";
+    Proto[Proto["GameServerFloorChangeDown"] = 191] = "GameServerFloorChangeDown";
+    Proto[Proto["GameServerChooseOutfit"] = 200] = "GameServerChooseOutfit";
+    Proto[Proto["GameServerVipAdd"] = 210] = "GameServerVipAdd";
+    Proto[Proto["GameServerVipState"] = 211] = "GameServerVipState";
+    Proto[Proto["GameServerVipLogout"] = 212] = "GameServerVipLogout";
+    Proto[Proto["GameServerTutorialHint"] = 220] = "GameServerTutorialHint";
+    Proto[Proto["GameServerAutomapFlag"] = 221] = "GameServerAutomapFlag";
+    Proto[Proto["GameServerCoinBalance"] = 223] = "GameServerCoinBalance";
+    Proto[Proto["GameServerStoreError"] = 224] = "GameServerStoreError";
+    Proto[Proto["GameServerRequestPurchaseData"] = 225] = "GameServerRequestPurchaseData";
+    Proto[Proto["GameServerQuestLog"] = 240] = "GameServerQuestLog";
+    Proto[Proto["GameServerQuestLine"] = 241] = "GameServerQuestLine";
+    Proto[Proto["GameServerCoinBalanceUpdating"] = 242] = "GameServerCoinBalanceUpdating";
+    Proto[Proto["GameServerChannelEvent"] = 243] = "GameServerChannelEvent";
+    Proto[Proto["GameServerItemInfo"] = 244] = "GameServerItemInfo";
+    Proto[Proto["GameServerPlayerInventory"] = 245] = "GameServerPlayerInventory";
+    Proto[Proto["GameServerMarketEnter"] = 246] = "GameServerMarketEnter";
+    Proto[Proto["GameServerMarketLeave"] = 247] = "GameServerMarketLeave";
+    Proto[Proto["GameServerMarketDetail"] = 248] = "GameServerMarketDetail";
+    Proto[Proto["GameServerMarketBrowse"] = 249] = "GameServerMarketBrowse";
+    Proto[Proto["GameServerModalDialog"] = 250] = "GameServerModalDialog";
+    Proto[Proto["GameServerStore"] = 251] = "GameServerStore";
+    Proto[Proto["GameServerStoreOffers"] = 252] = "GameServerStoreOffers";
+    Proto[Proto["GameServerStoreTransactionHistory"] = 253] = "GameServerStoreTransactionHistory";
+    Proto[Proto["GameServerStoreCompletePurchase"] = 254] = "GameServerStoreCompletePurchase";
+    Proto[Proto["ClientEnterAccount"] = 1] = "ClientEnterAccount";
+    Proto[Proto["ClientPendingGame"] = 10] = "ClientPendingGame";
+    Proto[Proto["ClientEnterGame"] = 15] = "ClientEnterGame";
+    Proto[Proto["ClientLeaveGame"] = 20] = "ClientLeaveGame";
+    Proto[Proto["ClientPing"] = 29] = "ClientPing";
+    Proto[Proto["ClientPingBack"] = 30] = "ClientPingBack";
+    Proto[Proto["ClientFirstGameOpcode"] = 50] = "ClientFirstGameOpcode";
+    Proto[Proto["ClientExtendedOpcode"] = 50] = "ClientExtendedOpcode";
+    Proto[Proto["ClientChangeMapAwareRange"] = 51] = "ClientChangeMapAwareRange";
+    Proto[Proto["ClientAutoWalk"] = 100] = "ClientAutoWalk";
+    Proto[Proto["ClientWalkNorth"] = 101] = "ClientWalkNorth";
+    Proto[Proto["ClientWalkEast"] = 102] = "ClientWalkEast";
+    Proto[Proto["ClientWalkSouth"] = 103] = "ClientWalkSouth";
+    Proto[Proto["ClientWalkWest"] = 104] = "ClientWalkWest";
+    Proto[Proto["ClientStop"] = 105] = "ClientStop";
+    Proto[Proto["ClientWalkNorthEast"] = 106] = "ClientWalkNorthEast";
+    Proto[Proto["ClientWalkSouthEast"] = 107] = "ClientWalkSouthEast";
+    Proto[Proto["ClientWalkSouthWest"] = 108] = "ClientWalkSouthWest";
+    Proto[Proto["ClientWalkNorthWest"] = 109] = "ClientWalkNorthWest";
+    Proto[Proto["ClientTurnNorth"] = 111] = "ClientTurnNorth";
+    Proto[Proto["ClientTurnEast"] = 112] = "ClientTurnEast";
+    Proto[Proto["ClientTurnSouth"] = 113] = "ClientTurnSouth";
+    Proto[Proto["ClientTurnWest"] = 114] = "ClientTurnWest";
+    Proto[Proto["ClientEquipItem"] = 119] = "ClientEquipItem";
+    Proto[Proto["ClientMove"] = 120] = "ClientMove";
+    Proto[Proto["ClientInspectNpcTrade"] = 121] = "ClientInspectNpcTrade";
+    Proto[Proto["ClientBuyItem"] = 122] = "ClientBuyItem";
+    Proto[Proto["ClientSellItem"] = 123] = "ClientSellItem";
+    Proto[Proto["ClientCloseNpcTrade"] = 124] = "ClientCloseNpcTrade";
+    Proto[Proto["ClientRequestTrade"] = 125] = "ClientRequestTrade";
+    Proto[Proto["ClientInspectTrade"] = 126] = "ClientInspectTrade";
+    Proto[Proto["ClientAcceptTrade"] = 127] = "ClientAcceptTrade";
+    Proto[Proto["ClientRejectTrade"] = 128] = "ClientRejectTrade";
+    Proto[Proto["ClientUseItem"] = 130] = "ClientUseItem";
+    Proto[Proto["ClientUseItemWith"] = 131] = "ClientUseItemWith";
+    Proto[Proto["ClientUseOnCreature"] = 132] = "ClientUseOnCreature";
+    Proto[Proto["ClientRotateItem"] = 133] = "ClientRotateItem";
+    Proto[Proto["ClientCloseContainer"] = 135] = "ClientCloseContainer";
+    Proto[Proto["ClientUpContainer"] = 136] = "ClientUpContainer";
+    Proto[Proto["ClientEditText"] = 137] = "ClientEditText";
+    Proto[Proto["ClientEditList"] = 138] = "ClientEditList";
+    Proto[Proto["ClientLook"] = 140] = "ClientLook";
+    Proto[Proto["ClientLookCreature"] = 141] = "ClientLookCreature";
+    Proto[Proto["ClientTalk"] = 150] = "ClientTalk";
+    Proto[Proto["ClientRequestChannels"] = 151] = "ClientRequestChannels";
+    Proto[Proto["ClientJoinChannel"] = 152] = "ClientJoinChannel";
+    Proto[Proto["ClientLeaveChannel"] = 153] = "ClientLeaveChannel";
+    Proto[Proto["ClientOpenPrivateChannel"] = 154] = "ClientOpenPrivateChannel";
+    Proto[Proto["ClientOpenRuleViolation"] = 155] = "ClientOpenRuleViolation";
+    Proto[Proto["ClientCloseRuleViolation"] = 156] = "ClientCloseRuleViolation";
+    Proto[Proto["ClientCancelRuleViolation"] = 157] = "ClientCancelRuleViolation";
+    Proto[Proto["ClientCloseNpcChannel"] = 158] = "ClientCloseNpcChannel";
+    Proto[Proto["ClientChangeFightModes"] = 160] = "ClientChangeFightModes";
+    Proto[Proto["ClientAttack"] = 161] = "ClientAttack";
+    Proto[Proto["ClientFollow"] = 162] = "ClientFollow";
+    Proto[Proto["ClientInviteToParty"] = 163] = "ClientInviteToParty";
+    Proto[Proto["ClientJoinParty"] = 164] = "ClientJoinParty";
+    Proto[Proto["ClientRevokeInvitation"] = 165] = "ClientRevokeInvitation";
+    Proto[Proto["ClientPassLeadership"] = 166] = "ClientPassLeadership";
+    Proto[Proto["ClientLeaveParty"] = 167] = "ClientLeaveParty";
+    Proto[Proto["ClientShareExperience"] = 168] = "ClientShareExperience";
+    Proto[Proto["ClientDisbandParty"] = 169] = "ClientDisbandParty";
+    Proto[Proto["ClientOpenOwnChannel"] = 170] = "ClientOpenOwnChannel";
+    Proto[Proto["ClientInviteToOwnChannel"] = 171] = "ClientInviteToOwnChannel";
+    Proto[Proto["ClientExcludeFromOwnChannel"] = 172] = "ClientExcludeFromOwnChannel";
+    Proto[Proto["ClientCancelAttackAndFollow"] = 190] = "ClientCancelAttackAndFollow";
+    Proto[Proto["ClientUpdateTile"] = 201] = "ClientUpdateTile";
+    Proto[Proto["ClientRefreshContainer"] = 202] = "ClientRefreshContainer";
+    Proto[Proto["ClientBrowseField"] = 203] = "ClientBrowseField";
+    Proto[Proto["ClientSeekInContainer"] = 204] = "ClientSeekInContainer";
+    Proto[Proto["ClientRequestOutfit"] = 210] = "ClientRequestOutfit";
+    Proto[Proto["ClientChangeOutfit"] = 211] = "ClientChangeOutfit";
+    Proto[Proto["ClientMount"] = 212] = "ClientMount";
+    Proto[Proto["ClientAddVip"] = 220] = "ClientAddVip";
+    Proto[Proto["ClientRemoveVip"] = 221] = "ClientRemoveVip";
+    Proto[Proto["ClientEditVip"] = 222] = "ClientEditVip";
+    Proto[Proto["ClientBugReport"] = 230] = "ClientBugReport";
+    Proto[Proto["ClientRuleViolation"] = 231] = "ClientRuleViolation";
+    Proto[Proto["ClientDebugReport"] = 232] = "ClientDebugReport";
+    Proto[Proto["ClientTransferCoins"] = 239] = "ClientTransferCoins";
+    Proto[Proto["ClientRequestQuestLog"] = 240] = "ClientRequestQuestLog";
+    Proto[Proto["ClientRequestQuestLine"] = 241] = "ClientRequestQuestLine";
+    Proto[Proto["ClientNewRuleViolation"] = 242] = "ClientNewRuleViolation";
+    Proto[Proto["ClientRequestItemInfo"] = 243] = "ClientRequestItemInfo";
+    Proto[Proto["ClientMarketLeave"] = 244] = "ClientMarketLeave";
+    Proto[Proto["ClientMarketBrowse"] = 245] = "ClientMarketBrowse";
+    Proto[Proto["ClientMarketCreate"] = 246] = "ClientMarketCreate";
+    Proto[Proto["ClientMarketCancel"] = 247] = "ClientMarketCancel";
+    Proto[Proto["ClientMarketAccept"] = 248] = "ClientMarketAccept";
+    Proto[Proto["ClientAnswerModalDialog"] = 249] = "ClientAnswerModalDialog";
+    Proto[Proto["ClientOpenStore"] = 250] = "ClientOpenStore";
+    Proto[Proto["ClientRequestStoreOffers"] = 251] = "ClientRequestStoreOffers";
+    Proto[Proto["ClientBuyStoreOffer"] = 252] = "ClientBuyStoreOffer";
+    Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
+    Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
+    Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
+    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
+    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
+    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
+    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
+    Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
+    Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
+    Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
+    Proto[Proto["MonsterStartId"] = 1073741824] = "MonsterStartId";
+    Proto[Proto["MonsterEndId"] = 2147483648] = "MonsterEndId";
+    Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
+    Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
+})(Proto || (exports.Proto = Proto = {}));
+exports.Proto = Proto;
+
+/***/ }),
+
+/***/ 362:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Outfit = exports.Outfit = function () {
+    function Outfit() {
+        _classCallCheck(this, Outfit);
+    }
+
+    _createClass(Outfit, [{
+        key: "setMount",
+        value: function setMount(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setCategory",
+        value: function setCategory(ThingCategoryCreature) {}
+    }, {
+        key: "setId",
+        value: function setId(lookType) {}
+    }, {
+        key: "setHead",
+        value: function setHead(head) {}
+    }, {
+        key: "setBody",
+        value: function setBody(body) {}
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {}
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {}
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {}
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(auxId) {}
+    }]);
+
+    return Outfit;
+}();
+
+/***/ }),
+
+/***/ 363:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Item = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+var _thingtypemanager = __webpack_require__(69);
+
+var _const = __webpack_require__(43);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Item = exports.Item = function (_Thing) {
+    _inherits(Item, _Thing);
+
+    function Item() {
+        var m_clientId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+        _classCallCheck(this, Item);
+
+        var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
+
+        _this.m_clientId = m_clientId;
+        return _this;
+    }
+
+    _createClass(Item, [{
+        key: "isItem",
+        value: function isItem() {
+            return true;
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_clientId;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_clientId = id;
+        }
+    }, {
+        key: "setCountOrSubType",
+        value: function setCountOrSubType(count) {}
+    }, {
+        key: "getThingType",
+        value: function getThingType() {
+            return _thingtypemanager.g_things.getThingType(this.m_clientId, _const.ThingCategory.ThingCategoryItem);
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType() {
+            return this.getThingType();
+        }
+    }]);
+
+    return Item;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 364:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StaticText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StaticText = exports.StaticText = function (_Thing) {
+    _inherits(StaticText, _Thing);
+
+    function StaticText() {
+        _classCallCheck(this, StaticText);
+
+        return _possibleConstructorReturn(this, (StaticText.__proto__ || Object.getPrototypeOf(StaticText)).apply(this, arguments));
+    }
+
+    _createClass(StaticText, [{
+        key: "isStaticText",
+        value: function isStaticText() {
+            return true;
+        }
+    }]);
+
+    return StaticText;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 365:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Effect = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+var _thingtypemanager = __webpack_require__(69);
+
+var _const = __webpack_require__(43);
+
+var _timer = __webpack_require__(366);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Effect = exports.Effect = function (_Thing) {
+    _inherits(Effect, _Thing);
+
+    function Effect() {
+        _classCallCheck(this, Effect);
+
+        var _this = _possibleConstructorReturn(this, (Effect.__proto__ || Object.getPrototypeOf(Effect)).apply(this, arguments));
+
+        _this.m_animationTimer = new _timer.Timer();
+        return _this;
+    }
+
+    _createClass(Effect, [{
+        key: "isEffect",
+        value: function isEffect() {
+            return true;
+        }
+    }, {
+        key: "drawEffect",
+        value: function drawEffect(dest, scaleFactor, animate) {
+            var offsetX = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+            var offsetY = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+            var lightView = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+
+            if (this.m_id == 0) return;
+            var animationPhase = 0;
+            if (animate) animationPhase = Math.min(this.m_animationTimer.ticksElapsed() / this.m_phaseDuration, this.getAnimationPhases() - 1);
+            var xPattern = offsetX % this.getNumPatternX();
+            if (xPattern < 0) xPattern += this.getNumPatternX();
+            var yPattern = offsetY % this.getNumPatternY();
+            if (yPattern < 0) yPattern += this.getNumPatternY();
+            this.rawGetThingType().draw(dest, scaleFactor, 0, xPattern, yPattern, 0, animationPhase, lightView);
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            if (!_thingtypemanager.g_things.isValidDatId(id, _const.ThingCategory.ThingCategoryEffect)) id = 0;
+            this.m_id = id;
+        }
+    }, {
+        key: "asEffect",
+        value: function asEffect() {
+            return this;
+        }
+    }, {
+        key: "getThingType",
+        value: function getThingType() {
+            return _thingtypemanager.g_things.getThingType(this.m_id, _const.ThingCategory.ThingCategoryEffect);
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType() {
+            return _thingtypemanager.g_things.rawGetThingType(this.m_id, _const.ThingCategory.ThingCategoryEffect);
+        }
+    }, {
+        key: "onAppear",
+        value: function onAppear() {
+            this.m_animationTimer.restart();
+            this.m_phaseDuration = Effect.EFFECT_TICKS_PER_FRAME;
+            // hack to fix some animation phases duration, currently there is no better solution
+            if (this.m_id == 33) this.m_phaseDuration <<= 2;
+            //g_dispatcher.scheduleEvent([this]() { g_map.removeThing(this); }, this.m_phaseDuration * this.getAnimationPhases());
+        }
+    }]);
+
+    return Effect;
+}(_thing.Thing);
+
+Effect.EFFECT_TICKS_PER_FRAME = 75;
+
+/***/ }),
+
+/***/ 366:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Timer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _g_clock = __webpack_require__(367);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Timer = exports.Timer = function () {
+    function Timer() {
+        _classCallCheck(this, Timer);
+
+        this.m_startTicks = 0;
+        this.m_stopped = false;
+        this.restart();
+    }
+
+    _createClass(Timer, [{
+        key: "restart",
+        value: function restart() {
+            this.m_startTicks = _g_clock.g_clock.millis();
+            this.m_stopped = false;
+        }
+    }, {
+        key: "stop",
+        value: function stop() {
+            this.m_stopped = true;
+        }
+    }, {
+        key: "startTicks",
+        value: function startTicks() {
+            return this.m_startTicks;
+        }
+    }, {
+        key: "ticksElapsed",
+        value: function ticksElapsed() {
+            return _g_clock.g_clock.millis() - this.m_startTicks;
+        }
+    }, {
+        key: "timeElapsed",
+        value: function timeElapsed() {
+            return this.ticksElapsed() / 1000;
+        }
+    }, {
+        key: "running",
+        value: function running() {
+            return !this.m_stopped;
+        }
+    }]);
+
+    return Timer;
+}();
+
+/***/ }),
+
+/***/ 367:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var g_clock = exports.g_clock = function () {
+    function g_clock() {
+        _classCallCheck(this, g_clock);
+    }
+
+    _createClass(g_clock, null, [{
+        key: "millis",
+        value: function millis() {
+            return +new Date();
+        }
+    }]);
+
+    return g_clock;
+}();
+
+/***/ }),
+
+/***/ 368:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.AnimatedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AnimatedText = exports.AnimatedText = function (_Thing) {
+    _inherits(AnimatedText, _Thing);
+
+    function AnimatedText() {
+        _classCallCheck(this, AnimatedText);
+
+        return _possibleConstructorReturn(this, (AnimatedText.__proto__ || Object.getPrototypeOf(AnimatedText)).apply(this, arguments));
+    }
+
+    _createClass(AnimatedText, [{
+        key: "isAnimatedText",
+        value: function isAnimatedText() {
+            return true;
+        }
+    }, {
+        key: "setColor",
+        value: function setColor(color) {}
+    }, {
+        key: "setText",
+        value: function setText(text) {}
+    }]);
+
+    return AnimatedText;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 369:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Missile = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Missile = exports.Missile = function (_Thing) {
+    _inherits(Missile, _Thing);
+
+    function Missile() {
+        _classCallCheck(this, Missile);
+
+        return _possibleConstructorReturn(this, (Missile.__proto__ || Object.getPrototypeOf(Missile)).apply(this, arguments));
+    }
+
+    _createClass(Missile, [{
+        key: "isMissile",
+        value: function isMissile() {
+            return true;
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "setPath",
+        value: function setPath(fromPos, toPos) {}
+    }]);
+
+    return Missile;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 370:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Npc = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(68);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Npc = exports.Npc = function (_Creature) {
+    _inherits(Npc, _Creature);
+
+    function Npc() {
+        _classCallCheck(this, Npc);
+
+        return _possibleConstructorReturn(this, (Npc.__proto__ || Object.getPrototypeOf(Npc)).apply(this, arguments));
+    }
+
+    _createClass(Npc, [{
+        key: "isNpc",
+        value: function isNpc() {
+            return true;
+        }
+    }]);
+
+    return Npc;
+}(_creature.Creature);
+
+/***/ }),
+
+/***/ 371:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Monster = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(68);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Monster = exports.Monster = function (_Creature) {
+    _inherits(Monster, _Creature);
+
+    function Monster() {
+        _classCallCheck(this, Monster);
+
+        return _possibleConstructorReturn(this, (Monster.__proto__ || Object.getPrototypeOf(Monster)).apply(this, arguments));
+    }
+
+    _createClass(Monster, [{
+        key: "isMonster",
+        value: function isMonster() {
+            return true;
+        }
+    }]);
+
+    return Monster;
+}(_creature.Creature);
+
+/***/ }),
+
+/***/ 372:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Container = exports.Container = function () {
+    function Container() {
+        _classCallCheck(this, Container);
+    }
+
+    _createClass(Container, [{
+        key: "setId",
+        value: function setId(id) {}
+    }]);
+
+    return Container;
+}();
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Otc = exports.Otc = undefined;
 (function (Otc) {
     Otc[Otc["TILE_PIXELS"] = 32] = "TILE_PIXELS";
     Otc[Otc["MAX_ELEVATION"] = 24] = "MAX_ELEVATION";
@@ -22,8 +5357,8 @@ var Otc;
     Otc[Otc["MAX_STATIC_TEXT_WIDTH"] = 200] = "MAX_STATIC_TEXT_WIDTH";
     Otc[Otc["MAX_AUTOWALK_STEPS_RETRY"] = 10] = "MAX_AUTOWALK_STEPS_RETRY";
     Otc[Otc["MAX_AUTOWALK_DIST"] = 127] = "MAX_AUTOWALK_DIST";
-})(Otc = exports.Otc || (exports.Otc = {}));
-var DrawFlags;
+})(Otc || (exports.Otc = Otc = {}));
+var DrawFlags = exports.DrawFlags = undefined;
 (function (DrawFlags) {
     DrawFlags[DrawFlags["DrawGround"] = 1] = "DrawGround";
     DrawFlags[DrawFlags["DrawGroundBorders"] = 2] = "DrawGroundBorders";
@@ -43,8 +5378,8 @@ var DrawFlags;
     DrawFlags[DrawFlags["DrawManaBar"] = 32768] = "DrawManaBar";
     DrawFlags[DrawFlags["DrawWalls"] = 12] = "DrawWalls";
     DrawFlags[DrawFlags["DrawEverything"] = 65535] = "DrawEverything";
-})(DrawFlags = exports.DrawFlags || (exports.DrawFlags = {}));
-var DatOpts;
+})(DrawFlags || (exports.DrawFlags = DrawFlags = {}));
+var DatOpts = exports.DatOpts = undefined;
 (function (DatOpts) {
     DatOpts[DatOpts["DatGround"] = 0] = "DatGround";
     DatOpts[DatOpts["DatGroundClip"] = 1] = "DatGroundClip";
@@ -81,8 +5416,8 @@ var DatOpts;
     DatOpts[DatOpts["DatCloth"] = 32] = "DatCloth";
     DatOpts[DatOpts["DatAnimation"] = 33] = "DatAnimation";
     DatOpts[DatOpts["DatLastOpt"] = 255] = "DatLastOpt";
-})(DatOpts = exports.DatOpts || (exports.DatOpts = {}));
-var InventorySlot;
+})(DatOpts || (exports.DatOpts = DatOpts = {}));
+var InventorySlot = exports.InventorySlot = undefined;
 (function (InventorySlot) {
     InventorySlot[InventorySlot["InventorySlotHead"] = 1] = "InventorySlotHead";
     InventorySlot[InventorySlot["InventorySlotNecklace"] = 2] = "InventorySlotNecklace";
@@ -100,8 +5435,8 @@ var InventorySlot;
     InventorySlot[InventorySlot["InventorySlotExt3"] = 14] = "InventorySlotExt3";
     InventorySlot[InventorySlot["InventorySlotExt4"] = 15] = "InventorySlotExt4";
     InventorySlot[InventorySlot["LastInventorySlot"] = 16] = "LastInventorySlot";
-})(InventorySlot = exports.InventorySlot || (exports.InventorySlot = {}));
-var Statistic;
+})(InventorySlot || (exports.InventorySlot = InventorySlot = {}));
+var Statistic = exports.Statistic = undefined;
 (function (Statistic) {
     Statistic[Statistic["Health"] = 0] = "Health";
     Statistic[Statistic["MaxHealth"] = 1] = "MaxHealth";
@@ -116,8 +5451,8 @@ var Statistic;
     Statistic[Statistic["Soul"] = 10] = "Soul";
     Statistic[Statistic["Stamina"] = 11] = "Stamina";
     Statistic[Statistic["LastStatistic"] = 12] = "LastStatistic";
-})(Statistic = exports.Statistic || (exports.Statistic = {}));
-var Skill;
+})(Statistic || (exports.Statistic = Statistic = {}));
+var Skill = exports.Skill = undefined;
 (function (Skill) {
     Skill[Skill["Fist"] = 0] = "Fist";
     Skill[Skill["Club"] = 1] = "Club";
@@ -133,8 +5468,8 @@ var Skill;
     Skill[Skill["ManaLeechChance"] = 11] = "ManaLeechChance";
     Skill[Skill["ManaLeechAmount"] = 12] = "ManaLeechAmount";
     Skill[Skill["LastSkill"] = 13] = "LastSkill";
-})(Skill = exports.Skill || (exports.Skill = {}));
-var Direction;
+})(Skill || (exports.Skill = Skill = {}));
+var Direction = exports.Direction = undefined;
 (function (Direction) {
     Direction[Direction["North"] = 0] = "North";
     Direction[Direction["East"] = 1] = "East";
@@ -145,8 +5480,8 @@ var Direction;
     Direction[Direction["SouthWest"] = 6] = "SouthWest";
     Direction[Direction["NorthWest"] = 7] = "NorthWest";
     Direction[Direction["InvalidDirection"] = 8] = "InvalidDirection";
-})(Direction = exports.Direction || (exports.Direction = {}));
-var FluidsColor;
+})(Direction || (exports.Direction = Direction = {}));
+var FluidsColor = exports.FluidsColor = undefined;
 (function (FluidsColor) {
     FluidsColor[FluidsColor["FluidTransparent"] = 0] = "FluidTransparent";
     FluidsColor[FluidsColor["FluidBlue"] = 1] = "FluidBlue";
@@ -156,8 +5491,8 @@ var FluidsColor;
     FluidsColor[FluidsColor["FluidYellow"] = 5] = "FluidYellow";
     FluidsColor[FluidsColor["FluidWhite"] = 6] = "FluidWhite";
     FluidsColor[FluidsColor["FluidPurple"] = 7] = "FluidPurple";
-})(FluidsColor = exports.FluidsColor || (exports.FluidsColor = {}));
-var FluidsType;
+})(FluidsColor || (exports.FluidsColor = FluidsColor = {}));
+var FluidsType = exports.FluidsType = undefined;
 (function (FluidsType) {
     FluidsType[FluidsType["FluidNone"] = 0] = "FluidNone";
     FluidsType[FluidsType["FluidWater"] = 1] = "FluidWater";
@@ -177,26 +5512,26 @@ var FluidsType;
     FluidsType[FluidsType["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
     FluidsType[FluidsType["FluidTea"] = 16] = "FluidTea";
     FluidsType[FluidsType["FluidMead"] = 17] = "FluidMead";
-})(FluidsType = exports.FluidsType || (exports.FluidsType = {}));
-var FightModes;
+})(FluidsType || (exports.FluidsType = FluidsType = {}));
+var FightModes = exports.FightModes = undefined;
 (function (FightModes) {
     FightModes[FightModes["FightOffensive"] = 1] = "FightOffensive";
     FightModes[FightModes["FightBalanced"] = 2] = "FightBalanced";
     FightModes[FightModes["FightDefensive"] = 3] = "FightDefensive";
-})(FightModes = exports.FightModes || (exports.FightModes = {}));
-var ChaseModes;
+})(FightModes || (exports.FightModes = FightModes = {}));
+var ChaseModes = exports.ChaseModes = undefined;
 (function (ChaseModes) {
     ChaseModes[ChaseModes["DontChase"] = 0] = "DontChase";
     ChaseModes[ChaseModes["ChaseOpponent"] = 1] = "ChaseOpponent";
-})(ChaseModes = exports.ChaseModes || (exports.ChaseModes = {}));
-var PVPModes;
+})(ChaseModes || (exports.ChaseModes = ChaseModes = {}));
+var PVPModes = exports.PVPModes = undefined;
 (function (PVPModes) {
     PVPModes[PVPModes["WhiteDove"] = 0] = "WhiteDove";
     PVPModes[PVPModes["WhiteHand"] = 1] = "WhiteHand";
     PVPModes[PVPModes["YellowHand"] = 2] = "YellowHand";
     PVPModes[PVPModes["RedFist"] = 3] = "RedFist";
-})(PVPModes = exports.PVPModes || (exports.PVPModes = {}));
-var PlayerSkulls;
+})(PVPModes || (exports.PVPModes = PVPModes = {}));
+var PlayerSkulls = exports.PlayerSkulls = undefined;
 (function (PlayerSkulls) {
     PlayerSkulls[PlayerSkulls["SkullNone"] = 0] = "SkullNone";
     PlayerSkulls[PlayerSkulls["SkullYellow"] = 1] = "SkullYellow";
@@ -205,9 +5540,9 @@ var PlayerSkulls;
     PlayerSkulls[PlayerSkulls["SkullRed"] = 4] = "SkullRed";
     PlayerSkulls[PlayerSkulls["SkullBlack"] = 5] = "SkullBlack";
     PlayerSkulls[PlayerSkulls["SkullOrange"] = 6] = "SkullOrange";
-})(PlayerSkulls = exports.PlayerSkulls || (exports.PlayerSkulls = {}));
+})(PlayerSkulls || (exports.PlayerSkulls = PlayerSkulls = {}));
 ;
-var PlayerShields;
+var PlayerShields = exports.PlayerShields = undefined;
 (function (PlayerShields) {
     PlayerShields[PlayerShields["ShieldNone"] = 0] = "ShieldNone";
     PlayerShields[PlayerShields["ShieldWhiteYellow"] = 1] = "ShieldWhiteYellow";
@@ -221,8 +5556,8 @@ var PlayerShields;
     PlayerShields[PlayerShields["ShieldBlueNoSharedExp"] = 9] = "ShieldBlueNoSharedExp";
     PlayerShields[PlayerShields["ShieldYellowNoSharedExp"] = 10] = "ShieldYellowNoSharedExp";
     PlayerShields[PlayerShields["ShieldGray"] = 11] = "ShieldGray"; // 11 member of another party
-})(PlayerShields = exports.PlayerShields || (exports.PlayerShields = {}));
-var PlayerEmblems;
+})(PlayerShields || (exports.PlayerShields = PlayerShields = {}));
+var PlayerEmblems = exports.PlayerEmblems = undefined;
 (function (PlayerEmblems) {
     PlayerEmblems[PlayerEmblems["EmblemNone"] = 0] = "EmblemNone";
     PlayerEmblems[PlayerEmblems["EmblemGreen"] = 1] = "EmblemGreen";
@@ -230,16 +5565,16 @@ var PlayerEmblems;
     PlayerEmblems[PlayerEmblems["EmblemBlue"] = 3] = "EmblemBlue";
     PlayerEmblems[PlayerEmblems["EmblemMember"] = 4] = "EmblemMember";
     PlayerEmblems[PlayerEmblems["EmblemOther"] = 5] = "EmblemOther";
-})(PlayerEmblems = exports.PlayerEmblems || (exports.PlayerEmblems = {}));
-var CreatureIcons;
+})(PlayerEmblems || (exports.PlayerEmblems = PlayerEmblems = {}));
+var CreatureIcons = exports.CreatureIcons = undefined;
 (function (CreatureIcons) {
     CreatureIcons[CreatureIcons["NpcIconNone"] = 0] = "NpcIconNone";
     CreatureIcons[CreatureIcons["NpcIconChat"] = 1] = "NpcIconChat";
     CreatureIcons[CreatureIcons["NpcIconTrade"] = 2] = "NpcIconTrade";
     CreatureIcons[CreatureIcons["NpcIconQuest"] = 3] = "NpcIconQuest";
     CreatureIcons[CreatureIcons["NpcIconTradeQuest"] = 4] = "NpcIconTradeQuest";
-})(CreatureIcons = exports.CreatureIcons || (exports.CreatureIcons = {}));
-var PlayerStates;
+})(CreatureIcons || (exports.CreatureIcons = CreatureIcons = {}));
+var PlayerStates = exports.PlayerStates = undefined;
 (function (PlayerStates) {
     PlayerStates[PlayerStates["IconNone"] = 0] = "IconNone";
     PlayerStates[PlayerStates["IconPoison"] = 1] = "IconPoison";
@@ -259,8 +5594,8 @@ var PlayerStates;
     PlayerStates[PlayerStates["IconPz"] = 16384] = "IconPz";
     PlayerStates[PlayerStates["IconBleeding"] = 32768] = "IconBleeding";
     PlayerStates[PlayerStates["IconHungry"] = 65536] = "IconHungry";
-})(PlayerStates = exports.PlayerStates || (exports.PlayerStates = {}));
-var MessageMode;
+})(PlayerStates || (exports.PlayerStates = PlayerStates = {}));
+var MessageMode = exports.MessageMode = undefined;
 (function (MessageMode) {
     MessageMode[MessageMode["MessageNone"] = 0] = "MessageNone";
     MessageMode[MessageMode["MessageSay"] = 1] = "MessageSay";
@@ -317,8 +5652,8 @@ var MessageMode;
     MessageMode[MessageMode["MessageNpcFromStartBlock"] = 51] = "MessageNpcFromStartBlock";
     MessageMode[MessageMode["LastMessage"] = 52] = "LastMessage";
     MessageMode[MessageMode["MessageInvalid"] = 255] = "MessageInvalid";
-})(MessageMode = exports.MessageMode || (exports.MessageMode = {}));
-var GameFeature;
+})(MessageMode || (exports.MessageMode = MessageMode = {}));
+var GameFeature = exports.GameFeature = undefined;
 (function (GameFeature) {
     GameFeature[GameFeature["GameProtocolChecksum"] = 1] = "GameProtocolChecksum";
     GameFeature[GameFeature["GameAccountNames"] = 2] = "GameAccountNames";
@@ -395,23 +5730,23 @@ var GameFeature;
     GameFeature[GameFeature["GameIngameStoreServiceType"] = 75] = "GameIngameStoreServiceType";
     GameFeature[GameFeature["GameAdditionalSkills"] = 76] = "GameAdditionalSkills";
     GameFeature[GameFeature["LastGameFeature"] = 101] = "LastGameFeature";
-})(GameFeature = exports.GameFeature || (exports.GameFeature = {}));
-var PathFindResult;
+})(GameFeature || (exports.GameFeature = GameFeature = {}));
+var PathFindResult = exports.PathFindResult = undefined;
 (function (PathFindResult) {
     PathFindResult[PathFindResult["PathFindResultOk"] = 0] = "PathFindResultOk";
     PathFindResult[PathFindResult["PathFindResultSamePosition"] = 1] = "PathFindResultSamePosition";
     PathFindResult[PathFindResult["PathFindResultImpossible"] = 2] = "PathFindResultImpossible";
     PathFindResult[PathFindResult["PathFindResultTooFar"] = 3] = "PathFindResultTooFar";
     PathFindResult[PathFindResult["PathFindResultNoWay"] = 4] = "PathFindResultNoWay";
-})(PathFindResult = exports.PathFindResult || (exports.PathFindResult = {}));
-var PathFindFlags;
+})(PathFindResult || (exports.PathFindResult = PathFindResult = {}));
+var PathFindFlags = exports.PathFindFlags = undefined;
 (function (PathFindFlags) {
     PathFindFlags[PathFindFlags["PathFindAllowNotSeenTiles"] = 1] = "PathFindAllowNotSeenTiles";
     PathFindFlags[PathFindFlags["PathFindAllowCreatures"] = 2] = "PathFindAllowCreatures";
     PathFindFlags[PathFindFlags["PathFindAllowNonPathable"] = 4] = "PathFindAllowNonPathable";
     PathFindFlags[PathFindFlags["PathFindAllowNonWalkable"] = 8] = "PathFindAllowNonWalkable";
-})(PathFindFlags = exports.PathFindFlags || (exports.PathFindFlags = {}));
-var AutomapFlags;
+})(PathFindFlags || (exports.PathFindFlags = PathFindFlags = {}));
+var AutomapFlags = exports.AutomapFlags = undefined;
 (function (AutomapFlags) {
     AutomapFlags[AutomapFlags["MapMarkTick"] = 0] = "MapMarkTick";
     AutomapFlags[AutomapFlags["MapMarkQuestion"] = 1] = "MapMarkQuestion";
@@ -433,21 +5768,21 @@ var AutomapFlags;
     AutomapFlags[AutomapFlags["MapMarkRedWest"] = 17] = "MapMarkRedWest";
     AutomapFlags[AutomapFlags["MapMarkGreenNorth"] = 18] = "MapMarkGreenNorth";
     AutomapFlags[AutomapFlags["MapMarkGreenSouth"] = 19] = "MapMarkGreenSouth";
-})(AutomapFlags = exports.AutomapFlags || (exports.AutomapFlags = {}));
-var VipState;
+})(AutomapFlags || (exports.AutomapFlags = AutomapFlags = {}));
+var VipState = exports.VipState = undefined;
 (function (VipState) {
     VipState[VipState["VipStateOffline"] = 0] = "VipStateOffline";
     VipState[VipState["VipStateOnline"] = 1] = "VipStateOnline";
     VipState[VipState["VipStatePending"] = 2] = "VipStatePending";
-})(VipState = exports.VipState || (exports.VipState = {}));
-var SpeedFormula;
+})(VipState || (exports.VipState = VipState = {}));
+var SpeedFormula = exports.SpeedFormula = undefined;
 (function (SpeedFormula) {
     SpeedFormula[SpeedFormula["SpeedFormulaA"] = 0] = "SpeedFormulaA";
     SpeedFormula[SpeedFormula["SpeedFormulaB"] = 1] = "SpeedFormulaB";
     SpeedFormula[SpeedFormula["SpeedFormulaC"] = 2] = "SpeedFormulaC";
     SpeedFormula[SpeedFormula["LastSpeedFormula"] = 3] = "LastSpeedFormula";
-})(SpeedFormula = exports.SpeedFormula || (exports.SpeedFormula = {}));
-var Blessings;
+})(SpeedFormula || (exports.SpeedFormula = SpeedFormula = {}));
+var Blessings = exports.Blessings = undefined;
 (function (Blessings) {
     Blessings[Blessings["BlessingNone"] = 0] = "BlessingNone";
     Blessings[Blessings["BlessingAdventurer"] = 1] = "BlessingAdventurer";
@@ -456,18 +5791,18 @@ var Blessings;
     Blessings[Blessings["BlessingFireOfSuns"] = 8] = "BlessingFireOfSuns";
     Blessings[Blessings["BlessingWisdomOfSolitude"] = 16] = "BlessingWisdomOfSolitude";
     Blessings[Blessings["BlessingSparkOfPhoenix"] = 32] = "BlessingSparkOfPhoenix";
-})(Blessings = exports.Blessings || (exports.Blessings = {}));
-var DeathType;
+})(Blessings || (exports.Blessings = Blessings = {}));
+var DeathType = exports.DeathType = undefined;
 (function (DeathType) {
     DeathType[DeathType["DeathRegular"] = 0] = "DeathRegular";
     DeathType[DeathType["DeathBlessed"] = 1] = "DeathBlessed";
-})(DeathType = exports.DeathType || (exports.DeathType = {}));
-var StoreProductTypes;
+})(DeathType || (exports.DeathType = DeathType = {}));
+var StoreProductTypes = exports.StoreProductTypes = undefined;
 (function (StoreProductTypes) {
     StoreProductTypes[StoreProductTypes["ProductTypeOther"] = 0] = "ProductTypeOther";
     StoreProductTypes[StoreProductTypes["ProductTypeNameChange"] = 1] = "ProductTypeNameChange";
-})(StoreProductTypes = exports.StoreProductTypes || (exports.StoreProductTypes = {}));
-var StoreErrorTypes;
+})(StoreProductTypes || (exports.StoreProductTypes = StoreProductTypes = {}));
+var StoreErrorTypes = exports.StoreErrorTypes = undefined;
 (function (StoreErrorTypes) {
     StoreErrorTypes[StoreErrorTypes["StoreNoError"] = -1] = "StoreNoError";
     StoreErrorTypes[StoreErrorTypes["StorePurchaseError"] = 0] = "StorePurchaseError";
@@ -475,21 +5810,21 @@ var StoreErrorTypes;
     StoreErrorTypes[StoreErrorTypes["StoreHistoryError"] = 2] = "StoreHistoryError";
     StoreErrorTypes[StoreErrorTypes["StoreTransferError"] = 3] = "StoreTransferError";
     StoreErrorTypes[StoreErrorTypes["StoreInformation"] = 4] = "StoreInformation";
-})(StoreErrorTypes = exports.StoreErrorTypes || (exports.StoreErrorTypes = {}));
-var StoreStates;
+})(StoreErrorTypes || (exports.StoreErrorTypes = StoreErrorTypes = {}));
+var StoreStates = exports.StoreStates = undefined;
 (function (StoreStates) {
     StoreStates[StoreStates["StateNone"] = 0] = "StateNone";
     StoreStates[StoreStates["StateNew"] = 1] = "StateNew";
     StoreStates[StoreStates["StateSale"] = 2] = "StateSale";
     StoreStates[StoreStates["StateTimed"] = 3] = "StateTimed";
-})(StoreStates = exports.StoreStates || (exports.StoreStates = {}));
-var FrameGroupType;
+})(StoreStates || (exports.StoreStates = StoreStates = {}));
+var FrameGroupType = exports.FrameGroupType = undefined;
 (function (FrameGroupType) {
     FrameGroupType[FrameGroupType["FrameGroupDefault"] = 0] = "FrameGroupDefault";
     FrameGroupType[FrameGroupType["FrameGroupIdle"] = 0] = "FrameGroupIdle";
     FrameGroupType[FrameGroupType["FrameGroupMoving"] = 1] = "FrameGroupMoving";
-})(FrameGroupType = exports.FrameGroupType || (exports.FrameGroupType = {}));
-var ThingCategory;
+})(FrameGroupType || (exports.FrameGroupType = FrameGroupType = {}));
+var ThingCategory = exports.ThingCategory = undefined;
 (function (ThingCategory) {
     ThingCategory[ThingCategory["ThingCategoryItem"] = 0] = "ThingCategoryItem";
     ThingCategory[ThingCategory["ThingCategoryCreature"] = 1] = "ThingCategoryCreature";
@@ -497,8 +5832,8 @@ var ThingCategory;
     ThingCategory[ThingCategory["ThingCategoryMissile"] = 3] = "ThingCategoryMissile";
     ThingCategory[ThingCategory["ThingInvalidCategory"] = 4] = "ThingInvalidCategory";
     ThingCategory[ThingCategory["ThingLastCategory"] = 4] = "ThingLastCategory";
-})(ThingCategory = exports.ThingCategory || (exports.ThingCategory = {}));
-var ThingAttr;
+})(ThingCategory || (exports.ThingCategory = ThingCategory = {}));
+var ThingAttr = exports.ThingAttr = undefined;
 (function (ThingAttr) {
     ThingAttr[ThingAttr["ThingAttrGround"] = 0] = "ThingAttrGround";
     ThingAttr[ThingAttr["ThingAttrGroundBorder"] = 1] = "ThingAttrGroundBorder";
@@ -545,368 +5880,1366 @@ var ThingAttr;
     ThingAttr[ThingAttr["ThingAttrNoMoveAnimation"] = 253] = "ThingAttrNoMoveAnimation";
     ThingAttr[ThingAttr["ThingAttrChargeable"] = 254] = "ThingAttrChargeable";
     ThingAttr[ThingAttr["ThingLastAttr"] = 255] = "ThingLastAttr";
-})(ThingAttr = exports.ThingAttr || (exports.ThingAttr = {}));
-var SpriteMask;
+})(ThingAttr || (exports.ThingAttr = ThingAttr = {}));
+var SpriteMask = exports.SpriteMask = undefined;
 (function (SpriteMask) {
     SpriteMask[SpriteMask["SpriteMaskRed"] = 1] = "SpriteMaskRed";
     SpriteMask[SpriteMask["SpriteMaskGreen"] = 2] = "SpriteMaskGreen";
     SpriteMask[SpriteMask["SpriteMaskBlue"] = 3] = "SpriteMaskBlue";
     SpriteMask[SpriteMask["SpriteMaskYellow"] = 4] = "SpriteMaskYellow";
-})(SpriteMask = exports.SpriteMask || (exports.SpriteMask = {}));
-var AnimationPhase;
+})(SpriteMask || (exports.SpriteMask = SpriteMask = {}));
+var AnimationPhase = exports.AnimationPhase = undefined;
 (function (AnimationPhase) {
     AnimationPhase[AnimationPhase["AnimPhaseAutomatic"] = -1] = "AnimPhaseAutomatic";
     AnimationPhase[AnimationPhase["AnimPhaseRandom"] = 254] = "AnimPhaseRandom";
     AnimationPhase[AnimationPhase["AnimPhaseAsync"] = 255] = "AnimPhaseAsync";
-})(AnimationPhase = exports.AnimationPhase || (exports.AnimationPhase = {}));
-var AnimationDirection;
+})(AnimationPhase || (exports.AnimationPhase = AnimationPhase = {}));
+var AnimationDirection = exports.AnimationDirection = undefined;
 (function (AnimationDirection) {
     AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
     AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
-})(AnimationDirection = exports.AnimationDirection || (exports.AnimationDirection = {}));
+})(AnimationDirection || (exports.AnimationDirection = AnimationDirection = {}));
 
 /***/ }),
-/* 1 */,
-/* 2 */
+
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(1);
-var log = function log() {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Thing = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _map = __webpack_require__(96);
+
+var _game = __webpack_require__(67);
+
+var _log = __webpack_require__(32);
+
+var _thingtypemanager = __webpack_require__(69);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Thing = exports.Thing = function () {
+    function Thing() {
+        _classCallCheck(this, Thing);
     }
-    console.log.apply(this, v);
-    $('#status').text(v.join(','));
-};
-exports.log = log;
-var error = function error() {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
-    }
-    console.error.apply(this, v);
-    console.log.apply(this, [new Error().stack]);
-    $('#status').text(v.join(','));
-};
-exports.error = error;
+
+    _createClass(Thing, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, animate) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {}
+    }, {
+        key: "setPosition",
+        value: function setPosition(position) {
+            if (this.m_position == position) return;
+            var oldPos = this.m_position;
+            this.m_position = position;
+            this.onPositionChange(this.m_position, oldPos);
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return 0;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return this.m_position;
+        }
+    }, {
+        key: "getStackPriority",
+        value: function getStackPriority() {
+            if (this.isGround()) return 0;else if (this.isGroundBorder()) return 1;else if (this.isOnBottom()) return 2;else if (this.isOnTop()) return 3;else if (this.isCreature()) return 4;else return 5;
+        }
+    }, {
+        key: "getTile",
+        value: function getTile() {
+            return _map.g_map.getTile(this.m_position);
+        }
+    }, {
+        key: "getParentContainer",
+        value: function getParentContainer() {
+            if (this.m_position.x == 0xffff && this.m_position.y & 0x40) {
+                var containerId = this.m_position.y ^ 0x40;
+                return _game.g_game.getContainer(containerId);
+            }
+            return null;
+        }
+    }, {
+        key: "getStackPos",
+        value: function getStackPos() {
+            if (this.m_position.x == 65535 && this.isItem()) return this.m_position.z;else {
+                var tile = this.getTile();
+                if (tile) return tile.getThingStackPos(this);else (0, _log.error)("got a thing with invalid stackpos");
+            }
+            return -1;
+        }
+    }, {
+        key: "isItem",
+        value: function isItem() {
+            return false;
+        }
+    }, {
+        key: "isEffect",
+        value: function isEffect() {
+            return false;
+        }
+    }, {
+        key: "isMissile",
+        value: function isMissile() {
+            return false;
+        }
+    }, {
+        key: "isCreature",
+        value: function isCreature() {
+            return false;
+        }
+    }, {
+        key: "isNpc",
+        value: function isNpc() {
+            return false;
+        }
+    }, {
+        key: "isMonster",
+        value: function isMonster() {
+            return false;
+        }
+    }, {
+        key: "isPlayer",
+        value: function isPlayer() {
+            return false;
+        }
+    }, {
+        key: "isLocalPlayer",
+        value: function isLocalPlayer() {
+            return false;
+        }
+    }, {
+        key: "isAnimatedText",
+        value: function isAnimatedText() {
+            return false;
+        }
+    }, {
+        key: "isStaticText",
+        value: function isStaticText() {
+            return false;
+        }
+        // type shortcuts
+
+    }, {
+        key: "getThingType",
+        value: function getThingType() {
+            return _thingtypemanager.g_things.getNullThingType();
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType() {
+            return this.getThingType();
+        }
+    }, {
+        key: "getSize",
+        value: function getSize() {
+            return this.rawGetThingType().getSize();
+        }
+    }, {
+        key: "getWidth",
+        value: function getWidth() {
+            return this.rawGetThingType().getWidth();
+        }
+    }, {
+        key: "getHeight",
+        value: function getHeight() {
+            return this.rawGetThingType().getHeight();
+        }
+    }, {
+        key: "getDisplacement",
+        value: function getDisplacement() {
+            return this.rawGetThingType().getDisplacement();
+        }
+    }, {
+        key: "getDisplacementX",
+        value: function getDisplacementX() {
+            return this.rawGetThingType().getDisplacementX();
+        }
+    }, {
+        key: "getDisplacementY",
+        value: function getDisplacementY() {
+            return this.rawGetThingType().getDisplacementY();
+        }
+    }, {
+        key: "getExactSize",
+        value: function getExactSize(layer, xPattern, yPattern, zPattern, animationPhase) {
+            return this.rawGetThingType().getExactSize(layer, xPattern, yPattern, zPattern, animationPhase);
+        }
+    }, {
+        key: "getLayers",
+        value: function getLayers() {
+            return this.rawGetThingType().getLayers();
+        }
+    }, {
+        key: "getNumPatternX",
+        value: function getNumPatternX() {
+            return this.rawGetThingType().getNumPatternX();
+        }
+    }, {
+        key: "getNumPatternY",
+        value: function getNumPatternY() {
+            return this.rawGetThingType().getNumPatternY();
+        }
+    }, {
+        key: "getNumPatternZ",
+        value: function getNumPatternZ() {
+            return this.rawGetThingType().getNumPatternZ();
+        }
+    }, {
+        key: "getAnimationPhases",
+        value: function getAnimationPhases() {
+            return this.rawGetThingType().getAnimationPhases();
+        }
+    }, {
+        key: "getAnimator",
+        value: function getAnimator() {
+            return this.rawGetThingType().getAnimator();
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            return this.rawGetThingType().getGroundSpeed();
+        }
+    }, {
+        key: "getMaxTextLength",
+        value: function getMaxTextLength() {
+            return this.rawGetThingType().getMaxTextLength();
+        }
+    }, {
+        key: "getLight",
+        value: function getLight() {
+            return this.rawGetThingType().getLight();
+        }
+    }, {
+        key: "getMinimapColor",
+        value: function getMinimapColor() {
+            return this.rawGetThingType().getMinimapColor();
+        }
+    }, {
+        key: "getLensHelp",
+        value: function getLensHelp() {
+            return this.rawGetThingType().getLensHelp();
+        }
+    }, {
+        key: "getClothSlot",
+        value: function getClothSlot() {
+            return this.rawGetThingType().getClothSlot();
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            return this.rawGetThingType().getElevation();
+        }
+    }, {
+        key: "isGround",
+        value: function isGround() {
+            return this.rawGetThingType().isGround();
+        }
+    }, {
+        key: "isGroundBorder",
+        value: function isGroundBorder() {
+            return this.rawGetThingType().isGroundBorder();
+        }
+    }, {
+        key: "isOnBottom",
+        value: function isOnBottom() {
+            return this.rawGetThingType().isOnBottom();
+        }
+    }, {
+        key: "isOnTop",
+        value: function isOnTop() {
+            return this.rawGetThingType().isOnTop();
+        }
+    }, {
+        key: "isContainer",
+        value: function isContainer() {
+            return this.rawGetThingType().isContainer();
+        }
+    }, {
+        key: "isStackable",
+        value: function isStackable() {
+            return this.rawGetThingType().isStackable();
+        }
+    }, {
+        key: "isForceUse",
+        value: function isForceUse() {
+            return this.rawGetThingType().isForceUse();
+        }
+    }, {
+        key: "isMultiUse",
+        value: function isMultiUse() {
+            return this.rawGetThingType().isMultiUse();
+        }
+    }, {
+        key: "isWritable",
+        value: function isWritable() {
+            return this.rawGetThingType().isWritable();
+        }
+    }, {
+        key: "isChargeable",
+        value: function isChargeable() {
+            return this.rawGetThingType().isChargeable();
+        }
+    }, {
+        key: "isWritableOnce",
+        value: function isWritableOnce() {
+            return this.rawGetThingType().isWritableOnce();
+        }
+    }, {
+        key: "isFluidContainer",
+        value: function isFluidContainer() {
+            return this.rawGetThingType().isFluidContainer();
+        }
+    }, {
+        key: "isSplash",
+        value: function isSplash() {
+            return this.rawGetThingType().isSplash();
+        }
+    }, {
+        key: "isNotWalkable",
+        value: function isNotWalkable() {
+            return this.rawGetThingType().isNotWalkable();
+        }
+    }, {
+        key: "isNotMoveable",
+        value: function isNotMoveable() {
+            return this.rawGetThingType().isNotMoveable();
+        }
+    }, {
+        key: "blockProjectile",
+        value: function blockProjectile() {
+            return this.rawGetThingType().blockProjectile();
+        }
+    }, {
+        key: "isNotPathable",
+        value: function isNotPathable() {
+            return this.rawGetThingType().isNotPathable();
+        }
+    }, {
+        key: "isPickupable",
+        value: function isPickupable() {
+            return this.rawGetThingType().isPickupable();
+        }
+    }, {
+        key: "isHangable",
+        value: function isHangable() {
+            return this.rawGetThingType().isHangable();
+        }
+    }, {
+        key: "isHookSouth",
+        value: function isHookSouth() {
+            return this.rawGetThingType().isHookSouth();
+        }
+    }, {
+        key: "isHookEast",
+        value: function isHookEast() {
+            return this.rawGetThingType().isHookEast();
+        }
+    }, {
+        key: "isRotateable",
+        value: function isRotateable() {
+            return this.rawGetThingType().isRotateable();
+        }
+    }, {
+        key: "hasLight",
+        value: function hasLight() {
+            return this.rawGetThingType().hasLight();
+        }
+    }, {
+        key: "isDontHide",
+        value: function isDontHide() {
+            return this.rawGetThingType().isDontHide();
+        }
+    }, {
+        key: "isTranslucent",
+        value: function isTranslucent() {
+            return this.rawGetThingType().isTranslucent();
+        }
+    }, {
+        key: "hasDisplacement",
+        value: function hasDisplacement() {
+            return this.rawGetThingType().hasDisplacement();
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            return this.rawGetThingType().hasElevation();
+        }
+    }, {
+        key: "isLyingCorpse",
+        value: function isLyingCorpse() {
+            return this.rawGetThingType().isLyingCorpse();
+        }
+    }, {
+        key: "isAnimateAlways",
+        value: function isAnimateAlways() {
+            return this.rawGetThingType().isAnimateAlways();
+        }
+    }, {
+        key: "hasMiniMapColor",
+        value: function hasMiniMapColor() {
+            return this.rawGetThingType().hasMiniMapColor();
+        }
+    }, {
+        key: "hasLensHelp",
+        value: function hasLensHelp() {
+            return this.rawGetThingType().hasLensHelp();
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            return this.rawGetThingType().isFullGround();
+        }
+    }, {
+        key: "isIgnoreLook",
+        value: function isIgnoreLook() {
+            return this.rawGetThingType().isIgnoreLook();
+        }
+    }, {
+        key: "isCloth",
+        value: function isCloth() {
+            return this.rawGetThingType().isCloth();
+        }
+    }, {
+        key: "isMarketable",
+        value: function isMarketable() {
+            return this.rawGetThingType().isMarketable();
+        }
+    }, {
+        key: "isUsable",
+        value: function isUsable() {
+            return this.rawGetThingType().isUsable();
+        }
+    }, {
+        key: "isWrapable",
+        value: function isWrapable() {
+            return this.rawGetThingType().isWrapable();
+        }
+    }, {
+        key: "isUnwrapable",
+        value: function isUnwrapable() {
+            return this.rawGetThingType().isUnwrapable();
+        }
+    }, {
+        key: "isTopEffect",
+        value: function isTopEffect() {
+            return this.rawGetThingType().isTopEffect();
+        }
+    }, {
+        key: "getMarketData",
+        value: function getMarketData() {
+            return this.rawGetThingType().getMarketData();
+        }
+    }, {
+        key: "onPositionChange",
+        value: function onPositionChange(newPos, oldPos) {}
+    }, {
+        key: "onAppear",
+        value: function onAppear() {}
+    }, {
+        key: "onDisappear",
+        value: function onDisappear() {}
+    }]);
+
+    return Thing;
+}();
 
 /***/ }),
-/* 3 */
+
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var UnjustifiedPoints = function () {
-    function UnjustifiedPoints() {}
-    return UnjustifiedPoints;
-}();
-exports.UnjustifiedPoints = UnjustifiedPoints;
-var AwareRange = function () {
-    function AwareRange() {
-        this.top = 6;
-        this.right = 9;
-        this.bottom = 7;
-        this.left = 8;
-    }
-    AwareRange.prototype.horizontal = function () {
-        return this.left + this.right + 1;
-    };
-    AwareRange.prototype.vertical = function () {
-        return this.top + this.bottom + 1;
-    };
-    return AwareRange;
-}();
-exports.AwareRange = AwareRange;
-var MarketData = function () {
-    function MarketData() {}
-    return MarketData;
-}();
-exports.MarketData = MarketData;
-var Light = function () {
-    function Light() {
-        this.intensity = 0;
-        this.color = 215;
-    }
-    return Light;
-}();
-exports.Light = Light;
-var g_clock = function () {
-    function g_clock() {}
-    g_clock.millis = function () {
-        return +new Date();
-    };
-    return g_clock;
-}();
-exports.g_clock = g_clock;
-var Timer = function () {
-    function Timer() {
-        this.m_startTicks = 0;
-        this.m_stopped = false;
-        this.restart();
-    }
-    Timer.prototype.restart = function () {
-        this.m_startTicks = g_clock.millis();
-        this.m_stopped = false;
-    };
-    Timer.prototype.stop = function () {
-        this.m_stopped = true;
-    };
-    Timer.prototype.startTicks = function () {
-        return this.m_startTicks;
-    };
-    Timer.prototype.ticksElapsed = function () {
-        return g_clock.millis() - this.m_startTicks;
-    };
-    Timer.prototype.timeElapsed = function () {
-        return this.ticksElapsed() / 1000;
-    };
-    Timer.prototype.running = function () {
-        return !this.m_stopped;
-    };
-    return Timer;
-}();
-exports.Timer = Timer;
-var Point = function () {
-    function Point(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-    Point.prototype.add = function (point) {
-        return new Point(this.x + point.x, this.y + point.y);
-    };
-    Point.prototype.sub = function (point) {
-        return new Point(this.x - point.x, this.y - point.y);
-    };
-    Point.prototype.mul = function (ratio) {
-        return new Point(this.x * ratio, this.y * ratio);
-    };
-    return Point;
-}();
-exports.Point = Point;
-var Rect = function () {
-    function Rect(p1, p2) {}
-    return Rect;
-}();
-exports.Rect = Rect;
-var Texture = function () {
-    function Texture(image, buildMipmaps, compress) {
-        if (buildMipmaps === void 0) {
-            buildMipmaps = false;
-        }
-        if (compress === void 0) {
-            compress = false;
-        }
-        this.m_id = 0;
-        this.m_time = 0;
-        this.m_hasMipmaps = false;
-        this.m_smooth = false;
-        this.m_upsideDown = false;
-        this.m_repeat = false;
-    }
-    return Texture;
-}();
-exports.Texture = Texture;
-var Size = function () {
-    function Size(wd, ht) {
-        if (wd === void 0) {
-            wd = -1;
-        }
-        if (ht === void 0) {
-            ht = -1;
-        }
-        this.wd = wd;
-        this.ht = ht;
-    }
-    Size.prototype.add = function (size) {
-        return new Size(this.wd + size.wd, this.ht + size.ht);
-    };
-    Size.prototype.sub = function (size) {
-        return new Size(this.wd - size.wd, this.ht - size.ht);
-    };
-    Size.prototype.mul = function (ratio) {
-        return new Size(this.wd * ratio, this.ht * ratio);
-    };
-    Size.prototype.isNull = function () {
-        return this.wd == 0 && this.ht == 0;
-    };
-    Size.prototype.isEmpty = function () {
-        return this.wd < 1 || this.ht < 1;
-    };
-    Size.prototype.isValid = function () {
-        return this.wd >= 0 && this.ht >= 0;
-    };
-    Size.prototype.width = function () {
-        return this.wd;
-    };
-    Size.prototype.height = function () {
-        return this.ht;
-    };
-    Size.prototype.resize = function (w, h) {
-        this.wd = w;
-        this.ht = h;
-    };
-    Size.prototype.setWidth = function (w) {
-        this.wd = w;
-    };
-    Size.prototype.setHeight = function (h) {
-        this.ht = h;
-    };
-    Size.prototype.ratio = function () {
-        return this.wd / this.ht;
-    };
-    Size.prototype.area = function () {
-        return this.wd * this.ht;
-    };
-    return Size;
-}();
-exports.Size = Size;
-var ThingTypeAttribs = function () {
-    function ThingTypeAttribs() {
-        this.attribs = {};
-    }
-    ThingTypeAttribs.prototype.has = function (attr) {
-        return this.attribs.hasOwnProperty(attr.toString());
-    };
-    ThingTypeAttribs.prototype.get = function (attr) {
-        return this.attribs[attr];
-    };
-    ThingTypeAttribs.prototype.set = function (attr, value) {
-        this.attribs[attr] = value;
-    };
-    ThingTypeAttribs.prototype.remove = function (attr) {
-        delete this.attribs[attr];
-    };
-    return ThingTypeAttribs;
-}();
-exports.ThingTypeAttribs = ThingTypeAttribs;
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_game = exports.Game = undefined;
 
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-"use strict";
+var _localplayer = __webpack_require__(344);
 
+var _const = __webpack_require__(43);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var localplayer_1 = __webpack_require__(12);
-var const_1 = __webpack_require__(0);
-var thingtypemanager_1 = __webpack_require__(18);
-var protocolgame_1 = __webpack_require__(14);
-var log_1 = __webpack_require__(2);
-var map_1 = __webpack_require__(13);
-var container_1 = __webpack_require__(11);
-var Game = function () {
-    function Game() {}
-    Game.prototype.setUnjustifiedPoints = function (arg0) {
-        throw new Error("Method not implemented.");
-    };
-    Game.prototype.processEnterGame = function () {
-        throw new Error("Method not implemented.");
-    };
-    Game.prototype.getContainer = function (containerId) {
-        return new container_1.Container();
-    };
-    Game.prototype.processGameStart = function () {
-        log_1.error('Method not implemented.');
-    };
-    Object.defineProperty(Game.prototype, "g_things", {
-        get: function get() {
-            return new thingtypemanager_1.ThingTypeManager();
-        },
-        enumerable: true,
-        configurable: true
+var _thingtypemanager = __webpack_require__(69);
+
+var _protocolgame = __webpack_require__(356);
+
+var _map = __webpack_require__(96);
+
+var _container = __webpack_require__(372);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
-    Object.defineProperty(Game.prototype, "g_map", {
-        get: function get() {
-            return new map_1.Map();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Game.prototype.getClientVersion = function () {
-        return 3;
-    };
-    Game.prototype.getProtocolVersion = function () {
-        return 10009;
-    };
-    Game.prototype.getOs = function () {
-        return 3;
-    };
-    Game.prototype.processConnectionError = function () {
-        throw new Error("Method not implemented.");
-    };
-    Game.prototype.getFeature = function (feature) {
-        switch (feature) {
-            case const_1.GameFeature.GameChallengeOnLogin:
-                return true;
+};
+
+var Game = exports.Game = function () {
+    function Game() {
+        _classCallCheck(this, Game);
+
+        this.m_clientVersion = 0;
+        this.messageModesMap = {};
+        this.m_features = [];
+    }
+
+    _createClass(Game, [{
+        key: "setClientVersion",
+        value: function setClientVersion(version) {
+            this.m_clientVersion = version;
+            this.updateMessageModesMap(version);
+            this.updateFeatures(version);
         }
-        return false;
-    };
-    Game.prototype.getLocalPlayer = function () {
-        return new localplayer_1.LocalPlayer();
-    };
-    Game.prototype.login = function (accountName, accountPassword, characterName) {
-        this.m_protocolGame = new protocolgame_1.ProtocolGame(this);
-        this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-    };
-    Game.prototype.setExpertPvpMode = function (expertModeEnabled) {};
-    Game.prototype.setServerBeat = function (serverBeat) {};
-    Game.prototype.setCanReportBugs = function (canReportBugs) {};
-    Game.prototype.processLogin = function () {};
-    Game.prototype.processPendingGame = function () {};
-    Game.prototype.setOpenPvpSituations = function (openPvpSituations) {};
-    Game.prototype.processPlayerHelpers = function (helpers) {};
-    Game.prototype.processGMActions = function (actions) {};
-    Game.prototype.processUpdateNeeded = function (signature) {};
-    Game.prototype.processLoginError = function (error) {};
-    Game.prototype.processLoginAdvice = function (message) {};
-    Game.prototype.processLoginWait = function (message, time) {};
-    Game.prototype.processLoginToken = function (unknown) {};
-    Game.prototype.processPingBack = function () {};
-    Game.prototype.processDeath = function (deathType, penality) {};
-    Game.prototype.processOpenContainer = function (containerId, containerItem, name, capacity, hasParent, items, isUnlocked, hasPages, containerSize, firstIndex) {};
-    Game.prototype.processCloseContainer = function (containerId) {};
-    Game.prototype.processContainerAddItem = function (containerId, item, slot) {};
-    Game.prototype.processContainerUpdateItem = function (containerId, slot, item) {};
-    Game.prototype.processContainerRemoveItem = function (containerId, slot, lastItem) {};
-    Game.prototype.processInventoryChange = function (slot, item) {};
-    Game.prototype.processOpenNpcTrade = function (items) {};
-    Game.prototype.processPlayerGoods = function (money, goods) {};
-    Game.prototype.formatCreatureName = function (string) {
-        return string;
-    };
-    Game.prototype.processCloseNpcTrade = function () {};
-    Game.prototype.processOwnTrade = function (name, items) {};
-    Game.prototype.processCounterTrade = function (name, items) {};
-    Game.prototype.processCloseTrade = function () {};
+    }, {
+        key: "loadDatFile",
+        value: function loadDatFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return _thingtypemanager.g_things.loadDat(file);
+
+                            case 2:
+                                return _context.abrupt("return", _context.sent);
+
+                            case 3:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+        }
+    }, {
+        key: "updateMessageModesMap",
+        value: function updateMessageModesMap(version) {
+            this.messageModesMap = {};
+            if (version >= 1094) {
+                this.messageModesMap[_const.MessageMode.MessageMana] = 43;
+            }
+            if (version >= 1055) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 5;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 8;
+                this.messageModesMap[_const.MessageMode.MessageSpell] = 9;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 10;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18; // Admin
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageGameHighlight] = 20;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageDamageDealed] = 23;
+                this.messageModesMap[_const.MessageMode.MessageDamageReceived] = 24;
+                this.messageModesMap[_const.MessageMode.MessageHeal] = 25;
+                this.messageModesMap[_const.MessageMode.MessageExp] = 26;
+                this.messageModesMap[_const.MessageMode.MessageDamageOthers] = 27;
+                this.messageModesMap[_const.MessageMode.MessageHealOthers] = 28;
+                this.messageModesMap[_const.MessageMode.MessageExpOthers] = 29;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 30;
+                this.messageModesMap[_const.MessageMode.MessageLoot] = 31;
+                this.messageModesMap[_const.MessageMode.MessageTradeNpc] = 32;
+                this.messageModesMap[_const.MessageMode.MessageGuild] = 33;
+                this.messageModesMap[_const.MessageMode.MessagePartyManagement] = 34;
+                this.messageModesMap[_const.MessageMode.MessageParty] = 35;
+                this.messageModesMap[_const.MessageMode.MessageBarkLow] = 36;
+                this.messageModesMap[_const.MessageMode.MessageBarkLoud] = 37;
+                this.messageModesMap[_const.MessageMode.MessageReport] = 38;
+                this.messageModesMap[_const.MessageMode.MessageHotkeyUse] = 39;
+                this.messageModesMap[_const.MessageMode.MessageTutorialHint] = 40;
+                this.messageModesMap[_const.MessageMode.MessageThankyou] = 41;
+                this.messageModesMap[_const.MessageMode.MessageMarket] = 42;
+            } else if (version >= 1036) {
+                for (var i = _const.MessageMode.MessageNone; i <= _const.MessageMode.MessageBeyondLast; ++i) {
+                    if (i >= _const.MessageMode.MessageNpcTo) this.messageModesMap[i] = i + 1;else this.messageModesMap[i] = i;
+                }
+            } else if (version >= 900) {
+                for (var _i = _const.MessageMode.MessageNone; _i <= _const.MessageMode.MessageBeyondLast; ++_i) {
+                    this.messageModesMap[_i] = _i;
+                }
+            } else if (version >= 861) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 13;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 14;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 18;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 19;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 20;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 21;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 22;
+            } else if (version >= 840) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 9;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 10;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 14;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 15;
+                // 16, 17 ??
+                this.messageModesMap[_const.MessageMode.MessageRed] = 18;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 19;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 20;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 21;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 22;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 23;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 24;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 25;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 26;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 27;
+            } else if (version >= 760) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 5;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 6;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 7;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                // 13, 14, 15 ??
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 16;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 20;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 23;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 24;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 25;
+            }
+        }
+    }, {
+        key: "updateFeatures",
+        value: function updateFeatures(version) {
+            this.m_features = [];
+            this.enableFeature(_const.GameFeature.GameFormatCreatureName);
+            if (version >= 770) {
+                this.enableFeature(_const.GameFeature.GameLooktypeU16);
+                this.enableFeature(_const.GameFeature.GameMessageStatements);
+                this.enableFeature(_const.GameFeature.GameLoginPacketEncryption);
+            }
+            if (version >= 780) {
+                this.enableFeature(_const.GameFeature.GamePlayerAddons);
+                this.enableFeature(_const.GameFeature.GamePlayerStamina);
+                this.enableFeature(_const.GameFeature.GameNewFluids);
+                this.enableFeature(_const.GameFeature.GameMessageLevel);
+                this.enableFeature(_const.GameFeature.GamePlayerStateU16);
+                this.enableFeature(_const.GameFeature.GameNewOutfitProtocol);
+            }
+            if (version >= 790) {
+                this.enableFeature(_const.GameFeature.GameWritableDate);
+            }
+            if (version >= 840) {
+                this.enableFeature(_const.GameFeature.GameProtocolChecksum);
+                this.enableFeature(_const.GameFeature.GameAccountNames);
+                this.enableFeature(_const.GameFeature.GameDoubleFreeCapacity);
+            }
+            if (version >= 841) {
+                this.enableFeature(_const.GameFeature.GameChallengeOnLogin);
+                this.enableFeature(_const.GameFeature.GameMessageSizeCheck);
+            }
+            if (version >= 854) {
+                this.enableFeature(_const.GameFeature.GameCreatureEmblems);
+            }
+            if (version >= 860) {
+                this.enableFeature(_const.GameFeature.GameAttackSeq);
+            }
+            if (version >= 862) {
+                this.enableFeature(_const.GameFeature.GamePenalityOnDeath);
+            }
+            if (version >= 870) {
+                this.enableFeature(_const.GameFeature.GameDoubleExperience);
+                this.enableFeature(_const.GameFeature.GamePlayerMounts);
+                this.enableFeature(_const.GameFeature.GameSpellList);
+            }
+            if (version >= 910) {
+                this.enableFeature(_const.GameFeature.GameNameOnNpcTrade);
+                this.enableFeature(_const.GameFeature.GameTotalCapacity);
+                this.enableFeature(_const.GameFeature.GameSkillsBase);
+                this.enableFeature(_const.GameFeature.GamePlayerRegenerationTime);
+                this.enableFeature(_const.GameFeature.GameChannelPlayerList);
+                this.enableFeature(_const.GameFeature.GameEnvironmentEffect);
+                this.enableFeature(_const.GameFeature.GameItemAnimationPhase);
+            }
+            if (version >= 940) {
+                this.enableFeature(_const.GameFeature.GamePlayerMarket);
+            }
+            if (version >= 953) {
+                this.enableFeature(_const.GameFeature.GamePurseSlot);
+                this.enableFeature(_const.GameFeature.GameClientPing);
+            }
+            if (version >= 960) {
+                this.enableFeature(_const.GameFeature.GameSpritesU32);
+                this.enableFeature(_const.GameFeature.GameOfflineTrainingTime);
+            }
+            if (version >= 963) {
+                this.enableFeature(_const.GameFeature.GameAdditionalVipInfo);
+            }
+            if (version >= 980) {
+                this.enableFeature(_const.GameFeature.GamePreviewState);
+                this.enableFeature(_const.GameFeature.GameClientVersion);
+            }
+            if (version >= 981) {
+                this.enableFeature(_const.GameFeature.GameLoginPending);
+                this.enableFeature(_const.GameFeature.GameNewSpeedLaw);
+            }
+            if (version >= 984) {
+                this.enableFeature(_const.GameFeature.GameContainerPagination);
+                this.enableFeature(_const.GameFeature.GameBrowseField);
+            }
+            if (version >= 1000) {
+                this.enableFeature(_const.GameFeature.GameThingMarks);
+                this.enableFeature(_const.GameFeature.GamePVPMode);
+            }
+            if (version >= 1035) {
+                this.enableFeature(_const.GameFeature.GameDoubleSkills);
+                this.enableFeature(_const.GameFeature.GameBaseSkillU16);
+            }
+            if (version >= 1036) {
+                this.enableFeature(_const.GameFeature.GameCreatureIcons);
+                this.enableFeature(_const.GameFeature.GameHideNpcNames);
+            }
+            if (version >= 1038) {
+                this.enableFeature(_const.GameFeature.GamePremiumExpiration);
+            }
+            if (version >= 1050) {
+                this.enableFeature(_const.GameFeature.GameEnhancedAnimations);
+            }
+            if (version >= 1053) {
+                this.enableFeature(_const.GameFeature.GameUnjustifiedPoints);
+            }
+            if (version >= 1054) {
+                this.enableFeature(_const.GameFeature.GameExperienceBonus);
+            }
+            if (version >= 1055) {
+                this.enableFeature(_const.GameFeature.GameDeathType);
+            }
+            if (version >= 1057) {
+                this.enableFeature(_const.GameFeature.GameIdleAnimations);
+            }
+            if (version >= 1061) {
+                this.enableFeature(_const.GameFeature.GameOGLInformation);
+            }
+            if (version >= 1071) {
+                this.enableFeature(_const.GameFeature.GameContentRevision);
+            }
+            if (version >= 1072) {
+                this.enableFeature(_const.GameFeature.GameAuthenticator);
+            }
+            if (version >= 1074) {
+                this.enableFeature(_const.GameFeature.GameSessionKey);
+            }
+            if (version >= 1080) {
+                this.enableFeature(_const.GameFeature.GameIngameStore);
+            }
+            if (version >= 1092) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreServiceType);
+            }
+            if (version >= 1093) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreHighlights);
+            }
+            if (version >= 1094) {
+                this.enableFeature(_const.GameFeature.GameAdditionalSkills);
+            }
+        }
+    }, {
+        key: "enableFeature",
+        value: function enableFeature(feature) {
+            this.m_features[feature] = true;
+        }
+    }, {
+        key: "disableFeature",
+        value: function disableFeature(feature) {
+            this.m_features[feature] = false;
+        }
+    }, {
+        key: "getFeature",
+        value: function getFeature(feature) {
+            return this.m_features[feature] == true;
+        }
+    }, {
+        key: "translateMessageModeFromServer",
+        value: function translateMessageModeFromServer(mode) {
+            for (var i in this.messageModesMap) {
+                if (this.messageModesMap[i] == mode) {
+                    return parseInt(i);
+                }
+            }
+            return _const.MessageMode.MessageInvalid;
+        }
+    }, {
+        key: "getContainer",
+        value: function getContainer(containerId) {
+            return new _container.Container();
+        }
+    }, {
+        key: "getClientVersion",
+        value: function getClientVersion() {
+            return this.m_clientVersion;
+        }
+    }, {
+        key: "getProtocolVersion",
+        value: function getProtocolVersion() {
+            return 10009;
+        }
+    }, {
+        key: "getOs",
+        value: function getOs() {
+            return 3;
+        }
+    }, {
+        key: "processConnectionError",
+        value: function processConnectionError() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "getLocalPlayer",
+        value: function getLocalPlayer() {
+            return new _localplayer.LocalPlayer();
+        }
+    }, {
+        key: "login",
+        value: function login(accountName, accountPassword, characterName) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+        }
+    }, {
+        key: "formatCreatureName",
+        value: function formatCreatureName(string) {
+            return string;
+        }
+    }, {
+        key: "g_things",
+        get: function get() {
+            return new _thingtypemanager.ThingTypeManager();
+        }
+    }, {
+        key: "g_map",
+        get: function get() {
+            return new _map.Map();
+        }
+    }]);
+
     return Game;
 }();
-exports.Game = Game;
+
 var g_game = new Game();
 exports.g_game = g_game;
 
 /***/ }),
-/* 5 */
+
+/***/ 68:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var Color = function () {
-    function Color() {}
-    Color.from8bit = function (arg0) {
-        throw new Error("Method not implemented.");
-    };
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Creature = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Creature = exports.Creature = function (_Thing) {
+    _inherits(Creature, _Thing);
+
+    function Creature() {
+        _classCallCheck(this, Creature);
+
+        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
+
+        _this.m_id = 0;
+        _this.m_known = false;
+        return _this;
+    }
+
+    _createClass(Creature, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "setName",
+        value: function setName(name) {
+            this.m_name = name;
+        }
+    }, {
+        key: "isCreature",
+        value: function isCreature() {
+            return true;
+        }
+    }, {
+        key: "setKnown",
+        value: function setKnown(v) {
+            this.m_known = v;
+        }
+    }, {
+        key: "isKnown",
+        value: function isKnown() {
+            return this.m_known;
+        }
+    }, {
+        key: "addTimedSquare",
+        value: function addTimedSquare(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "hideStaticSquare",
+        value: function hideStaticSquare() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "showStaticSquare",
+        value: function showStaticSquare(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setType",
+        value: function setType(type) {}
+    }, {
+        key: "allowAppearWalk",
+        value: function allowAppearWalk() {}
+    }, {
+        key: "setHealthPercent",
+        value: function setHealthPercent(healthPercent) {}
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "setOutfit",
+        value: function setOutfit(outfit) {}
+    }, {
+        key: "setSpeed",
+        value: function setSpeed(speed) {}
+    }, {
+        key: "setBaseSpeed",
+        value: function setBaseSpeed(baseSpeed) {}
+    }, {
+        key: "setSkull",
+        value: function setSkull(skull) {}
+    }, {
+        key: "setShield",
+        value: function setShield(shield) {}
+    }, {
+        key: "setPassable",
+        value: function setPassable(v) {}
+    }, {
+        key: "setEmblem",
+        value: function setEmblem(emblem) {}
+    }, {
+        key: "setIcon",
+        value: function setIcon(icon) {}
+    }, {
+        key: "setDirection",
+        value: function setDirection(direction) {}
+    }, {
+        key: "turn",
+        value: function turn(direction) {}
+    }]);
+
+    return Creature;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 69:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_things = exports.ThingTypeManager = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thingtype = __webpack_require__(346);
+
+var _const = __webpack_require__(43);
+
+var _log = __webpack_require__(32);
+
+var _resources = __webpack_require__(354);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var nullThingType = new _thingtype.ThingType();
+
+var ThingTypeManager = exports.ThingTypeManager = function () {
+    function ThingTypeManager() {
+        _classCallCheck(this, ThingTypeManager);
+
+        this.m_nullThingType = new _thingtype.ThingType();
+        this.m_thingTypes = null;
+        this.m_datLoaded = false;
+        this.m_datSignature = 0;
+        this.m_contentRevision = 0;
+        this.m_thingTypes = [];
+        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
+            this.m_thingTypes[i] = [];
+        }
+    }
+
+    _createClass(ThingTypeManager, [{
+        key: "getThingType",
+        value: function getThingType(id, category) {
+            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
+                _log.Log.error("invalid thing type client id %d in category %d", id, category);
+                return this.m_nullThingType;
+            }
+            return this.m_thingTypes[category][id];
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType(id, category) {
+            return this.getThingType(id, category);
+        }
+    }, {
+        key: "isValidDatId",
+        value: function isValidDatId(id, category) {
+            return true;
+        }
+    }, {
+        key: "getNullThingType",
+        value: function getNullThingType() {
+            return nullThingType;
+        }
+    }, {
+        key: "getContentRevision",
+        value: function getContentRevision() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "loadDat",
+        value: function loadDat(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var fin, category, count, thingCount, _category, firstId, id, type;
+
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.m_datLoaded = false;
+                                this.m_datSignature = 0;
+                                this.m_contentRevision = 0;
+                                _context.prev = 3;
+
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                _context.next = 7;
+                                return _resources.g_resources.openFile(file);
+
+                            case 7:
+                                fin = _context.sent;
+
+                                this.m_datSignature = fin.getU32();
+                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
+                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
+                                    count = fin.getU16() + 1;
+
+                                    this.m_thingTypes[category] = [];
+                                    for (thingCount = 0; thingCount < count; ++thingCount) {
+                                        this.m_thingTypes[category][thingCount] = nullThingType;
+                                    }
+                                }
+                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
+                                    firstId = 1;
+
+                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
+                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
+                                        type = new _thingtype.ThingType();
+
+                                        type.unserialize(id, _category, fin);
+                                        this.m_thingTypes[_category][id] = type;
+                                    }
+                                }
+                                this.m_datLoaded = true;
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
+                                return _context.abrupt("return", true);
+
+                            case 17:
+                                _context.prev = 17;
+                                _context.t0 = _context["catch"](3);
+
+                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
+                                return _context.abrupt("return", false);
+
+                            case 21:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[3, 17]]);
+            }));
+        }
+    }]);
+
+    return ThingTypeManager;
+}();
+
+var g_things = new ThingTypeManager();
+exports.g_things = g_things;
+
+/***/ }),
+
+/***/ 96:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_map = exports.Map = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(68);
+
+var _tile = __webpack_require__(345);
+
+var _awarerange = __webpack_require__(134);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Map = exports.Map = function () {
+    function Map() {
+        _classCallCheck(this, Map);
+
+        this.m_awareRange = new _awarerange.AwareRange();
+    }
+
+    _createClass(Map, [{
+        key: "getTile",
+        value: function getTile(position) {
+            return new _tile.Tile();
+        }
+    }, {
+        key: "setAwareRange",
+        value: function setAwareRange(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "getCreatureById",
+        value: function getCreatureById(id) {
+            return new _creature.Creature();
+        }
+    }, {
+        key: "getAwareRange",
+        value: function getAwareRange() {
+            return this.m_awareRange;
+        }
+    }, {
+        key: "getCentralPosition",
+        value: function getCentralPosition() {
+            return this.m_centralPosition;
+        }
+    }, {
+        key: "setCentralPosition",
+        value: function setCentralPosition(pos) {
+            this.m_centralPosition = pos;
+        }
+    }, {
+        key: "cleanTile",
+        value: function cleanTile(tilePos) {}
+    }, {
+        key: "addThing",
+        value: function addThing(thing, position) {
+            var stackPos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+        }
+    }, {
+        key: "removeThing",
+        value: function removeThing(thing) {
+            return true;
+        }
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "getThing",
+        value: function getThing(pos, stackpos) {
+            return new _creature.Creature();
+        }
+    }, {
+        key: "removeCreatureById",
+        value: function removeCreatureById(removeId) {}
+    }, {
+        key: "addCreature",
+        value: function addCreature(creature) {}
+    }]);
+
+    return Map;
+}();
+
+var g_map = new Map();
+exports.g_map = g_map;
+
+/***/ }),
+
+/***/ 97:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Color = exports.Color = function () {
+    function Color() {
+        _classCallCheck(this, Color);
+    }
+
+    _createClass(Color, null, [{
+        key: "from8bit",
+        value: function from8bit(arg0) {
+            return new Color();
+        }
+    }]);
+
     return Color;
 }();
+
 Color.alpha = 0x00000000;
 Color.white = 0xffffffff;
 Color.black = 0xff000000;
@@ -926,1141 +7259,7 @@ Color.gray = 0xffa0a0a0;
 Color.darkGray = 0xff808080;
 Color.lightGray = 0xffc0c0c0;
 Color.orange = 0xff008cff;
-exports.Color = Color;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __extends = undefined && undefined.__extends || function () {
-    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
-        d.__proto__ = b;
-    } || function (d, b) {
-        for (var p in b) {
-            if (b.hasOwnProperty(p)) d[p] = b[p];
-        }
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() {
-            this.constructor = d;
-        }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-}();
-Object.defineProperty(exports, "__esModule", { value: true });
-var thing_1 = __webpack_require__(20);
-var Creature = function (_super) {
-    __extends(Creature, _super);
-    function Creature() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Creature.prototype.addTimedSquare = function (arg0) {
-        throw new Error("Method not implemented.");
-    };
-    Creature.prototype.hideStaticSquare = function () {
-        throw new Error("Method not implemented.");
-    };
-    Creature.prototype.showStaticSquare = function (arg0) {
-        throw new Error("Method not implemented.");
-    };
-    Creature.prototype.setType = function (type) {};
-    Creature.prototype.allowAppearWalk = function () {};
-    Creature.prototype.setHealthPercent = function (healthPercent) {};
-    Creature.prototype.setLight = function (light) {};
-    Creature.prototype.setOutfit = function (outfit) {};
-    Creature.prototype.setSpeed = function (speed) {};
-    Creature.prototype.setBaseSpeed = function (baseSpeed) {};
-    Creature.prototype.setSkull = function (skull) {};
-    Creature.prototype.setShield = function (shield) {};
-    Creature.prototype.setPassable = function (v) {};
-    return Creature;
-}(thing_1.Thing);
-exports.Creature = Creature;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var log_1 = __webpack_require__(2);
-var color_1 = __webpack_require__(5);
-var structures_1 = __webpack_require__(3);
-var Image = function () {
-    function Image(size) {
-        if (size instanceof structures_1.Size) {} else if (typeof size == 'number') {}
-    }
-    Image.prototype.blit = function (point, image) {};
-    Image.prototype.overwriteMask = function (color, insideColor, outsideColor) {
-        if (insideColor === void 0) {
-            insideColor = color_1.Color.white;
-        }
-        if (outsideColor === void 0) {
-            outsideColor = color_1.Color.alpha;
-        }
-    };
-    Image.load = function (path) {
-        log_1.error('load image', path);
-        return null;
-    };
-    Image.prototype.setId = function (id) {};
-    return Image;
-}();
-exports.Image = Image;
-
-/***/ }),
-/* 8 */,
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var $ = __webpack_require__(1);
-__webpack_require__(8);
-var const_1 = __webpack_require__(0);
-var game_1 = __webpack_require__(4);
-var x = const_1.Otc.MAX_AUTOWALK_DIST;
-$(function () {
-    var game = new game_1.Game();
-    game.login('', '', '');
-});
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var const_1 = __webpack_require__(0);
-var Animator = function () {
-    function Animator() {
-        this.m_animationPhases = 0;
-        this.m_startPhase = 0;
-        this.m_loopCount = 0;
-        this.m_async = false;
-        this.m_phaseDurations = [];
-        this.m_currentDuration = 0;
-        this.m_currentDirection = const_1.AnimationDirection.AnimDirForward;
-        this.m_currentLoop = 0;
-        this.m_lastPhaseTicks = 0;
-        this.m_isComplete = false;
-        this.m_phase = 0;
-    }
-    Animator.prototype.unserialize = function (animationPhases, fin) {
-        this.m_animationPhases = animationPhases;
-        this.m_async = fin.getU8() == 0;
-        this.m_loopCount = fin.get32();
-        this.m_startPhase = fin.get8();
-        for (var i = 0; i < this.m_animationPhases; ++i) {
-            var minimum = fin.getU32();
-            var maximum = fin.getU32();
-            this.m_phaseDurations.push([minimum, maximum]);
-        }
-        /*
-        m_phase = getStartPhase();
-         assert(m_animationPhases == (int)m_phaseDurations.size());
-        assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
-        */
-    };
-    return Animator;
-}();
-exports.Animator = Animator;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Container = function () {
-    function Container() {}
-    Container.prototype.setId = function (id) {};
-    return Container;
-}();
-exports.Container = Container;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __extends = undefined && undefined.__extends || function () {
-    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
-        d.__proto__ = b;
-    } || function (d, b) {
-        for (var p in b) {
-            if (b.hasOwnProperty(p)) d[p] = b[p];
-        }
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() {
-            this.constructor = d;
-        }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-}();
-Object.defineProperty(exports, "__esModule", { value: true });
-var player_1 = __webpack_require__(15);
-var LocalPlayer = function (_super) {
-    __extends(LocalPlayer, _super);
-    function LocalPlayer() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    LocalPlayer.prototype.setBlessings = function (blessings) {};
-    return LocalPlayer;
-}(player_1.Player);
-exports.LocalPlayer = LocalPlayer;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var structures_1 = __webpack_require__(3);
-var creature_1 = __webpack_require__(6);
-var tile_1 = __webpack_require__(19);
-var Map = function () {
-    function Map() {
-        this.m_awareRange = new structures_1.AwareRange();
-        this.tmpCreature = new creature_1.Creature();
-    }
-    Map.prototype.getTile = function (position) {
-        return new tile_1.Tile();
-    };
-    Map.prototype.setAwareRange = function (arg0) {
-        throw new Error("Method not implemented.");
-    };
-    Map.prototype.getCreatureById = function (id) {
-        return this.tmpCreature;
-    };
-    Map.prototype.getAwareRange = function () {
-        return this.m_awareRange;
-    };
-    Map.prototype.getCentralPosition = function () {
-        return this.m_centralPosition;
-    };
-    Map.prototype.setCentralPosition = function (pos) {
-        this.m_centralPosition = pos;
-    };
-    Map.prototype.cleanTile = function (tilePos) {};
-    Map.prototype.addThing = function (thing, position, stackPos) {
-        if (stackPos === void 0) {
-            stackPos = -1;
-        }
-    };
-    Map.prototype.removeThing = function (thing) {
-        return false;
-    };
-    Map.prototype.setLight = function (light) {};
-    Map.prototype.getThing = function (pos, stackpos) {};
-    Map.prototype.removeCreatureById = function (removeId) {};
-    return Map;
-}();
-exports.Map = Map;
-var g_map = new Map();
-exports.g_map = g_map;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: SyntaxError: Unexpected token (1879:21)\n\n\u001b[0m \u001b[90m 1877 | \u001b[39m                        creatureType \u001b[33m=\u001b[39m proto_1\u001b[33m.\u001b[39m\u001b[33mProto\u001b[39m\u001b[33m.\u001b[39m\u001b[33mCreatureTypeNpc\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 1878 | \u001b[39m                }\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 1879 | \u001b[39m                std\u001b[33m:\u001b[39m \u001b[33m:\u001b[39m string\u001b[33m;\u001b[39m\n \u001b[90m      | \u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 1880 | \u001b[39m                name \u001b[33m=\u001b[39m game_1\u001b[33m.\u001b[39mg_game\u001b[33m.\u001b[39mformatCreatureName(msg\u001b[33m.\u001b[39mgetString())\u001b[33m;\u001b[39m\n \u001b[90m 1881 | \u001b[39m                \u001b[36mif\u001b[39m (id \u001b[33m==\u001b[39m m_localPlayer\u001b[33m.\u001b[39mgetId())\n \u001b[90m 1882 | \u001b[39m                    creature \u001b[33m=\u001b[39m m_localPlayer\u001b[33m;\u001b[39m\u001b[0m\n");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __extends = undefined && undefined.__extends || function () {
-    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
-        d.__proto__ = b;
-    } || function (d, b) {
-        for (var p in b) {
-            if (b.hasOwnProperty(p)) d[p] = b[p];
-        }
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() {
-            this.constructor = d;
-        }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-}();
-Object.defineProperty(exports, "__esModule", { value: true });
-var creature_1 = __webpack_require__(6);
-var Player = function (_super) {
-    __extends(Player, _super);
-    function Player() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return Player;
-}(creature_1.Creature);
-exports.Player = Player;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var image_1 = __webpack_require__(7);
-var SpriteManager = function () {
-    function SpriteManager() {
-        this.m_loaded = false;
-        this.m_signature = 0;
-        this.m_spritesCount = 0;
-        this.m_spritesOffset = 0;
-        this.m_spritesFile = null;
-    }
-    SpriteManager.prototype.getSpriteImage = function (id) {
-        return new image_1.Image(0);
-    };
-    return SpriteManager;
-}();
-exports.SpriteManager = SpriteManager;
-var g_sprites = new SpriteManager();
-exports.g_sprites = g_sprites;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var const_1 = __webpack_require__(0);
-var structures_1 = __webpack_require__(3);
-var game_1 = __webpack_require__(4);
-var log_1 = __webpack_require__(2);
-var animator_1 = __webpack_require__(10);
-var image_1 = __webpack_require__(7);
-var color_1 = __webpack_require__(5);
-var spritemanager_1 = __webpack_require__(16);
-var ThingType = function () {
-    function ThingType() {
-        this.m_attribs = new structures_1.ThingTypeAttribs();
-    }
-    ThingType.prototype.unserialize = function (clientId, category, fin) {
-        this.m_null = false;
-        this.m_id = clientId;
-        this.m_category = category;
-        var count = 0,
-            attr = -1;
-        var done = false;
-        for (var i = 0; i < const_1.ThingAttr.ThingLastAttr; ++i) {
-            count++;
-            attr = fin.getU8();
-            if (attr == const_1.ThingAttr.ThingLastAttr) {
-                done = true;
-                break;
-            }
-            if (game_1.g_game.getClientVersion() >= 1000) {
-                /* In 10.10+ all attributes from 16 and up were
-                 * incremented by 1 to make space for 16 as
-                 * "No Movement Animation" flag.
-                 */
-                if (attr == 16) attr = const_1.ThingAttr.ThingAttrNoMoveAnimation;else if (attr > 16) attr -= 1;
-            } else if (game_1.g_game.getClientVersion() >= 860) {
-                /* Default attribute values follow
-                 * the format of 8.6-9.86.
-                 * Therefore no changes here.
-                 */
-            } else if (game_1.g_game.getClientVersion() >= 780) {
-                /* In 7.80-8.54 all attributes from 8 and higher were
-                 * incremented by 1 to make space for 8 as
-                 * "Item Charges" flag.
-                 */
-                if (attr == 8) {
-                    this.m_attribs.set(const_1.ThingAttr.ThingAttrChargeable, true);
-                    continue;
-                } else if (attr > 8) attr -= 1;
-            } else if (game_1.g_game.getClientVersion() >= 755) {
-                /* In 7.55-7.72 attributes 23 is "Floor Change". */
-                if (attr == 23) attr = const_1.ThingAttr.ThingAttrFloorChange;
-            } else if (game_1.g_game.getClientVersion() >= 740) {
-                /* In 7.4-7.5 attribute "Ground Border" did not exist
-                 * attributes 1-15 have to be adjusted.
-                 * Several other changes in the format.
-                 */
-                if (attr > 0 && attr <= 15) attr += 1;else if (attr == 16) attr = const_1.ThingAttr.ThingAttrLight;else if (attr == 17) attr = const_1.ThingAttr.ThingAttrFloorChange;else if (attr == 18) attr = const_1.ThingAttr.ThingAttrFullGround;else if (attr == 19) attr = const_1.ThingAttr.ThingAttrElevation;else if (attr == 20) attr = const_1.ThingAttr.ThingAttrDisplacement;else if (attr == 22) attr = const_1.ThingAttr.ThingAttrMinimapColor;else if (attr == 23) attr = const_1.ThingAttr.ThingAttrRotateable;else if (attr == 24) attr = const_1.ThingAttr.ThingAttrLyingCorpse;else if (attr == 25) attr = const_1.ThingAttr.ThingAttrHangable;else if (attr == 26) attr = const_1.ThingAttr.ThingAttrHookSouth;else if (attr == 27) attr = const_1.ThingAttr.ThingAttrHookEast;else if (attr == 28) attr = const_1.ThingAttr.ThingAttrAnimateAlways;
-                /* "Multi Use" and "Force Use" are swapped */
-                if (attr == const_1.ThingAttr.ThingAttrMultiUse) attr = const_1.ThingAttr.ThingAttrForceUse;else if (attr == const_1.ThingAttr.ThingAttrForceUse) attr = const_1.ThingAttr.ThingAttrMultiUse;
-            }
-            switch (attr) {
-                case const_1.ThingAttr.ThingAttrDisplacement:
-                    {
-                        if (game_1.g_game.getClientVersion() >= 755) {
-                            this.m_displacement.x = fin.getU16();
-                            this.m_displacement.y = fin.getU16();
-                        } else {
-                            this.m_displacement.x = 8;
-                            this.m_displacement.y = 8;
-                        }
-                        this.m_attribs.set(attr, true);
-                        break;
-                    }
-                case const_1.ThingAttr.ThingAttrLight:
-                    {
-                        var light = new structures_1.Light();
-                        light.intensity = fin.getU16();
-                        light.color = fin.getU16();
-                        this.m_attribs.set(attr, light);
-                        break;
-                    }
-                case const_1.ThingAttr.ThingAttrMarket:
-                    {
-                        var market = new structures_1.MarketData();
-                        market.category = fin.getU16();
-                        market.tradeAs = fin.getU16();
-                        market.showAs = fin.getU16();
-                        market.name = fin.getString();
-                        market.restrictVocation = fin.getU16();
-                        market.requiredLevel = fin.getU16();
-                        this.m_attribs.set(attr, market);
-                        break;
-                    }
-                case const_1.ThingAttr.ThingAttrElevation:
-                    {
-                        this.m_elevation = fin.getU16();
-                        this.m_attribs.set(attr, this.m_elevation);
-                        break;
-                    }
-                case const_1.ThingAttr.ThingAttrUsable:
-                case const_1.ThingAttr.ThingAttrGround:
-                case const_1.ThingAttr.ThingAttrWritable:
-                case const_1.ThingAttr.ThingAttrWritableOnce:
-                case const_1.ThingAttr.ThingAttrMinimapColor:
-                case const_1.ThingAttr.ThingAttrCloth:
-                case const_1.ThingAttr.ThingAttrLensHelp:
-                    this.m_attribs.set(attr, fin.getU16());
-                    break;
-                default:
-                    this.m_attribs.set(attr, true);
-                    break;
-            }
-        }
-        if (!done) log_1.error("corrupt data (id: %d, category: %d, count: %d, lastAttr: %d)", this.m_id, this.m_category, count, attr);
-        var hasFrameGroups = category == const_1.ThingCategory.ThingCategoryCreature && game_1.g_game.getFeature(const_1.GameFeature.GameIdleAnimations);
-        var groupCount = hasFrameGroups ? fin.getU8() : 1;
-        this.m_animationPhases = 0;
-        var totalSpritesCount = 0;
-        for (var i = 0; i < groupCount; ++i) {
-            var frameGroupType = const_1.FrameGroupType.FrameGroupDefault;
-            if (hasFrameGroups) frameGroupType = fin.getU8();
-            var width = fin.getU8();
-            var height = fin.getU8();
-            this.m_size = new structures_1.Size(width, height);
-            if (width > 1 || height > 1) {
-                this.m_realSize = fin.getU8();
-                this.m_exactSize = Math.min(this.m_realSize, Math.max(width * 32, height * 32));
-            } else this.m_exactSize = 32;
-            this.m_layers = fin.getU8();
-            this.m_numPatternX = fin.getU8();
-            this.m_numPatternY = fin.getU8();
-            if (game_1.g_game.getClientVersion() >= 755) this.m_numPatternZ = fin.getU8();else this.m_numPatternZ = 1;
-            var groupAnimationsPhases = fin.getU8();
-            this.m_animationPhases += groupAnimationsPhases;
-            if (groupAnimationsPhases > 1 && game_1.g_game.getFeature(const_1.GameFeature.GameEnhancedAnimations)) {
-                this.m_animator = new animator_1.Animator();
-                this.m_animator.unserialize(groupAnimationsPhases, fin);
-            }
-            var totalSprites = this.m_size.area() * this.m_layers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ * groupAnimationsPhases;
-            if (totalSpritesCount + totalSprites > 4096) log_1.error("a thing type has more than 4096 sprites");
-            //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
-            for (var i_1 = totalSpritesCount; i_1 < totalSpritesCount + totalSprites; i_1++) {
-                this.m_spritesIndex[i_1] = game_1.g_game.getFeature(const_1.GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
-            }totalSpritesCount += totalSprites;
-        }
-        /*
-                this.m_textures.resize(m_animationPhases);
-                this.m_texturesFramesRects.resize(m_animationPhases);
-                this.m_texturesFramesOriginRects.resize(m_animationPhases);
-                this.m_texturesFramesOffsets.resize(m_animationPhases);
-        */
-    };
-    ThingType.prototype.draw = function (dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase, lightView) {
-        if (lightView === void 0) {
-            lightView = null;
-        }
-        /*todo*/
-    };
-    ThingType.prototype.getId = function () {
-        return this.m_id;
-    };
-    ThingType.prototype.getCategory = function () {
-        return this.m_category;
-    };
-    ThingType.prototype.isNull = function () {
-        return this.m_null;
-    };
-    ThingType.prototype.hasAttr = function (attr) {
-        return this.m_attribs.has(attr);
-    };
-    ThingType.prototype.getSize = function () {
-        return this.m_size;
-    };
-    ThingType.prototype.getWidth = function () {
-        return this.m_size.width();
-    };
-    ThingType.prototype.getHeight = function () {
-        return this.m_size.height();
-    };
-    ThingType.prototype.getExactSize = function (layer, xPattern, yPattern, zPattern, animationPhase) {
-        if (layer === void 0) {
-            layer = 0;
-        }
-        if (xPattern === void 0) {
-            xPattern = 0;
-        }
-        if (yPattern === void 0) {
-            yPattern = 0;
-        }
-        if (zPattern === void 0) {
-            zPattern = 0;
-        }
-        if (animationPhase === void 0) {
-            animationPhase = 0;
-        }
-        /* todo */
-        return 0;
-    };
-    ThingType.prototype.getRealSize = function () {
-        return this.m_realSize;
-    };
-    ThingType.prototype.getLayers = function () {
-        return this.m_layers;
-    };
-    ThingType.prototype.getNumPatternX = function () {
-        return this.m_numPatternX;
-    };
-    ThingType.prototype.getNumPatternY = function () {
-        return this.m_numPatternY;
-    };
-    ThingType.prototype.getNumPatternZ = function () {
-        return this.m_numPatternZ;
-    };
-    ThingType.prototype.getAnimationPhases = function () {
-        return this.m_animationPhases;
-    };
-    ThingType.prototype.getAnimator = function () {
-        return this.m_animator;
-    };
-    ThingType.prototype.getDisplacement = function () {
-        return this.m_displacement;
-    };
-    ThingType.prototype.getDisplacementX = function () {
-        return this.getDisplacement().x;
-    };
-    ThingType.prototype.getDisplacementY = function () {
-        return this.getDisplacement().y;
-    };
-    ThingType.prototype.getElevation = function () {
-        return this.m_elevation;
-    };
-    ThingType.prototype.getGroundSpeed = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrGround);
-    };
-    ThingType.prototype.getMaxTextLength = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrWritableOnce) ? this.m_attribs.get(const_1.ThingAttr.ThingAttrWritableOnce) : this.m_attribs.get(const_1.ThingAttr.ThingAttrWritable);
-    };
-    ThingType.prototype.getLight = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrLight);
-    };
-    ThingType.prototype.getMinimapColor = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrMinimapColor);
-    };
-    ThingType.prototype.getLensHelp = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrLensHelp);
-    };
-    ThingType.prototype.getClothSlot = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrCloth);
-    };
-    ThingType.prototype.getMarketData = function () {
-        return this.m_attribs.get(const_1.ThingAttr.ThingAttrMarket);
-    };
-    ThingType.prototype.isGround = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrGround);
-    };
-    ThingType.prototype.isGroundBorder = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrGroundBorder);
-    };
-    ThingType.prototype.isOnBottom = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrOnBottom);
-    };
-    ThingType.prototype.isOnTop = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrOnTop);
-    };
-    ThingType.prototype.isContainer = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrContainer);
-    };
-    ThingType.prototype.isStackable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrStackable);
-    };
-    ThingType.prototype.isForceUse = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrForceUse);
-    };
-    ThingType.prototype.isMultiUse = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrMultiUse);
-    };
-    ThingType.prototype.isWritable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrWritable);
-    };
-    ThingType.prototype.isChargeable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrChargeable);
-    };
-    ThingType.prototype.isWritableOnce = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrWritableOnce);
-    };
-    ThingType.prototype.isFluidContainer = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrFluidContainer);
-    };
-    ThingType.prototype.isSplash = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrSplash);
-    };
-    ThingType.prototype.isNotWalkable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrNotWalkable);
-    };
-    ThingType.prototype.isNotMoveable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrNotMoveable);
-    };
-    ThingType.prototype.blockProjectile = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrBlockProjectile);
-    };
-    ThingType.prototype.isNotPathable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrNotPathable);
-    };
-    ThingType.prototype.isPickupable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrPickupable);
-    };
-    ThingType.prototype.isHangable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrHangable);
-    };
-    ThingType.prototype.isHookSouth = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrHookSouth);
-    };
-    ThingType.prototype.isHookEast = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrHookEast);
-    };
-    ThingType.prototype.isRotateable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrRotateable);
-    };
-    ThingType.prototype.hasLight = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrLight);
-    };
-    ThingType.prototype.isDontHide = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrDontHide);
-    };
-    ThingType.prototype.isTranslucent = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrTranslucent);
-    };
-    ThingType.prototype.hasDisplacement = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrDisplacement);
-    };
-    ThingType.prototype.hasElevation = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrElevation);
-    };
-    ThingType.prototype.isLyingCorpse = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrLyingCorpse);
-    };
-    ThingType.prototype.isAnimateAlways = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrAnimateAlways);
-    };
-    ThingType.prototype.hasMiniMapColor = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrMinimapColor);
-    };
-    ThingType.prototype.hasLensHelp = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrLensHelp);
-    };
-    ThingType.prototype.isFullGround = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrFullGround);
-    };
-    ThingType.prototype.isIgnoreLook = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrLook);
-    };
-    ThingType.prototype.isCloth = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrCloth);
-    };
-    ThingType.prototype.isMarketable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrMarket);
-    };
-    ThingType.prototype.isUsable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrUsable);
-    };
-    ThingType.prototype.isWrapable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrWrapable);
-    };
-    ThingType.prototype.isUnwrapable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrUnwrapable);
-    };
-    ThingType.prototype.isTopEffect = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrTopEffect);
-    };
-    ThingType.prototype.getSprites = function () {
-        return this.m_spritesIndex;
-    };
-    // additional
-    ThingType.prototype.getOpacity = function () {
-        return this.m_opacity;
-    };
-    ThingType.prototype.isNotPreWalkable = function () {
-        return this.m_attribs.has(const_1.ThingAttr.ThingAttrNotPreWalkable);
-    };
-    ThingType.prototype.setPathable = function (v) {
-        if (v == true) this.m_attribs.remove(const_1.ThingAttr.ThingAttrNotPathable);else this.m_attribs.set(const_1.ThingAttr.ThingAttrNotPathable, true);
-    };
-    ThingType.prototype.getTexture = function (animationPhase) {
-        var animationPhaseTexture = this.m_textures[animationPhase];
-        if (!animationPhaseTexture) {
-            var useCustomImage = false;
-            if (animationPhase == 0 && !(this.m_customImage.length == 0)) useCustomImage = true;
-            // we don't need layers in common items, they will be pre-drawn
-            var textureLayers = 1;
-            var numLayers = this.m_layers;
-            if (this.m_category == const_1.ThingCategory.ThingCategoryCreature && numLayers >= 2) {
-                // 5 layers: outfit base, red mask, green mask, blue mask, yellow mask
-                textureLayers = 5;
-                numLayers = 5;
-            }
-            var indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
-            var textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
-            var fullImage = void 0;
-            if (useCustomImage) fullImage = image_1.Image.load(this.m_customImage);else fullImage = new image_1.Image(textureSize.mul(const_1.Otc.TILE_PIXELS));
-            /*
-                    m_texturesFramesRects[animationPhase].resize(indexSize);
-                    m_texturesFramesOriginRects[animationPhase].resize(indexSize);
-                    m_texturesFramesOffsets[animationPhase].resize(indexSize);
-            */
-            for (var z = 0; z < this.m_numPatternZ; ++z) {
-                for (var y = 0; y < this.m_numPatternY; ++y) {
-                    for (var x = 0; x < this.m_numPatternX; ++x) {
-                        for (var l = 0; l < numLayers; ++l) {
-                            var spriteMask = this.m_category == const_1.ThingCategory.ThingCategoryCreature && l > 0;
-                            var frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
-                            var framePos = new structures_1.Point(frameIndex % (textureSize.width() / this.m_size.width()) * this.m_size.width() * const_1.Otc.TILE_PIXELS, frameIndex / (textureSize.width() / this.m_size.width()) * this.m_size.height() * const_1.Otc.TILE_PIXELS);
-                            if (!useCustomImage) {
-                                for (var h = 0; h < this.m_size.height(); ++h) {
-                                    for (var w = 0; w < this.m_size.width(); ++w) {
-                                        var spriteIndex = this.getSpriteIndex(w, h, spriteMask ? 1 : l, x, y, z, animationPhase);
-                                        var spriteImage = spritemanager_1.g_sprites.getSpriteImage(this.m_spritesIndex[spriteIndex]);
-                                        if (spriteImage) {
-                                            if (spriteMask) {
-                                                spriteImage.overwriteMask(ThingType.maskColors[l - 1]);
-                                            }
-                                            var spritePos = new structures_1.Point((this.m_size.width() - w - 1) * const_1.Otc.TILE_PIXELS, (this.m_size.height() - h - 1) * const_1.Otc.TILE_PIXELS);
-                                            fullImage.blit(framePos.add(spritePos), spriteImage);
-                                        }
-                                    }
-                                }
-                            }
-                            var drawRect = new structures_1.Rect(framePos.add(new structures_1.Point(this.m_size.width(), this.m_size.height())).mul(const_1.Otc.TILE_PIXELS).sub(new structures_1.Point(1, 1)), framePos);
-                            for (var x_1 = framePos.x; x_1 < framePos.x + this.m_size.width() * const_1.Otc.TILE_PIXELS; ++x_1) {
-                                for (var y_1 = framePos.y; y_1 < framePos.y + this.m_size.height() * const_1.Otc.TILE_PIXELS; ++y_1) {
-                                    /*
-                                    uint8 *p = fullImage->getPixel(x,y);
-                                    if(p[3] != 0x00) {
-                                        drawRect.setTop   (std::min<int>(y, (int)drawRect.top()));
-                                        drawRect.setLeft  (std::min<int>(x, (int)drawRect.left()));
-                                        drawRect.setBottom(std::max<int>(y, (int)drawRect.bottom()));
-                                        drawRect.setRight (std::max<int>(x, (int)drawRect.right()));
-                                    }
-                                    */
-                                }
-                            }
-                            /*
-                                                    m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
-                                                    m_texturesFramesOriginRects[animationPhase][frameIndex] = Rect(framePos, Size(m_size.width(), m_size.height()) * Otc::TILE_PIXELS);
-                                                    m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft() - framePos;
-                                                    */
-                        }
-                    }
-                }
-            }
-            animationPhaseTexture = new structures_1.Texture(fullImage, true);
-            //animationPhaseTexture->setSmooth(true);
-        }
-        return animationPhaseTexture;
-    };
-    ThingType.prototype.getBestTextureDimension = function (w, h, count) {
-        /*todo*/
-        return new structures_1.Size(w, h);
-    };
-    ThingType.prototype.getSpriteIndex = function (w, h, l, x, y, z, a) {
-        var index = (((((a % this.m_animationPhases * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x) * this.m_layers + l) * this.m_size.height() + h) * this.m_size.width() + w;
-        if (index < this.m_spritesIndex.length) {
-            throw new Error('index < this.m_spritesIndex.length');
-        }
-        return index;
-    };
-    ThingType.prototype.getTextureIndex = function (l, x, y, z) {
-        return ((l * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x;
-    };
-    return ThingType;
-}();
-ThingType.maskColors = [color_1.Color.red, color_1.Color.green, color_1.Color.blue, color_1.Color.yellow];
-exports.ThingType = ThingType;
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var thingtype_1 = __webpack_require__(17);
-var const_1 = __webpack_require__(0);
-var log_1 = __webpack_require__(2);
-var nullThingType = new thingtype_1.ThingType();
-var ThingTypeManager = function () {
-    function ThingTypeManager() {
-        this.m_nullThingType = new thingtype_1.ThingType();
-        this.m_thingTypes = null;
-        this.m_thingTypes = [];
-        for (var i = const_1.ThingCategory.ThingCategoryItem; i < const_1.ThingCategory.ThingLastCategory; ++i) {
-            this.m_thingTypes[i] = [];
-        }
-    }
-    ThingTypeManager.prototype.isValidDatId = function (id, category) {
-        return true;
-    };
-    ThingTypeManager.prototype.getThingType = function (id, category) {
-        if (category >= const_1.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
-            log_1.error("invalid thing type client id %d in category %d", id, category);
-            return this.m_nullThingType;
-        }
-        return this.m_thingTypes[category][id];
-    };
-    ThingTypeManager.prototype.rawGetThingType = function (id, category) {
-        return this.getThingType(id, category);
-    };
-    ThingTypeManager.prototype.getNullThingType = function () {
-        return nullThingType;
-    };
-    ThingTypeManager.prototype.getContentRevision = function () {
-        throw new Error("Method not implemented.");
-    };
-    return ThingTypeManager;
-}();
-exports.ThingTypeManager = ThingTypeManager;
-var g_things = new ThingTypeManager();
-exports.g_things = g_things;
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Tile = function () {
-    function Tile() {}
-    Tile.prototype.getThingStackPos = function (thing) {
-        return 0;
-    };
-    return Tile;
-}();
-exports.Tile = Tile;
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var map_1 = __webpack_require__(13);
-var game_1 = __webpack_require__(4);
-var log_1 = __webpack_require__(2);
-var thingtypemanager_1 = __webpack_require__(18);
-var Thing = function () {
-    function Thing() {}
-    Thing.prototype.draw = function (dest, scaleFactor, animate, lightView) {
-        if (lightView === void 0) {
-            lightView = null;
-        }
-    };
-    Thing.prototype.setId = function (id) {};
-    Thing.prototype.setPosition = function (position) {
-        if (this.m_position == position) return;
-        var oldPos = this.m_position;
-        this.m_position = position;
-        this.onPositionChange(this.m_position, oldPos);
-    };
-    Thing.prototype.getId = function () {
-        return 0;
-    };
-    Thing.prototype.getPosition = function () {
-        return this.m_position;
-    };
-    Thing.prototype.getStackPriority = function () {
-        if (this.isGround()) return 0;else if (this.isGroundBorder()) return 1;else if (this.isOnBottom()) return 2;else if (this.isOnTop()) return 3;else if (this.isCreature()) return 4;else return 5;
-    };
-    Thing.prototype.getTile = function () {
-        return map_1.g_map.getTile(this.m_position);
-    };
-    Thing.prototype.getParentContainer = function () {
-        if (this.m_position.x == 0xffff && this.m_position.y & 0x40) {
-            var containerId = this.m_position.y ^ 0x40;
-            return game_1.g_game.getContainer(containerId);
-        }
-        return null;
-    };
-    Thing.prototype.getStackPos = function () {
-        if (this.m_position.x == 65535 && this.isItem()) return this.m_position.z;else {
-            var tile = this.getTile();
-            if (tile) return tile.getThingStackPos(this);else log_1.error("got a thing with invalid stackpos");
-        }
-        return -1;
-    };
-    Thing.prototype.isItem = function () {
-        return false;
-    };
-    Thing.prototype.isEffect = function () {
-        return false;
-    };
-    Thing.prototype.isMissile = function () {
-        return false;
-    };
-    Thing.prototype.isCreature = function () {
-        return false;
-    };
-    Thing.prototype.isNpc = function () {
-        return false;
-    };
-    Thing.prototype.isMonster = function () {
-        return false;
-    };
-    Thing.prototype.isPlayer = function () {
-        return false;
-    };
-    Thing.prototype.isLocalPlayer = function () {
-        return false;
-    };
-    Thing.prototype.isAnimatedText = function () {
-        return false;
-    };
-    Thing.prototype.isStaticText = function () {
-        return false;
-    };
-    // type shortcuts
-    Thing.prototype.getThingType = function () {
-        return thingtypemanager_1.g_things.getNullThingType();
-    };
-    Thing.prototype.rawGetThingType = function () {
-        return thingtypemanager_1.g_things.getNullThingType();
-    };
-    Thing.prototype.getSize = function () {
-        return this.rawGetThingType().getSize();
-    };
-    Thing.prototype.getWidth = function () {
-        return this.rawGetThingType().getWidth();
-    };
-    Thing.prototype.getHeight = function () {
-        return this.rawGetThingType().getHeight();
-    };
-    Thing.prototype.getDisplacement = function () {
-        return this.rawGetThingType().getDisplacement();
-    };
-    Thing.prototype.getDisplacementX = function () {
-        return this.rawGetThingType().getDisplacementX();
-    };
-    Thing.prototype.getDisplacementY = function () {
-        return this.rawGetThingType().getDisplacementY();
-    };
-    Thing.prototype.getExactSize = function (layer, xPattern, yPattern, zPattern, animationPhase) {
-        return this.rawGetThingType().getExactSize(layer, xPattern, yPattern, zPattern, animationPhase);
-    };
-    Thing.prototype.getLayers = function () {
-        return this.rawGetThingType().getLayers();
-    };
-    Thing.prototype.getNumPatternX = function () {
-        return this.rawGetThingType().getNumPatternX();
-    };
-    Thing.prototype.getNumPatternY = function () {
-        return this.rawGetThingType().getNumPatternY();
-    };
-    Thing.prototype.getNumPatternZ = function () {
-        return this.rawGetThingType().getNumPatternZ();
-    };
-    Thing.prototype.getAnimationPhases = function () {
-        return this.rawGetThingType().getAnimationPhases();
-    };
-    Thing.prototype.getAnimator = function () {
-        return this.rawGetThingType().getAnimator();
-    };
-    Thing.prototype.getGroundSpeed = function () {
-        return this.rawGetThingType().getGroundSpeed();
-    };
-    Thing.prototype.getMaxTextLength = function () {
-        return this.rawGetThingType().getMaxTextLength();
-    };
-    Thing.prototype.getLight = function () {
-        return this.rawGetThingType().getLight();
-    };
-    Thing.prototype.getMinimapColor = function () {
-        return this.rawGetThingType().getMinimapColor();
-    };
-    Thing.prototype.getLensHelp = function () {
-        return this.rawGetThingType().getLensHelp();
-    };
-    Thing.prototype.getClothSlot = function () {
-        return this.rawGetThingType().getClothSlot();
-    };
-    Thing.prototype.getElevation = function () {
-        return this.rawGetThingType().getElevation();
-    };
-    Thing.prototype.isGround = function () {
-        return this.rawGetThingType().isGround();
-    };
-    Thing.prototype.isGroundBorder = function () {
-        return this.rawGetThingType().isGroundBorder();
-    };
-    Thing.prototype.isOnBottom = function () {
-        return this.rawGetThingType().isOnBottom();
-    };
-    Thing.prototype.isOnTop = function () {
-        return this.rawGetThingType().isOnTop();
-    };
-    Thing.prototype.isContainer = function () {
-        return this.rawGetThingType().isContainer();
-    };
-    Thing.prototype.isStackable = function () {
-        return this.rawGetThingType().isStackable();
-    };
-    Thing.prototype.isForceUse = function () {
-        return this.rawGetThingType().isForceUse();
-    };
-    Thing.prototype.isMultiUse = function () {
-        return this.rawGetThingType().isMultiUse();
-    };
-    Thing.prototype.isWritable = function () {
-        return this.rawGetThingType().isWritable();
-    };
-    Thing.prototype.isChargeable = function () {
-        return this.rawGetThingType().isChargeable();
-    };
-    Thing.prototype.isWritableOnce = function () {
-        return this.rawGetThingType().isWritableOnce();
-    };
-    Thing.prototype.isFluidContainer = function () {
-        return this.rawGetThingType().isFluidContainer();
-    };
-    Thing.prototype.isSplash = function () {
-        return this.rawGetThingType().isSplash();
-    };
-    Thing.prototype.isNotWalkable = function () {
-        return this.rawGetThingType().isNotWalkable();
-    };
-    Thing.prototype.isNotMoveable = function () {
-        return this.rawGetThingType().isNotMoveable();
-    };
-    Thing.prototype.blockProjectile = function () {
-        return this.rawGetThingType().blockProjectile();
-    };
-    Thing.prototype.isNotPathable = function () {
-        return this.rawGetThingType().isNotPathable();
-    };
-    Thing.prototype.isPickupable = function () {
-        return this.rawGetThingType().isPickupable();
-    };
-    Thing.prototype.isHangable = function () {
-        return this.rawGetThingType().isHangable();
-    };
-    Thing.prototype.isHookSouth = function () {
-        return this.rawGetThingType().isHookSouth();
-    };
-    Thing.prototype.isHookEast = function () {
-        return this.rawGetThingType().isHookEast();
-    };
-    Thing.prototype.isRotateable = function () {
-        return this.rawGetThingType().isRotateable();
-    };
-    Thing.prototype.hasLight = function () {
-        return this.rawGetThingType().hasLight();
-    };
-    Thing.prototype.isDontHide = function () {
-        return this.rawGetThingType().isDontHide();
-    };
-    Thing.prototype.isTranslucent = function () {
-        return this.rawGetThingType().isTranslucent();
-    };
-    Thing.prototype.hasDisplacement = function () {
-        return this.rawGetThingType().hasDisplacement();
-    };
-    Thing.prototype.hasElevation = function () {
-        return this.rawGetThingType().hasElevation();
-    };
-    Thing.prototype.isLyingCorpse = function () {
-        return this.rawGetThingType().isLyingCorpse();
-    };
-    Thing.prototype.isAnimateAlways = function () {
-        return this.rawGetThingType().isAnimateAlways();
-    };
-    Thing.prototype.hasMiniMapColor = function () {
-        return this.rawGetThingType().hasMiniMapColor();
-    };
-    Thing.prototype.hasLensHelp = function () {
-        return this.rawGetThingType().hasLensHelp();
-    };
-    Thing.prototype.isFullGround = function () {
-        return this.rawGetThingType().isFullGround();
-    };
-    Thing.prototype.isIgnoreLook = function () {
-        return this.rawGetThingType().isIgnoreLook();
-    };
-    Thing.prototype.isCloth = function () {
-        return this.rawGetThingType().isCloth();
-    };
-    Thing.prototype.isMarketable = function () {
-        return this.rawGetThingType().isMarketable();
-    };
-    Thing.prototype.isUsable = function () {
-        return this.rawGetThingType().isUsable();
-    };
-    Thing.prototype.isWrapable = function () {
-        return this.rawGetThingType().isWrapable();
-    };
-    Thing.prototype.isUnwrapable = function () {
-        return this.rawGetThingType().isUnwrapable();
-    };
-    Thing.prototype.isTopEffect = function () {
-        return this.rawGetThingType().isTopEffect();
-    };
-    Thing.prototype.getMarketData = function () {
-        return this.rawGetThingType().getMarketData();
-    };
-    Thing.prototype.onPositionChange = function (newPos, oldPos) {};
-    Thing.prototype.onAppear = function () {};
-    Thing.prototype.onDisappear = function () {};
-    return Thing;
-}();
-exports.Thing = Thing;
 
 /***/ })
-],[9]);
+
+},[139]);

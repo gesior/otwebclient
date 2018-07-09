@@ -20,6 +20,6 @@ export class Color {
     public static readonly orange     = 0xff008cff;
 
     static from8bit(arg0: any): any {
-        throw new Error("Method not implemented.");
+        return new Color();
     }
 }

@@ -1,1 +1,1 @@
-{"version":3,"file":"animatedtext.js","sourceRoot":"","sources":["animatedtext.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,iCAA8B;AAE9B;IAAkC,gCAAK;IAAvC;;IAQA,CAAC;IAPG,+BAAQ,GAAR,UAAS,KAAa;IAEtB,CAAC;IAED,8BAAO,GAAP,UAAQ,IAAY;IAEpB,CAAC;IACL,mBAAC;AAAD,CAAC,AARD,CAAkC,aAAK,GAQtC;AARY,oCAAY"}
+{"version":3,"file":"animatedtext.js","sourceRoot":"","sources":["animatedtext.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,KAAK,EAAC,MAAM,SAAS,CAAC;AAE9B,MAAM,mBAAoB,SAAQ,KAAK;IACnC,cAAc;QACV,OAAO,IAAI,CAAC;IAChB,CAAC;IAED,QAAQ,CAAC,KAAa;IAEtB,CAAC;IAED,OAAO,CAAC,IAAY;IAEpB,CAAC;CACJ"}

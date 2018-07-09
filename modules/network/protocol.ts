@@ -87,6 +87,11 @@ export class Protocol {
             return;
         }
 
+        if (this.m_checksumEnabled) {
+            // size(2) + checksum(4)
+            inputMessage.skip(6);
+        }
+
         if (this.m_xteaEncryptionEnabled) {
             if (!this.xteaDecrypt(inputMessage)) {
                 error("failed to decrypt message");

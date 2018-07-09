@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Proto;
 (function (Proto) {
     Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
@@ -218,6 +216,10 @@ var Proto;
     Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
     Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
     Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
+    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
+    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
+    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
+    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
     Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
     Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
     Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
@@ -226,5 +228,5 @@ var Proto;
     Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
     Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
 })(Proto || (Proto = {}));
-exports.Proto = Proto;
+export { Proto };
 //# sourceMappingURL=proto.js.map

@@ -215,6 +215,10 @@ enum Proto {
     ClientOpenTransactionHistory        = 253, // 1080
     ClientRequestTransactionHistory     = 254,  // 1080
     CreatureTypePlayer = 0,
+    CreatureTypeMonster = 1,
+    CreatureTypeNpc = 2,
+    CreatureTypeSummonOwn = 3,
+    CreatureTypeSummonOther = 4,
     CreatureTypeUnknown = 0xFF,
     PlayerStartId = 0x10000000,
     PlayerEndId = 0x40000000,
