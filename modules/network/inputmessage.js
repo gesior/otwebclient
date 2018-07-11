@@ -2,7 +2,7 @@ import { log } from '../log';
 import { Position } from "../position";
 export class InputMessage {
     constructor(msg) {
-        this.data = new DataView(msg.buffer.slice(0));
+        this.data = msg; // new DataView(msg.buffer.slice(0));
         this.offset = 0;
         this.size = this.data.byteLength;
     }

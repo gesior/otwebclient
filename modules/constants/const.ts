@@ -565,3 +565,26 @@ export enum AnimationDirection {
     AnimDirForward = 0,
     AnimDirBackward = 1
 }
+
+export enum Tilestate
+{
+    TILESTATE_NONE = 0,
+    TILESTATE_PROTECTIONZONE = 1 << 0,
+    TILESTATE_TRASHED = 1 << 1,
+    TILESTATE_OPTIONALZONE = 1 << 2,
+    TILESTATE_NOLOGOUT = 1 << 3,
+    TILESTATE_HARDCOREZONE = 1 << 4,
+    TILESTATE_REFRESH = 1 << 5,
+
+    // internal usage
+    TILESTATE_HOUSE = 1 << 6,
+    TILESTATE_TELEPORT = 1 << 17,
+    TILESTATE_MAGICFIELD = 1 << 18,
+    TILESTATE_MAILBOX = 1 << 19,
+    TILESTATE_TRASHHOLDER = 1 << 20,
+    TILESTATE_BED = 1 << 21,
+    TILESTATE_DEPOT = 1 << 22,
+    TILESTATE_TRANSLUECENT_LIGHT = 1 << 23,
+
+    TILESTATE_LAST = 1 << 24
+}

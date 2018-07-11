@@ -164,6 +164,16 @@ var Size = exports.Size = function () {
     }
 
     _createClass(Size, [{
+        key: "equals",
+        value: function equals(otherSize) {
+            return this.wd == otherSize.wd && this.ht == otherSize.ht;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Size(this.wd, this.ht);
+        }
+    }, {
         key: "add",
         value: function add(size) {
             return new Size(this.wd + size.wd, this.ht + size.ht);
@@ -266,8 +276,11 @@ var Light = exports.Light = function Light() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Position = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(43);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -285,11 +298,112 @@ var Position = exports.Position = function () {
     }
 
     _createClass(Position, [{
+        key: "equals",
+        value: function equals(otherPosition) {
+            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Position(this.x, this.y, this.z);
+        }
+    }, {
+        key: "isMapPosition",
+        value: function isMapPosition() {
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
+        }
+    }, {
+        key: "distance",
+        value: function distance(pos) {
+            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
+        }
+    }, {
+        key: "translate",
+        value: function translate(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            this.x += dx;
+            this.y += dy;
+            this.z += dz;
+        }
+    }, {
         key: "translated",
         value: function translated(dx, dy) {
             var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
             return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+    }, {
+        key: "isInRange",
+        value: function isInRange(pos, xRange, yRange) {
+            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+        }
+        /*
+            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
+                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+            }
+        */
+
+    }, {
+        key: "up",
+        value: function up() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z - n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "down",
+        value: function down() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z + n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredUp",
+        value: function coveredUp() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x + n,
+                ny = this.y + n,
+                nz = this.z - n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredDown",
+        value: function coveredDown() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x - n,
+                ny = this.y - n,
+                nz = this.z + n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
         }
     }]);
 
@@ -501,9 +615,897 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
 /***/ }),
 
 /***/ 345:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: 'return' outside of function (320:4)\n\n\u001b[0m \u001b[90m 318 | \u001b[39m\u001b[33mTile\u001b[39m\u001b[33m.\u001b[39m\u001b[33mMAX_THINGS\u001b[39m \u001b[33m=\u001b[39m \u001b[35m10\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 319 | \u001b[39m{\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 320 | \u001b[39m    \u001b[36mreturn\u001b[39m m_flags \u001b[33m&\u001b[39m \u001b[33mTILESTATE_TRANSLUECENT_LIGHT\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 321 | \u001b[39m}\n \u001b[90m 322 | \u001b[39mbool\u001b[33m;\u001b[39m\n \u001b[90m 323 | \u001b[39mmustHookSouth()\u001b[33m;\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Tile = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _game = __webpack_require__(67);
+
+var _map = __webpack_require__(96);
+
+var _const = __webpack_require__(43);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Tile = exports.Tile = function () {
+    function Tile(position) {
+        _classCallCheck(this, Tile);
+
+        this.m_drawElevation = 0;
+        this.m_minimapColor = 0;
+        this.m_flags = 0;
+        this.m_walkingCreatures = [];
+        this.m_effects = [];
+        this.m_things = [];
+        this.m_position = position;
+    }
+
+    _createClass(Tile, [{
+        key: "clean",
+        value: function clean() {
+            while (this.m_things.length > 0) {
+                this.removeThing(this.m_things.pop());
+            }
+        }
+    }, {
+        key: "addWalkingCreature",
+        value: function addWalkingCreature(creature) {
+            this.m_walkingCreatures.push(creature);
+        }
+    }, {
+        key: "removeWalkingCreature",
+        value: function removeWalkingCreature(creature) {
+            var index = this.m_walkingCreatures.indexOf(creature);
+            if (index > -1) {
+                this.m_walkingCreatures.splice(index, 1);
+            }
+        }
+    }, {
+        key: "addThing",
+        value: function addThing(thing, stackPos) {
+            if (!thing) return;
+            if (thing.isEffect()) {
+                if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
+            } else {
+                // priority                                    854
+                // 0 - ground,                        -.      -.
+                // 1 - ground borders                 -.      -.
+                // 2 - bottom (walls),                -.      -.
+                // 3 - on top (doors)                 -.      -.
+                // 4 - creatures, from top to bottom  <--      -.
+                // 5 - items, from top to bottom      <--      <--
+                if (stackPos < 0 || stackPos == 255) {
+                    var priority = thing.getStackPriority();
+                    // -1 or 255 => auto detect position
+                    // -2        => append
+                    var append = void 0;
+                    if (stackPos == -2) append = true;else {
+                        append = priority <= 3;
+                        // newer protocols does not store creatures in reverse order
+                        if (_game.g_game.getClientVersion() >= 854 && priority == 4) append = !append;
+                    }
+                    for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
+                        var otherPriority = this.m_things[stackPos].getStackPriority();
+                        if (append && otherPriority > priority || !append && otherPriority >= priority) break;
+                    }
+                } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
+                //this.m_things.insert(this.m_things.begin() + stackPos, thing);
+                this.m_things[stackPos] = thing;
+                if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
+                /*
+                // check stack priorities
+                // this code exists to find stackpos bugs faster
+                int lastPriority = 0;
+                for(const ThingPtr& thing :this.m_things) {
+                    int priority = thing.getStackPriority();
+                    assert(lastPriority <= priority);
+                    lastPriority = priority;
+                }
+                */
+            }
+            thing.setPosition(this.m_position);
+            thing.onAppear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+        }
+    }, {
+        key: "removeThing",
+        value: function removeThing(thing) {
+            if (!thing) return false;
+            var removed = false;
+            if (thing.isEffect()) {
+                var index = this.m_effects.indexOf(thing);
+                if (index > -1) {
+                    this.m_effects.splice(index, 1);
+                    removed = true;
+                }
+            } else {
+                var _index = this.m_things.indexOf(thing);
+                if (_index > -1) {
+                    this.m_things.splice(_index, 1);
+                    removed = true;
+                }
+            }
+            thing.onDisappear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+            return removed;
+        }
+    }, {
+        key: "getThing",
+        value: function getThing(stackPos) {
+            if (stackPos >= 0 && stackPos < this.m_things.length) return this.m_things[stackPos];
+            return null;
+        }
+    }, {
+        key: "getEffect",
+        value: function getEffect(id) {
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = this.m_effects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var effect = _step.value;
+
+                    if (effect.getId() == id) return effect;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            return null;
+        }
+    }, {
+        key: "hasThing",
+        value: function hasThing(thing) {
+            return this.m_things.indexOf(thing) > -1;
+        }
+    }, {
+        key: "getThingStackPos",
+        value: function getThingStackPos(thing) {
+            /*
+            for(let stackpos = 0; stackpos < this.m_things.length; ++stackpos)
+            if(thing == this.m_things[stackpos])
+                return stackpos;
+             */
+            return this.m_things.indexOf(thing);
+        }
+    }, {
+        key: "getTopThing",
+        value: function getTopThing() {
+            if (this.isEmpty()) return null;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = this.m_things[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var thing = _step2.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            return this.m_things[this.m_things.length - 1];
+        }
+    }, {
+        key: "getTopLookThing",
+        value: function getTopLookThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isIgnoreLook() && !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) return thing;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopUseThing",
+        value: function getTopUseThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
+            }
+            for (var _i = 0; _i < this.m_things.length; ++_i) {
+                var _thing = this.m_things[_i];
+                if (!_thing.isGround() && !_thing.isGroundBorder() && !_thing.isCreature() && !_thing.isSplash()) return _thing;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopCreature",
+        value: function getTopCreature() {
+            var creature = void 0;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isLocalPlayer()) creature = thing;else if (thing.isCreature() && !thing.isLocalPlayer()) return thing;
+            }
+            if (!creature && this.m_walkingCreatures.length > 0) creature = this.m_walkingCreatures[this.m_walkingCreatures.length - 1];
+            // check for walking creatures in tiles around
+            if (!creature) {
+                for (var xi = -1; xi <= 1; ++xi) {
+                    for (var yi = -1; yi <= 1; ++yi) {
+                        var pos = this.m_position.translated(xi, yi);
+                        if (pos == this.m_position) continue;
+                        var tile = _map.g_map.getTile(pos);
+                        if (tile) {
+                            var _iteratorNormalCompletion3 = true;
+                            var _didIteratorError3 = false;
+                            var _iteratorError3 = undefined;
+
+                            try {
+                                for (var _iterator3 = tile.getCreatures()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                    var c = _step3.value;
+
+                                    /* todo */
+                                    //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
+                                    creature = c;
+                                    //}
+                                }
+                            } catch (err) {
+                                _didIteratorError3 = true;
+                                _iteratorError3 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                        _iterator3.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError3) {
+                                        throw _iteratorError3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return creature;
+        }
+    }, {
+        key: "getTopMoveThing",
+        value: function getTopMoveThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) {
+                    if (i > 0 && thing.isNotMoveable()) return this.m_things[i - 1];
+                    return thing;
+                }
+            }
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = this.m_things[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var _thing2 = _step4.value;
+
+                    if (_thing2.isCreature()) return _thing2;
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopMultiUseThing",
+        value: function getTopMultiUseThing() {
+            if (this.isEmpty()) return null;
+            var topCreature = this.getTopCreature();
+            if (topCreature) return topCreature;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse()) return thing;
+            }
+            for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
+                var _thing3 = this.m_things[_i2];
+                if (!_thing3.isGround() && !_thing3.isGroundBorder() && !_thing3.isOnBottom() && !_thing3.isOnTop()) {
+                    if (_i2 > 0 && _thing3.isSplash()) return this.m_things[_i2 - 1];
+                    return _thing3;
+                }
+            }
+            for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
+                var _thing4 = this.m_things[_i3];
+                if (!_thing4.isGround() && !_thing4.isOnTop()) return _thing4;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return this.m_position;
+        }
+    }, {
+        key: "getDrawElevation",
+        value: function getDrawElevation() {
+            return this.m_drawElevation;
+        }
+    }, {
+        key: "getItems",
+        value: function getItems() {
+            var items = [];
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
+
+            try {
+                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var thing = _step5.value;
+
+                    if (thing.isItem()) items.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
+                }
+            }
+
+            return items;
+        }
+    }, {
+        key: "getCreatures",
+        value: function getCreatures() {
+            var creatures = [];
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
+
+            try {
+                for (var _iterator6 = this.m_things[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var thing = _step6.value;
+
+                    if (thing.isCreature()) creatures.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
+                }
+            }
+
+            return creatures;
+        }
+    }, {
+        key: "getWalkingCreatures",
+        value: function getWalkingCreatures() {
+            return this.m_walkingCreatures;
+        }
+    }, {
+        key: "getThings",
+        value: function getThings() {
+            return this.m_things;
+        }
+    }, {
+        key: "getGround",
+        value: function getGround() {
+            var firstObject = this.getThing(0);
+            if (!firstObject) return null;
+            if (firstObject.isGround() && firstObject.isItem()) return firstObject;
+            return null;
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            var groundSpeed = 100;
+            var ground = this.getGround();
+            if (ground) groundSpeed = ground.getGroundSpeed();
+            return groundSpeed;
+        }
+    }, {
+        key: "getMinimapColorByte",
+        value: function getMinimapColorByte() {
+            var color = 255; // alpha
+            if (this.m_minimapColor != 0) return this.m_minimapColor;
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
+
+            try {
+                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var thing = _step7.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
+                    var c = thing.getMinimapColor();
+                    if (c != 0) color = c;
+                }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
+                }
+            }
+
+            return color;
+        }
+    }, {
+        key: "getThingCount",
+        value: function getThingCount() {
+            return this.m_things.length + this.m_effects.length;
+        }
+    }, {
+        key: "isPathable",
+        value: function isPathable() {
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
+
+            try {
+                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var thing = _step8.value;
+
+                    if (thing.isNotPathable()) return false;
+                }
+            } catch (err) {
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
+                    }
+                } finally {
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isWalkable",
+        value: function isWalkable() {
+            var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            if (!this.getGround()) return false;
+            var _iteratorNormalCompletion9 = true;
+            var _didIteratorError9 = false;
+            var _iteratorError9 = undefined;
+
+            try {
+                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                    var thing = _step9.value;
+
+                    if (thing.isNotWalkable()) return false;
+                    if (!ignoreCreatures) {
+                        if (thing.isCreature()) {
+                            var creature = thing;
+                            /* todo */
+                            //if(!creature.isPassable() && creature.canBeSeen())
+                            return false;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError9 = true;
+                _iteratorError9 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                        _iterator9.return();
+                    }
+                } finally {
+                    if (_didIteratorError9) {
+                        throw _iteratorError9;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            var ground = this.getGround();
+            if (ground && ground.isFullGround()) return true;
+            return false;
+        }
+    }, {
+        key: "isFullyOpaque",
+        value: function isFullyOpaque() {
+            var firstObject = this.getThing(0);
+            return firstObject && firstObject.isFullGround();
+        }
+    }, {
+        key: "isSingleDimension",
+        value: function isSingleDimension() {
+            if (this.m_walkingCreatures.length > 0) return false;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
+
+            try {
+                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var thing = _step10.value;
+
+                    if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
+                }
+            } catch (err) {
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
+                    }
+                } finally {
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isLookPossible",
+        value: function isLookPossible() {
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
+
+            try {
+                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var thing = _step11.value;
+
+                    if (thing.blockProjectile()) return false;
+                }
+            } catch (err) {
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
+                    }
+                } finally {
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isClickable",
+        value: function isClickable() {
+            var hasGround = false;
+            var hasOnBottom = false;
+            var hasIgnoreLook = false;
+            var _iteratorNormalCompletion12 = true;
+            var _didIteratorError12 = false;
+            var _iteratorError12 = undefined;
+
+            try {
+                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                    var thing = _step12.value;
+
+                    if (thing.isGround()) hasGround = true;
+                    if (thing.isOnBottom()) hasOnBottom = true;
+                    if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
+                }
+            } catch (err) {
+                _didIteratorError12 = true;
+                _iteratorError12 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                        _iterator12.return();
+                    }
+                } finally {
+                    if (_didIteratorError12) {
+                        throw _iteratorError12;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.m_things.length == 0;
+        }
+    }, {
+        key: "isDrawable",
+        value: function isDrawable() {
+            return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
+        }
+    }, {
+        key: "hasTranslucentLight",
+        value: function hasTranslucentLight() {
+            return (this.m_flags & _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
+        }
+    }, {
+        key: "mustHookSouth",
+        value: function mustHookSouth() {
+            var _iteratorNormalCompletion13 = true;
+            var _didIteratorError13 = false;
+            var _iteratorError13 = undefined;
+
+            try {
+                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                    var thing = _step13.value;
+
+                    if (thing.isHookSouth()) return true;
+                }
+            } catch (err) {
+                _didIteratorError13 = true;
+                _iteratorError13 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                        _iterator13.return();
+                    }
+                } finally {
+                    if (_didIteratorError13) {
+                        throw _iteratorError13;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "mustHookEast",
+        value: function mustHookEast() {
+            var _iteratorNormalCompletion14 = true;
+            var _didIteratorError14 = false;
+            var _iteratorError14 = undefined;
+
+            try {
+                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+                    var thing = _step14.value;
+
+                    if (thing.isHookEast()) return true;
+                }
+            } catch (err) {
+                _didIteratorError14 = true;
+                _iteratorError14 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                        _iterator14.return();
+                    }
+                } finally {
+                    if (_didIteratorError14) {
+                        throw _iteratorError14;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "hasCreature",
+        value: function hasCreature() {
+            var _iteratorNormalCompletion15 = true;
+            var _didIteratorError15 = false;
+            var _iteratorError15 = undefined;
+
+            try {
+                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                    var thing = _step15.value;
+
+                    if (thing.isCreature()) return true;
+                }
+            } catch (err) {
+                _didIteratorError15 = true;
+                _iteratorError15 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                        _iterator15.return();
+                    }
+                } finally {
+                    if (_didIteratorError15) {
+                        throw _iteratorError15;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "limitsFloorsView",
+        value: function limitsFloorsView() {
+            var isFreeView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            // ground and walls limits the view
+            var firstThing = this.getThing(0);
+            if (isFreeView) {
+                if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom())) return true;
+            } else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom() && firstThing.blockProjectile())) return true;
+            return false;
+        }
+    }, {
+        key: "canErase",
+        value: function canErase() {
+            return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            var elevation = 0;
+            var _iteratorNormalCompletion16 = true;
+            var _didIteratorError16 = false;
+            var _iteratorError16 = undefined;
+
+            try {
+                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                    var thing = _step16.value;
+
+                    if (thing.getElevation() > 0) elevation++;
+                }
+            } catch (err) {
+                _didIteratorError16 = true;
+                _iteratorError16 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                        _iterator16.return();
+                    }
+                } finally {
+                    if (_didIteratorError16) {
+                        throw _iteratorError16;
+                    }
+                }
+            }
+
+            return elevation;
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            var elevation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            return this.getElevation() >= elevation;
+        }
+    }, {
+        key: "overwriteMinimapColor",
+        value: function overwriteMinimapColor(color) {
+            this.m_minimapColor = color;
+        }
+    }, {
+        key: "remFlag",
+        value: function remFlag(flag) {
+            this.m_flags &= ~flag;
+        }
+    }, {
+        key: "setFlag",
+        value: function setFlag(flag) {
+            this.m_flags |= flag;
+        }
+    }, {
+        key: "setFlags",
+        value: function setFlags(flags) {
+            this.m_flags = flags;
+        }
+    }, {
+        key: "hasFlag",
+        value: function hasFlag(flag) {
+            return (this.m_flags & flag) == flag;
+        }
+    }, {
+        key: "getFlags",
+        value: function getFlags() {
+            return this.m_flags;
+        }
+    }, {
+        key: "checkTranslucentLight",
+        value: function checkTranslucentLight() {
+            if (this.m_position.z != _const.Otc.SEA_FLOOR) return;
+            var downPos = this.m_position.clone();
+            if (!downPos.down()) return;
+            var tile = _map.g_map.getOrCreateTile(downPos);
+            if (!tile) return;
+            var translucent = false;
+            var _iteratorNormalCompletion17 = true;
+            var _didIteratorError17 = false;
+            var _iteratorError17 = undefined;
+
+            try {
+                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                    var thing = _step17.value;
+
+                    if (thing.isTranslucent() || thing.hasLensHelp()) {
+                        translucent = true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError17 = true;
+                _iteratorError17 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                        _iterator17.return();
+                    }
+                } finally {
+                    if (_didIteratorError17) {
+                        throw _iteratorError17;
+                    }
+                }
+            }
+
+            if (translucent) tile.m_flags |= _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;else tile.m_flags &= ~_const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
+        }
+    }]);
+
+    return Tile;
+}();
+
+Tile.MAX_THINGS = 10;
 
 /***/ }),
 
@@ -1342,6 +2344,16 @@ var Point = exports.Point = function () {
     }
 
     _createClass(Point, [{
+        key: "equals",
+        value: function equals(otherPoint) {
+            return this.x == otherPoint.x && this.y == otherPoint.y;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Point(this.x, this.y);
+        }
+    }, {
         key: "add",
         value: function add(point) {
             return new Point(this.x + point.x, this.y + point.y);
@@ -1400,12 +2412,360 @@ var Texture = exports.Texture = function Texture(image) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Rect = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _point = __webpack_require__(350);
+
+var _size2 = __webpack_require__(136);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Rect = exports.Rect = function Rect(p1, p2) {
-    _classCallCheck(this, Rect);
-};
+var Rect = exports.Rect = function () {
+    function Rect() {
+        _classCallCheck(this, Rect);
+
+        //TRect() : x1(0), y1(0), x2(-1), y2(-1) { }
+        //TRect(T x, T y, T width, T height) : x1(x), y1(y), x2(x+width-1), y2(y+height-1) { }
+        //TRect(const & topLeft, const & bottomRight) : x1(topLeft.x), y1(topLeft.y), x2(bottomRight.x), y2(bottomRight.y) { }
+        //TRect(const TRect<T>& other) : x1(other.x1), y1(other.y1), x2(other.x2), y2(other.y2) { }
+        //TRect(T x, T y, const TSize<T>& size) : x1(x), y1(y), x2(x+size.width()-1), y2(y+size.height()-1) { }
+        //TRect(const & topLeft, const TSize<T>& size) : x1(topLeft.x), y1(topLeft.y), x2(x1+size.width()-1), y2(y1+size.height()-1) { }
+        //TRect(const & topLeft, int width, int height) : x1(topLeft.x), y1(topLeft.y), x2(x1+width-1), y2(y1+height-1) { }
+        this.x1 = 0;
+        this.y1 = 0;
+        this.x2 = 0;
+        this.y2 = 0;
+        if (arguments.length == 0) {
+            this.x1 = 0;
+            this.y1 = 0;
+            this.x2 = -1;
+            this.y2 = -1;
+            return;
+        } else if (arguments.length == 1) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof Rect) {
+                var other = arguments.length <= 0 ? undefined : arguments[0];
+                this.x1 = other.x1;
+                this.y1 = other.y1;
+                this.x2 = other.x2;
+                this.y2 = other.y2;
+                return;
+            }
+        } else if (arguments.length == 2) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _point.Point) {
+                var topLeft = arguments.length <= 0 ? undefined : arguments[0];
+                var bottomRight = arguments.length <= 1 ? undefined : arguments[1];
+                this.x1 = topLeft.x;
+                this.y1 = topLeft.y;
+                this.x2 = bottomRight.x;
+                this.y2 = bottomRight.y;
+                return;
+            } else if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _size2.Size) {
+                var _topLeft = arguments.length <= 0 ? undefined : arguments[0];
+                var size = arguments.length <= 1 ? undefined : arguments[1];
+                this.x1 = _topLeft.x;
+                this.y1 = _topLeft.y;
+                this.x2 = this.x1 + size.width() - 1;
+                this.y2 = this.y1 + size.height() - 1;
+                return;
+            }
+        } else if (arguments.length == 3) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
+                var _topLeft2 = arguments.length <= 0 ? undefined : arguments[0];
+                var width = arguments.length <= 1 ? undefined : arguments[1];
+                var height = arguments.length <= 2 ? undefined : arguments[2];
+                this.x1 = _topLeft2.x;
+                this.y1 = _topLeft2.y;
+                this.x2 = this.x1 + width - 1;
+                this.y2 = this.y1 + height - 1;
+                return;
+            } else if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && (arguments.length <= 2 ? undefined : arguments[2]) instanceof _size2.Size) {
+                var x = arguments.length <= 0 ? undefined : arguments[0];
+                var y = arguments.length <= 1 ? undefined : arguments[1];
+                var _size = arguments.length <= 2 ? undefined : arguments[2];
+                this.x1 = x;
+                this.y1 = y;
+                this.x2 = this.x1 + _size.width() - 1;
+                this.y2 = this.y1 + _size.height() - 1;
+                return;
+            }
+        } else if (arguments.length == 4) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number' && typeof (arguments.length <= 3 ? undefined : arguments[3]) == 'number') {
+                var _x = arguments.length <= 0 ? undefined : arguments[0];
+                var _y = arguments.length <= 1 ? undefined : arguments[1];
+                var _width = arguments.length <= 2 ? undefined : arguments[2];
+                var _height = arguments.length <= 3 ? undefined : arguments[3];
+                this.x1 = _x;
+                this.y1 = _y;
+                this.x2 = this.x1 + _width - 1;
+                this.y2 = this.y1 + _height - 1;
+                return;
+            }
+        }
+        throw new Error('Invalid constructor parameters.');
+    }
+
+    _createClass(Rect, [{
+        key: "equals",
+        value: function equals(otherRect) {
+            return this.x1 == otherRect.x1 && this.y1 == otherRect.y1 && this.x2 == otherRect.x2 && this.y2 == otherRect.y2;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Rect(this);
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.x2 == this.x1 - 1 && this.y2 == this.y1 - 1;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.x1 > this.x2 || this.y1 > this.y2;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return this.x1 <= this.x2 && this.y1 <= this.y2;
+        }
+    }, {
+        key: "left",
+        value: function left() {
+            return this.x1;
+        }
+    }, {
+        key: "top",
+        value: function top() {
+            return this.y1;
+        }
+    }, {
+        key: "right",
+        value: function right() {
+            return this.x2;
+        }
+    }, {
+        key: "bottom",
+        value: function bottom() {
+            return this.y2;
+        }
+    }, {
+        key: "horizontalCenter",
+        value: function horizontalCenter() {
+            return this.x1 + (this.x2 - this.x1) / 2;
+        }
+    }, {
+        key: "verticalCenter",
+        value: function verticalCenter() {
+            return this.y1 + (this.y2 - this.y1) / 2;
+        }
+    }, {
+        key: "x",
+        value: function x() {
+            return this.x1;
+        }
+    }, {
+        key: "y",
+        value: function y() {
+            return this.y1;
+        }
+    }, {
+        key: "topLeft",
+        value: function topLeft() {
+            return new _point.Point(this.x1, this.y1);
+        }
+    }, {
+        key: "bottomRight",
+        value: function bottomRight() {
+            return new _point.Point(this.x2, this.y2);
+        }
+    }, {
+        key: "topRight",
+        value: function topRight() {
+            return new _point.Point(this.x2, this.y1);
+        }
+    }, {
+        key: "bottomLeft",
+        value: function bottomLeft() {
+            return new _point.Point(this.x1, this.y2);
+        }
+    }, {
+        key: "topCenter",
+        value: function topCenter() {
+            return new _point.Point((this.x1 + this.x2) / 2, this.y1);
+        }
+    }, {
+        key: "bottomCenter",
+        value: function bottomCenter() {
+            return new _point.Point((this.x1 + this.x2) / 2, this.y2);
+        }
+    }, {
+        key: "centerLeft",
+        value: function centerLeft() {
+            return new _point.Point(this.x1, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "centerRight",
+        value: function centerRight() {
+            return new _point.Point(this.x2, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "center",
+        value: function center() {
+            return new _point.Point((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "width",
+        value: function width() {
+            return this.x2 - this.x1 + 1;
+        }
+    }, {
+        key: "height",
+        value: function height() {
+            return this.y2 - this.y1 + 1;
+        }
+    }, {
+        key: "size",
+        value: function size() {
+            return new _size2.Size(this.width(), this.height());
+        }
+    }, {
+        key: "reset",
+        value: function reset() {
+            this.x1 = this.y1 = 0;
+            this.x2 = this.y2 = -1;
+        }
+    }, {
+        key: "clear",
+        value: function clear() {
+            this.x2 = this.x1 - 1;
+            this.y2 = this.y1 - 1;
+        }
+    }, {
+        key: "setLeft",
+        value: function setLeft(pos) {
+            this.x1 = pos;
+        }
+    }, {
+        key: "setTop",
+        value: function setTop(pos) {
+            this.y1 = pos;
+        }
+    }, {
+        key: "setRight",
+        value: function setRight(pos) {
+            this.x2 = pos;
+        }
+    }, {
+        key: "setBottom",
+        value: function setBottom(pos) {
+            this.y2 = pos;
+        }
+    }, {
+        key: "setX",
+        value: function setX(x) {
+            this.x1 = x;
+        }
+    }, {
+        key: "setY",
+        value: function setY(y) {
+            this.y1 = y;
+        }
+    }, {
+        key: "setTopLeft",
+        value: function setTopLeft(p) {
+            this.x1 = p.x;
+            this.y1 = p.y;
+        }
+    }, {
+        key: "setBottomRight",
+        value: function setBottomRight(p) {
+            this.x2 = p.x;
+            this.y2 = p.y;
+        }
+    }, {
+        key: "setTopRight",
+        value: function setTopRight(p) {
+            this.x2 = p.x;
+            this.y1 = p.y;
+        }
+    }, {
+        key: "setBottomLeft",
+        value: function setBottomLeft(p) {
+            this.x1 = p.x;
+            this.y2 = p.y;
+        }
+    }, {
+        key: "setWidth",
+        value: function setWidth(width) {
+            this.x2 = this.x1 + width - 1;
+        }
+    }, {
+        key: "setHeight",
+        value: function setHeight(height) {
+            this.y2 = this.y1 + height - 1;
+        }
+    }, {
+        key: "setSize",
+        value: function setSize(size) {
+            this.x2 = this.x1 + size.width() - 1;
+            this.y2 = this.y1 + size.height() - 1;
+        }
+    }, {
+        key: "setRect",
+        value: function setRect(x, y, width, height) {
+            this.x1 = x;
+            this.y1 = y;
+            this.x2 = x + width - 1;
+            this.y2 = y + height - 1;
+        }
+    }, {
+        key: "setCoords",
+        value: function setCoords(left, top, right, bottom) {
+            this.x1 = left;
+            this.y1 = top;
+            this.x2 = right;
+            this.y2 = bottom;
+        }
+    }, {
+        key: "moveLeft",
+        value: function moveLeft(pos) {
+            this.x2 += pos - this.x1;
+            this.x1 = pos;
+        }
+    }, {
+        key: "moveTop",
+        value: function moveTop(pos) {
+            this.y2 += pos - this.y1;
+            this.y1 = pos;
+        }
+    }, {
+        key: "moveRight",
+        value: function moveRight(pos) {
+            this.x1 += pos - this.x2;
+            this.x2 = pos;
+        }
+    }, {
+        key: "moveBottom",
+        value: function moveBottom(pos) {
+            this.y1 += pos - this.y2;
+            this.y2 = pos;
+        }
+    }, {
+        key: "bind",
+        value: function bind(r) {
+            if (this.isNull() || r.isNull()) return;
+            if (this.right() > r.right()) this.moveRight(r.right());
+            if (this.bottom() > r.bottom()) this.moveBottom(r.bottom());
+            if (this.left() < r.left()) this.moveLeft(r.left());
+            if (this.top() < r.top()) this.moveTop(r.top());
+        }
+    }]);
+
+    return Rect;
+}();
 
 /***/ }),
 
@@ -2188,6 +3548,8 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         key: "sendPingBack",
         value: function sendPingBack() {
             console.log('sendPingBack');
+            console.log(_map.g_map.m_floorMissiles);
+            console.log(_map.g_map.m_tileBlocks);
             var msg = new _outputmessage.OutputMessage();
             msg.addU8(_proto.Proto.ClientPingBack);
             this.send(msg);
@@ -2585,6 +3947,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             }
             var creature = thing;
             creature.allowAppearWalk();
+            _log.Log.debug('creature move', creature);
             _map.g_map.addThing(thing, newPos, -1);
         }
     }, {
@@ -3573,7 +4936,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                 for (var ny = 0; ny < height; ny++) {
                     var tilePos = new _position.Position(x + nx + offset, y + ny + offset, z);
                     if (skip == 0) skip = this.setTileDescription(msg, tilePos);else {
-                        _log.Log.debug('setFloorDescription - clean', tilePos);
+                        //Log.debug('setFloorDescription - clean', tilePos);
                         _map.g_map.cleanTile(tilePos);
                         skip--;
                     }
@@ -3584,7 +4947,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "setTileDescription",
         value: function setTileDescription(msg, position) {
-            _log.Log.debug('setTileDescription', position);
+            //Log.debug('setTileDescription', position);
             _map.g_map.cleanTile(position);
             var gotEffect = false;
             for (var stackPos = 0; stackPos < 256; stackPos++) {
@@ -4010,7 +5373,7 @@ var InputMessage = exports.InputMessage = function () {
     function InputMessage(msg) {
         _classCallCheck(this, InputMessage);
 
-        this.data = new DataView(msg.buffer.slice(0));
+        this.data = msg; // new DataView(msg.buffer.slice(0));
         this.offset = 0;
         this.size = this.data.byteLength;
     }
@@ -4890,6 +6253,20 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
+var _rect = __webpack_require__(352);
+
+var _point = __webpack_require__(350);
+
+var _color = __webpack_require__(97);
+
+var _const = __webpack_require__(43);
+
+var _g_clock = __webpack_require__(367);
+
+var _map = __webpack_require__(96);
+
+var _log = __webpack_require__(32);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -4902,13 +6279,152 @@ var StaticText = exports.StaticText = function (_Thing) {
     function StaticText() {
         _classCallCheck(this, StaticText);
 
-        return _possibleConstructorReturn(this, (StaticText.__proto__ || Object.getPrototypeOf(StaticText)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (StaticText.__proto__ || Object.getPrototypeOf(StaticText)).apply(this, arguments));
+
+        _this.m_yell = false;
+        /*std::deque<std::pair<std::string, ticks_t>>*/
+        _this.m_messages = [];
+        _this.m_updateEvent = null;
+        return _this;
     }
 
     _createClass(StaticText, [{
+        key: "drawText",
+        value: function drawText(dest, parentRect) {
+            var textSize = this.m_cachedText.getTextSize();
+            var rect = new _rect.Rect(dest.sub(new _point.Point(textSize.width() / 2, textSize.height())).add(new _point.Point(20, 5)), textSize);
+            var boundRect = rect.clone();
+            boundRect.bind(parentRect);
+            //g_painter->setColor(m_color);
+            this.m_cachedText.draw(boundRect);
+        }
+    }, {
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "getMessageMode",
+        value: function getMessageMode() {
+            return this.m_mode;
+        }
+    }, {
+        key: "getFirstMessage",
+        value: function getFirstMessage() {
+            return this.m_messages[0][0];
+        }
+    }, {
+        key: "isYell",
+        value: function isYell() {
+            return this.m_mode == _const.MessageMode.MessageYell || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageBarkLoud;
+        }
+    }, {
+        key: "setText",
+        value: function setText(text) {
+            this.m_cachedText.setText(text);
+        }
+    }, {
+        key: "setFont",
+        value: function setFont(fontName) {
+            this.m_cachedText.setFont(fontName);
+        }
+    }, {
+        key: "addMessage",
+        value: function addMessage(name, mode, text) {
+            if (this.m_messages.length == 0) {
+                this.m_name = name;
+                this.m_mode = mode;
+            } else if (this.m_name != name || this.m_mode != mode) {
+                return false;
+            } else if (this.m_messages.length > 10) {
+                this.m_messages.shift();
+                clearTimeout(this.m_updateEvent);
+                this.m_updateEvent = null;
+            }
+            var delay = Math.max(_const.Otc.STATIC_DURATION_PER_CHARACTER * text.length, _const.Otc.MIN_STATIC_TEXT_DURATION);
+            if (this.isYell()) delay *= 2;
+            this.m_messages.push([text, _g_clock.g_clock.millis() + delay]);
+            this.compose();
+            if (!this.m_updateEvent) this.scheduleUpdate();
+            return true;
+        }
+    }, {
+        key: "asStaticText",
+        value: function asStaticText() {
+            return this;
+        }
+    }, {
         key: "isStaticText",
         value: function isStaticText() {
             return true;
+        }
+    }, {
+        key: "setColor",
+        value: function setColor(color) {
+            this.m_color = color;
+        }
+    }, {
+        key: "getColor",
+        value: function getColor() {
+            return this.m_color;
+        }
+    }, {
+        key: "update",
+        value: function update() {
+            this.m_messages.shift();
+            if (this.m_messages.length == 0) {
+                // schedule removal
+                var self = this.asStaticText();
+                setTimeout(function (self) {
+                    _map.g_map.removeThing(self);
+                }, 0, self);
+            } else {
+                this.compose();
+                this.scheduleUpdate();
+            }
+        }
+    }, {
+        key: "scheduleUpdate",
+        value: function scheduleUpdate() {
+            var delay = Math.max(this.m_messages[0][1] - _g_clock.g_clock.millis(), 0);
+            var self = this.asStaticText();
+            this.m_updateEvent = setTimeout(function (self) {
+                self.m_updateEvent = null;
+                self.update();
+            }, delay, self);
+        }
+    }, {
+        key: "compose",
+        value: function compose() {
+            //TODO: this could be moved to lua
+            var text = void 0;
+            if (this.m_mode == _const.MessageMode.MessageSay) {
+                text += this.m_name;
+                text += " says:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageWhisper) {
+                text += this.m_name;
+                text += " whispers:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageYell) {
+                text += this.m_name;
+                text += " yells:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageMonsterSay || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageSpell || this.m_mode == _const.MessageMode.MessageBarkLow || this.m_mode == _const.MessageMode.MessageBarkLoud) {
+                this.m_color = new _color.Color(254, 101, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageNpcFrom || this.m_mode == _const.MessageMode.MessageNpcFromStartBlock) {
+                text += this.m_name;
+                text += " says:\n";
+                this.m_color = new _color.Color(95, 247, 247);
+            } else {
+                _log.Log.error("Unknown speak type: %d", this.m_mode);
+            }
+            for (var i = 0; i < this.m_messages.length; ++i) {
+                text += this.m_messages[i][0];
+                if (i < this.m_messages.length - 1) text += "\n";
+            }
+            this.m_cachedText.setText(text);
+            this.m_cachedText.wrapText(275);
         }
     }]);
 
@@ -5131,6 +6647,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
+var _timer = __webpack_require__(366);
+
+var _color = __webpack_require__(97);
+
+var _cachedtext = __webpack_require__(374);
+
+var _const = __webpack_require__(43);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -5143,20 +6667,112 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
     function AnimatedText() {
         _classCallCheck(this, AnimatedText);
 
-        return _possibleConstructorReturn(this, (AnimatedText.__proto__ || Object.getPrototypeOf(AnimatedText)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (AnimatedText.__proto__ || Object.getPrototypeOf(AnimatedText)).call(this));
+
+        _this.m_color = new _color.Color();
+        _this.m_animationTimer = new _timer.Timer();
+        _this.m_cachedText.setFont("verdana-11px-rounded");
+        _this.m_cachedText.setAlign(_cachedtext.CachedText.ALIGN_LEFT);
+        return _this;
     }
 
     _createClass(AnimatedText, [{
+        key: "drawText",
+        value: function drawText(dest, visibleRect) {
+            /* todo */
+            /*
+            static float tf = Otc::ANIMATED_TEXT_DURATION;
+            static float tftf = Otc::ANIMATED_TEXT_DURATION * Otc::ANIMATED_TEXT_DURATION;
+             Point p = dest;
+            Size textSize = m_cachedText.getTextSize();
+            float t = m_animationTimer.ticksElapsed();
+            p.x += (24 - textSize.width() / 2);
+             if(g_game.getFeature(Otc::GameDiagonalAnimatedText)) {
+                p.x -= (4 * t / tf) + (8 * t * t / tftf);
+            }
+             p.y += 8 + (-48 * t) / tf;
+            p += m_offset;
+            Rect rect(p, textSize);
+             if(visibleRect.contains(rect)) {
+                float t0 = tf / 1.2;
+                if(t > t0) {
+                    Color color = m_color;
+                    color.setAlpha((float)(1 - (t - t0) / (tf - t0)));
+                    g_painter.setColor(color);
+                }
+                else
+                    g_painter.setColor(m_color);
+                m_cachedText.draw(rect);
+            }
+            */
+        }
+    }, {
+        key: "setColor",
+        value: function setColor(color) {
+            this.m_color = _color.Color.from8bit(color);
+        }
+    }, {
+        key: "setText",
+        value: function setText(text) {
+            //m_cachedText.setText(text);
+        }
+    }, {
+        key: "setOffset",
+        value: function setOffset(offset) {
+            this.m_offset = offset;
+        }
+    }, {
+        key: "getColor",
+        value: function getColor() {
+            return this.m_color;
+        }
+    }, {
+        key: "getCachedText",
+        value: function getCachedText() {
+            return this.m_cachedText;
+        }
+    }, {
+        key: "getOffset",
+        value: function getOffset() {
+            return this.m_offset;
+        }
+    }, {
+        key: "getTimer",
+        value: function getTimer() {
+            return this.m_animationTimer;
+        }
+    }, {
+        key: "merge",
+        value: function merge(other) {
+            if (other.getColor() != this.m_color) return false;
+            if (other.getCachedText().getFont() != this.m_cachedText.getFont()) return false;
+            if (this.m_animationTimer.ticksElapsed() > _const.Otc.ANIMATED_TEXT_DURATION / 2.5) return false;
+            var number = parseInt(this.m_cachedText.getText());
+            var otherNumber = parseInt(other.getCachedText().getText());
+            if (!isNaN(number) && !isNaN(otherNumber)) {
+                this.m_cachedText.setText((number + otherNumber).toString());
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "asAnimatedText",
+        value: function asAnimatedText() {
+            return this;
+        }
+    }, {
         key: "isAnimatedText",
         value: function isAnimatedText() {
             return true;
         }
     }, {
-        key: "setColor",
-        value: function setColor(color) {}
-    }, {
-        key: "setText",
-        value: function setText(text) {}
+        key: "onAppear",
+        value: function onAppear() {
+            this.m_animationTimer.restart();
+            // schedule removal
+            //auto self = asAnimatedText();
+            //g_dispatcher.scheduleEvent([self]() { g_map.removeThing(self); }, Otc::ANIMATED_TEXT_DURATION);
+        }
     }]);
 
     return AnimatedText;
@@ -5329,6 +6945,196 @@ var Container = exports.Container = function () {
 
     return Container;
 }();
+
+/***/ }),
+
+/***/ 373:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TileBlock = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _tile = __webpack_require__(345);
+
+var _helpers = __webpack_require__(375);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TileBlock = exports.TileBlock = function () {
+    function TileBlock() {
+        _classCallCheck(this, TileBlock);
+
+        this.m_tiles = [];
+    }
+
+    _createClass(TileBlock, [{
+        key: "create",
+        value: function create(pos) {
+            var tile = new _tile.Tile(pos);
+            this.m_tiles[this.getTileIndex(pos)] = tile;
+            return tile;
+        }
+    }, {
+        key: "getOrCreate",
+        value: function getOrCreate(pos) {
+            var tile = this.get(pos);
+            if (!tile) tile = this.create(pos);
+            return tile;
+        }
+    }, {
+        key: "get",
+        value: function get(pos) {
+            return this.m_tiles[this.getTileIndex(pos)];
+        }
+    }, {
+        key: "remove",
+        value: function remove(pos) {
+            this.m_tiles[this.getTileIndex(pos)] = null;
+        }
+    }, {
+        key: "getTileIndex",
+        value: function getTileIndex(pos) {
+            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
+        }
+    }, {
+        key: "getTiles",
+        value: function getTiles() {
+            return this.m_tiles;
+        }
+    }]);
+
+    return TileBlock;
+}();
+
+TileBlock.BLOCK_SIZE = 32;
+
+/***/ }),
+
+/***/ 374:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CachedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _size = __webpack_require__(136);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CachedText = exports.CachedText = function () {
+    function CachedText() {
+        _classCallCheck(this, CachedText);
+
+        this.m_text = null;
+        this.m_textSize = null;
+        this.m_textMustRecache = true;
+        this.m_font = null;
+        this.m_align = null;
+    }
+
+    _createClass(CachedText, [{
+        key: 'draw',
+        value: function draw(rect) {
+            if (!this.m_font) return;
+            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
+                this.m_textMustRecache = false;
+                this.m_textCachedScreenCoords = rect;
+                //m_textCoordsBuffer.clear();
+                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+            }
+            //if(m_font->getTexture())
+            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
+        }
+    }, {
+        key: 'wrapText',
+        value: function wrapText(maxWidth) {
+            if (this.m_font) {
+                // update new line positions
+                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
+                this.update();
+            }
+        }
+    }, {
+        key: 'setFont',
+        value: function setFont(font) {
+            this.m_font = font;
+            this.update();
+        }
+    }, {
+        key: 'setText',
+        value: function setText(text) {
+            this.m_text = text;
+            this.update();
+        }
+    }, {
+        key: 'setAlign',
+        value: function setAlign(align) {
+            this.m_align = align;
+            this.update();
+        }
+    }, {
+        key: 'getTextSize',
+        value: function getTextSize() {
+            return this.m_textSize;
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            return this.m_text;
+        }
+    }, {
+        key: 'getFont',
+        value: function getFont() {
+            return this.m_font;
+        }
+    }, {
+        key: 'getAlign',
+        value: function getAlign() {
+            return this.m_align;
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.m_font) this.m_textSize = new _size.Size();
+            /* todo */ //m_font->calculateTextRectSize(m_text);
+            this.m_textMustRecache = true;
+        }
+    }]);
+
+    return CachedText;
+}();
+
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+
+/***/ }),
+
+/***/ 375:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
+};
+exports.toInt = toInt;
 
 /***/ }),
 
@@ -5899,6 +7705,26 @@ var AnimationDirection = exports.AnimationDirection = undefined;
     AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
     AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
 })(AnimationDirection || (exports.AnimationDirection = AnimationDirection = {}));
+var Tilestate = exports.Tilestate = undefined;
+(function (Tilestate) {
+    Tilestate[Tilestate["TILESTATE_NONE"] = 0] = "TILESTATE_NONE";
+    Tilestate[Tilestate["TILESTATE_PROTECTIONZONE"] = 1] = "TILESTATE_PROTECTIONZONE";
+    Tilestate[Tilestate["TILESTATE_TRASHED"] = 2] = "TILESTATE_TRASHED";
+    Tilestate[Tilestate["TILESTATE_OPTIONALZONE"] = 4] = "TILESTATE_OPTIONALZONE";
+    Tilestate[Tilestate["TILESTATE_NOLOGOUT"] = 8] = "TILESTATE_NOLOGOUT";
+    Tilestate[Tilestate["TILESTATE_HARDCOREZONE"] = 16] = "TILESTATE_HARDCOREZONE";
+    Tilestate[Tilestate["TILESTATE_REFRESH"] = 32] = "TILESTATE_REFRESH";
+    // internal usage
+    Tilestate[Tilestate["TILESTATE_HOUSE"] = 64] = "TILESTATE_HOUSE";
+    Tilestate[Tilestate["TILESTATE_TELEPORT"] = 131072] = "TILESTATE_TELEPORT";
+    Tilestate[Tilestate["TILESTATE_MAGICFIELD"] = 262144] = "TILESTATE_MAGICFIELD";
+    Tilestate[Tilestate["TILESTATE_MAILBOX"] = 524288] = "TILESTATE_MAILBOX";
+    Tilestate[Tilestate["TILESTATE_TRASHHOLDER"] = 1048576] = "TILESTATE_TRASHHOLDER";
+    Tilestate[Tilestate["TILESTATE_BED"] = 2097152] = "TILESTATE_BED";
+    Tilestate[Tilestate["TILESTATE_DEPOT"] = 4194304] = "TILESTATE_DEPOT";
+    Tilestate[Tilestate["TILESTATE_TRANSLUECENT_LIGHT"] = 8388608] = "TILESTATE_TRANSLUECENT_LIGHT";
+    Tilestate[Tilestate["TILESTATE_LAST"] = 16777216] = "TILESTATE_LAST";
+})(Tilestate || (exports.Tilestate = Tilestate = {}));
 
 /***/ }),
 
@@ -7131,9 +8957,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _creature = __webpack_require__(68);
 
-var _tile = __webpack_require__(345);
+var _position = __webpack_require__(138);
 
 var _awarerange = __webpack_require__(134);
+
+var _light = __webpack_require__(137);
+
+var _tileblock = __webpack_require__(373);
+
+var _const = __webpack_require__(43);
+
+var _point = __webpack_require__(350);
+
+var _helpers = __webpack_require__(375);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7141,13 +8977,55 @@ var Map = exports.Map = function () {
     function Map() {
         _classCallCheck(this, Map);
 
+        this.m_tileBlocks = [];
+        this.m_knownCreatures = [];
+        this.m_floorMissiles = [];
+        this.m_animatedTexts = [];
+        this.m_staticTexts = [];
+        // std::vector<MapViewPtr> m_mapViews;
+        //std::unordered_map<Position, std::string, PositionHasher> m_waypoints;
+        this.m_animationFlags = 0;
+        this.m_zoneFlags = 0;
+        this.m_zoneColors = [];
+        this.m_zoneOpacity = 0.0;
+        this.m_light = new _light.Light();
+        this.m_centralPosition = new _position.Position();
+        this.m_attribs = [];
         this.m_awareRange = new _awarerange.AwareRange();
+        for (var z = 0; z <= _const.Otc.MAX_Z + 1; ++z) {
+            this.m_tileBlocks[z] = [];
+            this.m_floorMissiles[z] = [];
+        }
     }
 
     _createClass(Map, [{
+        key: "createTile",
+        value: function createTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (!block) {
+                block = new _tileblock.TileBlock();
+                this.m_tileBlocks[pos.z][this.getBlockIndex(pos)] = block;
+            }
+            return block.create(pos);
+        }
+    }, {
         key: "getTile",
-        value: function getTile(position) {
-            return new _tile.Tile();
+        value: function getTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var it = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (it) return it.get(pos);
+            return null;
+        }
+    }, {
+        key: "getOrCreateTile",
+        value: function getOrCreateTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var tile = this.getTile(pos);
+            if (!tile) {
+                tile = this.createTile(pos);
+            }
+            return tile;
         }
     }, {
         key: "setAwareRange",
@@ -7176,16 +9054,162 @@ var Map = exports.Map = function () {
         }
     }, {
         key: "cleanTile",
-        value: function cleanTile(tilePos) {}
+        value: function cleanTile(pos) {
+            if (!pos.isMapPosition()) return;
+            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (block) {
+                var tile = block.get(pos);
+                if (tile) {
+                    tile.clean();
+                    if (tile.canErase()) block.remove(pos);
+                    //notificateTileUpdate(pos);
+                }
+            }
+            for (var i = 0; i < this.m_staticTexts.length;) {
+                var staticText = this.m_staticTexts[i];
+                if (staticText.getPosition().equals(pos) && staticText.getMessageMode() == _const.MessageMode.MessageNone) this.m_staticTexts.splice(i, 1);else ++i;
+            }
+        }
     }, {
         key: "addThing",
-        value: function addThing(thing, position) {
+        value: function addThing(thing, pos) {
             var stackPos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+
+            if (!thing) return;
+            if (thing.isItem() || thing.isCreature() || thing.isEffect()) {
+                var tile = this.getOrCreateTile(pos);
+                if (tile) tile.addThing(thing, stackPos);
+            } else {
+                if (thing.isMissile()) {
+                    this.m_floorMissiles[pos.z].push(thing);
+                } else if (thing.isAnimatedText()) {
+                    // this code will stack animated texts of the same color
+                    var animatedText = thing;
+                    var prevAnimatedText = void 0;
+                    var merged = false;
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = this.m_animatedTexts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var other = _step.value;
+
+                            if (other.getPosition() == pos) {
+                                prevAnimatedText = other;
+                                if (other.merge(animatedText)) {
+                                    merged = true;
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+
+                    if (!merged) {
+                        if (prevAnimatedText) {
+                            var offset = prevAnimatedText.getOffset();
+                            var t = prevAnimatedText.getTimer().ticksElapsed();
+                            if (t < _const.Otc.ANIMATED_TEXT_DURATION / 4.0) {
+                                var y = 12 - 48 * t / _const.Otc.ANIMATED_TEXT_DURATION;
+                                offset.add(new _point.Point(0, y));
+                            }
+                            offset.y = Math.min(offset.y, 12);
+                            animatedText.setOffset(offset);
+                        }
+                        this.m_animatedTexts.push(animatedText);
+                    }
+                } else if (thing.isStaticText()) {
+                    var staticText = thing;
+                    var mustAdd = true;
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = this.m_staticTexts[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var _other = _step2.value;
+
+                            // try to combine messages
+                            if (_other.getPosition() == pos && _other.addMessage(staticText.getName(), staticText.getMessageMode(), staticText.getFirstMessage())) {
+                                mustAdd = false;
+                                break;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+
+                    if (mustAdd) this.m_staticTexts.push(staticText);else return;
+                }
+                thing.setPosition(pos);
+                thing.onAppear();
+            }
+            //notificateTileUpdate(pos);
         }
     }, {
         key: "removeThing",
         value: function removeThing(thing) {
-            return true;
+            if (!thing) return false;
+            var ret = false;
+            if (thing.isMissile()) {
+                var missile = thing;
+                var z = missile.getPosition().z;
+                var it = this.m_floorMissiles[z].indexOf(missile);
+                if (it > -1) {
+                    this.m_floorMissiles.splice(it, 1);
+                    ret = true;
+                }
+            } else if (thing.isAnimatedText()) {
+                var animatedText = thing;
+                var _it = this.m_animatedTexts.indexOf(animatedText);
+                if (_it > -1) {
+                    this.m_animatedTexts.splice(_it, 1);
+                    ret = true;
+                }
+            } else if (thing.isStaticText()) {
+                var staticText = thing;
+                var _it2 = this.m_staticTexts.indexOf(staticText);
+                if (_it2 > -1) {
+                    this.m_staticTexts.splice(_it2, 1);
+                    ret = true;
+                }
+            } else {
+                var tile = thing.getTile();
+                if (tile) ret = tile.removeThing(thing);
+            }
+            //notificateTileUpdate(thing.getPosition());
+            return ret;
+        }
+    }, {
+        key: "removeThingByPos",
+        value: function removeThingByPos(pos, stackPos) {
+            var tile = this.getTile(pos);
+            if (tile) return this.removeThing(tile.getThing(stackPos));
+            return false;
         }
     }, {
         key: "setLight",
@@ -7193,7 +9217,9 @@ var Map = exports.Map = function () {
     }, {
         key: "getThing",
         value: function getThing(pos, stackpos) {
-            return new _creature.Creature();
+            var tile = this.getTile(pos);
+            if (tile) return tile.getThing(stackpos);
+            return null;
         }
     }, {
         key: "removeCreatureById",
@@ -7201,6 +9227,16 @@ var Map = exports.Map = function () {
     }, {
         key: "addCreature",
         value: function addCreature(creature) {}
+    }, {
+        key: "removeUnawareThings",
+        value: function removeUnawareThings() {
+            /* todo */
+        }
+    }, {
+        key: "getBlockIndex",
+        value: function getBlockIndex(pos) {
+            return (0, _helpers.toInt)(pos.y / _tileblock.TileBlock.BLOCK_SIZE) * (0, _helpers.toInt)(65536 / _tileblock.TileBlock.BLOCK_SIZE) + (0, _helpers.toInt)(pos.x / _tileblock.TileBlock.BLOCK_SIZE);
+        }
     }]);
 
     return Map;
@@ -7226,14 +9262,122 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Color = exports.Color = function () {
+    //Color() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f) { }
+    //Color(uint32 rgba) { setRGBA(rgba); }
     function Color() {
         _classCallCheck(this, Color);
+
+        if (arguments.length == 0) {
+            this.m_r = 1;
+            this.m_g = 1;
+            this.m_b = 1;
+            this.m_a = 1;
+            return;
+        } else if (arguments.length == 1) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number') {
+                this.setRGBA(arguments.length <= 0 ? undefined : arguments[0]);
+                return;
+            }
+        } else if (arguments.length == 3) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
+                var r = (arguments.length <= 0 ? undefined : arguments[0]) / 255;
+                var g = (arguments.length <= 1 ? undefined : arguments[1]) / 255;
+                var b = (arguments.length <= 2 ? undefined : arguments[2]) / 255;
+                this.m_r = r;
+                this.m_g = g;
+                this.m_b = b;
+                this.m_a = 1;
+                return;
+            }
+        }
+        throw new Error('Unhandled constructor');
     }
 
-    _createClass(Color, null, [{
-        key: "from8bit",
-        value: function from8bit(arg0) {
-            return new Color();
+    _createClass(Color, [{
+        key: 'equals',
+        value: function equals(otherColor) {
+            return this.m_r == otherColor.m_r && this.m_g == otherColor.m_g && this.m_b == otherColor.m_b && this.m_a == otherColor.m_a;
+        }
+    }, {
+        key: 'clone',
+        value: function clone() {
+            var color = new Color();
+            color.m_r = this.m_r;
+            color.m_g = this.m_g;
+            color.m_b = this.m_b;
+            color.m_a = this.m_a;
+            return color;
+        }
+    }, {
+        key: 'a',
+        value: function a() {
+            return this.m_a * 255.0;
+        }
+    }, {
+        key: 'b',
+        value: function b() {
+            return this.m_b * 255.0;
+        }
+    }, {
+        key: 'g',
+        value: function g() {
+            return this.m_g * 255.0;
+        }
+    }, {
+        key: 'r',
+        value: function r() {
+            return this.m_r * 255.0;
+        }
+    }, {
+        key: 'aF',
+        value: function aF() {
+            return this.m_a;
+        }
+    }, {
+        key: 'bF',
+        value: function bF() {
+            return this.m_b;
+        }
+    }, {
+        key: 'gF',
+        value: function gF() {
+            return this.m_g;
+        }
+    }, {
+        key: 'rF',
+        value: function rF() {
+            return this.m_r;
+        }
+    }, {
+        key: 'rgba',
+        value: function rgba() {
+            return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
+        }
+    }, {
+        key: 'setRGBA',
+        value: function setRGBA(r) {
+            var g = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+            var b = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+            var a = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 255;
+
+            if (g == -1) {
+                var rgba = r;
+                this.setRGBA(rgba >> 0 & 0xff, rgba >> 8 & 0xff, rgba >> 16 & 0xff, rgba >> 24 & 0xff);
+            } else {
+                this.m_r = r / 255;
+                this.m_g = g / 255;
+                this.m_b = b / 255;
+                this.m_a = a / 255;
+            }
+        }
+    }], [{
+        key: 'from8bit',
+        value: function from8bit(color) {
+            if (color >= 216 || color <= 0) return new Color(0, 0, 0);
+            var r = parseInt((color / 36).toString()) % 6 * 51;
+            var g = parseInt((color / 6).toString()) % 6 * 51;
+            var b = color % 6 * 51;
+            return new Color(r, g, b);
         }
     }]);
 

@@ -1,5 +1,6 @@
 import { g_game } from "./game";
 import { g_map } from "./map";
+import { Otc, Tilestate } from "./constants/const";
 export class Tile {
     constructor(position) {
         this.m_drawElevation = 0;
@@ -234,8 +235,12 @@ export class Tile {
         }
         return this.m_things[0];
     }
-    getPosition() { return this.m_position; }
-    getDrawElevation() { return this.m_drawElevation; }
+    getPosition() {
+        return this.m_position;
+    }
+    getDrawElevation() {
+        return this.m_drawElevation;
+    }
     getItems() {
         let items = [];
         for (let thing of this.m_things) {
@@ -252,8 +257,12 @@ export class Tile {
         }
         return creatures;
     }
-    getWalkingCreatures() { return this.m_walkingCreatures; }
-    getThings() { return this.m_things; }
+    getWalkingCreatures() {
+        return this.m_walkingCreatures;
+    }
+    getThings() {
+        return this.m_things;
+    }
     getGround() {
         let firstObject = this.getThing(0);
         if (!firstObject)
@@ -282,7 +291,9 @@ export class Tile {
         }
         return color;
     }
-    getThingCount() { return this.m_things.length + this.m_effects.length; }
+    getThingCount() {
+        return this.m_things.length + this.m_effects.length;
+    }
     isPathable() {
         for (let thing of this.m_things)
             if (thing.isNotPathable())
@@ -306,34 +317,134 @@ export class Tile {
         }
         return true;
     }
-    hasTranslucentLight() { return m_flags & TILESTATE_TRANSLUECENT_LIGHT; }
-    getElevation() { }
+    isFullGround() {
+        let ground = this.getGround();
+        if (ground && ground.isFullGround())
+            return true;
+        return false;
+    }
+    isFullyOpaque() {
+        let firstObject = this.getThing(0);
+        return firstObject && firstObject.isFullGround();
+    }
+    isSingleDimension() {
+        if (this.m_walkingCreatures.length > 0)
+            return false;
+        for (let thing of this.m_things)
+            if (thing.getHeight() != 1 || thing.getWidth() != 1)
+                return false;
+        return true;
+    }
+    isLookPossible() {
+        for (let thing of this.m_things)
+            if (thing.blockProjectile())
+                return false;
+        return true;
+    }
+    isClickable() {
+        let hasGround = false;
+        let hasOnBottom = false;
+        let hasIgnoreLook = false;
+        for (let thing of this.m_things) {
+            if (thing.isGround())
+                hasGround = true;
+            if (thing.isOnBottom())
+                hasOnBottom = true;
+            if ((hasGround || hasOnBottom) && !hasIgnoreLook)
+                return true;
+        }
+        return false;
+    }
+    isEmpty() {
+        return this.m_things.length == 0;
+    }
+    isDrawable() {
+        return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
+    }
+    hasTranslucentLight() {
+        return (this.m_flags & Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
+    }
+    mustHookSouth() {
+        for (let thing of this.m_things)
+            if (thing.isHookSouth())
+                return true;
+        return false;
+    }
+    mustHookEast() {
+        for (let thing of this.m_things)
+            if (thing.isHookEast())
+                return true;
+        return false;
+    }
+    hasCreature() {
+        for (let thing of this.m_things)
+            if (thing.isCreature())
+                return true;
+        return false;
+    }
+    limitsFloorsView(isFreeView = false) {
+        // ground and walls limits the view
+        let firstThing = this.getThing(0);
+        if (isFreeView) {
+            if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom()))
+                return true;
+        }
+        else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || (firstThing.isOnBottom() && firstThing.blockProjectile())))
+            return true;
+        return false;
+    }
+    canErase() {
+        return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
+    }
+    getElevation() {
+        let elevation = 0;
+        for (let thing of this.m_things)
+            if (thing.getElevation() > 0)
+                elevation++;
+        return elevation;
+    }
+    hasElevation(elevation = 1) {
+        return this.getElevation() >= elevation;
+    }
+    overwriteMinimapColor(color) {
+        this.m_minimapColor = color;
+    }
+    remFlag(flag) {
+        this.m_flags &= ~flag;
+    }
+    setFlag(flag) {
+        this.m_flags |= flag;
+    }
+    setFlags(flags) {
+        this.m_flags = flags;
+    }
+    hasFlag(flag) {
+        return (this.m_flags & flag) == flag;
+    }
+    getFlags() {
+        return this.m_flags;
+    }
+    checkTranslucentLight() {
+        if (this.m_position.z != Otc.SEA_FLOOR)
+            return;
+        let downPos = this.m_position.clone();
+        if (!downPos.down())
+            return;
+        let tile = g_map.getOrCreateTile(downPos);
+        if (!tile)
+            return;
+        let translucent = false;
+        for (let thing of this.m_things) {
+            if (thing.isTranslucent() || thing.hasLensHelp()) {
+                translucent = true;
+                break;
+            }
+        }
+        if (translucent)
+            tile.m_flags |= Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
+        else
+            tile.m_flags &= ~Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
+    }
 }
 Tile.MAX_THINGS = 10;
-void overwriteMinimapColor(uint8, color);
-{
-    m_minimapColor = color;
-}
-void remFlag(uint32, flag);
-{
-    m_flags &= ~flag;
-}
-void setFlag(uint32, flag);
-{
-    m_flags |= flag;
-}
-void setFlags(uint32, flags);
-{
-    m_flags = flags;
-}
-bool;
-hasFlag(uint32, flag);
-{
-    return (m_flags & flag) == flag;
-}
-uint32;
-getFlags();
-{
-    return m_flags;
-}
 //# sourceMappingURL=tile.js.map

@@ -456,6 +456,8 @@ export class ProtocolGame extends Protocol {
     }
     sendPingBack() {
         console.log('sendPingBack');
+        console.log(g_map.m_floorMissiles);
+        console.log(g_map.m_tileBlocks);
         let msg = new OutputMessage();
         msg.addU8(Proto.ClientPingBack);
         this.send(msg);
@@ -804,6 +806,7 @@ export class ProtocolGame extends Protocol {
         }
         let creature = thing;
         creature.allowAppearWalk();
+        Log.debug('creature move', creature);
         g_map.addThing(thing, newPos, -1);
     }
     parseOpenContainer(msg) {
@@ -1740,7 +1743,7 @@ export class ProtocolGame extends Protocol {
                 if (skip == 0)
                     skip = this.setTileDescription(msg, tilePos);
                 else {
-                    Log.debug('setFloorDescription - clean', tilePos);
+                    //Log.debug('setFloorDescription - clean', tilePos);
                     g_map.cleanTile(tilePos);
                     skip--;
                 }
@@ -1749,7 +1752,7 @@ export class ProtocolGame extends Protocol {
         return skip;
     }
     setTileDescription(msg, position) {
-        Log.debug('setTileDescription', position);
+        //Log.debug('setTileDescription', position);
         g_map.cleanTile(position);
         let gotEffect = false;
         for (let stackPos = 0; stackPos < 256; stackPos++) {

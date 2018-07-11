@@ -7,11 +7,10 @@ export class InputMessage {
     private size: number;
 
     constructor(msg: DataView) {
-        this.data = new DataView(msg.buffer.slice(0));
+        this.data = msg;// new DataView(msg.buffer.slice(0));
         this.offset = 0;
         this.size = this.data.byteLength;
     }
-
 
     getU8(): number {
         //log('InputMessage.getU8', this.offset, this.size);

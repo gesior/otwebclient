@@ -1,6 +1,16 @@
+import {Position} from "../position";
+
 export class Size {
     constructor(private wd: number = -1, private ht: number = -1) {
 
+    }
+
+    equals(otherSize: Size): boolean {
+        return this.wd == otherSize.wd && this.ht == otherSize.ht;
+    }
+
+    clone(): Size {
+        return new Size(this.wd, this.ht);
     }
 
     add(size: Size): Size {
@@ -53,5 +63,4 @@ export class Size {
     area(): number {
         return this.wd * this.ht;
     }
-
 }

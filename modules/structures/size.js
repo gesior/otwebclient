@@ -3,6 +3,12 @@ export class Size {
         this.wd = wd;
         this.ht = ht;
     }
+    equals(otherSize) {
+        return this.wd == otherSize.wd && this.ht == otherSize.ht;
+    }
+    clone() {
+        return new Size(this.wd, this.ht);
+    }
     add(size) {
         return new Size(this.wd + size.wd, this.ht + size.ht);
     }

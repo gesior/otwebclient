@@ -556,4 +556,24 @@ export var AnimationDirection;
     AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
     AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
 })(AnimationDirection || (AnimationDirection = {}));
+export var Tilestate;
+(function (Tilestate) {
+    Tilestate[Tilestate["TILESTATE_NONE"] = 0] = "TILESTATE_NONE";
+    Tilestate[Tilestate["TILESTATE_PROTECTIONZONE"] = 1] = "TILESTATE_PROTECTIONZONE";
+    Tilestate[Tilestate["TILESTATE_TRASHED"] = 2] = "TILESTATE_TRASHED";
+    Tilestate[Tilestate["TILESTATE_OPTIONALZONE"] = 4] = "TILESTATE_OPTIONALZONE";
+    Tilestate[Tilestate["TILESTATE_NOLOGOUT"] = 8] = "TILESTATE_NOLOGOUT";
+    Tilestate[Tilestate["TILESTATE_HARDCOREZONE"] = 16] = "TILESTATE_HARDCOREZONE";
+    Tilestate[Tilestate["TILESTATE_REFRESH"] = 32] = "TILESTATE_REFRESH";
+    // internal usage
+    Tilestate[Tilestate["TILESTATE_HOUSE"] = 64] = "TILESTATE_HOUSE";
+    Tilestate[Tilestate["TILESTATE_TELEPORT"] = 131072] = "TILESTATE_TELEPORT";
+    Tilestate[Tilestate["TILESTATE_MAGICFIELD"] = 262144] = "TILESTATE_MAGICFIELD";
+    Tilestate[Tilestate["TILESTATE_MAILBOX"] = 524288] = "TILESTATE_MAILBOX";
+    Tilestate[Tilestate["TILESTATE_TRASHHOLDER"] = 1048576] = "TILESTATE_TRASHHOLDER";
+    Tilestate[Tilestate["TILESTATE_BED"] = 2097152] = "TILESTATE_BED";
+    Tilestate[Tilestate["TILESTATE_DEPOT"] = 4194304] = "TILESTATE_DEPOT";
+    Tilestate[Tilestate["TILESTATE_TRANSLUECENT_LIGHT"] = 8388608] = "TILESTATE_TRANSLUECENT_LIGHT";
+    Tilestate[Tilestate["TILESTATE_LAST"] = 16777216] = "TILESTATE_LAST";
+})(Tilestate || (Tilestate = {}));
 //# sourceMappingURL=const.js.map
