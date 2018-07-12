@@ -12,11 +12,25 @@ import { g_things, ThingTypeManager } from "./thingtypemanager";
 import { ProtocolGame } from "./network/protocolgame";
 import { Map } from "./map";
 import { Container } from "./container";
+import { g_chat } from "./view/chatbox";
 export class Game {
     constructor() {
         this.m_clientVersion = 0;
         this.messageModesMap = {};
         this.m_features = [];
+    }
+    processCloseChannel(channelId) {
+        g_chat.removeTab(channelId);
+    }
+    processOpenChannel(channelId, name) {
+        g_chat.addChannel(name, channelId);
+    }
+    processOpenOwnPrivateChannel(channelId, name) {
+        g_chat.addChannel(name, channelId);
+    }
+    processTalk(name, level, mode, message, channelId, creaturePos) {
+        console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+        g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
     setClientVersion(version) {
         this.m_clientVersion = version;

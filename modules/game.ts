@@ -6,8 +6,26 @@ import {error} from "./log";
 import {Map} from "./map";
 import {Container} from "./container";
 import {Item} from "./item";
+import {g_chat} from "./view/chatbox";
+import {Position} from "./position";
 
 export class Game {
+    processCloseChannel(channelId: number): any {
+        g_chat.removeTab(channelId);
+    }
+
+    processOpenChannel(channelId: number, name: string) {
+        g_chat.addChannel(name, channelId);
+    }
+
+    processOpenOwnPrivateChannel(channelId: number, name: string) {
+        g_chat.addChannel(name, channelId);
+    }
+    processTalk(name: string, level: number, mode: MessageMode, message: string, channelId: number, creaturePos: Position) {
+        console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+        g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+    }
+
     m_clientVersion = 0;
     messageModesMap = {};
     m_features: boolean[] = [];
@@ -398,7 +416,6 @@ export class Game {
     formatCreatureName(string: string): string {
         return string;
     }
-
 }
 
 let g_game = new Game();

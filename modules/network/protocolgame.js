@@ -455,9 +455,23 @@ export class ProtocolGame extends Protocol {
         }
     }
     sendPingBack() {
-        console.log('sendPingBack');
-        console.log(g_map.m_floorMissiles);
-        console.log(g_map.m_tileBlocks);
+        //console.log('sendPingBack');
+        //console.log(g_map.m_floorMissiles);
+        //console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+        if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
+            let pos = this.m_localPlayer.getPosition();
+            for (let y = pos.y - 7; y <= pos.y + 7; y++) {
+                let row = [];
+                for (let x = pos.x - 7; x <= pos.x + 7; x++) {
+                    if (g_map.getTile(new Position(x, y, 7)))
+                        row.push(g_map.getTile(new Position(x, y, 7)).getItems());
+                    else
+                        row.push([]);
+                }
+                //console.log(row);
+            }
+            //console.log()
+        }
         let msg = new OutputMessage();
         msg.addU8(Proto.ClientPingBack);
         this.send(msg);
@@ -1335,7 +1349,7 @@ export class ProtocolGame extends Protocol {
                 break;
         }
         let text = msg.getString();
-        //g_game.processTalk(name, level, mode, text, channelId, pos);
+        g_game.processTalk(name, level, mode, text, channelId, pos);
     }
     parseChannelList(msg) {
         let count = msg.getU8();
@@ -1358,7 +1372,8 @@ export class ProtocolGame extends Protocol {
             for (let i = 0; i < invitedPlayers; ++i)
                 g_game.formatCreatureName(msg.getString()); // player name
         }
-        //g_game.processOpenChannel(channelId, name);
+        console.error('open channel', channelId, name);
+        g_game.processOpenChannel(channelId, name);
     }
     parseOpenPrivateChannel(msg) {
         let name = g_game.formatCreatureName(msg.getString());
@@ -1367,25 +1382,29 @@ export class ProtocolGame extends Protocol {
     parseOpenOwnPrivateChannel(msg) {
         let channelId = msg.getU16();
         let name = msg.getString();
-        //g_game.processOpenOwnPrivateChannel(channelId, name);
+        g_game.processOpenOwnPrivateChannel(channelId, name);
     }
     parseCloseChannel(msg) {
         let channelId = msg.getU16();
-        //g_game.processCloseChannel(channelId);
+        g_game.processCloseChannel(channelId);
     }
     parseRuleViolationChannel(msg) {
         let channelId = msg.getU16();
+        console.log('g_game.processRuleViolationChannel', channelId);
         //g_game.processRuleViolationChannel(channelId);
     }
     parseRuleViolationRemove(msg) {
         let name = msg.getString();
+        console.log('g_game.processRuleViolationRemove', name);
         //g_game.processRuleViolationRemove(name);
     }
     parseRuleViolationCancel(msg) {
         let name = msg.getString();
+        console.log('g_game.processRuleViolationCancel', name);
         //g_game.processRuleViolationCancel(name);
     }
     parseRuleViolationLock(msg) {
+        console.log('g_game.processRuleViolationLock');
         //g_game.processRuleViolationLock();
     }
     parseTextMessage(msg) {
@@ -1736,7 +1755,7 @@ export class ProtocolGame extends Protocol {
             skip = this.setFloorDescription(msg, x, y, nz, width, height, z - nz, skip);
     }
     setFloorDescription(msg, x, y, z, width, height, offset, skip) {
-        Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
+        //Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
         for (let nx = 0; nx < width; nx++) {
             for (let ny = 0; ny < height; ny++) {
                 let tilePos = new Position(x + nx + offset, y + ny + offset, z);
@@ -1757,7 +1776,7 @@ export class ProtocolGame extends Protocol {
         let gotEffect = false;
         for (let stackPos = 0; stackPos < 256; stackPos++) {
             if (msg.peekU16() >= 0xff00) {
-                Log.debug('setTileDescription SKIP', position, stackPos, msg.peekU16() & 0xff);
+                //Log.debug('setTileDescription SKIP', position, stackPos, msg.peekU16() & 0xff);
                 return msg.getU16() & 0xff;
             }
             if (g_game.getFeature(GameFeature.GameEnvironmentEffect) && !gotEffect) {
@@ -1822,7 +1841,7 @@ export class ProtocolGame extends Protocol {
     }
     getThing(msg) {
         let thing = new Thing();
-        Log.debug('getThing', msg.peekU16());
+        //Log.debug('getThing', msg.peekU16());
         let id = msg.getU16();
         if (id == 0)
             Log.error("invalid thing id");
@@ -1844,8 +1863,10 @@ export class ProtocolGame extends Protocol {
             pos.z = msg.getU8();
             let stackpos = msg.getU8();
             thing = g_map.getThing(pos, stackpos);
-            if (!thing)
-                Log.error("no thing at pos:%s, stackpos:%d", pos, stackpos);
+            if (!thing) {
+                Log.error("no thing at pos:%s, stackpos:%d", pos, stackpos, g_map.getTile(pos));
+                throw new Error('no thing');
+            }
         }
         else {
             let id = msg.getU32();
@@ -1981,7 +2002,7 @@ export class ProtocolGame extends Protocol {
     getItem(msg, id = 0) {
         if (id == 0)
             id = msg.getU16();
-        Log.debug('getItem', id);
+        //Log.debug('getItem', id);
         let item = new Item(id);
         if (item.getId() == 0)
             Log.error("unable to create item with invalid id %d", id);

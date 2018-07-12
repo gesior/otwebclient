@@ -596,7 +596,10 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
     function LocalPlayer() {
         _classCallCheck(this, LocalPlayer);
 
-        return _possibleConstructorReturn(this, (LocalPlayer.__proto__ || Object.getPrototypeOf(LocalPlayer)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (LocalPlayer.__proto__ || Object.getPrototypeOf(LocalPlayer)).apply(this, arguments));
+
+        _this.m_known = false;
+        return _this;
     }
 
     _createClass(LocalPlayer, [{
@@ -607,6 +610,16 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
     }, {
         key: 'setBlessings',
         value: function setBlessings(blessings) {}
+    }, {
+        key: 'setKnown',
+        value: function setKnown(v) {
+            this.m_known = v;
+        }
+    }, {
+        key: 'isKnown',
+        value: function isKnown() {
+            return this.m_known;
+        }
     }]);
 
     return LocalPlayer;
@@ -632,6 +645,8 @@ var _game = __webpack_require__(67);
 var _map = __webpack_require__(96);
 
 var _const = __webpack_require__(43);
+
+var _log = __webpack_require__(32);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -740,7 +755,10 @@ var Tile = exports.Tile = function () {
     }, {
         key: "getThing",
         value: function getThing(stackPos) {
-            if (stackPos >= 0 && stackPos < this.m_things.length) return this.m_things[stackPos];
+            if (stackPos >= 0 && stackPos < this.m_things.length) {
+                _log.Log.debug('tile thing: ', this.m_things[stackPos]);
+                return this.m_things[stackPos];
+            }
             return null;
         }
     }, {
@@ -3547,9 +3565,20 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "sendPingBack",
         value: function sendPingBack() {
-            console.log('sendPingBack');
-            console.log(_map.g_map.m_floorMissiles);
-            console.log(_map.g_map.m_tileBlocks);
+            //console.log('sendPingBack');
+            //console.log(g_map.m_floorMissiles);
+            //console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+            if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
+                var pos = this.m_localPlayer.getPosition();
+                for (var y = pos.y - 7; y <= pos.y + 7; y++) {
+                    var row = [];
+                    for (var x = pos.x - 7; x <= pos.x + 7; x++) {
+                        if (_map.g_map.getTile(new _position.Position(x, y, 7))) row.push(_map.g_map.getTile(new _position.Position(x, y, 7)).getItems());else row.push([]);
+                    }
+                    //console.log(row);
+                }
+                //console.log()
+            }
             var msg = new _outputmessage.OutputMessage();
             msg.addU8(_proto.Proto.ClientPingBack);
             this.send(msg);
@@ -4480,7 +4509,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                     break;
             }
             var text = msg.getString();
-            //g_game.processTalk(name, level, mode, text, channelId, pos);
+            _game.g_game.processTalk(name, level, mode, text, channelId, pos);
         }
     }, {
         key: "parseChannelList",
@@ -4509,7 +4538,8 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                     _game.g_game.formatCreatureName(msg.getString());
                 } // player name
             }
-            //g_game.processOpenChannel(channelId, name);
+            console.error('open channel', channelId, name);
+            _game.g_game.processOpenChannel(channelId, name);
         }
     }, {
         key: "parseOpenPrivateChannel",
@@ -4522,35 +4552,39 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         value: function parseOpenOwnPrivateChannel(msg) {
             var channelId = msg.getU16();
             var name = msg.getString();
-            //g_game.processOpenOwnPrivateChannel(channelId, name);
+            _game.g_game.processOpenOwnPrivateChannel(channelId, name);
         }
     }, {
         key: "parseCloseChannel",
         value: function parseCloseChannel(msg) {
             var channelId = msg.getU16();
-            //g_game.processCloseChannel(channelId);
+            _game.g_game.processCloseChannel(channelId);
         }
     }, {
         key: "parseRuleViolationChannel",
         value: function parseRuleViolationChannel(msg) {
             var channelId = msg.getU16();
+            console.log('g_game.processRuleViolationChannel', channelId);
             //g_game.processRuleViolationChannel(channelId);
         }
     }, {
         key: "parseRuleViolationRemove",
         value: function parseRuleViolationRemove(msg) {
             var name = msg.getString();
+            console.log('g_game.processRuleViolationRemove', name);
             //g_game.processRuleViolationRemove(name);
         }
     }, {
         key: "parseRuleViolationCancel",
         value: function parseRuleViolationCancel(msg) {
             var name = msg.getString();
+            console.log('g_game.processRuleViolationCancel', name);
             //g_game.processRuleViolationCancel(name);
         }
     }, {
         key: "parseRuleViolationLock",
         value: function parseRuleViolationLock(msg) {
+            console.log('g_game.processRuleViolationLock');
             //g_game.processRuleViolationLock();
         }
     }, {
@@ -4931,7 +4965,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "setFloorDescription",
         value: function setFloorDescription(msg, x, y, z, width, height, offset, skip) {
-            _log.Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
+            //Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
             for (var nx = 0; nx < width; nx++) {
                 for (var ny = 0; ny < height; ny++) {
                     var tilePos = new _position.Position(x + nx + offset, y + ny + offset, z);
@@ -4952,7 +4986,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             var gotEffect = false;
             for (var stackPos = 0; stackPos < 256; stackPos++) {
                 if (msg.peekU16() >= 0xff00) {
-                    _log.Log.debug('setTileDescription SKIP', position, stackPos, msg.peekU16() & 0xff);
+                    //Log.debug('setTileDescription SKIP', position, stackPos, msg.peekU16() & 0xff);
                     return msg.getU16() & 0xff;
                 }
                 if (_game.g_game.getFeature(_const.GameFeature.GameEnvironmentEffect) && !gotEffect) {
@@ -5014,7 +5048,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         key: "getThing",
         value: function getThing(msg) {
             var thing = new _thing.Thing();
-            _log.Log.debug('getThing', msg.peekU16());
+            //Log.debug('getThing', msg.peekU16());
             var id = msg.getU16();
             if (id == 0) _log.Log.error("invalid thing id");else if (id == _proto.Proto.UnknownCreature || id == _proto.Proto.OutdatedCreature || id == _proto.Proto.Creature) thing = this.getCreature(msg, id);else if (id == _proto.Proto.StaticText) thing = this.getStaticText(msg, id);else thing = this.getItem(msg, id);
             return thing;
@@ -5031,7 +5065,10 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                 pos.z = msg.getU8();
                 var stackpos = msg.getU8();
                 thing = _map.g_map.getThing(pos, stackpos);
-                if (!thing) _log.Log.error("no thing at pos:%s, stackpos:%d", pos, stackpos);
+                if (!thing) {
+                    _log.Log.error("no thing at pos:%s, stackpos:%d", pos, stackpos, _map.g_map.getTile(pos));
+                    throw new Error('no thing');
+                }
             } else {
                 var id = msg.getU32();
                 thing = _map.g_map.getCreatureById(id);
@@ -5135,7 +5172,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
             if (id == 0) id = msg.getU16();
-            _log.Log.debug('getItem', id);
+            //Log.debug('getItem', id);
             var item = new _item.Item(id);
             if (item.getId() == 0) _log.Log.error("unable to create item with invalid id %d", id);
             if (_game.g_game.getFeature(_const.GameFeature.GameThingMarks)) {
@@ -6261,6 +6298,8 @@ var _color = __webpack_require__(97);
 
 var _const = __webpack_require__(43);
 
+var _cachedtext = __webpack_require__(374);
+
 var _g_clock = __webpack_require__(367);
 
 var _map = __webpack_require__(96);
@@ -6284,6 +6323,7 @@ var StaticText = exports.StaticText = function (_Thing) {
         _this.m_yell = false;
         /*std::deque<std::pair<std::string, ticks_t>>*/
         _this.m_messages = [];
+        _this.m_cachedText = new _cachedtext.CachedText();
         _this.m_updateEvent = null;
         return _this;
     }
@@ -7135,6 +7175,487 @@ var toInt = function toInt(int) {
     return parseInt(int.toString());
 };
 exports.toInt = toInt;
+
+/***/ }),
+
+/***/ 376:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_chat = exports.Chatbox = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _SpeakTypes;
+
+var _chatboxtab = __webpack_require__(377);
+
+var _const = __webpack_require__(43);
+
+var _log = __webpack_require__(32);
+
+var _game = __webpack_require__(67);
+
+var _statictext = __webpack_require__(364);
+
+var _map = __webpack_require__(96);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var SpeakTypesSettings = {
+    none: {},
+    say: { speakType: _const.MessageMode.MessageSay, color: '#FFFF00' },
+    whisper: { speakType: _const.MessageMode.MessageWhisper, color: '#FFFF00' },
+    yell: { speakType: _const.MessageMode.MessageYell, color: '#FFFF00' },
+    broadcast: { speakType: _const.MessageMode.MessageGamemasterBroadcast, color: '#F55E5E' },
+    private: { speakType: _const.MessageMode.MessagePrivateTo, color: '#5FF7F7', private: true },
+    privateRed: { speakType: _const.MessageMode.MessageGamemasterPrivateTo, color: '#F55E5E', private: true },
+    privatePlayerToPlayer: { speakType: _const.MessageMode.MessagePrivateTo, color: '#9F9DFD', private: true },
+    privatePlayerToNpc: { speakType: _const.MessageMode.MessageNpcTo, color: '#9F9DFD', private: true, npcChat: true },
+    privateNpcToPlayer: { speakType: _const.MessageMode.MessageNpcFrom, color: '#5FF7F7', private: true, npcChat: true },
+    channelYellow: { speakType: _const.MessageMode.MessageChannel, color: '#FFFF00' },
+    channelWhite: { speakType: _const.MessageMode.MessageChannelManagement, color: '#FFFFFF' },
+    channelRed: { speakType: _const.MessageMode.MessageGamemasterChannel, color: '#F55E5E' },
+    channelOrange: { speakType: _const.MessageMode.MessageChannelHighlight, color: '#FE6500' },
+    monsterSay: { speakType: _const.MessageMode.MessageMonsterSay, color: '#FE6500', hideInConsole: true },
+    monsterYell: { speakType: _const.MessageMode.MessageMonsterYell, color: '#FE6500', hideInConsole: true },
+    rvrAnswerFrom: { speakType: _const.MessageMode.MessageRVRAnswer, color: '#FE6500' },
+    rvrAnswerTo: { speakType: _const.MessageMode.MessageRVRAnswer, color: '#FE6500' },
+    rvrContinue: { speakType: _const.MessageMode.MessageRVRContinue, color: '#FFFF00' }
+};
+var SpeakTypes = (_SpeakTypes = {}, _defineProperty(_SpeakTypes, _const.MessageMode.MessageSay, SpeakTypesSettings.say), _defineProperty(_SpeakTypes, _const.MessageMode.MessageWhisper, SpeakTypesSettings.whisper), _defineProperty(_SpeakTypes, _const.MessageMode.MessageYell, SpeakTypesSettings.yell), _defineProperty(_SpeakTypes, _const.MessageMode.MessageGamemasterBroadcast, SpeakTypesSettings.broadcast), _defineProperty(_SpeakTypes, _const.MessageMode.MessagePrivateFrom, SpeakTypesSettings.private), _defineProperty(_SpeakTypes, _const.MessageMode.MessageGamemasterPrivateFrom, SpeakTypesSettings.privateRed), _defineProperty(_SpeakTypes, _const.MessageMode.MessageNpcTo, SpeakTypesSettings.privatePlayerToNpc), _defineProperty(_SpeakTypes, _const.MessageMode.MessageNpcFrom, SpeakTypesSettings.privateNpcToPlayer), _defineProperty(_SpeakTypes, _const.MessageMode.MessageChannel, SpeakTypesSettings.channelYellow), _defineProperty(_SpeakTypes, _const.MessageMode.MessageChannelManagement, SpeakTypesSettings.channelWhite), _defineProperty(_SpeakTypes, _const.MessageMode.MessageGamemasterChannel, SpeakTypesSettings.channelRed), _defineProperty(_SpeakTypes, _const.MessageMode.MessageChannelHighlight, SpeakTypesSettings.channelOrange), _defineProperty(_SpeakTypes, _const.MessageMode.MessageMonsterSay, SpeakTypesSettings.monsterSay), _defineProperty(_SpeakTypes, _const.MessageMode.MessageMonsterYell, SpeakTypesSettings.monsterYell), _defineProperty(_SpeakTypes, _const.MessageMode.MessageRVRChannel, SpeakTypesSettings.channelWhite), _defineProperty(_SpeakTypes, _const.MessageMode.MessageRVRContinue, SpeakTypesSettings.rvrContinue), _defineProperty(_SpeakTypes, _const.MessageMode.MessageRVRAnswer, SpeakTypesSettings.rvrAnswerFrom), _defineProperty(_SpeakTypes, _const.MessageMode.MessageNpcFromStartBlock, SpeakTypesSettings.privateNpcToPlayer), _defineProperty(_SpeakTypes, _const.MessageMode.MessageSpell, SpeakTypesSettings.none), _defineProperty(_SpeakTypes, _const.MessageMode.MessageBarkLow, SpeakTypesSettings.none), _defineProperty(_SpeakTypes, _const.MessageMode.MessageBarkLoud, SpeakTypesSettings.none), _SpeakTypes);
+
+var Chatbox = exports.Chatbox = function () {
+    function Chatbox() {
+        _classCallCheck(this, Chatbox);
+
+        this.consolePanel = null;
+        this.consoleContentPanel = null;
+        this.consoleTabBar = null;
+        this.consoleTextEdit = null;
+        this.channels = [];
+        this.channelsWindow = null;
+        this.communicationWindow = null;
+        this.ownPrivateName = null;
+        this.messageHistory = {};
+        this.currentMessageIndex = 0;
+        this.ignoreNpcMessages = false;
+        this.defaultTab = null;
+        this.serverTab = null;
+        this.violationsChannelId = null;
+        this.violationWindow = null;
+        this.violationReportTab = null;
+        this.ignoredChannels = {};
+        this.filters = {};
+        this.tabs = [];
+    }
+
+    _createClass(Chatbox, [{
+        key: "addTab",
+        value: function addTab(name) {
+            var focus = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            var tab = this.getTab(name);
+            if (tab) {
+                focus = true;
+            } else {
+                tab = new _chatboxtab.ChatboxTab(name);
+            }
+            if (focus) {
+                this.selectTab(tab);
+            }
+            this.tabs[name] = tab;
+            return tab;
+        }
+    }, {
+        key: "selectTab",
+        value: function selectTab(tab) {
+            /* todo */
+        }
+    }, {
+        key: "removeTab",
+        value: function removeTab(tab) {
+            console.error('close tab', tab);
+            /*
+            if type(tab) == 'string' then
+            tab = consoleTabBar:getTab(tab)
+            end
+             if tab == defaultTab or tab == serverTab then
+            return
+            end
+             if tab == violationReportTab then
+            g_game.cancelRuleViolation()
+            violationReportTab = nil
+            elseif tab.violationChatName then
+            g_game.closeRuleViolation(tab.violationChatName)
+            elseif tab.channelId then
+            -- notificate the server that we are leaving the channel
+            for k, v in pairs(channels) do
+                if (k == tab.channelId) then channels[k] = nil end
+            end
+            g_game.leaveChannel(tab.channelId)
+            elseif tab:getText() == "NPCs" then
+            g_game.closeNpcChannel()
+            end
+             consoleTabBar:removeTab(tab)
+            */
+        }
+    }, {
+        key: "addChannel",
+        value: function addChannel(name, id) {
+            console.log('add chanel', name, id);
+            this.channels[id] = name;
+            var tab = this.addTab(name, true);
+            tab.channelId = id;
+            return tab;
+        }
+    }, {
+        key: "addPrivateChannel",
+        value: function addPrivateChannel(receiver) {
+            this.channels[receiver] = receiver;
+            return this.addTab(receiver, false);
+        }
+    }, {
+        key: "getTab",
+        value: function getTab(name) {
+            return this.tabs[name];
+        }
+    }, {
+        key: "addPrivateText",
+        value: function addPrivateText(text, speaktype, name, isPrivateCommand, creatureName) {
+            var focus = false;
+            if (speaktype.npcChat) {
+                name = 'NPCs';
+                focus = true;
+            }
+            var privateTab = this.getTab(name);
+            if (!privateTab) {
+                privateTab = this.addTab(name, focus);
+                this.channels[name] = name;
+                privateTab.npcChat = speaktype.npcChat;
+            } else if (focus) {
+                this.selectTab(privateTab);
+            }
+            this.addTabText(text, speaktype, privateTab, creatureName);
+        }
+    }, {
+        key: "addText",
+        value: function addText(text, speaktype, tabName, creatureName) {
+            var tab = this.getTab(tabName);
+            if (tab) {
+                this.addTabText(text, speaktype, tab, creatureName);
+            } else {
+                console.error('no tab', tabName, this.tabs);
+            }
+        }
+    }, {
+        key: "addTabText",
+        value: function addTabText(text, speaktype, tab, creatureName) {
+            tab.addText(text, speaktype, creatureName);
+        }
+        /*
+        function addTabText(text, speaktype, tab, creatureName)
+          if not tab or tab.locked or not text or #text == 0 then return end
+        
+          if modules.client_options.getOption('showTimestampsInConsole') then
+            text = os.date('%H:%M') .. ' ' .. text
+          end
+        
+          local panel = consoleTabBar:getTabPanel(tab)
+          local consoleBuffer = panel:getChildById('consoleBuffer')
+          local label = g_ui.createWidget('ConsoleLabel', consoleBuffer)
+          label:setId('consoleLabel' .. consoleBuffer:getChildCount())
+          label:setText(text)
+          label:setColor(speaktype.color)
+          consoleTabBar:blinkTab(tab)
+        
+          -- Overlay for consoleBuffer which shows highlighted words only
+        
+          if speaktype.npcChat and (g_game.getCharacterName() ~= creatureName or g_game.getCharacterName() == 'Account Manager') then
+            local highlightData = getHighlightedText(text)
+            if #highlightData > 0 then
+              local labelHighlight = g_ui.createWidget('ConsolePhantomLabel', label)
+              labelHighlight:fill('parent')
+        
+              labelHighlight:setId('consoleLabelHighlight' .. consoleBuffer:getChildCount())
+              labelHighlight:setColor("#1f9ffe")
+        
+              -- Remove the curly braces
+              for i = 1, #highlightData / 3 do
+                local dataBlock = { _start = highlightData[(i-1)*3+1], _end = highlightData[(i-1)*3+2], words = highlightData[(i-1)*3+3] }
+                text = text:gsub("%{(.-)%}", dataBlock.words, 1)
+        
+                -- Recalculate positions as braces are removed
+                highlightData[(i-1)*3+1] = dataBlock._start - ((i-1) * 2)
+                highlightData[(i-1)*3+2] = dataBlock._end - (1 + (i-1) * 2)
+              end
+              label:setText(text)
+        
+              -- Calculate the positions of the highlighted text and fill with string.char(127) [Width: 1]
+              local drawText = label:getDrawText()
+              local tmpText = ""
+              for i = 1, #highlightData / 3 do
+                local dataBlock = { _start = highlightData[(i-1)*3+1], _end = highlightData[(i-1)*3+2], words = highlightData[(i-1)*3+3] }
+                local lastBlockEnd = (highlightData[(i-2)*3+2] or 1)
+        
+                for letter = lastBlockEnd, dataBlock._start-1 do
+                  local tmpChar = string.byte(drawText:sub(letter, letter))
+                  local fillChar = (tmpChar == 10 or tmpChar == 32) and string.char(tmpChar) or string.char(127)
+        
+                  tmpText = tmpText .. string.rep(fillChar, letterWidth[tmpChar])
+                end
+                tmpText = tmpText .. dataBlock.words
+              end
+        
+              -- Fill the highlight label to the same size as default label
+              local finalBlockEnd = (highlightData[(#highlightData/3-1)*3+2] or 1)
+              for letter = finalBlockEnd, drawText:len() do
+                  local tmpChar = string.byte(drawText:sub(letter, letter))
+                  local fillChar = (tmpChar == 10 or tmpChar == 32) and string.char(tmpChar) or string.char(127)
+        
+                  tmpText = tmpText .. string.rep(fillChar, letterWidth[tmpChar])
+              end
+        
+              labelHighlight:setText(tmpText)
+            end
+          end
+        
+          label.name = creatureName
+          consoleBuffer.onMouseRelease = function(self, mousePos, mouseButton)
+            processMessageMenu(mousePos, mouseButton, nil, nil, nil, tab)
+          end
+          label.onMouseRelease = function(self, mousePos, mouseButton)
+            processMessageMenu(mousePos, mouseButton, creatureName, text, self, tab)
+          end
+          label.onMousePress = function(self, mousePos, button)
+            if button == MouseLeftButton then clearSelection(consoleBuffer) end
+          end
+          label.onDragEnter = function(self, mousePos)
+            clearSelection(consoleBuffer)
+            return true
+          end
+          label.onDragLeave = function(self, droppedWidget, mousePos)
+            local text = {}
+            for selectionChild = consoleBuffer.selection.first, consoleBuffer.selection.last do
+              local label = self:getParent():getChildByIndex(selectionChild)
+              table.insert(text, label:getSelection())
+            end
+            consoleBuffer.selectionText = table.concat(text, '\n')
+            return true
+          end
+          label.onDragMove = function(self, mousePos, mouseMoved)
+            local parent = self:getParent()
+            local parentRect = parent:getPaddingRect()
+            local selfIndex = parent:getChildIndex(self)
+            local child = parent:getChildByPos(mousePos)
+        
+            -- find bonding children
+            if not child then
+              if mousePos.y < self:getY() then
+                for index = selfIndex - 1, 1, -1 do
+                  local label = parent:getChildByIndex(index)
+                  if label:getY() + label:getHeight() > parentRect.y then
+                    if (mousePos.y >= label:getY() and mousePos.y <= label:getY() + label:getHeight()) or index == 1 then
+                      child = label
+                      break
+                    end
+                  else
+                    child = parent:getChildByIndex(index + 1)
+                    break
+                  end
+                end
+              elseif mousePos.y > self:getY() + self:getHeight() then
+                for index = selfIndex + 1, parent:getChildCount(), 1 do
+                  local label = parent:getChildByIndex(index)
+                  if label:getY() < parentRect.y + parentRect.height then
+                    if (mousePos.y >= label:getY() and mousePos.y <= label:getY() + label:getHeight()) or index == parent:getChildCount() then
+                      child = label
+                      break
+                    end
+                  else
+                    child = parent:getChildByIndex(index - 1)
+                    break
+                  end
+                end
+              else
+                child = self
+              end
+            end
+        
+            if not child then return false end
+        
+            local childIndex = parent:getChildIndex(child)
+        
+            -- remove old selection
+            clearSelection(consoleBuffer)
+        
+            -- update self selection
+            local textBegin = self:getTextPos(self:getLastClickPosition())
+            local textPos = self:getTextPos(mousePos)
+            self:setSelection(textBegin, textPos)
+        
+            consoleBuffer.selection = { first = math.min(selfIndex, childIndex), last = math.max(selfIndex, childIndex) }
+        
+            -- update siblings selection
+            if child ~= self then
+              for selectionChild = consoleBuffer.selection.first + 1, consoleBuffer.selection.last - 1 do
+                parent:getChildByIndex(selectionChild):selectAll()
+              end
+        
+              local textPos = child:getTextPos(mousePos)
+              if childIndex > selfIndex then
+                child:setSelection(0, textPos)
+              else
+                child:setSelection(string.len(child:getText()), textPos)
+              end
+            end
+        
+            return true
+          end
+        
+          if consoleBuffer:getChildCount() > MAX_LINES then
+            local child = consoleBuffer:getFirstChild()
+            clearSelection(consoleBuffer)
+            child:destroy()
+          end
+        end
+         */
+
+    }, {
+        key: "displayBroadcastMessage",
+        value: function displayBroadcastMessage(text) {
+            this.getTab(this.defaultTab).addText(text, SpeakTypes[_const.MessageMode.MessageGamemasterPrivateFrom], '');
+        }
+    }, {
+        key: "handleMessage",
+        value: function handleMessage(name, level, mode, message, channelId, creaturePos) {
+            if (mode == _const.MessageMode.MessageGamemasterBroadcast) {
+                this.displayBroadcastMessage(name + ': ' + message);
+                return;
+            }
+            var isNpcMode = mode == _const.MessageMode.MessageNpcFromStartBlock || mode == _const.MessageMode.MessageNpcFrom;
+            if (this.ignoreNpcMessages && isNpcMode) {
+                return;
+            }
+            var speaktype = SpeakTypes[mode];
+            if (!speaktype) {
+                _log.Log.error('unhandled onTalk message mode ' + mode + ': ' + message);
+                return;
+            }
+            var localPlayer = _game.g_game.getLocalPlayer();
+            if (mode == _const.MessageMode.MessageRVRChannel) {
+                channelId = this.violationsChannelId;
+            }
+            if (mode == _const.MessageMode.MessageSay || mode == _const.MessageMode.MessageWhisper || mode == _const.MessageMode.MessageYell || mode == _const.MessageMode.MessageSpell || mode == _const.MessageMode.MessageMonsterSay || mode == _const.MessageMode.MessageMonsterYell || mode == _const.MessageMode.MessageNpcFrom || mode == _const.MessageMode.MessageBarkLow || mode == _const.MessageMode.MessageBarkLoud || mode == _const.MessageMode.MessageNpcFromStartBlock && creaturePos) {
+                var staticText = new _statictext.StaticText();
+                var staticMessage = message;
+                if (isNpcMode) {
+                    var highlightData = staticMessage; //getHighlightedText(staticMessage)
+                    if (highlightData.length > 0) {
+                        for (var i = 1; highlightData.length / 3; i++) {
+                            var dataBlock = {
+                                _start: highlightData[(i - 1) * 3 + 1],
+                                _end: highlightData[(i - 1) * 3 + 2],
+                                words: highlightData[(i - 1) * 3 + 3]
+                            };
+                            //staticMessage = staticMessage:gsub("{"..dataBlock.words.."}", dataBlock.words)
+                        }
+                    }
+                    staticText.setColor(speaktype.color);
+                }
+                staticText.addMessage(name, mode, staticMessage);
+                _map.g_map.addThing(staticText, creaturePos, -1);
+            }
+            var defaultMessage = mode <= 3 && true || false;
+            if (speaktype == SpeakTypesSettings.none) {
+                return;
+            }
+            if (speaktype.hideInConsole) {
+                return;
+            }
+            var composedMessage = message; //applyMessagePrefixies(name, level, message)
+            if (mode == _const.MessageMode.MessageRVRAnswer) {
+                this.addTabText(composedMessage, speaktype, this.violationReportTab, name);
+            } else if (mode == _const.MessageMode.MessageRVRContinue) {
+                this.addText(composedMessage, speaktype, name + '\'...', name);
+            } else if (speaktype.private) {
+                this.addPrivateText(composedMessage, speaktype, name, false, name);
+                if (speaktype != SpeakTypesSettings.privateNpcToPlayer) {
+                    //modules.game_textmessage.displayPrivateMessage(name+':\n'+message);
+                }
+            } else {
+                var channel = this.defaultTab;
+                if (!defaultMessage) {
+                    channel = this.channels[channelId];
+                }
+                if (channel) {
+                    this.addText(composedMessage, speaktype, channel, name);
+                } else {
+                    _log.Log.debug('message in channel id ' + channelId + ' which is unknown, this is a server bug, relogin if you want to see messages in this channel');
+                }
+            }
+        }
+    }]);
+
+    return Chatbox;
+}();
+
+var g_chat = new Chatbox();
+g_chat.addTab('Default', true);
+g_chat.addTab('Server Log');
+g_chat.defaultTab = 'Default';
+g_chat.serverTab = 'Server Log';
+exports.g_chat = g_chat;
+
+/***/ }),
+
+/***/ 377:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ChatboxTab = exports.ChatboxTab = function () {
+    function ChatboxTab(name) {
+        _classCallCheck(this, ChatboxTab);
+
+        this.name = name;
+        this.channelId = -1;
+        var div = document.getElementById('chatbox');
+        var content = document.createElement('div');
+        content.setAttribute('id', 'chatboxtab-' + this.name);
+        div.appendChild(content);
+        this.addText('------------------------------------' + this.name, 0, '');
+    }
+
+    _createClass(ChatboxTab, [{
+        key: 'addText',
+        value: function addText(text, speaktype, creatureName) {
+            var div = document.getElementById('chatboxtab-' + this.name);
+            var content = document.createElement('div');
+            content.innerText = creatureName + ', ' + text;
+            div.appendChild(content);
+            console.log('tab', this.name, text, speaktype, creatureName);
+        }
+    }]);
+
+    return ChatboxTab;
+}();
 
 /***/ }),
 
@@ -8213,6 +8734,8 @@ var _map = __webpack_require__(96);
 
 var _container = __webpack_require__(372);
 
+var _chatbox = __webpack_require__(376);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
@@ -8250,6 +8773,27 @@ var Game = exports.Game = function () {
     }
 
     _createClass(Game, [{
+        key: "processCloseChannel",
+        value: function processCloseChannel(channelId) {
+            _chatbox.g_chat.removeTab(channelId);
+        }
+    }, {
+        key: "processOpenChannel",
+        value: function processOpenChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processOpenOwnPrivateChannel",
+        value: function processOpenOwnPrivateChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processTalk",
+        value: function processTalk(name, level, mode, message, channelId, creaturePos) {
+            console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+            _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        }
+    }, {
         key: "setClientVersion",
         value: function setClientVersion(version) {
             this.m_clientVersion = version;
@@ -8672,7 +9216,6 @@ var Creature = exports.Creature = function (_Thing) {
         var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
 
         _this.m_id = 0;
-        _this.m_known = false;
         return _this;
     }
 
@@ -8700,16 +9243,6 @@ var Creature = exports.Creature = function (_Thing) {
         key: "isCreature",
         value: function isCreature() {
             return true;
-        }
-    }, {
-        key: "setKnown",
-        value: function setKnown(v) {
-            this.m_known = v;
-        }
-    }, {
-        key: "isKnown",
-        value: function isKnown() {
-            return this.m_known;
         }
     }, {
         key: "addTimedSquare",
@@ -9222,11 +9755,18 @@ var Map = exports.Map = function () {
             return null;
         }
     }, {
-        key: "removeCreatureById",
-        value: function removeCreatureById(removeId) {}
-    }, {
         key: "addCreature",
-        value: function addCreature(creature) {}
+        value: function addCreature(creature) {
+            this.m_knownCreatures[creature.getId()] = creature;
+        }
+    }, {
+        key: "removeCreatureById",
+        value: function removeCreatureById(id) {
+            if (id == 0) return;
+            if (this.m_knownCreatures[id]) {
+                this.m_knownCreatures.splice(id, 1);
+            }
+        }
     }, {
         key: "removeUnawareThings",
         value: function removeUnawareThings() {

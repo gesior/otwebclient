@@ -202,9 +202,15 @@ export class Map {
             return tile.getThing(stackpos);
         return null;
     }
-    removeCreatureById(removeId) {
-    }
     addCreature(creature) {
+        this.m_knownCreatures[creature.getId()] = creature;
+    }
+    removeCreatureById(id) {
+        if (id == 0)
+            return;
+        if (this.m_knownCreatures[id]) {
+            this.m_knownCreatures.splice(id, 1);
+        }
     }
     removeUnawareThings() {
         /* todo */

@@ -3,7 +3,6 @@ export class Creature extends Thing {
     constructor() {
         super();
         this.m_id = 0;
-        this.m_known = false;
     }
     getId() {
         return this.m_id;
@@ -19,12 +18,6 @@ export class Creature extends Thing {
     }
     isCreature() {
         return true;
-    }
-    setKnown(v) {
-        this.m_known = v;
-    }
-    isKnown() {
-        return this.m_known;
     }
     addTimedSquare(arg0) {
         throw new Error("Method not implemented.");

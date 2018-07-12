@@ -16,7 +16,7 @@ export class StaticText extends Thing {
     m_name: string;
     m_mode: MessageMode;
     m_color: Color;
-    m_cachedText: CachedText;
+    m_cachedText: CachedText = new CachedText();
     m_updateEvent: number = null;
 
     drawText(dest: Point, parentRect: Rect) {

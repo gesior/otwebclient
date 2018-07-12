@@ -3,6 +3,7 @@ import { Rect } from "./structures/rect";
 import { Point } from "./structures/point";
 import { Color } from "./color";
 import { MessageMode, Otc } from "./constants/const";
+import { CachedText } from "./cachedtext";
 import { g_clock } from "./structures/g_clock";
 import { g_map } from "./map";
 import { Log } from "./log";
@@ -12,6 +13,7 @@ export class StaticText extends Thing {
         this.m_yell = false;
         /*std::deque<std::pair<std::string, ticks_t>>*/
         this.m_messages = [];
+        this.m_cachedText = new CachedText();
         this.m_updateEvent = null;
     }
     drawText(dest, parentRect) {

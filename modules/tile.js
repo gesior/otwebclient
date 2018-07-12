@@ -1,6 +1,7 @@
 import { g_game } from "./game";
 import { g_map } from "./map";
 import { Otc, Tilestate } from "./constants/const";
+import { Log } from "./log";
 export class Tile {
     constructor(position) {
         this.m_drawElevation = 0;
@@ -106,8 +107,10 @@ export class Tile {
         return removed;
     }
     getThing(stackPos) {
-        if (stackPos >= 0 && stackPos < this.m_things.length)
+        if (stackPos >= 0 && stackPos < this.m_things.length) {
+            Log.debug('tile thing: ', this.m_things[stackPos]);
             return this.m_things[stackPos];
+        }
         return null;
     }
     getEffect(id) {

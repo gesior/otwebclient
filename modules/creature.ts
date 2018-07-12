@@ -6,7 +6,6 @@ import {Light} from "./structures/light";
 export class Creature extends Thing {
     m_id: number = 0;
     m_name: string;
-    m_known: boolean = false;
 
     constructor() {
         super();
@@ -29,13 +28,6 @@ export class Creature extends Thing {
 
     isCreature() {
         return true;
-    }
-
-    setKnown(v: boolean) {
-        this.m_known = v;
-    }
-    isKnown() {
-        return this.m_known;
     }
 
     addTimedSquare(arg0: any): any {

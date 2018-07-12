@@ -6,6 +6,7 @@ import {g_game} from "./game";
 import {Item} from "./item";
 import {g_map} from "./map";
 import {Otc, Tilestate} from "./constants/const";
+import {Log} from "./log";
 
 export class Tile {
     static MAX_THINGS = 10;
@@ -140,8 +141,10 @@ export class Tile {
 
     getThing(stackPos: number): Thing {
 
-        if (stackPos >= 0 && stackPos < this.m_things.length)
+        if (stackPos >= 0 && stackPos < this.m_things.length) {
+            Log.debug('tile thing: ', this.m_things[stackPos]);
             return this.m_things[stackPos];
+        }
         return null;
     }
 

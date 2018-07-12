@@ -241,12 +241,18 @@ m_awareRange: AwareRange = new AwareRange();
         return null;
     }
 
-    removeCreatureById(removeId: number) {
-        
+    addCreature(creature: Creature) {
+        this.m_knownCreatures[creature.getId()] = creature;
     }
 
-    addCreature(creature: Creature) {
-        
+    removeCreatureById(id: number)
+    {
+        if(id == 0)
+        return;
+
+        if (this.m_knownCreatures[id]) {
+            this.m_knownCreatures.splice(id, 1);
+        }
     }
 
     removeUnawareThings() {
