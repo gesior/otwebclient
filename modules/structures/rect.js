@@ -1,7 +1,9 @@
-import { Point } from "./point";
-import { Size } from "./size";
-export class Rect {
-    constructor(...args) {
+"use strict";
+exports.__esModule = true;
+var point_1 = require("./point");
+var size_1 = require("./size");
+var Rect = /** @class */ (function () {
+    function Rect() {
         //TRect() : x1(0), y1(0), x2(-1), y2(-1) { }
         //TRect(T x, T y, T width, T height) : x1(x), y1(y), x2(x+width-1), y2(y+height-1) { }
         //TRect(const & topLeft, const & bottomRight) : x1(topLeft.x), y1(topLeft.y), x2(bottomRight.x), y2(bottomRight.y) { }
@@ -9,6 +11,10 @@ export class Rect {
         //TRect(T x, T y, const TSize<T>& size) : x1(x), y1(y), x2(x+size.width()-1), y2(y+size.height()-1) { }
         //TRect(const & topLeft, const TSize<T>& size) : x1(topLeft.x), y1(topLeft.y), x2(x1+size.width()-1), y2(y1+size.height()-1) { }
         //TRect(const & topLeft, int width, int height) : x1(topLeft.x), y1(topLeft.y), x2(x1+width-1), y2(y1+height-1) { }
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
         this.x1 = 0;
         this.y1 = 0;
         this.x2 = 0;
@@ -22,7 +28,7 @@ export class Rect {
         }
         else if (args.length == 1) {
             if (args[0] instanceof Rect) {
-                let other = args[0];
+                var other = args[0];
                 this.x1 = other.x1;
                 this.y1 = other.y1;
                 this.x2 = other.x2;
@@ -31,18 +37,18 @@ export class Rect {
             }
         }
         else if (args.length == 2) {
-            if (args[0] instanceof Point && args[1] instanceof Point) {
-                let topLeft = args[0];
-                let bottomRight = args[1];
+            if (args[0] instanceof point_1.Point && args[1] instanceof point_1.Point) {
+                var topLeft = args[0];
+                var bottomRight = args[1];
                 this.x1 = topLeft.x;
                 this.y1 = topLeft.y;
                 this.x2 = bottomRight.x;
                 this.y2 = bottomRight.y;
                 return;
             }
-            else if (args[0] instanceof Point && args[1] instanceof Size) {
-                let topLeft = args[0];
-                let size = args[1];
+            else if (args[0] instanceof point_1.Point && args[1] instanceof size_1.Size) {
+                var topLeft = args[0];
+                var size = args[1];
                 this.x1 = topLeft.x;
                 this.y1 = topLeft.y;
                 this.x2 = this.x1 + size.width() - 1;
@@ -51,20 +57,20 @@ export class Rect {
             }
         }
         else if (args.length == 3) {
-            if (args[0] instanceof Point && typeof args[1] == 'number' && typeof args[2] == 'number') {
-                let topLeft = args[0];
-                let width = args[1];
-                let height = args[2];
+            if (args[0] instanceof point_1.Point && typeof args[1] == 'number' && typeof args[2] == 'number') {
+                var topLeft = args[0];
+                var width = args[1];
+                var height = args[2];
                 this.x1 = topLeft.x;
                 this.y1 = topLeft.y;
                 this.x2 = this.x1 + width - 1;
                 this.y2 = this.y1 + height - 1;
                 return;
             }
-            else if (typeof args[0] == 'number' && typeof args[1] == 'number' && args[2] instanceof Size) {
-                let x = args[0];
-                let y = args[1];
-                let size = args[2];
+            else if (typeof args[0] == 'number' && typeof args[1] == 'number' && args[2] instanceof size_1.Size) {
+                var x = args[0];
+                var y = args[1];
+                var size = args[2];
                 this.x1 = x;
                 this.y1 = y;
                 this.x2 = this.x1 + size.width() - 1;
@@ -75,10 +81,10 @@ export class Rect {
         else if (args.length == 4) {
             if (typeof args[0] == 'number' && typeof args[1] == 'number' &&
                 typeof args[2] == 'number' && typeof args[3] == 'number') {
-                let x = args[0];
-                let y = args[1];
-                let width = args[2];
-                let height = args[3];
+                var x = args[0];
+                var y = args[1];
+                var width = args[2];
+                var height = args[3];
                 this.x1 = x;
                 this.y1 = y;
                 this.x2 = this.x1 + width - 1;
@@ -88,162 +94,162 @@ export class Rect {
         }
         throw new Error('Invalid constructor parameters.');
     }
-    equals(otherRect) {
+    Rect.prototype.equals = function (otherRect) {
         return this.x1 == otherRect.x1 && this.y1 == otherRect.y1 && this.x2 == otherRect.x2 && this.y2 == otherRect.y2;
-    }
-    clone() {
+    };
+    Rect.prototype.clone = function () {
         return new Rect(this);
-    }
-    isNull() {
+    };
+    Rect.prototype.isNull = function () {
         return this.x2 == this.x1 - 1 && this.y2 == this.y1 - 1;
-    }
-    isEmpty() {
+    };
+    Rect.prototype.isEmpty = function () {
         return this.x1 > this.x2 || this.y1 > this.y2;
-    }
-    isValid() {
+    };
+    Rect.prototype.isValid = function () {
         return this.x1 <= this.x2 && this.y1 <= this.y2;
-    }
-    left() {
+    };
+    Rect.prototype.left = function () {
         return this.x1;
-    }
-    top() {
+    };
+    Rect.prototype.top = function () {
         return this.y1;
-    }
-    right() {
+    };
+    Rect.prototype.right = function () {
         return this.x2;
-    }
-    bottom() {
+    };
+    Rect.prototype.bottom = function () {
         return this.y2;
-    }
-    horizontalCenter() {
+    };
+    Rect.prototype.horizontalCenter = function () {
         return this.x1 + (this.x2 - this.x1) / 2;
-    }
-    verticalCenter() {
+    };
+    Rect.prototype.verticalCenter = function () {
         return this.y1 + (this.y2 - this.y1) / 2;
-    }
-    x() {
+    };
+    Rect.prototype.x = function () {
         return this.x1;
-    }
-    y() {
+    };
+    Rect.prototype.y = function () {
         return this.y1;
-    }
-    topLeft() {
-        return new Point(this.x1, this.y1);
-    }
-    bottomRight() {
-        return new Point(this.x2, this.y2);
-    }
-    topRight() {
-        return new Point(this.x2, this.y1);
-    }
-    bottomLeft() {
-        return new Point(this.x1, this.y2);
-    }
-    topCenter() {
-        return new Point((this.x1 + this.x2) / 2, this.y1);
-    }
-    bottomCenter() {
-        return new Point((this.x1 + this.x2) / 2, this.y2);
-    }
-    centerLeft() {
-        return new Point(this.x1, (this.y1 + this.y2) / 2);
-    }
-    centerRight() {
-        return new Point(this.x2, (this.y1 + this.y2) / 2);
-    }
-    center() {
-        return new Point((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2);
-    }
-    width() {
+    };
+    Rect.prototype.topLeft = function () {
+        return new point_1.Point(this.x1, this.y1);
+    };
+    Rect.prototype.bottomRight = function () {
+        return new point_1.Point(this.x2, this.y2);
+    };
+    Rect.prototype.topRight = function () {
+        return new point_1.Point(this.x2, this.y1);
+    };
+    Rect.prototype.bottomLeft = function () {
+        return new point_1.Point(this.x1, this.y2);
+    };
+    Rect.prototype.topCenter = function () {
+        return new point_1.Point((this.x1 + this.x2) / 2, this.y1);
+    };
+    Rect.prototype.bottomCenter = function () {
+        return new point_1.Point((this.x1 + this.x2) / 2, this.y2);
+    };
+    Rect.prototype.centerLeft = function () {
+        return new point_1.Point(this.x1, (this.y1 + this.y2) / 2);
+    };
+    Rect.prototype.centerRight = function () {
+        return new point_1.Point(this.x2, (this.y1 + this.y2) / 2);
+    };
+    Rect.prototype.center = function () {
+        return new point_1.Point((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2);
+    };
+    Rect.prototype.width = function () {
         return this.x2 - this.x1 + 1;
-    }
-    height() {
+    };
+    Rect.prototype.height = function () {
         return this.y2 - this.y1 + 1;
-    }
-    size() {
-        return new Size(this.width(), this.height());
-    }
-    reset() {
+    };
+    Rect.prototype.size = function () {
+        return new size_1.Size(this.width(), this.height());
+    };
+    Rect.prototype.reset = function () {
         this.x1 = this.y1 = 0;
         this.x2 = this.y2 = -1;
-    }
-    clear() {
+    };
+    Rect.prototype.clear = function () {
         this.x2 = this.x1 - 1;
         this.y2 = this.y1 - 1;
-    }
-    setLeft(pos) {
+    };
+    Rect.prototype.setLeft = function (pos) {
         this.x1 = pos;
-    }
-    setTop(pos) {
+    };
+    Rect.prototype.setTop = function (pos) {
         this.y1 = pos;
-    }
-    setRight(pos) {
+    };
+    Rect.prototype.setRight = function (pos) {
         this.x2 = pos;
-    }
-    setBottom(pos) {
+    };
+    Rect.prototype.setBottom = function (pos) {
         this.y2 = pos;
-    }
-    setX(x) {
+    };
+    Rect.prototype.setX = function (x) {
         this.x1 = x;
-    }
-    setY(y) {
+    };
+    Rect.prototype.setY = function (y) {
         this.y1 = y;
-    }
-    setTopLeft(p) {
+    };
+    Rect.prototype.setTopLeft = function (p) {
         this.x1 = p.x;
         this.y1 = p.y;
-    }
-    setBottomRight(p) {
+    };
+    Rect.prototype.setBottomRight = function (p) {
         this.x2 = p.x;
         this.y2 = p.y;
-    }
-    setTopRight(p) {
+    };
+    Rect.prototype.setTopRight = function (p) {
         this.x2 = p.x;
         this.y1 = p.y;
-    }
-    setBottomLeft(p) {
+    };
+    Rect.prototype.setBottomLeft = function (p) {
         this.x1 = p.x;
         this.y2 = p.y;
-    }
-    setWidth(width) {
+    };
+    Rect.prototype.setWidth = function (width) {
         this.x2 = this.x1 + width - 1;
-    }
-    setHeight(height) {
+    };
+    Rect.prototype.setHeight = function (height) {
         this.y2 = this.y1 + height - 1;
-    }
-    setSize(size) {
+    };
+    Rect.prototype.setSize = function (size) {
         this.x2 = this.x1 + size.width() - 1;
         this.y2 = this.y1 + size.height() - 1;
-    }
-    setRect(x, y, width, height) {
+    };
+    Rect.prototype.setRect = function (x, y, width, height) {
         this.x1 = x;
         this.y1 = y;
         this.x2 = (x + width - 1);
         this.y2 = (y + height - 1);
-    }
-    setCoords(left, top, right, bottom) {
+    };
+    Rect.prototype.setCoords = function (left, top, right, bottom) {
         this.x1 = left;
         this.y1 = top;
         this.x2 = right;
         this.y2 = bottom;
-    }
-    moveLeft(pos) {
+    };
+    Rect.prototype.moveLeft = function (pos) {
         this.x2 += (pos - this.x1);
         this.x1 = pos;
-    }
-    moveTop(pos) {
+    };
+    Rect.prototype.moveTop = function (pos) {
         this.y2 += (pos - this.y1);
         this.y1 = pos;
-    }
-    moveRight(pos) {
+    };
+    Rect.prototype.moveRight = function (pos) {
         this.x1 += (pos - this.x2);
         this.x2 = pos;
-    }
-    moveBottom(pos) {
+    };
+    Rect.prototype.moveBottom = function (pos) {
         this.y1 += (pos - this.y2);
         this.y2 = pos;
-    }
-    bind(r) {
+    };
+    Rect.prototype.bind = function (r) {
         if (this.isNull() || r.isNull())
             return;
         if (this.right() > r.right())
@@ -254,6 +260,7 @@ export class Rect {
             this.moveLeft(r.left());
         if (this.top() < r.top())
             this.moveTop(r.top());
-    }
-}
-//# sourceMappingURL=rect.js.map
+    };
+    return Rect;
+}());
+exports.Rect = Rect;

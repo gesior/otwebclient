@@ -2,47 +2,131 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/modules/view/chatbox.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/view/chatboxtab.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vendor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/animatedtext.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animatedtext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cachedtext.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cachedtext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/color.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/color.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/constants/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/const.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/constants/helpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/helpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/constants/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/container.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/container.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/creature.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/creature.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/creature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/effect.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/effect.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/game.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/game.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/inputfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/inputfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/jspack.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/jspack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/lightview.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/lightview.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/localplayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/localplayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/localplayer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/localplayer.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/localplayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/localplayer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/log.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/map.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/map.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/missile.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/missile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/inputmessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/inputmessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/outputmessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/outputmessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/protocol.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocol.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/outfit.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/outfit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/player.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/player.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/position.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/position.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/spritemanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/spritemanager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/statictext.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/statictext.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/statictext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/awarerange.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/awarerange.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/g_clock.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/g_clock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/light.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/light.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/marketdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/marketdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/monster.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/monster.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/npc.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/npc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/point.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/point.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/rect.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/rect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/size.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/size.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/texture.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/texture.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/thingtypeattribs.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/thingtypeattribs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/timer.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/timer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/unjustifiedpoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/unjustifiedpoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thing.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thing.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thing.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtypemanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtypemanager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/tile.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/tile.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/tile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tileblock.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tileblock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/view/chatbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatboxtab.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/view/chatboxtab.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1178514901">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts">
+        <counts>
+          <entry key="TypeScriptServerServiceImpl" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="js" value="1" />
+          <entry key="ts" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JavaScript" value="1" />
+          <entry key="TypeScript" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.php.composer.command.options" />
+      <usages-collector id="statistics.php.new.class" />
+      <usages-collector id="statistics.php.composer.actions" />
+      <usages-collector id="statistics.php.new.test" />
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="TypeScript" value="270" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="ts" value="270" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.php.rename.constructor" />
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="fronttypescript" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="map.ts" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/map.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="232" column="28" selection-start-line="232" selection-start-column="28" selection-end-line="232" selection-end-column="28" />
+            <state relative-caret-position="413">
+              <caret line="241" column="27" lean-forward="true" selection-start-line="241" selection-start-column="27" selection-end-line="241" selection-end-column="27" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -50,11 +134,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tile.ts" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/tile.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1869">
-              <caret line="144" column="60" selection-start-line="144" selection-start-column="57" selection-end-line="144" selection-end-column="60" />
+            <state relative-caret-position="333">
+              <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -62,11 +146,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="protocolgame.ts" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="1636" column="34" lean-forward="true" selection-start-line="1636" selection-start-column="34" selection-end-line="1636" selection-end-column="34" />
+            <state relative-caret-position="301">
+              <caret line="944" column="56" selection-start-line="944" selection-start-column="56" selection-end-line="944" selection-end-column="56" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -74,11 +158,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.ts" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/log.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modules/game.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+            <state relative-caret-position="670">
+              <caret line="412" column="30" selection-start-line="412" selection-start-column="30" selection-end-line="412" selection-end-column="30" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -86,62 +179,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatbox.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/view/chatbox.ts">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="100" column="40" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
+            <state relative-caret-position="4851">
+              <caret line="352" column="25" lean-forward="true" selection-start-line="352" selection-start-column="25" selection-end-line="352" selection-end-column="25" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#93#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chatboxtab.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/view/chatboxtab.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/spritemanager.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="80" selection-start-line="8" selection-start-column="80" selection-end-line="8" selection-end-column="80" />
+            <state relative-caret-position="195">
+              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="statictext.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/statictext.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/init.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="6" column="39" lean-forward="true" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+            <state relative-caret-position="105">
+              <caret line="8" column="15" lean-forward="true" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/item.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="79" selection-start-line="17" selection-start-column="79" selection-end-line="17" selection-end-column="79" />
+            <state relative-caret-position="180">
+              <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#0#30#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="const.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/thing.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="259" column="12" selection-start-line="259" selection-start-column="12" selection-end-line="259" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proto.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/constants/proto.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="86" column="46" selection-start-line="86" selection-start-column="46" selection-end-line="86" selection-end-column="46" />
+            <state relative-caret-position="451">
+              <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,21 +237,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MessageModes.</find>
-      <find>[</find>
-      <find>MessageMode.</find>
-      <find>SpeakTypesSettings</find>
-      <find>and</find>
-      <find>~=</find>
-      <find>localPlayer:</find>
-      <find>or</find>
-      <find>violationsChannelId</find>
-      <find>def</find>
-      <find>processr</find>
-      <find>processru</find>
-      <find>processChannelTabMenu</find>
-      <find>new chatbox</find>
-      <find>channels</find>
       <find>settext</find>
       <find>achedText.setTe</find>
       <find>channel</find>
@@ -180,6 +252,21 @@
       <find>b = this.getTa</find>
       <find>if (cha</find>
       <find>m_cachedText</find>
+      <find>setlocal</find>
+      <find>log_1</find>
+      <find>reature mov</find>
+      <find>revers</find>
+      <find>reature mo</find>
+      <find>reature move</find>
+      <find>insert</find>
+      <find>m_datId</find>
+      <find>getstackp</find>
+      <find>creature mo</find>
+      <find>creature mov</find>
+      <find>m_knownCreatures</find>
+      <find>console.log</find>
+      <find>no creature found to m</find>
+      <find>addth</find>
     </findStrings>
     <replaceStrings>
       <replace>this.m_attribs</replace>
@@ -223,7 +310,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/missile.ts" />
         <option value="$PROJECT_DIR$/modules/player.ts" />
         <option value="$PROJECT_DIR$/modules/container.ts" />
         <option value="$PROJECT_DIR$/modules/structures/monster.ts" />
@@ -249,13 +335,10 @@
         <option value="$PROJECT_DIR$/modules/structures/thingtypeattribs.ts" />
         <option value="$PROJECT_DIR$/modules/game.js" />
         <option value="$PROJECT_DIR$/modules/thingtypemanager.ts" />
-        <option value="$PROJECT_DIR$/modules/thingtype.ts" />
         <option value="$PROJECT_DIR$/init.ts" />
-        <option value="$PROJECT_DIR$/modules/item.ts" />
         <option value="$PROJECT_DIR$/modules/constants/const.ts" />
         <option value="$PROJECT_DIR$/modules/cachedtext.ts" />
         <option value="$PROJECT_DIR$/modules/animatedtext.ts" />
-        <option value="$PROJECT_DIR$/modules/thing.ts" />
         <option value="$PROJECT_DIR$/modules/color.ts" />
         <option value="$PROJECT_DIR$/modules/structures/rect.ts" />
         <option value="$PROJECT_DIR$/modules/structures/size.ts" />
@@ -264,16 +347,20 @@
         <option value="$PROJECT_DIR$/modules/network/inputmessage.ts" />
         <option value="$PROJECT_DIR$/modules/constants/helpers.ts" />
         <option value="$PROJECT_DIR$/modules/tileblock.ts" />
-        <option value="$PROJECT_DIR$/modules/tile.ts" />
         <option value="$PROJECT_DIR$/modules/creature.ts" />
         <option value="$PROJECT_DIR$/modules/localplayer.ts" />
-        <option value="$PROJECT_DIR$/modules/map.ts" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/modules/statictext.ts" />
         <option value="$PROJECT_DIR$/modules/view/chatboxtab.ts" />
-        <option value="$PROJECT_DIR$/modules/network/protocolgame.ts" />
         <option value="$PROJECT_DIR$/modules/game.ts" />
         <option value="$PROJECT_DIR$/modules/view/chatbox.ts" />
+        <option value="$PROJECT_DIR$/../../../ergo_test_rekrutacyjny_app/nowa/index.htm" />
+        <option value="$PROJECT_DIR$/modules/map.ts" />
+        <option value="$PROJECT_DIR$/modules/network/protocolgame.ts" />
+        <option value="$PROJECT_DIR$/modules/thing.ts" />
+        <option value="$PROJECT_DIR$/modules/tile.ts" />
+        <option value="$PROJECT_DIR$/modules/item.ts" />
+        <option value="$PROJECT_DIR$/modules/thingtype.ts" />
       </list>
     </option>
   </component>
@@ -309,9 +396,9 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1919" />
+    <option name="x" value="-1" />
     <option name="width" value="1922" />
-    <option name="height" value="1047" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -319,6 +406,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -359,18 +447,17 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../angular-components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../ergo_test_rekrutacyjny_app/unpack" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -410,60 +497,72 @@
       <option name="presentableId" value="Default" />
       <updated>1530695288186</updated>
       <workItem from="1530695289251" duration="2052000" />
-      <workItem from="1530697389980" duration="127077000" />
+      <workItem from="1530697389980" duration="128965000" />
+      <workItem from="1531476545485" duration="268000" />
+      <workItem from="1533019802851" duration="9908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129129000" />
+    <option name="totallyTimeSpent" value="141193000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1919" y="0" width="1922" height="1047" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.43431053" />
-      <window_info anchor="bottom" id="LuaCheck" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32879582" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" weight="0.43396226" />
-      <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12219851" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49947754" visible="true" weight="0.12433298" />
+      <window_info id="Structure" order="1" sideWeight="0.5005225" side_tool="true" weight="0.12433298" />
+      <window_info active="true" id="Favorites" order="2" sideWeight="0.5005225" side_tool="true" visible="true" weight="0.12433298" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32984293" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32879582" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3291536" />
+      <window_info anchor="bottom" id="LuaCheck" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3291536" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" weight="0.43260187" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.3291536" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.4336468" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="LuaCheck" order="7" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32879582" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12219851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32984293" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32879582" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="LuaCheck" order="7" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="10" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32984293" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.72771084" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -558,57 +657,37 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/modules/tile.ts</url>
+          <line>43</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/modules/network/protocolgame.ts</url>
+          <line>956</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/modules/map.ts</url>
+          <line>237</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/jspack.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/image.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/container.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/network/outputmessage.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/network/protocol.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/es6-promise/es6-promise.d.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/es6-promise/es6-promise.d.ts" />
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es6.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -666,16 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
           <caret line="10966" column="14" selection-start-line="10966" selection-start-column="14" selection-end-line="10966" selection-end-column="14" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/log.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -725,9 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -738,53 +804,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-          <folding>
-            <element signature="e#57#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/thingtypemanager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1965">
-          <caret line="131" column="56" selection-start-line="131" selection-start-column="56" selection-end-line="131" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/item.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modules/cachedtext.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding>
-            <element signature="e#1#40#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -792,19 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/thing.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -840,19 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
           <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/network/inputmessage.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,9 +864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -890,44 +884,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/tile.ts">
+    <entry file="file://$PROJECT_DIR$/../../../ergo_test_rekrutacyjny_app/nowa/index.htm" />
+    <entry file="file://$PROJECT_DIR$/modules/view/chatbox.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1869">
-          <caret line="144" column="60" selection-start-line="144" selection-start-column="57" selection-end-line="144" selection-end-column="60" />
+        <state relative-caret-position="1410">
+          <caret line="100" column="40" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/map.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="232" column="28" selection-start-line="232" selection-start-column="28" selection-end-line="232" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/constants/proto.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="86" column="46" selection-start-line="86" selection-start-column="46" selection-end-line="86" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="259" column="12" selection-start-line="259" selection-start-column="12" selection-end-line="259" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/statictext.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="6" column="39" lean-forward="true" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+        <state relative-caret-position="90">
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -941,6 +912,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3885">
+          <caret line="259" column="12" selection-start-line="259" selection-start-column="12" selection-end-line="259" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/constants/proto.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1290">
+          <caret line="86" column="46" selection-start-line="86" selection-start-column="46" selection-end-line="86" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modules/view/chatboxtab.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -948,32 +933,124 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/game.ts">
+    <entry file="file://$PROJECT_DIR$/modules/network/inputmessage.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-479">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/network/outputmessage.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/thingtypemanager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/spritemanager.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/game.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="412" column="30" selection-start-line="412" selection-start-column="30" selection-end-line="412" selection-end-column="30" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/view/chatbox.ts">
+    <entry file="file://$PROJECT_DIR$/init.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="100" column="40" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="40" />
+        <state relative-caret-position="105">
+          <caret line="8" column="15" lean-forward="true" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/log.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/map.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="241" column="27" lean-forward="true" selection-start-line="241" selection-start-column="27" selection-end-line="241" selection-end-column="27" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="1636" column="34" lean-forward="true" selection-start-line="1636" selection-start-column="34" selection-end-line="1636" selection-end-column="34" />
+        <state relative-caret-position="301">
+          <caret line="944" column="56" selection-start-line="944" selection-start-column="56" selection-end-line="944" selection-end-column="56" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/thing.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/tile.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/item.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4851">
+          <caret line="352" column="25" lean-forward="true" selection-start-line="352" selection-start-column="25" selection-end-line="352" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#93#0" expanded="true" />
           </folding>
         </state>
       </provider>

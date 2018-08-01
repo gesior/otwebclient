@@ -15,9 +15,7 @@ import {MarketData} from "./structures/marketdata";
 
 
 export class Thing {
-
     m_position: Position;
-    m_datId: number;
 
     draw(dest: Point, scaleFactor: number, animate: boolean, lightView: LightView = null) {
     }

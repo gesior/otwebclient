@@ -1,17 +1,31 @@
-import { Thing } from "./thing";
-import { Timer } from "./structures/timer";
-import { Color } from "./color";
-import { CachedText } from "./cachedtext";
-import { Otc } from "./constants/const";
-export class AnimatedText extends Thing {
-    constructor() {
-        super();
-        this.m_color = new Color();
-        this.m_animationTimer = new Timer();
-        this.m_cachedText.setFont("verdana-11px-rounded");
-        this.m_cachedText.setAlign(CachedText.ALIGN_LEFT);
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var thing_1 = require("./thing");
+var timer_1 = require("./structures/timer");
+var color_1 = require("./color");
+var cachedtext_1 = require("./cachedtext");
+var const_1 = require("./constants/const");
+var AnimatedText = /** @class */ (function (_super) {
+    __extends(AnimatedText, _super);
+    function AnimatedText() {
+        var _this = _super.call(this) || this;
+        _this.m_color = new color_1.Color();
+        _this.m_animationTimer = new timer_1.Timer();
+        _this.m_cachedText.setFont("verdana-11px-rounded");
+        _this.m_cachedText.setAlign(cachedtext_1.CachedText.ALIGN_LEFT);
+        return _this;
     }
-    drawText(dest, visibleRect) {
+    AnimatedText.prototype.drawText = function (dest, visibleRect) {
         /* todo */
         /*
         static float tf = Otc::ANIMATED_TEXT_DURATION;
@@ -42,54 +56,55 @@ export class AnimatedText extends Thing {
             m_cachedText.draw(rect);
         }
         */
-    }
-    setColor(color) {
-        this.m_color = Color.from8bit(color);
-    }
-    setText(text) {
+    };
+    AnimatedText.prototype.setColor = function (color) {
+        this.m_color = color_1.Color.from8bit(color);
+    };
+    AnimatedText.prototype.setText = function (text) {
         //m_cachedText.setText(text);
-    }
-    setOffset(offset) {
+    };
+    AnimatedText.prototype.setOffset = function (offset) {
         this.m_offset = offset;
-    }
-    getColor() {
+    };
+    AnimatedText.prototype.getColor = function () {
         return this.m_color;
-    }
-    getCachedText() {
+    };
+    AnimatedText.prototype.getCachedText = function () {
         return this.m_cachedText;
-    }
-    getOffset() {
+    };
+    AnimatedText.prototype.getOffset = function () {
         return this.m_offset;
-    }
-    getTimer() {
+    };
+    AnimatedText.prototype.getTimer = function () {
         return this.m_animationTimer;
-    }
-    merge(other) {
+    };
+    AnimatedText.prototype.merge = function (other) {
         if (other.getColor() != this.m_color)
             return false;
         if (other.getCachedText().getFont() != this.m_cachedText.getFont())
             return false;
-        if (this.m_animationTimer.ticksElapsed() > Otc.ANIMATED_TEXT_DURATION / 2.5)
+        if (this.m_animationTimer.ticksElapsed() > const_1.Otc.ANIMATED_TEXT_DURATION / 2.5)
             return false;
-        let number = parseInt(this.m_cachedText.getText());
-        let otherNumber = parseInt(other.getCachedText().getText());
+        var number = parseInt(this.m_cachedText.getText());
+        var otherNumber = parseInt(other.getCachedText().getText());
         if (!isNaN(number) && !isNaN(otherNumber)) {
             this.m_cachedText.setText((number + otherNumber).toString());
             return true;
         }
         return false;
-    }
-    asAnimatedText() {
+    };
+    AnimatedText.prototype.asAnimatedText = function () {
         return this;
-    }
-    isAnimatedText() {
+    };
+    AnimatedText.prototype.isAnimatedText = function () {
         return true;
-    }
-    onAppear() {
+    };
+    AnimatedText.prototype.onAppear = function () {
         this.m_animationTimer.restart();
         // schedule removal
         //auto self = asAnimatedText();
         //g_dispatcher.scheduleEvent([self]() { g_map.removeThing(self); }, Otc::ANIMATED_TEXT_DURATION);
-    }
-}
-//# sourceMappingURL=animatedtext.js.map
+    };
+    return AnimatedText;
+}(thing_1.Thing));
+exports.AnimatedText = AnimatedText;

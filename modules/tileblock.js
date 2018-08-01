@@ -1,32 +1,35 @@
-import { Tile } from "./tile";
-import { toInt } from "./constants/helpers";
-export class TileBlock {
-    constructor() {
+"use strict";
+exports.__esModule = true;
+var tile_1 = require("./tile");
+var helpers_1 = require("./constants/helpers");
+var TileBlock = /** @class */ (function () {
+    function TileBlock() {
         this.m_tiles = [];
     }
-    create(pos) {
-        let tile = new Tile(pos);
+    TileBlock.prototype.create = function (pos) {
+        var tile = new tile_1.Tile(pos);
         this.m_tiles[this.getTileIndex(pos)] = tile;
         return tile;
-    }
-    getOrCreate(pos) {
-        let tile = this.get(pos);
+    };
+    TileBlock.prototype.getOrCreate = function (pos) {
+        var tile = this.get(pos);
         if (!tile)
             tile = this.create(pos);
         return tile;
-    }
-    get(pos) {
+    };
+    TileBlock.prototype.get = function (pos) {
         return this.m_tiles[this.getTileIndex(pos)];
-    }
-    remove(pos) {
+    };
+    TileBlock.prototype.remove = function (pos) {
         this.m_tiles[this.getTileIndex(pos)] = null;
-    }
-    getTileIndex(pos) {
-        return (toInt(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE) + toInt(pos.x % TileBlock.BLOCK_SIZE);
-    }
-    getTiles() {
+    };
+    TileBlock.prototype.getTileIndex = function (pos) {
+        return (helpers_1.toInt(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE) + helpers_1.toInt(pos.x % TileBlock.BLOCK_SIZE);
+    };
+    TileBlock.prototype.getTiles = function () {
         return this.m_tiles;
-    }
-}
-TileBlock.BLOCK_SIZE = 32;
-//# sourceMappingURL=tileblock.js.map
+    };
+    TileBlock.BLOCK_SIZE = 32;
+    return TileBlock;
+}());
+exports.TileBlock = TileBlock;

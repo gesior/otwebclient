@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -6,45 +7,88 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { InputFile } from "./inputfile";
-import { Log } from "./log";
-class Resources {
-    openFile(file) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let get = function (url) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    return new Promise((resolve, reject) => {
-                        var xhr = new XMLHttpRequest();
-                        xhr.responseType = 'arraybuffer';
-                        xhr.onload = function (e) {
-                            if (this.status >= 200 && this.status < 300)
-                                resolve(this.response);
-                            else
-                                reject('Response status: ' + this.status);
-                        };
-                        xhr.onerror = function (e) {
-                            reject(e);
-                        };
-                        xhr.open('GET', url, true); //Async
-                        xhr.send();
-                    });
-                });
-            };
-            try {
-                let response = yield get(file);
-                console.log('r', response);
-                let uInt8Array = new Uint8Array(response);
-                return new InputFile(new DataView(uInt8Array.buffer));
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
             }
-            catch (e) {
-                Log.debug('failed to openFile', e);
-                throw e;
-            }
-        });
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-}
-let g_resources = new Resources();
-export { g_resources };
+};
+exports.__esModule = true;
+var inputfile_1 = require("./inputfile");
+var log_1 = require("./log");
+var Resources = /** @class */ (function () {
+    function Resources() {
+    }
+    Resources.prototype.openFile = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var get, response, uInt8Array, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        get = function (url) {
+                            return __awaiter(this, void 0, void 0, function () {
+                                return __generator(this, function (_a) {
+                                    return [2 /*return*/, new Promise(function (resolve, reject) {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.responseType = 'arraybuffer';
+                                            xhr.onload = function (e) {
+                                                if (this.status >= 200 && this.status < 300)
+                                                    resolve(this.response);
+                                                else
+                                                    reject('Response status: ' + this.status);
+                                            };
+                                            xhr.onerror = function (e) {
+                                                reject(e);
+                                            };
+                                            xhr.open('GET', url, true); //Async
+                                            xhr.send();
+                                        })];
+                                });
+                            });
+                        };
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, get(file)];
+                    case 2:
+                        response = _a.sent();
+                        console.log('r', response);
+                        uInt8Array = new Uint8Array(response);
+                        return [2 /*return*/, new inputfile_1.InputFile(new DataView(uInt8Array.buffer))];
+                    case 3:
+                        e_1 = _a.sent();
+                        log_1.Log.debug('failed to openFile', e_1);
+                        throw e_1;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return Resources;
+}());
+var g_resources = new Resources();
+exports.g_resources = g_resources;
 /*
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
@@ -57,4 +101,3 @@ console.log(uInt8Array);
 
 xhr.send();
  */ 
-//# sourceMappingURL=resources.js.map

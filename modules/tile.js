@@ -35,6 +35,8 @@ export class Tile {
                 this.m_effects.push(thing);
         }
         else {
+            if (thing.isCreature())
+                console.log('tile.addThing', thing, stackPos, this.m_things);
             // priority                                    854
             // 0 - ground,                        -.      -.
             // 1 - ground borders                 -.      -.
@@ -57,6 +59,7 @@ export class Tile {
                 }
                 for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
                     let otherPriority = this.m_things[stackPos].getStackPriority();
+                    console.log('prior', stackPos, priority, otherPriority);
                     if ((append && otherPriority > priority) || (!append && otherPriority >= priority))
                         break;
                 }
@@ -64,7 +67,8 @@ export class Tile {
             else if (stackPos > this.m_things.length)
                 stackPos = this.m_things.length;
             //this.m_things.insert(this.m_things.begin() + stackPos, thing);
-            this.m_things[stackPos] = thing;
+            this.m_things.splice(stackPos, 0, thing);
+            //this.m_things[stackPos] = thing;
             if (this.m_things.length > Tile.MAX_THINGS)
                 this.removeThing(this.m_things[Tile.MAX_THINGS]);
             /*
@@ -167,7 +171,7 @@ export class Tile {
         let creature;
         for (let i = 0; i < this.m_things.length; ++i) {
             let thing = this.m_things[i];
-            if (thing.isLocalPlayer()) // return local player if there is no other creature
+            if (thing.isLocalPlayer())
                 creature = thing;
             else if (thing.isCreature() && !thing.isLocalPlayer())
                 return thing;

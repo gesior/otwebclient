@@ -811,7 +811,7 @@ export class ProtocolGame extends Protocol {
         let thing = this.getMappedThing(msg);
         let newPos = this.getPosition(msg);
         if (!thing || !thing.isCreature()) {
-            Log.error("no creature found to move");
+            Log.error("no creature found to move", thing);
             return;
         }
         if (!g_map.removeThing(thing)) {
@@ -820,7 +820,7 @@ export class ProtocolGame extends Protocol {
         }
         let creature = thing;
         creature.allowAppearWalk();
-        Log.debug('creature move', creature);
+        Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
         g_map.addThing(thing, newPos, -1);
     }
     parseOpenContainer(msg) {
@@ -1847,9 +1847,9 @@ export class ProtocolGame extends Protocol {
             Log.error("invalid thing id");
         else if (id == Proto.UnknownCreature || id == Proto.OutdatedCreature || id == Proto.Creature)
             thing = this.getCreature(msg, id);
-        else if (id == Proto.StaticText) // otclient only
+        else if (id == Proto.StaticText)
             thing = this.getStaticText(msg, id);
-        else // item
+        else
             thing = this.getItem(msg, id);
         return thing;
     }

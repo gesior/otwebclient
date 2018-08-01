@@ -293,7 +293,7 @@ export class ThingType {
         return this.m_attribs.has(ThingAttr.ThingAttrGroundBorder);
     }
     isOnBottom() {
-        return this.m_attribs.has(ThingAttr.ThingAttrWritable);
+        return this.m_attribs.has(ThingAttr.ThingAttrOnBottom);
     }
     isOnTop() {
         return this.m_attribs.has(ThingAttr.ThingAttrOnTop);

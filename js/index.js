@@ -1,273 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 133:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Player = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _creature = __webpack_require__(68);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Player = exports.Player = function (_Creature) {
-    _inherits(Player, _Creature);
-
-    function Player() {
-        _classCallCheck(this, Player);
-
-        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
-    }
-
-    _createClass(Player, [{
-        key: 'isPlayer',
-        value: function isPlayer() {
-            return true;
-        }
-    }]);
-
-    return Player;
-}(_creature.Creature);
-
-/***/ }),
-
-/***/ 134:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AwareRange = exports.AwareRange = function () {
-    function AwareRange() {
-        _classCallCheck(this, AwareRange);
-
-        this.top = 6;
-        this.right = 9;
-        this.bottom = 7;
-        this.left = 8;
-    }
-
-    _createClass(AwareRange, [{
-        key: "horizontal",
-        value: function horizontal() {
-            return this.left + this.right + 1;
-        }
-    }, {
-        key: "vertical",
-        value: function vertical() {
-            return this.top + this.bottom + 1;
-        }
-    }]);
-
-    return AwareRange;
-}();
-
-/***/ }),
-
-/***/ 135:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Image = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _log = __webpack_require__(32);
-
-var _color = __webpack_require__(97);
-
-var _size = __webpack_require__(136);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Image = exports.Image = function () {
-    _createClass(Image, [{
-        key: "blit",
-        value: function blit(point, image) {}
-    }, {
-        key: "overwriteMask",
-        value: function overwriteMask(color) {
-            var insideColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _color.Color.white;
-            var outsideColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _color.Color.alpha;
-        }
-    }]);
-
-    function Image(size) {
-        _classCallCheck(this, Image);
-
-        if (size instanceof _size.Size) {} else if (typeof size == 'number') {}
-    }
-
-    _createClass(Image, [{
-        key: "setId",
-        value: function setId(id) {}
-    }], [{
-        key: "load",
-        value: function load(path) {
-            (0, _log.error)('load image', path);
-            return null;
-        }
-    }]);
-
-    return Image;
-}();
-
-/***/ }),
-
-/***/ 136:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Size = exports.Size = function () {
-    function Size() {
-        var wd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
-        var ht = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-
-        _classCallCheck(this, Size);
-
-        this.wd = wd;
-        this.ht = ht;
-    }
-
-    _createClass(Size, [{
-        key: "equals",
-        value: function equals(otherSize) {
-            return this.wd == otherSize.wd && this.ht == otherSize.ht;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Size(this.wd, this.ht);
-        }
-    }, {
-        key: "add",
-        value: function add(size) {
-            return new Size(this.wd + size.wd, this.ht + size.ht);
-        }
-    }, {
-        key: "sub",
-        value: function sub(size) {
-            return new Size(this.wd - size.wd, this.ht - size.ht);
-        }
-    }, {
-        key: "mul",
-        value: function mul(ratio) {
-            return new Size(this.wd * ratio, this.ht * ratio);
-        }
-    }, {
-        key: "isNull",
-        value: function isNull() {
-            return this.wd == 0 && this.ht == 0;
-        }
-    }, {
-        key: "isEmpty",
-        value: function isEmpty() {
-            return this.wd < 1 || this.ht < 1;
-        }
-    }, {
-        key: "isValid",
-        value: function isValid() {
-            return this.wd >= 0 && this.ht >= 0;
-        }
-    }, {
-        key: "width",
-        value: function width() {
-            return this.wd;
-        }
-    }, {
-        key: "height",
-        value: function height() {
-            return this.ht;
-        }
-    }, {
-        key: "resize",
-        value: function resize(w, h) {
-            this.wd = w;
-            this.ht = h;
-        }
-    }, {
-        key: "setWidth",
-        value: function setWidth(w) {
-            this.wd = w;
-        }
-    }, {
-        key: "setHeight",
-        value: function setHeight(h) {
-            this.ht = h;
-        }
-    }, {
-        key: "ratio",
-        value: function ratio() {
-            return this.wd / this.ht;
-        }
-    }, {
-        key: "area",
-        value: function area() {
-            return this.wd * this.ht;
-        }
-    }]);
-
-    return Size;
-}();
-
-/***/ }),
-
-/***/ 137:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Light = exports.Light = function Light() {
-    _classCallCheck(this, Light);
-
-    this.intensity = 0;
-    this.color = 215;
-};
-
-/***/ }),
-
-/***/ 138:
+/***/ 100:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -280,7 +13,7 @@ exports.Position = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -412,16 +145,1545 @@ var Position = exports.Position = function () {
 
 /***/ }),
 
+/***/ 101:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Light = exports.Light = function Light() {
+    _classCallCheck(this, Light);
+
+    this.intensity = 0;
+    this.color = 215;
+};
+
+/***/ }),
+
+/***/ 11:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Otc = exports.Otc = undefined;
+(function (Otc) {
+    Otc[Otc["TILE_PIXELS"] = 32] = "TILE_PIXELS";
+    Otc[Otc["MAX_ELEVATION"] = 24] = "MAX_ELEVATION";
+    Otc[Otc["SEA_FLOOR"] = 7] = "SEA_FLOOR";
+    Otc[Otc["UNDERGROUND_FLOOR"] = 8] = "UNDERGROUND_FLOOR";
+    Otc[Otc["MAX_Z"] = 15] = "MAX_Z";
+    Otc[Otc["AWARE_UNDEGROUND_FLOOR_RANGE"] = 2] = "AWARE_UNDEGROUND_FLOOR_RANGE";
+    Otc[Otc["INVISIBLE_TICKS_PER_FRAME"] = 500] = "INVISIBLE_TICKS_PER_FRAME";
+    Otc[Otc["ITEM_TICKS_PER_FRAME"] = 500] = "ITEM_TICKS_PER_FRAME";
+    Otc[Otc["ANIMATED_TEXT_DURATION"] = 1000] = "ANIMATED_TEXT_DURATION";
+    Otc[Otc["STATIC_DURATION_PER_CHARACTER"] = 60] = "STATIC_DURATION_PER_CHARACTER";
+    Otc[Otc["MIN_STATIC_TEXT_DURATION"] = 3000] = "MIN_STATIC_TEXT_DURATION";
+    Otc[Otc["MAX_STATIC_TEXT_WIDTH"] = 200] = "MAX_STATIC_TEXT_WIDTH";
+    Otc[Otc["MAX_AUTOWALK_STEPS_RETRY"] = 10] = "MAX_AUTOWALK_STEPS_RETRY";
+    Otc[Otc["MAX_AUTOWALK_DIST"] = 127] = "MAX_AUTOWALK_DIST";
+})(Otc || (exports.Otc = Otc = {}));
+var DrawFlags = exports.DrawFlags = undefined;
+(function (DrawFlags) {
+    DrawFlags[DrawFlags["DrawGround"] = 1] = "DrawGround";
+    DrawFlags[DrawFlags["DrawGroundBorders"] = 2] = "DrawGroundBorders";
+    DrawFlags[DrawFlags["DrawOnBottom"] = 4] = "DrawOnBottom";
+    DrawFlags[DrawFlags["DrawOnTop"] = 8] = "DrawOnTop";
+    DrawFlags[DrawFlags["DrawItems"] = 16] = "DrawItems";
+    DrawFlags[DrawFlags["DrawCreatures"] = 32] = "DrawCreatures";
+    DrawFlags[DrawFlags["DrawEffects"] = 64] = "DrawEffects";
+    DrawFlags[DrawFlags["DrawMissiles"] = 128] = "DrawMissiles";
+    DrawFlags[DrawFlags["DrawCreaturesInformation"] = 256] = "DrawCreaturesInformation";
+    DrawFlags[DrawFlags["DrawStaticTexts"] = 512] = "DrawStaticTexts";
+    DrawFlags[DrawFlags["DrawAnimatedTexts"] = 1024] = "DrawAnimatedTexts";
+    DrawFlags[DrawFlags["DrawAnimations"] = 2048] = "DrawAnimations";
+    DrawFlags[DrawFlags["DrawBars"] = 4096] = "DrawBars";
+    DrawFlags[DrawFlags["DrawNames"] = 8192] = "DrawNames";
+    DrawFlags[DrawFlags["DrawLights"] = 16384] = "DrawLights";
+    DrawFlags[DrawFlags["DrawManaBar"] = 32768] = "DrawManaBar";
+    DrawFlags[DrawFlags["DrawWalls"] = 12] = "DrawWalls";
+    DrawFlags[DrawFlags["DrawEverything"] = 65535] = "DrawEverything";
+})(DrawFlags || (exports.DrawFlags = DrawFlags = {}));
+var DatOpts = exports.DatOpts = undefined;
+(function (DatOpts) {
+    DatOpts[DatOpts["DatGround"] = 0] = "DatGround";
+    DatOpts[DatOpts["DatGroundClip"] = 1] = "DatGroundClip";
+    DatOpts[DatOpts["DatOnBottom"] = 2] = "DatOnBottom";
+    DatOpts[DatOpts["DatOnTop"] = 3] = "DatOnTop";
+    DatOpts[DatOpts["DatContainer"] = 4] = "DatContainer";
+    DatOpts[DatOpts["DatStackable"] = 5] = "DatStackable";
+    DatOpts[DatOpts["DatForceUse"] = 6] = "DatForceUse";
+    DatOpts[DatOpts["DatMultiUse"] = 7] = "DatMultiUse";
+    DatOpts[DatOpts["DatWritable"] = 8] = "DatWritable";
+    DatOpts[DatOpts["DatWritableOnce"] = 9] = "DatWritableOnce";
+    DatOpts[DatOpts["DatFluidContainer"] = 10] = "DatFluidContainer";
+    DatOpts[DatOpts["DatSplash"] = 11] = "DatSplash";
+    DatOpts[DatOpts["DatBlockWalk"] = 12] = "DatBlockWalk";
+    DatOpts[DatOpts["DatNotMoveable"] = 13] = "DatNotMoveable";
+    DatOpts[DatOpts["DatBlockProjectile"] = 14] = "DatBlockProjectile";
+    DatOpts[DatOpts["DatBlockPathFind"] = 15] = "DatBlockPathFind";
+    DatOpts[DatOpts["DatPickupable"] = 16] = "DatPickupable";
+    DatOpts[DatOpts["DatHangable"] = 17] = "DatHangable";
+    DatOpts[DatOpts["DatHookSouth"] = 18] = "DatHookSouth";
+    DatOpts[DatOpts["DatHookEast"] = 19] = "DatHookEast";
+    DatOpts[DatOpts["DatRotable"] = 20] = "DatRotable";
+    DatOpts[DatOpts["DatLight"] = 21] = "DatLight";
+    DatOpts[DatOpts["DatDontHide"] = 22] = "DatDontHide";
+    DatOpts[DatOpts["DatTranslucent"] = 23] = "DatTranslucent";
+    DatOpts[DatOpts["DatDisplacement"] = 24] = "DatDisplacement";
+    DatOpts[DatOpts["DatElevation"] = 25] = "DatElevation";
+    DatOpts[DatOpts["DatLyingCorpse"] = 26] = "DatLyingCorpse";
+    DatOpts[DatOpts["DatAnimateAlways"] = 27] = "DatAnimateAlways";
+    DatOpts[DatOpts["DatMinimapColor"] = 28] = "DatMinimapColor";
+    DatOpts[DatOpts["DatLensHelp"] = 29] = "DatLensHelp";
+    DatOpts[DatOpts["DatFullGround"] = 30] = "DatFullGround";
+    DatOpts[DatOpts["DatIgnoreLook"] = 31] = "DatIgnoreLook";
+    DatOpts[DatOpts["DatCloth"] = 32] = "DatCloth";
+    DatOpts[DatOpts["DatAnimation"] = 33] = "DatAnimation";
+    DatOpts[DatOpts["DatLastOpt"] = 255] = "DatLastOpt";
+})(DatOpts || (exports.DatOpts = DatOpts = {}));
+var InventorySlot = exports.InventorySlot = undefined;
+(function (InventorySlot) {
+    InventorySlot[InventorySlot["InventorySlotHead"] = 1] = "InventorySlotHead";
+    InventorySlot[InventorySlot["InventorySlotNecklace"] = 2] = "InventorySlotNecklace";
+    InventorySlot[InventorySlot["InventorySlotBackpack"] = 3] = "InventorySlotBackpack";
+    InventorySlot[InventorySlot["InventorySlotArmor"] = 4] = "InventorySlotArmor";
+    InventorySlot[InventorySlot["InventorySlotRight"] = 5] = "InventorySlotRight";
+    InventorySlot[InventorySlot["InventorySlotLeft"] = 6] = "InventorySlotLeft";
+    InventorySlot[InventorySlot["InventorySlotLegs"] = 7] = "InventorySlotLegs";
+    InventorySlot[InventorySlot["InventorySlotFeet"] = 8] = "InventorySlotFeet";
+    InventorySlot[InventorySlot["InventorySlotRing"] = 9] = "InventorySlotRing";
+    InventorySlot[InventorySlot["InventorySlotAmmo"] = 10] = "InventorySlotAmmo";
+    InventorySlot[InventorySlot["InventorySlotPurse"] = 11] = "InventorySlotPurse";
+    InventorySlot[InventorySlot["InventorySlotExt1"] = 12] = "InventorySlotExt1";
+    InventorySlot[InventorySlot["InventorySlotExt2"] = 13] = "InventorySlotExt2";
+    InventorySlot[InventorySlot["InventorySlotExt3"] = 14] = "InventorySlotExt3";
+    InventorySlot[InventorySlot["InventorySlotExt4"] = 15] = "InventorySlotExt4";
+    InventorySlot[InventorySlot["LastInventorySlot"] = 16] = "LastInventorySlot";
+})(InventorySlot || (exports.InventorySlot = InventorySlot = {}));
+var Statistic = exports.Statistic = undefined;
+(function (Statistic) {
+    Statistic[Statistic["Health"] = 0] = "Health";
+    Statistic[Statistic["MaxHealth"] = 1] = "MaxHealth";
+    Statistic[Statistic["FreeCapacity"] = 2] = "FreeCapacity";
+    Statistic[Statistic["Experience"] = 3] = "Experience";
+    Statistic[Statistic["Level"] = 4] = "Level";
+    Statistic[Statistic["LevelPercent"] = 5] = "LevelPercent";
+    Statistic[Statistic["Mana"] = 6] = "Mana";
+    Statistic[Statistic["MaxMana"] = 7] = "MaxMana";
+    Statistic[Statistic["MagicLevel"] = 8] = "MagicLevel";
+    Statistic[Statistic["MagicLevelPercent"] = 9] = "MagicLevelPercent";
+    Statistic[Statistic["Soul"] = 10] = "Soul";
+    Statistic[Statistic["Stamina"] = 11] = "Stamina";
+    Statistic[Statistic["LastStatistic"] = 12] = "LastStatistic";
+})(Statistic || (exports.Statistic = Statistic = {}));
+var Skill = exports.Skill = undefined;
+(function (Skill) {
+    Skill[Skill["Fist"] = 0] = "Fist";
+    Skill[Skill["Club"] = 1] = "Club";
+    Skill[Skill["Sword"] = 2] = "Sword";
+    Skill[Skill["Axe"] = 3] = "Axe";
+    Skill[Skill["Distance"] = 4] = "Distance";
+    Skill[Skill["Shielding"] = 5] = "Shielding";
+    Skill[Skill["Fishing"] = 6] = "Fishing";
+    Skill[Skill["CriticalChance"] = 7] = "CriticalChance";
+    Skill[Skill["CriticalDamage"] = 8] = "CriticalDamage";
+    Skill[Skill["LifeLeechChance"] = 9] = "LifeLeechChance";
+    Skill[Skill["LifeLeechAmount"] = 10] = "LifeLeechAmount";
+    Skill[Skill["ManaLeechChance"] = 11] = "ManaLeechChance";
+    Skill[Skill["ManaLeechAmount"] = 12] = "ManaLeechAmount";
+    Skill[Skill["LastSkill"] = 13] = "LastSkill";
+})(Skill || (exports.Skill = Skill = {}));
+var Direction = exports.Direction = undefined;
+(function (Direction) {
+    Direction[Direction["North"] = 0] = "North";
+    Direction[Direction["East"] = 1] = "East";
+    Direction[Direction["South"] = 2] = "South";
+    Direction[Direction["West"] = 3] = "West";
+    Direction[Direction["NorthEast"] = 4] = "NorthEast";
+    Direction[Direction["SouthEast"] = 5] = "SouthEast";
+    Direction[Direction["SouthWest"] = 6] = "SouthWest";
+    Direction[Direction["NorthWest"] = 7] = "NorthWest";
+    Direction[Direction["InvalidDirection"] = 8] = "InvalidDirection";
+})(Direction || (exports.Direction = Direction = {}));
+var FluidsColor = exports.FluidsColor = undefined;
+(function (FluidsColor) {
+    FluidsColor[FluidsColor["FluidTransparent"] = 0] = "FluidTransparent";
+    FluidsColor[FluidsColor["FluidBlue"] = 1] = "FluidBlue";
+    FluidsColor[FluidsColor["FluidRed"] = 2] = "FluidRed";
+    FluidsColor[FluidsColor["FluidBrown"] = 3] = "FluidBrown";
+    FluidsColor[FluidsColor["FluidGreen"] = 4] = "FluidGreen";
+    FluidsColor[FluidsColor["FluidYellow"] = 5] = "FluidYellow";
+    FluidsColor[FluidsColor["FluidWhite"] = 6] = "FluidWhite";
+    FluidsColor[FluidsColor["FluidPurple"] = 7] = "FluidPurple";
+})(FluidsColor || (exports.FluidsColor = FluidsColor = {}));
+var FluidsType = exports.FluidsType = undefined;
+(function (FluidsType) {
+    FluidsType[FluidsType["FluidNone"] = 0] = "FluidNone";
+    FluidsType[FluidsType["FluidWater"] = 1] = "FluidWater";
+    FluidsType[FluidsType["FluidMana"] = 2] = "FluidMana";
+    FluidsType[FluidsType["FluidBeer"] = 3] = "FluidBeer";
+    FluidsType[FluidsType["FluidOil"] = 4] = "FluidOil";
+    FluidsType[FluidsType["FluidBlood"] = 5] = "FluidBlood";
+    FluidsType[FluidsType["FluidSlime"] = 6] = "FluidSlime";
+    FluidsType[FluidsType["FluidMud"] = 7] = "FluidMud";
+    FluidsType[FluidsType["FluidLemonade"] = 8] = "FluidLemonade";
+    FluidsType[FluidsType["FluidMilk"] = 9] = "FluidMilk";
+    FluidsType[FluidsType["FluidWine"] = 10] = "FluidWine";
+    FluidsType[FluidsType["FluidHealth"] = 11] = "FluidHealth";
+    FluidsType[FluidsType["FluidUrine"] = 12] = "FluidUrine";
+    FluidsType[FluidsType["FluidRum"] = 13] = "FluidRum";
+    FluidsType[FluidsType["FluidFruidJuice"] = 14] = "FluidFruidJuice";
+    FluidsType[FluidsType["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
+    FluidsType[FluidsType["FluidTea"] = 16] = "FluidTea";
+    FluidsType[FluidsType["FluidMead"] = 17] = "FluidMead";
+})(FluidsType || (exports.FluidsType = FluidsType = {}));
+var FightModes = exports.FightModes = undefined;
+(function (FightModes) {
+    FightModes[FightModes["FightOffensive"] = 1] = "FightOffensive";
+    FightModes[FightModes["FightBalanced"] = 2] = "FightBalanced";
+    FightModes[FightModes["FightDefensive"] = 3] = "FightDefensive";
+})(FightModes || (exports.FightModes = FightModes = {}));
+var ChaseModes = exports.ChaseModes = undefined;
+(function (ChaseModes) {
+    ChaseModes[ChaseModes["DontChase"] = 0] = "DontChase";
+    ChaseModes[ChaseModes["ChaseOpponent"] = 1] = "ChaseOpponent";
+})(ChaseModes || (exports.ChaseModes = ChaseModes = {}));
+var PVPModes = exports.PVPModes = undefined;
+(function (PVPModes) {
+    PVPModes[PVPModes["WhiteDove"] = 0] = "WhiteDove";
+    PVPModes[PVPModes["WhiteHand"] = 1] = "WhiteHand";
+    PVPModes[PVPModes["YellowHand"] = 2] = "YellowHand";
+    PVPModes[PVPModes["RedFist"] = 3] = "RedFist";
+})(PVPModes || (exports.PVPModes = PVPModes = {}));
+var PlayerSkulls = exports.PlayerSkulls = undefined;
+(function (PlayerSkulls) {
+    PlayerSkulls[PlayerSkulls["SkullNone"] = 0] = "SkullNone";
+    PlayerSkulls[PlayerSkulls["SkullYellow"] = 1] = "SkullYellow";
+    PlayerSkulls[PlayerSkulls["SkullGreen"] = 2] = "SkullGreen";
+    PlayerSkulls[PlayerSkulls["SkullWhite"] = 3] = "SkullWhite";
+    PlayerSkulls[PlayerSkulls["SkullRed"] = 4] = "SkullRed";
+    PlayerSkulls[PlayerSkulls["SkullBlack"] = 5] = "SkullBlack";
+    PlayerSkulls[PlayerSkulls["SkullOrange"] = 6] = "SkullOrange";
+})(PlayerSkulls || (exports.PlayerSkulls = PlayerSkulls = {}));
+;
+var PlayerShields = exports.PlayerShields = undefined;
+(function (PlayerShields) {
+    PlayerShields[PlayerShields["ShieldNone"] = 0] = "ShieldNone";
+    PlayerShields[PlayerShields["ShieldWhiteYellow"] = 1] = "ShieldWhiteYellow";
+    PlayerShields[PlayerShields["ShieldWhiteBlue"] = 2] = "ShieldWhiteBlue";
+    PlayerShields[PlayerShields["ShieldBlue"] = 3] = "ShieldBlue";
+    PlayerShields[PlayerShields["ShieldYellow"] = 4] = "ShieldYellow";
+    PlayerShields[PlayerShields["ShieldBlueSharedExp"] = 5] = "ShieldBlueSharedExp";
+    PlayerShields[PlayerShields["ShieldYellowSharedExp"] = 6] = "ShieldYellowSharedExp";
+    PlayerShields[PlayerShields["ShieldBlueNoSharedExpBlink"] = 7] = "ShieldBlueNoSharedExpBlink";
+    PlayerShields[PlayerShields["ShieldYellowNoSharedExpBlink"] = 8] = "ShieldYellowNoSharedExpBlink";
+    PlayerShields[PlayerShields["ShieldBlueNoSharedExp"] = 9] = "ShieldBlueNoSharedExp";
+    PlayerShields[PlayerShields["ShieldYellowNoSharedExp"] = 10] = "ShieldYellowNoSharedExp";
+    PlayerShields[PlayerShields["ShieldGray"] = 11] = "ShieldGray"; // 11 member of another party
+})(PlayerShields || (exports.PlayerShields = PlayerShields = {}));
+var PlayerEmblems = exports.PlayerEmblems = undefined;
+(function (PlayerEmblems) {
+    PlayerEmblems[PlayerEmblems["EmblemNone"] = 0] = "EmblemNone";
+    PlayerEmblems[PlayerEmblems["EmblemGreen"] = 1] = "EmblemGreen";
+    PlayerEmblems[PlayerEmblems["EmblemRed"] = 2] = "EmblemRed";
+    PlayerEmblems[PlayerEmblems["EmblemBlue"] = 3] = "EmblemBlue";
+    PlayerEmblems[PlayerEmblems["EmblemMember"] = 4] = "EmblemMember";
+    PlayerEmblems[PlayerEmblems["EmblemOther"] = 5] = "EmblemOther";
+})(PlayerEmblems || (exports.PlayerEmblems = PlayerEmblems = {}));
+var CreatureIcons = exports.CreatureIcons = undefined;
+(function (CreatureIcons) {
+    CreatureIcons[CreatureIcons["NpcIconNone"] = 0] = "NpcIconNone";
+    CreatureIcons[CreatureIcons["NpcIconChat"] = 1] = "NpcIconChat";
+    CreatureIcons[CreatureIcons["NpcIconTrade"] = 2] = "NpcIconTrade";
+    CreatureIcons[CreatureIcons["NpcIconQuest"] = 3] = "NpcIconQuest";
+    CreatureIcons[CreatureIcons["NpcIconTradeQuest"] = 4] = "NpcIconTradeQuest";
+})(CreatureIcons || (exports.CreatureIcons = CreatureIcons = {}));
+var PlayerStates = exports.PlayerStates = undefined;
+(function (PlayerStates) {
+    PlayerStates[PlayerStates["IconNone"] = 0] = "IconNone";
+    PlayerStates[PlayerStates["IconPoison"] = 1] = "IconPoison";
+    PlayerStates[PlayerStates["IconBurn"] = 2] = "IconBurn";
+    PlayerStates[PlayerStates["IconEnergy"] = 4] = "IconEnergy";
+    PlayerStates[PlayerStates["IconDrunk"] = 8] = "IconDrunk";
+    PlayerStates[PlayerStates["IconManaShield"] = 16] = "IconManaShield";
+    PlayerStates[PlayerStates["IconParalyze"] = 32] = "IconParalyze";
+    PlayerStates[PlayerStates["IconHaste"] = 64] = "IconHaste";
+    PlayerStates[PlayerStates["IconSwords"] = 128] = "IconSwords";
+    PlayerStates[PlayerStates["IconDrowning"] = 256] = "IconDrowning";
+    PlayerStates[PlayerStates["IconFreezing"] = 512] = "IconFreezing";
+    PlayerStates[PlayerStates["IconDazzled"] = 1024] = "IconDazzled";
+    PlayerStates[PlayerStates["IconCursed"] = 2048] = "IconCursed";
+    PlayerStates[PlayerStates["IconPartyBuff"] = 4096] = "IconPartyBuff";
+    PlayerStates[PlayerStates["IconPzBlock"] = 8192] = "IconPzBlock";
+    PlayerStates[PlayerStates["IconPz"] = 16384] = "IconPz";
+    PlayerStates[PlayerStates["IconBleeding"] = 32768] = "IconBleeding";
+    PlayerStates[PlayerStates["IconHungry"] = 65536] = "IconHungry";
+})(PlayerStates || (exports.PlayerStates = PlayerStates = {}));
+var MessageMode = exports.MessageMode = undefined;
+(function (MessageMode) {
+    MessageMode[MessageMode["MessageNone"] = 0] = "MessageNone";
+    MessageMode[MessageMode["MessageSay"] = 1] = "MessageSay";
+    MessageMode[MessageMode["MessageWhisper"] = 2] = "MessageWhisper";
+    MessageMode[MessageMode["MessageYell"] = 3] = "MessageYell";
+    MessageMode[MessageMode["MessagePrivateFrom"] = 4] = "MessagePrivateFrom";
+    MessageMode[MessageMode["MessagePrivateTo"] = 5] = "MessagePrivateTo";
+    MessageMode[MessageMode["MessageChannelManagement"] = 6] = "MessageChannelManagement";
+    MessageMode[MessageMode["MessageChannel"] = 7] = "MessageChannel";
+    MessageMode[MessageMode["MessageChannelHighlight"] = 8] = "MessageChannelHighlight";
+    MessageMode[MessageMode["MessageSpell"] = 9] = "MessageSpell";
+    MessageMode[MessageMode["MessageNpcFrom"] = 10] = "MessageNpcFrom";
+    MessageMode[MessageMode["MessageNpcTo"] = 11] = "MessageNpcTo";
+    MessageMode[MessageMode["MessageGamemasterBroadcast"] = 12] = "MessageGamemasterBroadcast";
+    MessageMode[MessageMode["MessageGamemasterChannel"] = 13] = "MessageGamemasterChannel";
+    MessageMode[MessageMode["MessageGamemasterPrivateFrom"] = 14] = "MessageGamemasterPrivateFrom";
+    MessageMode[MessageMode["MessageGamemasterPrivateTo"] = 15] = "MessageGamemasterPrivateTo";
+    MessageMode[MessageMode["MessageLogin"] = 16] = "MessageLogin";
+    MessageMode[MessageMode["MessageWarning"] = 17] = "MessageWarning";
+    MessageMode[MessageMode["MessageGame"] = 18] = "MessageGame";
+    MessageMode[MessageMode["MessageFailure"] = 19] = "MessageFailure";
+    MessageMode[MessageMode["MessageLook"] = 20] = "MessageLook";
+    MessageMode[MessageMode["MessageDamageDealed"] = 21] = "MessageDamageDealed";
+    MessageMode[MessageMode["MessageDamageReceived"] = 22] = "MessageDamageReceived";
+    MessageMode[MessageMode["MessageHeal"] = 23] = "MessageHeal";
+    MessageMode[MessageMode["MessageExp"] = 24] = "MessageExp";
+    MessageMode[MessageMode["MessageDamageOthers"] = 25] = "MessageDamageOthers";
+    MessageMode[MessageMode["MessageHealOthers"] = 26] = "MessageHealOthers";
+    MessageMode[MessageMode["MessageExpOthers"] = 27] = "MessageExpOthers";
+    MessageMode[MessageMode["MessageStatus"] = 28] = "MessageStatus";
+    MessageMode[MessageMode["MessageLoot"] = 29] = "MessageLoot";
+    MessageMode[MessageMode["MessageTradeNpc"] = 30] = "MessageTradeNpc";
+    MessageMode[MessageMode["MessageGuild"] = 31] = "MessageGuild";
+    MessageMode[MessageMode["MessagePartyManagement"] = 32] = "MessagePartyManagement";
+    MessageMode[MessageMode["MessageParty"] = 33] = "MessageParty";
+    MessageMode[MessageMode["MessageBarkLow"] = 34] = "MessageBarkLow";
+    MessageMode[MessageMode["MessageBarkLoud"] = 35] = "MessageBarkLoud";
+    MessageMode[MessageMode["MessageReport"] = 36] = "MessageReport";
+    MessageMode[MessageMode["MessageHotkeyUse"] = 37] = "MessageHotkeyUse";
+    MessageMode[MessageMode["MessageTutorialHint"] = 38] = "MessageTutorialHint";
+    MessageMode[MessageMode["MessageThankyou"] = 39] = "MessageThankyou";
+    MessageMode[MessageMode["MessageMarket"] = 40] = "MessageMarket";
+    MessageMode[MessageMode["MessageMana"] = 41] = "MessageMana";
+    MessageMode[MessageMode["MessageBeyondLast"] = 42] = "MessageBeyondLast";
+    // deprecated
+    MessageMode[MessageMode["MessageMonsterYell"] = 43] = "MessageMonsterYell";
+    MessageMode[MessageMode["MessageMonsterSay"] = 44] = "MessageMonsterSay";
+    MessageMode[MessageMode["MessageRed"] = 45] = "MessageRed";
+    MessageMode[MessageMode["MessageBlue"] = 46] = "MessageBlue";
+    MessageMode[MessageMode["MessageRVRChannel"] = 47] = "MessageRVRChannel";
+    MessageMode[MessageMode["MessageRVRAnswer"] = 48] = "MessageRVRAnswer";
+    MessageMode[MessageMode["MessageRVRContinue"] = 49] = "MessageRVRContinue";
+    MessageMode[MessageMode["MessageGameHighlight"] = 50] = "MessageGameHighlight";
+    MessageMode[MessageMode["MessageNpcFromStartBlock"] = 51] = "MessageNpcFromStartBlock";
+    MessageMode[MessageMode["LastMessage"] = 52] = "LastMessage";
+    MessageMode[MessageMode["MessageInvalid"] = 255] = "MessageInvalid";
+})(MessageMode || (exports.MessageMode = MessageMode = {}));
+var GameFeature = exports.GameFeature = undefined;
+(function (GameFeature) {
+    GameFeature[GameFeature["GameProtocolChecksum"] = 1] = "GameProtocolChecksum";
+    GameFeature[GameFeature["GameAccountNames"] = 2] = "GameAccountNames";
+    GameFeature[GameFeature["GameChallengeOnLogin"] = 3] = "GameChallengeOnLogin";
+    GameFeature[GameFeature["GamePenalityOnDeath"] = 4] = "GamePenalityOnDeath";
+    GameFeature[GameFeature["GameNameOnNpcTrade"] = 5] = "GameNameOnNpcTrade";
+    GameFeature[GameFeature["GameDoubleFreeCapacity"] = 6] = "GameDoubleFreeCapacity";
+    GameFeature[GameFeature["GameDoubleExperience"] = 7] = "GameDoubleExperience";
+    GameFeature[GameFeature["GameTotalCapacity"] = 8] = "GameTotalCapacity";
+    GameFeature[GameFeature["GameSkillsBase"] = 9] = "GameSkillsBase";
+    GameFeature[GameFeature["GamePlayerRegenerationTime"] = 10] = "GamePlayerRegenerationTime";
+    GameFeature[GameFeature["GameChannelPlayerList"] = 11] = "GameChannelPlayerList";
+    GameFeature[GameFeature["GamePlayerMounts"] = 12] = "GamePlayerMounts";
+    GameFeature[GameFeature["GameEnvironmentEffect"] = 13] = "GameEnvironmentEffect";
+    GameFeature[GameFeature["GameCreatureEmblems"] = 14] = "GameCreatureEmblems";
+    GameFeature[GameFeature["GameItemAnimationPhase"] = 15] = "GameItemAnimationPhase";
+    GameFeature[GameFeature["GameMagicEffectU16"] = 16] = "GameMagicEffectU16";
+    GameFeature[GameFeature["GamePlayerMarket"] = 17] = "GamePlayerMarket";
+    GameFeature[GameFeature["GameSpritesU32"] = 18] = "GameSpritesU32";
+    // 19 unused
+    GameFeature[GameFeature["GameOfflineTrainingTime"] = 20] = "GameOfflineTrainingTime";
+    GameFeature[GameFeature["GamePurseSlot"] = 21] = "GamePurseSlot";
+    GameFeature[GameFeature["GameFormatCreatureName"] = 22] = "GameFormatCreatureName";
+    GameFeature[GameFeature["GameSpellList"] = 23] = "GameSpellList";
+    GameFeature[GameFeature["GameClientPing"] = 24] = "GameClientPing";
+    GameFeature[GameFeature["GameExtendedClientPing"] = 25] = "GameExtendedClientPing";
+    GameFeature[GameFeature["GameDoubleHealth"] = 28] = "GameDoubleHealth";
+    GameFeature[GameFeature["GameDoubleSkills"] = 29] = "GameDoubleSkills";
+    GameFeature[GameFeature["GameChangeMapAwareRange"] = 30] = "GameChangeMapAwareRange";
+    GameFeature[GameFeature["GameMapMovePosition"] = 31] = "GameMapMovePosition";
+    GameFeature[GameFeature["GameAttackSeq"] = 32] = "GameAttackSeq";
+    GameFeature[GameFeature["GameBlueNpcNameColor"] = 33] = "GameBlueNpcNameColor";
+    GameFeature[GameFeature["GameDiagonalAnimatedText"] = 34] = "GameDiagonalAnimatedText";
+    GameFeature[GameFeature["GameLoginPending"] = 35] = "GameLoginPending";
+    GameFeature[GameFeature["GameNewSpeedLaw"] = 36] = "GameNewSpeedLaw";
+    GameFeature[GameFeature["GameForceFirstAutoWalkStep"] = 37] = "GameForceFirstAutoWalkStep";
+    GameFeature[GameFeature["GameMinimapRemove"] = 38] = "GameMinimapRemove";
+    GameFeature[GameFeature["GameDoubleShopSellAmount"] = 39] = "GameDoubleShopSellAmount";
+    GameFeature[GameFeature["GameContainerPagination"] = 40] = "GameContainerPagination";
+    GameFeature[GameFeature["GameThingMarks"] = 41] = "GameThingMarks";
+    GameFeature[GameFeature["GameLooktypeU16"] = 42] = "GameLooktypeU16";
+    GameFeature[GameFeature["GamePlayerStamina"] = 43] = "GamePlayerStamina";
+    GameFeature[GameFeature["GamePlayerAddons"] = 44] = "GamePlayerAddons";
+    GameFeature[GameFeature["GameMessageStatements"] = 45] = "GameMessageStatements";
+    GameFeature[GameFeature["GameMessageLevel"] = 46] = "GameMessageLevel";
+    GameFeature[GameFeature["GameNewFluids"] = 47] = "GameNewFluids";
+    GameFeature[GameFeature["GamePlayerStateU16"] = 48] = "GamePlayerStateU16";
+    GameFeature[GameFeature["GameNewOutfitProtocol"] = 49] = "GameNewOutfitProtocol";
+    GameFeature[GameFeature["GamePVPMode"] = 50] = "GamePVPMode";
+    GameFeature[GameFeature["GameWritableDate"] = 51] = "GameWritableDate";
+    GameFeature[GameFeature["GameAdditionalVipInfo"] = 52] = "GameAdditionalVipInfo";
+    GameFeature[GameFeature["GameBaseSkillU16"] = 53] = "GameBaseSkillU16";
+    GameFeature[GameFeature["GameCreatureIcons"] = 54] = "GameCreatureIcons";
+    GameFeature[GameFeature["GameHideNpcNames"] = 55] = "GameHideNpcNames";
+    GameFeature[GameFeature["GameSpritesAlphaChannel"] = 56] = "GameSpritesAlphaChannel";
+    GameFeature[GameFeature["GamePremiumExpiration"] = 57] = "GamePremiumExpiration";
+    GameFeature[GameFeature["GameBrowseField"] = 58] = "GameBrowseField";
+    GameFeature[GameFeature["GameEnhancedAnimations"] = 59] = "GameEnhancedAnimations";
+    GameFeature[GameFeature["GameOGLInformation"] = 60] = "GameOGLInformation";
+    GameFeature[GameFeature["GameMessageSizeCheck"] = 61] = "GameMessageSizeCheck";
+    GameFeature[GameFeature["GamePreviewState"] = 62] = "GamePreviewState";
+    GameFeature[GameFeature["GameLoginPacketEncryption"] = 63] = "GameLoginPacketEncryption";
+    GameFeature[GameFeature["GameClientVersion"] = 64] = "GameClientVersion";
+    GameFeature[GameFeature["GameContentRevision"] = 65] = "GameContentRevision";
+    GameFeature[GameFeature["GameExperienceBonus"] = 66] = "GameExperienceBonus";
+    GameFeature[GameFeature["GameAuthenticator"] = 67] = "GameAuthenticator";
+    GameFeature[GameFeature["GameUnjustifiedPoints"] = 68] = "GameUnjustifiedPoints";
+    GameFeature[GameFeature["GameSessionKey"] = 69] = "GameSessionKey";
+    GameFeature[GameFeature["GameDeathType"] = 70] = "GameDeathType";
+    GameFeature[GameFeature["GameIdleAnimations"] = 71] = "GameIdleAnimations";
+    GameFeature[GameFeature["GameKeepUnawareTiles"] = 72] = "GameKeepUnawareTiles";
+    GameFeature[GameFeature["GameIngameStore"] = 73] = "GameIngameStore";
+    GameFeature[GameFeature["GameIngameStoreHighlights"] = 74] = "GameIngameStoreHighlights";
+    GameFeature[GameFeature["GameIngameStoreServiceType"] = 75] = "GameIngameStoreServiceType";
+    GameFeature[GameFeature["GameAdditionalSkills"] = 76] = "GameAdditionalSkills";
+    GameFeature[GameFeature["LastGameFeature"] = 101] = "LastGameFeature";
+})(GameFeature || (exports.GameFeature = GameFeature = {}));
+var PathFindResult = exports.PathFindResult = undefined;
+(function (PathFindResult) {
+    PathFindResult[PathFindResult["PathFindResultOk"] = 0] = "PathFindResultOk";
+    PathFindResult[PathFindResult["PathFindResultSamePosition"] = 1] = "PathFindResultSamePosition";
+    PathFindResult[PathFindResult["PathFindResultImpossible"] = 2] = "PathFindResultImpossible";
+    PathFindResult[PathFindResult["PathFindResultTooFar"] = 3] = "PathFindResultTooFar";
+    PathFindResult[PathFindResult["PathFindResultNoWay"] = 4] = "PathFindResultNoWay";
+})(PathFindResult || (exports.PathFindResult = PathFindResult = {}));
+var PathFindFlags = exports.PathFindFlags = undefined;
+(function (PathFindFlags) {
+    PathFindFlags[PathFindFlags["PathFindAllowNotSeenTiles"] = 1] = "PathFindAllowNotSeenTiles";
+    PathFindFlags[PathFindFlags["PathFindAllowCreatures"] = 2] = "PathFindAllowCreatures";
+    PathFindFlags[PathFindFlags["PathFindAllowNonPathable"] = 4] = "PathFindAllowNonPathable";
+    PathFindFlags[PathFindFlags["PathFindAllowNonWalkable"] = 8] = "PathFindAllowNonWalkable";
+})(PathFindFlags || (exports.PathFindFlags = PathFindFlags = {}));
+var AutomapFlags = exports.AutomapFlags = undefined;
+(function (AutomapFlags) {
+    AutomapFlags[AutomapFlags["MapMarkTick"] = 0] = "MapMarkTick";
+    AutomapFlags[AutomapFlags["MapMarkQuestion"] = 1] = "MapMarkQuestion";
+    AutomapFlags[AutomapFlags["MapMarkExclamation"] = 2] = "MapMarkExclamation";
+    AutomapFlags[AutomapFlags["MapMarkStar"] = 3] = "MapMarkStar";
+    AutomapFlags[AutomapFlags["MapMarkCross"] = 4] = "MapMarkCross";
+    AutomapFlags[AutomapFlags["MapMarkTemple"] = 5] = "MapMarkTemple";
+    AutomapFlags[AutomapFlags["MapMarkKiss"] = 6] = "MapMarkKiss";
+    AutomapFlags[AutomapFlags["MapMarkShovel"] = 7] = "MapMarkShovel";
+    AutomapFlags[AutomapFlags["MapMarkSword"] = 8] = "MapMarkSword";
+    AutomapFlags[AutomapFlags["MapMarkFlag"] = 9] = "MapMarkFlag";
+    AutomapFlags[AutomapFlags["MapMarkLock"] = 10] = "MapMarkLock";
+    AutomapFlags[AutomapFlags["MapMarkBag"] = 11] = "MapMarkBag";
+    AutomapFlags[AutomapFlags["MapMarkSkull"] = 12] = "MapMarkSkull";
+    AutomapFlags[AutomapFlags["MapMarkDollar"] = 13] = "MapMarkDollar";
+    AutomapFlags[AutomapFlags["MapMarkRedNorth"] = 14] = "MapMarkRedNorth";
+    AutomapFlags[AutomapFlags["MapMarkRedSouth"] = 15] = "MapMarkRedSouth";
+    AutomapFlags[AutomapFlags["MapMarkRedEast"] = 16] = "MapMarkRedEast";
+    AutomapFlags[AutomapFlags["MapMarkRedWest"] = 17] = "MapMarkRedWest";
+    AutomapFlags[AutomapFlags["MapMarkGreenNorth"] = 18] = "MapMarkGreenNorth";
+    AutomapFlags[AutomapFlags["MapMarkGreenSouth"] = 19] = "MapMarkGreenSouth";
+})(AutomapFlags || (exports.AutomapFlags = AutomapFlags = {}));
+var VipState = exports.VipState = undefined;
+(function (VipState) {
+    VipState[VipState["VipStateOffline"] = 0] = "VipStateOffline";
+    VipState[VipState["VipStateOnline"] = 1] = "VipStateOnline";
+    VipState[VipState["VipStatePending"] = 2] = "VipStatePending";
+})(VipState || (exports.VipState = VipState = {}));
+var SpeedFormula = exports.SpeedFormula = undefined;
+(function (SpeedFormula) {
+    SpeedFormula[SpeedFormula["SpeedFormulaA"] = 0] = "SpeedFormulaA";
+    SpeedFormula[SpeedFormula["SpeedFormulaB"] = 1] = "SpeedFormulaB";
+    SpeedFormula[SpeedFormula["SpeedFormulaC"] = 2] = "SpeedFormulaC";
+    SpeedFormula[SpeedFormula["LastSpeedFormula"] = 3] = "LastSpeedFormula";
+})(SpeedFormula || (exports.SpeedFormula = SpeedFormula = {}));
+var Blessings = exports.Blessings = undefined;
+(function (Blessings) {
+    Blessings[Blessings["BlessingNone"] = 0] = "BlessingNone";
+    Blessings[Blessings["BlessingAdventurer"] = 1] = "BlessingAdventurer";
+    Blessings[Blessings["BlessingSpiritualShielding"] = 2] = "BlessingSpiritualShielding";
+    Blessings[Blessings["BlessingEmbraceOfTibia"] = 4] = "BlessingEmbraceOfTibia";
+    Blessings[Blessings["BlessingFireOfSuns"] = 8] = "BlessingFireOfSuns";
+    Blessings[Blessings["BlessingWisdomOfSolitude"] = 16] = "BlessingWisdomOfSolitude";
+    Blessings[Blessings["BlessingSparkOfPhoenix"] = 32] = "BlessingSparkOfPhoenix";
+})(Blessings || (exports.Blessings = Blessings = {}));
+var DeathType = exports.DeathType = undefined;
+(function (DeathType) {
+    DeathType[DeathType["DeathRegular"] = 0] = "DeathRegular";
+    DeathType[DeathType["DeathBlessed"] = 1] = "DeathBlessed";
+})(DeathType || (exports.DeathType = DeathType = {}));
+var StoreProductTypes = exports.StoreProductTypes = undefined;
+(function (StoreProductTypes) {
+    StoreProductTypes[StoreProductTypes["ProductTypeOther"] = 0] = "ProductTypeOther";
+    StoreProductTypes[StoreProductTypes["ProductTypeNameChange"] = 1] = "ProductTypeNameChange";
+})(StoreProductTypes || (exports.StoreProductTypes = StoreProductTypes = {}));
+var StoreErrorTypes = exports.StoreErrorTypes = undefined;
+(function (StoreErrorTypes) {
+    StoreErrorTypes[StoreErrorTypes["StoreNoError"] = -1] = "StoreNoError";
+    StoreErrorTypes[StoreErrorTypes["StorePurchaseError"] = 0] = "StorePurchaseError";
+    StoreErrorTypes[StoreErrorTypes["StoreNetworkError"] = 1] = "StoreNetworkError";
+    StoreErrorTypes[StoreErrorTypes["StoreHistoryError"] = 2] = "StoreHistoryError";
+    StoreErrorTypes[StoreErrorTypes["StoreTransferError"] = 3] = "StoreTransferError";
+    StoreErrorTypes[StoreErrorTypes["StoreInformation"] = 4] = "StoreInformation";
+})(StoreErrorTypes || (exports.StoreErrorTypes = StoreErrorTypes = {}));
+var StoreStates = exports.StoreStates = undefined;
+(function (StoreStates) {
+    StoreStates[StoreStates["StateNone"] = 0] = "StateNone";
+    StoreStates[StoreStates["StateNew"] = 1] = "StateNew";
+    StoreStates[StoreStates["StateSale"] = 2] = "StateSale";
+    StoreStates[StoreStates["StateTimed"] = 3] = "StateTimed";
+})(StoreStates || (exports.StoreStates = StoreStates = {}));
+var FrameGroupType = exports.FrameGroupType = undefined;
+(function (FrameGroupType) {
+    FrameGroupType[FrameGroupType["FrameGroupDefault"] = 0] = "FrameGroupDefault";
+    FrameGroupType[FrameGroupType["FrameGroupIdle"] = 0] = "FrameGroupIdle";
+    FrameGroupType[FrameGroupType["FrameGroupMoving"] = 1] = "FrameGroupMoving";
+})(FrameGroupType || (exports.FrameGroupType = FrameGroupType = {}));
+var ThingCategory = exports.ThingCategory = undefined;
+(function (ThingCategory) {
+    ThingCategory[ThingCategory["ThingCategoryItem"] = 0] = "ThingCategoryItem";
+    ThingCategory[ThingCategory["ThingCategoryCreature"] = 1] = "ThingCategoryCreature";
+    ThingCategory[ThingCategory["ThingCategoryEffect"] = 2] = "ThingCategoryEffect";
+    ThingCategory[ThingCategory["ThingCategoryMissile"] = 3] = "ThingCategoryMissile";
+    ThingCategory[ThingCategory["ThingInvalidCategory"] = 4] = "ThingInvalidCategory";
+    ThingCategory[ThingCategory["ThingLastCategory"] = 4] = "ThingLastCategory";
+})(ThingCategory || (exports.ThingCategory = ThingCategory = {}));
+var ThingAttr = exports.ThingAttr = undefined;
+(function (ThingAttr) {
+    ThingAttr[ThingAttr["ThingAttrGround"] = 0] = "ThingAttrGround";
+    ThingAttr[ThingAttr["ThingAttrGroundBorder"] = 1] = "ThingAttrGroundBorder";
+    ThingAttr[ThingAttr["ThingAttrOnBottom"] = 2] = "ThingAttrOnBottom";
+    ThingAttr[ThingAttr["ThingAttrOnTop"] = 3] = "ThingAttrOnTop";
+    ThingAttr[ThingAttr["ThingAttrContainer"] = 4] = "ThingAttrContainer";
+    ThingAttr[ThingAttr["ThingAttrStackable"] = 5] = "ThingAttrStackable";
+    ThingAttr[ThingAttr["ThingAttrForceUse"] = 6] = "ThingAttrForceUse";
+    ThingAttr[ThingAttr["ThingAttrMultiUse"] = 7] = "ThingAttrMultiUse";
+    ThingAttr[ThingAttr["ThingAttrWritable"] = 8] = "ThingAttrWritable";
+    ThingAttr[ThingAttr["ThingAttrWritableOnce"] = 9] = "ThingAttrWritableOnce";
+    ThingAttr[ThingAttr["ThingAttrFluidContainer"] = 10] = "ThingAttrFluidContainer";
+    ThingAttr[ThingAttr["ThingAttrSplash"] = 11] = "ThingAttrSplash";
+    ThingAttr[ThingAttr["ThingAttrNotWalkable"] = 12] = "ThingAttrNotWalkable";
+    ThingAttr[ThingAttr["ThingAttrNotMoveable"] = 13] = "ThingAttrNotMoveable";
+    ThingAttr[ThingAttr["ThingAttrBlockProjectile"] = 14] = "ThingAttrBlockProjectile";
+    ThingAttr[ThingAttr["ThingAttrNotPathable"] = 15] = "ThingAttrNotPathable";
+    ThingAttr[ThingAttr["ThingAttrPickupable"] = 16] = "ThingAttrPickupable";
+    ThingAttr[ThingAttr["ThingAttrHangable"] = 17] = "ThingAttrHangable";
+    ThingAttr[ThingAttr["ThingAttrHookSouth"] = 18] = "ThingAttrHookSouth";
+    ThingAttr[ThingAttr["ThingAttrHookEast"] = 19] = "ThingAttrHookEast";
+    ThingAttr[ThingAttr["ThingAttrRotateable"] = 20] = "ThingAttrRotateable";
+    ThingAttr[ThingAttr["ThingAttrLight"] = 21] = "ThingAttrLight";
+    ThingAttr[ThingAttr["ThingAttrDontHide"] = 22] = "ThingAttrDontHide";
+    ThingAttr[ThingAttr["ThingAttrTranslucent"] = 23] = "ThingAttrTranslucent";
+    ThingAttr[ThingAttr["ThingAttrDisplacement"] = 24] = "ThingAttrDisplacement";
+    ThingAttr[ThingAttr["ThingAttrElevation"] = 25] = "ThingAttrElevation";
+    ThingAttr[ThingAttr["ThingAttrLyingCorpse"] = 26] = "ThingAttrLyingCorpse";
+    ThingAttr[ThingAttr["ThingAttrAnimateAlways"] = 27] = "ThingAttrAnimateAlways";
+    ThingAttr[ThingAttr["ThingAttrMinimapColor"] = 28] = "ThingAttrMinimapColor";
+    ThingAttr[ThingAttr["ThingAttrLensHelp"] = 29] = "ThingAttrLensHelp";
+    ThingAttr[ThingAttr["ThingAttrFullGround"] = 30] = "ThingAttrFullGround";
+    ThingAttr[ThingAttr["ThingAttrLook"] = 31] = "ThingAttrLook";
+    ThingAttr[ThingAttr["ThingAttrCloth"] = 32] = "ThingAttrCloth";
+    ThingAttr[ThingAttr["ThingAttrMarket"] = 33] = "ThingAttrMarket";
+    ThingAttr[ThingAttr["ThingAttrUsable"] = 34] = "ThingAttrUsable";
+    ThingAttr[ThingAttr["ThingAttrWrapable"] = 35] = "ThingAttrWrapable";
+    ThingAttr[ThingAttr["ThingAttrUnwrapable"] = 36] = "ThingAttrUnwrapable";
+    ThingAttr[ThingAttr["ThingAttrTopEffect"] = 37] = "ThingAttrTopEffect";
+    // additional
+    ThingAttr[ThingAttr["ThingAttrOpacity"] = 100] = "ThingAttrOpacity";
+    ThingAttr[ThingAttr["ThingAttrNotPreWalkable"] = 101] = "ThingAttrNotPreWalkable";
+    ThingAttr[ThingAttr["ThingAttrFloorChange"] = 252] = "ThingAttrFloorChange";
+    ThingAttr[ThingAttr["ThingAttrNoMoveAnimation"] = 253] = "ThingAttrNoMoveAnimation";
+    ThingAttr[ThingAttr["ThingAttrChargeable"] = 254] = "ThingAttrChargeable";
+    ThingAttr[ThingAttr["ThingLastAttr"] = 255] = "ThingLastAttr";
+})(ThingAttr || (exports.ThingAttr = ThingAttr = {}));
+var SpriteMask = exports.SpriteMask = undefined;
+(function (SpriteMask) {
+    SpriteMask[SpriteMask["SpriteMaskRed"] = 1] = "SpriteMaskRed";
+    SpriteMask[SpriteMask["SpriteMaskGreen"] = 2] = "SpriteMaskGreen";
+    SpriteMask[SpriteMask["SpriteMaskBlue"] = 3] = "SpriteMaskBlue";
+    SpriteMask[SpriteMask["SpriteMaskYellow"] = 4] = "SpriteMaskYellow";
+})(SpriteMask || (exports.SpriteMask = SpriteMask = {}));
+var AnimationPhase = exports.AnimationPhase = undefined;
+(function (AnimationPhase) {
+    AnimationPhase[AnimationPhase["AnimPhaseAutomatic"] = -1] = "AnimPhaseAutomatic";
+    AnimationPhase[AnimationPhase["AnimPhaseRandom"] = 254] = "AnimPhaseRandom";
+    AnimationPhase[AnimationPhase["AnimPhaseAsync"] = 255] = "AnimPhaseAsync";
+})(AnimationPhase || (exports.AnimationPhase = AnimationPhase = {}));
+var AnimationDirection = exports.AnimationDirection = undefined;
+(function (AnimationDirection) {
+    AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
+    AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
+})(AnimationDirection || (exports.AnimationDirection = AnimationDirection = {}));
+var Tilestate = exports.Tilestate = undefined;
+(function (Tilestate) {
+    Tilestate[Tilestate["TILESTATE_NONE"] = 0] = "TILESTATE_NONE";
+    Tilestate[Tilestate["TILESTATE_PROTECTIONZONE"] = 1] = "TILESTATE_PROTECTIONZONE";
+    Tilestate[Tilestate["TILESTATE_TRASHED"] = 2] = "TILESTATE_TRASHED";
+    Tilestate[Tilestate["TILESTATE_OPTIONALZONE"] = 4] = "TILESTATE_OPTIONALZONE";
+    Tilestate[Tilestate["TILESTATE_NOLOGOUT"] = 8] = "TILESTATE_NOLOGOUT";
+    Tilestate[Tilestate["TILESTATE_HARDCOREZONE"] = 16] = "TILESTATE_HARDCOREZONE";
+    Tilestate[Tilestate["TILESTATE_REFRESH"] = 32] = "TILESTATE_REFRESH";
+    // internal usage
+    Tilestate[Tilestate["TILESTATE_HOUSE"] = 64] = "TILESTATE_HOUSE";
+    Tilestate[Tilestate["TILESTATE_TELEPORT"] = 131072] = "TILESTATE_TELEPORT";
+    Tilestate[Tilestate["TILESTATE_MAGICFIELD"] = 262144] = "TILESTATE_MAGICFIELD";
+    Tilestate[Tilestate["TILESTATE_MAILBOX"] = 524288] = "TILESTATE_MAILBOX";
+    Tilestate[Tilestate["TILESTATE_TRASHHOLDER"] = 1048576] = "TILESTATE_TRASHHOLDER";
+    Tilestate[Tilestate["TILESTATE_BED"] = 2097152] = "TILESTATE_BED";
+    Tilestate[Tilestate["TILESTATE_DEPOT"] = 4194304] = "TILESTATE_DEPOT";
+    Tilestate[Tilestate["TILESTATE_TRANSLUECENT_LIGHT"] = 8388608] = "TILESTATE_TRANSLUECENT_LIGHT";
+    Tilestate[Tilestate["TILESTATE_LAST"] = 16777216] = "TILESTATE_LAST";
+})(Tilestate || (exports.Tilestate = Tilestate = {}));
+
+/***/ }),
+
+/***/ 137:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Player = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(71);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Player = exports.Player = function (_Creature) {
+    _inherits(Player, _Creature);
+
+    function Player() {
+        _classCallCheck(this, Player);
+
+        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+    }
+
+    _createClass(Player, [{
+        key: 'isPlayer',
+        value: function isPlayer() {
+            return true;
+        }
+    }]);
+
+    return Player;
+}(_creature.Creature);
+
+/***/ }),
+
+/***/ 138:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AwareRange = exports.AwareRange = function () {
+    function AwareRange() {
+        _classCallCheck(this, AwareRange);
+
+        this.top = 6;
+        this.right = 9;
+        this.bottom = 7;
+        this.left = 8;
+    }
+
+    _createClass(AwareRange, [{
+        key: "horizontal",
+        value: function horizontal() {
+            return this.left + this.right + 1;
+        }
+    }, {
+        key: "vertical",
+        value: function vertical() {
+            return this.top + this.bottom + 1;
+        }
+    }]);
+
+    return AwareRange;
+}();
+
+/***/ }),
+
 /***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(140);
-module.exports = __webpack_require__(342);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
+};
+exports.toInt = toInt;
+
+/***/ }),
+
+/***/ 140:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Image = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _log = __webpack_require__(23);
+
+var _color = __webpack_require__(55);
+
+var _size = __webpack_require__(73);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Image = exports.Image = function () {
+    _createClass(Image, [{
+        key: "blit",
+        value: function blit(point, image) {}
+    }, {
+        key: "overwriteMask",
+        value: function overwriteMask(color) {
+            var insideColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _color.Color.white;
+            var outsideColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _color.Color.alpha;
+        }
+    }]);
+
+    function Image(size) {
+        _classCallCheck(this, Image);
+
+        if (size instanceof _size.Size) {} else if (typeof size == 'number') {}
+    }
+
+    _createClass(Image, [{
+        key: "setId",
+        value: function setId(id) {}
+    }], [{
+        key: "load",
+        value: function load(path) {
+            (0, _log.error)('load image', path);
+            return null;
+        }
+    }]);
+
+    return Image;
+}();
+
+/***/ }),
+
+/***/ 141:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Rect = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _point = __webpack_require__(72);
+
+var _size2 = __webpack_require__(73);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Rect = exports.Rect = function () {
+    function Rect() {
+        _classCallCheck(this, Rect);
+
+        //TRect() : x1(0), y1(0), x2(-1), y2(-1) { }
+        //TRect(T x, T y, T width, T height) : x1(x), y1(y), x2(x+width-1), y2(y+height-1) { }
+        //TRect(const & topLeft, const & bottomRight) : x1(topLeft.x), y1(topLeft.y), x2(bottomRight.x), y2(bottomRight.y) { }
+        //TRect(const TRect<T>& other) : x1(other.x1), y1(other.y1), x2(other.x2), y2(other.y2) { }
+        //TRect(T x, T y, const TSize<T>& size) : x1(x), y1(y), x2(x+size.width()-1), y2(y+size.height()-1) { }
+        //TRect(const & topLeft, const TSize<T>& size) : x1(topLeft.x), y1(topLeft.y), x2(x1+size.width()-1), y2(y1+size.height()-1) { }
+        //TRect(const & topLeft, int width, int height) : x1(topLeft.x), y1(topLeft.y), x2(x1+width-1), y2(y1+height-1) { }
+        this.x1 = 0;
+        this.y1 = 0;
+        this.x2 = 0;
+        this.y2 = 0;
+        if (arguments.length == 0) {
+            this.x1 = 0;
+            this.y1 = 0;
+            this.x2 = -1;
+            this.y2 = -1;
+            return;
+        } else if (arguments.length == 1) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof Rect) {
+                var other = arguments.length <= 0 ? undefined : arguments[0];
+                this.x1 = other.x1;
+                this.y1 = other.y1;
+                this.x2 = other.x2;
+                this.y2 = other.y2;
+                return;
+            }
+        } else if (arguments.length == 2) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _point.Point) {
+                var topLeft = arguments.length <= 0 ? undefined : arguments[0];
+                var bottomRight = arguments.length <= 1 ? undefined : arguments[1];
+                this.x1 = topLeft.x;
+                this.y1 = topLeft.y;
+                this.x2 = bottomRight.x;
+                this.y2 = bottomRight.y;
+                return;
+            } else if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _size2.Size) {
+                var _topLeft = arguments.length <= 0 ? undefined : arguments[0];
+                var size = arguments.length <= 1 ? undefined : arguments[1];
+                this.x1 = _topLeft.x;
+                this.y1 = _topLeft.y;
+                this.x2 = this.x1 + size.width() - 1;
+                this.y2 = this.y1 + size.height() - 1;
+                return;
+            }
+        } else if (arguments.length == 3) {
+            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
+                var _topLeft2 = arguments.length <= 0 ? undefined : arguments[0];
+                var width = arguments.length <= 1 ? undefined : arguments[1];
+                var height = arguments.length <= 2 ? undefined : arguments[2];
+                this.x1 = _topLeft2.x;
+                this.y1 = _topLeft2.y;
+                this.x2 = this.x1 + width - 1;
+                this.y2 = this.y1 + height - 1;
+                return;
+            } else if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && (arguments.length <= 2 ? undefined : arguments[2]) instanceof _size2.Size) {
+                var x = arguments.length <= 0 ? undefined : arguments[0];
+                var y = arguments.length <= 1 ? undefined : arguments[1];
+                var _size = arguments.length <= 2 ? undefined : arguments[2];
+                this.x1 = x;
+                this.y1 = y;
+                this.x2 = this.x1 + _size.width() - 1;
+                this.y2 = this.y1 + _size.height() - 1;
+                return;
+            }
+        } else if (arguments.length == 4) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number' && typeof (arguments.length <= 3 ? undefined : arguments[3]) == 'number') {
+                var _x = arguments.length <= 0 ? undefined : arguments[0];
+                var _y = arguments.length <= 1 ? undefined : arguments[1];
+                var _width = arguments.length <= 2 ? undefined : arguments[2];
+                var _height = arguments.length <= 3 ? undefined : arguments[3];
+                this.x1 = _x;
+                this.y1 = _y;
+                this.x2 = this.x1 + _width - 1;
+                this.y2 = this.y1 + _height - 1;
+                return;
+            }
+        }
+        throw new Error('Invalid constructor parameters.');
+    }
+
+    _createClass(Rect, [{
+        key: "equals",
+        value: function equals(otherRect) {
+            return this.x1 == otherRect.x1 && this.y1 == otherRect.y1 && this.x2 == otherRect.x2 && this.y2 == otherRect.y2;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Rect(this);
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.x2 == this.x1 - 1 && this.y2 == this.y1 - 1;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.x1 > this.x2 || this.y1 > this.y2;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return this.x1 <= this.x2 && this.y1 <= this.y2;
+        }
+    }, {
+        key: "left",
+        value: function left() {
+            return this.x1;
+        }
+    }, {
+        key: "top",
+        value: function top() {
+            return this.y1;
+        }
+    }, {
+        key: "right",
+        value: function right() {
+            return this.x2;
+        }
+    }, {
+        key: "bottom",
+        value: function bottom() {
+            return this.y2;
+        }
+    }, {
+        key: "horizontalCenter",
+        value: function horizontalCenter() {
+            return this.x1 + (this.x2 - this.x1) / 2;
+        }
+    }, {
+        key: "verticalCenter",
+        value: function verticalCenter() {
+            return this.y1 + (this.y2 - this.y1) / 2;
+        }
+    }, {
+        key: "x",
+        value: function x() {
+            return this.x1;
+        }
+    }, {
+        key: "y",
+        value: function y() {
+            return this.y1;
+        }
+    }, {
+        key: "topLeft",
+        value: function topLeft() {
+            return new _point.Point(this.x1, this.y1);
+        }
+    }, {
+        key: "bottomRight",
+        value: function bottomRight() {
+            return new _point.Point(this.x2, this.y2);
+        }
+    }, {
+        key: "topRight",
+        value: function topRight() {
+            return new _point.Point(this.x2, this.y1);
+        }
+    }, {
+        key: "bottomLeft",
+        value: function bottomLeft() {
+            return new _point.Point(this.x1, this.y2);
+        }
+    }, {
+        key: "topCenter",
+        value: function topCenter() {
+            return new _point.Point((this.x1 + this.x2) / 2, this.y1);
+        }
+    }, {
+        key: "bottomCenter",
+        value: function bottomCenter() {
+            return new _point.Point((this.x1 + this.x2) / 2, this.y2);
+        }
+    }, {
+        key: "centerLeft",
+        value: function centerLeft() {
+            return new _point.Point(this.x1, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "centerRight",
+        value: function centerRight() {
+            return new _point.Point(this.x2, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "center",
+        value: function center() {
+            return new _point.Point((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2);
+        }
+    }, {
+        key: "width",
+        value: function width() {
+            return this.x2 - this.x1 + 1;
+        }
+    }, {
+        key: "height",
+        value: function height() {
+            return this.y2 - this.y1 + 1;
+        }
+    }, {
+        key: "size",
+        value: function size() {
+            return new _size2.Size(this.width(), this.height());
+        }
+    }, {
+        key: "reset",
+        value: function reset() {
+            this.x1 = this.y1 = 0;
+            this.x2 = this.y2 = -1;
+        }
+    }, {
+        key: "clear",
+        value: function clear() {
+            this.x2 = this.x1 - 1;
+            this.y2 = this.y1 - 1;
+        }
+    }, {
+        key: "setLeft",
+        value: function setLeft(pos) {
+            this.x1 = pos;
+        }
+    }, {
+        key: "setTop",
+        value: function setTop(pos) {
+            this.y1 = pos;
+        }
+    }, {
+        key: "setRight",
+        value: function setRight(pos) {
+            this.x2 = pos;
+        }
+    }, {
+        key: "setBottom",
+        value: function setBottom(pos) {
+            this.y2 = pos;
+        }
+    }, {
+        key: "setX",
+        value: function setX(x) {
+            this.x1 = x;
+        }
+    }, {
+        key: "setY",
+        value: function setY(y) {
+            this.y1 = y;
+        }
+    }, {
+        key: "setTopLeft",
+        value: function setTopLeft(p) {
+            this.x1 = p.x;
+            this.y1 = p.y;
+        }
+    }, {
+        key: "setBottomRight",
+        value: function setBottomRight(p) {
+            this.x2 = p.x;
+            this.y2 = p.y;
+        }
+    }, {
+        key: "setTopRight",
+        value: function setTopRight(p) {
+            this.x2 = p.x;
+            this.y1 = p.y;
+        }
+    }, {
+        key: "setBottomLeft",
+        value: function setBottomLeft(p) {
+            this.x1 = p.x;
+            this.y2 = p.y;
+        }
+    }, {
+        key: "setWidth",
+        value: function setWidth(width) {
+            this.x2 = this.x1 + width - 1;
+        }
+    }, {
+        key: "setHeight",
+        value: function setHeight(height) {
+            this.y2 = this.y1 + height - 1;
+        }
+    }, {
+        key: "setSize",
+        value: function setSize(size) {
+            this.x2 = this.x1 + size.width() - 1;
+            this.y2 = this.y1 + size.height() - 1;
+        }
+    }, {
+        key: "setRect",
+        value: function setRect(x, y, width, height) {
+            this.x1 = x;
+            this.y1 = y;
+            this.x2 = x + width - 1;
+            this.y2 = y + height - 1;
+        }
+    }, {
+        key: "setCoords",
+        value: function setCoords(left, top, right, bottom) {
+            this.x1 = left;
+            this.y1 = top;
+            this.x2 = right;
+            this.y2 = bottom;
+        }
+    }, {
+        key: "moveLeft",
+        value: function moveLeft(pos) {
+            this.x2 += pos - this.x1;
+            this.x1 = pos;
+        }
+    }, {
+        key: "moveTop",
+        value: function moveTop(pos) {
+            this.y2 += pos - this.y1;
+            this.y1 = pos;
+        }
+    }, {
+        key: "moveRight",
+        value: function moveRight(pos) {
+            this.x1 += pos - this.x2;
+            this.x2 = pos;
+        }
+    }, {
+        key: "moveBottom",
+        value: function moveBottom(pos) {
+            this.y1 += pos - this.y2;
+            this.y2 = pos;
+        }
+    }, {
+        key: "bind",
+        value: function bind(r) {
+            if (this.isNull() || r.isNull()) return;
+            if (this.right() > r.right()) this.moveRight(r.right());
+            if (this.bottom() > r.bottom()) this.moveBottom(r.bottom());
+            if (this.left() < r.left()) this.moveLeft(r.left());
+            if (this.top() < r.top()) this.moveTop(r.top());
+        }
+    }]);
+
+    return Rect;
+}();
+
+/***/ }),
+
+/***/ 142:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.StaticText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+var _rect = __webpack_require__(141);
+
+var _point = __webpack_require__(72);
+
+var _color = __webpack_require__(55);
+
+var _const = __webpack_require__(11);
+
+var _cachedtext = __webpack_require__(143);
+
+var _g_clock = __webpack_require__(144);
+
+var _map = __webpack_require__(50);
+
+var _log = __webpack_require__(23);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var StaticText = exports.StaticText = function (_Thing) {
+    _inherits(StaticText, _Thing);
+
+    function StaticText() {
+        _classCallCheck(this, StaticText);
+
+        var _this = _possibleConstructorReturn(this, (StaticText.__proto__ || Object.getPrototypeOf(StaticText)).apply(this, arguments));
+
+        _this.m_yell = false;
+        /*std::deque<std::pair<std::string, ticks_t>>*/
+        _this.m_messages = [];
+        _this.m_cachedText = new _cachedtext.CachedText();
+        _this.m_updateEvent = null;
+        return _this;
+    }
+
+    _createClass(StaticText, [{
+        key: "drawText",
+        value: function drawText(dest, parentRect) {
+            var textSize = this.m_cachedText.getTextSize();
+            var rect = new _rect.Rect(dest.sub(new _point.Point(textSize.width() / 2, textSize.height())).add(new _point.Point(20, 5)), textSize);
+            var boundRect = rect.clone();
+            boundRect.bind(parentRect);
+            //g_painter->setColor(m_color);
+            this.m_cachedText.draw(boundRect);
+        }
+    }, {
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "getMessageMode",
+        value: function getMessageMode() {
+            return this.m_mode;
+        }
+    }, {
+        key: "getFirstMessage",
+        value: function getFirstMessage() {
+            return this.m_messages[0][0];
+        }
+    }, {
+        key: "isYell",
+        value: function isYell() {
+            return this.m_mode == _const.MessageMode.MessageYell || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageBarkLoud;
+        }
+    }, {
+        key: "setText",
+        value: function setText(text) {
+            this.m_cachedText.setText(text);
+        }
+    }, {
+        key: "setFont",
+        value: function setFont(fontName) {
+            this.m_cachedText.setFont(fontName);
+        }
+    }, {
+        key: "addMessage",
+        value: function addMessage(name, mode, text) {
+            if (this.m_messages.length == 0) {
+                this.m_name = name;
+                this.m_mode = mode;
+            } else if (this.m_name != name || this.m_mode != mode) {
+                return false;
+            } else if (this.m_messages.length > 10) {
+                this.m_messages.shift();
+                clearTimeout(this.m_updateEvent);
+                this.m_updateEvent = null;
+            }
+            var delay = Math.max(_const.Otc.STATIC_DURATION_PER_CHARACTER * text.length, _const.Otc.MIN_STATIC_TEXT_DURATION);
+            if (this.isYell()) delay *= 2;
+            this.m_messages.push([text, _g_clock.g_clock.millis() + delay]);
+            this.compose();
+            if (!this.m_updateEvent) this.scheduleUpdate();
+            return true;
+        }
+    }, {
+        key: "asStaticText",
+        value: function asStaticText() {
+            return this;
+        }
+    }, {
+        key: "isStaticText",
+        value: function isStaticText() {
+            return true;
+        }
+    }, {
+        key: "setColor",
+        value: function setColor(color) {
+            this.m_color = color;
+        }
+    }, {
+        key: "getColor",
+        value: function getColor() {
+            return this.m_color;
+        }
+    }, {
+        key: "update",
+        value: function update() {
+            this.m_messages.shift();
+            if (this.m_messages.length == 0) {
+                // schedule removal
+                var self = this.asStaticText();
+                setTimeout(function (self) {
+                    _map.g_map.removeThing(self);
+                }, 0, self);
+            } else {
+                this.compose();
+                this.scheduleUpdate();
+            }
+        }
+    }, {
+        key: "scheduleUpdate",
+        value: function scheduleUpdate() {
+            var delay = Math.max(this.m_messages[0][1] - _g_clock.g_clock.millis(), 0);
+            var self = this.asStaticText();
+            this.m_updateEvent = setTimeout(function (self) {
+                self.m_updateEvent = null;
+                self.update();
+            }, delay, self);
+        }
+    }, {
+        key: "compose",
+        value: function compose() {
+            //TODO: this could be moved to lua
+            var text = void 0;
+            if (this.m_mode == _const.MessageMode.MessageSay) {
+                text += this.m_name;
+                text += " says:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageWhisper) {
+                text += this.m_name;
+                text += " whispers:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageYell) {
+                text += this.m_name;
+                text += " yells:\n";
+                this.m_color = new _color.Color(239, 239, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageMonsterSay || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageSpell || this.m_mode == _const.MessageMode.MessageBarkLow || this.m_mode == _const.MessageMode.MessageBarkLoud) {
+                this.m_color = new _color.Color(254, 101, 0);
+            } else if (this.m_mode == _const.MessageMode.MessageNpcFrom || this.m_mode == _const.MessageMode.MessageNpcFromStartBlock) {
+                text += this.m_name;
+                text += " says:\n";
+                this.m_color = new _color.Color(95, 247, 247);
+            } else {
+                _log.Log.error("Unknown speak type: %d", this.m_mode);
+            }
+            for (var i = 0; i < this.m_messages.length; ++i) {
+                text += this.m_messages[i][0];
+                if (i < this.m_messages.length - 1) text += "\n";
+            }
+            this.m_cachedText.setText(text);
+            this.m_cachedText.wrapText(275);
+        }
+    }]);
+
+    return StaticText;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 143:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CachedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _size = __webpack_require__(73);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CachedText = exports.CachedText = function () {
+    function CachedText() {
+        _classCallCheck(this, CachedText);
+
+        this.m_text = null;
+        this.m_textSize = null;
+        this.m_textMustRecache = true;
+        this.m_font = null;
+        this.m_align = null;
+    }
+
+    _createClass(CachedText, [{
+        key: 'draw',
+        value: function draw(rect) {
+            if (!this.m_font) return;
+            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
+                this.m_textMustRecache = false;
+                this.m_textCachedScreenCoords = rect;
+                //m_textCoordsBuffer.clear();
+                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+            }
+            //if(m_font->getTexture())
+            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
+        }
+    }, {
+        key: 'wrapText',
+        value: function wrapText(maxWidth) {
+            if (this.m_font) {
+                // update new line positions
+                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
+                this.update();
+            }
+        }
+    }, {
+        key: 'setFont',
+        value: function setFont(font) {
+            this.m_font = font;
+            this.update();
+        }
+    }, {
+        key: 'setText',
+        value: function setText(text) {
+            this.m_text = text;
+            this.update();
+        }
+    }, {
+        key: 'setAlign',
+        value: function setAlign(align) {
+            this.m_align = align;
+            this.update();
+        }
+    }, {
+        key: 'getTextSize',
+        value: function getTextSize() {
+            return this.m_textSize;
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            return this.m_text;
+        }
+    }, {
+        key: 'getFont',
+        value: function getFont() {
+            return this.m_font;
+        }
+    }, {
+        key: 'getAlign',
+        value: function getAlign() {
+            return this.m_align;
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.m_font) this.m_textSize = new _size.Size();
+            /* todo */ //m_font->calculateTextRectSize(m_text);
+            this.m_textMustRecache = true;
+        }
+    }]);
+
+    return CachedText;
+}();
+
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+
+/***/ }),
+
+/***/ 144:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var g_clock = exports.g_clock = function () {
+    function g_clock() {
+        _classCallCheck(this, g_clock);
+    }
+
+    _createClass(g_clock, null, [{
+        key: "millis",
+        value: function millis() {
+            return +new Date();
+        }
+    }]);
+
+    return g_clock;
+}();
+
+/***/ }),
+
+/***/ 145:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Timer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _g_clock = __webpack_require__(144);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Timer = exports.Timer = function () {
+    function Timer() {
+        _classCallCheck(this, Timer);
+
+        this.m_startTicks = 0;
+        this.m_stopped = false;
+        this.restart();
+    }
+
+    _createClass(Timer, [{
+        key: "restart",
+        value: function restart() {
+            this.m_startTicks = _g_clock.g_clock.millis();
+            this.m_stopped = false;
+        }
+    }, {
+        key: "stop",
+        value: function stop() {
+            this.m_stopped = true;
+        }
+    }, {
+        key: "startTicks",
+        value: function startTicks() {
+            return this.m_startTicks;
+        }
+    }, {
+        key: "ticksElapsed",
+        value: function ticksElapsed() {
+            return _g_clock.g_clock.millis() - this.m_startTicks;
+        }
+    }, {
+        key: "timeElapsed",
+        value: function timeElapsed() {
+            return this.ticksElapsed() / 1000;
+        }
+    }, {
+        key: "running",
+        value: function running() {
+            return !this.m_stopped;
+        }
+    }]);
+
+    return Timer;
+}();
+
+/***/ }),
+
+/***/ 146:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(147);
+module.exports = __webpack_require__(349);
 
 
 /***/ }),
 
-/***/ 32:
+/***/ 23:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -497,19 +1759,19 @@ exports.error = error;
 
 /***/ }),
 
-/***/ 342:
+/***/ 349:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jquery = __webpack_require__(343);
+var _jquery = __webpack_require__(350);
 
 var $ = _interopRequireWildcard(_jquery);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -569,7 +1831,7 @@ test();
 
 /***/ }),
 
-/***/ 344:
+/***/ 351:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -582,7 +1844,7 @@ exports.LocalPlayer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _player = __webpack_require__(133);
+var _player = __webpack_require__(137);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -627,7 +1889,76 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
 
 /***/ }),
 
-/***/ 345:
+/***/ 352:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TileBlock = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _tile = __webpack_require__(353);
+
+var _helpers = __webpack_require__(139);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TileBlock = exports.TileBlock = function () {
+    function TileBlock() {
+        _classCallCheck(this, TileBlock);
+
+        this.m_tiles = [];
+    }
+
+    _createClass(TileBlock, [{
+        key: "create",
+        value: function create(pos) {
+            var tile = new _tile.Tile(pos);
+            this.m_tiles[this.getTileIndex(pos)] = tile;
+            return tile;
+        }
+    }, {
+        key: "getOrCreate",
+        value: function getOrCreate(pos) {
+            var tile = this.get(pos);
+            if (!tile) tile = this.create(pos);
+            return tile;
+        }
+    }, {
+        key: "get",
+        value: function get(pos) {
+            return this.m_tiles[this.getTileIndex(pos)];
+        }
+    }, {
+        key: "remove",
+        value: function remove(pos) {
+            this.m_tiles[this.getTileIndex(pos)] = null;
+        }
+    }, {
+        key: "getTileIndex",
+        value: function getTileIndex(pos) {
+            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
+        }
+    }, {
+        key: "getTiles",
+        value: function getTiles() {
+            return this.m_tiles;
+        }
+    }]);
+
+    return TileBlock;
+}();
+
+TileBlock.BLOCK_SIZE = 32;
+
+/***/ }),
+
+/***/ 353:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -640,13 +1971,13 @@ exports.Tile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
-var _map = __webpack_require__(96);
+var _map = __webpack_require__(50);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -690,6 +2021,7 @@ var Tile = exports.Tile = function () {
             if (thing.isEffect()) {
                 if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
             } else {
+                if (thing.isCreature()) console.log('tile.addThing', thing, stackPos, this.m_things);
                 // priority                                    854
                 // 0 - ground,                        -.      -.
                 // 1 - ground borders                 -.      -.
@@ -709,11 +2041,13 @@ var Tile = exports.Tile = function () {
                     }
                     for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
                         var otherPriority = this.m_things[stackPos].getStackPriority();
+                        console.log('prior', stackPos, priority, otherPriority);
                         if (append && otherPriority > priority || !append && otherPriority >= priority) break;
                     }
                 } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
                 //this.m_things.insert(this.m_things.begin() + stackPos, thing);
-                this.m_things[stackPos] = thing;
+                this.m_things.splice(stackPos, 0, thing);
+                //this.m_things[stackPos] = thing;
                 if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
                 /*
                 // check stack priorities
@@ -1527,7 +2861,7 @@ Tile.MAX_THINGS = 10;
 
 /***/ }),
 
-/***/ 346:
+/***/ 354:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1540,33 +2874,33 @@ exports.ThingType = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
-var _animator = __webpack_require__(347);
+var _animator = __webpack_require__(355);
 
-var _image = __webpack_require__(135);
+var _image = __webpack_require__(140);
 
-var _color = __webpack_require__(97);
+var _color = __webpack_require__(55);
 
-var _spritemanager = __webpack_require__(348);
+var _spritemanager = __webpack_require__(356);
 
-var _thingtypeattribs = __webpack_require__(349);
+var _thingtypeattribs = __webpack_require__(357);
 
-var _size = __webpack_require__(136);
+var _size = __webpack_require__(73);
 
-var _point = __webpack_require__(350);
+var _point = __webpack_require__(72);
 
-var _texture = __webpack_require__(351);
+var _texture = __webpack_require__(358);
 
-var _rect = __webpack_require__(352);
+var _rect = __webpack_require__(141);
 
-var _marketdata = __webpack_require__(353);
+var _marketdata = __webpack_require__(359);
 
-var _light = __webpack_require__(137);
+var _light = __webpack_require__(101);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1881,7 +3215,7 @@ var ThingType = exports.ThingType = function () {
     }, {
         key: "isOnBottom",
         value: function isOnBottom() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritable);
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnBottom);
         }
     }, {
         key: "isOnTop",
@@ -2188,7 +3522,7 @@ ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue,
 
 /***/ }),
 
-/***/ 347:
+/***/ 355:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2201,7 +3535,7 @@ exports.Animator = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2247,7 +3581,7 @@ var Animator = exports.Animator = function () {
 
 /***/ }),
 
-/***/ 348:
+/***/ 356:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2260,7 +3594,7 @@ exports.g_sprites = exports.SpriteManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _image = __webpack_require__(135);
+var _image = __webpack_require__(140);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2290,7 +3624,7 @@ exports.g_sprites = g_sprites;
 
 /***/ }),
 
-/***/ 349:
+/***/ 357:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2339,61 +3673,7 @@ var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
 
 /***/ }),
 
-/***/ 350:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Point = exports.Point = function () {
-    function Point(x, y) {
-        _classCallCheck(this, Point);
-
-        this.x = x;
-        this.y = y;
-    }
-
-    _createClass(Point, [{
-        key: "equals",
-        value: function equals(otherPoint) {
-            return this.x == otherPoint.x && this.y == otherPoint.y;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Point(this.x, this.y);
-        }
-    }, {
-        key: "add",
-        value: function add(point) {
-            return new Point(this.x + point.x, this.y + point.y);
-        }
-    }, {
-        key: "sub",
-        value: function sub(point) {
-            return new Point(this.x - point.x, this.y - point.y);
-        }
-    }, {
-        key: "mul",
-        value: function mul(ratio) {
-            return new Point(this.x * ratio, this.y * ratio);
-        }
-    }]);
-
-    return Point;
-}();
-
-/***/ }),
-
-/***/ 351:
+/***/ 358:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2421,373 +3701,7 @@ var Texture = exports.Texture = function Texture(image) {
 
 /***/ }),
 
-/***/ 352:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Rect = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _point = __webpack_require__(350);
-
-var _size2 = __webpack_require__(136);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Rect = exports.Rect = function () {
-    function Rect() {
-        _classCallCheck(this, Rect);
-
-        //TRect() : x1(0), y1(0), x2(-1), y2(-1) { }
-        //TRect(T x, T y, T width, T height) : x1(x), y1(y), x2(x+width-1), y2(y+height-1) { }
-        //TRect(const & topLeft, const & bottomRight) : x1(topLeft.x), y1(topLeft.y), x2(bottomRight.x), y2(bottomRight.y) { }
-        //TRect(const TRect<T>& other) : x1(other.x1), y1(other.y1), x2(other.x2), y2(other.y2) { }
-        //TRect(T x, T y, const TSize<T>& size) : x1(x), y1(y), x2(x+size.width()-1), y2(y+size.height()-1) { }
-        //TRect(const & topLeft, const TSize<T>& size) : x1(topLeft.x), y1(topLeft.y), x2(x1+size.width()-1), y2(y1+size.height()-1) { }
-        //TRect(const & topLeft, int width, int height) : x1(topLeft.x), y1(topLeft.y), x2(x1+width-1), y2(y1+height-1) { }
-        this.x1 = 0;
-        this.y1 = 0;
-        this.x2 = 0;
-        this.y2 = 0;
-        if (arguments.length == 0) {
-            this.x1 = 0;
-            this.y1 = 0;
-            this.x2 = -1;
-            this.y2 = -1;
-            return;
-        } else if (arguments.length == 1) {
-            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof Rect) {
-                var other = arguments.length <= 0 ? undefined : arguments[0];
-                this.x1 = other.x1;
-                this.y1 = other.y1;
-                this.x2 = other.x2;
-                this.y2 = other.y2;
-                return;
-            }
-        } else if (arguments.length == 2) {
-            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _point.Point) {
-                var topLeft = arguments.length <= 0 ? undefined : arguments[0];
-                var bottomRight = arguments.length <= 1 ? undefined : arguments[1];
-                this.x1 = topLeft.x;
-                this.y1 = topLeft.y;
-                this.x2 = bottomRight.x;
-                this.y2 = bottomRight.y;
-                return;
-            } else if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && (arguments.length <= 1 ? undefined : arguments[1]) instanceof _size2.Size) {
-                var _topLeft = arguments.length <= 0 ? undefined : arguments[0];
-                var size = arguments.length <= 1 ? undefined : arguments[1];
-                this.x1 = _topLeft.x;
-                this.y1 = _topLeft.y;
-                this.x2 = this.x1 + size.width() - 1;
-                this.y2 = this.y1 + size.height() - 1;
-                return;
-            }
-        } else if (arguments.length == 3) {
-            if ((arguments.length <= 0 ? undefined : arguments[0]) instanceof _point.Point && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
-                var _topLeft2 = arguments.length <= 0 ? undefined : arguments[0];
-                var width = arguments.length <= 1 ? undefined : arguments[1];
-                var height = arguments.length <= 2 ? undefined : arguments[2];
-                this.x1 = _topLeft2.x;
-                this.y1 = _topLeft2.y;
-                this.x2 = this.x1 + width - 1;
-                this.y2 = this.y1 + height - 1;
-                return;
-            } else if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && (arguments.length <= 2 ? undefined : arguments[2]) instanceof _size2.Size) {
-                var x = arguments.length <= 0 ? undefined : arguments[0];
-                var y = arguments.length <= 1 ? undefined : arguments[1];
-                var _size = arguments.length <= 2 ? undefined : arguments[2];
-                this.x1 = x;
-                this.y1 = y;
-                this.x2 = this.x1 + _size.width() - 1;
-                this.y2 = this.y1 + _size.height() - 1;
-                return;
-            }
-        } else if (arguments.length == 4) {
-            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number' && typeof (arguments.length <= 3 ? undefined : arguments[3]) == 'number') {
-                var _x = arguments.length <= 0 ? undefined : arguments[0];
-                var _y = arguments.length <= 1 ? undefined : arguments[1];
-                var _width = arguments.length <= 2 ? undefined : arguments[2];
-                var _height = arguments.length <= 3 ? undefined : arguments[3];
-                this.x1 = _x;
-                this.y1 = _y;
-                this.x2 = this.x1 + _width - 1;
-                this.y2 = this.y1 + _height - 1;
-                return;
-            }
-        }
-        throw new Error('Invalid constructor parameters.');
-    }
-
-    _createClass(Rect, [{
-        key: "equals",
-        value: function equals(otherRect) {
-            return this.x1 == otherRect.x1 && this.y1 == otherRect.y1 && this.x2 == otherRect.x2 && this.y2 == otherRect.y2;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Rect(this);
-        }
-    }, {
-        key: "isNull",
-        value: function isNull() {
-            return this.x2 == this.x1 - 1 && this.y2 == this.y1 - 1;
-        }
-    }, {
-        key: "isEmpty",
-        value: function isEmpty() {
-            return this.x1 > this.x2 || this.y1 > this.y2;
-        }
-    }, {
-        key: "isValid",
-        value: function isValid() {
-            return this.x1 <= this.x2 && this.y1 <= this.y2;
-        }
-    }, {
-        key: "left",
-        value: function left() {
-            return this.x1;
-        }
-    }, {
-        key: "top",
-        value: function top() {
-            return this.y1;
-        }
-    }, {
-        key: "right",
-        value: function right() {
-            return this.x2;
-        }
-    }, {
-        key: "bottom",
-        value: function bottom() {
-            return this.y2;
-        }
-    }, {
-        key: "horizontalCenter",
-        value: function horizontalCenter() {
-            return this.x1 + (this.x2 - this.x1) / 2;
-        }
-    }, {
-        key: "verticalCenter",
-        value: function verticalCenter() {
-            return this.y1 + (this.y2 - this.y1) / 2;
-        }
-    }, {
-        key: "x",
-        value: function x() {
-            return this.x1;
-        }
-    }, {
-        key: "y",
-        value: function y() {
-            return this.y1;
-        }
-    }, {
-        key: "topLeft",
-        value: function topLeft() {
-            return new _point.Point(this.x1, this.y1);
-        }
-    }, {
-        key: "bottomRight",
-        value: function bottomRight() {
-            return new _point.Point(this.x2, this.y2);
-        }
-    }, {
-        key: "topRight",
-        value: function topRight() {
-            return new _point.Point(this.x2, this.y1);
-        }
-    }, {
-        key: "bottomLeft",
-        value: function bottomLeft() {
-            return new _point.Point(this.x1, this.y2);
-        }
-    }, {
-        key: "topCenter",
-        value: function topCenter() {
-            return new _point.Point((this.x1 + this.x2) / 2, this.y1);
-        }
-    }, {
-        key: "bottomCenter",
-        value: function bottomCenter() {
-            return new _point.Point((this.x1 + this.x2) / 2, this.y2);
-        }
-    }, {
-        key: "centerLeft",
-        value: function centerLeft() {
-            return new _point.Point(this.x1, (this.y1 + this.y2) / 2);
-        }
-    }, {
-        key: "centerRight",
-        value: function centerRight() {
-            return new _point.Point(this.x2, (this.y1 + this.y2) / 2);
-        }
-    }, {
-        key: "center",
-        value: function center() {
-            return new _point.Point((this.x1 + this.x2) / 2, (this.y1 + this.y2) / 2);
-        }
-    }, {
-        key: "width",
-        value: function width() {
-            return this.x2 - this.x1 + 1;
-        }
-    }, {
-        key: "height",
-        value: function height() {
-            return this.y2 - this.y1 + 1;
-        }
-    }, {
-        key: "size",
-        value: function size() {
-            return new _size2.Size(this.width(), this.height());
-        }
-    }, {
-        key: "reset",
-        value: function reset() {
-            this.x1 = this.y1 = 0;
-            this.x2 = this.y2 = -1;
-        }
-    }, {
-        key: "clear",
-        value: function clear() {
-            this.x2 = this.x1 - 1;
-            this.y2 = this.y1 - 1;
-        }
-    }, {
-        key: "setLeft",
-        value: function setLeft(pos) {
-            this.x1 = pos;
-        }
-    }, {
-        key: "setTop",
-        value: function setTop(pos) {
-            this.y1 = pos;
-        }
-    }, {
-        key: "setRight",
-        value: function setRight(pos) {
-            this.x2 = pos;
-        }
-    }, {
-        key: "setBottom",
-        value: function setBottom(pos) {
-            this.y2 = pos;
-        }
-    }, {
-        key: "setX",
-        value: function setX(x) {
-            this.x1 = x;
-        }
-    }, {
-        key: "setY",
-        value: function setY(y) {
-            this.y1 = y;
-        }
-    }, {
-        key: "setTopLeft",
-        value: function setTopLeft(p) {
-            this.x1 = p.x;
-            this.y1 = p.y;
-        }
-    }, {
-        key: "setBottomRight",
-        value: function setBottomRight(p) {
-            this.x2 = p.x;
-            this.y2 = p.y;
-        }
-    }, {
-        key: "setTopRight",
-        value: function setTopRight(p) {
-            this.x2 = p.x;
-            this.y1 = p.y;
-        }
-    }, {
-        key: "setBottomLeft",
-        value: function setBottomLeft(p) {
-            this.x1 = p.x;
-            this.y2 = p.y;
-        }
-    }, {
-        key: "setWidth",
-        value: function setWidth(width) {
-            this.x2 = this.x1 + width - 1;
-        }
-    }, {
-        key: "setHeight",
-        value: function setHeight(height) {
-            this.y2 = this.y1 + height - 1;
-        }
-    }, {
-        key: "setSize",
-        value: function setSize(size) {
-            this.x2 = this.x1 + size.width() - 1;
-            this.y2 = this.y1 + size.height() - 1;
-        }
-    }, {
-        key: "setRect",
-        value: function setRect(x, y, width, height) {
-            this.x1 = x;
-            this.y1 = y;
-            this.x2 = x + width - 1;
-            this.y2 = y + height - 1;
-        }
-    }, {
-        key: "setCoords",
-        value: function setCoords(left, top, right, bottom) {
-            this.x1 = left;
-            this.y1 = top;
-            this.x2 = right;
-            this.y2 = bottom;
-        }
-    }, {
-        key: "moveLeft",
-        value: function moveLeft(pos) {
-            this.x2 += pos - this.x1;
-            this.x1 = pos;
-        }
-    }, {
-        key: "moveTop",
-        value: function moveTop(pos) {
-            this.y2 += pos - this.y1;
-            this.y1 = pos;
-        }
-    }, {
-        key: "moveRight",
-        value: function moveRight(pos) {
-            this.x1 += pos - this.x2;
-            this.x2 = pos;
-        }
-    }, {
-        key: "moveBottom",
-        value: function moveBottom(pos) {
-            this.y1 += pos - this.y2;
-            this.y2 = pos;
-        }
-    }, {
-        key: "bind",
-        value: function bind(r) {
-            if (this.isNull() || r.isNull()) return;
-            if (this.right() > r.right()) this.moveRight(r.right());
-            if (this.bottom() > r.bottom()) this.moveBottom(r.bottom());
-            if (this.left() < r.left()) this.moveLeft(r.left());
-            if (this.top() < r.top()) this.moveTop(r.top());
-        }
-    }]);
-
-    return Rect;
-}();
-
-/***/ }),
-
-/***/ 353:
+/***/ 359:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2805,7 +3719,7 @@ var MarketData = exports.MarketData = function MarketData() {
 
 /***/ }),
 
-/***/ 354:
+/***/ 360:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2818,9 +3732,9 @@ exports.g_resources = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputfile = __webpack_require__(355);
+var _inputfile = __webpack_require__(361);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2939,7 +3853,7 @@ xhr.send();
 
 /***/ }),
 
-/***/ 355:
+/***/ 361:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3053,7 +3967,7 @@ var InputFile = exports.InputFile = function () {
 
 /***/ }),
 
-/***/ 356:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3068,49 +3982,49 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(357);
+var _protocol = __webpack_require__(363);
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
-var _outputmessage = __webpack_require__(359);
+var _outputmessage = __webpack_require__(365);
 
-var _proto = __webpack_require__(361);
+var _proto = __webpack_require__(367);
 
-var _outfit = __webpack_require__(362);
+var _outfit = __webpack_require__(368);
 
 var _thing = __webpack_require__(44);
 
-var _position = __webpack_require__(138);
+var _position = __webpack_require__(100);
 
-var _item = __webpack_require__(363);
+var _item = __webpack_require__(369);
 
-var _statictext = __webpack_require__(364);
+var _statictext = __webpack_require__(142);
 
-var _thingtypemanager = __webpack_require__(69);
+var _thingtypemanager = __webpack_require__(54);
 
-var _map = __webpack_require__(96);
+var _map = __webpack_require__(50);
 
-var _effect = __webpack_require__(365);
+var _effect = __webpack_require__(370);
 
-var _animatedtext = __webpack_require__(368);
+var _animatedtext = __webpack_require__(371);
 
-var _missile = __webpack_require__(369);
+var _missile = __webpack_require__(372);
 
-var _color2 = __webpack_require__(97);
+var _color2 = __webpack_require__(55);
 
-var _player = __webpack_require__(133);
+var _player = __webpack_require__(137);
 
-var _light = __webpack_require__(137);
+var _light = __webpack_require__(101);
 
-var _npc = __webpack_require__(370);
+var _npc = __webpack_require__(373);
 
-var _monster = __webpack_require__(371);
+var _monster = __webpack_require__(374);
 
-var _awarerange = __webpack_require__(134);
+var _awarerange = __webpack_require__(138);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3967,7 +4881,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             var thing = this.getMappedThing(msg);
             var newPos = this.getPosition(msg);
             if (!thing || !thing.isCreature()) {
-                _log.Log.error("no creature found to move");
+                _log.Log.error("no creature found to move", thing);
                 return;
             }
             if (!_map.g_map.removeThing(thing)) {
@@ -3976,7 +4890,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             }
             var creature = thing;
             creature.allowAppearWalk();
-            _log.Log.debug('creature move', creature);
+            _log.Log.debug('creature move', creature, _map.g_map.getTile(newPos).m_things);
             _map.g_map.addThing(thing, newPos, -1);
         }
     }, {
@@ -5220,7 +6134,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 357:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5233,9 +6147,9 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(358);
+var _inputmessage = __webpack_require__(364);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5387,7 +6301,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 358:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5400,9 +6314,9 @@ exports.InputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
-var _position = __webpack_require__(138);
+var _position = __webpack_require__(100);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5515,7 +6429,7 @@ var InputMessage = exports.InputMessage = function () {
 
 /***/ }),
 
-/***/ 359:
+/***/ 365:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5528,7 +6442,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(360);
+var _jspack = __webpack_require__(366);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5615,7 +6529,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 360:
+/***/ 366:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5903,7 +6817,7 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 361:
+/***/ 367:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6146,7 +7060,7 @@ exports.Proto = Proto;
 
 /***/ }),
 
-/***/ 362:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6201,7 +7115,7 @@ var Outfit = exports.Outfit = function () {
 
 /***/ }),
 
-/***/ 363:
+/***/ 369:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6216,9 +7130,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
-var _thingtypemanager = __webpack_require__(69);
+var _thingtypemanager = __webpack_require__(54);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6237,6 +7151,9 @@ var Item = exports.Item = function (_Thing) {
         var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
         _this.m_clientId = m_clientId;
+        _this.istop = _this.getThingType().isOnTop();
+        _this.isbot = _this.getThingType().isOnBottom();
+        _this.stackprio = _this.getStackPriority();
         return _this;
     }
 
@@ -6275,205 +7192,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 364:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.StaticText = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _thing = __webpack_require__(44);
-
-var _rect = __webpack_require__(352);
-
-var _point = __webpack_require__(350);
-
-var _color = __webpack_require__(97);
-
-var _const = __webpack_require__(43);
-
-var _cachedtext = __webpack_require__(374);
-
-var _g_clock = __webpack_require__(367);
-
-var _map = __webpack_require__(96);
-
-var _log = __webpack_require__(32);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var StaticText = exports.StaticText = function (_Thing) {
-    _inherits(StaticText, _Thing);
-
-    function StaticText() {
-        _classCallCheck(this, StaticText);
-
-        var _this = _possibleConstructorReturn(this, (StaticText.__proto__ || Object.getPrototypeOf(StaticText)).apply(this, arguments));
-
-        _this.m_yell = false;
-        /*std::deque<std::pair<std::string, ticks_t>>*/
-        _this.m_messages = [];
-        _this.m_cachedText = new _cachedtext.CachedText();
-        _this.m_updateEvent = null;
-        return _this;
-    }
-
-    _createClass(StaticText, [{
-        key: "drawText",
-        value: function drawText(dest, parentRect) {
-            var textSize = this.m_cachedText.getTextSize();
-            var rect = new _rect.Rect(dest.sub(new _point.Point(textSize.width() / 2, textSize.height())).add(new _point.Point(20, 5)), textSize);
-            var boundRect = rect.clone();
-            boundRect.bind(parentRect);
-            //g_painter->setColor(m_color);
-            this.m_cachedText.draw(boundRect);
-        }
-    }, {
-        key: "getName",
-        value: function getName() {
-            return this.m_name;
-        }
-    }, {
-        key: "getMessageMode",
-        value: function getMessageMode() {
-            return this.m_mode;
-        }
-    }, {
-        key: "getFirstMessage",
-        value: function getFirstMessage() {
-            return this.m_messages[0][0];
-        }
-    }, {
-        key: "isYell",
-        value: function isYell() {
-            return this.m_mode == _const.MessageMode.MessageYell || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageBarkLoud;
-        }
-    }, {
-        key: "setText",
-        value: function setText(text) {
-            this.m_cachedText.setText(text);
-        }
-    }, {
-        key: "setFont",
-        value: function setFont(fontName) {
-            this.m_cachedText.setFont(fontName);
-        }
-    }, {
-        key: "addMessage",
-        value: function addMessage(name, mode, text) {
-            if (this.m_messages.length == 0) {
-                this.m_name = name;
-                this.m_mode = mode;
-            } else if (this.m_name != name || this.m_mode != mode) {
-                return false;
-            } else if (this.m_messages.length > 10) {
-                this.m_messages.shift();
-                clearTimeout(this.m_updateEvent);
-                this.m_updateEvent = null;
-            }
-            var delay = Math.max(_const.Otc.STATIC_DURATION_PER_CHARACTER * text.length, _const.Otc.MIN_STATIC_TEXT_DURATION);
-            if (this.isYell()) delay *= 2;
-            this.m_messages.push([text, _g_clock.g_clock.millis() + delay]);
-            this.compose();
-            if (!this.m_updateEvent) this.scheduleUpdate();
-            return true;
-        }
-    }, {
-        key: "asStaticText",
-        value: function asStaticText() {
-            return this;
-        }
-    }, {
-        key: "isStaticText",
-        value: function isStaticText() {
-            return true;
-        }
-    }, {
-        key: "setColor",
-        value: function setColor(color) {
-            this.m_color = color;
-        }
-    }, {
-        key: "getColor",
-        value: function getColor() {
-            return this.m_color;
-        }
-    }, {
-        key: "update",
-        value: function update() {
-            this.m_messages.shift();
-            if (this.m_messages.length == 0) {
-                // schedule removal
-                var self = this.asStaticText();
-                setTimeout(function (self) {
-                    _map.g_map.removeThing(self);
-                }, 0, self);
-            } else {
-                this.compose();
-                this.scheduleUpdate();
-            }
-        }
-    }, {
-        key: "scheduleUpdate",
-        value: function scheduleUpdate() {
-            var delay = Math.max(this.m_messages[0][1] - _g_clock.g_clock.millis(), 0);
-            var self = this.asStaticText();
-            this.m_updateEvent = setTimeout(function (self) {
-                self.m_updateEvent = null;
-                self.update();
-            }, delay, self);
-        }
-    }, {
-        key: "compose",
-        value: function compose() {
-            //TODO: this could be moved to lua
-            var text = void 0;
-            if (this.m_mode == _const.MessageMode.MessageSay) {
-                text += this.m_name;
-                text += " says:\n";
-                this.m_color = new _color.Color(239, 239, 0);
-            } else if (this.m_mode == _const.MessageMode.MessageWhisper) {
-                text += this.m_name;
-                text += " whispers:\n";
-                this.m_color = new _color.Color(239, 239, 0);
-            } else if (this.m_mode == _const.MessageMode.MessageYell) {
-                text += this.m_name;
-                text += " yells:\n";
-                this.m_color = new _color.Color(239, 239, 0);
-            } else if (this.m_mode == _const.MessageMode.MessageMonsterSay || this.m_mode == _const.MessageMode.MessageMonsterYell || this.m_mode == _const.MessageMode.MessageSpell || this.m_mode == _const.MessageMode.MessageBarkLow || this.m_mode == _const.MessageMode.MessageBarkLoud) {
-                this.m_color = new _color.Color(254, 101, 0);
-            } else if (this.m_mode == _const.MessageMode.MessageNpcFrom || this.m_mode == _const.MessageMode.MessageNpcFromStartBlock) {
-                text += this.m_name;
-                text += " says:\n";
-                this.m_color = new _color.Color(95, 247, 247);
-            } else {
-                _log.Log.error("Unknown speak type: %d", this.m_mode);
-            }
-            for (var i = 0; i < this.m_messages.length; ++i) {
-                text += this.m_messages[i][0];
-                if (i < this.m_messages.length - 1) text += "\n";
-            }
-            this.m_cachedText.setText(text);
-            this.m_cachedText.wrapText(275);
-        }
-    }]);
-
-    return StaticText;
-}(_thing.Thing);
-
-/***/ }),
-
-/***/ 365:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6488,11 +7207,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
-var _thingtypemanager = __webpack_require__(69);
+var _thingtypemanager = __webpack_require__(54);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _timer = __webpack_require__(366);
+var _timer = __webpack_require__(145);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6577,102 +7296,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 366:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Timer = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _g_clock = __webpack_require__(367);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Timer = exports.Timer = function () {
-    function Timer() {
-        _classCallCheck(this, Timer);
-
-        this.m_startTicks = 0;
-        this.m_stopped = false;
-        this.restart();
-    }
-
-    _createClass(Timer, [{
-        key: "restart",
-        value: function restart() {
-            this.m_startTicks = _g_clock.g_clock.millis();
-            this.m_stopped = false;
-        }
-    }, {
-        key: "stop",
-        value: function stop() {
-            this.m_stopped = true;
-        }
-    }, {
-        key: "startTicks",
-        value: function startTicks() {
-            return this.m_startTicks;
-        }
-    }, {
-        key: "ticksElapsed",
-        value: function ticksElapsed() {
-            return _g_clock.g_clock.millis() - this.m_startTicks;
-        }
-    }, {
-        key: "timeElapsed",
-        value: function timeElapsed() {
-            return this.ticksElapsed() / 1000;
-        }
-    }, {
-        key: "running",
-        value: function running() {
-            return !this.m_stopped;
-        }
-    }]);
-
-    return Timer;
-}();
-
-/***/ }),
-
-/***/ 367:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var g_clock = exports.g_clock = function () {
-    function g_clock() {
-        _classCallCheck(this, g_clock);
-    }
-
-    _createClass(g_clock, null, [{
-        key: "millis",
-        value: function millis() {
-            return +new Date();
-        }
-    }]);
-
-    return g_clock;
-}();
-
-/***/ }),
-
-/***/ 368:
+/***/ 371:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6687,13 +7311,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
-var _timer = __webpack_require__(366);
+var _timer = __webpack_require__(145);
 
-var _color = __webpack_require__(97);
+var _color = __webpack_require__(55);
 
-var _cachedtext = __webpack_require__(374);
+var _cachedtext = __webpack_require__(143);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6820,7 +7444,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 369:
+/***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6875,7 +7499,7 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
-/***/ 370:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6888,7 +7512,7 @@ exports.Npc = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(68);
+var _creature = __webpack_require__(71);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6917,7 +7541,7 @@ var Npc = exports.Npc = function (_Creature) {
 
 /***/ }),
 
-/***/ 371:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6930,7 +7554,7 @@ exports.Monster = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(68);
+var _creature = __webpack_require__(71);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6959,7 +7583,7 @@ var Monster = exports.Monster = function (_Creature) {
 
 /***/ }),
 
-/***/ 372:
+/***/ 375:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6988,196 +7612,6 @@ var Container = exports.Container = function () {
 
 /***/ }),
 
-/***/ 373:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.TileBlock = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tile = __webpack_require__(345);
-
-var _helpers = __webpack_require__(375);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TileBlock = exports.TileBlock = function () {
-    function TileBlock() {
-        _classCallCheck(this, TileBlock);
-
-        this.m_tiles = [];
-    }
-
-    _createClass(TileBlock, [{
-        key: "create",
-        value: function create(pos) {
-            var tile = new _tile.Tile(pos);
-            this.m_tiles[this.getTileIndex(pos)] = tile;
-            return tile;
-        }
-    }, {
-        key: "getOrCreate",
-        value: function getOrCreate(pos) {
-            var tile = this.get(pos);
-            if (!tile) tile = this.create(pos);
-            return tile;
-        }
-    }, {
-        key: "get",
-        value: function get(pos) {
-            return this.m_tiles[this.getTileIndex(pos)];
-        }
-    }, {
-        key: "remove",
-        value: function remove(pos) {
-            this.m_tiles[this.getTileIndex(pos)] = null;
-        }
-    }, {
-        key: "getTileIndex",
-        value: function getTileIndex(pos) {
-            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
-        }
-    }, {
-        key: "getTiles",
-        value: function getTiles() {
-            return this.m_tiles;
-        }
-    }]);
-
-    return TileBlock;
-}();
-
-TileBlock.BLOCK_SIZE = 32;
-
-/***/ }),
-
-/***/ 374:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.CachedText = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _size = __webpack_require__(136);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var CachedText = exports.CachedText = function () {
-    function CachedText() {
-        _classCallCheck(this, CachedText);
-
-        this.m_text = null;
-        this.m_textSize = null;
-        this.m_textMustRecache = true;
-        this.m_font = null;
-        this.m_align = null;
-    }
-
-    _createClass(CachedText, [{
-        key: 'draw',
-        value: function draw(rect) {
-            if (!this.m_font) return;
-            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
-                this.m_textMustRecache = false;
-                this.m_textCachedScreenCoords = rect;
-                //m_textCoordsBuffer.clear();
-                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
-            }
-            //if(m_font->getTexture())
-            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
-        }
-    }, {
-        key: 'wrapText',
-        value: function wrapText(maxWidth) {
-            if (this.m_font) {
-                // update new line positions
-                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
-                this.update();
-            }
-        }
-    }, {
-        key: 'setFont',
-        value: function setFont(font) {
-            this.m_font = font;
-            this.update();
-        }
-    }, {
-        key: 'setText',
-        value: function setText(text) {
-            this.m_text = text;
-            this.update();
-        }
-    }, {
-        key: 'setAlign',
-        value: function setAlign(align) {
-            this.m_align = align;
-            this.update();
-        }
-    }, {
-        key: 'getTextSize',
-        value: function getTextSize() {
-            return this.m_textSize;
-        }
-    }, {
-        key: 'getText',
-        value: function getText() {
-            return this.m_text;
-        }
-    }, {
-        key: 'getFont',
-        value: function getFont() {
-            return this.m_font;
-        }
-    }, {
-        key: 'getAlign',
-        value: function getAlign() {
-            return this.m_align;
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            if (this.m_font) this.m_textSize = new _size.Size();
-            /* todo */ //m_font->calculateTextRectSize(m_text);
-            this.m_textMustRecache = true;
-        }
-    }]);
-
-    return CachedText;
-}();
-
-CachedText.ALIGN_LEFT = 'left';
-CachedText.ALIGN_RIGHT = 'right';
-
-/***/ }),
-
-/***/ 375:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toInt = function toInt(int) {
-    return parseInt(int.toString());
-};
-exports.toInt = toInt;
-
-/***/ }),
-
 /***/ 376:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7195,15 +7629,15 @@ var _SpeakTypes;
 
 var _chatboxtab = __webpack_require__(377);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
-var _statictext = __webpack_require__(364);
+var _statictext = __webpack_require__(142);
 
-var _map = __webpack_require__(96);
+var _map = __webpack_require__(50);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7659,596 +8093,6 @@ var ChatboxTab = exports.ChatboxTab = function () {
 
 /***/ }),
 
-/***/ 43:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var Otc = exports.Otc = undefined;
-(function (Otc) {
-    Otc[Otc["TILE_PIXELS"] = 32] = "TILE_PIXELS";
-    Otc[Otc["MAX_ELEVATION"] = 24] = "MAX_ELEVATION";
-    Otc[Otc["SEA_FLOOR"] = 7] = "SEA_FLOOR";
-    Otc[Otc["UNDERGROUND_FLOOR"] = 8] = "UNDERGROUND_FLOOR";
-    Otc[Otc["MAX_Z"] = 15] = "MAX_Z";
-    Otc[Otc["AWARE_UNDEGROUND_FLOOR_RANGE"] = 2] = "AWARE_UNDEGROUND_FLOOR_RANGE";
-    Otc[Otc["INVISIBLE_TICKS_PER_FRAME"] = 500] = "INVISIBLE_TICKS_PER_FRAME";
-    Otc[Otc["ITEM_TICKS_PER_FRAME"] = 500] = "ITEM_TICKS_PER_FRAME";
-    Otc[Otc["ANIMATED_TEXT_DURATION"] = 1000] = "ANIMATED_TEXT_DURATION";
-    Otc[Otc["STATIC_DURATION_PER_CHARACTER"] = 60] = "STATIC_DURATION_PER_CHARACTER";
-    Otc[Otc["MIN_STATIC_TEXT_DURATION"] = 3000] = "MIN_STATIC_TEXT_DURATION";
-    Otc[Otc["MAX_STATIC_TEXT_WIDTH"] = 200] = "MAX_STATIC_TEXT_WIDTH";
-    Otc[Otc["MAX_AUTOWALK_STEPS_RETRY"] = 10] = "MAX_AUTOWALK_STEPS_RETRY";
-    Otc[Otc["MAX_AUTOWALK_DIST"] = 127] = "MAX_AUTOWALK_DIST";
-})(Otc || (exports.Otc = Otc = {}));
-var DrawFlags = exports.DrawFlags = undefined;
-(function (DrawFlags) {
-    DrawFlags[DrawFlags["DrawGround"] = 1] = "DrawGround";
-    DrawFlags[DrawFlags["DrawGroundBorders"] = 2] = "DrawGroundBorders";
-    DrawFlags[DrawFlags["DrawOnBottom"] = 4] = "DrawOnBottom";
-    DrawFlags[DrawFlags["DrawOnTop"] = 8] = "DrawOnTop";
-    DrawFlags[DrawFlags["DrawItems"] = 16] = "DrawItems";
-    DrawFlags[DrawFlags["DrawCreatures"] = 32] = "DrawCreatures";
-    DrawFlags[DrawFlags["DrawEffects"] = 64] = "DrawEffects";
-    DrawFlags[DrawFlags["DrawMissiles"] = 128] = "DrawMissiles";
-    DrawFlags[DrawFlags["DrawCreaturesInformation"] = 256] = "DrawCreaturesInformation";
-    DrawFlags[DrawFlags["DrawStaticTexts"] = 512] = "DrawStaticTexts";
-    DrawFlags[DrawFlags["DrawAnimatedTexts"] = 1024] = "DrawAnimatedTexts";
-    DrawFlags[DrawFlags["DrawAnimations"] = 2048] = "DrawAnimations";
-    DrawFlags[DrawFlags["DrawBars"] = 4096] = "DrawBars";
-    DrawFlags[DrawFlags["DrawNames"] = 8192] = "DrawNames";
-    DrawFlags[DrawFlags["DrawLights"] = 16384] = "DrawLights";
-    DrawFlags[DrawFlags["DrawManaBar"] = 32768] = "DrawManaBar";
-    DrawFlags[DrawFlags["DrawWalls"] = 12] = "DrawWalls";
-    DrawFlags[DrawFlags["DrawEverything"] = 65535] = "DrawEverything";
-})(DrawFlags || (exports.DrawFlags = DrawFlags = {}));
-var DatOpts = exports.DatOpts = undefined;
-(function (DatOpts) {
-    DatOpts[DatOpts["DatGround"] = 0] = "DatGround";
-    DatOpts[DatOpts["DatGroundClip"] = 1] = "DatGroundClip";
-    DatOpts[DatOpts["DatOnBottom"] = 2] = "DatOnBottom";
-    DatOpts[DatOpts["DatOnTop"] = 3] = "DatOnTop";
-    DatOpts[DatOpts["DatContainer"] = 4] = "DatContainer";
-    DatOpts[DatOpts["DatStackable"] = 5] = "DatStackable";
-    DatOpts[DatOpts["DatForceUse"] = 6] = "DatForceUse";
-    DatOpts[DatOpts["DatMultiUse"] = 7] = "DatMultiUse";
-    DatOpts[DatOpts["DatWritable"] = 8] = "DatWritable";
-    DatOpts[DatOpts["DatWritableOnce"] = 9] = "DatWritableOnce";
-    DatOpts[DatOpts["DatFluidContainer"] = 10] = "DatFluidContainer";
-    DatOpts[DatOpts["DatSplash"] = 11] = "DatSplash";
-    DatOpts[DatOpts["DatBlockWalk"] = 12] = "DatBlockWalk";
-    DatOpts[DatOpts["DatNotMoveable"] = 13] = "DatNotMoveable";
-    DatOpts[DatOpts["DatBlockProjectile"] = 14] = "DatBlockProjectile";
-    DatOpts[DatOpts["DatBlockPathFind"] = 15] = "DatBlockPathFind";
-    DatOpts[DatOpts["DatPickupable"] = 16] = "DatPickupable";
-    DatOpts[DatOpts["DatHangable"] = 17] = "DatHangable";
-    DatOpts[DatOpts["DatHookSouth"] = 18] = "DatHookSouth";
-    DatOpts[DatOpts["DatHookEast"] = 19] = "DatHookEast";
-    DatOpts[DatOpts["DatRotable"] = 20] = "DatRotable";
-    DatOpts[DatOpts["DatLight"] = 21] = "DatLight";
-    DatOpts[DatOpts["DatDontHide"] = 22] = "DatDontHide";
-    DatOpts[DatOpts["DatTranslucent"] = 23] = "DatTranslucent";
-    DatOpts[DatOpts["DatDisplacement"] = 24] = "DatDisplacement";
-    DatOpts[DatOpts["DatElevation"] = 25] = "DatElevation";
-    DatOpts[DatOpts["DatLyingCorpse"] = 26] = "DatLyingCorpse";
-    DatOpts[DatOpts["DatAnimateAlways"] = 27] = "DatAnimateAlways";
-    DatOpts[DatOpts["DatMinimapColor"] = 28] = "DatMinimapColor";
-    DatOpts[DatOpts["DatLensHelp"] = 29] = "DatLensHelp";
-    DatOpts[DatOpts["DatFullGround"] = 30] = "DatFullGround";
-    DatOpts[DatOpts["DatIgnoreLook"] = 31] = "DatIgnoreLook";
-    DatOpts[DatOpts["DatCloth"] = 32] = "DatCloth";
-    DatOpts[DatOpts["DatAnimation"] = 33] = "DatAnimation";
-    DatOpts[DatOpts["DatLastOpt"] = 255] = "DatLastOpt";
-})(DatOpts || (exports.DatOpts = DatOpts = {}));
-var InventorySlot = exports.InventorySlot = undefined;
-(function (InventorySlot) {
-    InventorySlot[InventorySlot["InventorySlotHead"] = 1] = "InventorySlotHead";
-    InventorySlot[InventorySlot["InventorySlotNecklace"] = 2] = "InventorySlotNecklace";
-    InventorySlot[InventorySlot["InventorySlotBackpack"] = 3] = "InventorySlotBackpack";
-    InventorySlot[InventorySlot["InventorySlotArmor"] = 4] = "InventorySlotArmor";
-    InventorySlot[InventorySlot["InventorySlotRight"] = 5] = "InventorySlotRight";
-    InventorySlot[InventorySlot["InventorySlotLeft"] = 6] = "InventorySlotLeft";
-    InventorySlot[InventorySlot["InventorySlotLegs"] = 7] = "InventorySlotLegs";
-    InventorySlot[InventorySlot["InventorySlotFeet"] = 8] = "InventorySlotFeet";
-    InventorySlot[InventorySlot["InventorySlotRing"] = 9] = "InventorySlotRing";
-    InventorySlot[InventorySlot["InventorySlotAmmo"] = 10] = "InventorySlotAmmo";
-    InventorySlot[InventorySlot["InventorySlotPurse"] = 11] = "InventorySlotPurse";
-    InventorySlot[InventorySlot["InventorySlotExt1"] = 12] = "InventorySlotExt1";
-    InventorySlot[InventorySlot["InventorySlotExt2"] = 13] = "InventorySlotExt2";
-    InventorySlot[InventorySlot["InventorySlotExt3"] = 14] = "InventorySlotExt3";
-    InventorySlot[InventorySlot["InventorySlotExt4"] = 15] = "InventorySlotExt4";
-    InventorySlot[InventorySlot["LastInventorySlot"] = 16] = "LastInventorySlot";
-})(InventorySlot || (exports.InventorySlot = InventorySlot = {}));
-var Statistic = exports.Statistic = undefined;
-(function (Statistic) {
-    Statistic[Statistic["Health"] = 0] = "Health";
-    Statistic[Statistic["MaxHealth"] = 1] = "MaxHealth";
-    Statistic[Statistic["FreeCapacity"] = 2] = "FreeCapacity";
-    Statistic[Statistic["Experience"] = 3] = "Experience";
-    Statistic[Statistic["Level"] = 4] = "Level";
-    Statistic[Statistic["LevelPercent"] = 5] = "LevelPercent";
-    Statistic[Statistic["Mana"] = 6] = "Mana";
-    Statistic[Statistic["MaxMana"] = 7] = "MaxMana";
-    Statistic[Statistic["MagicLevel"] = 8] = "MagicLevel";
-    Statistic[Statistic["MagicLevelPercent"] = 9] = "MagicLevelPercent";
-    Statistic[Statistic["Soul"] = 10] = "Soul";
-    Statistic[Statistic["Stamina"] = 11] = "Stamina";
-    Statistic[Statistic["LastStatistic"] = 12] = "LastStatistic";
-})(Statistic || (exports.Statistic = Statistic = {}));
-var Skill = exports.Skill = undefined;
-(function (Skill) {
-    Skill[Skill["Fist"] = 0] = "Fist";
-    Skill[Skill["Club"] = 1] = "Club";
-    Skill[Skill["Sword"] = 2] = "Sword";
-    Skill[Skill["Axe"] = 3] = "Axe";
-    Skill[Skill["Distance"] = 4] = "Distance";
-    Skill[Skill["Shielding"] = 5] = "Shielding";
-    Skill[Skill["Fishing"] = 6] = "Fishing";
-    Skill[Skill["CriticalChance"] = 7] = "CriticalChance";
-    Skill[Skill["CriticalDamage"] = 8] = "CriticalDamage";
-    Skill[Skill["LifeLeechChance"] = 9] = "LifeLeechChance";
-    Skill[Skill["LifeLeechAmount"] = 10] = "LifeLeechAmount";
-    Skill[Skill["ManaLeechChance"] = 11] = "ManaLeechChance";
-    Skill[Skill["ManaLeechAmount"] = 12] = "ManaLeechAmount";
-    Skill[Skill["LastSkill"] = 13] = "LastSkill";
-})(Skill || (exports.Skill = Skill = {}));
-var Direction = exports.Direction = undefined;
-(function (Direction) {
-    Direction[Direction["North"] = 0] = "North";
-    Direction[Direction["East"] = 1] = "East";
-    Direction[Direction["South"] = 2] = "South";
-    Direction[Direction["West"] = 3] = "West";
-    Direction[Direction["NorthEast"] = 4] = "NorthEast";
-    Direction[Direction["SouthEast"] = 5] = "SouthEast";
-    Direction[Direction["SouthWest"] = 6] = "SouthWest";
-    Direction[Direction["NorthWest"] = 7] = "NorthWest";
-    Direction[Direction["InvalidDirection"] = 8] = "InvalidDirection";
-})(Direction || (exports.Direction = Direction = {}));
-var FluidsColor = exports.FluidsColor = undefined;
-(function (FluidsColor) {
-    FluidsColor[FluidsColor["FluidTransparent"] = 0] = "FluidTransparent";
-    FluidsColor[FluidsColor["FluidBlue"] = 1] = "FluidBlue";
-    FluidsColor[FluidsColor["FluidRed"] = 2] = "FluidRed";
-    FluidsColor[FluidsColor["FluidBrown"] = 3] = "FluidBrown";
-    FluidsColor[FluidsColor["FluidGreen"] = 4] = "FluidGreen";
-    FluidsColor[FluidsColor["FluidYellow"] = 5] = "FluidYellow";
-    FluidsColor[FluidsColor["FluidWhite"] = 6] = "FluidWhite";
-    FluidsColor[FluidsColor["FluidPurple"] = 7] = "FluidPurple";
-})(FluidsColor || (exports.FluidsColor = FluidsColor = {}));
-var FluidsType = exports.FluidsType = undefined;
-(function (FluidsType) {
-    FluidsType[FluidsType["FluidNone"] = 0] = "FluidNone";
-    FluidsType[FluidsType["FluidWater"] = 1] = "FluidWater";
-    FluidsType[FluidsType["FluidMana"] = 2] = "FluidMana";
-    FluidsType[FluidsType["FluidBeer"] = 3] = "FluidBeer";
-    FluidsType[FluidsType["FluidOil"] = 4] = "FluidOil";
-    FluidsType[FluidsType["FluidBlood"] = 5] = "FluidBlood";
-    FluidsType[FluidsType["FluidSlime"] = 6] = "FluidSlime";
-    FluidsType[FluidsType["FluidMud"] = 7] = "FluidMud";
-    FluidsType[FluidsType["FluidLemonade"] = 8] = "FluidLemonade";
-    FluidsType[FluidsType["FluidMilk"] = 9] = "FluidMilk";
-    FluidsType[FluidsType["FluidWine"] = 10] = "FluidWine";
-    FluidsType[FluidsType["FluidHealth"] = 11] = "FluidHealth";
-    FluidsType[FluidsType["FluidUrine"] = 12] = "FluidUrine";
-    FluidsType[FluidsType["FluidRum"] = 13] = "FluidRum";
-    FluidsType[FluidsType["FluidFruidJuice"] = 14] = "FluidFruidJuice";
-    FluidsType[FluidsType["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
-    FluidsType[FluidsType["FluidTea"] = 16] = "FluidTea";
-    FluidsType[FluidsType["FluidMead"] = 17] = "FluidMead";
-})(FluidsType || (exports.FluidsType = FluidsType = {}));
-var FightModes = exports.FightModes = undefined;
-(function (FightModes) {
-    FightModes[FightModes["FightOffensive"] = 1] = "FightOffensive";
-    FightModes[FightModes["FightBalanced"] = 2] = "FightBalanced";
-    FightModes[FightModes["FightDefensive"] = 3] = "FightDefensive";
-})(FightModes || (exports.FightModes = FightModes = {}));
-var ChaseModes = exports.ChaseModes = undefined;
-(function (ChaseModes) {
-    ChaseModes[ChaseModes["DontChase"] = 0] = "DontChase";
-    ChaseModes[ChaseModes["ChaseOpponent"] = 1] = "ChaseOpponent";
-})(ChaseModes || (exports.ChaseModes = ChaseModes = {}));
-var PVPModes = exports.PVPModes = undefined;
-(function (PVPModes) {
-    PVPModes[PVPModes["WhiteDove"] = 0] = "WhiteDove";
-    PVPModes[PVPModes["WhiteHand"] = 1] = "WhiteHand";
-    PVPModes[PVPModes["YellowHand"] = 2] = "YellowHand";
-    PVPModes[PVPModes["RedFist"] = 3] = "RedFist";
-})(PVPModes || (exports.PVPModes = PVPModes = {}));
-var PlayerSkulls = exports.PlayerSkulls = undefined;
-(function (PlayerSkulls) {
-    PlayerSkulls[PlayerSkulls["SkullNone"] = 0] = "SkullNone";
-    PlayerSkulls[PlayerSkulls["SkullYellow"] = 1] = "SkullYellow";
-    PlayerSkulls[PlayerSkulls["SkullGreen"] = 2] = "SkullGreen";
-    PlayerSkulls[PlayerSkulls["SkullWhite"] = 3] = "SkullWhite";
-    PlayerSkulls[PlayerSkulls["SkullRed"] = 4] = "SkullRed";
-    PlayerSkulls[PlayerSkulls["SkullBlack"] = 5] = "SkullBlack";
-    PlayerSkulls[PlayerSkulls["SkullOrange"] = 6] = "SkullOrange";
-})(PlayerSkulls || (exports.PlayerSkulls = PlayerSkulls = {}));
-;
-var PlayerShields = exports.PlayerShields = undefined;
-(function (PlayerShields) {
-    PlayerShields[PlayerShields["ShieldNone"] = 0] = "ShieldNone";
-    PlayerShields[PlayerShields["ShieldWhiteYellow"] = 1] = "ShieldWhiteYellow";
-    PlayerShields[PlayerShields["ShieldWhiteBlue"] = 2] = "ShieldWhiteBlue";
-    PlayerShields[PlayerShields["ShieldBlue"] = 3] = "ShieldBlue";
-    PlayerShields[PlayerShields["ShieldYellow"] = 4] = "ShieldYellow";
-    PlayerShields[PlayerShields["ShieldBlueSharedExp"] = 5] = "ShieldBlueSharedExp";
-    PlayerShields[PlayerShields["ShieldYellowSharedExp"] = 6] = "ShieldYellowSharedExp";
-    PlayerShields[PlayerShields["ShieldBlueNoSharedExpBlink"] = 7] = "ShieldBlueNoSharedExpBlink";
-    PlayerShields[PlayerShields["ShieldYellowNoSharedExpBlink"] = 8] = "ShieldYellowNoSharedExpBlink";
-    PlayerShields[PlayerShields["ShieldBlueNoSharedExp"] = 9] = "ShieldBlueNoSharedExp";
-    PlayerShields[PlayerShields["ShieldYellowNoSharedExp"] = 10] = "ShieldYellowNoSharedExp";
-    PlayerShields[PlayerShields["ShieldGray"] = 11] = "ShieldGray"; // 11 member of another party
-})(PlayerShields || (exports.PlayerShields = PlayerShields = {}));
-var PlayerEmblems = exports.PlayerEmblems = undefined;
-(function (PlayerEmblems) {
-    PlayerEmblems[PlayerEmblems["EmblemNone"] = 0] = "EmblemNone";
-    PlayerEmblems[PlayerEmblems["EmblemGreen"] = 1] = "EmblemGreen";
-    PlayerEmblems[PlayerEmblems["EmblemRed"] = 2] = "EmblemRed";
-    PlayerEmblems[PlayerEmblems["EmblemBlue"] = 3] = "EmblemBlue";
-    PlayerEmblems[PlayerEmblems["EmblemMember"] = 4] = "EmblemMember";
-    PlayerEmblems[PlayerEmblems["EmblemOther"] = 5] = "EmblemOther";
-})(PlayerEmblems || (exports.PlayerEmblems = PlayerEmblems = {}));
-var CreatureIcons = exports.CreatureIcons = undefined;
-(function (CreatureIcons) {
-    CreatureIcons[CreatureIcons["NpcIconNone"] = 0] = "NpcIconNone";
-    CreatureIcons[CreatureIcons["NpcIconChat"] = 1] = "NpcIconChat";
-    CreatureIcons[CreatureIcons["NpcIconTrade"] = 2] = "NpcIconTrade";
-    CreatureIcons[CreatureIcons["NpcIconQuest"] = 3] = "NpcIconQuest";
-    CreatureIcons[CreatureIcons["NpcIconTradeQuest"] = 4] = "NpcIconTradeQuest";
-})(CreatureIcons || (exports.CreatureIcons = CreatureIcons = {}));
-var PlayerStates = exports.PlayerStates = undefined;
-(function (PlayerStates) {
-    PlayerStates[PlayerStates["IconNone"] = 0] = "IconNone";
-    PlayerStates[PlayerStates["IconPoison"] = 1] = "IconPoison";
-    PlayerStates[PlayerStates["IconBurn"] = 2] = "IconBurn";
-    PlayerStates[PlayerStates["IconEnergy"] = 4] = "IconEnergy";
-    PlayerStates[PlayerStates["IconDrunk"] = 8] = "IconDrunk";
-    PlayerStates[PlayerStates["IconManaShield"] = 16] = "IconManaShield";
-    PlayerStates[PlayerStates["IconParalyze"] = 32] = "IconParalyze";
-    PlayerStates[PlayerStates["IconHaste"] = 64] = "IconHaste";
-    PlayerStates[PlayerStates["IconSwords"] = 128] = "IconSwords";
-    PlayerStates[PlayerStates["IconDrowning"] = 256] = "IconDrowning";
-    PlayerStates[PlayerStates["IconFreezing"] = 512] = "IconFreezing";
-    PlayerStates[PlayerStates["IconDazzled"] = 1024] = "IconDazzled";
-    PlayerStates[PlayerStates["IconCursed"] = 2048] = "IconCursed";
-    PlayerStates[PlayerStates["IconPartyBuff"] = 4096] = "IconPartyBuff";
-    PlayerStates[PlayerStates["IconPzBlock"] = 8192] = "IconPzBlock";
-    PlayerStates[PlayerStates["IconPz"] = 16384] = "IconPz";
-    PlayerStates[PlayerStates["IconBleeding"] = 32768] = "IconBleeding";
-    PlayerStates[PlayerStates["IconHungry"] = 65536] = "IconHungry";
-})(PlayerStates || (exports.PlayerStates = PlayerStates = {}));
-var MessageMode = exports.MessageMode = undefined;
-(function (MessageMode) {
-    MessageMode[MessageMode["MessageNone"] = 0] = "MessageNone";
-    MessageMode[MessageMode["MessageSay"] = 1] = "MessageSay";
-    MessageMode[MessageMode["MessageWhisper"] = 2] = "MessageWhisper";
-    MessageMode[MessageMode["MessageYell"] = 3] = "MessageYell";
-    MessageMode[MessageMode["MessagePrivateFrom"] = 4] = "MessagePrivateFrom";
-    MessageMode[MessageMode["MessagePrivateTo"] = 5] = "MessagePrivateTo";
-    MessageMode[MessageMode["MessageChannelManagement"] = 6] = "MessageChannelManagement";
-    MessageMode[MessageMode["MessageChannel"] = 7] = "MessageChannel";
-    MessageMode[MessageMode["MessageChannelHighlight"] = 8] = "MessageChannelHighlight";
-    MessageMode[MessageMode["MessageSpell"] = 9] = "MessageSpell";
-    MessageMode[MessageMode["MessageNpcFrom"] = 10] = "MessageNpcFrom";
-    MessageMode[MessageMode["MessageNpcTo"] = 11] = "MessageNpcTo";
-    MessageMode[MessageMode["MessageGamemasterBroadcast"] = 12] = "MessageGamemasterBroadcast";
-    MessageMode[MessageMode["MessageGamemasterChannel"] = 13] = "MessageGamemasterChannel";
-    MessageMode[MessageMode["MessageGamemasterPrivateFrom"] = 14] = "MessageGamemasterPrivateFrom";
-    MessageMode[MessageMode["MessageGamemasterPrivateTo"] = 15] = "MessageGamemasterPrivateTo";
-    MessageMode[MessageMode["MessageLogin"] = 16] = "MessageLogin";
-    MessageMode[MessageMode["MessageWarning"] = 17] = "MessageWarning";
-    MessageMode[MessageMode["MessageGame"] = 18] = "MessageGame";
-    MessageMode[MessageMode["MessageFailure"] = 19] = "MessageFailure";
-    MessageMode[MessageMode["MessageLook"] = 20] = "MessageLook";
-    MessageMode[MessageMode["MessageDamageDealed"] = 21] = "MessageDamageDealed";
-    MessageMode[MessageMode["MessageDamageReceived"] = 22] = "MessageDamageReceived";
-    MessageMode[MessageMode["MessageHeal"] = 23] = "MessageHeal";
-    MessageMode[MessageMode["MessageExp"] = 24] = "MessageExp";
-    MessageMode[MessageMode["MessageDamageOthers"] = 25] = "MessageDamageOthers";
-    MessageMode[MessageMode["MessageHealOthers"] = 26] = "MessageHealOthers";
-    MessageMode[MessageMode["MessageExpOthers"] = 27] = "MessageExpOthers";
-    MessageMode[MessageMode["MessageStatus"] = 28] = "MessageStatus";
-    MessageMode[MessageMode["MessageLoot"] = 29] = "MessageLoot";
-    MessageMode[MessageMode["MessageTradeNpc"] = 30] = "MessageTradeNpc";
-    MessageMode[MessageMode["MessageGuild"] = 31] = "MessageGuild";
-    MessageMode[MessageMode["MessagePartyManagement"] = 32] = "MessagePartyManagement";
-    MessageMode[MessageMode["MessageParty"] = 33] = "MessageParty";
-    MessageMode[MessageMode["MessageBarkLow"] = 34] = "MessageBarkLow";
-    MessageMode[MessageMode["MessageBarkLoud"] = 35] = "MessageBarkLoud";
-    MessageMode[MessageMode["MessageReport"] = 36] = "MessageReport";
-    MessageMode[MessageMode["MessageHotkeyUse"] = 37] = "MessageHotkeyUse";
-    MessageMode[MessageMode["MessageTutorialHint"] = 38] = "MessageTutorialHint";
-    MessageMode[MessageMode["MessageThankyou"] = 39] = "MessageThankyou";
-    MessageMode[MessageMode["MessageMarket"] = 40] = "MessageMarket";
-    MessageMode[MessageMode["MessageMana"] = 41] = "MessageMana";
-    MessageMode[MessageMode["MessageBeyondLast"] = 42] = "MessageBeyondLast";
-    // deprecated
-    MessageMode[MessageMode["MessageMonsterYell"] = 43] = "MessageMonsterYell";
-    MessageMode[MessageMode["MessageMonsterSay"] = 44] = "MessageMonsterSay";
-    MessageMode[MessageMode["MessageRed"] = 45] = "MessageRed";
-    MessageMode[MessageMode["MessageBlue"] = 46] = "MessageBlue";
-    MessageMode[MessageMode["MessageRVRChannel"] = 47] = "MessageRVRChannel";
-    MessageMode[MessageMode["MessageRVRAnswer"] = 48] = "MessageRVRAnswer";
-    MessageMode[MessageMode["MessageRVRContinue"] = 49] = "MessageRVRContinue";
-    MessageMode[MessageMode["MessageGameHighlight"] = 50] = "MessageGameHighlight";
-    MessageMode[MessageMode["MessageNpcFromStartBlock"] = 51] = "MessageNpcFromStartBlock";
-    MessageMode[MessageMode["LastMessage"] = 52] = "LastMessage";
-    MessageMode[MessageMode["MessageInvalid"] = 255] = "MessageInvalid";
-})(MessageMode || (exports.MessageMode = MessageMode = {}));
-var GameFeature = exports.GameFeature = undefined;
-(function (GameFeature) {
-    GameFeature[GameFeature["GameProtocolChecksum"] = 1] = "GameProtocolChecksum";
-    GameFeature[GameFeature["GameAccountNames"] = 2] = "GameAccountNames";
-    GameFeature[GameFeature["GameChallengeOnLogin"] = 3] = "GameChallengeOnLogin";
-    GameFeature[GameFeature["GamePenalityOnDeath"] = 4] = "GamePenalityOnDeath";
-    GameFeature[GameFeature["GameNameOnNpcTrade"] = 5] = "GameNameOnNpcTrade";
-    GameFeature[GameFeature["GameDoubleFreeCapacity"] = 6] = "GameDoubleFreeCapacity";
-    GameFeature[GameFeature["GameDoubleExperience"] = 7] = "GameDoubleExperience";
-    GameFeature[GameFeature["GameTotalCapacity"] = 8] = "GameTotalCapacity";
-    GameFeature[GameFeature["GameSkillsBase"] = 9] = "GameSkillsBase";
-    GameFeature[GameFeature["GamePlayerRegenerationTime"] = 10] = "GamePlayerRegenerationTime";
-    GameFeature[GameFeature["GameChannelPlayerList"] = 11] = "GameChannelPlayerList";
-    GameFeature[GameFeature["GamePlayerMounts"] = 12] = "GamePlayerMounts";
-    GameFeature[GameFeature["GameEnvironmentEffect"] = 13] = "GameEnvironmentEffect";
-    GameFeature[GameFeature["GameCreatureEmblems"] = 14] = "GameCreatureEmblems";
-    GameFeature[GameFeature["GameItemAnimationPhase"] = 15] = "GameItemAnimationPhase";
-    GameFeature[GameFeature["GameMagicEffectU16"] = 16] = "GameMagicEffectU16";
-    GameFeature[GameFeature["GamePlayerMarket"] = 17] = "GamePlayerMarket";
-    GameFeature[GameFeature["GameSpritesU32"] = 18] = "GameSpritesU32";
-    // 19 unused
-    GameFeature[GameFeature["GameOfflineTrainingTime"] = 20] = "GameOfflineTrainingTime";
-    GameFeature[GameFeature["GamePurseSlot"] = 21] = "GamePurseSlot";
-    GameFeature[GameFeature["GameFormatCreatureName"] = 22] = "GameFormatCreatureName";
-    GameFeature[GameFeature["GameSpellList"] = 23] = "GameSpellList";
-    GameFeature[GameFeature["GameClientPing"] = 24] = "GameClientPing";
-    GameFeature[GameFeature["GameExtendedClientPing"] = 25] = "GameExtendedClientPing";
-    GameFeature[GameFeature["GameDoubleHealth"] = 28] = "GameDoubleHealth";
-    GameFeature[GameFeature["GameDoubleSkills"] = 29] = "GameDoubleSkills";
-    GameFeature[GameFeature["GameChangeMapAwareRange"] = 30] = "GameChangeMapAwareRange";
-    GameFeature[GameFeature["GameMapMovePosition"] = 31] = "GameMapMovePosition";
-    GameFeature[GameFeature["GameAttackSeq"] = 32] = "GameAttackSeq";
-    GameFeature[GameFeature["GameBlueNpcNameColor"] = 33] = "GameBlueNpcNameColor";
-    GameFeature[GameFeature["GameDiagonalAnimatedText"] = 34] = "GameDiagonalAnimatedText";
-    GameFeature[GameFeature["GameLoginPending"] = 35] = "GameLoginPending";
-    GameFeature[GameFeature["GameNewSpeedLaw"] = 36] = "GameNewSpeedLaw";
-    GameFeature[GameFeature["GameForceFirstAutoWalkStep"] = 37] = "GameForceFirstAutoWalkStep";
-    GameFeature[GameFeature["GameMinimapRemove"] = 38] = "GameMinimapRemove";
-    GameFeature[GameFeature["GameDoubleShopSellAmount"] = 39] = "GameDoubleShopSellAmount";
-    GameFeature[GameFeature["GameContainerPagination"] = 40] = "GameContainerPagination";
-    GameFeature[GameFeature["GameThingMarks"] = 41] = "GameThingMarks";
-    GameFeature[GameFeature["GameLooktypeU16"] = 42] = "GameLooktypeU16";
-    GameFeature[GameFeature["GamePlayerStamina"] = 43] = "GamePlayerStamina";
-    GameFeature[GameFeature["GamePlayerAddons"] = 44] = "GamePlayerAddons";
-    GameFeature[GameFeature["GameMessageStatements"] = 45] = "GameMessageStatements";
-    GameFeature[GameFeature["GameMessageLevel"] = 46] = "GameMessageLevel";
-    GameFeature[GameFeature["GameNewFluids"] = 47] = "GameNewFluids";
-    GameFeature[GameFeature["GamePlayerStateU16"] = 48] = "GamePlayerStateU16";
-    GameFeature[GameFeature["GameNewOutfitProtocol"] = 49] = "GameNewOutfitProtocol";
-    GameFeature[GameFeature["GamePVPMode"] = 50] = "GamePVPMode";
-    GameFeature[GameFeature["GameWritableDate"] = 51] = "GameWritableDate";
-    GameFeature[GameFeature["GameAdditionalVipInfo"] = 52] = "GameAdditionalVipInfo";
-    GameFeature[GameFeature["GameBaseSkillU16"] = 53] = "GameBaseSkillU16";
-    GameFeature[GameFeature["GameCreatureIcons"] = 54] = "GameCreatureIcons";
-    GameFeature[GameFeature["GameHideNpcNames"] = 55] = "GameHideNpcNames";
-    GameFeature[GameFeature["GameSpritesAlphaChannel"] = 56] = "GameSpritesAlphaChannel";
-    GameFeature[GameFeature["GamePremiumExpiration"] = 57] = "GamePremiumExpiration";
-    GameFeature[GameFeature["GameBrowseField"] = 58] = "GameBrowseField";
-    GameFeature[GameFeature["GameEnhancedAnimations"] = 59] = "GameEnhancedAnimations";
-    GameFeature[GameFeature["GameOGLInformation"] = 60] = "GameOGLInformation";
-    GameFeature[GameFeature["GameMessageSizeCheck"] = 61] = "GameMessageSizeCheck";
-    GameFeature[GameFeature["GamePreviewState"] = 62] = "GamePreviewState";
-    GameFeature[GameFeature["GameLoginPacketEncryption"] = 63] = "GameLoginPacketEncryption";
-    GameFeature[GameFeature["GameClientVersion"] = 64] = "GameClientVersion";
-    GameFeature[GameFeature["GameContentRevision"] = 65] = "GameContentRevision";
-    GameFeature[GameFeature["GameExperienceBonus"] = 66] = "GameExperienceBonus";
-    GameFeature[GameFeature["GameAuthenticator"] = 67] = "GameAuthenticator";
-    GameFeature[GameFeature["GameUnjustifiedPoints"] = 68] = "GameUnjustifiedPoints";
-    GameFeature[GameFeature["GameSessionKey"] = 69] = "GameSessionKey";
-    GameFeature[GameFeature["GameDeathType"] = 70] = "GameDeathType";
-    GameFeature[GameFeature["GameIdleAnimations"] = 71] = "GameIdleAnimations";
-    GameFeature[GameFeature["GameKeepUnawareTiles"] = 72] = "GameKeepUnawareTiles";
-    GameFeature[GameFeature["GameIngameStore"] = 73] = "GameIngameStore";
-    GameFeature[GameFeature["GameIngameStoreHighlights"] = 74] = "GameIngameStoreHighlights";
-    GameFeature[GameFeature["GameIngameStoreServiceType"] = 75] = "GameIngameStoreServiceType";
-    GameFeature[GameFeature["GameAdditionalSkills"] = 76] = "GameAdditionalSkills";
-    GameFeature[GameFeature["LastGameFeature"] = 101] = "LastGameFeature";
-})(GameFeature || (exports.GameFeature = GameFeature = {}));
-var PathFindResult = exports.PathFindResult = undefined;
-(function (PathFindResult) {
-    PathFindResult[PathFindResult["PathFindResultOk"] = 0] = "PathFindResultOk";
-    PathFindResult[PathFindResult["PathFindResultSamePosition"] = 1] = "PathFindResultSamePosition";
-    PathFindResult[PathFindResult["PathFindResultImpossible"] = 2] = "PathFindResultImpossible";
-    PathFindResult[PathFindResult["PathFindResultTooFar"] = 3] = "PathFindResultTooFar";
-    PathFindResult[PathFindResult["PathFindResultNoWay"] = 4] = "PathFindResultNoWay";
-})(PathFindResult || (exports.PathFindResult = PathFindResult = {}));
-var PathFindFlags = exports.PathFindFlags = undefined;
-(function (PathFindFlags) {
-    PathFindFlags[PathFindFlags["PathFindAllowNotSeenTiles"] = 1] = "PathFindAllowNotSeenTiles";
-    PathFindFlags[PathFindFlags["PathFindAllowCreatures"] = 2] = "PathFindAllowCreatures";
-    PathFindFlags[PathFindFlags["PathFindAllowNonPathable"] = 4] = "PathFindAllowNonPathable";
-    PathFindFlags[PathFindFlags["PathFindAllowNonWalkable"] = 8] = "PathFindAllowNonWalkable";
-})(PathFindFlags || (exports.PathFindFlags = PathFindFlags = {}));
-var AutomapFlags = exports.AutomapFlags = undefined;
-(function (AutomapFlags) {
-    AutomapFlags[AutomapFlags["MapMarkTick"] = 0] = "MapMarkTick";
-    AutomapFlags[AutomapFlags["MapMarkQuestion"] = 1] = "MapMarkQuestion";
-    AutomapFlags[AutomapFlags["MapMarkExclamation"] = 2] = "MapMarkExclamation";
-    AutomapFlags[AutomapFlags["MapMarkStar"] = 3] = "MapMarkStar";
-    AutomapFlags[AutomapFlags["MapMarkCross"] = 4] = "MapMarkCross";
-    AutomapFlags[AutomapFlags["MapMarkTemple"] = 5] = "MapMarkTemple";
-    AutomapFlags[AutomapFlags["MapMarkKiss"] = 6] = "MapMarkKiss";
-    AutomapFlags[AutomapFlags["MapMarkShovel"] = 7] = "MapMarkShovel";
-    AutomapFlags[AutomapFlags["MapMarkSword"] = 8] = "MapMarkSword";
-    AutomapFlags[AutomapFlags["MapMarkFlag"] = 9] = "MapMarkFlag";
-    AutomapFlags[AutomapFlags["MapMarkLock"] = 10] = "MapMarkLock";
-    AutomapFlags[AutomapFlags["MapMarkBag"] = 11] = "MapMarkBag";
-    AutomapFlags[AutomapFlags["MapMarkSkull"] = 12] = "MapMarkSkull";
-    AutomapFlags[AutomapFlags["MapMarkDollar"] = 13] = "MapMarkDollar";
-    AutomapFlags[AutomapFlags["MapMarkRedNorth"] = 14] = "MapMarkRedNorth";
-    AutomapFlags[AutomapFlags["MapMarkRedSouth"] = 15] = "MapMarkRedSouth";
-    AutomapFlags[AutomapFlags["MapMarkRedEast"] = 16] = "MapMarkRedEast";
-    AutomapFlags[AutomapFlags["MapMarkRedWest"] = 17] = "MapMarkRedWest";
-    AutomapFlags[AutomapFlags["MapMarkGreenNorth"] = 18] = "MapMarkGreenNorth";
-    AutomapFlags[AutomapFlags["MapMarkGreenSouth"] = 19] = "MapMarkGreenSouth";
-})(AutomapFlags || (exports.AutomapFlags = AutomapFlags = {}));
-var VipState = exports.VipState = undefined;
-(function (VipState) {
-    VipState[VipState["VipStateOffline"] = 0] = "VipStateOffline";
-    VipState[VipState["VipStateOnline"] = 1] = "VipStateOnline";
-    VipState[VipState["VipStatePending"] = 2] = "VipStatePending";
-})(VipState || (exports.VipState = VipState = {}));
-var SpeedFormula = exports.SpeedFormula = undefined;
-(function (SpeedFormula) {
-    SpeedFormula[SpeedFormula["SpeedFormulaA"] = 0] = "SpeedFormulaA";
-    SpeedFormula[SpeedFormula["SpeedFormulaB"] = 1] = "SpeedFormulaB";
-    SpeedFormula[SpeedFormula["SpeedFormulaC"] = 2] = "SpeedFormulaC";
-    SpeedFormula[SpeedFormula["LastSpeedFormula"] = 3] = "LastSpeedFormula";
-})(SpeedFormula || (exports.SpeedFormula = SpeedFormula = {}));
-var Blessings = exports.Blessings = undefined;
-(function (Blessings) {
-    Blessings[Blessings["BlessingNone"] = 0] = "BlessingNone";
-    Blessings[Blessings["BlessingAdventurer"] = 1] = "BlessingAdventurer";
-    Blessings[Blessings["BlessingSpiritualShielding"] = 2] = "BlessingSpiritualShielding";
-    Blessings[Blessings["BlessingEmbraceOfTibia"] = 4] = "BlessingEmbraceOfTibia";
-    Blessings[Blessings["BlessingFireOfSuns"] = 8] = "BlessingFireOfSuns";
-    Blessings[Blessings["BlessingWisdomOfSolitude"] = 16] = "BlessingWisdomOfSolitude";
-    Blessings[Blessings["BlessingSparkOfPhoenix"] = 32] = "BlessingSparkOfPhoenix";
-})(Blessings || (exports.Blessings = Blessings = {}));
-var DeathType = exports.DeathType = undefined;
-(function (DeathType) {
-    DeathType[DeathType["DeathRegular"] = 0] = "DeathRegular";
-    DeathType[DeathType["DeathBlessed"] = 1] = "DeathBlessed";
-})(DeathType || (exports.DeathType = DeathType = {}));
-var StoreProductTypes = exports.StoreProductTypes = undefined;
-(function (StoreProductTypes) {
-    StoreProductTypes[StoreProductTypes["ProductTypeOther"] = 0] = "ProductTypeOther";
-    StoreProductTypes[StoreProductTypes["ProductTypeNameChange"] = 1] = "ProductTypeNameChange";
-})(StoreProductTypes || (exports.StoreProductTypes = StoreProductTypes = {}));
-var StoreErrorTypes = exports.StoreErrorTypes = undefined;
-(function (StoreErrorTypes) {
-    StoreErrorTypes[StoreErrorTypes["StoreNoError"] = -1] = "StoreNoError";
-    StoreErrorTypes[StoreErrorTypes["StorePurchaseError"] = 0] = "StorePurchaseError";
-    StoreErrorTypes[StoreErrorTypes["StoreNetworkError"] = 1] = "StoreNetworkError";
-    StoreErrorTypes[StoreErrorTypes["StoreHistoryError"] = 2] = "StoreHistoryError";
-    StoreErrorTypes[StoreErrorTypes["StoreTransferError"] = 3] = "StoreTransferError";
-    StoreErrorTypes[StoreErrorTypes["StoreInformation"] = 4] = "StoreInformation";
-})(StoreErrorTypes || (exports.StoreErrorTypes = StoreErrorTypes = {}));
-var StoreStates = exports.StoreStates = undefined;
-(function (StoreStates) {
-    StoreStates[StoreStates["StateNone"] = 0] = "StateNone";
-    StoreStates[StoreStates["StateNew"] = 1] = "StateNew";
-    StoreStates[StoreStates["StateSale"] = 2] = "StateSale";
-    StoreStates[StoreStates["StateTimed"] = 3] = "StateTimed";
-})(StoreStates || (exports.StoreStates = StoreStates = {}));
-var FrameGroupType = exports.FrameGroupType = undefined;
-(function (FrameGroupType) {
-    FrameGroupType[FrameGroupType["FrameGroupDefault"] = 0] = "FrameGroupDefault";
-    FrameGroupType[FrameGroupType["FrameGroupIdle"] = 0] = "FrameGroupIdle";
-    FrameGroupType[FrameGroupType["FrameGroupMoving"] = 1] = "FrameGroupMoving";
-})(FrameGroupType || (exports.FrameGroupType = FrameGroupType = {}));
-var ThingCategory = exports.ThingCategory = undefined;
-(function (ThingCategory) {
-    ThingCategory[ThingCategory["ThingCategoryItem"] = 0] = "ThingCategoryItem";
-    ThingCategory[ThingCategory["ThingCategoryCreature"] = 1] = "ThingCategoryCreature";
-    ThingCategory[ThingCategory["ThingCategoryEffect"] = 2] = "ThingCategoryEffect";
-    ThingCategory[ThingCategory["ThingCategoryMissile"] = 3] = "ThingCategoryMissile";
-    ThingCategory[ThingCategory["ThingInvalidCategory"] = 4] = "ThingInvalidCategory";
-    ThingCategory[ThingCategory["ThingLastCategory"] = 4] = "ThingLastCategory";
-})(ThingCategory || (exports.ThingCategory = ThingCategory = {}));
-var ThingAttr = exports.ThingAttr = undefined;
-(function (ThingAttr) {
-    ThingAttr[ThingAttr["ThingAttrGround"] = 0] = "ThingAttrGround";
-    ThingAttr[ThingAttr["ThingAttrGroundBorder"] = 1] = "ThingAttrGroundBorder";
-    ThingAttr[ThingAttr["ThingAttrOnBottom"] = 2] = "ThingAttrOnBottom";
-    ThingAttr[ThingAttr["ThingAttrOnTop"] = 3] = "ThingAttrOnTop";
-    ThingAttr[ThingAttr["ThingAttrContainer"] = 4] = "ThingAttrContainer";
-    ThingAttr[ThingAttr["ThingAttrStackable"] = 5] = "ThingAttrStackable";
-    ThingAttr[ThingAttr["ThingAttrForceUse"] = 6] = "ThingAttrForceUse";
-    ThingAttr[ThingAttr["ThingAttrMultiUse"] = 7] = "ThingAttrMultiUse";
-    ThingAttr[ThingAttr["ThingAttrWritable"] = 8] = "ThingAttrWritable";
-    ThingAttr[ThingAttr["ThingAttrWritableOnce"] = 9] = "ThingAttrWritableOnce";
-    ThingAttr[ThingAttr["ThingAttrFluidContainer"] = 10] = "ThingAttrFluidContainer";
-    ThingAttr[ThingAttr["ThingAttrSplash"] = 11] = "ThingAttrSplash";
-    ThingAttr[ThingAttr["ThingAttrNotWalkable"] = 12] = "ThingAttrNotWalkable";
-    ThingAttr[ThingAttr["ThingAttrNotMoveable"] = 13] = "ThingAttrNotMoveable";
-    ThingAttr[ThingAttr["ThingAttrBlockProjectile"] = 14] = "ThingAttrBlockProjectile";
-    ThingAttr[ThingAttr["ThingAttrNotPathable"] = 15] = "ThingAttrNotPathable";
-    ThingAttr[ThingAttr["ThingAttrPickupable"] = 16] = "ThingAttrPickupable";
-    ThingAttr[ThingAttr["ThingAttrHangable"] = 17] = "ThingAttrHangable";
-    ThingAttr[ThingAttr["ThingAttrHookSouth"] = 18] = "ThingAttrHookSouth";
-    ThingAttr[ThingAttr["ThingAttrHookEast"] = 19] = "ThingAttrHookEast";
-    ThingAttr[ThingAttr["ThingAttrRotateable"] = 20] = "ThingAttrRotateable";
-    ThingAttr[ThingAttr["ThingAttrLight"] = 21] = "ThingAttrLight";
-    ThingAttr[ThingAttr["ThingAttrDontHide"] = 22] = "ThingAttrDontHide";
-    ThingAttr[ThingAttr["ThingAttrTranslucent"] = 23] = "ThingAttrTranslucent";
-    ThingAttr[ThingAttr["ThingAttrDisplacement"] = 24] = "ThingAttrDisplacement";
-    ThingAttr[ThingAttr["ThingAttrElevation"] = 25] = "ThingAttrElevation";
-    ThingAttr[ThingAttr["ThingAttrLyingCorpse"] = 26] = "ThingAttrLyingCorpse";
-    ThingAttr[ThingAttr["ThingAttrAnimateAlways"] = 27] = "ThingAttrAnimateAlways";
-    ThingAttr[ThingAttr["ThingAttrMinimapColor"] = 28] = "ThingAttrMinimapColor";
-    ThingAttr[ThingAttr["ThingAttrLensHelp"] = 29] = "ThingAttrLensHelp";
-    ThingAttr[ThingAttr["ThingAttrFullGround"] = 30] = "ThingAttrFullGround";
-    ThingAttr[ThingAttr["ThingAttrLook"] = 31] = "ThingAttrLook";
-    ThingAttr[ThingAttr["ThingAttrCloth"] = 32] = "ThingAttrCloth";
-    ThingAttr[ThingAttr["ThingAttrMarket"] = 33] = "ThingAttrMarket";
-    ThingAttr[ThingAttr["ThingAttrUsable"] = 34] = "ThingAttrUsable";
-    ThingAttr[ThingAttr["ThingAttrWrapable"] = 35] = "ThingAttrWrapable";
-    ThingAttr[ThingAttr["ThingAttrUnwrapable"] = 36] = "ThingAttrUnwrapable";
-    ThingAttr[ThingAttr["ThingAttrTopEffect"] = 37] = "ThingAttrTopEffect";
-    // additional
-    ThingAttr[ThingAttr["ThingAttrOpacity"] = 100] = "ThingAttrOpacity";
-    ThingAttr[ThingAttr["ThingAttrNotPreWalkable"] = 101] = "ThingAttrNotPreWalkable";
-    ThingAttr[ThingAttr["ThingAttrFloorChange"] = 252] = "ThingAttrFloorChange";
-    ThingAttr[ThingAttr["ThingAttrNoMoveAnimation"] = 253] = "ThingAttrNoMoveAnimation";
-    ThingAttr[ThingAttr["ThingAttrChargeable"] = 254] = "ThingAttrChargeable";
-    ThingAttr[ThingAttr["ThingLastAttr"] = 255] = "ThingLastAttr";
-})(ThingAttr || (exports.ThingAttr = ThingAttr = {}));
-var SpriteMask = exports.SpriteMask = undefined;
-(function (SpriteMask) {
-    SpriteMask[SpriteMask["SpriteMaskRed"] = 1] = "SpriteMaskRed";
-    SpriteMask[SpriteMask["SpriteMaskGreen"] = 2] = "SpriteMaskGreen";
-    SpriteMask[SpriteMask["SpriteMaskBlue"] = 3] = "SpriteMaskBlue";
-    SpriteMask[SpriteMask["SpriteMaskYellow"] = 4] = "SpriteMaskYellow";
-})(SpriteMask || (exports.SpriteMask = SpriteMask = {}));
-var AnimationPhase = exports.AnimationPhase = undefined;
-(function (AnimationPhase) {
-    AnimationPhase[AnimationPhase["AnimPhaseAutomatic"] = -1] = "AnimPhaseAutomatic";
-    AnimationPhase[AnimationPhase["AnimPhaseRandom"] = 254] = "AnimPhaseRandom";
-    AnimationPhase[AnimationPhase["AnimPhaseAsync"] = 255] = "AnimPhaseAsync";
-})(AnimationPhase || (exports.AnimationPhase = AnimationPhase = {}));
-var AnimationDirection = exports.AnimationDirection = undefined;
-(function (AnimationDirection) {
-    AnimationDirection[AnimationDirection["AnimDirForward"] = 0] = "AnimDirForward";
-    AnimationDirection[AnimationDirection["AnimDirBackward"] = 1] = "AnimDirBackward";
-})(AnimationDirection || (exports.AnimationDirection = AnimationDirection = {}));
-var Tilestate = exports.Tilestate = undefined;
-(function (Tilestate) {
-    Tilestate[Tilestate["TILESTATE_NONE"] = 0] = "TILESTATE_NONE";
-    Tilestate[Tilestate["TILESTATE_PROTECTIONZONE"] = 1] = "TILESTATE_PROTECTIONZONE";
-    Tilestate[Tilestate["TILESTATE_TRASHED"] = 2] = "TILESTATE_TRASHED";
-    Tilestate[Tilestate["TILESTATE_OPTIONALZONE"] = 4] = "TILESTATE_OPTIONALZONE";
-    Tilestate[Tilestate["TILESTATE_NOLOGOUT"] = 8] = "TILESTATE_NOLOGOUT";
-    Tilestate[Tilestate["TILESTATE_HARDCOREZONE"] = 16] = "TILESTATE_HARDCOREZONE";
-    Tilestate[Tilestate["TILESTATE_REFRESH"] = 32] = "TILESTATE_REFRESH";
-    // internal usage
-    Tilestate[Tilestate["TILESTATE_HOUSE"] = 64] = "TILESTATE_HOUSE";
-    Tilestate[Tilestate["TILESTATE_TELEPORT"] = 131072] = "TILESTATE_TELEPORT";
-    Tilestate[Tilestate["TILESTATE_MAGICFIELD"] = 262144] = "TILESTATE_MAGICFIELD";
-    Tilestate[Tilestate["TILESTATE_MAILBOX"] = 524288] = "TILESTATE_MAILBOX";
-    Tilestate[Tilestate["TILESTATE_TRASHHOLDER"] = 1048576] = "TILESTATE_TRASHHOLDER";
-    Tilestate[Tilestate["TILESTATE_BED"] = 2097152] = "TILESTATE_BED";
-    Tilestate[Tilestate["TILESTATE_DEPOT"] = 4194304] = "TILESTATE_DEPOT";
-    Tilestate[Tilestate["TILESTATE_TRANSLUECENT_LIGHT"] = 8388608] = "TILESTATE_TRANSLUECENT_LIGHT";
-    Tilestate[Tilestate["TILESTATE_LAST"] = 16777216] = "TILESTATE_LAST";
-})(Tilestate || (exports.Tilestate = Tilestate = {}));
-
-/***/ }),
-
 /***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8262,13 +8106,13 @@ exports.Thing = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _map = __webpack_require__(96);
+var _map = __webpack_require__(50);
 
-var _game = __webpack_require__(67);
+var _game = __webpack_require__(49);
 
-var _log = __webpack_require__(32);
+var _log = __webpack_require__(23);
 
-var _thingtypemanager = __webpack_require__(69);
+var _thingtypemanager = __webpack_require__(54);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8709,7 +8553,7 @@ var Thing = exports.Thing = function () {
 
 /***/ }),
 
-/***/ 67:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8722,17 +8566,17 @@ exports.g_game = exports.Game = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _localplayer = __webpack_require__(344);
+var _localplayer = __webpack_require__(351);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _thingtypemanager = __webpack_require__(69);
+var _thingtypemanager = __webpack_require__(54);
 
-var _protocolgame = __webpack_require__(356);
+var _protocolgame = __webpack_require__(362);
 
-var _map = __webpack_require__(96);
+var _map = __webpack_require__(50);
 
-var _container = __webpack_require__(372);
+var _container = __webpack_require__(375);
 
 var _chatbox = __webpack_require__(376);
 
@@ -9186,296 +9030,7 @@ exports.g_game = g_game;
 
 /***/ }),
 
-/***/ 68:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Creature = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _thing = __webpack_require__(44);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Creature = exports.Creature = function (_Thing) {
-    _inherits(Creature, _Thing);
-
-    function Creature() {
-        _classCallCheck(this, Creature);
-
-        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
-
-        _this.m_id = 0;
-        return _this;
-    }
-
-    _createClass(Creature, [{
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "getName",
-        value: function getName() {
-            return this.m_name;
-        }
-    }, {
-        key: "setName",
-        value: function setName(name) {
-            this.m_name = name;
-        }
-    }, {
-        key: "isCreature",
-        value: function isCreature() {
-            return true;
-        }
-    }, {
-        key: "addTimedSquare",
-        value: function addTimedSquare(arg0) {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "hideStaticSquare",
-        value: function hideStaticSquare() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "showStaticSquare",
-        value: function showStaticSquare(arg0) {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "setType",
-        value: function setType(type) {}
-    }, {
-        key: "allowAppearWalk",
-        value: function allowAppearWalk() {}
-    }, {
-        key: "setHealthPercent",
-        value: function setHealthPercent(healthPercent) {}
-    }, {
-        key: "setLight",
-        value: function setLight(light) {}
-    }, {
-        key: "setOutfit",
-        value: function setOutfit(outfit) {}
-    }, {
-        key: "setSpeed",
-        value: function setSpeed(speed) {}
-    }, {
-        key: "setBaseSpeed",
-        value: function setBaseSpeed(baseSpeed) {}
-    }, {
-        key: "setSkull",
-        value: function setSkull(skull) {}
-    }, {
-        key: "setShield",
-        value: function setShield(shield) {}
-    }, {
-        key: "setPassable",
-        value: function setPassable(v) {}
-    }, {
-        key: "setEmblem",
-        value: function setEmblem(emblem) {}
-    }, {
-        key: "setIcon",
-        value: function setIcon(icon) {}
-    }, {
-        key: "setDirection",
-        value: function setDirection(direction) {}
-    }, {
-        key: "turn",
-        value: function turn(direction) {}
-    }]);
-
-    return Creature;
-}(_thing.Thing);
-
-/***/ }),
-
-/***/ 69:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_things = exports.ThingTypeManager = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _thingtype = __webpack_require__(346);
-
-var _const = __webpack_require__(43);
-
-var _log = __webpack_require__(32);
-
-var _resources = __webpack_require__(354);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var nullThingType = new _thingtype.ThingType();
-
-var ThingTypeManager = exports.ThingTypeManager = function () {
-    function ThingTypeManager() {
-        _classCallCheck(this, ThingTypeManager);
-
-        this.m_nullThingType = new _thingtype.ThingType();
-        this.m_thingTypes = null;
-        this.m_datLoaded = false;
-        this.m_datSignature = 0;
-        this.m_contentRevision = 0;
-        this.m_thingTypes = [];
-        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
-            this.m_thingTypes[i] = [];
-        }
-    }
-
-    _createClass(ThingTypeManager, [{
-        key: "getThingType",
-        value: function getThingType(id, category) {
-            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
-                _log.Log.error("invalid thing type client id %d in category %d", id, category);
-                return this.m_nullThingType;
-            }
-            return this.m_thingTypes[category][id];
-        }
-    }, {
-        key: "rawGetThingType",
-        value: function rawGetThingType(id, category) {
-            return this.getThingType(id, category);
-        }
-    }, {
-        key: "isValidDatId",
-        value: function isValidDatId(id, category) {
-            return true;
-        }
-    }, {
-        key: "getNullThingType",
-        value: function getNullThingType() {
-            return nullThingType;
-        }
-    }, {
-        key: "getContentRevision",
-        value: function getContentRevision() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "loadDat",
-        value: function loadDat(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var fin, category, count, thingCount, _category, firstId, id, type;
-
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.m_datLoaded = false;
-                                this.m_datSignature = 0;
-                                this.m_contentRevision = 0;
-                                _context.prev = 3;
-
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                _context.next = 7;
-                                return _resources.g_resources.openFile(file);
-
-                            case 7:
-                                fin = _context.sent;
-
-                                this.m_datSignature = fin.getU32();
-                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
-                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
-                                    count = fin.getU16() + 1;
-
-                                    this.m_thingTypes[category] = [];
-                                    for (thingCount = 0; thingCount < count; ++thingCount) {
-                                        this.m_thingTypes[category][thingCount] = nullThingType;
-                                    }
-                                }
-                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
-                                    firstId = 1;
-
-                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
-                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
-                                        type = new _thingtype.ThingType();
-
-                                        type.unserialize(id, _category, fin);
-                                        this.m_thingTypes[_category][id] = type;
-                                    }
-                                }
-                                this.m_datLoaded = true;
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
-                                return _context.abrupt("return", true);
-
-                            case 17:
-                                _context.prev = 17;
-                                _context.t0 = _context["catch"](3);
-
-                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
-                                return _context.abrupt("return", false);
-
-                            case 21:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[3, 17]]);
-            }));
-        }
-    }]);
-
-    return ThingTypeManager;
-}();
-
-var g_things = new ThingTypeManager();
-exports.g_things = g_things;
-
-/***/ }),
-
-/***/ 96:
+/***/ 50:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9488,21 +9043,23 @@ exports.g_map = exports.Map = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(68);
+var _creature = __webpack_require__(71);
 
-var _position = __webpack_require__(138);
+var _position = __webpack_require__(100);
 
-var _awarerange = __webpack_require__(134);
+var _awarerange = __webpack_require__(138);
 
-var _light = __webpack_require__(137);
+var _light = __webpack_require__(101);
 
-var _tileblock = __webpack_require__(373);
+var _tileblock = __webpack_require__(352);
 
-var _const = __webpack_require__(43);
+var _const = __webpack_require__(11);
 
-var _point = __webpack_require__(350);
+var _point = __webpack_require__(72);
 
-var _helpers = __webpack_require__(375);
+var _helpers = __webpack_require__(139);
+
+var _log = __webpack_require__(23);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9751,6 +9308,7 @@ var Map = exports.Map = function () {
         key: "getThing",
         value: function getThing(pos, stackpos) {
             var tile = this.getTile(pos);
+            _log.Log.debug('Map.getThing', pos, tile.getThing(stackpos));
             if (tile) return tile.getThing(stackpos);
             return null;
         }
@@ -9787,7 +9345,174 @@ exports.g_map = g_map;
 
 /***/ }),
 
-/***/ 97:
+/***/ 54:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_things = exports.ThingTypeManager = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thingtype = __webpack_require__(354);
+
+var _const = __webpack_require__(11);
+
+var _log = __webpack_require__(23);
+
+var _resources = __webpack_require__(360);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var nullThingType = new _thingtype.ThingType();
+
+var ThingTypeManager = exports.ThingTypeManager = function () {
+    function ThingTypeManager() {
+        _classCallCheck(this, ThingTypeManager);
+
+        this.m_nullThingType = new _thingtype.ThingType();
+        this.m_thingTypes = null;
+        this.m_datLoaded = false;
+        this.m_datSignature = 0;
+        this.m_contentRevision = 0;
+        this.m_thingTypes = [];
+        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
+            this.m_thingTypes[i] = [];
+        }
+    }
+
+    _createClass(ThingTypeManager, [{
+        key: "getThingType",
+        value: function getThingType(id, category) {
+            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
+                _log.Log.error("invalid thing type client id %d in category %d", id, category);
+                return this.m_nullThingType;
+            }
+            return this.m_thingTypes[category][id];
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType(id, category) {
+            return this.getThingType(id, category);
+        }
+    }, {
+        key: "isValidDatId",
+        value: function isValidDatId(id, category) {
+            return true;
+        }
+    }, {
+        key: "getNullThingType",
+        value: function getNullThingType() {
+            return nullThingType;
+        }
+    }, {
+        key: "getContentRevision",
+        value: function getContentRevision() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "loadDat",
+        value: function loadDat(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var fin, category, count, thingCount, _category, firstId, id, type;
+
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.m_datLoaded = false;
+                                this.m_datSignature = 0;
+                                this.m_contentRevision = 0;
+                                _context.prev = 3;
+
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                _context.next = 7;
+                                return _resources.g_resources.openFile(file);
+
+                            case 7:
+                                fin = _context.sent;
+
+                                this.m_datSignature = fin.getU32();
+                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
+                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
+                                    count = fin.getU16() + 1;
+
+                                    this.m_thingTypes[category] = [];
+                                    for (thingCount = 0; thingCount < count; ++thingCount) {
+                                        this.m_thingTypes[category][thingCount] = nullThingType;
+                                    }
+                                }
+                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
+                                    firstId = 1;
+
+                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
+                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
+                                        type = new _thingtype.ThingType();
+
+                                        type.unserialize(id, _category, fin);
+                                        this.m_thingTypes[_category][id] = type;
+                                    }
+                                }
+                                this.m_datLoaded = true;
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
+                                return _context.abrupt("return", true);
+
+                            case 17:
+                                _context.prev = 17;
+                                _context.t0 = _context["catch"](3);
+
+                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
+                                return _context.abrupt("return", false);
+
+                            case 21:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[3, 17]]);
+            }));
+        }
+    }]);
+
+    return ThingTypeManager;
+}();
+
+var g_things = new ThingTypeManager();
+exports.g_things = g_things;
+
+/***/ }),
+
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9944,6 +9669,290 @@ Color.darkGray = 0xff808080;
 Color.lightGray = 0xffc0c0c0;
 Color.orange = 0xff008cff;
 
+/***/ }),
+
+/***/ 71:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Creature = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thing = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Creature = exports.Creature = function (_Thing) {
+    _inherits(Creature, _Thing);
+
+    function Creature() {
+        _classCallCheck(this, Creature);
+
+        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
+
+        _this.m_id = 0;
+        return _this;
+    }
+
+    _createClass(Creature, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "setName",
+        value: function setName(name) {
+            this.m_name = name;
+        }
+    }, {
+        key: "isCreature",
+        value: function isCreature() {
+            return true;
+        }
+    }, {
+        key: "addTimedSquare",
+        value: function addTimedSquare(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "hideStaticSquare",
+        value: function hideStaticSquare() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "showStaticSquare",
+        value: function showStaticSquare(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setType",
+        value: function setType(type) {}
+    }, {
+        key: "allowAppearWalk",
+        value: function allowAppearWalk() {}
+    }, {
+        key: "setHealthPercent",
+        value: function setHealthPercent(healthPercent) {}
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "setOutfit",
+        value: function setOutfit(outfit) {}
+    }, {
+        key: "setSpeed",
+        value: function setSpeed(speed) {}
+    }, {
+        key: "setBaseSpeed",
+        value: function setBaseSpeed(baseSpeed) {}
+    }, {
+        key: "setSkull",
+        value: function setSkull(skull) {}
+    }, {
+        key: "setShield",
+        value: function setShield(shield) {}
+    }, {
+        key: "setPassable",
+        value: function setPassable(v) {}
+    }, {
+        key: "setEmblem",
+        value: function setEmblem(emblem) {}
+    }, {
+        key: "setIcon",
+        value: function setIcon(icon) {}
+    }, {
+        key: "setDirection",
+        value: function setDirection(direction) {}
+    }, {
+        key: "turn",
+        value: function turn(direction) {}
+    }]);
+
+    return Creature;
+}(_thing.Thing);
+
+/***/ }),
+
+/***/ 72:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Point = exports.Point = function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: "equals",
+        value: function equals(otherPoint) {
+            return this.x == otherPoint.x && this.y == otherPoint.y;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Point(this.x, this.y);
+        }
+    }, {
+        key: "add",
+        value: function add(point) {
+            return new Point(this.x + point.x, this.y + point.y);
+        }
+    }, {
+        key: "sub",
+        value: function sub(point) {
+            return new Point(this.x - point.x, this.y - point.y);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Point(this.x * ratio, this.y * ratio);
+        }
+    }]);
+
+    return Point;
+}();
+
+/***/ }),
+
+/***/ 73:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Size = exports.Size = function () {
+    function Size() {
+        var wd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+        var ht = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+
+        _classCallCheck(this, Size);
+
+        this.wd = wd;
+        this.ht = ht;
+    }
+
+    _createClass(Size, [{
+        key: "equals",
+        value: function equals(otherSize) {
+            return this.wd == otherSize.wd && this.ht == otherSize.ht;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Size(this.wd, this.ht);
+        }
+    }, {
+        key: "add",
+        value: function add(size) {
+            return new Size(this.wd + size.wd, this.ht + size.ht);
+        }
+    }, {
+        key: "sub",
+        value: function sub(size) {
+            return new Size(this.wd - size.wd, this.ht - size.ht);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Size(this.wd * ratio, this.ht * ratio);
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.wd == 0 && this.ht == 0;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.wd < 1 || this.ht < 1;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return this.wd >= 0 && this.ht >= 0;
+        }
+    }, {
+        key: "width",
+        value: function width() {
+            return this.wd;
+        }
+    }, {
+        key: "height",
+        value: function height() {
+            return this.ht;
+        }
+    }, {
+        key: "resize",
+        value: function resize(w, h) {
+            this.wd = w;
+            this.ht = h;
+        }
+    }, {
+        key: "setWidth",
+        value: function setWidth(w) {
+            this.wd = w;
+        }
+    }, {
+        key: "setHeight",
+        value: function setHeight(h) {
+            this.ht = h;
+        }
+    }, {
+        key: "ratio",
+        value: function ratio() {
+            return this.wd / this.ht;
+        }
+    }, {
+        key: "area",
+        value: function area() {
+            return this.wd * this.ht;
+        }
+    }]);
+
+    return Size;
+}();
+
 /***/ })
 
-},[139]);
+},[146]);

@@ -6,6 +6,7 @@ import { TileBlock } from "./tileblock";
 import { MessageMode, Otc } from "./constants/const";
 import { Point } from "./structures/point";
 import { toInt } from "./constants/helpers";
+import { Log } from "./log";
 export class Map {
     constructor() {
         this.m_tileBlocks = [];
@@ -121,7 +122,7 @@ export class Map {
                     if (prevAnimatedText) {
                         let offset = prevAnimatedText.getOffset();
                         let t = prevAnimatedText.getTimer().ticksElapsed();
-                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) { // didnt move 12 pixels
+                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) {
                             let y = 12 - 48 * t / Otc.ANIMATED_TEXT_DURATION;
                             offset.add(new Point(0, y));
                         }
@@ -198,6 +199,7 @@ export class Map {
     }
     getThing(pos, stackpos) {
         let tile = this.getTile(pos);
+        Log.debug('Map.getThing', pos, tile.getThing(stackpos));
         if (tile)
             return tile.getThing(stackpos);
         return null;

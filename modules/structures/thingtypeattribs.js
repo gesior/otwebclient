@@ -1,19 +1,22 @@
-export class ThingTypeAttribs {
-    constructor() {
+"use strict";
+exports.__esModule = true;
+var ThingTypeAttribs = /** @class */ (function () {
+    function ThingTypeAttribs() {
         this.attribs = {};
     }
-    has(attr) {
+    ThingTypeAttribs.prototype.has = function (attr) {
         return this.attribs.hasOwnProperty(attr.toString());
-    }
-    get(attr) {
+    };
+    ThingTypeAttribs.prototype.get = function (attr) {
         return this.attribs[attr];
-    }
-    set(attr, value) {
+    };
+    ThingTypeAttribs.prototype.set = function (attr, value) {
         //console.log(attr, value);
         this.attribs[attr] = value;
-    }
-    remove(attr) {
+    };
+    ThingTypeAttribs.prototype.remove = function (attr) {
         delete this.attribs[attr];
-    }
-}
-//# sourceMappingURL=thingtypeattribs.js.map
+    };
+    return ThingTypeAttribs;
+}());
+exports.ThingTypeAttribs = ThingTypeAttribs;

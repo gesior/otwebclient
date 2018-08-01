@@ -1,53 +1,58 @@
-export class Size {
-    constructor(wd = -1, ht = -1) {
+"use strict";
+exports.__esModule = true;
+var Size = /** @class */ (function () {
+    function Size(wd, ht) {
+        if (wd === void 0) { wd = -1; }
+        if (ht === void 0) { ht = -1; }
         this.wd = wd;
         this.ht = ht;
     }
-    equals(otherSize) {
+    Size.prototype.equals = function (otherSize) {
         return this.wd == otherSize.wd && this.ht == otherSize.ht;
-    }
-    clone() {
+    };
+    Size.prototype.clone = function () {
         return new Size(this.wd, this.ht);
-    }
-    add(size) {
+    };
+    Size.prototype.add = function (size) {
         return new Size(this.wd + size.wd, this.ht + size.ht);
-    }
-    sub(size) {
+    };
+    Size.prototype.sub = function (size) {
         return new Size(this.wd - size.wd, this.ht - size.ht);
-    }
-    mul(ratio) {
+    };
+    Size.prototype.mul = function (ratio) {
         return new Size(this.wd * ratio, this.ht * ratio);
-    }
-    isNull() {
+    };
+    Size.prototype.isNull = function () {
         return this.wd == 0 && this.ht == 0;
-    }
-    isEmpty() {
+    };
+    Size.prototype.isEmpty = function () {
         return this.wd < 1 || this.ht < 1;
-    }
-    isValid() {
+    };
+    Size.prototype.isValid = function () {
         return this.wd >= 0 && this.ht >= 0;
-    }
-    width() {
+    };
+    Size.prototype.width = function () {
         return this.wd;
-    }
-    height() {
+    };
+    Size.prototype.height = function () {
         return this.ht;
-    }
-    resize(w, h) {
+    };
+    Size.prototype.resize = function (w, h) {
         this.wd = w;
         this.ht = h;
-    }
-    setWidth(w) {
+    };
+    Size.prototype.setWidth = function (w) {
         this.wd = w;
-    }
-    setHeight(h) {
+    };
+    Size.prototype.setHeight = function (h) {
         this.ht = h;
-    }
-    ratio() {
+    };
+    Size.prototype.ratio = function () {
         return this.wd / this.ht;
-    }
-    area() {
+    };
+    Size.prototype.area = function () {
         return this.wd * this.ht;
-    }
-}
-//# sourceMappingURL=size.js.map
+    };
+    return Size;
+}());
+exports.Size = Size;

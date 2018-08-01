@@ -1,7 +1,10 @@
-export class Light {
-    constructor() {
+"use strict";
+exports.__esModule = true;
+var Light = /** @class */ (function () {
+    function Light() {
         this.intensity = 0;
         this.color = 215;
     }
-}
-//# sourceMappingURL=light.js.map
+    return Light;
+}());
+exports.Light = Light;

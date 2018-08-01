@@ -825,7 +825,6 @@ export class ProtocolGame extends Protocol {
         if (!this.m_mapKnown)
             this.m_localPlayer.setPosition(pos);
 
-
         g_map.setCentralPosition(pos);
 
         Log.debug(this.m_localPlayer, g_map.getCentralPosition());
@@ -943,7 +942,7 @@ export class ProtocolGame extends Protocol {
         let newPos = this.getPosition(msg);
 
         if (!thing || !thing.isCreature()) {
-            Log.error("no creature found to move");
+            Log.error("no creature found to move", thing);
             return;
         }
 
@@ -955,7 +954,7 @@ export class ProtocolGame extends Protocol {
         let creature = <Creature> thing;
         creature.allowAppearWalk();
 
-        Log.debug('creature move', creature);
+        Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
         g_map.addThing(thing, newPos, -1);
     }
 

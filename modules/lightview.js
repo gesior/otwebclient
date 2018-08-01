@@ -1,5 +1,10 @@
-export class LightView {
-    setId(id) {
+"use strict";
+exports.__esModule = true;
+var LightView = /** @class */ (function () {
+    function LightView() {
     }
-}
-//# sourceMappingURL=lightview.js.map
+    LightView.prototype.setId = function (id) {
+    };
+    return LightView;
+}());
+exports.LightView = LightView;

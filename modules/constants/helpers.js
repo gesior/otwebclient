@@ -1,5 +1,6 @@
-let toInt = (int) => {
+"use strict";
+exports.__esModule = true;
+var toInt = function (int) {
     return parseInt(int.toString());
 };
-export { toInt };
-//# sourceMappingURL=helpers.js.map
+exports.toInt = toInt;

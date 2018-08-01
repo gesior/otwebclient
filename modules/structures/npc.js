@@ -1,5 +1,22 @@
-import { Creature } from "../creature";
-export class Npc extends Creature {
-    isNpc() { return true; }
-}
-//# sourceMappingURL=npc.js.map
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var creature_1 = require("../creature");
+var Npc = /** @class */ (function (_super) {
+    __extends(Npc, _super);
+    function Npc() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Npc.prototype.isNpc = function () { return true; };
+    return Npc;
+}(creature_1.Creature));
+exports.Npc = Npc;

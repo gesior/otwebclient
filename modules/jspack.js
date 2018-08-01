@@ -1,7 +1,9 @@
+"use strict";
 /*!
  *  Copyright © 2008 Fair Oaks Labs, Inc.
  *  All rights reserved.
  */
+exports.__esModule = true;
 // Utility object:  Encode/Decode C-style binary primitives to/from octet arrays
 function JSPack() {
     // Module-level (private) variables
@@ -265,6 +267,5 @@ function JSPack() {
         return sum;
     };
 }
+exports.JSPack = JSPack;
 ;
-export { JSPack };
-//# sourceMappingURL=jspack.js.map

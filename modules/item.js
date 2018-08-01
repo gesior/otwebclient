@@ -5,6 +5,9 @@ export class Item extends Thing {
     constructor(m_clientId = 0) {
         super();
         this.m_clientId = m_clientId;
+        this.istop = this.getThingType().isOnTop();
+        this.isbot = this.getThingType().isOnBottom();
+        this.stackprio = this.getStackPriority();
     }
     isItem() {
         return true;

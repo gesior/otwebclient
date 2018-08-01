@@ -12,6 +12,7 @@ import {StaticText} from "./statictext";
 import {Color} from "./color";
 import {Point} from "./structures/point";
 import {toInt} from "./constants/helpers";
+import {Log} from "./log";
 
 
 export class Map {
@@ -236,6 +237,7 @@ m_awareRange: AwareRange = new AwareRange();
 
     getThing(pos: Position, stackpos: number): Thing {
         let tile = this.getTile(pos);
+        Log.debug('Map.getThing', pos, tile.getThing(stackpos));
         if(tile)
             return tile.getThing(stackpos);
         return null;
@@ -248,7 +250,7 @@ m_awareRange: AwareRange = new AwareRange();
     removeCreatureById(id: number)
     {
         if(id == 0)
-        return;
+            return;
 
         if (this.m_knownCreatures[id]) {
             this.m_knownCreatures.splice(id, 1);
