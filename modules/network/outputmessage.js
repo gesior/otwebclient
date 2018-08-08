@@ -1,42 +1,38 @@
-"use strict";
-exports.__esModule = true;
-var jspack_1 = require("../jspack");
-var OutputMessage = /** @class */ (function () {
-    function OutputMessage() {
+import { JSPack } from "../jspack";
+export class OutputMessage {
+    constructor() {
         this.data = [];
     }
-    OutputMessage.prototype.addU8 = function (v) {
+    addU8(v) {
         v = v % 256;
         this.data = this.data.concat(OutputMessage.packer.Pack('B', [v]));
-    };
-    OutputMessage.prototype.addU16 = function (v) {
+    }
+    addU16(v) {
         v = v % (256 * 256);
         this.data = this.data.concat(OutputMessage.packer.Pack('<H', [v]));
-    };
-    OutputMessage.prototype.addU32 = function (v) {
+    }
+    addU32(v) {
         v = v % (256 * 256 * 256 * 256);
         this.data = this.data.concat(OutputMessage.packer.Pack('<I', [v]));
-    };
-    OutputMessage.prototype.addU64 = function (v) {
+    }
+    addU64(v) {
         throw new Error('unimplemented');
-    };
-    OutputMessage.prototype.addString = function (v) {
+    }
+    addString(v) {
         this.data = this.data.concat(OutputMessage.packer.Pack('<H', [v.length]));
-        for (var _i = 0, v_1 = v; _i < v_1.length; _i++) {
-            var c = v_1[_i];
+        for (let c of v) {
             this.data = this.data.concat(OutputMessage.packer.Pack('s', [c]));
         }
-    };
-    OutputMessage.prototype.writeChecksum = function () {
+    }
+    writeChecksum() {
         //error('writeChecksum not implemented');
-    };
-    OutputMessage.prototype.writeMessageSize = function () {
+    }
+    writeMessageSize() {
         this.data = OutputMessage.packer.Pack('<H', [this.data.length]).concat(this.data);
-    };
-    OutputMessage.prototype.getBuffer = function () {
+    }
+    getBuffer() {
         return new Uint8Array(this.data).buffer; //OutputMessage.packer.Pack('<H', [this.data.length]).concat(this.data);
-    };
-    OutputMessage.packer = (new jspack_1.JSPack());
-    return OutputMessage;
-}());
-exports.OutputMessage = OutputMessage;
+    }
+}
+OutputMessage.packer = (new JSPack());
+//# sourceMappingURL=outputmessage.js.map

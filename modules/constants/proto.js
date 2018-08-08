@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 var Proto;
 (function (Proto) {
     Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
@@ -230,4 +228,5 @@ var Proto;
     Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
     Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
 })(Proto || (Proto = {}));
-exports.Proto = Proto;
+export { Proto };
+//# sourceMappingURL=proto.js.map

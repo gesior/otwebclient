@@ -1,19 +1,17 @@
-"use strict";
-exports.__esModule = true;
-var inputmessage_1 = require("./inputmessage");
-var log_1 = require("../log");
-var Protocol = /** @class */ (function () {
-    function Protocol() {
+import { InputMessage } from "./inputmessage";
+import { log, error } from "../log";
+export class Protocol {
+    constructor() {
         this.m_xteaEncryptionEnabled = false;
         this.m_checksumEnabled = null;
         this.m_connection = null;
         this.m_xteaKey = [];
     }
-    Protocol.prototype.connect = function (host, port) {
-        var serverUrl = "ws://" + host + ":" + port;
+    connect(host, port) {
+        const serverUrl = "ws://" + host + ":" + port;
         this.m_connection = new WebSocket(serverUrl);
         this.m_connection.binaryType = 'arraybuffer';
-        var protocol = this;
+        let protocol = this;
         this.m_connection.onopen = function (evt) {
             console.log('m_connectiononopen', evt);
             protocol.onConnect(evt);
@@ -22,7 +20,7 @@ var Protocol = /** @class */ (function () {
             console.log('m_connectiononerror', evt);
             protocol.onError(evt);
         };
-        this.m_connection.onclose = function (evt) {
+        this.m_connection.onclose = (evt) => {
             console.log('m_connectiononclose', evt);
             protocol.onClose(evt);
         };
@@ -30,22 +28,22 @@ var Protocol = /** @class */ (function () {
             console.log('m_connectiononmessage', evt);
             protocol.internalRecvData(evt);
         };
-    };
-    Protocol.prototype.onConnect = function (evt) {
-        log_1.log("onConnect", evt);
-    };
-    Protocol.prototype.onRecv = function (inputMessage) {
-        log_1.log("onRecv", inputMessage);
-    };
-    Protocol.prototype.onError = function (evt) {
-        log_1.log("onError", evt);
+    }
+    onConnect(evt) {
+        log("onConnect", evt);
+    }
+    onRecv(inputMessage) {
+        log("onRecv", inputMessage);
+    }
+    onError(evt) {
+        log("onError", evt);
         this.disconnect();
-    };
-    Protocol.prototype.onClose = function (evt) {
-        log_1.log("onClose", evt);
+    }
+    onClose(evt) {
+        log("onClose", evt);
         this.disconnect();
-    };
-    Protocol.prototype.send = function (outputMessage) {
+    }
+    send(outputMessage) {
         if (this.m_xteaEncryptionEnabled)
             this.xteaEncrypt(outputMessage);
         if (this.m_checksumEnabled)
@@ -53,15 +51,15 @@ var Protocol = /** @class */ (function () {
         outputMessage.writeMessageSize();
         if (this.m_connection)
             this.m_connection.send(outputMessage.getBuffer());
-    };
-    Protocol.prototype.internalRecvData = function (evt) {
+    }
+    internalRecvData(evt) {
         if (!this.isConnected()) {
-            log_1.error("received data while disconnected");
+            error("received data while disconnected");
             return;
         }
-        var inputMessage = new inputmessage_1.InputMessage(new DataView(evt.data));
+        let inputMessage = new InputMessage(new DataView(evt.data));
         if (this.m_checksumEnabled && !inputMessage.validateChecksum()) {
-            log_1.error("got a network message with invalid checksum");
+            error("got a network message with invalid checksum");
             return;
         }
         if (this.m_checksumEnabled) {
@@ -70,45 +68,44 @@ var Protocol = /** @class */ (function () {
         }
         if (this.m_xteaEncryptionEnabled) {
             if (!this.xteaDecrypt(inputMessage)) {
-                log_1.error("failed to decrypt message");
+                error("failed to decrypt message");
                 return;
             }
         }
         this.onRecv(inputMessage);
-    };
-    Protocol.prototype.isConnected = function () {
+    }
+    isConnected() {
         return this.m_connection && this.m_connection.readyState == WebSocket.OPEN;
-    };
-    Protocol.prototype.isConnecting = function () {
+    }
+    isConnecting() {
         return this.m_connection && this.m_connection.readyState == WebSocket.CONNECTING;
-    };
-    Protocol.prototype.disconnect = function () {
+    }
+    disconnect() {
         if (this.m_connection) {
             this.m_connection.close();
             this.m_connection = null;
         }
-    };
-    Protocol.prototype.enableXteaEncryption = function () {
+    }
+    enableXteaEncryption() {
         this.m_xteaEncryptionEnabled = true;
-    };
-    Protocol.prototype.enableChecksum = function () {
+    }
+    enableChecksum() {
         this.m_checksumEnabled = true;
-    };
-    Protocol.prototype.xteaEncrypt = function (outputMessage) {
+    }
+    xteaEncrypt(outputMessage) {
         return true;
-    };
-    Protocol.prototype.xteaDecrypt = function (inputMessage) {
+    }
+    xteaDecrypt(inputMessage) {
         return true;
-    };
-    Protocol.prototype.generateXteaKey = function () {
+    }
+    generateXteaKey() {
         throw new Error('unimplemented');
-    };
-    Protocol.prototype.getXteaKey = function () {
+    }
+    getXteaKey() {
         throw new Error('unimplemented');
-    };
-    Protocol.prototype.setXteaKey = function () {
+    }
+    setXteaKey() {
         throw new Error('unimplemented');
-    };
-    return Protocol;
-}());
-exports.Protocol = Protocol;
+    }
+}
+//# sourceMappingURL=protocol.js.map

@@ -1,73 +1,70 @@
-"use strict";
-exports.__esModule = true;
-var InputFile = /** @class */ (function () {
-    function InputFile(msg) {
+export class InputFile {
+    constructor(msg) {
         this.data = msg;
         this.offset = 0;
         this.size = msg.byteLength;
     }
-    InputFile.prototype.getU8 = function () {
+    getU8() {
         if (this.offset === this.size)
             throw new Error("Koniec pliku");
-        var v = this.data.getUint8(this.offset);
+        let v = this.data.getUint8(this.offset);
         this.offset += 1;
         return v;
-    };
-    InputFile.prototype.getU16 = function () {
+    }
+    getU16() {
         return this.getU8() + this.getU8() * 256;
-    };
-    InputFile.prototype.getU32 = function () {
+    }
+    getU32() {
         return this.getU16() + this.getU16() * 256 * 256;
-    };
-    InputFile.prototype.getU64 = function () {
+    }
+    getU64() {
         return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-    };
-    InputFile.prototype.get8 = function () {
+    }
+    get8() {
         if (this.offset === this.size)
             throw new Error("Koniec pliku");
-        var v = this.data.getInt8(this.offset);
+        let v = this.data.getInt8(this.offset);
         this.offset += 1;
         return v;
-    };
-    InputFile.prototype.get16 = function () {
+    }
+    get16() {
         if (this.offset === this.size)
             throw new Error("Koniec pliku");
-        var v = this.data.getInt16(this.offset);
+        let v = this.data.getInt16(this.offset);
         this.offset += 2;
         return v;
-    };
-    InputFile.prototype.get32 = function () {
+    }
+    get32() {
         if (this.offset === this.size)
             throw new Error("Koniec pliku");
-        var v = this.data.getInt32(this.offset);
+        let v = this.data.getInt32(this.offset);
         this.offset += 4;
         return v;
-    };
-    InputFile.prototype.getString = function () {
-        var length = this.getU16();
-        var text = '';
-        for (var i = 0; i < length; i++) {
+    }
+    getString() {
+        const length = this.getU16();
+        let text = '';
+        for (let i = 0; i < length; i++) {
             text += String.fromCharCode(this.getU8());
         }
         return text;
-    };
-    InputFile.prototype.peekU8 = function () {
-        var v = this.getU8();
+    }
+    peekU8() {
+        const v = this.getU8();
         this.offset -= 1;
         return v;
-    };
-    InputFile.prototype.getUnreadSize = function () {
+    }
+    getUnreadSize() {
         return this.size - this.offset;
-    };
-    InputFile.prototype.getReadPos = function () {
+    }
+    getReadPos() {
         return this.offset;
-    };
-    InputFile.prototype.setReadPos = function (offset) {
+    }
+    setReadPos(offset) {
         this.offset = offset;
-    };
-    InputFile.prototype.validateChecksum = function () {
+    }
+    validateChecksum() {
         return true;
-    };
-    return InputFile;
-}());
-exports.InputFile = InputFile;
+    }
+}
+//# sourceMappingURL=inputfile.js.map

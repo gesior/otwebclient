@@ -1,50 +1,24 @@
-"use strict";
-exports.__esModule = true;
-var log = function () {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
-    }
+let log = function (...v) {
     console.log.apply(this, v);
     //$('#status').text(v.join(','));
 };
-exports.log = log;
-var error = function () {
-    var v = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        v[_i] = arguments[_i];
-    }
+let error = function (...v) {
     console.error.apply(this, v);
     //$('#status').text(v.join(','));
 };
-exports.error = error;
-var Log = /** @class */ (function () {
-    function Log() {
+export class Log {
+    static log(...v) {
+        console.log.apply(this, v);
+        //$('#status').text(v.join(','));
     }
-    Log.log = function () {
-        var v = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            v[_i] = arguments[_i];
-        }
+    static debug(...v) {
         console.log.apply(this, v);
         //$('#status').text(v.join(','));
-    };
-    Log.debug = function () {
-        var v = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            v[_i] = arguments[_i];
-        }
-        console.log.apply(this, v);
-        //$('#status').text(v.join(','));
-    };
-    Log.error = function () {
-        var v = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            v[_i] = arguments[_i];
-        }
+    }
+    static error(...v) {
         console.error.apply(this, v);
         //$('#status').text(v.join(','));
-    };
-    return Log;
-}());
-exports.Log = Log;
+    }
+}
+export { log, error };
+//# sourceMappingURL=log.js.map

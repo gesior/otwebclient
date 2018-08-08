@@ -1,31 +1,28 @@
-"use strict";
-exports.__esModule = true;
-var g_clock_1 = require("./g_clock");
-var Timer = /** @class */ (function () {
-    function Timer() {
+import { g_clock } from "./g_clock";
+export class Timer {
+    constructor() {
         this.m_startTicks = 0;
         this.m_stopped = false;
         this.restart();
     }
-    Timer.prototype.restart = function () {
-        this.m_startTicks = g_clock_1.g_clock.millis();
+    restart() {
+        this.m_startTicks = g_clock.millis();
         this.m_stopped = false;
-    };
-    Timer.prototype.stop = function () {
+    }
+    stop() {
         this.m_stopped = true;
-    };
-    Timer.prototype.startTicks = function () {
+    }
+    startTicks() {
         return this.m_startTicks;
-    };
-    Timer.prototype.ticksElapsed = function () {
-        return g_clock_1.g_clock.millis() - this.m_startTicks;
-    };
-    Timer.prototype.timeElapsed = function () {
+    }
+    ticksElapsed() {
+        return g_clock.millis() - this.m_startTicks;
+    }
+    timeElapsed() {
         return this.ticksElapsed() / 1000;
-    };
-    Timer.prototype.running = function () {
+    }
+    running() {
         return !this.m_stopped;
-    };
-    return Timer;
-}());
-exports.Timer = Timer;
+    }
+}
+//# sourceMappingURL=timer.js.map

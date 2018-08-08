@@ -1,10 +1,5 @@
-"use strict";
-exports.__esModule = true;
-var Container = /** @class */ (function () {
-    function Container() {
+export class Container {
+    setId(id) {
     }
-    Container.prototype.setId = function (id) {
-    };
-    return Container;
-}());
-exports.Container = Container;
+}
+//# sourceMappingURL=container.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"npc.js","sourceRoot":"","sources":["npc.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,QAAQ,EAAC,MAAM,aAAa,CAAC;AAErC,MAAM,UAAW,SAAQ,QAAQ;IAE7B,KAAK,KAAK,OAAO,IAAI,CAAC,CAAC,CAAC;CAC3B"}
+{"version":3,"file":"npc.js","sourceRoot":"","sources":["npc.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,QAAQ,EAAC,MAAM,aAAa,CAAC;AAErC,MAAM,UAAW,SAAQ,QAAQ;IAE7B,KAAK,KAAK,MAAM,CAAC,IAAI,CAAC,CAAC,CAAC;CAC3B"}

@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -7,414 +6,372 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-exports.__esModule = true;
-var localplayer_1 = require("./localplayer");
-var const_1 = require("./constants/const");
-var thingtypemanager_1 = require("./thingtypemanager");
-var protocolgame_1 = require("./network/protocolgame");
-var map_1 = require("./map");
-var container_1 = require("./container");
-var chatbox_1 = require("./view/chatbox");
-var Game = /** @class */ (function () {
-    function Game() {
+import { LocalPlayer } from "./localplayer";
+import { GameFeature, MessageMode } from "./constants/const";
+import { g_things, ThingTypeManager } from "./thingtypemanager";
+import { ProtocolGame } from "./network/protocolgame";
+import { Map } from "./map";
+import { Container } from "./container";
+import { g_chat } from "./view/chatbox";
+export class Game {
+    constructor() {
         this.m_clientVersion = 0;
         this.messageModesMap = {};
         this.m_features = [];
     }
-    Game.prototype.processCloseChannel = function (channelId) {
-        chatbox_1.g_chat.removeTab(channelId);
-    };
-    Game.prototype.processOpenChannel = function (channelId, name) {
-        chatbox_1.g_chat.addChannel(name, channelId);
-    };
-    Game.prototype.processOpenOwnPrivateChannel = function (channelId, name) {
-        chatbox_1.g_chat.addChannel(name, channelId);
-    };
-    Game.prototype.processTalk = function (name, level, mode, message, channelId, creaturePos) {
+    processCloseChannel(channelId) {
+        g_chat.removeTab(channelId);
+    }
+    processOpenChannel(channelId, name) {
+        g_chat.addChannel(name, channelId);
+    }
+    processOpenOwnPrivateChannel(channelId, name) {
+        g_chat.addChannel(name, channelId);
+    }
+    processTalk(name, level, mode, message, channelId, creaturePos) {
         console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
-        chatbox_1.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
-    };
-    Game.prototype.setClientVersion = function (version) {
+        g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+    }
+    setClientVersion(version) {
         this.m_clientVersion = version;
         this.updateMessageModesMap(version);
         this.updateFeatures(version);
-    };
-    Game.prototype.loadDatFile = function (file) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, thingtypemanager_1.g_things.loadDat(file)];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
+    }
+    loadDatFile(file) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield g_things.loadDat(file);
         });
-    };
-    Game.prototype.updateMessageModesMap = function (version) {
+    }
+    updateMessageModesMap(version) {
         this.messageModesMap = {};
         if (version >= 1094) {
-            this.messageModesMap[const_1.MessageMode.MessageMana] = 43;
+            this.messageModesMap[MessageMode.MessageMana] = 43;
         }
-        if (version >= 1055) { // might be 1054
-            this.messageModesMap[const_1.MessageMode.MessageNone] = 0;
-            this.messageModesMap[const_1.MessageMode.MessageSay] = 1;
-            this.messageModesMap[const_1.MessageMode.MessageWhisper] = 2;
-            this.messageModesMap[const_1.MessageMode.MessageYell] = 3;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateFrom] = 4;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateTo] = 5;
-            this.messageModesMap[const_1.MessageMode.MessageChannelManagement] = 6;
-            this.messageModesMap[const_1.MessageMode.MessageChannel] = 7;
-            this.messageModesMap[const_1.MessageMode.MessageChannelHighlight] = 8;
-            this.messageModesMap[const_1.MessageMode.MessageSpell] = 9;
-            this.messageModesMap[const_1.MessageMode.MessageNpcFromStartBlock] = 10;
-            this.messageModesMap[const_1.MessageMode.MessageNpcFrom] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageNpcTo] = 12;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterBroadcast] = 13;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterChannel] = 14;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateFrom] = 15;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateTo] = 16;
-            this.messageModesMap[const_1.MessageMode.MessageLogin] = 17;
-            this.messageModesMap[const_1.MessageMode.MessageWarning] = 18; // Admin
-            this.messageModesMap[const_1.MessageMode.MessageGame] = 19;
-            this.messageModesMap[const_1.MessageMode.MessageGameHighlight] = 20;
-            this.messageModesMap[const_1.MessageMode.MessageFailure] = 21;
-            this.messageModesMap[const_1.MessageMode.MessageLook] = 22;
-            this.messageModesMap[const_1.MessageMode.MessageDamageDealed] = 23;
-            this.messageModesMap[const_1.MessageMode.MessageDamageReceived] = 24;
-            this.messageModesMap[const_1.MessageMode.MessageHeal] = 25;
-            this.messageModesMap[const_1.MessageMode.MessageExp] = 26;
-            this.messageModesMap[const_1.MessageMode.MessageDamageOthers] = 27;
-            this.messageModesMap[const_1.MessageMode.MessageHealOthers] = 28;
-            this.messageModesMap[const_1.MessageMode.MessageExpOthers] = 29;
-            this.messageModesMap[const_1.MessageMode.MessageStatus] = 30;
-            this.messageModesMap[const_1.MessageMode.MessageLoot] = 31;
-            this.messageModesMap[const_1.MessageMode.MessageTradeNpc] = 32;
-            this.messageModesMap[const_1.MessageMode.MessageGuild] = 33;
-            this.messageModesMap[const_1.MessageMode.MessagePartyManagement] = 34;
-            this.messageModesMap[const_1.MessageMode.MessageParty] = 35;
-            this.messageModesMap[const_1.MessageMode.MessageBarkLow] = 36;
-            this.messageModesMap[const_1.MessageMode.MessageBarkLoud] = 37;
-            this.messageModesMap[const_1.MessageMode.MessageReport] = 38;
-            this.messageModesMap[const_1.MessageMode.MessageHotkeyUse] = 39;
-            this.messageModesMap[const_1.MessageMode.MessageTutorialHint] = 40;
-            this.messageModesMap[const_1.MessageMode.MessageThankyou] = 41;
-            this.messageModesMap[const_1.MessageMode.MessageMarket] = 42;
+        if (version >= 1055) {
+            this.messageModesMap[MessageMode.MessageNone] = 0;
+            this.messageModesMap[MessageMode.MessageSay] = 1;
+            this.messageModesMap[MessageMode.MessageWhisper] = 2;
+            this.messageModesMap[MessageMode.MessageYell] = 3;
+            this.messageModesMap[MessageMode.MessagePrivateFrom] = 4;
+            this.messageModesMap[MessageMode.MessagePrivateTo] = 5;
+            this.messageModesMap[MessageMode.MessageChannelManagement] = 6;
+            this.messageModesMap[MessageMode.MessageChannel] = 7;
+            this.messageModesMap[MessageMode.MessageChannelHighlight] = 8;
+            this.messageModesMap[MessageMode.MessageSpell] = 9;
+            this.messageModesMap[MessageMode.MessageNpcFromStartBlock] = 10;
+            this.messageModesMap[MessageMode.MessageNpcFrom] = 11;
+            this.messageModesMap[MessageMode.MessageNpcTo] = 12;
+            this.messageModesMap[MessageMode.MessageGamemasterBroadcast] = 13;
+            this.messageModesMap[MessageMode.MessageGamemasterChannel] = 14;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateFrom] = 15;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateTo] = 16;
+            this.messageModesMap[MessageMode.MessageLogin] = 17;
+            this.messageModesMap[MessageMode.MessageWarning] = 18; // Admin
+            this.messageModesMap[MessageMode.MessageGame] = 19;
+            this.messageModesMap[MessageMode.MessageGameHighlight] = 20;
+            this.messageModesMap[MessageMode.MessageFailure] = 21;
+            this.messageModesMap[MessageMode.MessageLook] = 22;
+            this.messageModesMap[MessageMode.MessageDamageDealed] = 23;
+            this.messageModesMap[MessageMode.MessageDamageReceived] = 24;
+            this.messageModesMap[MessageMode.MessageHeal] = 25;
+            this.messageModesMap[MessageMode.MessageExp] = 26;
+            this.messageModesMap[MessageMode.MessageDamageOthers] = 27;
+            this.messageModesMap[MessageMode.MessageHealOthers] = 28;
+            this.messageModesMap[MessageMode.MessageExpOthers] = 29;
+            this.messageModesMap[MessageMode.MessageStatus] = 30;
+            this.messageModesMap[MessageMode.MessageLoot] = 31;
+            this.messageModesMap[MessageMode.MessageTradeNpc] = 32;
+            this.messageModesMap[MessageMode.MessageGuild] = 33;
+            this.messageModesMap[MessageMode.MessagePartyManagement] = 34;
+            this.messageModesMap[MessageMode.MessageParty] = 35;
+            this.messageModesMap[MessageMode.MessageBarkLow] = 36;
+            this.messageModesMap[MessageMode.MessageBarkLoud] = 37;
+            this.messageModesMap[MessageMode.MessageReport] = 38;
+            this.messageModesMap[MessageMode.MessageHotkeyUse] = 39;
+            this.messageModesMap[MessageMode.MessageTutorialHint] = 40;
+            this.messageModesMap[MessageMode.MessageThankyou] = 41;
+            this.messageModesMap[MessageMode.MessageMarket] = 42;
         }
         else if (version >= 1036) {
-            for (var i = const_1.MessageMode.MessageNone; i <= const_1.MessageMode.MessageBeyondLast; ++i) {
-                if (i >= const_1.MessageMode.MessageNpcTo)
+            for (let i = MessageMode.MessageNone; i <= MessageMode.MessageBeyondLast; ++i) {
+                if (i >= MessageMode.MessageNpcTo)
                     this.messageModesMap[i] = i + 1;
                 else
                     this.messageModesMap[i] = i;
             }
         }
         else if (version >= 900) {
-            for (var i = const_1.MessageMode.MessageNone; i <= const_1.MessageMode.MessageBeyondLast; ++i)
+            for (let i = MessageMode.MessageNone; i <= MessageMode.MessageBeyondLast; ++i)
                 this.messageModesMap[i] = i;
         }
         else if (version >= 861) {
-            this.messageModesMap[const_1.MessageMode.MessageNone] = 0;
-            this.messageModesMap[const_1.MessageMode.MessageSay] = 1;
-            this.messageModesMap[const_1.MessageMode.MessageWhisper] = 2;
-            this.messageModesMap[const_1.MessageMode.MessageYell] = 3;
-            this.messageModesMap[const_1.MessageMode.MessageNpcTo] = 4;
-            this.messageModesMap[const_1.MessageMode.MessageNpcFrom] = 5;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateFrom] = 6;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateTo] = 6;
-            this.messageModesMap[const_1.MessageMode.MessageChannel] = 7;
-            this.messageModesMap[const_1.MessageMode.MessageChannelManagement] = 8;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterBroadcast] = 9;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterChannel] = 10;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateFrom] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateTo] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageChannelHighlight] = 12;
-            this.messageModesMap[const_1.MessageMode.MessageMonsterSay] = 13;
-            this.messageModesMap[const_1.MessageMode.MessageMonsterYell] = 14;
-            this.messageModesMap[const_1.MessageMode.MessageWarning] = 15;
-            this.messageModesMap[const_1.MessageMode.MessageGame] = 16;
-            this.messageModesMap[const_1.MessageMode.MessageLogin] = 17;
-            this.messageModesMap[const_1.MessageMode.MessageStatus] = 18;
-            this.messageModesMap[const_1.MessageMode.MessageLook] = 19;
-            this.messageModesMap[const_1.MessageMode.MessageFailure] = 20;
-            this.messageModesMap[const_1.MessageMode.MessageBlue] = 21;
-            this.messageModesMap[const_1.MessageMode.MessageRed] = 22;
+            this.messageModesMap[MessageMode.MessageNone] = 0;
+            this.messageModesMap[MessageMode.MessageSay] = 1;
+            this.messageModesMap[MessageMode.MessageWhisper] = 2;
+            this.messageModesMap[MessageMode.MessageYell] = 3;
+            this.messageModesMap[MessageMode.MessageNpcTo] = 4;
+            this.messageModesMap[MessageMode.MessageNpcFrom] = 5;
+            this.messageModesMap[MessageMode.MessagePrivateFrom] = 6;
+            this.messageModesMap[MessageMode.MessagePrivateTo] = 6;
+            this.messageModesMap[MessageMode.MessageChannel] = 7;
+            this.messageModesMap[MessageMode.MessageChannelManagement] = 8;
+            this.messageModesMap[MessageMode.MessageGamemasterBroadcast] = 9;
+            this.messageModesMap[MessageMode.MessageGamemasterChannel] = 10;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateFrom] = 11;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateTo] = 11;
+            this.messageModesMap[MessageMode.MessageChannelHighlight] = 12;
+            this.messageModesMap[MessageMode.MessageMonsterSay] = 13;
+            this.messageModesMap[MessageMode.MessageMonsterYell] = 14;
+            this.messageModesMap[MessageMode.MessageWarning] = 15;
+            this.messageModesMap[MessageMode.MessageGame] = 16;
+            this.messageModesMap[MessageMode.MessageLogin] = 17;
+            this.messageModesMap[MessageMode.MessageStatus] = 18;
+            this.messageModesMap[MessageMode.MessageLook] = 19;
+            this.messageModesMap[MessageMode.MessageFailure] = 20;
+            this.messageModesMap[MessageMode.MessageBlue] = 21;
+            this.messageModesMap[MessageMode.MessageRed] = 22;
         }
         else if (version >= 840) {
-            this.messageModesMap[const_1.MessageMode.MessageNone] = 0;
-            this.messageModesMap[const_1.MessageMode.MessageSay] = 1;
-            this.messageModesMap[const_1.MessageMode.MessageWhisper] = 2;
-            this.messageModesMap[const_1.MessageMode.MessageYell] = 3;
-            this.messageModesMap[const_1.MessageMode.MessageNpcTo] = 4;
-            this.messageModesMap[const_1.MessageMode.MessageNpcFromStartBlock] = 5;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateFrom] = 6;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateTo] = 6;
-            this.messageModesMap[const_1.MessageMode.MessageChannel] = 7;
-            this.messageModesMap[const_1.MessageMode.MessageChannelManagement] = 8;
-            this.messageModesMap[const_1.MessageMode.MessageRVRChannel] = 9;
-            this.messageModesMap[const_1.MessageMode.MessageRVRAnswer] = 10;
-            this.messageModesMap[const_1.MessageMode.MessageRVRContinue] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterBroadcast] = 12;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterChannel] = 13;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateFrom] = 14;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateTo] = 14;
-            this.messageModesMap[const_1.MessageMode.MessageChannelHighlight] = 15;
+            this.messageModesMap[MessageMode.MessageNone] = 0;
+            this.messageModesMap[MessageMode.MessageSay] = 1;
+            this.messageModesMap[MessageMode.MessageWhisper] = 2;
+            this.messageModesMap[MessageMode.MessageYell] = 3;
+            this.messageModesMap[MessageMode.MessageNpcTo] = 4;
+            this.messageModesMap[MessageMode.MessageNpcFromStartBlock] = 5;
+            this.messageModesMap[MessageMode.MessagePrivateFrom] = 6;
+            this.messageModesMap[MessageMode.MessagePrivateTo] = 6;
+            this.messageModesMap[MessageMode.MessageChannel] = 7;
+            this.messageModesMap[MessageMode.MessageChannelManagement] = 8;
+            this.messageModesMap[MessageMode.MessageRVRChannel] = 9;
+            this.messageModesMap[MessageMode.MessageRVRAnswer] = 10;
+            this.messageModesMap[MessageMode.MessageRVRContinue] = 11;
+            this.messageModesMap[MessageMode.MessageGamemasterBroadcast] = 12;
+            this.messageModesMap[MessageMode.MessageGamemasterChannel] = 13;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateFrom] = 14;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateTo] = 14;
+            this.messageModesMap[MessageMode.MessageChannelHighlight] = 15;
             // 16, 17 ??
-            this.messageModesMap[const_1.MessageMode.MessageRed] = 18;
-            this.messageModesMap[const_1.MessageMode.MessageMonsterSay] = 19;
-            this.messageModesMap[const_1.MessageMode.MessageMonsterYell] = 20;
-            this.messageModesMap[const_1.MessageMode.MessageWarning] = 21;
-            this.messageModesMap[const_1.MessageMode.MessageGame] = 22;
-            this.messageModesMap[const_1.MessageMode.MessageLogin] = 23;
-            this.messageModesMap[const_1.MessageMode.MessageStatus] = 24;
-            this.messageModesMap[const_1.MessageMode.MessageLook] = 25;
-            this.messageModesMap[const_1.MessageMode.MessageFailure] = 26;
-            this.messageModesMap[const_1.MessageMode.MessageBlue] = 27;
+            this.messageModesMap[MessageMode.MessageRed] = 18;
+            this.messageModesMap[MessageMode.MessageMonsterSay] = 19;
+            this.messageModesMap[MessageMode.MessageMonsterYell] = 20;
+            this.messageModesMap[MessageMode.MessageWarning] = 21;
+            this.messageModesMap[MessageMode.MessageGame] = 22;
+            this.messageModesMap[MessageMode.MessageLogin] = 23;
+            this.messageModesMap[MessageMode.MessageStatus] = 24;
+            this.messageModesMap[MessageMode.MessageLook] = 25;
+            this.messageModesMap[MessageMode.MessageFailure] = 26;
+            this.messageModesMap[MessageMode.MessageBlue] = 27;
         }
         else if (version >= 760) {
-            this.messageModesMap[const_1.MessageMode.MessageNone] = 0;
-            this.messageModesMap[const_1.MessageMode.MessageSay] = 1;
-            this.messageModesMap[const_1.MessageMode.MessageWhisper] = 2;
-            this.messageModesMap[const_1.MessageMode.MessageYell] = 3;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateFrom] = 4;
-            this.messageModesMap[const_1.MessageMode.MessagePrivateTo] = 4;
-            this.messageModesMap[const_1.MessageMode.MessageChannel] = 5;
-            this.messageModesMap[const_1.MessageMode.MessageRVRChannel] = 6;
-            this.messageModesMap[const_1.MessageMode.MessageRVRAnswer] = 7;
-            this.messageModesMap[const_1.MessageMode.MessageRVRContinue] = 8;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterBroadcast] = 9;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterChannel] = 10;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateFrom] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageGamemasterPrivateTo] = 11;
-            this.messageModesMap[const_1.MessageMode.MessageChannelHighlight] = 12;
+            this.messageModesMap[MessageMode.MessageNone] = 0;
+            this.messageModesMap[MessageMode.MessageSay] = 1;
+            this.messageModesMap[MessageMode.MessageWhisper] = 2;
+            this.messageModesMap[MessageMode.MessageYell] = 3;
+            this.messageModesMap[MessageMode.MessagePrivateFrom] = 4;
+            this.messageModesMap[MessageMode.MessagePrivateTo] = 4;
+            this.messageModesMap[MessageMode.MessageChannel] = 5;
+            this.messageModesMap[MessageMode.MessageRVRChannel] = 6;
+            this.messageModesMap[MessageMode.MessageRVRAnswer] = 7;
+            this.messageModesMap[MessageMode.MessageRVRContinue] = 8;
+            this.messageModesMap[MessageMode.MessageGamemasterBroadcast] = 9;
+            this.messageModesMap[MessageMode.MessageGamemasterChannel] = 10;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateFrom] = 11;
+            this.messageModesMap[MessageMode.MessageGamemasterPrivateTo] = 11;
+            this.messageModesMap[MessageMode.MessageChannelHighlight] = 12;
             // 13, 14, 15 ??
-            this.messageModesMap[const_1.MessageMode.MessageMonsterSay] = 16;
-            this.messageModesMap[const_1.MessageMode.MessageMonsterYell] = 17;
-            this.messageModesMap[const_1.MessageMode.MessageWarning] = 18;
-            this.messageModesMap[const_1.MessageMode.MessageGame] = 19;
-            this.messageModesMap[const_1.MessageMode.MessageLogin] = 20;
-            this.messageModesMap[const_1.MessageMode.MessageStatus] = 21;
-            this.messageModesMap[const_1.MessageMode.MessageLook] = 22;
-            this.messageModesMap[const_1.MessageMode.MessageFailure] = 23;
-            this.messageModesMap[const_1.MessageMode.MessageBlue] = 24;
-            this.messageModesMap[const_1.MessageMode.MessageRed] = 25;
+            this.messageModesMap[MessageMode.MessageMonsterSay] = 16;
+            this.messageModesMap[MessageMode.MessageMonsterYell] = 17;
+            this.messageModesMap[MessageMode.MessageWarning] = 18;
+            this.messageModesMap[MessageMode.MessageGame] = 19;
+            this.messageModesMap[MessageMode.MessageLogin] = 20;
+            this.messageModesMap[MessageMode.MessageStatus] = 21;
+            this.messageModesMap[MessageMode.MessageLook] = 22;
+            this.messageModesMap[MessageMode.MessageFailure] = 23;
+            this.messageModesMap[MessageMode.MessageBlue] = 24;
+            this.messageModesMap[MessageMode.MessageRed] = 25;
         }
-    };
-    Game.prototype.updateFeatures = function (version) {
+    }
+    updateFeatures(version) {
         this.m_features = [];
-        this.enableFeature(const_1.GameFeature.GameFormatCreatureName);
+        this.enableFeature(GameFeature.GameFormatCreatureName);
         if (version >= 770) {
-            this.enableFeature(const_1.GameFeature.GameLooktypeU16);
-            this.enableFeature(const_1.GameFeature.GameMessageStatements);
-            this.enableFeature(const_1.GameFeature.GameLoginPacketEncryption);
+            this.enableFeature(GameFeature.GameLooktypeU16);
+            this.enableFeature(GameFeature.GameMessageStatements);
+            this.enableFeature(GameFeature.GameLoginPacketEncryption);
         }
         if (version >= 780) {
-            this.enableFeature(const_1.GameFeature.GamePlayerAddons);
-            this.enableFeature(const_1.GameFeature.GamePlayerStamina);
-            this.enableFeature(const_1.GameFeature.GameNewFluids);
-            this.enableFeature(const_1.GameFeature.GameMessageLevel);
-            this.enableFeature(const_1.GameFeature.GamePlayerStateU16);
-            this.enableFeature(const_1.GameFeature.GameNewOutfitProtocol);
+            this.enableFeature(GameFeature.GamePlayerAddons);
+            this.enableFeature(GameFeature.GamePlayerStamina);
+            this.enableFeature(GameFeature.GameNewFluids);
+            this.enableFeature(GameFeature.GameMessageLevel);
+            this.enableFeature(GameFeature.GamePlayerStateU16);
+            this.enableFeature(GameFeature.GameNewOutfitProtocol);
         }
         if (version >= 790) {
-            this.enableFeature(const_1.GameFeature.GameWritableDate);
+            this.enableFeature(GameFeature.GameWritableDate);
         }
         if (version >= 840) {
-            this.enableFeature(const_1.GameFeature.GameProtocolChecksum);
-            this.enableFeature(const_1.GameFeature.GameAccountNames);
-            this.enableFeature(const_1.GameFeature.GameDoubleFreeCapacity);
+            this.enableFeature(GameFeature.GameProtocolChecksum);
+            this.enableFeature(GameFeature.GameAccountNames);
+            this.enableFeature(GameFeature.GameDoubleFreeCapacity);
         }
         if (version >= 841) {
-            this.enableFeature(const_1.GameFeature.GameChallengeOnLogin);
-            this.enableFeature(const_1.GameFeature.GameMessageSizeCheck);
+            this.enableFeature(GameFeature.GameChallengeOnLogin);
+            this.enableFeature(GameFeature.GameMessageSizeCheck);
         }
         if (version >= 854) {
-            this.enableFeature(const_1.GameFeature.GameCreatureEmblems);
+            this.enableFeature(GameFeature.GameCreatureEmblems);
         }
         if (version >= 860) {
-            this.enableFeature(const_1.GameFeature.GameAttackSeq);
+            this.enableFeature(GameFeature.GameAttackSeq);
         }
         if (version >= 862) {
-            this.enableFeature(const_1.GameFeature.GamePenalityOnDeath);
+            this.enableFeature(GameFeature.GamePenalityOnDeath);
         }
         if (version >= 870) {
-            this.enableFeature(const_1.GameFeature.GameDoubleExperience);
-            this.enableFeature(const_1.GameFeature.GamePlayerMounts);
-            this.enableFeature(const_1.GameFeature.GameSpellList);
+            this.enableFeature(GameFeature.GameDoubleExperience);
+            this.enableFeature(GameFeature.GamePlayerMounts);
+            this.enableFeature(GameFeature.GameSpellList);
         }
         if (version >= 910) {
-            this.enableFeature(const_1.GameFeature.GameNameOnNpcTrade);
-            this.enableFeature(const_1.GameFeature.GameTotalCapacity);
-            this.enableFeature(const_1.GameFeature.GameSkillsBase);
-            this.enableFeature(const_1.GameFeature.GamePlayerRegenerationTime);
-            this.enableFeature(const_1.GameFeature.GameChannelPlayerList);
-            this.enableFeature(const_1.GameFeature.GameEnvironmentEffect);
-            this.enableFeature(const_1.GameFeature.GameItemAnimationPhase);
+            this.enableFeature(GameFeature.GameNameOnNpcTrade);
+            this.enableFeature(GameFeature.GameTotalCapacity);
+            this.enableFeature(GameFeature.GameSkillsBase);
+            this.enableFeature(GameFeature.GamePlayerRegenerationTime);
+            this.enableFeature(GameFeature.GameChannelPlayerList);
+            this.enableFeature(GameFeature.GameEnvironmentEffect);
+            this.enableFeature(GameFeature.GameItemAnimationPhase);
         }
         if (version >= 940) {
-            this.enableFeature(const_1.GameFeature.GamePlayerMarket);
+            this.enableFeature(GameFeature.GamePlayerMarket);
         }
         if (version >= 953) {
-            this.enableFeature(const_1.GameFeature.GamePurseSlot);
-            this.enableFeature(const_1.GameFeature.GameClientPing);
+            this.enableFeature(GameFeature.GamePurseSlot);
+            this.enableFeature(GameFeature.GameClientPing);
         }
         if (version >= 960) {
-            this.enableFeature(const_1.GameFeature.GameSpritesU32);
-            this.enableFeature(const_1.GameFeature.GameOfflineTrainingTime);
+            this.enableFeature(GameFeature.GameSpritesU32);
+            this.enableFeature(GameFeature.GameOfflineTrainingTime);
         }
         if (version >= 963) {
-            this.enableFeature(const_1.GameFeature.GameAdditionalVipInfo);
+            this.enableFeature(GameFeature.GameAdditionalVipInfo);
         }
         if (version >= 980) {
-            this.enableFeature(const_1.GameFeature.GamePreviewState);
-            this.enableFeature(const_1.GameFeature.GameClientVersion);
+            this.enableFeature(GameFeature.GamePreviewState);
+            this.enableFeature(GameFeature.GameClientVersion);
         }
         if (version >= 981) {
-            this.enableFeature(const_1.GameFeature.GameLoginPending);
-            this.enableFeature(const_1.GameFeature.GameNewSpeedLaw);
+            this.enableFeature(GameFeature.GameLoginPending);
+            this.enableFeature(GameFeature.GameNewSpeedLaw);
         }
         if (version >= 984) {
-            this.enableFeature(const_1.GameFeature.GameContainerPagination);
-            this.enableFeature(const_1.GameFeature.GameBrowseField);
+            this.enableFeature(GameFeature.GameContainerPagination);
+            this.enableFeature(GameFeature.GameBrowseField);
         }
         if (version >= 1000) {
-            this.enableFeature(const_1.GameFeature.GameThingMarks);
-            this.enableFeature(const_1.GameFeature.GamePVPMode);
+            this.enableFeature(GameFeature.GameThingMarks);
+            this.enableFeature(GameFeature.GamePVPMode);
         }
         if (version >= 1035) {
-            this.enableFeature(const_1.GameFeature.GameDoubleSkills);
-            this.enableFeature(const_1.GameFeature.GameBaseSkillU16);
+            this.enableFeature(GameFeature.GameDoubleSkills);
+            this.enableFeature(GameFeature.GameBaseSkillU16);
         }
         if (version >= 1036) {
-            this.enableFeature(const_1.GameFeature.GameCreatureIcons);
-            this.enableFeature(const_1.GameFeature.GameHideNpcNames);
+            this.enableFeature(GameFeature.GameCreatureIcons);
+            this.enableFeature(GameFeature.GameHideNpcNames);
         }
         if (version >= 1038) {
-            this.enableFeature(const_1.GameFeature.GamePremiumExpiration);
+            this.enableFeature(GameFeature.GamePremiumExpiration);
         }
         if (version >= 1050) {
-            this.enableFeature(const_1.GameFeature.GameEnhancedAnimations);
+            this.enableFeature(GameFeature.GameEnhancedAnimations);
         }
         if (version >= 1053) {
-            this.enableFeature(const_1.GameFeature.GameUnjustifiedPoints);
+            this.enableFeature(GameFeature.GameUnjustifiedPoints);
         }
         if (version >= 1054) {
-            this.enableFeature(const_1.GameFeature.GameExperienceBonus);
+            this.enableFeature(GameFeature.GameExperienceBonus);
         }
         if (version >= 1055) {
-            this.enableFeature(const_1.GameFeature.GameDeathType);
+            this.enableFeature(GameFeature.GameDeathType);
         }
         if (version >= 1057) {
-            this.enableFeature(const_1.GameFeature.GameIdleAnimations);
+            this.enableFeature(GameFeature.GameIdleAnimations);
         }
         if (version >= 1061) {
-            this.enableFeature(const_1.GameFeature.GameOGLInformation);
+            this.enableFeature(GameFeature.GameOGLInformation);
         }
         if (version >= 1071) {
-            this.enableFeature(const_1.GameFeature.GameContentRevision);
+            this.enableFeature(GameFeature.GameContentRevision);
         }
         if (version >= 1072) {
-            this.enableFeature(const_1.GameFeature.GameAuthenticator);
+            this.enableFeature(GameFeature.GameAuthenticator);
         }
         if (version >= 1074) {
-            this.enableFeature(const_1.GameFeature.GameSessionKey);
+            this.enableFeature(GameFeature.GameSessionKey);
         }
         if (version >= 1080) {
-            this.enableFeature(const_1.GameFeature.GameIngameStore);
+            this.enableFeature(GameFeature.GameIngameStore);
         }
         if (version >= 1092) {
-            this.enableFeature(const_1.GameFeature.GameIngameStoreServiceType);
+            this.enableFeature(GameFeature.GameIngameStoreServiceType);
         }
         if (version >= 1093) {
-            this.enableFeature(const_1.GameFeature.GameIngameStoreHighlights);
+            this.enableFeature(GameFeature.GameIngameStoreHighlights);
         }
         if (version >= 1094) {
-            this.enableFeature(const_1.GameFeature.GameAdditionalSkills);
+            this.enableFeature(GameFeature.GameAdditionalSkills);
         }
-    };
-    Game.prototype.enableFeature = function (feature) {
+    }
+    enableFeature(feature) {
         this.m_features[feature] = true;
-    };
-    Game.prototype.disableFeature = function (feature) {
+    }
+    disableFeature(feature) {
         this.m_features[feature] = false;
-    };
-    Game.prototype.getFeature = function (feature) {
+    }
+    getFeature(feature) {
         return this.m_features[feature] == true;
-    };
-    Game.prototype.translateMessageModeFromServer = function (mode) {
-        for (var i in this.messageModesMap) {
+    }
+    translateMessageModeFromServer(mode) {
+        for (let i in this.messageModesMap) {
             if (this.messageModesMap[i] == mode) {
                 return parseInt(i);
             }
         }
-        return const_1.MessageMode.MessageInvalid;
-    };
-    Game.prototype.getContainer = function (containerId) {
-        return new container_1.Container();
-    };
-    Object.defineProperty(Game.prototype, "g_things", {
-        get: function () {
-            return new thingtypemanager_1.ThingTypeManager();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Game.prototype, "g_map", {
-        get: function () {
-            return new map_1.Map();
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Game.prototype.getClientVersion = function () {
+        return MessageMode.MessageInvalid;
+    }
+    getContainer(containerId) {
+        return new Container();
+    }
+    get g_things() {
+        return new ThingTypeManager();
+    }
+    get g_map() {
+        return new Map();
+    }
+    getClientVersion() {
         return this.m_clientVersion;
-    };
-    Game.prototype.getProtocolVersion = function () {
+    }
+    getProtocolVersion() {
         return 10009;
-    };
-    Game.prototype.getOs = function () {
+    }
+    getOs() {
         return 3;
-    };
-    Game.prototype.processConnectionError = function () {
+    }
+    processConnectionError() {
         throw new Error("Method not implemented.");
-    };
-    Game.prototype.getLocalPlayer = function () {
-        return new localplayer_1.LocalPlayer();
-    };
-    Game.prototype.login = function (accountName, accountPassword, characterName) {
-        this.m_protocolGame = new protocolgame_1.ProtocolGame(this);
+    }
+    getLocalPlayer() {
+        return new LocalPlayer();
+    }
+    login(accountName, accountPassword, characterName) {
+        this.m_protocolGame = new ProtocolGame(this);
         this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-    };
-    Game.prototype.formatCreatureName = function (string) {
+    }
+    formatCreatureName(string) {
         return string;
-    };
-    return Game;
-}());
-exports.Game = Game;
-var g_game = new Game();
-exports.g_game = g_game;
+    }
+}
+let g_game = new Game();
+export { g_game };
+//# sourceMappingURL=game.js.map

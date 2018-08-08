@@ -1,25 +1,22 @@
-"use strict";
-exports.__esModule = true;
-var Point = /** @class */ (function () {
-    function Point(x, y) {
+export class Point {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
-    Point.prototype.equals = function (otherPoint) {
+    equals(otherPoint) {
         return this.x == otherPoint.x && this.y == otherPoint.y;
-    };
-    Point.prototype.clone = function () {
+    }
+    clone() {
         return new Point(this.x, this.y);
-    };
-    Point.prototype.add = function (point) {
+    }
+    add(point) {
         return new Point(this.x + point.x, this.y + point.y);
-    };
-    Point.prototype.sub = function (point) {
+    }
+    sub(point) {
         return new Point(this.x - point.x, this.y - point.y);
-    };
-    Point.prototype.mul = function (ratio) {
+    }
+    mul(ratio) {
         return new Point(this.x * ratio, this.y * ratio);
-    };
-    return Point;
-}());
-exports.Point = Point;
+    }
+}
+//# sourceMappingURL=point.js.map

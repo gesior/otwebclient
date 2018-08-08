@@ -1,15 +1,13 @@
-"use strict";
-exports.__esModule = true;
-var size_1 = require("./structures/size");
-var CachedText = /** @class */ (function () {
-    function CachedText() {
+import { Size } from "./structures/size";
+export class CachedText {
+    constructor() {
         this.m_text = null;
         this.m_textSize = null;
         this.m_textMustRecache = true;
         this.m_font = null;
         this.m_align = null;
     }
-    CachedText.prototype.draw = function (rect) {
+    draw(rect) {
         if (!this.m_font)
             return;
         if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
@@ -20,46 +18,45 @@ var CachedText = /** @class */ (function () {
         }
         //if(m_font->getTexture())
         //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
-    };
-    CachedText.prototype.wrapText = function (maxWidth) {
+    }
+    wrapText(maxWidth) {
         if (this.m_font) {
             // update new line positions
             //this.m_text = this.m_font.wrapText(m_text, maxWidth);
             this.update();
         }
-    };
-    CachedText.prototype.setFont = function (font) {
+    }
+    setFont(font) {
         this.m_font = font;
         this.update();
-    };
-    CachedText.prototype.setText = function (text) {
+    }
+    setText(text) {
         this.m_text = text;
         this.update();
-    };
-    CachedText.prototype.setAlign = function (align) {
+    }
+    setAlign(align) {
         this.m_align = align;
         this.update();
-    };
-    CachedText.prototype.getTextSize = function () {
+    }
+    getTextSize() {
         return this.m_textSize;
-    };
-    CachedText.prototype.getText = function () {
+    }
+    getText() {
         return this.m_text;
-    };
-    CachedText.prototype.getFont = function () {
+    }
+    getFont() {
         return this.m_font;
-    };
-    CachedText.prototype.getAlign = function () {
+    }
+    getAlign() {
         return this.m_align;
-    };
-    CachedText.prototype.update = function () {
+    }
+    update() {
         if (this.m_font)
-            this.m_textSize = new size_1.Size();
+            this.m_textSize = new Size();
         /* todo */ //m_font->calculateTextRectSize(m_text);
         this.m_textMustRecache = true;
-    };
-    CachedText.ALIGN_LEFT = 'left';
-    CachedText.ALIGN_RIGHT = 'right';
-    return CachedText;
-}());
-exports.CachedText = CachedText;
+    }
+}
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+//# sourceMappingURL=cachedtext.js.map

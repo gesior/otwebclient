@@ -1,22 +1,19 @@
-"use strict";
-exports.__esModule = true;
-var ThingTypeAttribs = /** @class */ (function () {
-    function ThingTypeAttribs() {
+export class ThingTypeAttribs {
+    constructor() {
         this.attribs = {};
     }
-    ThingTypeAttribs.prototype.has = function (attr) {
+    has(attr) {
         return this.attribs.hasOwnProperty(attr.toString());
-    };
-    ThingTypeAttribs.prototype.get = function (attr) {
+    }
+    get(attr) {
         return this.attribs[attr];
-    };
-    ThingTypeAttribs.prototype.set = function (attr, value) {
+    }
+    set(attr, value) {
         //console.log(attr, value);
         this.attribs[attr] = value;
-    };
-    ThingTypeAttribs.prototype.remove = function (attr) {
+    }
+    remove(attr) {
         delete this.attribs[attr];
-    };
-    return ThingTypeAttribs;
-}());
-exports.ThingTypeAttribs = ThingTypeAttribs;
+    }
+}
+//# sourceMappingURL=thingtypeattribs.js.map

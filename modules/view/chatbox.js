@@ -1,58 +1,55 @@
-"use strict";
-exports.__esModule = true;
-var _a;
-var chatboxtab_1 = require("./chatboxtab");
-var const_1 = require("../constants/const");
-var log_1 = require("../log");
-var game_1 = require("../game");
-var statictext_1 = require("../statictext");
-var map_1 = require("../map");
-var SpeakTypesSettings = {
+import { ChatboxTab } from "./chatboxtab";
+import { MessageMode } from "../constants/const";
+import { Log } from "../log";
+import { g_game } from "../game";
+import { StaticText } from "../statictext";
+import { g_map } from "../map";
+let SpeakTypesSettings = {
     none: {},
-    say: { speakType: const_1.MessageMode.MessageSay, color: '#FFFF00' },
-    whisper: { speakType: const_1.MessageMode.MessageWhisper, color: '#FFFF00' },
-    yell: { speakType: const_1.MessageMode.MessageYell, color: '#FFFF00' },
-    broadcast: { speakType: const_1.MessageMode.MessageGamemasterBroadcast, color: '#F55E5E' },
-    private: { speakType: const_1.MessageMode.MessagePrivateTo, color: '#5FF7F7', private: true },
-    privateRed: { speakType: const_1.MessageMode.MessageGamemasterPrivateTo, color: '#F55E5E', private: true },
-    privatePlayerToPlayer: { speakType: const_1.MessageMode.MessagePrivateTo, color: '#9F9DFD', private: true },
-    privatePlayerToNpc: { speakType: const_1.MessageMode.MessageNpcTo, color: '#9F9DFD', private: true, npcChat: true },
-    privateNpcToPlayer: { speakType: const_1.MessageMode.MessageNpcFrom, color: '#5FF7F7', private: true, npcChat: true },
-    channelYellow: { speakType: const_1.MessageMode.MessageChannel, color: '#FFFF00' },
-    channelWhite: { speakType: const_1.MessageMode.MessageChannelManagement, color: '#FFFFFF' },
-    channelRed: { speakType: const_1.MessageMode.MessageGamemasterChannel, color: '#F55E5E' },
-    channelOrange: { speakType: const_1.MessageMode.MessageChannelHighlight, color: '#FE6500' },
-    monsterSay: { speakType: const_1.MessageMode.MessageMonsterSay, color: '#FE6500', hideInConsole: true },
-    monsterYell: { speakType: const_1.MessageMode.MessageMonsterYell, color: '#FE6500', hideInConsole: true },
-    rvrAnswerFrom: { speakType: const_1.MessageMode.MessageRVRAnswer, color: '#FE6500' },
-    rvrAnswerTo: { speakType: const_1.MessageMode.MessageRVRAnswer, color: '#FE6500' },
-    rvrContinue: { speakType: const_1.MessageMode.MessageRVRContinue, color: '#FFFF00' }
+    say: { speakType: MessageMode.MessageSay, color: '#FFFF00' },
+    whisper: { speakType: MessageMode.MessageWhisper, color: '#FFFF00' },
+    yell: { speakType: MessageMode.MessageYell, color: '#FFFF00' },
+    broadcast: { speakType: MessageMode.MessageGamemasterBroadcast, color: '#F55E5E' },
+    private: { speakType: MessageMode.MessagePrivateTo, color: '#5FF7F7', private: true },
+    privateRed: { speakType: MessageMode.MessageGamemasterPrivateTo, color: '#F55E5E', private: true },
+    privatePlayerToPlayer: { speakType: MessageMode.MessagePrivateTo, color: '#9F9DFD', private: true },
+    privatePlayerToNpc: { speakType: MessageMode.MessageNpcTo, color: '#9F9DFD', private: true, npcChat: true },
+    privateNpcToPlayer: { speakType: MessageMode.MessageNpcFrom, color: '#5FF7F7', private: true, npcChat: true },
+    channelYellow: { speakType: MessageMode.MessageChannel, color: '#FFFF00' },
+    channelWhite: { speakType: MessageMode.MessageChannelManagement, color: '#FFFFFF' },
+    channelRed: { speakType: MessageMode.MessageGamemasterChannel, color: '#F55E5E' },
+    channelOrange: { speakType: MessageMode.MessageChannelHighlight, color: '#FE6500' },
+    monsterSay: { speakType: MessageMode.MessageMonsterSay, color: '#FE6500', hideInConsole: true },
+    monsterYell: { speakType: MessageMode.MessageMonsterYell, color: '#FE6500', hideInConsole: true },
+    rvrAnswerFrom: { speakType: MessageMode.MessageRVRAnswer, color: '#FE6500' },
+    rvrAnswerTo: { speakType: MessageMode.MessageRVRAnswer, color: '#FE6500' },
+    rvrContinue: { speakType: MessageMode.MessageRVRContinue, color: '#FFFF00' },
 };
-var SpeakTypes = (_a = {},
-    _a[const_1.MessageMode.MessageSay] = SpeakTypesSettings.say,
-    _a[const_1.MessageMode.MessageWhisper] = SpeakTypesSettings.whisper,
-    _a[const_1.MessageMode.MessageYell] = SpeakTypesSettings.yell,
-    _a[const_1.MessageMode.MessageGamemasterBroadcast] = SpeakTypesSettings.broadcast,
-    _a[const_1.MessageMode.MessagePrivateFrom] = SpeakTypesSettings.private,
-    _a[const_1.MessageMode.MessageGamemasterPrivateFrom] = SpeakTypesSettings.privateRed,
-    _a[const_1.MessageMode.MessageNpcTo] = SpeakTypesSettings.privatePlayerToNpc,
-    _a[const_1.MessageMode.MessageNpcFrom] = SpeakTypesSettings.privateNpcToPlayer,
-    _a[const_1.MessageMode.MessageChannel] = SpeakTypesSettings.channelYellow,
-    _a[const_1.MessageMode.MessageChannelManagement] = SpeakTypesSettings.channelWhite,
-    _a[const_1.MessageMode.MessageGamemasterChannel] = SpeakTypesSettings.channelRed,
-    _a[const_1.MessageMode.MessageChannelHighlight] = SpeakTypesSettings.channelOrange,
-    _a[const_1.MessageMode.MessageMonsterSay] = SpeakTypesSettings.monsterSay,
-    _a[const_1.MessageMode.MessageMonsterYell] = SpeakTypesSettings.monsterYell,
-    _a[const_1.MessageMode.MessageRVRChannel] = SpeakTypesSettings.channelWhite,
-    _a[const_1.MessageMode.MessageRVRContinue] = SpeakTypesSettings.rvrContinue,
-    _a[const_1.MessageMode.MessageRVRAnswer] = SpeakTypesSettings.rvrAnswerFrom,
-    _a[const_1.MessageMode.MessageNpcFromStartBlock] = SpeakTypesSettings.privateNpcToPlayer,
-    _a[const_1.MessageMode.MessageSpell] = SpeakTypesSettings.none,
-    _a[const_1.MessageMode.MessageBarkLow] = SpeakTypesSettings.none,
-    _a[const_1.MessageMode.MessageBarkLoud] = SpeakTypesSettings.none,
-    _a);
-var Chatbox = /** @class */ (function () {
-    function Chatbox() {
+let SpeakTypes = {
+    [MessageMode.MessageSay]: SpeakTypesSettings.say,
+    [MessageMode.MessageWhisper]: SpeakTypesSettings.whisper,
+    [MessageMode.MessageYell]: SpeakTypesSettings.yell,
+    [MessageMode.MessageGamemasterBroadcast]: SpeakTypesSettings.broadcast,
+    [MessageMode.MessagePrivateFrom]: SpeakTypesSettings.private,
+    [MessageMode.MessageGamemasterPrivateFrom]: SpeakTypesSettings.privateRed,
+    [MessageMode.MessageNpcTo]: SpeakTypesSettings.privatePlayerToNpc,
+    [MessageMode.MessageNpcFrom]: SpeakTypesSettings.privateNpcToPlayer,
+    [MessageMode.MessageChannel]: SpeakTypesSettings.channelYellow,
+    [MessageMode.MessageChannelManagement]: SpeakTypesSettings.channelWhite,
+    [MessageMode.MessageGamemasterChannel]: SpeakTypesSettings.channelRed,
+    [MessageMode.MessageChannelHighlight]: SpeakTypesSettings.channelOrange,
+    [MessageMode.MessageMonsterSay]: SpeakTypesSettings.monsterSay,
+    [MessageMode.MessageMonsterYell]: SpeakTypesSettings.monsterYell,
+    [MessageMode.MessageRVRChannel]: SpeakTypesSettings.channelWhite,
+    [MessageMode.MessageRVRContinue]: SpeakTypesSettings.rvrContinue,
+    [MessageMode.MessageRVRAnswer]: SpeakTypesSettings.rvrAnswerFrom,
+    [MessageMode.MessageNpcFromStartBlock]: SpeakTypesSettings.privateNpcToPlayer,
+    [MessageMode.MessageSpell]: SpeakTypesSettings.none,
+    [MessageMode.MessageBarkLow]: SpeakTypesSettings.none,
+    [MessageMode.MessageBarkLoud]: SpeakTypesSettings.none,
+};
+export class Chatbox {
+    constructor() {
         this.consolePanel = null;
         this.consoleContentPanel = null;
         this.consoleTabBar = null;
@@ -73,25 +70,24 @@ var Chatbox = /** @class */ (function () {
         this.filters = {};
         this.tabs = [];
     }
-    Chatbox.prototype.addTab = function (name, focus) {
-        if (focus === void 0) { focus = false; }
-        var tab = this.getTab(name);
+    addTab(name, focus = false) {
+        let tab = this.getTab(name);
         if (tab) {
             focus = true;
         }
         else {
-            tab = new chatboxtab_1.ChatboxTab(name);
+            tab = new ChatboxTab(name);
         }
         if (focus) {
             this.selectTab(tab);
         }
         this.tabs[name] = tab;
         return tab;
-    };
-    Chatbox.prototype.selectTab = function (tab) {
+    }
+    selectTab(tab) {
         /* todo */
-    };
-    Chatbox.prototype.removeTab = function (tab) {
+    }
+    removeTab(tab) {
         console.error('close tab', tab);
         /*
         if type(tab) == 'string' then
@@ -119,28 +115,28 @@ var Chatbox = /** @class */ (function () {
 
         consoleTabBar:removeTab(tab)
         */
-    };
-    Chatbox.prototype.addChannel = function (name, id) {
+    }
+    addChannel(name, id) {
         console.log('add chanel', name, id);
         this.channels[id] = name;
-        var tab = this.addTab(name, true);
+        let tab = this.addTab(name, true);
         tab.channelId = id;
         return tab;
-    };
-    Chatbox.prototype.addPrivateChannel = function (receiver) {
+    }
+    addPrivateChannel(receiver) {
         this.channels[receiver] = receiver;
         return this.addTab(receiver, false);
-    };
-    Chatbox.prototype.getTab = function (name) {
+    }
+    getTab(name) {
         return this.tabs[name];
-    };
-    Chatbox.prototype.addPrivateText = function (text, speaktype, name, isPrivateCommand, creatureName) {
-        var focus = false;
+    }
+    addPrivateText(text, speaktype, name, isPrivateCommand, creatureName) {
+        let focus = false;
         if (speaktype.npcChat) {
             name = 'NPCs';
             focus = true;
         }
-        var privateTab = this.getTab(name);
+        let privateTab = this.getTab(name);
         if (!privateTab) {
             privateTab = this.addTab(name, focus);
             this.channels[name] = name;
@@ -150,19 +146,19 @@ var Chatbox = /** @class */ (function () {
             this.selectTab(privateTab);
         }
         this.addTabText(text, speaktype, privateTab, creatureName);
-    };
-    Chatbox.prototype.addText = function (text, speaktype, tabName, creatureName) {
-        var tab = this.getTab(tabName);
+    }
+    addText(text, speaktype, tabName, creatureName) {
+        let tab = this.getTab(tabName);
         if (tab) {
             this.addTabText(text, speaktype, tab, creatureName);
         }
         else {
             console.error('no tab', tabName, this.tabs);
         }
-    };
-    Chatbox.prototype.addTabText = function (text, speaktype, tab, creatureName) {
+    }
+    addTabText(text, speaktype, tab, creatureName) {
         tab.addText(text, speaktype, creatureName);
-    };
+    }
     /*
     function addTabText(text, speaktype, tab, creatureName)
       if not tab or tab.locked or not text or #text == 0 then return end
@@ -330,38 +326,38 @@ var Chatbox = /** @class */ (function () {
       end
     end
      */
-    Chatbox.prototype.displayBroadcastMessage = function (text) {
-        this.getTab(this.defaultTab).addText(text, SpeakTypes[const_1.MessageMode.MessageGamemasterPrivateFrom], '');
-    };
-    Chatbox.prototype.handleMessage = function (name, level, mode, message, channelId, creaturePos) {
-        if (mode == const_1.MessageMode.MessageGamemasterBroadcast) {
+    displayBroadcastMessage(text) {
+        this.getTab(this.defaultTab).addText(text, SpeakTypes[MessageMode.MessageGamemasterPrivateFrom], '');
+    }
+    handleMessage(name, level, mode, message, channelId, creaturePos) {
+        if (mode == MessageMode.MessageGamemasterBroadcast) {
             this.displayBroadcastMessage(name + ': ' + message);
             return;
         }
-        var isNpcMode = (mode == const_1.MessageMode.MessageNpcFromStartBlock || mode == const_1.MessageMode.MessageNpcFrom);
+        let isNpcMode = (mode == MessageMode.MessageNpcFromStartBlock || mode == MessageMode.MessageNpcFrom);
         if (this.ignoreNpcMessages && isNpcMode) {
             return;
         }
-        var speaktype = SpeakTypes[mode];
+        let speaktype = SpeakTypes[mode];
         if (!speaktype) {
-            log_1.Log.error('unhandled onTalk message mode ' + mode + ': ' + message);
+            Log.error('unhandled onTalk message mode ' + mode + ': ' + message);
             return;
         }
-        var localPlayer = game_1.g_game.getLocalPlayer();
-        if (mode == const_1.MessageMode.MessageRVRChannel) {
+        let localPlayer = g_game.getLocalPlayer();
+        if (mode == MessageMode.MessageRVRChannel) {
             channelId = this.violationsChannelId;
         }
-        if (mode == const_1.MessageMode.MessageSay || mode == const_1.MessageMode.MessageWhisper || mode == const_1.MessageMode.MessageYell ||
-            mode == const_1.MessageMode.MessageSpell || mode == const_1.MessageMode.MessageMonsterSay || mode == const_1.MessageMode.MessageMonsterYell ||
-            mode == const_1.MessageMode.MessageNpcFrom || mode == const_1.MessageMode.MessageBarkLow || mode == const_1.MessageMode.MessageBarkLoud ||
-            mode == const_1.MessageMode.MessageNpcFromStartBlock && creaturePos) {
-            var staticText = new statictext_1.StaticText();
-            var staticMessage = message;
+        if (mode == MessageMode.MessageSay || mode == MessageMode.MessageWhisper || mode == MessageMode.MessageYell ||
+            mode == MessageMode.MessageSpell || mode == MessageMode.MessageMonsterSay || mode == MessageMode.MessageMonsterYell ||
+            mode == MessageMode.MessageNpcFrom || mode == MessageMode.MessageBarkLow || mode == MessageMode.MessageBarkLoud ||
+            mode == MessageMode.MessageNpcFromStartBlock && creaturePos) {
+            let staticText = new StaticText();
+            let staticMessage = message;
             if (isNpcMode) {
-                var highlightData = staticMessage; //getHighlightedText(staticMessage)
+                let highlightData = staticMessage; //getHighlightedText(staticMessage)
                 if (highlightData.length > 0) {
-                    for (var i = 1; highlightData.length / 3; i++) {
-                        var dataBlock = {
+                    for (let i = 1; highlightData.length / 3; i++) {
+                        let dataBlock = {
                             _start: highlightData[(i - 1) * 3 + 1],
                             _end: highlightData[(i - 1) * 3 + 2],
                             words: highlightData[(i - 1) * 3 + 3]
@@ -372,20 +368,20 @@ var Chatbox = /** @class */ (function () {
                 staticText.setColor(speaktype.color);
             }
             staticText.addMessage(name, mode, staticMessage);
-            map_1.g_map.addThing(staticText, creaturePos, -1);
+            g_map.addThing(staticText, creaturePos, -1);
         }
-        var defaultMessage = mode <= 3 && true || false;
+        let defaultMessage = mode <= 3 && true || false;
         if (speaktype == SpeakTypesSettings.none) {
             return;
         }
         if (speaktype.hideInConsole) {
             return;
         }
-        var composedMessage = message; //applyMessagePrefixies(name, level, message)
-        if (mode == const_1.MessageMode.MessageRVRAnswer) {
+        let composedMessage = message; //applyMessagePrefixies(name, level, message)
+        if (mode == MessageMode.MessageRVRAnswer) {
             this.addTabText(composedMessage, speaktype, this.violationReportTab, name);
         }
-        else if (mode == const_1.MessageMode.MessageRVRContinue) {
+        else if (mode == MessageMode.MessageRVRContinue) {
             this.addText(composedMessage, speaktype, name + '\'...', name);
         }
         else if (speaktype.private) {
@@ -395,7 +391,7 @@ var Chatbox = /** @class */ (function () {
             }
         }
         else {
-            var channel = this.defaultTab;
+            let channel = this.defaultTab;
             if (!defaultMessage) {
                 channel = this.channels[channelId];
             }
@@ -403,16 +399,15 @@ var Chatbox = /** @class */ (function () {
                 this.addText(composedMessage, speaktype, channel, name);
             }
             else {
-                log_1.Log.debug('message in channel id ' + channelId + ' which is unknown, this is a server bug, relogin if you want to see messages in this channel');
+                Log.debug('message in channel id ' + channelId + ' which is unknown, this is a server bug, relogin if you want to see messages in this channel');
             }
         }
-    };
-    return Chatbox;
-}());
-exports.Chatbox = Chatbox;
-var g_chat = new Chatbox();
-exports.g_chat = g_chat;
+    }
+}
+let g_chat = new Chatbox();
 g_chat.addTab('Default', true);
 g_chat.addTab('Server Log');
 g_chat.defaultTab = 'Default';
 g_chat.serverTab = 'Server Log';
+export { g_chat };
+//# sourceMappingURL=chatbox.js.map

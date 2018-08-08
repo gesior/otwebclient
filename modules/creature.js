@@ -1,75 +1,60 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
-var thing_1 = require("./thing");
-var Creature = /** @class */ (function (_super) {
-    __extends(Creature, _super);
-    function Creature() {
-        var _this = _super.call(this) || this;
-        _this.m_id = 0;
-        return _this;
+import { Thing } from "./thing";
+export class Creature extends Thing {
+    constructor() {
+        super();
+        this.m_id = 0;
     }
-    Creature.prototype.getId = function () {
+    getId() {
         return this.m_id;
-    };
-    Creature.prototype.setId = function (id) {
+    }
+    setId(id) {
         this.m_id = id;
-    };
-    Creature.prototype.getName = function () {
+    }
+    getName() {
         return this.m_name;
-    };
-    Creature.prototype.setName = function (name) {
+    }
+    setName(name) {
         this.m_name = name;
-    };
-    Creature.prototype.isCreature = function () {
+    }
+    isCreature() {
         return true;
-    };
-    Creature.prototype.addTimedSquare = function (arg0) {
+    }
+    addTimedSquare(arg0) {
         throw new Error("Method not implemented.");
-    };
-    Creature.prototype.hideStaticSquare = function () {
+    }
+    hideStaticSquare() {
         throw new Error("Method not implemented.");
-    };
-    Creature.prototype.showStaticSquare = function (arg0) {
+    }
+    showStaticSquare(arg0) {
         throw new Error("Method not implemented.");
-    };
-    Creature.prototype.setType = function (type) {
-    };
-    Creature.prototype.allowAppearWalk = function () {
-    };
-    Creature.prototype.setHealthPercent = function (healthPercent) {
-    };
-    Creature.prototype.setLight = function (light) {
-    };
-    Creature.prototype.setOutfit = function (outfit) {
-    };
-    Creature.prototype.setSpeed = function (speed) {
-    };
-    Creature.prototype.setBaseSpeed = function (baseSpeed) {
-    };
-    Creature.prototype.setSkull = function (skull) {
-    };
-    Creature.prototype.setShield = function (shield) {
-    };
-    Creature.prototype.setPassable = function (v) {
-    };
-    Creature.prototype.setEmblem = function (emblem) {
-    };
-    Creature.prototype.setIcon = function (icon) {
-    };
-    Creature.prototype.setDirection = function (direction) {
-    };
-    Creature.prototype.turn = function (direction) {
-    };
-    return Creature;
-}(thing_1.Thing));
-exports.Creature = Creature;
+    }
+    setType(type) {
+    }
+    allowAppearWalk() {
+    }
+    setHealthPercent(healthPercent) {
+    }
+    setLight(light) {
+    }
+    setOutfit(outfit) {
+    }
+    setSpeed(speed) {
+    }
+    setBaseSpeed(baseSpeed) {
+    }
+    setSkull(skull) {
+    }
+    setShield(shield) {
+    }
+    setPassable(v) {
+    }
+    setEmblem(emblem) {
+    }
+    setIcon(icon) {
+    }
+    setDirection(direction) {
+    }
+    turn(direction) {
+    }
+}
+//# sourceMappingURL=creature.js.map

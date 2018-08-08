@@ -1,79 +1,76 @@
-"use strict";
-exports.__esModule = true;
-var log_1 = require("../log");
-var position_1 = require("../position");
-var InputMessage = /** @class */ (function () {
-    function InputMessage(msg) {
+import { log } from '../log';
+import { Position } from "../position";
+export class InputMessage {
+    constructor(msg) {
         this.data = msg; // new DataView(msg.buffer.slice(0));
         this.offset = 0;
         this.size = this.data.byteLength;
     }
-    InputMessage.prototype.getU8 = function () {
+    getU8() {
         //log('InputMessage.getU8', this.offset, this.size);
         if (this.offset === this.size)
             throw new Error("Koniec pakietu");
-        var v = this.data.getUint8(this.offset);
+        let v = this.data.getUint8(this.offset);
         this.offset += 1;
         return v;
-    };
-    InputMessage.prototype.getU16 = function () {
+    }
+    getU16() {
         return this.getU8() + this.getU8() * 256;
-    };
-    InputMessage.prototype.getU32 = function () {
+    }
+    getU32() {
         return this.getU16() + this.getU16() * 256 * 256;
-    };
-    InputMessage.prototype.getU64 = function () {
+    }
+    getU64() {
         return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-    };
-    InputMessage.prototype.getDouble = function () {
+    }
+    getDouble() {
         if (this.offset === this.size)
             throw new Error("Koniec pakietu");
-        var v = this.data.getFloat64(this.offset);
+        let v = this.data.getFloat64(this.offset);
         this.offset += 8;
         return v;
-    };
-    InputMessage.prototype.getString = function () {
-        var length = this.getU16();
-        var text = '';
-        for (var i = 0; i < length; i++) {
+    }
+    getString() {
+        const length = this.getU16();
+        let text = '';
+        for (let i = 0; i < length; i++) {
             text += String.fromCharCode(this.getU8());
         }
         return text;
-    };
-    InputMessage.prototype.getPosition = function () {
-        return new position_1.Position(this.getU16(), this.getU16(), this.getU8());
-    };
-    InputMessage.prototype.skipBytes = function (byteCount) {
-        log_1.log('InputMessage.skipBytes', this.offset, this.size);
+    }
+    getPosition() {
+        return new Position(this.getU16(), this.getU16(), this.getU8());
+    }
+    skipBytes(byteCount) {
+        log('InputMessage.skipBytes', this.offset, this.size);
         if (this.offset + byteCount > this.size)
             throw new Error("Koniec pakietu");
         this.offset += byteCount;
-    };
-    InputMessage.prototype.skip = function (bytes) {
+    }
+    skip(bytes) {
         this.skipBytes(bytes);
-    };
-    InputMessage.prototype.peekU8 = function () {
-        var v = this.getU8();
+    }
+    peekU8() {
+        const v = this.getU8();
         this.offset -= 1;
         return v;
-    };
-    InputMessage.prototype.peekU16 = function () {
-        var v = this.getU16();
+    }
+    peekU16() {
+        const v = this.getU16();
         this.offset -= 2;
         return v;
-    };
-    InputMessage.prototype.getUnreadSize = function () {
+    }
+    getUnreadSize() {
         return this.size - this.offset;
-    };
-    InputMessage.prototype.getReadPos = function () {
+    }
+    getReadPos() {
         return this.offset;
-    };
-    InputMessage.prototype.setReadPos = function (offset) {
+    }
+    setReadPos(offset) {
         this.offset = offset;
-    };
-    InputMessage.prototype.validateChecksum = function () {
+    }
+    validateChecksum() {
         return true;
-    };
-    return InputMessage;
-}());
-exports.InputMessage = InputMessage;
+    }
+}
+//# sourceMappingURL=inputmessage.js.map

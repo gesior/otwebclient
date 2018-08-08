@@ -1,1 +1,1 @@
-{"version":3,"file":"g_clock.js","sourceRoot":"","sources":["g_clock.ts"],"names":[],"mappings":"AAAA,MAAM;IACF,MAAM,CAAC,MAAM;QACT,OAAO,CAAC,IAAI,IAAI,EAAE,CAAC;IACvB,CAAC;CACJ"}
+{"version":3,"file":"g_clock.js","sourceRoot":"","sources":["g_clock.ts"],"names":[],"mappings":"AAAA,MAAM;IACF,MAAM,CAAC,MAAM;QACT,MAAM,CAAC,CAAC,IAAI,IAAI,EAAE,CAAC;IACvB,CAAC;CACJ"}
