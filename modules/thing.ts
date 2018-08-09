@@ -18,6 +18,7 @@ export class Thing {
     m_position: Position;
 
     draw(dest: Point, scaleFactor: number, animate: boolean, lightView: LightView = null) {
+        throw new Error('Unimplemented!');
     }
 
     setId(id: number) {

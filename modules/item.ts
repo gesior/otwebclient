@@ -4,6 +4,7 @@ import {ThingType} from "./thingtype";
 import {ThingCategory} from "./constants/const";
 
 export class Item extends Thing {
+    subtype: number = -1;
     istop: boolean;
     isbot: boolean;
     stackprio: number;
@@ -27,7 +28,7 @@ export class Item extends Thing {
     }
 
     setCountOrSubType(count: number) {
-
+        this.subtype = count;
     }
 
     getThingType(): ThingType {

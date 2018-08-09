@@ -4,6 +4,7 @@ import { DeathType, GameFeature, MessageMode, Otc, Skill, ThingCategory } from "
 import { Log } from "../log";
 import { OutputMessage } from "./outputmessage";
 import { Proto } from "../constants/proto";
+import { InputMessage } from "./inputmessage";
 import { Outfit } from "../outfit";
 import { Thing } from "../thing";
 import { Position } from "../position";
@@ -23,7 +24,6 @@ import { AwareRange } from "../structures/awarerange";
 export class ProtocolGame extends Protocol {
     constructor(game) {
         super();
-        this.m_localPlayer = null;
         this.m_gameInitialized = false;
         this.m_mapKnown = false;
     }
@@ -35,6 +35,35 @@ export class ProtocolGame extends Protocol {
         this.m_sessionKey = sessionKey;
         this.m_characterName = characterName;
         this.connect(host, port);
+    }
+    watch(m_movieData) {
+        var i = 0;
+        this.m_localPlayer = g_game.getLocalPlayer();
+        this.m_movieData = m_movieData;
+        var first = 0;
+        while (this.m_movieData.getUnreadSize() >= 10) {
+            let timestamp = this.m_movieData.getU64();
+            let s = this.m_movieData.getReadPos();
+            if (this.m_movieData.getUnreadSize() >= 10) {
+                var next = this.m_movieData.peekU64();
+                //console.log('com', timestamp, next);
+                if (next - timestamp < 5000 && next - timestamp >= 0) {
+                    continue;
+                }
+            }
+            this.m_movieData.setReadPos(s);
+            let packetLength = this.m_movieData.getU16();
+            let packetData = this.m_movieData.getBytes(packetLength);
+            if (first === 0)
+                first = timestamp;
+            if (i >= 70000)
+                Log.debug(parseInt("" + ((timestamp - first) / 1000)), i, timestamp, packetLength, packetData);
+            var inputMessage = new InputMessage(new DataView(packetData));
+            this.parseMessage(inputMessage);
+            if (++i >= 220000)
+                break;
+        }
+        console.error('loaded packets', i);
     }
     onConnect() {
         this.m_firstRecv = true;
@@ -88,7 +117,7 @@ export class ProtocolGame extends Protocol {
         try {
             while (msg.getUnreadSize() > 0) {
                 opcode = msg.getU8();
-                Log.debug('opcode', prevOpcode, opcode);
+                //Log.debug('opcode', prevOpcode, opcode);
                 if (!g_game.getFeature(GameFeature.GameLoginPending)) {
                     if (!this.m_gameInitialized && opcode > Proto.GameServerFirstGameOpcode) {
                         //g_game.processGameStart();
@@ -443,21 +472,24 @@ export class ProtocolGame extends Protocol {
                     case Proto.GameServerChangeMapAwareRange:
                         this.parseChangeMapAwareRange(msg);
                         break;
+                    case 55:
+                        return;
                     default:
-                        Log.error("unhandled opcode %d", opcode);
-                        break;
+                        Log.error("unhandled opcode %d", opcode, msg);
+                        throw new Error('opcode');
                 }
                 prevOpcode = opcode;
             }
         }
         catch (e) {
             Log.error("ProtocolGame parse message exception (%d bytes unread, last opcode is %d, prev opcode is %d): %s", msg.getUnreadSize(), opcode, prevOpcode, e);
+            throw new Error('parser');
         }
     }
     sendPingBack() {
         //console.log('sendPingBack');
         //console.log(g_map.m_floorMissiles);
-        //console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+        console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
         if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
             let pos = this.m_localPlayer.getPosition();
             for (let y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -695,7 +727,7 @@ export class ProtocolGame extends Protocol {
         //g_game.processLoginToken(unknown);
     }
     parsePing(msg) {
-        this.sendPingBack();
+        //this.sendPingBack();
     }
     parsePingBack(msg) {
         //g_game.processPingBack();
@@ -820,7 +852,7 @@ export class ProtocolGame extends Protocol {
         }
         let creature = thing;
         creature.allowAppearWalk();
-        Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
+        //Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
         g_map.addThing(thing, newPos, -1);
     }
     parseOpenContainer(msg) {
@@ -1639,12 +1671,15 @@ export class ProtocolGame extends Protocol {
         //g_lua.callGlobalField("g_game", "onItemInfo", list);
     }
     parsePlayerInventory(msg) {
+        msg.getU8(); // subtype
+        /*
         let size = msg.getU16();
         for (let i = 0; i < size; ++i) {
             msg.getU16(); // id
             msg.getU8(); // subtype
             msg.getU16(); // count
         }
+        */
     }
     parseModalDialog(msg) {
         let id = msg.getU32();
@@ -1877,7 +1912,7 @@ export class ProtocolGame extends Protocol {
         return thing;
     }
     getCreature(msg, type) {
-        Log.debug('getCreature', type, msg);
+        //Log.debug('getCreature', type, msg);
         if (type == 0)
             type = msg.getU16();
         let creature;
@@ -2040,6 +2075,9 @@ export class ProtocolGame extends Protocol {
         let y = msg.getU16();
         let z = msg.getU8();
         return new Position(x, y, z);
+    }
+    getLocalPlayer() {
+        return this.m_localPlayer;
     }
 }
 //# sourceMappingURL=protocolgame.js.map

@@ -1,4 +1,3 @@
-import { Creature } from "./creature";
 import { Position } from "./position";
 import { AwareRange } from "./structures/awarerange";
 import { Light } from "./structures/light";
@@ -6,7 +5,6 @@ import { TileBlock } from "./tileblock";
 import { MessageMode, Otc } from "./constants/const";
 import { Point } from "./structures/point";
 import { toInt } from "./constants/helpers";
-import { Log } from "./log";
 export class Map {
     constructor() {
         this.m_tileBlocks = [];
@@ -60,7 +58,13 @@ export class Map {
         throw new Error("Method not implemented.");
     }
     getCreatureById(id) {
-        return new Creature();
+        //console.log('known creatures', g_map.m_knownCreatures);
+        if (!g_map.m_knownCreatures[id]) {
+            console.log('known creatures failed', id, g_map.m_knownCreatures);
+            throw new Error('get ' + id);
+        }
+        return g_map.m_knownCreatures[id];
+        //        return new Creature();
     }
     getAwareRange() {
         return this.m_awareRange;
@@ -199,7 +203,7 @@ export class Map {
     }
     getThing(pos, stackpos) {
         let tile = this.getTile(pos);
-        Log.debug('Map.getThing', pos, tile.getThing(stackpos));
+        //Log.debug('Map.getThing', pos, tile.getThing(stackpos));
         if (tile)
             return tile.getThing(stackpos);
         return null;
@@ -211,13 +215,15 @@ export class Map {
         if (id == 0)
             return;
         if (this.m_knownCreatures[id]) {
-            this.m_knownCreatures.splice(id, 1);
+            //this.m_knownCreatures.splice(id, 1);
         }
     }
     removeUnawareThings() {
         /* todo */
     }
-    getBlockIndex(pos) { return (toInt(pos.y / TileBlock.BLOCK_SIZE) * toInt(65536 / TileBlock.BLOCK_SIZE)) + toInt(pos.x / TileBlock.BLOCK_SIZE); }
+    getBlockIndex(pos) {
+        return (toInt(pos.y / TileBlock.BLOCK_SIZE) * toInt(65536 / TileBlock.BLOCK_SIZE)) + toInt(pos.x / TileBlock.BLOCK_SIZE);
+    }
 }
 let g_map = new Map();
 export { g_map };

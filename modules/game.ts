@@ -8,6 +8,7 @@ import {Container} from "./container";
 import {Item} from "./item";
 import {g_chat} from "./view/chatbox";
 import {Position} from "./position";
+import {Movie} from "./network/movie";
 
 export class Game {
     processCloseChannel(channelId: number): any {
@@ -30,6 +31,7 @@ export class Game {
     messageModesMap = {};
     m_features: boolean[] = [];
     private m_protocolGame: ProtocolGame;
+    m_localPlayer = new LocalPlayer();
 
     setClientVersion(version: number) {
         this.m_clientVersion = version;
@@ -405,12 +407,17 @@ export class Game {
     }
 
     getLocalPlayer(): LocalPlayer {
-        return new LocalPlayer();
+        return this.m_localPlayer;
     }
 
     login(accountName: string, accountPassword: string, characterName: string) {
         this.m_protocolGame = new ProtocolGame(this);
         this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+    }
+
+    watchMovie(movie: Movie) {
+        this.m_protocolGame = new ProtocolGame(this);
+        this.m_protocolGame.watch(movie);
     }
 
     formatCreatureName(string: string): string {

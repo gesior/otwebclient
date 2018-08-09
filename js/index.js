@@ -166,6 +166,172 @@ var Light = exports.Light = function Light() {
 
 /***/ }),
 
+/***/ 102:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.BinaryDataReader = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _position = __webpack_require__(100);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BinaryDataReader = exports.BinaryDataReader = function () {
+    function BinaryDataReader(msg) {
+        _classCallCheck(this, BinaryDataReader);
+
+        this.data = msg;
+        this.offset = 0;
+        this.size = this.data.byteLength;
+    }
+
+    _createClass(BinaryDataReader, [{
+        key: "getU8",
+        value: function getU8() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "get8",
+        value: function get8() {
+            if (this.offset + 1 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "get16",
+        value: function get16() {
+            if (this.offset + 2 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt16(this.offset);
+            this.offset += 2;
+            return v;
+        }
+    }, {
+        key: "get32",
+        value: function get32() {
+            if (this.offset + 4 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt32(this.offset);
+            this.offset += 4;
+            return v;
+        }
+    }, {
+        key: "getDouble",
+        value: function getDouble() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getFloat64(this.offset);
+            this.offset += 8;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
+        }
+    }, {
+        key: "getBytes",
+        value: function getBytes(bytesCount) {
+            if (bytesCount == -1) bytesCount = this.size - this.offset;
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            var bytes = this.data.buffer.slice(this.offset, this.offset + bytesCount);
+            this.offset += bytesCount;
+            return bytes;
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "peekU16",
+        value: function peekU16() {
+            var v = this.getU16();
+            this.offset -= 2;
+            return v;
+        }
+    }, {
+        key: "peekU32",
+        value: function peekU32() {
+            var v = this.getU32();
+            this.offset -= 4;
+            return v;
+        }
+    }, {
+        key: "peekU64",
+        value: function peekU64() {
+            var v = this.getU64();
+            this.offset -= 8;
+            return v;
+        }
+    }, {
+        key: "skipBytes",
+        value: function skipBytes(bytesCount) {
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            this.offset += bytesCount;
+        }
+    }, {
+        key: "skip",
+        value: function skip(bytesCount) {
+            this.skipBytes(bytesCount);
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }]);
+
+    return BinaryDataReader;
+}();
+
+/***/ }),
+
 /***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -756,7 +922,7 @@ var Tilestate = exports.Tilestate = undefined;
 
 /***/ }),
 
-/***/ 137:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -798,7 +964,7 @@ var Player = exports.Player = function (_Creature) {
 
 /***/ }),
 
-/***/ 138:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -839,7 +1005,7 @@ var AwareRange = exports.AwareRange = function () {
 
 /***/ }),
 
-/***/ 139:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -855,62 +1021,7 @@ exports.toInt = toInt;
 
 /***/ }),
 
-/***/ 140:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Image = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _log = __webpack_require__(23);
-
-var _color = __webpack_require__(55);
-
-var _size = __webpack_require__(73);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Image = exports.Image = function () {
-    _createClass(Image, [{
-        key: "blit",
-        value: function blit(point, image) {}
-    }, {
-        key: "overwriteMask",
-        value: function overwriteMask(color) {
-            var insideColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _color.Color.white;
-            var outsideColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _color.Color.alpha;
-        }
-    }]);
-
-    function Image(size) {
-        _classCallCheck(this, Image);
-
-        if (size instanceof _size.Size) {} else if (typeof size == 'number') {}
-    }
-
-    _createClass(Image, [{
-        key: "setId",
-        value: function setId(id) {}
-    }], [{
-        key: "load",
-        value: function load(path) {
-            (0, _log.error)('load image', path);
-            return null;
-        }
-    }]);
-
-    return Image;
-}();
-
-/***/ }),
-
-/***/ 141:
+/***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1276,7 +1387,141 @@ var Rect = exports.Rect = function () {
 
 /***/ }),
 
-/***/ 142:
+/***/ 143:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_resources = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputfile = __webpack_require__(362);
+
+var _log = __webpack_require__(23);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
+    }
+
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
+
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+
+                                console.log('r', response);
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 10:
+                                _context2.prev = 10;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 14:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[1, 10]]);
+            }));
+        }
+    }]);
+
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
+
+/***/ }),
+
+/***/ 144:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1291,7 +1536,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
-var _rect = __webpack_require__(141);
+var _rect = __webpack_require__(142);
 
 var _point = __webpack_require__(72);
 
@@ -1299,9 +1544,9 @@ var _color = __webpack_require__(55);
 
 var _const = __webpack_require__(11);
 
-var _cachedtext = __webpack_require__(143);
+var _cachedtext = __webpack_require__(145);
 
-var _g_clock = __webpack_require__(144);
+var _g_clock = __webpack_require__(146);
 
 var _map = __webpack_require__(50);
 
@@ -1474,7 +1719,7 @@ var StaticText = exports.StaticText = function (_Thing) {
 
 /***/ }),
 
-/***/ 143:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1579,7 +1824,7 @@ CachedText.ALIGN_RIGHT = 'right';
 
 /***/ }),
 
-/***/ 144:
+/***/ 146:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1610,7 +1855,7 @@ var g_clock = exports.g_clock = function () {
 
 /***/ }),
 
-/***/ 145:
+/***/ 147:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1623,7 +1868,7 @@ exports.Timer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _g_clock = __webpack_require__(144);
+var _g_clock = __webpack_require__(146);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1674,11 +1919,11 @@ var Timer = exports.Timer = function () {
 
 /***/ }),
 
-/***/ 146:
+/***/ 148:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(147);
-module.exports = __webpack_require__(349);
+__webpack_require__(149);
+module.exports = __webpack_require__(351);
 
 
 /***/ }),
@@ -1759,19 +2004,25 @@ exports.error = error;
 
 /***/ }),
 
-/***/ 349:
+/***/ 351:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jquery = __webpack_require__(350);
+var _jquery = __webpack_require__(352);
 
 var $ = _interopRequireWildcard(_jquery);
 
 var _const = __webpack_require__(11);
 
 var _game = __webpack_require__(49);
+
+var _resources = __webpack_require__(143);
+
+var _movie = __webpack_require__(379);
+
+var _mapview = __webpack_require__(380);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1806,6 +2057,7 @@ var x = _const.Otc.MAX_AUTOWALK_DIST;
 console.log($);
 function test() {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var movieData, movie;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -1816,10 +2068,23 @@ function test() {
                         return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
                     case 4:
-                        console.log('login');
-                        _game.g_game.login('', '', 'GOD Spider Local');
+                        console.log('load file');
+                        _context.next = 7;
+                        return _resources.g_resources.openFile('http://inditex.localhost/small.ukcam');
 
-                    case 6:
+                    case 7:
+                        movieData = _context.sent;
+
+                        //movieData.setReadPos(8);
+                        movie = new _movie.Movie(new DataView(movieData.getBytes(-1)));
+
+                        _mapview.g_mapview.init();
+                        _mapview.g_mapview.clear();
+                        _game.g_game.watchMovie(movie);
+                        _mapview.g_mapview.draw();
+                        //g_game.login('', '', 'GOD Spider Local');
+
+                    case 13:
                     case 'end':
                         return _context.stop();
                 }
@@ -1831,7 +2096,7 @@ test();
 
 /***/ }),
 
-/***/ 351:
+/***/ 353:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1844,7 +2109,7 @@ exports.LocalPlayer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _player = __webpack_require__(137);
+var _player = __webpack_require__(138);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1889,7 +2154,7 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
 
 /***/ }),
 
-/***/ 352:
+/***/ 354:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1902,9 +2167,9 @@ exports.TileBlock = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tile = __webpack_require__(353);
+var _tile = __webpack_require__(355);
 
-var _helpers = __webpack_require__(139);
+var _helpers = __webpack_require__(140);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1958,7 +2223,7 @@ TileBlock.BLOCK_SIZE = 32;
 
 /***/ }),
 
-/***/ 353:
+/***/ 355:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1971,13 +2236,15 @@ exports.Tile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _position = __webpack_require__(100);
+
 var _game = __webpack_require__(49);
 
 var _map = __webpack_require__(50);
 
 var _const = __webpack_require__(11);
 
-var _log = __webpack_require__(23);
+var _point = __webpack_require__(72);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1995,6 +2262,147 @@ var Tile = exports.Tile = function () {
     }
 
     _createClass(Tile, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, drawFlags) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
+            // first bottom items
+            if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.m_things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var thing = _step.value;
+
+                        if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
+                        thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                        this.m_drawElevation += thing.getElevation();
+                        if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+            var redrawPreviousTopW = 0;
+            var redrawPreviousTopH = 0;
+            // now common items in reverse order
+            if (drawFlags & _const.DrawFlags.DrawItems) {
+                for (var it = this.m_things.length - 1; it >= 0; ++it) {
+                    var _thing = this.m_things[it];
+                    if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
+                    _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    if (_thing.isLyingCorpse()) {
+                        redrawPreviousTopW = Math.max(_thing.getWidth(), redrawPreviousTopW);
+                        redrawPreviousTopH = Math.max(_thing.getHeight(), redrawPreviousTopH);
+                    }
+                    this.m_drawElevation += _thing.getElevation();
+                    if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                }
+            }
+            // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
+            if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+                var topRedrawFlags = drawFlags & (_const.DrawFlags.DrawCreatures | _const.DrawFlags.DrawEffects | _const.DrawFlags.DrawOnTop | _const.DrawFlags.DrawAnimations);
+                if (topRedrawFlags) {
+                    for (var x = -redrawPreviousTopW; x <= 0; ++x) {
+                        for (var y = -redrawPreviousTopH; y <= 0; ++y) {
+                            if (x == 0 && y == 0) continue;
+                            var tile = _map.g_map.getTile(this.m_position.translated(x, y));
+                            if (tile) tile.draw(dest.add(new _point.Point(x * _const.Otc.TILE_PIXELS * scaleFactor, y * _const.Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                        }
+                    }
+                }
+            }
+            // creatures
+            if (drawFlags & _const.DrawFlags.DrawCreatures) {
+                if (animate) {
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = this.m_walkingCreatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var creature = _step2.value;
+
+                            creature.draw(new _point.Point(dest.x + ((creature.getPosition().x - this.m_position.x) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                }
+                for (var _it = this.m_things.length - 1; _it >= 0; ++_it) {
+                    var _thing2 = this.m_things[_it];
+                    if (!_thing2.isCreature()) continue;
+                    var _creature = _thing2;
+                    if (_creature && (!_creature.isWalking() || !animate)) _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                }
+            }
+            /*
+                    // effects
+                    for(const EffectPtr& effect : m_effects)
+                    effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
+            */
+            // top items
+            if (drawFlags & _const.DrawFlags.DrawOnTop) {
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                    for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var _thing3 = _step3.value;
+
+                        if (_thing3.isOnTop()) _thing3.draw(dest, scaleFactor, animate, lightView);
+                    }
+                } catch (err) {
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
+                        }
+                    } finally {
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
+                        }
+                    }
+                }
+            }
+            /*
+            // draw translucent light (for tiles beneath holes)
+            if(hasTranslucentLight() && lightView) {
+                Light light;
+                light.intensity = 1;
+                lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
+            }
+            */
+        }
+    }, {
         key: "clean",
         value: function clean() {
             while (this.m_things.length > 0) {
@@ -2017,11 +2425,15 @@ var Tile = exports.Tile = function () {
     }, {
         key: "addThing",
         value: function addThing(thing, stackPos) {
+            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('add', thing, stackPos);
             if (!thing) return;
             if (thing.isEffect()) {
                 if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
             } else {
-                if (thing.isCreature()) console.log('tile.addThing', thing, stackPos, this.m_things);
+                /*
+                if (thing.isCreature())
+                    console.log('tile.addThing', thing, stackPos, this.m_things);
+                */
                 // priority                                    854
                 // 0 - ground,                        -.      -.
                 // 1 - ground borders                 -.      -.
@@ -2041,7 +2453,7 @@ var Tile = exports.Tile = function () {
                     }
                     for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
                         var otherPriority = this.m_things[stackPos].getStackPriority();
-                        console.log('prior', stackPos, priority, otherPriority);
+                        //console.log('prior', stackPos, priority, otherPriority);
                         if (append && otherPriority > priority || !append && otherPriority >= priority) break;
                     }
                 } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
@@ -2067,6 +2479,7 @@ var Tile = exports.Tile = function () {
     }, {
         key: "removeThing",
         value: function removeThing(thing) {
+            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('rem', thing);
             if (!thing) return false;
             var removed = false;
             if (thing.isEffect()) {
@@ -2079,6 +2492,7 @@ var Tile = exports.Tile = function () {
                 var _index = this.m_things.indexOf(thing);
                 if (_index > -1) {
                     this.m_things.splice(_index, 1);
+                    if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('rem', _index);
                     removed = true;
                 }
             }
@@ -2089,8 +2503,9 @@ var Tile = exports.Tile = function () {
     }, {
         key: "getThing",
         value: function getThing(stackPos) {
+            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('get', stackPos);
             if (stackPos >= 0 && stackPos < this.m_things.length) {
-                _log.Log.debug('tile thing: ', this.m_things[stackPos]);
+                //Log.debug('tile thing: ', this.m_things[stackPos]);
                 return this.m_things[stackPos];
             }
             return null;
@@ -2098,27 +2513,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "getEffect",
         value: function getEffect(id) {
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
 
             try {
-                for (var _iterator = this.m_effects[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var effect = _step.value;
+                for (var _iterator4 = this.m_effects[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var effect = _step4.value;
 
                     if (effect.getId() == id) return effect;
                 }
             } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
                     }
                 } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
                     }
                 }
             }
@@ -2144,27 +2559,27 @@ var Tile = exports.Tile = function () {
         key: "getTopThing",
         value: function getTopThing() {
             if (this.isEmpty()) return null;
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
 
             try {
-                for (var _iterator2 = this.m_things[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var thing = _step2.value;
+                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var thing = _step5.value;
 
                     if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
                 }
             } catch (err) {
-                _didIteratorError2 = true;
-                _iteratorError2 = err;
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                        _iterator2.return();
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
                     }
                 } finally {
-                    if (_didIteratorError2) {
-                        throw _iteratorError2;
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
                     }
                 }
             }
@@ -2190,8 +2605,8 @@ var Tile = exports.Tile = function () {
                 if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
             }
             for (var _i = 0; _i < this.m_things.length; ++_i) {
-                var _thing = this.m_things[_i];
-                if (!_thing.isGround() && !_thing.isGroundBorder() && !_thing.isCreature() && !_thing.isSplash()) return _thing;
+                var _thing4 = this.m_things[_i];
+                if (!_thing4.isGround() && !_thing4.isGroundBorder() && !_thing4.isCreature() && !_thing4.isSplash()) return _thing4;
             }
             return this.m_things[0];
         }
@@ -2212,13 +2627,13 @@ var Tile = exports.Tile = function () {
                         if (pos == this.m_position) continue;
                         var tile = _map.g_map.getTile(pos);
                         if (tile) {
-                            var _iteratorNormalCompletion3 = true;
-                            var _didIteratorError3 = false;
-                            var _iteratorError3 = undefined;
+                            var _iteratorNormalCompletion6 = true;
+                            var _didIteratorError6 = false;
+                            var _iteratorError6 = undefined;
 
                             try {
-                                for (var _iterator3 = tile.getCreatures()[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                                    var c = _step3.value;
+                                for (var _iterator6 = tile.getCreatures()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                                    var c = _step6.value;
 
                                     /* todo */
                                     //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
@@ -2226,16 +2641,16 @@ var Tile = exports.Tile = function () {
                                     //}
                                 }
                             } catch (err) {
-                                _didIteratorError3 = true;
-                                _iteratorError3 = err;
+                                _didIteratorError6 = true;
+                                _iteratorError6 = err;
                             } finally {
                                 try {
-                                    if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                        _iterator3.return();
+                                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                                        _iterator6.return();
                                     }
                                 } finally {
-                                    if (_didIteratorError3) {
-                                        throw _iteratorError3;
+                                    if (_didIteratorError6) {
+                                        throw _iteratorError6;
                                     }
                                 }
                             }
@@ -2256,27 +2671,27 @@ var Tile = exports.Tile = function () {
                     return thing;
                 }
             }
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
 
             try {
-                for (var _iterator4 = this.m_things[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var _thing2 = _step4.value;
+                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var _thing5 = _step7.value;
 
-                    if (_thing2.isCreature()) return _thing2;
+                    if (_thing5.isCreature()) return _thing5;
                 }
             } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
                     }
                 } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
                     }
                 }
             }
@@ -2294,15 +2709,15 @@ var Tile = exports.Tile = function () {
                 if (thing.isForceUse()) return thing;
             }
             for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
-                var _thing3 = this.m_things[_i2];
-                if (!_thing3.isGround() && !_thing3.isGroundBorder() && !_thing3.isOnBottom() && !_thing3.isOnTop()) {
-                    if (_i2 > 0 && _thing3.isSplash()) return this.m_things[_i2 - 1];
-                    return _thing3;
+                var _thing6 = this.m_things[_i2];
+                if (!_thing6.isGround() && !_thing6.isGroundBorder() && !_thing6.isOnBottom() && !_thing6.isOnTop()) {
+                    if (_i2 > 0 && _thing6.isSplash()) return this.m_things[_i2 - 1];
+                    return _thing6;
                 }
             }
             for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
-                var _thing4 = this.m_things[_i3];
-                if (!_thing4.isGround() && !_thing4.isOnTop()) return _thing4;
+                var _thing7 = this.m_things[_i3];
+                if (!_thing7.isGround() && !_thing7.isOnTop()) return _thing7;
             }
             return this.m_things[0];
         }
@@ -2320,27 +2735,27 @@ var Tile = exports.Tile = function () {
         key: "getItems",
         value: function getItems() {
             var items = [];
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
 
             try {
-                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var thing = _step5.value;
+                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var thing = _step8.value;
 
                     if (thing.isItem()) items.push(thing);
                 }
             } catch (err) {
-                _didIteratorError5 = true;
-                _iteratorError5 = err;
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                        _iterator5.return();
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
                     }
                 } finally {
-                    if (_didIteratorError5) {
-                        throw _iteratorError5;
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
                     }
                 }
             }
@@ -2351,27 +2766,27 @@ var Tile = exports.Tile = function () {
         key: "getCreatures",
         value: function getCreatures() {
             var creatures = [];
-            var _iteratorNormalCompletion6 = true;
-            var _didIteratorError6 = false;
-            var _iteratorError6 = undefined;
+            var _iteratorNormalCompletion9 = true;
+            var _didIteratorError9 = false;
+            var _iteratorError9 = undefined;
 
             try {
-                for (var _iterator6 = this.m_things[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                    var thing = _step6.value;
+                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                    var thing = _step9.value;
 
                     if (thing.isCreature()) creatures.push(thing);
                 }
             } catch (err) {
-                _didIteratorError6 = true;
-                _iteratorError6 = err;
+                _didIteratorError9 = true;
+                _iteratorError9 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                        _iterator6.return();
+                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                        _iterator9.return();
                     }
                 } finally {
-                    if (_didIteratorError6) {
-                        throw _iteratorError6;
+                    if (_didIteratorError9) {
+                        throw _iteratorError9;
                     }
                 }
             }
@@ -2409,29 +2824,29 @@ var Tile = exports.Tile = function () {
         value: function getMinimapColorByte() {
             var color = 255; // alpha
             if (this.m_minimapColor != 0) return this.m_minimapColor;
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
 
             try {
-                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                    var thing = _step7.value;
+                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var thing = _step10.value;
 
                     if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
                     var c = thing.getMinimapColor();
                     if (c != 0) color = c;
                 }
             } catch (err) {
-                _didIteratorError7 = true;
-                _iteratorError7 = err;
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                        _iterator7.return();
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
                     }
                 } finally {
-                    if (_didIteratorError7) {
-                        throw _iteratorError7;
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
                     }
                 }
             }
@@ -2446,27 +2861,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "isPathable",
         value: function isPathable() {
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
 
             try {
-                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                    var thing = _step8.value;
+                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var thing = _step11.value;
 
                     if (thing.isNotPathable()) return false;
                 }
             } catch (err) {
-                _didIteratorError8 = true;
-                _iteratorError8 = err;
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                        _iterator8.return();
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
                     }
                 } finally {
-                    if (_didIteratorError8) {
-                        throw _iteratorError8;
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
                     }
                 }
             }
@@ -2479,13 +2894,13 @@ var Tile = exports.Tile = function () {
             var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
             if (!this.getGround()) return false;
-            var _iteratorNormalCompletion9 = true;
-            var _didIteratorError9 = false;
-            var _iteratorError9 = undefined;
+            var _iteratorNormalCompletion12 = true;
+            var _didIteratorError12 = false;
+            var _iteratorError12 = undefined;
 
             try {
-                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                    var thing = _step9.value;
+                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                    var thing = _step12.value;
 
                     if (thing.isNotWalkable()) return false;
                     if (!ignoreCreatures) {
@@ -2498,16 +2913,16 @@ var Tile = exports.Tile = function () {
                     }
                 }
             } catch (err) {
-                _didIteratorError9 = true;
-                _iteratorError9 = err;
+                _didIteratorError12 = true;
+                _iteratorError12 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                        _iterator9.return();
+                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                        _iterator12.return();
                     }
                 } finally {
-                    if (_didIteratorError9) {
-                        throw _iteratorError9;
+                    if (_didIteratorError12) {
+                        throw _iteratorError12;
                     }
                 }
             }
@@ -2531,27 +2946,27 @@ var Tile = exports.Tile = function () {
         key: "isSingleDimension",
         value: function isSingleDimension() {
             if (this.m_walkingCreatures.length > 0) return false;
-            var _iteratorNormalCompletion10 = true;
-            var _didIteratorError10 = false;
-            var _iteratorError10 = undefined;
+            var _iteratorNormalCompletion13 = true;
+            var _didIteratorError13 = false;
+            var _iteratorError13 = undefined;
 
             try {
-                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                    var thing = _step10.value;
+                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                    var thing = _step13.value;
 
                     if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
                 }
             } catch (err) {
-                _didIteratorError10 = true;
-                _iteratorError10 = err;
+                _didIteratorError13 = true;
+                _iteratorError13 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                        _iterator10.return();
+                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                        _iterator13.return();
                     }
                 } finally {
-                    if (_didIteratorError10) {
-                        throw _iteratorError10;
+                    if (_didIteratorError13) {
+                        throw _iteratorError13;
                     }
                 }
             }
@@ -2561,27 +2976,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "isLookPossible",
         value: function isLookPossible() {
-            var _iteratorNormalCompletion11 = true;
-            var _didIteratorError11 = false;
-            var _iteratorError11 = undefined;
+            var _iteratorNormalCompletion14 = true;
+            var _didIteratorError14 = false;
+            var _iteratorError14 = undefined;
 
             try {
-                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-                    var thing = _step11.value;
+                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+                    var thing = _step14.value;
 
                     if (thing.blockProjectile()) return false;
                 }
             } catch (err) {
-                _didIteratorError11 = true;
-                _iteratorError11 = err;
+                _didIteratorError14 = true;
+                _iteratorError14 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                        _iterator11.return();
+                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                        _iterator14.return();
                     }
                 } finally {
-                    if (_didIteratorError11) {
-                        throw _iteratorError11;
+                    if (_didIteratorError14) {
+                        throw _iteratorError14;
                     }
                 }
             }
@@ -2594,29 +3009,29 @@ var Tile = exports.Tile = function () {
             var hasGround = false;
             var hasOnBottom = false;
             var hasIgnoreLook = false;
-            var _iteratorNormalCompletion12 = true;
-            var _didIteratorError12 = false;
-            var _iteratorError12 = undefined;
+            var _iteratorNormalCompletion15 = true;
+            var _didIteratorError15 = false;
+            var _iteratorError15 = undefined;
 
             try {
-                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-                    var thing = _step12.value;
+                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                    var thing = _step15.value;
 
                     if (thing.isGround()) hasGround = true;
                     if (thing.isOnBottom()) hasOnBottom = true;
                     if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
                 }
             } catch (err) {
-                _didIteratorError12 = true;
-                _iteratorError12 = err;
+                _didIteratorError15 = true;
+                _iteratorError15 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
-                        _iterator12.return();
+                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                        _iterator15.return();
                     }
                 } finally {
-                    if (_didIteratorError12) {
-                        throw _iteratorError12;
+                    if (_didIteratorError15) {
+                        throw _iteratorError15;
                     }
                 }
             }
@@ -2641,27 +3056,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "mustHookSouth",
         value: function mustHookSouth() {
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
+            var _iteratorNormalCompletion16 = true;
+            var _didIteratorError16 = false;
+            var _iteratorError16 = undefined;
 
             try {
-                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                    var thing = _step13.value;
+                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                    var thing = _step16.value;
 
                     if (thing.isHookSouth()) return true;
                 }
             } catch (err) {
-                _didIteratorError13 = true;
-                _iteratorError13 = err;
+                _didIteratorError16 = true;
+                _iteratorError16 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                        _iterator13.return();
+                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                        _iterator16.return();
                     }
                 } finally {
-                    if (_didIteratorError13) {
-                        throw _iteratorError13;
+                    if (_didIteratorError16) {
+                        throw _iteratorError16;
                     }
                 }
             }
@@ -2671,27 +3086,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "mustHookEast",
         value: function mustHookEast() {
-            var _iteratorNormalCompletion14 = true;
-            var _didIteratorError14 = false;
-            var _iteratorError14 = undefined;
+            var _iteratorNormalCompletion17 = true;
+            var _didIteratorError17 = false;
+            var _iteratorError17 = undefined;
 
             try {
-                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-                    var thing = _step14.value;
+                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                    var thing = _step17.value;
 
                     if (thing.isHookEast()) return true;
                 }
             } catch (err) {
-                _didIteratorError14 = true;
-                _iteratorError14 = err;
+                _didIteratorError17 = true;
+                _iteratorError17 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
-                        _iterator14.return();
+                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                        _iterator17.return();
                     }
                 } finally {
-                    if (_didIteratorError14) {
-                        throw _iteratorError14;
+                    if (_didIteratorError17) {
+                        throw _iteratorError17;
                     }
                 }
             }
@@ -2701,27 +3116,27 @@ var Tile = exports.Tile = function () {
     }, {
         key: "hasCreature",
         value: function hasCreature() {
-            var _iteratorNormalCompletion15 = true;
-            var _didIteratorError15 = false;
-            var _iteratorError15 = undefined;
+            var _iteratorNormalCompletion18 = true;
+            var _didIteratorError18 = false;
+            var _iteratorError18 = undefined;
 
             try {
-                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-                    var thing = _step15.value;
+                for (var _iterator18 = this.m_things[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+                    var thing = _step18.value;
 
                     if (thing.isCreature()) return true;
                 }
             } catch (err) {
-                _didIteratorError15 = true;
-                _iteratorError15 = err;
+                _didIteratorError18 = true;
+                _iteratorError18 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                        _iterator15.return();
+                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                        _iterator18.return();
                     }
                 } finally {
-                    if (_didIteratorError15) {
-                        throw _iteratorError15;
+                    if (_didIteratorError18) {
+                        throw _iteratorError18;
                     }
                 }
             }
@@ -2749,27 +3164,27 @@ var Tile = exports.Tile = function () {
         key: "getElevation",
         value: function getElevation() {
             var elevation = 0;
-            var _iteratorNormalCompletion16 = true;
-            var _didIteratorError16 = false;
-            var _iteratorError16 = undefined;
+            var _iteratorNormalCompletion19 = true;
+            var _didIteratorError19 = false;
+            var _iteratorError19 = undefined;
 
             try {
-                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-                    var thing = _step16.value;
+                for (var _iterator19 = this.m_things[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+                    var thing = _step19.value;
 
                     if (thing.getElevation() > 0) elevation++;
                 }
             } catch (err) {
-                _didIteratorError16 = true;
-                _iteratorError16 = err;
+                _didIteratorError19 = true;
+                _iteratorError19 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
-                        _iterator16.return();
+                    if (!_iteratorNormalCompletion19 && _iterator19.return) {
+                        _iterator19.return();
                     }
                 } finally {
-                    if (_didIteratorError16) {
-                        throw _iteratorError16;
+                    if (_didIteratorError19) {
+                        throw _iteratorError19;
                     }
                 }
             }
@@ -2822,13 +3237,13 @@ var Tile = exports.Tile = function () {
             var tile = _map.g_map.getOrCreateTile(downPos);
             if (!tile) return;
             var translucent = false;
-            var _iteratorNormalCompletion17 = true;
-            var _didIteratorError17 = false;
-            var _iteratorError17 = undefined;
+            var _iteratorNormalCompletion20 = true;
+            var _didIteratorError20 = false;
+            var _iteratorError20 = undefined;
 
             try {
-                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-                    var thing = _step17.value;
+                for (var _iterator20 = this.m_things[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+                    var thing = _step20.value;
 
                     if (thing.isTranslucent() || thing.hasLensHelp()) {
                         translucent = true;
@@ -2836,16 +3251,16 @@ var Tile = exports.Tile = function () {
                     }
                 }
             } catch (err) {
-                _didIteratorError17 = true;
-                _iteratorError17 = err;
+                _didIteratorError20 = true;
+                _iteratorError20 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
-                        _iterator17.return();
+                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                        _iterator20.return();
                     }
                 } finally {
-                    if (_didIteratorError17) {
-                        throw _iteratorError17;
+                    if (_didIteratorError20) {
+                        throw _iteratorError20;
                     }
                 }
             }
@@ -2861,847 +3276,14 @@ Tile.MAX_THINGS = 10;
 
 /***/ }),
 
-/***/ 354:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.ThingType = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(11);
-
-var _game = __webpack_require__(49);
-
-var _log = __webpack_require__(23);
-
-var _animator = __webpack_require__(355);
-
-var _image = __webpack_require__(140);
-
-var _color = __webpack_require__(55);
-
-var _spritemanager = __webpack_require__(356);
-
-var _thingtypeattribs = __webpack_require__(357);
-
-var _size = __webpack_require__(73);
-
-var _point = __webpack_require__(72);
-
-var _texture = __webpack_require__(358);
-
-var _rect = __webpack_require__(141);
-
-var _marketdata = __webpack_require__(359);
-
-var _light = __webpack_require__(101);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ThingType = exports.ThingType = function () {
-    function ThingType() {
-        _classCallCheck(this, ThingType);
-
-        this.m_attribs = new _thingtypeattribs.ThingTypeAttribs();
-        this.m_spritesIndex = [];
-        this.m_textures = [];
-    }
-
-    _createClass(ThingType, [{
-        key: "unserialize",
-        value: function unserialize(clientId, category, fin) {
-            this.m_null = false;
-            this.m_id = clientId;
-            this.m_category = category;
-            //console.log('load', clientId, fin.getReadPos(), fin.data.buffer.slice(fin.getReadPos()));
-            var count = 0;
-            var attr = -1;
-            var done = false;
-            for (var i = 0; i < _const.ThingAttr.ThingLastAttr; ++i) {
-                count++;
-                attr = fin.getU8();
-                if (attr == _const.ThingAttr.ThingLastAttr) {
-                    done = true;
-                    break;
-                }
-                if (_game.g_game.getClientVersion() >= 1000) {
-                    /* In 10.10+ all attributes from 16 and up were
-                     * incremented by 1 to make space for 16 as
-                     * "No Movement Animation" flag.
-                     */
-                    if (attr == 16) attr = _const.ThingAttr.ThingAttrNoMoveAnimation;else if (attr > 16) attr -= 1;
-                } else if (_game.g_game.getClientVersion() >= 860) {
-                    /* Default attribute values follow
-                     * the format of 8.6-9.86.
-                     * Therefore no changes here.
-                     */
-                } else if (_game.g_game.getClientVersion() >= 780) {
-                    /* In 7.80-8.54 all attributes from 8 and higher were
-                     * incremented by 1 to make space for 8 as
-                     * "Item Charges" flag.
-                     */
-                    if (attr == 8) {
-                        this.m_attribs.set(_const.ThingAttr.ThingAttrChargeable, true);
-                        continue;
-                    } else if (attr > 8) attr -= 1;
-                } else if (_game.g_game.getClientVersion() >= 755) {
-                    /* In 7.55-7.72 attributes 23 is "Floor Change". */
-                    if (attr == 23) attr = _const.ThingAttr.ThingAttrFloorChange;
-                } else if (_game.g_game.getClientVersion() >= 740) {
-                    /* In 7.4-7.5 attribute "Ground Border" did not exist
-                     * attributes 1-15 have to be adjusted.
-                     * Several other changes in the format.
-                     */
-                    if (attr > 0 && attr <= 15) attr += 1;else if (attr == 16) attr = _const.ThingAttr.ThingAttrLight;else if (attr == 17) attr = _const.ThingAttr.ThingAttrFloorChange;else if (attr == 18) attr = _const.ThingAttr.ThingAttrFullGround;else if (attr == 19) attr = _const.ThingAttr.ThingAttrElevation;else if (attr == 20) attr = _const.ThingAttr.ThingAttrDisplacement;else if (attr == 22) attr = _const.ThingAttr.ThingAttrMinimapColor;else if (attr == 23) attr = _const.ThingAttr.ThingAttrRotateable;else if (attr == 24) attr = _const.ThingAttr.ThingAttrLyingCorpse;else if (attr == 25) attr = _const.ThingAttr.ThingAttrHangable;else if (attr == 26) attr = _const.ThingAttr.ThingAttrHookSouth;else if (attr == 27) attr = _const.ThingAttr.ThingAttrHookEast;else if (attr == 28) attr = _const.ThingAttr.ThingAttrAnimateAlways;
-                    /* "Multi Use" and "Force Use" are swapped */
-                    if (attr == _const.ThingAttr.ThingAttrMultiUse) attr = _const.ThingAttr.ThingAttrForceUse;else if (attr == _const.ThingAttr.ThingAttrForceUse) attr = _const.ThingAttr.ThingAttrMultiUse;
-                }
-                switch (attr) {
-                    case _const.ThingAttr.ThingAttrDisplacement:
-                        {
-                            this.m_displacement = new _point.Point(0, 0);
-                            if (_game.g_game.getClientVersion() >= 755) {
-                                this.m_displacement.x = fin.getU16();
-                                this.m_displacement.y = fin.getU16();
-                            } else {
-                                this.m_displacement.x = 8;
-                                this.m_displacement.y = 8;
-                            }
-                            this.m_attribs.set(attr, true);
-                            break;
-                        }
-                    case _const.ThingAttr.ThingAttrLight:
-                        {
-                            var light = new _light.Light();
-                            light.intensity = fin.getU16();
-                            light.color = fin.getU16();
-                            this.m_attribs.set(attr, light);
-                            break;
-                        }
-                    case _const.ThingAttr.ThingAttrMarket:
-                        {
-                            var market = new _marketdata.MarketData();
-                            market.category = fin.getU16();
-                            market.tradeAs = fin.getU16();
-                            market.showAs = fin.getU16();
-                            market.name = fin.getString();
-                            market.restrictVocation = fin.getU16();
-                            market.requiredLevel = fin.getU16();
-                            this.m_attribs.set(attr, market);
-                            break;
-                        }
-                    case _const.ThingAttr.ThingAttrElevation:
-                        {
-                            this.m_elevation = fin.getU16();
-                            this.m_attribs.set(attr, this.m_elevation);
-                            break;
-                        }
-                    case _const.ThingAttr.ThingAttrUsable:
-                    case _const.ThingAttr.ThingAttrGround:
-                    case _const.ThingAttr.ThingAttrWritable:
-                    case _const.ThingAttr.ThingAttrWritableOnce:
-                    case _const.ThingAttr.ThingAttrMinimapColor:
-                    case _const.ThingAttr.ThingAttrCloth:
-                    case _const.ThingAttr.ThingAttrLensHelp:
-                        this.m_attribs.set(attr, fin.getU16());
-                        break;
-                    default:
-                        this.m_attribs.set(attr, true);
-                        break;
-                }
-            }
-            if (!done) (0, _log.error)("corrupt data (id: %d, category: %d, count: %d, lastAttr: %d)", this.m_id, this.m_category, count, attr);
-            var hasFrameGroups = category == _const.ThingCategory.ThingCategoryCreature && _game.g_game.getFeature(_const.GameFeature.GameIdleAnimations);
-            var groupCount = hasFrameGroups ? fin.getU8() : 1;
-            this.m_animationPhases = 0;
-            var totalSpritesCount = 0;
-            //console.log(this.m_attribs.attribs);
-            for (var _i = 0; _i < groupCount; ++_i) {
-                var frameGroupType = _const.FrameGroupType.FrameGroupDefault;
-                if (hasFrameGroups) frameGroupType = fin.getU8();
-                var width = fin.getU8();
-                var height = fin.getU8();
-                this.m_size = new _size.Size(width, height);
-                if (width > 1 || height > 1) {
-                    this.m_realSize = fin.getU8();
-                    this.m_exactSize = Math.min(this.m_realSize, Math.max(width * 32, height * 32));
-                } else this.m_exactSize = 32;
-                this.m_layers = fin.getU8();
-                this.m_numPatternX = fin.getU8();
-                this.m_numPatternY = fin.getU8();
-                if (_game.g_game.getClientVersion() >= 755) this.m_numPatternZ = fin.getU8();else this.m_numPatternZ = 1;
-                var groupAnimationsPhases = fin.getU8();
-                this.m_animationPhases += groupAnimationsPhases;
-                if (groupAnimationsPhases > 1 && _game.g_game.getFeature(_const.GameFeature.GameEnhancedAnimations)) {
-                    this.m_animator = new _animator.Animator();
-                    this.m_animator.unserialize(groupAnimationsPhases, fin);
-                }
-                var totalSprites = this.m_size.area() * this.m_layers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ * groupAnimationsPhases;
-                if (totalSpritesCount + totalSprites > 4096) (0, _log.error)("a thing type has more than 4096 sprites", totalSprites, totalSpritesCount, this.m_size.area(), this.m_layers, this.m_numPatternX, this.m_numPatternY, this.m_numPatternZ, groupAnimationsPhases);
-                //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
-                this.m_spritesIndex = [];
-                for (var _i2 = totalSpritesCount; _i2 < totalSpritesCount + totalSprites; _i2++) {
-                    this.m_spritesIndex[_i2] = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
-                } //console.log('spr', this.m_spritesIndex);
-                totalSpritesCount += totalSprites;
-            }
-            /*
-                    this.m_textures.resize(m_animationPhases);
-                    this.m_texturesFramesRects.resize(m_animationPhases);
-                    this.m_texturesFramesOriginRects.resize(m_animationPhases);
-                    this.m_texturesFramesOffsets.resize(m_animationPhases);
-            */
-        }
-    }, {
-        key: "draw",
-        value: function draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase) {
-            /*todo*/
-
-            var lightView = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
-        }
-    }, {
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "getCategory",
-        value: function getCategory() {
-            return this.m_category;
-        }
-    }, {
-        key: "isNull",
-        value: function isNull() {
-            return this.m_null;
-        }
-    }, {
-        key: "hasAttr",
-        value: function hasAttr(attr) {
-            return this.m_attribs.has(attr);
-        }
-    }, {
-        key: "getSize",
-        value: function getSize() {
-            return this.m_size;
-        }
-    }, {
-        key: "getWidth",
-        value: function getWidth() {
-            return this.m_size.width();
-        }
-    }, {
-        key: "getHeight",
-        value: function getHeight() {
-            return this.m_size.height();
-        }
-    }, {
-        key: "getExactSize",
-        value: function getExactSize() {
-            var layer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-            var xPattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-            var yPattern = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-            var zPattern = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-            var animationPhase = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-
-            /* todo */
-            return 0;
-        }
-    }, {
-        key: "getRealSize",
-        value: function getRealSize() {
-            return this.m_realSize;
-        }
-    }, {
-        key: "getLayers",
-        value: function getLayers() {
-            return this.m_layers;
-        }
-    }, {
-        key: "getNumPatternX",
-        value: function getNumPatternX() {
-            return this.m_numPatternX;
-        }
-    }, {
-        key: "getNumPatternY",
-        value: function getNumPatternY() {
-            return this.m_numPatternY;
-        }
-    }, {
-        key: "getNumPatternZ",
-        value: function getNumPatternZ() {
-            return this.m_numPatternZ;
-        }
-    }, {
-        key: "getAnimationPhases",
-        value: function getAnimationPhases() {
-            return this.m_animationPhases;
-        }
-    }, {
-        key: "getAnimator",
-        value: function getAnimator() {
-            return this.m_animator;
-        }
-    }, {
-        key: "getDisplacement",
-        value: function getDisplacement() {
-            return this.m_displacement;
-        }
-    }, {
-        key: "getDisplacementX",
-        value: function getDisplacementX() {
-            return this.getDisplacement().x;
-        }
-    }, {
-        key: "getDisplacementY",
-        value: function getDisplacementY() {
-            return this.getDisplacement().y;
-        }
-    }, {
-        key: "getElevation",
-        value: function getElevation() {
-            return this.m_elevation;
-        }
-    }, {
-        key: "getGroundSpeed",
-        value: function getGroundSpeed() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrGround);
-        }
-    }, {
-        key: "getMaxTextLength",
-        value: function getMaxTextLength() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce) ? this.m_attribs.get(_const.ThingAttr.ThingAttrWritableOnce) : this.m_attribs.get(_const.ThingAttr.ThingAttrWritable);
-        }
-    }, {
-        key: "getLight",
-        value: function getLight() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrLight);
-        }
-    }, {
-        key: "getMinimapColor",
-        value: function getMinimapColor() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrMinimapColor);
-        }
-    }, {
-        key: "getLensHelp",
-        value: function getLensHelp() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrLensHelp);
-        }
-    }, {
-        key: "getClothSlot",
-        value: function getClothSlot() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrCloth);
-        }
-    }, {
-        key: "getMarketData",
-        value: function getMarketData() {
-            return this.m_attribs.get(_const.ThingAttr.ThingAttrMarket);
-        }
-    }, {
-        key: "isGround",
-        value: function isGround() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrGround);
-        }
-    }, {
-        key: "isGroundBorder",
-        value: function isGroundBorder() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrGroundBorder);
-        }
-    }, {
-        key: "isOnBottom",
-        value: function isOnBottom() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnBottom);
-        }
-    }, {
-        key: "isOnTop",
-        value: function isOnTop() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnTop);
-        }
-    }, {
-        key: "isContainer",
-        value: function isContainer() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrContainer);
-        }
-    }, {
-        key: "isStackable",
-        value: function isStackable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrStackable);
-        }
-    }, {
-        key: "isForceUse",
-        value: function isForceUse() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrForceUse);
-        }
-    }, {
-        key: "isMultiUse",
-        value: function isMultiUse() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrMultiUse);
-        }
-    }, {
-        key: "isWritable",
-        value: function isWritable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritable);
-        }
-    }, {
-        key: "isChargeable",
-        value: function isChargeable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrChargeable);
-        }
-    }, {
-        key: "isWritableOnce",
-        value: function isWritableOnce() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce);
-        }
-    }, {
-        key: "isFluidContainer",
-        value: function isFluidContainer() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrFluidContainer);
-        }
-    }, {
-        key: "isSplash",
-        value: function isSplash() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrSplash);
-        }
-    }, {
-        key: "isNotWalkable",
-        value: function isNotWalkable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotWalkable);
-        }
-    }, {
-        key: "isNotMoveable",
-        value: function isNotMoveable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotMoveable);
-        }
-    }, {
-        key: "blockProjectile",
-        value: function blockProjectile() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrBlockProjectile);
-        }
-    }, {
-        key: "isNotPathable",
-        value: function isNotPathable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPathable);
-        }
-    }, {
-        key: "isPickupable",
-        value: function isPickupable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrPickupable);
-        }
-    }, {
-        key: "isHangable",
-        value: function isHangable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrHangable);
-        }
-    }, {
-        key: "isHookSouth",
-        value: function isHookSouth() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookSouth);
-        }
-    }, {
-        key: "isHookEast",
-        value: function isHookEast() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookEast);
-        }
-    }, {
-        key: "isRotateable",
-        value: function isRotateable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrRotateable);
-        }
-    }, {
-        key: "hasLight",
-        value: function hasLight() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrLight);
-        }
-    }, {
-        key: "isDontHide",
-        value: function isDontHide() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrDontHide);
-        }
-    }, {
-        key: "isTranslucent",
-        value: function isTranslucent() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrTranslucent);
-        }
-    }, {
-        key: "hasDisplacement",
-        value: function hasDisplacement() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrDisplacement);
-        }
-    }, {
-        key: "hasElevation",
-        value: function hasElevation() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrElevation);
-        }
-    }, {
-        key: "isLyingCorpse",
-        value: function isLyingCorpse() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrLyingCorpse);
-        }
-    }, {
-        key: "isAnimateAlways",
-        value: function isAnimateAlways() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrAnimateAlways);
-        }
-    }, {
-        key: "hasMiniMapColor",
-        value: function hasMiniMapColor() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrMinimapColor);
-        }
-    }, {
-        key: "hasLensHelp",
-        value: function hasLensHelp() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrLensHelp);
-        }
-    }, {
-        key: "isFullGround",
-        value: function isFullGround() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrFullGround);
-        }
-    }, {
-        key: "isIgnoreLook",
-        value: function isIgnoreLook() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrLook);
-        }
-    }, {
-        key: "isCloth",
-        value: function isCloth() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrCloth);
-        }
-    }, {
-        key: "isMarketable",
-        value: function isMarketable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrMarket);
-        }
-    }, {
-        key: "isUsable",
-        value: function isUsable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrUsable);
-        }
-    }, {
-        key: "isWrapable",
-        value: function isWrapable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrWrapable);
-        }
-    }, {
-        key: "isUnwrapable",
-        value: function isUnwrapable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrUnwrapable);
-        }
-    }, {
-        key: "isTopEffect",
-        value: function isTopEffect() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrTopEffect);
-        }
-    }, {
-        key: "getSprites",
-        value: function getSprites() {
-            return this.m_spritesIndex;
-        }
-        // additional
-
-    }, {
-        key: "getOpacity",
-        value: function getOpacity() {
-            return this.m_opacity;
-        }
-    }, {
-        key: "isNotPreWalkable",
-        value: function isNotPreWalkable() {
-            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPreWalkable);
-        }
-    }, {
-        key: "setPathable",
-        value: function setPathable(v) {
-            if (v == true) this.m_attribs.remove(_const.ThingAttr.ThingAttrNotPathable);else this.m_attribs.set(_const.ThingAttr.ThingAttrNotPathable, true);
-        }
-    }, {
-        key: "getTexture",
-        value: function getTexture(animationPhase) {
-            var animationPhaseTexture = this.m_textures[animationPhase];
-            if (!animationPhaseTexture) {
-                var useCustomImage = false;
-                if (animationPhase == 0 && !(this.m_customImage.length == 0)) useCustomImage = true;
-                // we don't need layers in common items, they will be pre-drawn
-                var textureLayers = 1;
-                var numLayers = this.m_layers;
-                if (this.m_category == _const.ThingCategory.ThingCategoryCreature && numLayers >= 2) {
-                    // 5 layers: outfit base, red mask, green mask, blue mask, yellow mask
-                    textureLayers = 5;
-                    numLayers = 5;
-                }
-                var indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
-                var textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
-                var fullImage = void 0;
-                if (useCustomImage) fullImage = _image.Image.load(this.m_customImage);else fullImage = new _image.Image(textureSize.mul(_const.Otc.TILE_PIXELS));
-                /*
-                        m_texturesFramesRects[animationPhase].resize(indexSize);
-                        m_texturesFramesOriginRects[animationPhase].resize(indexSize);
-                        m_texturesFramesOffsets[animationPhase].resize(indexSize);
-                */
-                for (var z = 0; z < this.m_numPatternZ; ++z) {
-                    for (var y = 0; y < this.m_numPatternY; ++y) {
-                        for (var x = 0; x < this.m_numPatternX; ++x) {
-                            for (var l = 0; l < numLayers; ++l) {
-                                var spriteMask = this.m_category == _const.ThingCategory.ThingCategoryCreature && l > 0;
-                                var frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
-                                var framePos = new _point.Point(frameIndex % (textureSize.width() / this.m_size.width()) * this.m_size.width() * _const.Otc.TILE_PIXELS, frameIndex / (textureSize.width() / this.m_size.width()) * this.m_size.height() * _const.Otc.TILE_PIXELS);
-                                if (!useCustomImage) {
-                                    for (var h = 0; h < this.m_size.height(); ++h) {
-                                        for (var w = 0; w < this.m_size.width(); ++w) {
-                                            var spriteIndex = this.getSpriteIndex(w, h, spriteMask ? 1 : l, x, y, z, animationPhase);
-                                            var spriteImage = _spritemanager.g_sprites.getSpriteImage(this.m_spritesIndex[spriteIndex]);
-                                            if (spriteImage) {
-                                                if (spriteMask) {
-                                                    spriteImage.overwriteMask(ThingType.maskColors[l - 1]);
-                                                }
-                                                var spritePos = new _point.Point((this.m_size.width() - w - 1) * _const.Otc.TILE_PIXELS, (this.m_size.height() - h - 1) * _const.Otc.TILE_PIXELS);
-                                                fullImage.blit(framePos.add(spritePos), spriteImage);
-                                            }
-                                        }
-                                    }
-                                }
-                                var drawRect = new _rect.Rect(framePos.add(new _point.Point(this.m_size.width(), this.m_size.height())).mul(_const.Otc.TILE_PIXELS).sub(new _point.Point(1, 1)), framePos);
-                                for (var _x7 = framePos.x; _x7 < framePos.x + this.m_size.width() * _const.Otc.TILE_PIXELS; ++_x7) {
-                                    for (var _y = framePos.y; _y < framePos.y + this.m_size.height() * _const.Otc.TILE_PIXELS; ++_y) {
-                                        /*
-                                        uint8 *p = fullImage->getPixel(x,y);
-                                        if(p[3] != 0x00) {
-                                            drawRect.setTop   (std::min<int>(y, (int)drawRect.top()));
-                                            drawRect.setLeft  (std::min<int>(x, (int)drawRect.left()));
-                                            drawRect.setBottom(std::max<int>(y, (int)drawRect.bottom()));
-                                            drawRect.setRight (std::max<int>(x, (int)drawRect.right()));
-                                        }
-                                        */
-                                    }
-                                }
-                                /*
-                                                        m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
-                                                        m_texturesFramesOriginRects[animationPhase][frameIndex] = Rect(framePos, Size(m_size.width(), m_size.height()) * Otc::TILE_PIXELS);
-                                                        m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft() - framePos;
-                                                        */
-                            }
-                        }
-                    }
-                }
-                animationPhaseTexture = new _texture.Texture(fullImage, true);
-                //animationPhaseTexture->setSmooth(true);
-            }
-            return animationPhaseTexture;
-        }
-    }, {
-        key: "getBestTextureDimension",
-        value: function getBestTextureDimension(w, h, count) {
-            /*todo*/
-            return new _size.Size(w, h);
-        }
-    }, {
-        key: "getSpriteIndex",
-        value: function getSpriteIndex(w, h, l, x, y, z, a) {
-            var index = (((((a % this.m_animationPhases * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x) * this.m_layers + l) * this.m_size.height() + h) * this.m_size.width() + w;
-            if (index < this.m_spritesIndex.length) {
-                throw new Error('index < this.m_spritesIndex.length');
-            }
-            return index;
-        }
-    }, {
-        key: "getTextureIndex",
-        value: function getTextureIndex(l, x, y, z) {
-            return ((l * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x;
-        }
-    }]);
-
-    return ThingType;
-}();
-
-ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue, _color.Color.yellow];
-
-/***/ }),
-
-/***/ 355:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Animator = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(11);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Animator = exports.Animator = function () {
-    function Animator() {
-        _classCallCheck(this, Animator);
-
-        this.m_animationPhases = 0;
-        this.m_startPhase = 0;
-        this.m_loopCount = 0;
-        this.m_async = false;
-        this.m_phaseDurations = [];
-        this.m_currentDuration = 0;
-        this.m_currentDirection = _const.AnimationDirection.AnimDirForward;
-        this.m_currentLoop = 0;
-        this.m_lastPhaseTicks = 0;
-        this.m_isComplete = false;
-        this.m_phase = 0;
-    }
-
-    _createClass(Animator, [{
-        key: "unserialize",
-        value: function unserialize(animationPhases, fin) {
-            this.m_animationPhases = animationPhases;
-            this.m_async = fin.getU8() == 0;
-            this.m_loopCount = fin.get32();
-            this.m_startPhase = fin.get8();
-            for (var i = 0; i < this.m_animationPhases; ++i) {
-                var minimum = fin.getU32();
-                var maximum = fin.getU32();
-                this.m_phaseDurations.push([minimum, maximum]);
-            }
-            /*
-            m_phase = getStartPhase();
-             assert(m_animationPhases == (int)m_phaseDurations.size());
-            assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
-            */
-        }
-    }]);
-
-    return Animator;
-}();
-
-/***/ }),
-
 /***/ 356:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_sprites = exports.SpriteManager = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _image = __webpack_require__(140);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var SpriteManager = exports.SpriteManager = function () {
-    function SpriteManager() {
-        _classCallCheck(this, SpriteManager);
-
-        this.m_loaded = false;
-        this.m_signature = 0;
-        this.m_spritesCount = 0;
-        this.m_spritesOffset = 0;
-        this.m_spritesFile = null;
-    }
-
-    _createClass(SpriteManager, [{
-        key: "getSpriteImage",
-        value: function getSpriteImage(id) {
-            return new _image.Image(0);
-        }
-    }]);
-
-    return SpriteManager;
-}();
-
-var g_sprites = new SpriteManager();
-exports.g_sprites = g_sprites;
+throw new Error("Module build failed: SyntaxError: Unexpected token (564:25)\n\n\u001b[0m \u001b[90m 562 | \u001b[39m        f\u001b[33m;\u001b[39m\n \u001b[90m 563 | \u001b[39m        \u001b[36mif\u001b[39m (useOpacity)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 564 | \u001b[39m            g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m setColor(\u001b[33mColor\u001b[39m(\u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m \u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m \u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m m_opacity))\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 565 | \u001b[39m        g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m drawTexturedRect(screenRect\u001b[33m,\u001b[39m texture\u001b[33m,\u001b[39m textureRect)\u001b[33m;\u001b[39m\n \u001b[90m 566 | \u001b[39m        \u001b[36mif\u001b[39m (useOpacity)\n \u001b[90m 567 | \u001b[39m            g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m setColor(\u001b[33mColor\u001b[39m\u001b[33m,\u001b[39m white)\u001b[33m;\u001b[39m\u001b[0m\n");
 
 /***/ }),
 
-/***/ 357:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
-    function ThingTypeAttribs() {
-        _classCallCheck(this, ThingTypeAttribs);
-
-        this.attribs = {};
-    }
-
-    _createClass(ThingTypeAttribs, [{
-        key: "has",
-        value: function has(attr) {
-            return this.attribs.hasOwnProperty(attr.toString());
-        }
-    }, {
-        key: "get",
-        value: function get(attr) {
-            return this.attribs[attr];
-        }
-    }, {
-        key: "set",
-        value: function set(attr, value) {
-            //console.log(attr, value);
-            this.attribs[attr] = value;
-        }
-    }, {
-        key: "remove",
-        value: function remove(attr) {
-            delete this.attribs[attr];
-        }
-    }]);
-
-    return ThingTypeAttribs;
-}();
-
-/***/ }),
-
-/***/ 358:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Texture = exports.Texture = function Texture(image) {
-    var buildMipmaps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var compress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    _classCallCheck(this, Texture);
-
-    this.m_id = 0;
-    this.m_time = 0;
-    this.m_hasMipmaps = false;
-    this.m_smooth = false;
-    this.m_upsideDown = false;
-    this.m_repeat = false;
-};
-
-/***/ }),
-
-/***/ 359:
+/***/ 362:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3710,264 +3292,31 @@ var Texture = exports.Texture = function Texture(image) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.InputFile = undefined;
+
+var _binarydatareader = __webpack_require__(102);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var MarketData = exports.MarketData = function MarketData() {
-  _classCallCheck(this, MarketData);
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputFile = exports.InputFile = function (_BinaryDataReader) {
+  _inherits(InputFile, _BinaryDataReader);
+
+  function InputFile() {
+    _classCallCheck(this, InputFile);
+
+    return _possibleConstructorReturn(this, (InputFile.__proto__ || Object.getPrototypeOf(InputFile)).apply(this, arguments));
+  }
+
+  return InputFile;
+}(_binarydatareader.BinaryDataReader);
 
 /***/ }),
 
-/***/ 360:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_resources = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inputfile = __webpack_require__(361);
-
-var _log = __webpack_require__(23);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Resources = function () {
-    function Resources() {
-        _classCallCheck(this, Resources);
-    }
-
-    _createClass(Resources, [{
-        key: "openFile",
-        value: function openFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var get, response, uInt8Array;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                get = function get(url) {
-                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                        return regeneratorRuntime.wrap(function _callee$(_context) {
-                                            while (1) {
-                                                switch (_context.prev = _context.next) {
-                                                    case 0:
-                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.responseType = 'arraybuffer';
-                                                            xhr.onload = function (e) {
-                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
-                                                            };
-                                                            xhr.onerror = function (e) {
-                                                                reject(e);
-                                                            };
-                                                            xhr.open('GET', url, true); //Async
-                                                            xhr.send();
-                                                        }));
-
-                                                    case 1:
-                                                    case "end":
-                                                        return _context.stop();
-                                                }
-                                            }
-                                        }, _callee, this);
-                                    }));
-                                };
-
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return get(file);
-
-                            case 4:
-                                response = _context2.sent;
-
-                                console.log('r', response);
-                                uInt8Array = new Uint8Array(response);
-                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
-
-                            case 10:
-                                _context2.prev = 10;
-                                _context2.t0 = _context2["catch"](1);
-
-                                _log.Log.debug('failed to openFile', _context2.t0);
-                                throw _context2.t0;
-
-                            case 14:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 10]]);
-            }));
-        }
-    }]);
-
-    return Resources;
-}();
-
-var g_resources = new Resources();
-exports.g_resources = g_resources;
-/*
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
-xhr.responseType = 'arraybuffer';
-xhr.onload = function(e) {
-  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
-  // var byte3 = uInt8Array[4]; // byte at offset 4
-console.log(uInt8Array);
-};
-
-xhr.send();
- */
-
-/***/ }),
-
-/***/ 361:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var InputFile = exports.InputFile = function () {
-    function InputFile(msg) {
-        _classCallCheck(this, InputFile);
-
-        this.data = msg;
-        this.offset = 0;
-        this.size = msg.byteLength;
-    }
-
-    _createClass(InputFile, [{
-        key: "getU8",
-        value: function getU8() {
-            if (this.offset === this.size) throw new Error("Koniec pliku");
-            var v = this.data.getUint8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "getU16",
-        value: function getU16() {
-            return this.getU8() + this.getU8() * 256;
-        }
-    }, {
-        key: "getU32",
-        value: function getU32() {
-            return this.getU16() + this.getU16() * 256 * 256;
-        }
-    }, {
-        key: "getU64",
-        value: function getU64() {
-            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-        }
-    }, {
-        key: "get8",
-        value: function get8() {
-            if (this.offset === this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "get16",
-        value: function get16() {
-            if (this.offset === this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt16(this.offset);
-            this.offset += 2;
-            return v;
-        }
-    }, {
-        key: "get32",
-        value: function get32() {
-            if (this.offset === this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt32(this.offset);
-            this.offset += 4;
-            return v;
-        }
-    }, {
-        key: "getString",
-        value: function getString() {
-            var length = this.getU16();
-            var text = '';
-            for (var i = 0; i < length; i++) {
-                text += String.fromCharCode(this.getU8());
-            }
-            return text;
-        }
-    }, {
-        key: "peekU8",
-        value: function peekU8() {
-            var v = this.getU8();
-            this.offset -= 1;
-            return v;
-        }
-    }, {
-        key: "getUnreadSize",
-        value: function getUnreadSize() {
-            return this.size - this.offset;
-        }
-    }, {
-        key: "getReadPos",
-        value: function getReadPos() {
-            return this.offset;
-        }
-    }, {
-        key: "setReadPos",
-        value: function setReadPos(offset) {
-            this.offset = offset;
-        }
-    }, {
-        key: "validateChecksum",
-        value: function validateChecksum() {
-            return true;
-        }
-    }]);
-
-    return InputFile;
-}();
-
-/***/ }),
-
-/***/ 362:
+/***/ 363:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3982,7 +3331,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(363);
+var _protocol = __webpack_require__(364);
 
 var _game = __webpack_require__(49);
 
@@ -3990,41 +3339,43 @@ var _const = __webpack_require__(11);
 
 var _log = __webpack_require__(23);
 
-var _outputmessage = __webpack_require__(365);
+var _outputmessage = __webpack_require__(366);
 
-var _proto = __webpack_require__(367);
+var _proto = __webpack_require__(368);
 
-var _outfit = __webpack_require__(368);
+var _inputmessage = __webpack_require__(365);
+
+var _outfit = __webpack_require__(369);
 
 var _thing = __webpack_require__(44);
 
 var _position = __webpack_require__(100);
 
-var _item = __webpack_require__(369);
+var _item = __webpack_require__(370);
 
-var _statictext = __webpack_require__(142);
+var _statictext = __webpack_require__(144);
 
 var _thingtypemanager = __webpack_require__(54);
 
 var _map = __webpack_require__(50);
 
-var _effect = __webpack_require__(370);
+var _effect = __webpack_require__(371);
 
-var _animatedtext = __webpack_require__(371);
+var _animatedtext = __webpack_require__(372);
 
-var _missile = __webpack_require__(372);
+var _missile = __webpack_require__(373);
 
 var _color2 = __webpack_require__(55);
 
-var _player = __webpack_require__(137);
+var _player = __webpack_require__(138);
 
 var _light = __webpack_require__(101);
 
-var _npc = __webpack_require__(373);
+var _npc = __webpack_require__(374);
 
-var _monster = __webpack_require__(374);
+var _monster = __webpack_require__(375);
 
-var _awarerange = __webpack_require__(138);
+var _awarerange = __webpack_require__(139);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4040,7 +3391,6 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
         var _this = _possibleConstructorReturn(this, (ProtocolGame.__proto__ || Object.getPrototypeOf(ProtocolGame)).call(this));
 
-        _this.m_localPlayer = null;
         _this.m_gameInitialized = false;
         _this.m_mapKnown = false;
         return _this;
@@ -4056,6 +3406,34 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             this.m_sessionKey = sessionKey;
             this.m_characterName = characterName;
             this.connect(host, port);
+        }
+    }, {
+        key: "watch",
+        value: function watch(m_movieData) {
+            var i = 0;
+            this.m_localPlayer = _game.g_game.getLocalPlayer();
+            this.m_movieData = m_movieData;
+            var first = 0;
+            while (this.m_movieData.getUnreadSize() >= 10) {
+                var timestamp = this.m_movieData.getU64();
+                var s = this.m_movieData.getReadPos();
+                if (this.m_movieData.getUnreadSize() >= 10) {
+                    var next = this.m_movieData.peekU64();
+                    //console.log('com', timestamp, next);
+                    if (next - timestamp < 5000 && next - timestamp >= 0) {
+                        continue;
+                    }
+                }
+                this.m_movieData.setReadPos(s);
+                var packetLength = this.m_movieData.getU16();
+                var packetData = this.m_movieData.getBytes(packetLength);
+                if (first === 0) first = timestamp;
+                if (i >= 70000) _log.Log.debug(parseInt("" + (timestamp - first) / 1000), i, timestamp, packetLength, packetData);
+                var inputMessage = new _inputmessage.InputMessage(new DataView(packetData));
+                this.parseMessage(inputMessage);
+                if (++i >= 220000) break;
+            }
+            console.error('loaded packets', i);
         }
     }, {
         key: "onConnect",
@@ -4115,7 +3493,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             try {
                 while (msg.getUnreadSize() > 0) {
                     opcode = msg.getU8();
-                    _log.Log.debug('opcode', prevOpcode, opcode);
+                    //Log.debug('opcode', prevOpcode, opcode);
                     if (!_game.g_game.getFeature(_const.GameFeature.GameLoginPending)) {
                         if (!this.m_gameInitialized && opcode > _proto.Proto.GameServerFirstGameOpcode) {
                             //g_game.processGameStart();
@@ -4466,14 +3844,17 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                         case _proto.Proto.GameServerChangeMapAwareRange:
                             this.parseChangeMapAwareRange(msg);
                             break;
+                        case 55:
+                            return;
                         default:
-                            _log.Log.error("unhandled opcode %d", opcode);
-                            break;
+                            _log.Log.error("unhandled opcode %d", opcode, msg);
+                            throw new Error('opcode');
                     }
                     prevOpcode = opcode;
                 }
             } catch (e) {
                 _log.Log.error("ProtocolGame parse message exception (%d bytes unread, last opcode is %d, prev opcode is %d): %s", msg.getUnreadSize(), opcode, prevOpcode, e);
+                throw new Error('parser');
             }
         }
     }, {
@@ -4481,7 +3862,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         value: function sendPingBack() {
             //console.log('sendPingBack');
             //console.log(g_map.m_floorMissiles);
-            //console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+            console.log(_map.g_map.m_tileBlocks, _map.g_map.m_knownCreatures, this.m_localPlayer);
             if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
                 var pos = this.m_localPlayer.getPosition();
                 for (var y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -4756,7 +4137,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "parsePing",
         value: function parsePing(msg) {
-            this.sendPingBack();
+            //this.sendPingBack();
         }
     }, {
         key: "parsePingBack",
@@ -4890,7 +4271,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             }
             var creature = thing;
             creature.allowAppearWalk();
-            _log.Log.debug('creature move', creature, _map.g_map.getTile(newPos).m_things);
+            //Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
             _map.g_map.addThing(thing, newPos, -1);
         }
     }, {
@@ -5760,12 +5141,15 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "parsePlayerInventory",
         value: function parsePlayerInventory(msg) {
-            var size = msg.getU16();
-            for (var i = 0; i < size; ++i) {
+            msg.getU8(); // subtype
+            /*
+            let size = msg.getU16();
+            for (let i = 0; i < size; ++i) {
                 msg.getU16(); // id
                 msg.getU8(); // subtype
                 msg.getU16(); // count
             }
+            */
         }
     }, {
         key: "parseModalDialog",
@@ -5993,7 +5377,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
     }, {
         key: "getCreature",
         value: function getCreature(msg, type) {
-            _log.Log.debug('getCreature', type, msg);
+            //Log.debug('getCreature', type, msg);
             if (type == 0) type = msg.getU16();
             var creature = void 0;
             var known = type != _proto.Proto.UnknownCreature;
@@ -6127,6 +5511,11 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             var z = msg.getU8();
             return new _position.Position(x, y, z);
         }
+    }, {
+        key: "getLocalPlayer",
+        value: function getLocalPlayer() {
+            return this.m_localPlayer;
+        }
     }]);
 
     return ProtocolGame;
@@ -6134,7 +5523,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 363:
+/***/ 364:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6147,7 +5536,7 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(364);
+var _inputmessage = __webpack_require__(365);
 
 var _log = __webpack_require__(23);
 
@@ -6301,7 +5690,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 364:
+/***/ 365:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6314,110 +5703,24 @@ exports.InputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _log = __webpack_require__(23);
-
-var _position = __webpack_require__(100);
+var _binarydatareader = __webpack_require__(102);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var InputMessage = exports.InputMessage = function () {
-    function InputMessage(msg) {
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
+    _inherits(InputMessage, _BinaryDataReader);
+
+    function InputMessage() {
         _classCallCheck(this, InputMessage);
 
-        this.data = msg; // new DataView(msg.buffer.slice(0));
-        this.offset = 0;
-        this.size = this.data.byteLength;
+        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
     }
 
     _createClass(InputMessage, [{
-        key: "getU8",
-        value: function getU8() {
-            //log('InputMessage.getU8', this.offset, this.size);
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getUint8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "getU16",
-        value: function getU16() {
-            return this.getU8() + this.getU8() * 256;
-        }
-    }, {
-        key: "getU32",
-        value: function getU32() {
-            return this.getU16() + this.getU16() * 256 * 256;
-        }
-    }, {
-        key: "getU64",
-        value: function getU64() {
-            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-        }
-    }, {
-        key: "getDouble",
-        value: function getDouble() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getFloat64(this.offset);
-            this.offset += 8;
-            return v;
-        }
-    }, {
-        key: "getString",
-        value: function getString() {
-            var length = this.getU16();
-            var text = '';
-            for (var i = 0; i < length; i++) {
-                text += String.fromCharCode(this.getU8());
-            }
-            return text;
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
-        }
-    }, {
-        key: "skipBytes",
-        value: function skipBytes(byteCount) {
-            (0, _log.log)('InputMessage.skipBytes', this.offset, this.size);
-            if (this.offset + byteCount > this.size) throw new Error("Koniec pakietu");
-            this.offset += byteCount;
-        }
-    }, {
-        key: "skip",
-        value: function skip(bytes) {
-            this.skipBytes(bytes);
-        }
-    }, {
-        key: "peekU8",
-        value: function peekU8() {
-            var v = this.getU8();
-            this.offset -= 1;
-            return v;
-        }
-    }, {
-        key: "peekU16",
-        value: function peekU16() {
-            var v = this.getU16();
-            this.offset -= 2;
-            return v;
-        }
-    }, {
-        key: "getUnreadSize",
-        value: function getUnreadSize() {
-            return this.size - this.offset;
-        }
-    }, {
-        key: "getReadPos",
-        value: function getReadPos() {
-            return this.offset;
-        }
-    }, {
-        key: "setReadPos",
-        value: function setReadPos(offset) {
-            this.offset = offset;
-        }
-    }, {
         key: "validateChecksum",
         value: function validateChecksum() {
             return true;
@@ -6425,11 +5728,11 @@ var InputMessage = exports.InputMessage = function () {
     }]);
 
     return InputMessage;
-}();
+}(_binarydatareader.BinaryDataReader);
 
 /***/ }),
 
-/***/ 365:
+/***/ 366:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6442,7 +5745,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(366);
+var _jspack = __webpack_require__(367);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6529,7 +5832,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 366:
+/***/ 367:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6817,7 +6120,7 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 367:
+/***/ 368:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7060,7 +6363,7 @@ exports.Proto = Proto;
 
 /***/ }),
 
-/***/ 368:
+/***/ 369:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7069,53 +6372,176 @@ exports.Proto = Proto;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Outfit = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(11);
+
+var _color = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Outfit = exports.Outfit = function () {
     function Outfit() {
         _classCallCheck(this, Outfit);
+
+        this.m_category = _const.ThingCategory.ThingCategoryCreature;
+        this.m_id = 128;
+        this.m_auxId = 0;
+        this.resetClothes();
     }
 
     _createClass(Outfit, [{
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(id) {
+            this.m_auxId = id;
+        }
+    }, {
+        key: "setHead",
+        value: function setHead(head) {
+            this.m_head = head;
+            this.m_headColor = Outfit.getColor(head);
+        }
+    }, {
+        key: "setBody",
+        value: function setBody(body) {
+            this.m_body = body;
+            this.m_bodyColor = Outfit.getColor(body);
+        }
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {
+            this.m_legs = legs;
+            this.m_legsColor = Outfit.getColor(legs);
+        }
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {
+            this.m_feet = feet;
+            this.m_feetColor = Outfit.getColor(feet);
+        }
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {
+            this.m_addons = addons;
+        }
+    }, {
         key: "setMount",
-        value: function setMount(arg0) {
-            throw new Error("Method not implemented.");
+        value: function setMount(mount) {
+            this.m_mount = mount;
         }
     }, {
         key: "setCategory",
-        value: function setCategory(ThingCategoryCreature) {}
+        value: function setCategory(category) {
+            this.m_category = category;
+        }
     }, {
-        key: "setId",
-        value: function setId(lookType) {}
-    }, {
-        key: "setHead",
-        value: function setHead(head) {}
-    }, {
-        key: "setBody",
-        value: function setBody(body) {}
-    }, {
-        key: "setLegs",
-        value: function setLegs(legs) {}
-    }, {
-        key: "setFeet",
-        value: function setFeet(feet) {}
-    }, {
-        key: "setAddons",
-        value: function setAddons(addons) {}
-    }, {
-        key: "setAuxId",
-        value: function setAuxId(auxId) {}
+        key: "resetClothes",
+        value: function resetClothes() {
+            this.setHead(0);
+            this.setBody(0);
+            this.setLegs(0);
+            this.setFeet(0);
+            this.setMount(0);
+        }
+    }], [{
+        key: "getColor",
+        value: function getColor(color) {
+            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
+            var loc1 = 0,
+                loc2 = 0,
+                loc3 = 0;
+            if (color % Outfit.HSI_H_STEPS != 0) {
+                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
+                loc2 = 1;
+                loc3 = 1;
+                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
+                    case 0:
+                        loc2 = 0.25;
+                        loc3 = 1.00;
+                        break;
+                    case 1:
+                        loc2 = 0.25;
+                        loc3 = 0.75;
+                        break;
+                    case 2:
+                        loc2 = 0.50;
+                        loc3 = 0.75;
+                        break;
+                    case 3:
+                        loc2 = 0.667;
+                        loc3 = 0.75;
+                        break;
+                    case 4:
+                        loc2 = 1.00;
+                        loc3 = 1.00;
+                        break;
+                    case 5:
+                        loc2 = 1.00;
+                        loc3 = 0.75;
+                        break;
+                    case 6:
+                        loc2 = 1.00;
+                        loc3 = 0.50;
+                        break;
+                }
+            } else {
+                loc1 = 0;
+                loc2 = 0;
+                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
+            }
+            if (loc3 == 0) return new _color.Color(0, 0, 0);
+            if (loc2 == 0) {
+                var loc7 = Math.floor(loc3 * 255);
+                return new _color.Color(loc7, loc7, loc7);
+            }
+            var red = 0,
+                green = 0,
+                blue = 0;
+            if (loc1 < 1.0 / 6.0) {
+                red = loc3;
+                blue = loc3 * (1 - loc2);
+                green = blue + (loc3 - blue) * 6 * loc1;
+            } else if (loc1 < 2.0 / 6.0) {
+                green = loc3;
+                blue = loc3 * (1 - loc2);
+                red = green - (loc3 - blue) * (6 * loc1 - 1);
+            } else if (loc1 < 3.0 / 6.0) {
+                green = loc3;
+                red = loc3 * (1 - loc2);
+                blue = red + (loc3 - red) * (6 * loc1 - 2);
+            } else if (loc1 < 4.0 / 6.0) {
+                blue = loc3;
+                red = loc3 * (1 - loc2);
+                green = blue - (loc3 - red) * (6 * loc1 - 3);
+            } else if (loc1 < 5.0 / 6.0) {
+                blue = loc3;
+                green = loc3 * (1 - loc2);
+                red = green + (loc3 - green) * (6 * loc1 - 4);
+            } else {
+                red = loc3;
+                green = loc3 * (1 - loc2);
+                blue = red - (loc3 - green) * (6 * loc1 - 5);
+            }
+            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
+        }
     }]);
 
     return Outfit;
 }();
 
+Outfit.HSI_SI_VALUES = 7;
+Outfit.HSI_H_STEPS = 19;
+
 /***/ }),
 
-/***/ 369:
+/***/ 370:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7151,6 +6577,7 @@ var Item = exports.Item = function (_Thing) {
         var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
         _this.m_clientId = m_clientId;
+        _this.subtype = -1;
         _this.istop = _this.getThingType().isOnTop();
         _this.isbot = _this.getThingType().isOnBottom();
         _this.stackprio = _this.getStackPriority();
@@ -7174,7 +6601,9 @@ var Item = exports.Item = function (_Thing) {
         }
     }, {
         key: "setCountOrSubType",
-        value: function setCountOrSubType(count) {}
+        value: function setCountOrSubType(count) {
+            this.subtype = count;
+        }
     }, {
         key: "getThingType",
         value: function getThingType() {
@@ -7192,7 +6621,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 370:
+/***/ 371:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7211,7 +6640,7 @@ var _thingtypemanager = __webpack_require__(54);
 
 var _const = __webpack_require__(11);
 
-var _timer = __webpack_require__(145);
+var _timer = __webpack_require__(147);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7296,7 +6725,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 371:
+/***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7311,11 +6740,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
-var _timer = __webpack_require__(145);
+var _timer = __webpack_require__(147);
 
 var _color = __webpack_require__(55);
 
-var _cachedtext = __webpack_require__(143);
+var _cachedtext = __webpack_require__(145);
 
 var _const = __webpack_require__(11);
 
@@ -7335,6 +6764,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
         _this.m_color = new _color.Color();
         _this.m_animationTimer = new _timer.Timer();
+        _this.m_cachedText = new _cachedtext.CachedText();
         _this.m_cachedText.setFont("verdana-11px-rounded");
         _this.m_cachedText.setAlign(_cachedtext.CachedText.ALIGN_LEFT);
         return _this;
@@ -7444,7 +6874,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 372:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7499,7 +6929,7 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
-/***/ 373:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7541,7 +6971,7 @@ var Npc = exports.Npc = function (_Creature) {
 
 /***/ }),
 
-/***/ 374:
+/***/ 375:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7583,7 +7013,7 @@ var Monster = exports.Monster = function (_Creature) {
 
 /***/ }),
 
-/***/ 375:
+/***/ 376:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7612,7 +7042,7 @@ var Container = exports.Container = function () {
 
 /***/ }),
 
-/***/ 376:
+/***/ 377:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7627,7 +7057,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _SpeakTypes;
 
-var _chatboxtab = __webpack_require__(377);
+var _chatboxtab = __webpack_require__(378);
 
 var _const = __webpack_require__(11);
 
@@ -7635,7 +7065,7 @@ var _log = __webpack_require__(23);
 
 var _game = __webpack_require__(49);
 
-var _statictext = __webpack_require__(142);
+var _statictext = __webpack_require__(144);
 
 var _map = __webpack_require__(50);
 
@@ -8050,7 +7480,7 @@ exports.g_chat = g_chat;
 
 /***/ }),
 
-/***/ 377:
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8093,6 +7523,177 @@ var ChatboxTab = exports.ChatboxTab = function () {
 
 /***/ }),
 
+/***/ 379:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Movie = undefined;
+
+var _binarydatareader = __webpack_require__(102);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Movie = exports.Movie = function (_BinaryDataReader) {
+  _inherits(Movie, _BinaryDataReader);
+
+  function Movie() {
+    _classCallCheck(this, Movie);
+
+    return _possibleConstructorReturn(this, (Movie.__proto__ || Object.getPrototypeOf(Movie)).apply(this, arguments));
+  }
+
+  return Movie;
+}(_binarydatareader.BinaryDataReader);
+
+/***/ }),
+
+/***/ 380:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_mapview = exports.MapView = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _map = __webpack_require__(50);
+
+var _game = __webpack_require__(49);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MapView = exports.MapView = function () {
+    function MapView() {
+        _classCallCheck(this, MapView);
+    }
+
+    _createClass(MapView, [{
+        key: "init",
+        value: function init() {
+            var awareRange = _map.g_map.getAwareRange();
+            var mapViewContainer = document.getElementById('mapview');
+            //for (let z = 0; z <= Otc.MAX_Z + 1; ++z) {
+            for (var y = 0; y < awareRange.vertical(); ++y) {
+                for (var x = 0; x < awareRange.horizontal(); ++x) {
+                    var content = document.createElement('div');
+                    content.setAttribute('id', this.getTileId(x, y, 0));
+                    content.innerText = this.getTileId(x, y, 0);
+                    mapViewContainer.appendChild(content);
+                }
+            }
+            //}
+        }
+    }, {
+        key: "draw",
+        value: function draw() {
+            var awareRange = _map.g_map.getAwareRange();
+            for (var y = 0; y < awareRange.vertical(); ++y) {
+                for (var x = 0; x < awareRange.horizontal(); ++x) {
+                    var tileContainer = this.getTile(x, y, 0);
+                    var tile = _game.g_game.getLocalPlayer().getTile();
+                    var text = ''; //'<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + tile.getGround().rawGetThingType().getSprites()[0] + '.png">';
+                    var things = tile.m_things;
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var thing = _step.value;
+
+                            var sprite = thing.rawGetThingType().getSprites()[0];
+                            console.error(thing.rawGetThingType());
+                            text = text + '<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + sprite + '.png">';
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+
+                    var creatures = tile.getCreatures();
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = creatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var creature = _step2.value;
+
+                            text = text + '<img src="http://outfit-images.ots.me/idleOutfits1092/outfit.php?id=' + creature.m_outfit.m_id + '&addons=' + creature.m_outfit.m_addons + '&head=' + creature.m_outfit.m_head + '&body=' + creature.m_outfit.m_body + '&legs=' + creature.m_outfit.m_legs + '&feet=' + creature.m_outfit.m_feet + '&mount=' + creature.m_outfit.m_mount + '&direction=' + creature.m_direction + '">';
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+
+                    tileContainer.innerHTML = text;
+                }
+            }
+        }
+    }, {
+        key: "clear",
+        value: function clear() {
+            var awareRange = _map.g_map.getAwareRange();
+            for (var y = 0; y < awareRange.vertical(); ++y) {
+                for (var x = 0; x < awareRange.horizontal(); ++x) {
+                    var tile = this.getTile(x, y, 0);
+                    tile.innerHTML = '<img src="https://avatars2.githubusercontent.com/u/864393?s=40&v=4" alt="@bigtimebuddy">';
+                }
+            }
+        }
+    }, {
+        key: "getTileId",
+        value: function getTileId(x, y, z) {
+            return 'tile-' + x + '-' + y;
+        }
+    }, {
+        key: "getTile",
+        value: function getTile(x, y, z) {
+            return document.getElementById(this.getTileId(x, y, z));
+        }
+    }]);
+
+    return MapView;
+}();
+
+var g_mapview = new MapView();
+exports.g_mapview = g_mapview;
+
+/***/ }),
+
 /***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8125,6 +7726,8 @@ var Thing = exports.Thing = function () {
         key: "draw",
         value: function draw(dest, scaleFactor, animate) {
             var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            throw new Error('Unimplemented!');
         }
     }, {
         key: "setId",
@@ -8566,19 +8169,19 @@ exports.g_game = exports.Game = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _localplayer = __webpack_require__(351);
+var _localplayer = __webpack_require__(353);
 
 var _const = __webpack_require__(11);
 
 var _thingtypemanager = __webpack_require__(54);
 
-var _protocolgame = __webpack_require__(362);
+var _protocolgame = __webpack_require__(363);
 
 var _map = __webpack_require__(50);
 
-var _container = __webpack_require__(375);
+var _container = __webpack_require__(376);
 
-var _chatbox = __webpack_require__(376);
+var _chatbox = __webpack_require__(377);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8614,6 +8217,7 @@ var Game = exports.Game = function () {
         this.m_clientVersion = 0;
         this.messageModesMap = {};
         this.m_features = [];
+        this.m_localPlayer = new _localplayer.LocalPlayer();
     }
 
     _createClass(Game, [{
@@ -8997,13 +8601,19 @@ var Game = exports.Game = function () {
     }, {
         key: "getLocalPlayer",
         value: function getLocalPlayer() {
-            return new _localplayer.LocalPlayer();
+            return this.m_localPlayer;
         }
     }, {
         key: "login",
         value: function login(accountName, accountPassword, characterName) {
             this.m_protocolGame = new _protocolgame.ProtocolGame(this);
             this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+        }
+    }, {
+        key: "watchMovie",
+        value: function watchMovie(movie) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.watch(movie);
         }
     }, {
         key: "formatCreatureName",
@@ -9043,23 +8653,19 @@ exports.g_map = exports.Map = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
-
 var _position = __webpack_require__(100);
 
-var _awarerange = __webpack_require__(138);
+var _awarerange = __webpack_require__(139);
 
 var _light = __webpack_require__(101);
 
-var _tileblock = __webpack_require__(352);
+var _tileblock = __webpack_require__(354);
 
 var _const = __webpack_require__(11);
 
 var _point = __webpack_require__(72);
 
-var _helpers = __webpack_require__(139);
-
-var _log = __webpack_require__(23);
+var _helpers = __webpack_require__(140);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9125,7 +8731,13 @@ var Map = exports.Map = function () {
     }, {
         key: "getCreatureById",
         value: function getCreatureById(id) {
-            return new _creature.Creature();
+            //console.log('known creatures', g_map.m_knownCreatures);
+            if (!g_map.m_knownCreatures[id]) {
+                console.log('known creatures failed', id, g_map.m_knownCreatures);
+                throw new Error('get ' + id);
+            }
+            return g_map.m_knownCreatures[id];
+            //        return new Creature();
         }
     }, {
         key: "getAwareRange",
@@ -9308,7 +8920,7 @@ var Map = exports.Map = function () {
         key: "getThing",
         value: function getThing(pos, stackpos) {
             var tile = this.getTile(pos);
-            _log.Log.debug('Map.getThing', pos, tile.getThing(stackpos));
+            //Log.debug('Map.getThing', pos, tile.getThing(stackpos));
             if (tile) return tile.getThing(stackpos);
             return null;
         }
@@ -9322,7 +8934,7 @@ var Map = exports.Map = function () {
         value: function removeCreatureById(id) {
             if (id == 0) return;
             if (this.m_knownCreatures[id]) {
-                this.m_knownCreatures.splice(id, 1);
+                //this.m_knownCreatures.splice(id, 1);
             }
         }
     }, {
@@ -9358,13 +8970,13 @@ exports.g_things = exports.ThingTypeManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thingtype = __webpack_require__(354);
+var _thingtype = __webpack_require__(356);
 
 var _const = __webpack_require__(11);
 
 var _log = __webpack_require__(23);
 
-var _resources = __webpack_require__(360);
+var _resources = __webpack_require__(143);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9686,6 +9298,16 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(44);
 
+var _outfit = __webpack_require__(369);
+
+var _const = __webpack_require__(11);
+
+var _color = __webpack_require__(55);
+
+var _cachedtext = __webpack_require__(145);
+
+var _timer = __webpack_require__(147);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -9701,10 +9323,34 @@ var Creature = exports.Creature = function (_Thing) {
         var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
 
         _this.m_id = 0;
+        _this.m_showShieldTexture = true;
+        _this.m_shieldBlink = false;
+        _this.m_passable = false;
+        _this.m_showTimedSquare = false;
+        _this.m_showStaticSquare = false;
+        _this.m_removed = true;
+        _this.m_nameCache = new _cachedtext.CachedText();
+        _this.m_informationColor = new _color.Color();
+        _this.m_outfitColor = new _color.Color();
+        //ScheduledEventPtr m_outfitColorUpdateEvent;
+        _this.m_outfitColorTimer = new _timer.Timer();
+        _this.m_walkTimer = new _timer.Timer();
+        _this.m_footTimer = new _timer.Timer();
+        _this.m_walking = false;
+        _this.m_allowAppearWalk = false;
+        _this.m_footStepDrawn = false;
+        _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
+        _this.m_lastStepDirection = _const.Direction.InvalidDirection;
+        _this.m_outfit = new _outfit.Outfit();
         return _this;
     }
 
     _createClass(Creature, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, animate) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+        }
+    }, {
         key: "getId",
         value: function getId() {
             return this.m_id;
@@ -9732,33 +9378,39 @@ var Creature = exports.Creature = function (_Thing) {
     }, {
         key: "addTimedSquare",
         value: function addTimedSquare(arg0) {
-            throw new Error("Method not implemented.");
+            // throw new Error("Method not implemented.");
         }
     }, {
         key: "hideStaticSquare",
         value: function hideStaticSquare() {
-            throw new Error("Method not implemented.");
+            //throw new Error("Method not implemented.");
         }
     }, {
         key: "showStaticSquare",
         value: function showStaticSquare(arg0) {
-            throw new Error("Method not implemented.");
+            // throw new Error("Method not implemented.");
         }
     }, {
         key: "setType",
-        value: function setType(type) {}
+        value: function setType(type) {
+            this.m_type = type;
+        }
     }, {
         key: "allowAppearWalk",
         value: function allowAppearWalk() {}
     }, {
         key: "setHealthPercent",
-        value: function setHealthPercent(healthPercent) {}
+        value: function setHealthPercent(healthPercent) {
+            this.m_healthPercent = healthPercent;
+        }
     }, {
         key: "setLight",
         value: function setLight(light) {}
     }, {
         key: "setOutfit",
-        value: function setOutfit(outfit) {}
+        value: function setOutfit(outfit) {
+            this.m_outfit = outfit;
+        }
     }, {
         key: "setSpeed",
         value: function setSpeed(speed) {}
@@ -9782,10 +9434,19 @@ var Creature = exports.Creature = function (_Thing) {
         value: function setIcon(icon) {}
     }, {
         key: "setDirection",
-        value: function setDirection(direction) {}
+        value: function setDirection(direction) {
+            this.m_direction = direction;
+        }
     }, {
         key: "turn",
-        value: function turn(direction) {}
+        value: function turn(direction) {
+            if (!this.m_walking) this.setDirection(direction);else this.m_walkTurnDirection = direction;
+        }
+    }, {
+        key: "isWalking",
+        value: function isWalking() {
+            return this.m_walking;
+        }
     }]);
 
     return Creature;
@@ -9808,7 +9469,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Point = exports.Point = function () {
-    function Point(x, y) {
+    function Point() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
         _classCallCheck(this, Point);
 
         this.x = x;
@@ -9955,4 +9619,4 @@ var Size = exports.Size = function () {
 
 /***/ })
 
-},[146]);
+},[148]);

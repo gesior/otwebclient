@@ -8,6 +8,7 @@ export class AnimatedText extends Thing {
         super();
         this.m_color = new Color();
         this.m_animationTimer = new Timer();
+        this.m_cachedText = new CachedText();
         this.m_cachedText.setFont("verdana-11px-rounded");
         this.m_cachedText.setAlign(CachedText.ALIGN_LEFT);
     }

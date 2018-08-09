@@ -2,27 +2,69 @@
 
 <head>
     <title>Demo with JQuery and JQuery UI</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <style type="text/css">
-    .ui-dialog {
-        background-color: rgba(200, 200, 200, 0.2);
-        padding: 2px;
-        border: solid 1px darkblue;
-    }
+        .ui-dialog {
+            background-color: rgba(200, 200, 200, 0.2);
+            padding: 2px;
+            border: solid 1px darkblue;
+            clear: both;
+        }
+
+        #chatbox {
+            width: 100%;
+            background-color: red;
+            min-height: 50px;
+            max-height: 150px;
+            overflow: scroll;
+            margin-top: 40px;
+            clear: both;
+        }
+
+        #mapview {
+            width: 576px;
+            height: 416px;
+            background-color: green;
+            clear: both;
+        }
+
+        #mapview div {
+            float: left;
+            max-width: 32px;
+            max-height: 32px;
+            width: 32px;
+            height: 32px;
+            overflow: hidden;
+            background-color: yellow;
+            position: relative;
+        }
+
+        #mapview div img {
+            max-width: 32px;
+            max-height: 32px;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            left:0;
+            top: 0;
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
-    This should show a prehistoric dialog
-
-    <div id="chatbox" style="width:100%;background-color:red;min-height: 50px">
-    <div id="dialog">This is my super dialog content</div>
-    
-    <script src="js/vendor.js"></script>
-    <script src="js/index.js"></script>
-
+<div>START</div>
+<div id="mapview">
 
 </div>
+<div id="chatbox" style="">
+</div>
+<div>END</div>
+
+<script src="js/vendor.js"></script>
+<script src="js/index.js"></script>
+
+
 </body>
 
 </html>

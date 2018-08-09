@@ -9,7 +9,7 @@ import {Otc} from "./constants/const";
 export class AnimatedText extends Thing {
     m_color: Color = new Color();
     m_animationTimer: Timer = new Timer();
-    m_cachedText: CachedText;
+    m_cachedText: CachedText = new CachedText();
     m_offset: Point;
 
     constructor() {

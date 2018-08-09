@@ -19,22 +19,22 @@ export class ThingType {
     static maskColors = [Color.red, Color.green, Color.blue, Color.yellow];
 
     m_category: ThingCategory;
-    m_id: number;
-    m_null: boolean;
+    m_id: number = 0;
+    m_null: boolean = true;
     m_attribs: ThingTypeAttribs = new ThingTypeAttribs();
 
-    m_size: Size;
-    m_displacement: Point;
-    m_animator: Animator;
-    m_animationPhases: number;
-    m_exactSize: number;
-    m_realSize: number;
-    m_numPatternX: number;
-    m_numPatternY: number;
-    m_numPatternZ: number;
-    m_layers: number;
-    m_elevation: number;
-    m_opacity: number;
+    m_size: Size = new Size();
+    m_displacement: Point = new Point();
+    m_animator: Animator = null;
+    m_animationPhases: number = 0;
+    m_exactSize: number = 0;
+    m_realSize: number = 0;
+    m_numPatternX: number = 0;
+    m_numPatternY: number = 0;
+    m_numPatternZ: number = 0;
+    m_layers: number = 0;
+    m_elevation: number = 0;
+    m_opacity: number = 1.0;
     m_customImage: string;
 
     m_spritesIndex: number[] = [];
@@ -643,5 +643,51 @@ export class ThingType {
         return ((l * this.m_numPatternZ + z)
             * this.m_numPatternY + y)
             * this.m_numPatternX + x;
+    }
+
+    draw(dest: Point, scaleFactor: number, layer: number, xPattern: number, yPattern: number, zPattern: number, animationPhase: number, lightView: LightView = null)
+    {
+        if(this.m_null)
+        return;
+
+        if(animationPhase >=this. m_animationPhases)
+        return;
+
+        let texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
+        if(!texture)
+            return;
+
+        let frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
+        if(frameIndex >= m_texturesFramesRects[animationPhase].size())
+            return;
+
+        Point textureOffset;
+        Rect textureRect;
+
+        if(scaleFactor != 1.0) {
+        textureRect = m_texturesFramesOriginRects[animationPhase][frameIndex];
+        } else {
+            textureOffset = m_texturesFramesOffsets[animationPhase][frameIndex];
+            textureRect = m_texturesFramesRects[animationPhase][frameIndex];
+        }
+
+        Rect screenRect(dest + (textureOffset - m_displacement - (m_size.toPoint() - Point(1, 1)) * 32) * scaleFactor,
+            textureRect.size() * scaleFactor);
+
+        bool useOpacity = m_opacity < 1.0f;
+
+        if(useOpacity)
+            g_painter->setColor(Color(1.0f,1.0f,1.0f,m_opacity));
+
+        g_painter->drawTexturedRect(screenRect, texture, textureRect);
+
+        if(useOpacity)
+            g_painter->setColor(Color::white);
+
+        if(lightView && hasLight()) {
+            Light light = getLight();
+            if(light.intensity > 0)
+                lightView->addLightSource(screenRect.center(), scaleFactor, light);
+        }
     }
 }

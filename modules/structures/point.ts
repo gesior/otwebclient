@@ -2,7 +2,7 @@ import {Position} from "../position";
 
 export class Point {
 
-    constructor(public x: number, public y: number) {
+    constructor(public x: number = 0, public y: number = 0) {
 
     }
 

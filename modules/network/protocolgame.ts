@@ -24,6 +24,7 @@ import {UnjustifiedPoints} from "../structures/unjustifiedpoints";
 import {Npc} from "../structures/npc";
 import {Monster} from "../structures/monster";
 import {AwareRange} from "../structures/awarerange";
+import {Movie} from "./movie";
 
 export class ProtocolGame extends Protocol {
     private m_firstRecv: boolean;
@@ -36,9 +37,10 @@ export class ProtocolGame extends Protocol {
     private m_gameInitialized: boolean;
     private m_mapKnown: boolean;
 
+    private m_movieData: Movie;
+
     constructor(game: Game) {
         super();
-        this.m_localPlayer = null;
         this.m_gameInitialized = false;
         this.m_mapKnown = false;
 
@@ -53,6 +55,36 @@ export class ProtocolGame extends Protocol {
         this.m_characterName = characterName;
 
         this.connect(host, port);
+    }
+
+    watch(m_movieData: Movie) {
+        var i  =0;
+        this.m_localPlayer = g_game.getLocalPlayer();
+        this.m_movieData = m_movieData;
+        var first = 0;
+        while (this.m_movieData.getUnreadSize() >= 10) {
+            let timestamp = this.m_movieData.getU64();
+            let s = this.m_movieData.getReadPos();
+            if(this.m_movieData.getUnreadSize() >= 10) {
+                var next = this.m_movieData.peekU64();
+                //console.log('com', timestamp, next);
+                if (next - timestamp < 5000 && next - timestamp >= 0) {
+                    continue;
+                }
+            }
+            this.m_movieData.setReadPos(s);
+            let packetLength = this.m_movieData.getU16();
+            let packetData = this.m_movieData.getBytes(packetLength);
+            if (first === 0)
+                first = timestamp;
+            if (i >= 70000)
+            Log.debug(parseInt("" + ((timestamp - first) / 1000)), i, timestamp, packetLength, packetData);
+            var inputMessage = new InputMessage(new DataView(packetData));
+            this.parseMessage(inputMessage);
+            if (++i >= 220000)
+                break;
+        }
+        console.error('loaded packets', i);
     }
 
     onConnect() {
@@ -124,7 +156,7 @@ export class ProtocolGame extends Protocol {
         try {
             while (msg.getUnreadSize() > 0) {
                 opcode = msg.getU8();
-                Log.debug('opcode', prevOpcode, opcode);
+                //Log.debug('opcode', prevOpcode, opcode);
 
                 if (!g_game.getFeature(GameFeature.GameLoginPending)) {
                     if (!this.m_gameInitialized && opcode > Proto.GameServerFirstGameOpcode) {
@@ -481,9 +513,12 @@ export class ProtocolGame extends Protocol {
                     case Proto.GameServerChangeMapAwareRange:
                         this.parseChangeMapAwareRange(msg);
                         break;
+
+                    case 55:
+                        return;
                     default:
-                        Log.error("unhandled opcode %d", opcode);
-                        break;
+                        Log.error("unhandled opcode %d", opcode, msg);
+                        throw new Error('opcode');
                 }
                 prevOpcode = opcode;
             }
@@ -491,13 +526,14 @@ export class ProtocolGame extends Protocol {
         catch (e) {
             Log.error("ProtocolGame parse message exception (%d bytes unread, last opcode is %d, prev opcode is %d): %s",
                 msg.getUnreadSize(), opcode, prevOpcode, e);
+            throw new Error('parser');
         }
     }
 
     sendPingBack() {
         //console.log('sendPingBack');
         //console.log(g_map.m_floorMissiles);
-        //console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+        console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
         if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
             let pos = this.m_localPlayer.getPosition();
             for (let y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -793,7 +829,7 @@ export class ProtocolGame extends Protocol {
     }
 
     parsePing(msg: InputMessage): void {
-        this.sendPingBack();
+        //this.sendPingBack();
     }
 
     parsePingBack(msg: InputMessage) {
@@ -954,7 +990,7 @@ export class ProtocolGame extends Protocol {
         let creature = <Creature> thing;
         creature.allowAppearWalk();
 
-        Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
+        //Log.debug('creature move', creature, g_map.getTile(newPos).m_things);
         g_map.addThing(thing, newPos, -1);
     }
 
@@ -1945,12 +1981,15 @@ export class ProtocolGame extends Protocol {
     }
 
     parsePlayerInventory(msg: InputMessage) {
+        msg.getU8(); // subtype
+        /*
         let size = msg.getU16();
         for (let i = 0; i < size; ++i) {
             msg.getU16(); // id
             msg.getU8(); // subtype
             msg.getU16(); // count
         }
+        */
     }
 
     parseModalDialog(msg: InputMessage) {
@@ -2221,7 +2260,7 @@ export class ProtocolGame extends Protocol {
     }
 
     getCreature(msg: InputMessage, type: number): Creature {
-        Log.debug('getCreature', type, msg);
+        //Log.debug('getCreature', type, msg);
         if (type == 0)
             type = msg.getU16();
 
@@ -2420,4 +2459,7 @@ export class ProtocolGame extends Protocol {
         return new Position(x, y, z);
     }
 
+    getLocalPlayer(): LocalPlayer {
+        return this.m_localPlayer;
+    }
 }

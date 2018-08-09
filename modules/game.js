@@ -18,6 +18,7 @@ export class Game {
         this.m_clientVersion = 0;
         this.messageModesMap = {};
         this.m_features = [];
+        this.m_localPlayer = new LocalPlayer();
     }
     processCloseChannel(channelId) {
         g_chat.removeTab(channelId);
@@ -362,11 +363,15 @@ export class Game {
         throw new Error("Method not implemented.");
     }
     getLocalPlayer() {
-        return new LocalPlayer();
+        return this.m_localPlayer;
     }
     login(accountName, accountPassword, characterName) {
         this.m_protocolGame = new ProtocolGame(this);
         this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+    }
+    watchMovie(movie) {
+        this.m_protocolGame = new ProtocolGame(this);
+        this.m_protocolGame.watch(movie);
     }
     formatCreatureName(string) {
         return string;

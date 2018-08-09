@@ -14,7 +14,21 @@ import { MarketData } from "./structures/marketdata";
 import { Light } from "./structures/light";
 export class ThingType {
     constructor() {
+        this.m_id = 0;
+        this.m_null = true;
         this.m_attribs = new ThingTypeAttribs();
+        this.m_size = new Size();
+        this.m_displacement = new Point();
+        this.m_animator = null;
+        this.m_animationPhases = 0;
+        this.m_exactSize = 0;
+        this.m_realSize = 0;
+        this.m_numPatternX = 0;
+        this.m_numPatternY = 0;
+        this.m_numPatternZ = 0;
+        this.m_layers = 0;
+        this.m_elevation = 0;
+        this.m_opacity = 1.0;
         this.m_spritesIndex = [];
         this.m_textures = [];
     }
@@ -518,6 +532,45 @@ export class ThingType {
         return ((l * this.m_numPatternZ + z)
             * this.m_numPatternY + y)
             * this.m_numPatternX + x;
+    }
+    draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase, lightView = null) {
+        if (this.m_null)
+            return;
+        if (animationPhase >= this.m_animationPhases)
+            return;
+        let texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
+        if (!texture)
+            return;
+        let frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
+        if (frameIndex >= m_texturesFramesRects[animationPhase].size())
+            return;
+        Point;
+        textureOffset;
+        Rect;
+        textureRect;
+        if (scaleFactor != 1.0) {
+            textureRect = m_texturesFramesOriginRects[animationPhase][frameIndex];
+        }
+        else {
+            textureOffset = m_texturesFramesOffsets[animationPhase][frameIndex];
+            textureRect = m_texturesFramesRects[animationPhase][frameIndex];
+        }
+        Rect;
+        screenRect(dest + (textureOffset - m_displacement - (m_size.toPoint() - Point(1, 1)) * 32) * scaleFactor, textureRect.size() * scaleFactor);
+        bool;
+        useOpacity = m_opacity < 1.0;
+        f;
+        if (useOpacity)
+            g_painter -  > setColor(Color(1.0, f, 1.0, f, 1.0, f, m_opacity));
+        g_painter -  > drawTexturedRect(screenRect, texture, textureRect);
+        if (useOpacity)
+            g_painter -  > setColor(Color, white);
+        if (lightView && hasLight()) {
+            Light;
+            light = getLight();
+            if (light.intensity > 0)
+                lightView -  > addLightSource(screenRect.center(), scaleFactor, light);
+        }
     }
 }
 ThingType.maskColors = [Color.red, Color.green, Color.blue, Color.yellow];

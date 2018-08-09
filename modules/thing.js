@@ -4,6 +4,7 @@ import { error } from "./log";
 import { g_things } from "./thingtypemanager";
 export class Thing {
     draw(dest, scaleFactor, animate, lightView = null) {
+        throw new Error('Unimplemented!');
     }
     setId(id) {
     }

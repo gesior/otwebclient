@@ -5,8 +5,9 @@ import {Effect} from "./effect";
 import {g_game} from "./game";
 import {Item} from "./item";
 import {g_map} from "./map";
-import {Otc, Tilestate} from "./constants/const";
-import {Log} from "./log";
+import {DrawFlags, Otc, Tilestate} from "./constants/const";
+import {Point} from "./structures/point";
+import {LightView} from "./lightview";
 
 export class Tile {
     static MAX_THINGS = 10;
@@ -23,6 +24,107 @@ export class Tile {
 
     constructor(position: Position) {
         this.m_position = position;
+    }
+
+    draw(dest: Point, scaleFactor: number, drawFlags: DrawFlags, lightView: LightView = null) {
+        let animate: boolean = (drawFlags & DrawFlags.DrawAnimations) > 0;
+
+        // first bottom items
+        if (drawFlags & (DrawFlags.DrawGround | DrawFlags.DrawGroundBorders | DrawFlags.DrawOnBottom)) {
+            for (let thing of this.m_things) {
+                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom())
+                    break;
+
+                thing.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+
+                this.m_drawElevation += thing.getElevation();
+                if (this.m_drawElevation > Otc.MAX_ELEVATION)
+                    this.m_drawElevation = Otc.MAX_ELEVATION;
+            }
+        }
+
+        let redrawPreviousTopW = 0;
+        let redrawPreviousTopH = 0;
+
+        // now common items in reverse order
+        if (drawFlags & DrawFlags.DrawItems) {
+            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+                let thing = this.m_things[it];
+                if (thing.isOnTop() || thing.isOnBottom() || thing.isGroundBorder() || thing.isGround() || thing.isCreature())
+                    break;
+                thing.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+
+                if (thing.isLyingCorpse()) {
+                    redrawPreviousTopW = Math.max(thing.getWidth(), redrawPreviousTopW);
+                    redrawPreviousTopH = Math.max(thing.getHeight(), redrawPreviousTopH);
+                }
+
+                this.m_drawElevation += thing.getElevation();
+                if (this.m_drawElevation > Otc.MAX_ELEVATION)
+                    this.m_drawElevation = Otc.MAX_ELEVATION;
+            }
+        }
+
+        // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
+
+        if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+            let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
+            if (topRedrawFlags) {
+                for (let x = -redrawPreviousTopW; x <= 0; ++x) {
+                    for (let y = -redrawPreviousTopH; y <= 0; ++y) {
+                        if (x == 0 && y == 0)
+                            continue;
+                        let tile = g_map.getTile(this.m_position.translated(x, y));
+                        if (tile)
+                            tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                    }
+                }
+            }
+        }
+
+        // creatures
+        if (drawFlags & DrawFlags.DrawCreatures) {
+            if (animate) {
+                for (var creature of this.m_walkingCreatures) {
+                    creature.draw(
+                        new Point(
+                            dest.x + ((creature.getPosition().x - this.m_position.x) * Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor,
+                            dest.y + ((creature.getPosition().y - this.m_position.y) * Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor
+                        ),
+                        scaleFactor, animate, lightView
+                    );
+                }
+            }
+
+            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+                let thing = this.m_things[it];
+                if (!thing.isCreature())
+                    continue;
+                let creature = <Creature> thing;
+                if (creature && (!creature.isWalking() || !animate))
+                    creature.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+            }
+        }
+        /*
+                // effects
+                for(const EffectPtr& effect : m_effects)
+                effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
+        */
+        // top items
+        if (drawFlags & DrawFlags.DrawOnTop) {
+            for (let thing of this.m_things) {
+                if (thing.isOnTop())
+                    thing.draw(dest, scaleFactor, animate, lightView);
+            }
+        }
+        /*
+        // draw translucent light (for tiles beneath holes)
+        if(hasTranslucentLight() && lightView) {
+            Light light;
+            light.intensity = 1;
+            lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
+        }
+        */
     }
 
     clean() {
@@ -43,6 +145,8 @@ export class Tile {
 
     addThing(thing: Thing, stackPos: number) {
 
+        if (this.m_position.equals(new Position(32944, 32673, 7)))
+            console.error('add', thing, stackPos);
         if (!thing)
             return;
 
@@ -52,8 +156,10 @@ export class Tile {
             else
                 this.m_effects.push(<Effect> thing);
         } else {
+            /*
             if (thing.isCreature())
                 console.log('tile.addThing', thing, stackPos, this.m_things);
+            */
             // priority                                    854
             // 0 - ground,                        -.      -.
             // 1 - ground borders                 -.      -.
@@ -81,7 +187,7 @@ export class Tile {
 
                 for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
                     let otherPriority = this.m_things[stackPos].getStackPriority();
-                    console.log('prior', stackPos, priority, otherPriority);
+                    //console.log('prior', stackPos, priority, otherPriority);
                     if ((append && otherPriority > priority) || (!append && otherPriority >= priority))
                         break;
                 }
@@ -116,6 +222,8 @@ export class Tile {
 
     removeThing(thing: Thing): boolean {
 
+        if (this.m_position.equals(new Position(32944, 32673, 7)))
+            console.error('rem', thing);
         if (!thing)
             return false;
 
@@ -131,6 +239,8 @@ export class Tile {
             let index = this.m_things.indexOf(<Effect> thing);
             if (index > -1) {
                 this.m_things.splice(index, 1);
+                if (this.m_position.equals(new Position(32944, 32673, 7)))
+                    console.error('rem', index);
                 removed = true;
             }
         }
@@ -145,8 +255,11 @@ export class Tile {
 
     getThing(stackPos: number): Thing {
 
+        if (this.m_position.equals(new Position(32944, 32673, 7)))
+            console.error('get', stackPos);
+
         if (stackPos >= 0 && stackPos < this.m_things.length) {
-            Log.debug('tile thing: ', this.m_things[stackPos]);
+            //Log.debug('tile thing: ', this.m_things[stackPos]);
             return this.m_things[stackPos];
         }
         return null;
