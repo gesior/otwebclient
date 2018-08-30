@@ -1,3 +1,4 @@
+import { Point } from "./point";
 export class Size {
     constructor(wd = -1, ht = -1) {
         this.wd = wd;
@@ -48,6 +49,9 @@ export class Size {
     }
     area() {
         return this.wd * this.ht;
+    }
+    toPoint() {
+        return new Point(this.wd, this.ht);
     }
 }
 //# sourceMappingURL=size.js.map

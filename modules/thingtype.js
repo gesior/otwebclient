@@ -12,6 +12,8 @@ import { Texture } from "./structures/texture";
 import { Rect } from "./structures/rect";
 import { MarketData } from "./structures/marketdata";
 import { Light } from "./structures/light";
+import { g_painter } from "./painter";
+import { toInt } from "./constants/helpers";
 export class ThingType {
     constructor() {
         this.m_id = 0;
@@ -31,6 +33,9 @@ export class ThingType {
         this.m_opacity = 1.0;
         this.m_spritesIndex = [];
         this.m_textures = [];
+        this.m_texturesFramesRects = [];
+        this.m_texturesFramesOriginRects = [];
+        this.m_texturesFramesOffsets = [];
     }
     unserialize(clientId, category, fin) {
         this.m_null = false;
@@ -217,9 +222,6 @@ export class ThingType {
                 this.m_texturesFramesOriginRects.resize(m_animationPhases);
                 this.m_texturesFramesOffsets.resize(m_animationPhases);
         */
-    }
-    draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase, lightView = null) {
-        /*todo*/
     }
     getId() {
         return this.m_id;
@@ -437,7 +439,7 @@ export class ThingType {
         let animationPhaseTexture = this.m_textures[animationPhase];
         if (!animationPhaseTexture) {
             let useCustomImage = false;
-            if (animationPhase == 0 && !(this.m_customImage.length == 0))
+            if (animationPhase == 0 && this.m_customImage)
                 useCustomImage = true;
             // we don't need layers in common items, they will be pre-drawn
             let textureLayers = 1;
@@ -449,23 +451,24 @@ export class ThingType {
             }
             let indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
             let textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
+            console.log('dim', textureSize, this);
             let fullImage;
             if (useCustomImage)
                 fullImage = Image.load(this.m_customImage);
             else
                 fullImage = new Image(textureSize.mul(Otc.TILE_PIXELS));
-            /*
-                    m_texturesFramesRects[animationPhase].resize(indexSize);
-                    m_texturesFramesOriginRects[animationPhase].resize(indexSize);
-                    m_texturesFramesOffsets[animationPhase].resize(indexSize);
-            */
+            //console.log('fi', fullImage.getWidth(), fullImage.getHeight())
+            this.m_texturesFramesRects[animationPhase] = [];
+            this.m_texturesFramesOriginRects[animationPhase] = [];
+            this.m_texturesFramesOffsets[animationPhase] = [];
             for (let z = 0; z < this.m_numPatternZ; ++z) {
                 for (let y = 0; y < this.m_numPatternY; ++y) {
                     for (let x = 0; x < this.m_numPatternX; ++x) {
                         for (let l = 0; l < numLayers; ++l) {
                             let spriteMask = (this.m_category == ThingCategory.ThingCategoryCreature && l > 0);
                             let frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
-                            let framePos = new Point((frameIndex % (textureSize.width() / this.m_size.width()) * this.m_size.width()) * Otc.TILE_PIXELS, (frameIndex / (textureSize.width() / this.m_size.width()) * this.m_size.height()) * Otc.TILE_PIXELS);
+                            let framePos = new Point(toInt(frameIndex % toInt(textureSize.width() / this.m_size.width()) * this.m_size.width()) * Otc.TILE_PIXELS, toInt(frameIndex / toInt(textureSize.width() / this.m_size.width()) * this.m_size.height()) * Otc.TILE_PIXELS);
+                            //console.log('blitx', framePos);
                             if (!useCustomImage) {
                                 for (let h = 0; h < this.m_size.height(); ++h) {
                                     for (let w = 0; w < this.m_size.width(); ++w) {
@@ -478,6 +481,9 @@ export class ThingType {
                                             let spritePos = new Point((this.m_size.width() - w - 1) * Otc.TILE_PIXELS, (this.m_size.height() - h - 1) * Otc.TILE_PIXELS);
                                             fullImage.blit(framePos.add(spritePos), spriteImage);
                                         }
+                                        else {
+                                            //console.error(this.m_spritesIndex, spriteIndex);
+                                        }
                                     }
                                 }
                             }
@@ -486,34 +492,60 @@ export class ThingType {
                                 .sub(new Point(1, 1)), framePos);
                             for (let x = framePos.x; x < framePos.x + this.m_size.width() * Otc.TILE_PIXELS; ++x) {
                                 for (let y = framePos.y; y < framePos.y + this.m_size.height() * Otc.TILE_PIXELS; ++y) {
-                                    /*
-                                    uint8 *p = fullImage->getPixel(x,y);
-                                    if(p[3] != 0x00) {
-                                        drawRect.setTop   (std::min<int>(y, (int)drawRect.top()));
-                                        drawRect.setLeft  (std::min<int>(x, (int)drawRect.left()));
-                                        drawRect.setBottom(std::max<int>(y, (int)drawRect.bottom()));
-                                        drawRect.setRight (std::max<int>(x, (int)drawRect.right()));
+                                    let p = fullImage.getPixel(x, y);
+                                    if (p[3] != 0x00) {
+                                        drawRect.setTop(Math.min(y, drawRect.top()));
+                                        drawRect.setLeft(Math.min(x, drawRect.left()));
+                                        drawRect.setBottom(Math.max(y, drawRect.bottom()));
+                                        drawRect.setRight(Math.max(x, drawRect.right()));
                                     }
-                                    */
                                 }
                             }
-                            /*
-                                                    m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
-                                                    m_texturesFramesOriginRects[animationPhase][frameIndex] = Rect(framePos, Size(m_size.width(), m_size.height()) * Otc::TILE_PIXELS);
-                                                    m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft() - framePos;
-                                                    */
+                            console.log('blit', drawRect);
+                            this.m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
+                            this.m_texturesFramesOriginRects[animationPhase][frameIndex] = new Rect(framePos, new Size(this.m_size.width(), this.m_size.height()).mul(Otc.TILE_PIXELS));
+                            this.m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft().sub(framePos);
                         }
                     }
                 }
             }
             animationPhaseTexture = new Texture(fullImage, true);
             //animationPhaseTexture->setSmooth(true);
+            //console.log(this.m_id, animationPhase, animationPhaseTexture);
+            this.m_textures[animationPhase] = animationPhaseTexture;
         }
         return animationPhaseTexture;
     }
     getBestTextureDimension(w, h, count) {
-        /*todo*/
-        return new Size(w, h);
+        const MAX = 32;
+        let k = 1;
+        while (k < w)
+            k <<= 1;
+        w = k;
+        k = 1;
+        while (k < h)
+            k <<= 1;
+        h = k;
+        let numSprites = w * h * count;
+        /*
+        assert(numSprites <= MAX*MAX);
+        assert(w <= MAX);
+        assert(h <= MAX);
+        */
+        let bestDimension = new Size(MAX, MAX);
+        for (let i = w; i <= MAX; i <<= 1) {
+            for (let j = h; j <= MAX; j <<= 1) {
+                let candidateDimension = new Size(i, j);
+                if (candidateDimension.area() < numSprites)
+                    continue;
+                if ((candidateDimension.area() < bestDimension.area()) ||
+                    (candidateDimension.area() == bestDimension.area() && candidateDimension.width() + candidateDimension.height() < bestDimension.width() + bestDimension.height()))
+                    bestDimension = candidateDimension;
+            }
+        }
+        console.log('dim', this.m_id, bestDimension);
+        return bestDimension;
+        //return new Size(w, h);
     }
     getSpriteIndex(w, h, l, x, y, z, a) {
         let index = ((((((a % this.m_animationPhases)
@@ -523,7 +555,7 @@ export class ThingType {
             * this.m_layers + l)
             * this.m_size.height() + h)
             * this.m_size.width() + w;
-        if (index < this.m_spritesIndex.length) {
+        if (!(index < this.m_spritesIndex.length)) {
             throw new Error('index < this.m_spritesIndex.length');
         }
         return index;
@@ -534,43 +566,53 @@ export class ThingType {
             * this.m_numPatternX + x;
     }
     draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase, lightView = null) {
+        //console.log('draw thingtype', this.m_null, this.m_id, animationPhase, this.m_animationPhases);
         if (this.m_null)
             return;
         if (animationPhase >= this.m_animationPhases)
             return;
         let texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
+        console.log('tx', texture);
         if (!texture)
             return;
         let frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
-        if (frameIndex >= m_texturesFramesRects[animationPhase].size())
+        if (frameIndex >= this.m_texturesFramesRects[animationPhase].length)
             return;
-        Point;
-        textureOffset;
-        Rect;
-        textureRect;
+        let textureOffset = new Point();
+        let textureRect = new Rect();
         if (scaleFactor != 1.0) {
-            textureRect = m_texturesFramesOriginRects[animationPhase][frameIndex];
+            textureRect = this.m_texturesFramesOriginRects[animationPhase][frameIndex];
         }
         else {
-            textureOffset = m_texturesFramesOffsets[animationPhase][frameIndex];
-            textureRect = m_texturesFramesRects[animationPhase][frameIndex];
+            textureOffset = this.m_texturesFramesOffsets[animationPhase][frameIndex];
+            textureRect = this.m_texturesFramesRects[animationPhase][frameIndex];
         }
-        Rect;
-        screenRect(dest + (textureOffset - m_displacement - (m_size.toPoint() - Point(1, 1)) * 32) * scaleFactor, textureRect.size() * scaleFactor);
-        bool;
-        useOpacity = m_opacity < 1.0;
-        f;
-        if (useOpacity)
-            g_painter -  > setColor(Color(1.0, f, 1.0, f, 1.0, f, m_opacity));
-        g_painter -  > drawTexturedRect(screenRect, texture, textureRect);
-        if (useOpacity)
-            g_painter -  > setColor(Color, white);
-        if (lightView && hasLight()) {
-            Light;
-            light = getLight();
-            if (light.intensity > 0)
-                lightView -  > addLightSource(screenRect.center(), scaleFactor, light);
+        if (this.m_size.toPoint().x > 1) {
+            console.log('ds', this.m_id, this.m_size);
         }
+        let screenRect = new Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new Point(1, 1)).mul(32))).mul(scaleFactor), textureRect.size().mul(scaleFactor));
+        if (dest.x == 0 && dest.y == 0)
+            console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint());
+        /*
+                let useOpacity = m_opacity < 1.0f;
+
+                if(useOpacity)
+                    g_painter->setColor(Color(1.0f,1.0f,1.0f,m_opacity));
+
+        */
+        //g_painter.drawTexturedRect(dest, texture);
+        g_painter.drawTexturedRect(screenRect, texture, textureRect);
+        //throw new Error('aa');
+        /*
+                if(useOpacity)
+                    g_painter->setColor(Color::white);
+
+                if(lightView && hasLight()) {
+                    Light light = getLight();
+                    if(light.intensity > 0)
+                        lightView->addLightSource(screenRect.center(), scaleFactor, light);
+                }
+                */
     }
 }
 ThingType.maskColors = [Color.red, Color.green, Color.blue, Color.yellow];

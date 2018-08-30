@@ -139,4 +139,12 @@ export abstract class BinaryDataReader {
     setReadPos(offset: number) {
         this.offset = offset;
     }
+
+    tell(): number {
+        return this.getReadPos();
+    }
+
+    seek(offset: number) {
+        this.setReadPos(offset);
+    }
 }

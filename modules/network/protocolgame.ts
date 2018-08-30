@@ -25,6 +25,7 @@ import {Npc} from "../structures/npc";
 import {Monster} from "../structures/monster";
 import {AwareRange} from "../structures/awarerange";
 import {Movie} from "./movie";
+import {g_mapview} from "../view/mapview";
 
 export class ProtocolGame extends Protocol {
     private m_firstRecv: boolean;
@@ -60,6 +61,8 @@ export class ProtocolGame extends Protocol {
     watch(m_movieData: Movie) {
         var i  =0;
         this.m_localPlayer = g_game.getLocalPlayer();
+        g_mapview.followCreature(g_game.getLocalPlayer())
+
         this.m_movieData = m_movieData;
         var first = 0;
         while (this.m_movieData.getUnreadSize() >= 10) {
@@ -77,11 +80,10 @@ export class ProtocolGame extends Protocol {
             let packetData = this.m_movieData.getBytes(packetLength);
             if (first === 0)
                 first = timestamp;
-            if (i >= 70000)
-            Log.debug(parseInt("" + ((timestamp - first) / 1000)), i, timestamp, packetLength, packetData);
+
             var inputMessage = new InputMessage(new DataView(packetData));
             this.parseMessage(inputMessage);
-            if (++i >= 220000)
+            if (++i >= 12)
                 break;
         }
         console.error('loaded packets', i);

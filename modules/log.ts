@@ -1,5 +1,3 @@
-import * as $ from 'jquery';
-
 let log = function(...v: any[]) {
     console.log.apply(this, v);
     //$('#status').text(v.join(','));

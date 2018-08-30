@@ -155,7 +155,7 @@ export enum FluidsColor {
     FluidPurple
 }
 
-export enum FluidsType {
+export enum FluidsColor {
     FluidNone = 0,
     FluidWater,
     FluidMana,

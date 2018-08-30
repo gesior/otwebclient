@@ -1,8 +1,8 @@
-import { Position } from "./position";
 import { g_game } from "./game";
 import { g_map } from "./map";
 import { DrawFlags, Otc, Tilestate } from "./constants/const";
 import { Point } from "./structures/point";
+let cc = 0;
 export class Tile {
     constructor(position) {
         this.m_drawElevation = 0;
@@ -15,12 +15,16 @@ export class Tile {
     }
     draw(dest, scaleFactor, drawFlags, lightView = null) {
         let animate = (drawFlags & DrawFlags.DrawAnimations) > 0;
+        console.log('pp', this.m_position, dest, cc++);
         // first bottom items
         if (drawFlags & (DrawFlags.DrawGround | DrawFlags.DrawGroundBorders | DrawFlags.DrawOnBottom)) {
+            this.m_drawElevation = 0;
             for (let thing of this.m_things) {
                 if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom())
                     break;
-                thing.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                let toPos = dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
+                //console.log('topos', toPos);
+                thing.draw(toPos, scaleFactor, animate, lightView);
                 this.m_drawElevation += thing.getElevation();
                 if (this.m_drawElevation > Otc.MAX_ELEVATION)
                     this.m_drawElevation = Otc.MAX_ELEVATION;
@@ -30,7 +34,7 @@ export class Tile {
         let redrawPreviousTopH = 0;
         // now common items in reverse order
         if (drawFlags & DrawFlags.DrawItems) {
-            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+            for (let it = this.m_things.length - 1; it >= 0; --it) {
                 let thing = this.m_things[it];
                 if (thing.isOnTop() || thing.isOnBottom() || thing.isGroundBorder() || thing.isGround() || thing.isCreature())
                     break;
@@ -45,20 +49,22 @@ export class Tile {
             }
         }
         // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
-        if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
-            let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
-            if (topRedrawFlags) {
-                for (let x = -redrawPreviousTopW; x <= 0; ++x) {
-                    for (let y = -redrawPreviousTopH; y <= 0; ++y) {
-                        if (x == 0 && y == 0)
-                            continue;
-                        let tile = g_map.getTile(this.m_position.translated(x, y));
-                        if (tile)
-                            tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+        /*
+                if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+                    let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
+                    if (topRedrawFlags) {
+                        for (let x = -redrawPreviousTopW; x <= 0; ++x) {
+                            for (let y = -redrawPreviousTopH; y <= 0; ++y) {
+                                if (x == 0 && y == 0)
+                                    continue;
+                                let tile = g_map.getTile(this.m_position.translated(x, y));
+                                if (tile)
+                                    tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                            }
+                        }
                     }
                 }
-            }
-        }
+        */
         // creatures
         if (drawFlags & DrawFlags.DrawCreatures) {
             if (animate) {
@@ -66,13 +72,16 @@ export class Tile {
                     creature.draw(new Point(dest.x + ((creature.getPosition().x - this.m_position.x) * Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
                 }
             }
-            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+            for (let it = this.m_things.length - 1; it >= 0; --it) {
                 let thing = this.m_things[it];
+                //console.log(this.m_things, this.m_position, it);
                 if (!thing.isCreature())
                     continue;
                 let creature = thing;
-                if (creature && (!creature.isWalking() || !animate))
+                if (creature && (!creature.isWalking() || !animate)) {
+                    console.log('pp1', dest);
                     creature.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                }
             }
         }
         /*
@@ -83,8 +92,9 @@ export class Tile {
         // top items
         if (drawFlags & DrawFlags.DrawOnTop) {
             for (let thing of this.m_things) {
-                if (thing.isOnTop())
+                if (thing.isOnTop()) {
                     thing.draw(dest, scaleFactor, animate, lightView);
+                }
             }
         }
         /*
@@ -110,8 +120,6 @@ export class Tile {
         }
     }
     addThing(thing, stackPos) {
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('add', thing, stackPos);
         if (!thing)
             return;
         if (thing.isEffect()) {
@@ -176,8 +184,6 @@ export class Tile {
             this.checkTranslucentLight();
     }
     removeThing(thing) {
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('rem', thing);
         if (!thing)
             return false;
         let removed = false;
@@ -192,8 +198,6 @@ export class Tile {
             let index = this.m_things.indexOf(thing);
             if (index > -1) {
                 this.m_things.splice(index, 1);
-                if (this.m_position.equals(new Position(32944, 32673, 7)))
-                    console.error('rem', index);
                 removed = true;
             }
         }
@@ -203,8 +207,6 @@ export class Tile {
         return removed;
     }
     getThing(stackPos) {
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('get', stackPos);
         if (stackPos >= 0 && stackPos < this.m_things.length) {
             //Log.debug('tile thing: ', this.m_things[stackPos]);
             return this.m_things[stackPos];

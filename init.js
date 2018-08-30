@@ -6,8 +6,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import * as $ from 'jquery';
-//import 'jqueryui';
 import { Otc } from './modules/constants/const';
 import { g_game } from "./modules/game";
 import { g_resources } from "./modules/resources";
@@ -15,14 +13,16 @@ import { Movie } from "./modules/network/movie";
 import { g_mapview } from "./modules/view/mapview";
 let x = Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
-console.log($);
+import 'pixi.js';
+console.log('pixi', PIXI);
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
         g_game.setClientVersion(854);
         console.log('load');
         yield g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+        yield g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
         console.log('load file');
-        var movieData = yield g_resources.openFile('http://inditex.localhost/small.ukcam');
+        var movieData = yield g_resources.openFile('http://inditex.localhost/poh.ukcam');
         //movieData.setReadPos(8);
         var movie = new Movie(new DataView(movieData.getBytes(-1)));
         g_mapview.init();

@@ -9,6 +9,7 @@ import {Item} from "./item";
 import {g_chat} from "./view/chatbox";
 import {Position} from "./position";
 import {Movie} from "./network/movie";
+import {g_sprites} from "./spritemanager";
 
 export class Game {
     processCloseChannel(channelId: number): any {
@@ -23,7 +24,7 @@ export class Game {
         g_chat.addChannel(name, channelId);
     }
     processTalk(name: string, level: number, mode: MessageMode, message: string, channelId: number, creaturePos: Position) {
-        console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+        //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
         g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
 
@@ -41,6 +42,10 @@ export class Game {
 
     async loadDatFile(file: string) {
         return await g_things.loadDat(file);
+    }
+
+    async loadSprFile(file: string) {
+        return await g_sprites.loadSpr(file);
     }
 
     updateMessageModesMap(version: number) {

@@ -8,7 +8,7 @@ import {g_map} from "./map";
 import {DrawFlags, Otc, Tilestate} from "./constants/const";
 import {Point} from "./structures/point";
 import {LightView} from "./lightview";
-
+let cc = 0;
 export class Tile {
     static MAX_THINGS = 10;
 
@@ -29,13 +29,17 @@ export class Tile {
     draw(dest: Point, scaleFactor: number, drawFlags: DrawFlags, lightView: LightView = null) {
         let animate: boolean = (drawFlags & DrawFlags.DrawAnimations) > 0;
 
+        console.log('pp', this.m_position, dest, cc++);
         // first bottom items
         if (drawFlags & (DrawFlags.DrawGround | DrawFlags.DrawGroundBorders | DrawFlags.DrawOnBottom)) {
+            this.m_drawElevation = 0;
             for (let thing of this.m_things) {
                 if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom())
                     break;
 
-                thing.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                let toPos = dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
+                //console.log('topos', toPos);
+                thing.draw(toPos, scaleFactor, animate, lightView);
 
                 this.m_drawElevation += thing.getElevation();
                 if (this.m_drawElevation > Otc.MAX_ELEVATION)
@@ -48,7 +52,7 @@ export class Tile {
 
         // now common items in reverse order
         if (drawFlags & DrawFlags.DrawItems) {
-            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+            for (let it = this.m_things.length - 1; it >= 0; --it) {
                 let thing = this.m_things[it];
                 if (thing.isOnTop() || thing.isOnBottom() || thing.isGroundBorder() || thing.isGround() || thing.isCreature())
                     break;
@@ -66,7 +70,7 @@ export class Tile {
         }
 
         // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
-
+/*
         if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
             let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
             if (topRedrawFlags) {
@@ -81,6 +85,7 @@ export class Tile {
                 }
             }
         }
+*/
 
         // creatures
         if (drawFlags & DrawFlags.DrawCreatures) {
@@ -96,15 +101,19 @@ export class Tile {
                 }
             }
 
-            for (let it = this.m_things.length - 1; it >= 0; ++it) {
+            for (let it = this.m_things.length - 1; it >= 0; --it) {
                 let thing = this.m_things[it];
+                //console.log(this.m_things, this.m_position, it);
                 if (!thing.isCreature())
                     continue;
                 let creature = <Creature> thing;
-                if (creature && (!creature.isWalking() || !animate))
+                if (creature && (!creature.isWalking() || !animate)) {
+                    console.log('pp1', dest);
                     creature.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                }
             }
         }
+
         /*
                 // effects
                 for(const EffectPtr& effect : m_effects)
@@ -113,8 +122,9 @@ export class Tile {
         // top items
         if (drawFlags & DrawFlags.DrawOnTop) {
             for (let thing of this.m_things) {
-                if (thing.isOnTop())
-                    thing.draw(dest, scaleFactor, animate, lightView);
+                if (thing.isOnTop()) {
+                   thing.draw(dest, scaleFactor, animate, lightView);
+                }
             }
         }
         /*
@@ -144,9 +154,6 @@ export class Tile {
     }
 
     addThing(thing: Thing, stackPos: number) {
-
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('add', thing, stackPos);
         if (!thing)
             return;
 
@@ -221,9 +228,6 @@ export class Tile {
     }
 
     removeThing(thing: Thing): boolean {
-
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('rem', thing);
         if (!thing)
             return false;
 
@@ -239,8 +243,6 @@ export class Tile {
             let index = this.m_things.indexOf(<Effect> thing);
             if (index > -1) {
                 this.m_things.splice(index, 1);
-                if (this.m_position.equals(new Position(32944, 32673, 7)))
-                    console.error('rem', index);
                 removed = true;
             }
         }
@@ -254,10 +256,6 @@ export class Tile {
     }
 
     getThing(stackPos: number): Thing {
-
-        if (this.m_position.equals(new Position(32944, 32673, 7)))
-            console.error('get', stackPos);
-
         if (stackPos >= 0 && stackPos < this.m_things.length) {
             //Log.debug('tile thing: ', this.m_things[stackPos]);
             return this.m_things[stackPos];

@@ -106,5 +106,11 @@ export class BinaryDataReader {
     setReadPos(offset) {
         this.offset = offset;
     }
+    tell() {
+        return this.getReadPos();
+    }
+    seek(offset) {
+        this.setReadPos(offset);
+    }
 }
 //# sourceMappingURL=binarydatareader.js.map

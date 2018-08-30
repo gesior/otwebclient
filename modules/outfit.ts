@@ -26,6 +26,42 @@ export class Outfit {
         this.resetClothes();
     }
 
+    getId() {
+        return this.m_id;
+    }
+
+    getAuxId() {
+        return this.m_auxId;
+    }
+
+    getHead() {
+        return this.m_head;
+    }
+
+    getBody() {
+        return this.m_body;
+    }
+
+    getLegs() {
+        return this.m_legs;
+    }
+
+    getFeet() {
+        return this.m_feet;
+    }
+
+    getAddons() {
+        return this.m_addons;
+    }
+
+    getMount() {
+        return this.m_mount;
+    }
+
+    getCategory(): ThingCategory {
+        return this.m_category;
+    }
+
     setId(id: number) {
         this.m_id = id;
     }
@@ -66,14 +102,14 @@ export class Outfit {
         this.m_category = category;
     }
 
-    resetClothes()
-    {
+    resetClothes() {
         this.setHead(0);
         this.setBody(0);
         this.setLegs(0);
         this.setFeet(0);
         this.setMount(0);
     }
+
     static getColor(color: number): Color {
         if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES)
             color = 0;

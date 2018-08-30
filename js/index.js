@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 100:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,143 +9,322 @@ webpackJsonp([0],{
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Position = undefined;
+exports.Creature = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(11);
+var _thing = __webpack_require__(54);
+
+var _outfit = __webpack_require__(185);
+
+var _const = __webpack_require__(13);
+
+var _color = __webpack_require__(56);
+
+var _cachedtext = __webpack_require__(127);
+
+var _timer = __webpack_require__(128);
+
+var _point = __webpack_require__(42);
+
+var _proto = __webpack_require__(186);
+
+var _g_clock = __webpack_require__(92);
+
+var _thingtypemanager = __webpack_require__(64);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Position = exports.Position = function () {
-    function Position() {
-        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-        _classCallCheck(this, Position);
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-        this.x = x;
-        this.y = y;
-        this.z = z;
+var Creature = exports.Creature = function (_Thing) {
+    _inherits(Creature, _Thing);
+
+    function Creature() {
+        _classCallCheck(this, Creature);
+
+        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
+
+        _this.m_id = 0;
+        _this.m_healthPercent = 100;
+        _this.m_direction = _const.Direction.South;
+        _this.m_outfit = new _outfit.Outfit();
+        _this.m_speed = 200;
+        _this.m_skull = _const.PlayerSkulls.SkullNone;
+        _this.m_shield = _const.PlayerShields.ShieldNone;
+        _this.m_emblem = _const.PlayerEmblems.EmblemNone;
+        _this.m_type = _proto.Proto.CreatureTypeUnknown;
+        _this.m_icon = _const.CreatureIcons.NpcIconNone;
+        _this.m_showShieldTexture = true;
+        _this.m_shieldBlink = false;
+        _this.m_passable = false;
+        _this.m_showTimedSquare = false;
+        _this.m_showStaticSquare = false;
+        _this.m_removed = true;
+        _this.m_nameCache = new _cachedtext.CachedText();
+        _this.m_informationColor = new _color.Color(96, 96, 96);
+        _this.m_outfitColor = new _color.Color(255, 255, 255);
+        //ScheduledEventPtr m_outfitColorUpdateEvent;
+        _this.m_outfitColorTimer = new _timer.Timer();
+        //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
+        // walk related
+        _this.m_walkAnimationPhase = 0;
+        _this.m_walkedPixels = 0;
+        _this.m_footStep = 0;
+        _this.m_walkTimer = new _timer.Timer();
+        _this.m_footTimer = new _timer.Timer();
+        _this.m_walking = false;
+        _this.m_allowAppearWalk = false;
+        _this.m_footStepDrawn = false;
+        //ScheduledEventPtr m_walkUpdateEvent;
+        //ScheduledEventPtr m_walkFinishAnimEvent;
+        //EventPtr m_disappearEvent;
+        _this.m_walkOffset = new _point.Point();
+        _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
+        _this.m_lastStepDirection = _const.Direction.InvalidDirection;
+        return _this;
     }
 
-    _createClass(Position, [{
-        key: "equals",
-        value: function equals(otherPosition) {
-            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Position(this.x, this.y, this.z);
-        }
-    }, {
-        key: "isMapPosition",
-        value: function isMapPosition() {
-            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
-        }
-    }, {
-        key: "isValid",
-        value: function isValid() {
-            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
-        }
-    }, {
-        key: "distance",
-        value: function distance(pos) {
-            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
-        }
-    }, {
-        key: "translate",
-        value: function translate(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+    _createClass(Creature, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, animate) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-            this.x += dx;
-            this.y += dy;
-            this.z += dz;
+            if (!this.canBeSeen()) return;
+            var animationOffset = animate ? this.m_walkOffset : new _point.Point(0, 0);
+            /*
+                    if(m_showTimedSquare && animate) {
+                        g_painter.setColor(m_timedSquareColor);
+                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement() + 2)*scaleFactor, Size(28, 28)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
+                        g_painter.setColor(Color::white);
+                    }
+                     if(m_showStaticSquare && animate) {
+                        g_painter.setColor(m_staticSquareColor);
+                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement())*scaleFactor, Size(Otc::TILE_PIXELS, Otc::TILE_PIXELS)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
+                        g_painter.setColor(Color::white);
+                    }
+            */
+            this.internalDrawOutfit(dest.add(animationOffset).mul(scaleFactor), scaleFactor, animate, animate, this.m_direction);
+            this.m_footStepDrawn = true;
+            /*
+                    if(lightView) {
+                        Light light = rawGetThingType().getLight();
+                        if(m_light.intensity != light.intensity || m_light.color != light.color)
+                            light = m_light;
+                         // local player always have a minimum light in complete darkness
+                        if(isLocalPlayer() && (g_map.getLight().intensity < 64 || m_position.z > Otc::SEA_FLOOR)) {
+                            light.intensity = std::max<uint8>(light.intensity, 3);
+                            if(light.color == 0 || light.color > 215)
+                                light.color = 215;
+                        }
+                         if(light.intensity > 0)
+                            lightView.addLightSource(dest + (animationOffset + Point(16,16)) * scaleFactor, scaleFactor, light);
+                    }
+                    */
         }
     }, {
-        key: "translated",
-        value: function translated(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+        key: "internalDrawOutfit",
+        value: function internalDrawOutfit(dest, scaleFactor, animateWalk, animateIdle, direction) {
+            var lightView = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
 
-            return new Position(this.x + dx, this.y + dy, this.z + dz);
-        }
-    }, {
-        key: "isInRange",
-        value: function isInRange(pos, xRange, yRange) {
-            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
-        }
-        /*
-            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
-                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+            //g_painter.setColor(m_outfitColor);
+            // outfit is a real creature
+            if (this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryCreature) {
+                var animationPhase = animateWalk ? this.m_walkAnimationPhase : 0;
+                if (this.isAnimateAlways() && animateIdle) {
+                    var ticksPerFrame = 1000 / this.getAnimationPhases();
+                    animationPhase = _g_clock.g_clock.millis() % (ticksPerFrame * this.getAnimationPhases()) / ticksPerFrame;
+                }
+                // xPattern => creature direction
+                var xPattern = void 0;
+                if (direction == _const.Direction.NorthEast || direction == _const.Direction.SouthEast) xPattern = _const.Direction.East;else if (direction == _const.Direction.NorthWest || direction == _const.Direction.SouthWest) xPattern = _const.Direction.West;else xPattern = direction;
+                var zPattern = 0;
+                if (this.m_outfit.getMount() != 0) {
+                    var datType = _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getMount(), _const.ThingCategory.ThingCategoryCreature);
+                    dest = dest.sub(datType.getDisplacement().mul(scaleFactor));
+                    datType.draw(dest, scaleFactor, 0, xPattern, 0, 0, animationPhase, lightView);
+                    dest = dest.add(this.getDisplacement().mul(scaleFactor));
+                    zPattern = Math.min(1, this.getNumPatternZ() - 1);
+                }
+                // yPattern => creature addon
+                for (var yPattern = 0; yPattern < this.getNumPatternY(); yPattern++) {
+                    // continue if we dont have this addon
+                    if (yPattern > 0 && !(this.m_outfit.getAddons() & 1 << yPattern - 1)) continue;
+                    var _datType = this.rawGetThingType();
+                    console.log('pp', dest, _datType);
+                    _datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
+                    if (this.getLayers() > 1) {
+                        /*
+                        Color oldColor = g_painter.getColor();
+                        Painter::CompositionMode oldComposition = g_painter.getCompositionMode();
+                        g_painter.setCompositionMode(Painter::CompositionMode_Multiply);
+                        g_painter.setColor(m_outfit.getHeadColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskYellow, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getBodyColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskRed, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getLegsColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskGreen, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getFeetColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskBlue, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(oldColor);
+                        g_painter.setCompositionMode(oldComposition);
+                        */
+                    }
+                }
+                // outfit is a creature imitating an item or the invisible effect
             }
-        */
-
-    }, {
-        key: "up",
-        value: function up() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z - n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
+            /*
+            else  {
+                ThingType *type = g_things.rawGetThingType(m_outfit.getAuxId(), m_outfit.getCategory());
+                 int animationPhase = 0;
+                int animationPhases = type.getAnimationPhases();
+                int animateTicks = Otc::ITEM_TICKS_PER_FRAME;
+                 // when creature is an effect we cant render the first and last animation phase,
+                // instead we should loop in the phases between
+                if(m_outfit.getCategory() == ThingCategoryEffect) {
+                    animationPhases = std::max<int>(1, animationPhases-2);
+                    animateTicks = Otc::INVISIBLE_TICKS_PER_FRAME;
+                }
+                 if(animationPhases > 1) {
+                    if(animateIdle)
+                        animationPhase = (g_clock.millis() % (animateTicks * animationPhases)) / animateTicks;
+                    else
+                        animationPhase = animationPhases-1;
+                }
+                 if(m_outfit.getCategory() == ThingCategoryEffect)
+                    animationPhase = std::min<int>(animationPhase+1, animationPhases);
+                 type.draw(dest - (getDisplacement() * scaleFactor), scaleFactor, 0, 0, 0, 0, animationPhase, lightView);
             }
-            return false;
+            */
+            //g_painter.resetColor();
         }
     }, {
-        key: "down",
-        value: function down() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z + n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
         }
     }, {
-        key: "coveredUp",
-        value: function coveredUp() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x + n,
-                ny = this.y + n,
-                nz = this.z - n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
         }
     }, {
-        key: "coveredDown",
-        value: function coveredDown() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x - n,
-                ny = this.y - n,
-                nz = this.z + n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "setName",
+        value: function setName(name) {
+            this.m_name = name;
+        }
+    }, {
+        key: "isCreature",
+        value: function isCreature() {
+            return true;
+        }
+    }, {
+        key: "canBeSeen",
+        value: function canBeSeen() {
+            return !this.isInvisible() || this.isPlayer();
+        }
+    }, {
+        key: "isInvisible",
+        value: function isInvisible() {
+            return this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryEffect && this.m_outfit.getAuxId() == 13;
+        }
+    }, {
+        key: "addTimedSquare",
+        value: function addTimedSquare(arg0) {
+            // throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "hideStaticSquare",
+        value: function hideStaticSquare() {
+            //throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "showStaticSquare",
+        value: function showStaticSquare(arg0) {
+            // throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setType",
+        value: function setType(type) {
+            this.m_type = type;
+        }
+    }, {
+        key: "allowAppearWalk",
+        value: function allowAppearWalk() {}
+    }, {
+        key: "setHealthPercent",
+        value: function setHealthPercent(healthPercent) {
+            this.m_healthPercent = healthPercent;
+        }
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "setOutfit",
+        value: function setOutfit(outfit) {
+            this.m_outfit = outfit;
+        }
+    }, {
+        key: "setSpeed",
+        value: function setSpeed(speed) {}
+    }, {
+        key: "setBaseSpeed",
+        value: function setBaseSpeed(baseSpeed) {}
+    }, {
+        key: "setSkull",
+        value: function setSkull(skull) {}
+    }, {
+        key: "setShield",
+        value: function setShield(shield) {}
+    }, {
+        key: "setPassable",
+        value: function setPassable(v) {}
+    }, {
+        key: "setEmblem",
+        value: function setEmblem(emblem) {}
+    }, {
+        key: "setIcon",
+        value: function setIcon(icon) {}
+    }, {
+        key: "setDirection",
+        value: function setDirection(direction) {
+            this.m_direction = direction;
+        }
+    }, {
+        key: "turn",
+        value: function turn(direction) {
+            if (!this.m_walking) this.setDirection(direction);else this.m_walkTurnDirection = direction;
+        }
+    }, {
+        key: "isWalking",
+        value: function isWalking() {
+            return this.m_walking;
+        }
+    }, {
+        key: "getThingType",
+        value: function getThingType() {
+            return _thingtypemanager.g_things.getThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType() {
+            return _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
         }
     }]);
 
-    return Position;
-}();
+    return Creature;
+}(_thing.Thing);
 
 /***/ }),
 
-/***/ 101:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -166,7 +345,141 @@ var Light = exports.Light = function Light() {
 
 /***/ }),
 
-/***/ 102:
+/***/ 125:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_resources = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputfile = __webpack_require__(450);
+
+var _log = __webpack_require__(34);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
+    }
+
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
+
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+
+                                console.log('r', response);
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 10:
+                                _context2.prev = 10;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 14:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[1, 10]]);
+            }));
+        }
+    }]);
+
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
+
+/***/ }),
+
+/***/ 126:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -179,7 +492,7 @@ exports.BinaryDataReader = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(100);
+var _position = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -325,6 +638,16 @@ var BinaryDataReader = exports.BinaryDataReader = function () {
         value: function setReadPos(offset) {
             this.offset = offset;
         }
+    }, {
+        key: "tell",
+        value: function tell() {
+            return this.getReadPos();
+        }
+    }, {
+        key: "seek",
+        value: function seek(offset) {
+            this.setReadPos(offset);
+        }
     }]);
 
     return BinaryDataReader;
@@ -332,7 +655,176 @@ var BinaryDataReader = exports.BinaryDataReader = function () {
 
 /***/ }),
 
-/***/ 11:
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CachedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _size = __webpack_require__(91);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CachedText = exports.CachedText = function () {
+    function CachedText() {
+        _classCallCheck(this, CachedText);
+
+        this.m_text = null;
+        this.m_textSize = null;
+        this.m_textMustRecache = true;
+        this.m_font = null;
+        this.m_align = null;
+    }
+
+    _createClass(CachedText, [{
+        key: 'draw',
+        value: function draw(rect) {
+            if (!this.m_font) return;
+            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
+                this.m_textMustRecache = false;
+                this.m_textCachedScreenCoords = rect;
+                //m_textCoordsBuffer.clear();
+                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+            }
+            //if(m_font->getTexture())
+            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
+        }
+    }, {
+        key: 'wrapText',
+        value: function wrapText(maxWidth) {
+            if (this.m_font) {
+                // update new line positions
+                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
+                this.update();
+            }
+        }
+    }, {
+        key: 'setFont',
+        value: function setFont(font) {
+            this.m_font = font;
+            this.update();
+        }
+    }, {
+        key: 'setText',
+        value: function setText(text) {
+            this.m_text = text;
+            this.update();
+        }
+    }, {
+        key: 'setAlign',
+        value: function setAlign(align) {
+            this.m_align = align;
+            this.update();
+        }
+    }, {
+        key: 'getTextSize',
+        value: function getTextSize() {
+            return this.m_textSize;
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            return this.m_text;
+        }
+    }, {
+        key: 'getFont',
+        value: function getFont() {
+            return this.m_font;
+        }
+    }, {
+        key: 'getAlign',
+        value: function getAlign() {
+            return this.m_align;
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.m_font) this.m_textSize = new _size.Size();
+            /* todo */ //m_font->calculateTextRectSize(m_text);
+            this.m_textMustRecache = true;
+        }
+    }]);
+
+    return CachedText;
+}();
+
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+
+/***/ }),
+
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Timer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _g_clock = __webpack_require__(92);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Timer = exports.Timer = function () {
+    function Timer() {
+        _classCallCheck(this, Timer);
+
+        this.m_startTicks = 0;
+        this.m_stopped = false;
+        this.restart();
+    }
+
+    _createClass(Timer, [{
+        key: "restart",
+        value: function restart() {
+            this.m_startTicks = _g_clock.g_clock.millis();
+            this.m_stopped = false;
+        }
+    }, {
+        key: "stop",
+        value: function stop() {
+            this.m_stopped = true;
+        }
+    }, {
+        key: "startTicks",
+        value: function startTicks() {
+            return this.m_startTicks;
+        }
+    }, {
+        key: "ticksElapsed",
+        value: function ticksElapsed() {
+            return _g_clock.g_clock.millis() - this.m_startTicks;
+        }
+    }, {
+        key: "timeElapsed",
+        value: function timeElapsed() {
+            return this.ticksElapsed() / 1000;
+        }
+    }, {
+        key: "running",
+        value: function running() {
+            return !this.m_stopped;
+        }
+    }]);
+
+    return Timer;
+}();
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -492,27 +984,26 @@ var FluidsColor = exports.FluidsColor = undefined;
     FluidsColor[FluidsColor["FluidWhite"] = 6] = "FluidWhite";
     FluidsColor[FluidsColor["FluidPurple"] = 7] = "FluidPurple";
 })(FluidsColor || (exports.FluidsColor = FluidsColor = {}));
-var FluidsType = exports.FluidsType = undefined;
-(function (FluidsType) {
-    FluidsType[FluidsType["FluidNone"] = 0] = "FluidNone";
-    FluidsType[FluidsType["FluidWater"] = 1] = "FluidWater";
-    FluidsType[FluidsType["FluidMana"] = 2] = "FluidMana";
-    FluidsType[FluidsType["FluidBeer"] = 3] = "FluidBeer";
-    FluidsType[FluidsType["FluidOil"] = 4] = "FluidOil";
-    FluidsType[FluidsType["FluidBlood"] = 5] = "FluidBlood";
-    FluidsType[FluidsType["FluidSlime"] = 6] = "FluidSlime";
-    FluidsType[FluidsType["FluidMud"] = 7] = "FluidMud";
-    FluidsType[FluidsType["FluidLemonade"] = 8] = "FluidLemonade";
-    FluidsType[FluidsType["FluidMilk"] = 9] = "FluidMilk";
-    FluidsType[FluidsType["FluidWine"] = 10] = "FluidWine";
-    FluidsType[FluidsType["FluidHealth"] = 11] = "FluidHealth";
-    FluidsType[FluidsType["FluidUrine"] = 12] = "FluidUrine";
-    FluidsType[FluidsType["FluidRum"] = 13] = "FluidRum";
-    FluidsType[FluidsType["FluidFruidJuice"] = 14] = "FluidFruidJuice";
-    FluidsType[FluidsType["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
-    FluidsType[FluidsType["FluidTea"] = 16] = "FluidTea";
-    FluidsType[FluidsType["FluidMead"] = 17] = "FluidMead";
-})(FluidsType || (exports.FluidsType = FluidsType = {}));
+(function (FluidsColor) {
+    FluidsColor[FluidsColor["FluidNone"] = 0] = "FluidNone";
+    FluidsColor[FluidsColor["FluidWater"] = 1] = "FluidWater";
+    FluidsColor[FluidsColor["FluidMana"] = 2] = "FluidMana";
+    FluidsColor[FluidsColor["FluidBeer"] = 3] = "FluidBeer";
+    FluidsColor[FluidsColor["FluidOil"] = 4] = "FluidOil";
+    FluidsColor[FluidsColor["FluidBlood"] = 5] = "FluidBlood";
+    FluidsColor[FluidsColor["FluidSlime"] = 6] = "FluidSlime";
+    FluidsColor[FluidsColor["FluidMud"] = 7] = "FluidMud";
+    FluidsColor[FluidsColor["FluidLemonade"] = 8] = "FluidLemonade";
+    FluidsColor[FluidsColor["FluidMilk"] = 9] = "FluidMilk";
+    FluidsColor[FluidsColor["FluidWine"] = 10] = "FluidWine";
+    FluidsColor[FluidsColor["FluidHealth"] = 11] = "FluidHealth";
+    FluidsColor[FluidsColor["FluidUrine"] = 12] = "FluidUrine";
+    FluidsColor[FluidsColor["FluidRum"] = 13] = "FluidRum";
+    FluidsColor[FluidsColor["FluidFruidJuice"] = 14] = "FluidFruidJuice";
+    FluidsColor[FluidsColor["FluidCoconutMilk"] = 15] = "FluidCoconutMilk";
+    FluidsColor[FluidsColor["FluidTea"] = 16] = "FluidTea";
+    FluidsColor[FluidsColor["FluidMead"] = 17] = "FluidMead";
+})(FluidsColor || (exports.FluidsColor = FluidsColor = {}));
 var FightModes = exports.FightModes = undefined;
 (function (FightModes) {
     FightModes[FightModes["FightOffensive"] = 1] = "FightOffensive";
@@ -922,7 +1413,7 @@ var Tilestate = exports.Tilestate = undefined;
 
 /***/ }),
 
-/***/ 138:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -935,7 +1426,7 @@ exports.Player = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(123);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -964,7 +1455,7 @@ var Player = exports.Player = function (_Creature) {
 
 /***/ }),
 
-/***/ 139:
+/***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1005,7 +1496,7 @@ var AwareRange = exports.AwareRange = function () {
 
 /***/ }),
 
-/***/ 140:
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1014,14 +1505,369 @@ var AwareRange = exports.AwareRange = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var toInt = function toInt(int) {
-    return parseInt(int.toString());
-};
-exports.toInt = toInt;
+exports.Image = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _log = __webpack_require__(34);
+
+var _color = __webpack_require__(56);
+
+var _helpers = __webpack_require__(63);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Image = exports.Image = function () {
+    function Image(size) {
+        var bpp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
+        var pixels = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+        _classCallCheck(this, Image);
+
+        this.m_pixels = [];
+        this.m_size = size;
+        this.m_bpp = bpp;
+        if (pixels) {
+            this.m_pixels = pixels.slice();
+        } else {
+            this.m_pixels = [];
+            var bytes = size.area() * bpp;
+            for (var i = 0; i < bytes; ++i) {
+                this.m_pixels.push(0);
+            }
+        }
+    }
+
+    _createClass(Image, [{
+        key: "blit",
+        value: function blit(dest, other) {
+            //this.m_pixels = other.m_pixels;
+            //this.m_size = other.m_size;
+            //console.error('blit', dest, other);
+            var otherPixels = other.getPixelData();
+            //console.log('blit1', other.getPixelCount(), otherPixels)
+            for (var p = 0; p < other.getPixelCount(); ++p) {
+                var x = (0, _helpers.toInt)(p % other.getWidth());
+                var y = (0, _helpers.toInt)(p / other.getWidth());
+                var pos = ((dest.y + y) * (0, _helpers.toInt)(this.m_size.width()) + (dest.x + x)) * 4;
+                if (otherPixels[p * 4 + 3] != 0) {
+                    this.m_pixels[pos + 0] = otherPixels[p * 4 + 0];
+                    this.m_pixels[pos + 1] = otherPixels[p * 4 + 1];
+                    this.m_pixels[pos + 2] = otherPixels[p * 4 + 2];
+                    this.m_pixels[pos + 3] = otherPixels[p * 4 + 3];
+                }
+            }
+            //console.log('blit2',this.getPixelCount(), this.m_pixels);
+            //this.m_pixels[0] = this.m_pixels[0] + 1;
+        }
+    }, {
+        key: "overwriteMask",
+        value: function overwriteMask(color) {
+            var insideColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _color.Color.white;
+            var outsideColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _color.Color.alpha;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {}
+    }, {
+        key: "getWidth",
+        value: function getWidth() {
+            return this.m_size.width();
+        }
+    }, {
+        key: "getHeight",
+        value: function getHeight() {
+            return this.m_size.height();
+        }
+    }, {
+        key: "getPixel",
+        value: function getPixel(x, y) {
+            return this.m_pixels.slice((y * this.m_size.width() + x) * this.m_bpp, 4);
+        }
+    }, {
+        key: "getPixelCount",
+        value: function getPixelCount() {
+            return this.m_size.area();
+        }
+    }, {
+        key: "getPixels",
+        value: function getPixels() {
+            return this.m_pixels;
+        }
+    }, {
+        key: "getPixelData",
+        value: function getPixelData() {
+            return this.getPixels();
+        }
+    }], [{
+        key: "load",
+        value: function load(path) {
+            (0, _log.error)('load image', path);
+            return null;
+        }
+    }]);
+
+    return Image;
+}();
 
 /***/ }),
 
-/***/ 142:
+/***/ 182:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_sprites = exports.SpriteManager = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _image = __webpack_require__(181);
+
+var _resources = __webpack_require__(125);
+
+var _log = __webpack_require__(34);
+
+var _game = __webpack_require__(41);
+
+var _const = __webpack_require__(13);
+
+var _size = __webpack_require__(91);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var SpriteManager = exports.SpriteManager = function () {
+    function SpriteManager() {
+        _classCallCheck(this, SpriteManager);
+
+        this.m_loaded = false;
+        this.m_signature = 0;
+        this.m_spritesCount = 0;
+        this.m_spritesOffset = 0;
+        this.m_spritesFile = null;
+        this.m_spriteCache = [];
+    }
+
+    _createClass(SpriteManager, [{
+        key: "loadSpr",
+        value: function loadSpr(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.m_spritesCount = 0;
+                                this.m_signature = 0;
+                                this.m_loaded = false;
+                                _context.prev = 3;
+
+                                console.log(new Date().getTime(), 'spr');
+                                _context.next = 7;
+                                return _resources.g_resources.openFile(file);
+
+                            case 7:
+                                this.m_spritesFile = _context.sent;
+
+                                this.m_signature = this.m_spritesFile.getU32();
+                                this.m_spritesCount = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? this.m_spritesFile.getU32() : this.m_spritesFile.getU16();
+                                this.m_spritesOffset = this.m_spritesFile.tell();
+                                this.m_loaded = true;
+                                console.log(new Date().getTime(), 'spr');
+                                return _context.abrupt("return", true);
+
+                            case 16:
+                                _context.prev = 16;
+                                _context.t0 = _context["catch"](3);
+
+                                _log.Log.error("Failed to load sprites from '%s': %s", file, _context.t0);
+                                return _context.abrupt("return", false);
+
+                            case 20:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[3, 16]]);
+            }));
+        }
+    }, {
+        key: "getSpritesCount",
+        value: function getSpritesCount() {
+            return this.m_spritesCount;
+        }
+    }, {
+        key: "getSpriteImage",
+        value: function getSpriteImage(id) {
+            try {
+                if (id == 0 || !this.m_spritesFile) return null;
+                this.m_spritesFile.seek((id - 1) * 4 + this.m_spritesOffset);
+                var spriteAddress = this.m_spritesFile.getU32();
+                // no sprite? return an empty texture
+                if (spriteAddress == 0) return null;
+                if (this.m_spriteCache[spriteAddress]) {
+                    return this.m_spriteCache[spriteAddress];
+                }
+                this.m_spritesFile.seek(spriteAddress);
+                // skip color key
+                this.m_spritesFile.getU8();
+                this.m_spritesFile.getU8();
+                this.m_spritesFile.getU8();
+                var pixelDataSize = this.m_spritesFile.getU16();
+                var image = new _image.Image(new _size.Size(SpriteManager.SPRITE_SIZE, SpriteManager.SPRITE_SIZE));
+                var pixels = image.getPixelData();
+                var writePos = 0;
+                var read = 0;
+                var useAlpha = _game.g_game.getFeature(_const.GameFeature.GameSpritesAlphaChannel);
+                var channels = useAlpha ? 4 : 3;
+                // decompress pixels
+                while (read < pixelDataSize && writePos < SpriteManager.SPRITE_DATA_SIZE) {
+                    var transparentPixels = this.m_spritesFile.getU16();
+                    var coloredPixels = this.m_spritesFile.getU16();
+                    for (var i = 0; i < transparentPixels && writePos < SpriteManager.SPRITE_DATA_SIZE; i++) {
+                        pixels[writePos + 0] = 0x00;
+                        pixels[writePos + 1] = 0x00;
+                        pixels[writePos + 2] = 0x00;
+                        pixels[writePos + 3] = 0x00;
+                        writePos += 4;
+                    }
+                    for (var _i = 0; _i < coloredPixels && writePos < SpriteManager.SPRITE_DATA_SIZE; _i++) {
+                        pixels[writePos + 0] = this.m_spritesFile.getU8();
+                        pixels[writePos + 1] = this.m_spritesFile.getU8();
+                        pixels[writePos + 2] = this.m_spritesFile.getU8();
+                        pixels[writePos + 3] = useAlpha ? this.m_spritesFile.getU8() : 0xFF;
+                        writePos += 4;
+                    }
+                    read += 4 + channels * coloredPixels;
+                }
+                // fill remaining pixels with alpha
+                while (writePos < SpriteManager.SPRITE_DATA_SIZE) {
+                    pixels[writePos + 0] = 0x00;
+                    pixels[writePos + 1] = 0x00;
+                    pixels[writePos + 2] = 0x00;
+                    pixels[writePos + 3] = 0x00;
+                    writePos += 4;
+                }
+                this.m_spriteCache[spriteAddress] = image;
+                return image;
+            } catch (e) {
+                _log.Log.error("Failed to get sprite id %d: %s", id, e);
+                return null;
+            }
+        }
+    }]);
+
+    return SpriteManager;
+}();
+
+SpriteManager.SPRITE_SIZE = 32;
+SpriteManager.SPRITE_DATA_SIZE = SpriteManager.SPRITE_SIZE * SpriteManager.SPRITE_SIZE * 4;
+var g_sprites = new SpriteManager();
+exports.g_sprites = g_sprites;
+
+/***/ }),
+
+/***/ 183:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Painter = function () {
+    function Painter() {
+        _classCallCheck(this, Painter);
+
+        this.app = new PIXI.Application(800, 600, { transparent: true });
+        document.body.appendChild(this.app.view);
+        this.app.stage.interactive = true;
+        //this.container = new PIXI.particles.ParticleContainer();
+        //this.app.stage.addChild(this.container);
+        this.app.stage.on('mousemove', onPointerMove).on('touchmove', onPointerMove);
+        function onPointerMove(eventData) {}
+    }
+
+    _createClass(Painter, [{
+        key: 'drawTexturedRect',
+        value: function drawTexturedRect(dest, texture, src) {
+            if (dest.isEmpty() || src.isEmpty()) {
+                throw new Error('empty');
+                //return;
+            }
+            var pixiTexture = texture.getPixiTexture();
+            var pixiSprite = new PIXI.Sprite(pixiTexture);
+            pixiSprite.position.x = dest.left() + 400;
+            pixiSprite.position.y = dest.top() + 300;
+            pixiSprite.width = src.width();
+            pixiSprite.height = src.height();
+            console.log('addchild', dest, src, pixiTexture.width, pixiTexture.height);
+            this.app.stage.addChild(pixiSprite);
+            // const awareRange = g_map.getAwareRange();
+            // var painterview = document.getElementById('painterview');
+            // let image : Image = texture.tmp_img;
+            // var el = <HTMLCanvasElement> document.getElementById("myCanvas");
+            // var $ctx = el.getContext('2d');
+            // var id = $ctx.createImageData(1,1);
+            // for (let i = 0; i < image.getPixelCount(); ++i) {
+            //
+            //     let x = i % image.getWidth();
+            //     let y = toInt(i / image.getWidth());
+            //     let pos = ((y) * image.getWidth() + (x)) * 4;
+            //     let r = image.m_pixels[pos];
+            //     let g = image.m_pixels[pos+1];
+            //     let b = image.m_pixels[pos+2];
+            //     let a = image.m_pixels[pos+3];
+            //
+            //     //a=128;
+            //     $ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (a / 255) + ')';
+            //     $ctx.fillRect(dest.x + x + 260, dest.y + y+270, 1, 1);
+            // }
+        }
+    }]);
+
+    return Painter;
+}();
+
+var g_painter = new Painter();
+exports.g_painter = g_painter;
+
+/***/ }),
+
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1034,9 +1880,9 @@ exports.Rect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _size2 = __webpack_require__(73);
+var _size2 = __webpack_require__(91);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1387,7 +2233,7 @@ var Rect = exports.Rect = function () {
 
 /***/ }),
 
-/***/ 143:
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1396,132 +2242,506 @@ var Rect = exports.Rect = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.g_resources = undefined;
+exports.Outfit = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputfile = __webpack_require__(362);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _color = __webpack_require__(56);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+var Outfit = exports.Outfit = function () {
+    function Outfit() {
+        _classCallCheck(this, Outfit);
 
-var Resources = function () {
-    function Resources() {
-        _classCallCheck(this, Resources);
+        this.m_category = _const.ThingCategory.ThingCategoryCreature;
+        this.m_id = 128;
+        this.m_auxId = 0;
+        this.resetClothes();
     }
 
-    _createClass(Resources, [{
-        key: "openFile",
-        value: function openFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var get, response, uInt8Array;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                get = function get(url) {
-                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                        return regeneratorRuntime.wrap(function _callee$(_context) {
-                                            while (1) {
-                                                switch (_context.prev = _context.next) {
-                                                    case 0:
-                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.responseType = 'arraybuffer';
-                                                            xhr.onload = function (e) {
-                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
-                                                            };
-                                                            xhr.onerror = function (e) {
-                                                                reject(e);
-                                                            };
-                                                            xhr.open('GET', url, true); //Async
-                                                            xhr.send();
-                                                        }));
-
-                                                    case 1:
-                                                    case "end":
-                                                        return _context.stop();
-                                                }
-                                            }
-                                        }, _callee, this);
-                                    }));
-                                };
-
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return get(file);
-
-                            case 4:
-                                response = _context2.sent;
-
-                                console.log('r', response);
-                                uInt8Array = new Uint8Array(response);
-                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
-
-                            case 10:
-                                _context2.prev = 10;
-                                _context2.t0 = _context2["catch"](1);
-
-                                _log.Log.debug('failed to openFile', _context2.t0);
-                                throw _context2.t0;
-
-                            case 14:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 10]]);
-            }));
+    _createClass(Outfit, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "getAuxId",
+        value: function getAuxId() {
+            return this.m_auxId;
+        }
+    }, {
+        key: "getHead",
+        value: function getHead() {
+            return this.m_head;
+        }
+    }, {
+        key: "getBody",
+        value: function getBody() {
+            return this.m_body;
+        }
+    }, {
+        key: "getLegs",
+        value: function getLegs() {
+            return this.m_legs;
+        }
+    }, {
+        key: "getFeet",
+        value: function getFeet() {
+            return this.m_feet;
+        }
+    }, {
+        key: "getAddons",
+        value: function getAddons() {
+            return this.m_addons;
+        }
+    }, {
+        key: "getMount",
+        value: function getMount() {
+            return this.m_mount;
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return this.m_category;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(id) {
+            this.m_auxId = id;
+        }
+    }, {
+        key: "setHead",
+        value: function setHead(head) {
+            this.m_head = head;
+            this.m_headColor = Outfit.getColor(head);
+        }
+    }, {
+        key: "setBody",
+        value: function setBody(body) {
+            this.m_body = body;
+            this.m_bodyColor = Outfit.getColor(body);
+        }
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {
+            this.m_legs = legs;
+            this.m_legsColor = Outfit.getColor(legs);
+        }
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {
+            this.m_feet = feet;
+            this.m_feetColor = Outfit.getColor(feet);
+        }
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {
+            this.m_addons = addons;
+        }
+    }, {
+        key: "setMount",
+        value: function setMount(mount) {
+            this.m_mount = mount;
+        }
+    }, {
+        key: "setCategory",
+        value: function setCategory(category) {
+            this.m_category = category;
+        }
+    }, {
+        key: "resetClothes",
+        value: function resetClothes() {
+            this.setHead(0);
+            this.setBody(0);
+            this.setLegs(0);
+            this.setFeet(0);
+            this.setMount(0);
+        }
+    }], [{
+        key: "getColor",
+        value: function getColor(color) {
+            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
+            var loc1 = 0,
+                loc2 = 0,
+                loc3 = 0;
+            if (color % Outfit.HSI_H_STEPS != 0) {
+                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
+                loc2 = 1;
+                loc3 = 1;
+                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
+                    case 0:
+                        loc2 = 0.25;
+                        loc3 = 1.00;
+                        break;
+                    case 1:
+                        loc2 = 0.25;
+                        loc3 = 0.75;
+                        break;
+                    case 2:
+                        loc2 = 0.50;
+                        loc3 = 0.75;
+                        break;
+                    case 3:
+                        loc2 = 0.667;
+                        loc3 = 0.75;
+                        break;
+                    case 4:
+                        loc2 = 1.00;
+                        loc3 = 1.00;
+                        break;
+                    case 5:
+                        loc2 = 1.00;
+                        loc3 = 0.75;
+                        break;
+                    case 6:
+                        loc2 = 1.00;
+                        loc3 = 0.50;
+                        break;
+                }
+            } else {
+                loc1 = 0;
+                loc2 = 0;
+                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
+            }
+            if (loc3 == 0) return new _color.Color(0, 0, 0);
+            if (loc2 == 0) {
+                var loc7 = Math.floor(loc3 * 255);
+                return new _color.Color(loc7, loc7, loc7);
+            }
+            var red = 0,
+                green = 0,
+                blue = 0;
+            if (loc1 < 1.0 / 6.0) {
+                red = loc3;
+                blue = loc3 * (1 - loc2);
+                green = blue + (loc3 - blue) * 6 * loc1;
+            } else if (loc1 < 2.0 / 6.0) {
+                green = loc3;
+                blue = loc3 * (1 - loc2);
+                red = green - (loc3 - blue) * (6 * loc1 - 1);
+            } else if (loc1 < 3.0 / 6.0) {
+                green = loc3;
+                red = loc3 * (1 - loc2);
+                blue = red + (loc3 - red) * (6 * loc1 - 2);
+            } else if (loc1 < 4.0 / 6.0) {
+                blue = loc3;
+                red = loc3 * (1 - loc2);
+                green = blue - (loc3 - red) * (6 * loc1 - 3);
+            } else if (loc1 < 5.0 / 6.0) {
+                blue = loc3;
+                green = loc3 * (1 - loc2);
+                red = green + (loc3 - green) * (6 * loc1 - 4);
+            } else {
+                red = loc3;
+                green = loc3 * (1 - loc2);
+                blue = red - (loc3 - green) * (6 * loc1 - 5);
+            }
+            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
         }
     }]);
 
-    return Resources;
+    return Outfit;
 }();
 
-var g_resources = new Resources();
-exports.g_resources = g_resources;
-/*
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
-xhr.responseType = 'arraybuffer';
-xhr.onload = function(e) {
-  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
-  // var byte3 = uInt8Array[4]; // byte at offset 4
-console.log(uInt8Array);
-};
-
-xhr.send();
- */
+Outfit.HSI_SI_VALUES = 7;
+Outfit.HSI_H_STEPS = 19;
 
 /***/ }),
 
-/***/ 144:
+/***/ 186:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Proto;
+(function (Proto) {
+    Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
+    Proto[Proto["LoginServerMotd"] = 20] = "LoginServerMotd";
+    Proto[Proto["LoginServerUpdateNeeded"] = 30] = "LoginServerUpdateNeeded";
+    Proto[Proto["LoginServerCharacterList"] = 100] = "LoginServerCharacterList";
+    Proto[Proto["StaticText"] = 96] = "StaticText";
+    Proto[Proto["UnknownCreature"] = 97] = "UnknownCreature";
+    Proto[Proto["OutdatedCreature"] = 98] = "OutdatedCreature";
+    Proto[Proto["Creature"] = 99] = "Creature";
+    Proto[Proto["GameServerLoginOrPendingState"] = 10] = "GameServerLoginOrPendingState";
+    Proto[Proto["GameServerGMActions"] = 11] = "GameServerGMActions";
+    Proto[Proto["GameServerEnterGame"] = 15] = "GameServerEnterGame";
+    Proto[Proto["GameServerUpdateNeeded"] = 17] = "GameServerUpdateNeeded";
+    Proto[Proto["GameServerLoginError"] = 20] = "GameServerLoginError";
+    Proto[Proto["GameServerLoginAdvice"] = 21] = "GameServerLoginAdvice";
+    Proto[Proto["GameServerLoginWait"] = 22] = "GameServerLoginWait";
+    Proto[Proto["GameServerLoginSuccess"] = 23] = "GameServerLoginSuccess";
+    Proto[Proto["GameServerLoginToken"] = 24] = "GameServerLoginToken";
+    Proto[Proto["GameServerStoreButtonIndicators"] = 25] = "GameServerStoreButtonIndicators";
+    Proto[Proto["GameServerPingBack"] = 29] = "GameServerPingBack";
+    Proto[Proto["GameServerPing"] = 30] = "GameServerPing";
+    Proto[Proto["GameServerChallenge"] = 31] = "GameServerChallenge";
+    Proto[Proto["GameServerDeath"] = 40] = "GameServerDeath";
+    Proto[Proto["GameServerFirstGameOpcode"] = 50] = "GameServerFirstGameOpcode";
+    Proto[Proto["GameServerExtendedOpcode"] = 50] = "GameServerExtendedOpcode";
+    Proto[Proto["GameServerChangeMapAwareRange"] = 51] = "GameServerChangeMapAwareRange";
+    Proto[Proto["GameServerFullMap"] = 100] = "GameServerFullMap";
+    Proto[Proto["GameServerMapTopRow"] = 101] = "GameServerMapTopRow";
+    Proto[Proto["GameServerMapRightRow"] = 102] = "GameServerMapRightRow";
+    Proto[Proto["GameServerMapBottomRow"] = 103] = "GameServerMapBottomRow";
+    Proto[Proto["GameServerMapLeftRow"] = 104] = "GameServerMapLeftRow";
+    Proto[Proto["GameServerUpdateTile"] = 105] = "GameServerUpdateTile";
+    Proto[Proto["GameServerCreateOnMap"] = 106] = "GameServerCreateOnMap";
+    Proto[Proto["GameServerChangeOnMap"] = 107] = "GameServerChangeOnMap";
+    Proto[Proto["GameServerDeleteOnMap"] = 108] = "GameServerDeleteOnMap";
+    Proto[Proto["GameServerMoveCreature"] = 109] = "GameServerMoveCreature";
+    Proto[Proto["GameServerOpenContainer"] = 110] = "GameServerOpenContainer";
+    Proto[Proto["GameServerCloseContainer"] = 111] = "GameServerCloseContainer";
+    Proto[Proto["GameServerCreateContainer"] = 112] = "GameServerCreateContainer";
+    Proto[Proto["GameServerChangeInContainer"] = 113] = "GameServerChangeInContainer";
+    Proto[Proto["GameServerDeleteInContainer"] = 114] = "GameServerDeleteInContainer";
+    Proto[Proto["GameServerSetInventory"] = 120] = "GameServerSetInventory";
+    Proto[Proto["GameServerDeleteInventory"] = 121] = "GameServerDeleteInventory";
+    Proto[Proto["GameServerOpenNpcTrade"] = 122] = "GameServerOpenNpcTrade";
+    Proto[Proto["GameServerPlayerGoods"] = 123] = "GameServerPlayerGoods";
+    Proto[Proto["GameServerCloseNpcTrade"] = 124] = "GameServerCloseNpcTrade";
+    Proto[Proto["GameServerOwnTrade"] = 125] = "GameServerOwnTrade";
+    Proto[Proto["GameServerCounterTrade"] = 126] = "GameServerCounterTrade";
+    Proto[Proto["GameServerCloseTrade"] = 127] = "GameServerCloseTrade";
+    Proto[Proto["GameServerAmbient"] = 130] = "GameServerAmbient";
+    Proto[Proto["GameServerGraphicalEffect"] = 131] = "GameServerGraphicalEffect";
+    Proto[Proto["GameServerTextEffect"] = 132] = "GameServerTextEffect";
+    Proto[Proto["GameServerMissleEffect"] = 133] = "GameServerMissleEffect";
+    Proto[Proto["GameServerMarkCreature"] = 134] = "GameServerMarkCreature";
+    Proto[Proto["GameServerTrappers"] = 135] = "GameServerTrappers";
+    Proto[Proto["GameServerCreatureHealth"] = 140] = "GameServerCreatureHealth";
+    Proto[Proto["GameServerCreatureLight"] = 141] = "GameServerCreatureLight";
+    Proto[Proto["GameServerCreatureOutfit"] = 142] = "GameServerCreatureOutfit";
+    Proto[Proto["GameServerCreatureSpeed"] = 143] = "GameServerCreatureSpeed";
+    Proto[Proto["GameServerCreatureSkull"] = 144] = "GameServerCreatureSkull";
+    Proto[Proto["GameServerCreatureParty"] = 145] = "GameServerCreatureParty";
+    Proto[Proto["GameServerCreatureUnpass"] = 146] = "GameServerCreatureUnpass";
+    Proto[Proto["GameServerCreatureMarks"] = 147] = "GameServerCreatureMarks";
+    Proto[Proto["GameServerPlayerHelpers"] = 148] = "GameServerPlayerHelpers";
+    Proto[Proto["GameServerCreatureType"] = 149] = "GameServerCreatureType";
+    Proto[Proto["GameServerEditText"] = 150] = "GameServerEditText";
+    Proto[Proto["GameServerEditList"] = 151] = "GameServerEditList";
+    Proto[Proto["GameServerBlessings"] = 156] = "GameServerBlessings";
+    Proto[Proto["GameServerPreset"] = 157] = "GameServerPreset";
+    Proto[Proto["GameServerPremiumTrigger"] = 158] = "GameServerPremiumTrigger";
+    Proto[Proto["GameServerPlayerDataBasic"] = 159] = "GameServerPlayerDataBasic";
+    Proto[Proto["GameServerPlayerData"] = 160] = "GameServerPlayerData";
+    Proto[Proto["GameServerPlayerSkills"] = 161] = "GameServerPlayerSkills";
+    Proto[Proto["GameServerPlayerState"] = 162] = "GameServerPlayerState";
+    Proto[Proto["GameServerClearTarget"] = 163] = "GameServerClearTarget";
+    Proto[Proto["GameServerPlayerModes"] = 167] = "GameServerPlayerModes";
+    Proto[Proto["GameServerSpellDelay"] = 164] = "GameServerSpellDelay";
+    Proto[Proto["GameServerSpellGroupDelay"] = 165] = "GameServerSpellGroupDelay";
+    Proto[Proto["GameServerMultiUseDelay"] = 166] = "GameServerMultiUseDelay";
+    Proto[Proto["GameServerSetStoreDeepLink"] = 168] = "GameServerSetStoreDeepLink";
+    Proto[Proto["GameServerTalk"] = 170] = "GameServerTalk";
+    Proto[Proto["GameServerChannels"] = 171] = "GameServerChannels";
+    Proto[Proto["GameServerOpenChannel"] = 172] = "GameServerOpenChannel";
+    Proto[Proto["GameServerOpenPrivateChannel"] = 173] = "GameServerOpenPrivateChannel";
+    Proto[Proto["GameServerRuleViolationChannel"] = 174] = "GameServerRuleViolationChannel";
+    Proto[Proto["GameServerRuleViolationRemove"] = 175] = "GameServerRuleViolationRemove";
+    Proto[Proto["GameServerRuleViolationCancel"] = 176] = "GameServerRuleViolationCancel";
+    Proto[Proto["GameServerRuleViolationLock"] = 177] = "GameServerRuleViolationLock";
+    Proto[Proto["GameServerOpenOwnChannel"] = 178] = "GameServerOpenOwnChannel";
+    Proto[Proto["GameServerCloseChannel"] = 179] = "GameServerCloseChannel";
+    Proto[Proto["GameServerTextMessage"] = 180] = "GameServerTextMessage";
+    Proto[Proto["GameServerCancelWalk"] = 181] = "GameServerCancelWalk";
+    Proto[Proto["GameServerWalkWait"] = 182] = "GameServerWalkWait";
+    Proto[Proto["GameServerUnjustifiedStats"] = 183] = "GameServerUnjustifiedStats";
+    Proto[Proto["GameServerPvpSituations"] = 184] = "GameServerPvpSituations";
+    Proto[Proto["GameServerFloorChangeUp"] = 190] = "GameServerFloorChangeUp";
+    Proto[Proto["GameServerFloorChangeDown"] = 191] = "GameServerFloorChangeDown";
+    Proto[Proto["GameServerChooseOutfit"] = 200] = "GameServerChooseOutfit";
+    Proto[Proto["GameServerVipAdd"] = 210] = "GameServerVipAdd";
+    Proto[Proto["GameServerVipState"] = 211] = "GameServerVipState";
+    Proto[Proto["GameServerVipLogout"] = 212] = "GameServerVipLogout";
+    Proto[Proto["GameServerTutorialHint"] = 220] = "GameServerTutorialHint";
+    Proto[Proto["GameServerAutomapFlag"] = 221] = "GameServerAutomapFlag";
+    Proto[Proto["GameServerCoinBalance"] = 223] = "GameServerCoinBalance";
+    Proto[Proto["GameServerStoreError"] = 224] = "GameServerStoreError";
+    Proto[Proto["GameServerRequestPurchaseData"] = 225] = "GameServerRequestPurchaseData";
+    Proto[Proto["GameServerQuestLog"] = 240] = "GameServerQuestLog";
+    Proto[Proto["GameServerQuestLine"] = 241] = "GameServerQuestLine";
+    Proto[Proto["GameServerCoinBalanceUpdating"] = 242] = "GameServerCoinBalanceUpdating";
+    Proto[Proto["GameServerChannelEvent"] = 243] = "GameServerChannelEvent";
+    Proto[Proto["GameServerItemInfo"] = 244] = "GameServerItemInfo";
+    Proto[Proto["GameServerPlayerInventory"] = 245] = "GameServerPlayerInventory";
+    Proto[Proto["GameServerMarketEnter"] = 246] = "GameServerMarketEnter";
+    Proto[Proto["GameServerMarketLeave"] = 247] = "GameServerMarketLeave";
+    Proto[Proto["GameServerMarketDetail"] = 248] = "GameServerMarketDetail";
+    Proto[Proto["GameServerMarketBrowse"] = 249] = "GameServerMarketBrowse";
+    Proto[Proto["GameServerModalDialog"] = 250] = "GameServerModalDialog";
+    Proto[Proto["GameServerStore"] = 251] = "GameServerStore";
+    Proto[Proto["GameServerStoreOffers"] = 252] = "GameServerStoreOffers";
+    Proto[Proto["GameServerStoreTransactionHistory"] = 253] = "GameServerStoreTransactionHistory";
+    Proto[Proto["GameServerStoreCompletePurchase"] = 254] = "GameServerStoreCompletePurchase";
+    Proto[Proto["ClientEnterAccount"] = 1] = "ClientEnterAccount";
+    Proto[Proto["ClientPendingGame"] = 10] = "ClientPendingGame";
+    Proto[Proto["ClientEnterGame"] = 15] = "ClientEnterGame";
+    Proto[Proto["ClientLeaveGame"] = 20] = "ClientLeaveGame";
+    Proto[Proto["ClientPing"] = 29] = "ClientPing";
+    Proto[Proto["ClientPingBack"] = 30] = "ClientPingBack";
+    Proto[Proto["ClientFirstGameOpcode"] = 50] = "ClientFirstGameOpcode";
+    Proto[Proto["ClientExtendedOpcode"] = 50] = "ClientExtendedOpcode";
+    Proto[Proto["ClientChangeMapAwareRange"] = 51] = "ClientChangeMapAwareRange";
+    Proto[Proto["ClientAutoWalk"] = 100] = "ClientAutoWalk";
+    Proto[Proto["ClientWalkNorth"] = 101] = "ClientWalkNorth";
+    Proto[Proto["ClientWalkEast"] = 102] = "ClientWalkEast";
+    Proto[Proto["ClientWalkSouth"] = 103] = "ClientWalkSouth";
+    Proto[Proto["ClientWalkWest"] = 104] = "ClientWalkWest";
+    Proto[Proto["ClientStop"] = 105] = "ClientStop";
+    Proto[Proto["ClientWalkNorthEast"] = 106] = "ClientWalkNorthEast";
+    Proto[Proto["ClientWalkSouthEast"] = 107] = "ClientWalkSouthEast";
+    Proto[Proto["ClientWalkSouthWest"] = 108] = "ClientWalkSouthWest";
+    Proto[Proto["ClientWalkNorthWest"] = 109] = "ClientWalkNorthWest";
+    Proto[Proto["ClientTurnNorth"] = 111] = "ClientTurnNorth";
+    Proto[Proto["ClientTurnEast"] = 112] = "ClientTurnEast";
+    Proto[Proto["ClientTurnSouth"] = 113] = "ClientTurnSouth";
+    Proto[Proto["ClientTurnWest"] = 114] = "ClientTurnWest";
+    Proto[Proto["ClientEquipItem"] = 119] = "ClientEquipItem";
+    Proto[Proto["ClientMove"] = 120] = "ClientMove";
+    Proto[Proto["ClientInspectNpcTrade"] = 121] = "ClientInspectNpcTrade";
+    Proto[Proto["ClientBuyItem"] = 122] = "ClientBuyItem";
+    Proto[Proto["ClientSellItem"] = 123] = "ClientSellItem";
+    Proto[Proto["ClientCloseNpcTrade"] = 124] = "ClientCloseNpcTrade";
+    Proto[Proto["ClientRequestTrade"] = 125] = "ClientRequestTrade";
+    Proto[Proto["ClientInspectTrade"] = 126] = "ClientInspectTrade";
+    Proto[Proto["ClientAcceptTrade"] = 127] = "ClientAcceptTrade";
+    Proto[Proto["ClientRejectTrade"] = 128] = "ClientRejectTrade";
+    Proto[Proto["ClientUseItem"] = 130] = "ClientUseItem";
+    Proto[Proto["ClientUseItemWith"] = 131] = "ClientUseItemWith";
+    Proto[Proto["ClientUseOnCreature"] = 132] = "ClientUseOnCreature";
+    Proto[Proto["ClientRotateItem"] = 133] = "ClientRotateItem";
+    Proto[Proto["ClientCloseContainer"] = 135] = "ClientCloseContainer";
+    Proto[Proto["ClientUpContainer"] = 136] = "ClientUpContainer";
+    Proto[Proto["ClientEditText"] = 137] = "ClientEditText";
+    Proto[Proto["ClientEditList"] = 138] = "ClientEditList";
+    Proto[Proto["ClientLook"] = 140] = "ClientLook";
+    Proto[Proto["ClientLookCreature"] = 141] = "ClientLookCreature";
+    Proto[Proto["ClientTalk"] = 150] = "ClientTalk";
+    Proto[Proto["ClientRequestChannels"] = 151] = "ClientRequestChannels";
+    Proto[Proto["ClientJoinChannel"] = 152] = "ClientJoinChannel";
+    Proto[Proto["ClientLeaveChannel"] = 153] = "ClientLeaveChannel";
+    Proto[Proto["ClientOpenPrivateChannel"] = 154] = "ClientOpenPrivateChannel";
+    Proto[Proto["ClientOpenRuleViolation"] = 155] = "ClientOpenRuleViolation";
+    Proto[Proto["ClientCloseRuleViolation"] = 156] = "ClientCloseRuleViolation";
+    Proto[Proto["ClientCancelRuleViolation"] = 157] = "ClientCancelRuleViolation";
+    Proto[Proto["ClientCloseNpcChannel"] = 158] = "ClientCloseNpcChannel";
+    Proto[Proto["ClientChangeFightModes"] = 160] = "ClientChangeFightModes";
+    Proto[Proto["ClientAttack"] = 161] = "ClientAttack";
+    Proto[Proto["ClientFollow"] = 162] = "ClientFollow";
+    Proto[Proto["ClientInviteToParty"] = 163] = "ClientInviteToParty";
+    Proto[Proto["ClientJoinParty"] = 164] = "ClientJoinParty";
+    Proto[Proto["ClientRevokeInvitation"] = 165] = "ClientRevokeInvitation";
+    Proto[Proto["ClientPassLeadership"] = 166] = "ClientPassLeadership";
+    Proto[Proto["ClientLeaveParty"] = 167] = "ClientLeaveParty";
+    Proto[Proto["ClientShareExperience"] = 168] = "ClientShareExperience";
+    Proto[Proto["ClientDisbandParty"] = 169] = "ClientDisbandParty";
+    Proto[Proto["ClientOpenOwnChannel"] = 170] = "ClientOpenOwnChannel";
+    Proto[Proto["ClientInviteToOwnChannel"] = 171] = "ClientInviteToOwnChannel";
+    Proto[Proto["ClientExcludeFromOwnChannel"] = 172] = "ClientExcludeFromOwnChannel";
+    Proto[Proto["ClientCancelAttackAndFollow"] = 190] = "ClientCancelAttackAndFollow";
+    Proto[Proto["ClientUpdateTile"] = 201] = "ClientUpdateTile";
+    Proto[Proto["ClientRefreshContainer"] = 202] = "ClientRefreshContainer";
+    Proto[Proto["ClientBrowseField"] = 203] = "ClientBrowseField";
+    Proto[Proto["ClientSeekInContainer"] = 204] = "ClientSeekInContainer";
+    Proto[Proto["ClientRequestOutfit"] = 210] = "ClientRequestOutfit";
+    Proto[Proto["ClientChangeOutfit"] = 211] = "ClientChangeOutfit";
+    Proto[Proto["ClientMount"] = 212] = "ClientMount";
+    Proto[Proto["ClientAddVip"] = 220] = "ClientAddVip";
+    Proto[Proto["ClientRemoveVip"] = 221] = "ClientRemoveVip";
+    Proto[Proto["ClientEditVip"] = 222] = "ClientEditVip";
+    Proto[Proto["ClientBugReport"] = 230] = "ClientBugReport";
+    Proto[Proto["ClientRuleViolation"] = 231] = "ClientRuleViolation";
+    Proto[Proto["ClientDebugReport"] = 232] = "ClientDebugReport";
+    Proto[Proto["ClientTransferCoins"] = 239] = "ClientTransferCoins";
+    Proto[Proto["ClientRequestQuestLog"] = 240] = "ClientRequestQuestLog";
+    Proto[Proto["ClientRequestQuestLine"] = 241] = "ClientRequestQuestLine";
+    Proto[Proto["ClientNewRuleViolation"] = 242] = "ClientNewRuleViolation";
+    Proto[Proto["ClientRequestItemInfo"] = 243] = "ClientRequestItemInfo";
+    Proto[Proto["ClientMarketLeave"] = 244] = "ClientMarketLeave";
+    Proto[Proto["ClientMarketBrowse"] = 245] = "ClientMarketBrowse";
+    Proto[Proto["ClientMarketCreate"] = 246] = "ClientMarketCreate";
+    Proto[Proto["ClientMarketCancel"] = 247] = "ClientMarketCancel";
+    Proto[Proto["ClientMarketAccept"] = 248] = "ClientMarketAccept";
+    Proto[Proto["ClientAnswerModalDialog"] = 249] = "ClientAnswerModalDialog";
+    Proto[Proto["ClientOpenStore"] = 250] = "ClientOpenStore";
+    Proto[Proto["ClientRequestStoreOffers"] = 251] = "ClientRequestStoreOffers";
+    Proto[Proto["ClientBuyStoreOffer"] = 252] = "ClientBuyStoreOffer";
+    Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
+    Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
+    Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
+    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
+    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
+    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
+    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
+    Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
+    Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
+    Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
+    Proto[Proto["MonsterStartId"] = 1073741824] = "MonsterStartId";
+    Proto[Proto["MonsterEndId"] = 2147483648] = "MonsterEndId";
+    Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
+    Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
+})(Proto || (exports.Proto = Proto = {}));
+exports.Proto = Proto;
+
+/***/ }),
+
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.InputMessage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _binarydatareader = __webpack_require__(126);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
+    _inherits(InputMessage, _BinaryDataReader);
+
+    function InputMessage() {
+        _classCallCheck(this, InputMessage);
+
+        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
+    }
+
+    _createClass(InputMessage, [{
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
+        }
+    }]);
+
+    return InputMessage;
+}(_binarydatareader.BinaryDataReader);
+
+/***/ }),
+
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1534,23 +2754,23 @@ exports.StaticText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _rect = __webpack_require__(142);
+var _rect = __webpack_require__(184);
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(56);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _cachedtext = __webpack_require__(145);
+var _cachedtext = __webpack_require__(127);
 
-var _g_clock = __webpack_require__(146);
+var _g_clock = __webpack_require__(92);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(34);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1719,7 +2939,7 @@ var StaticText = exports.StaticText = function (_Thing) {
 
 /***/ }),
 
-/***/ 145:
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1728,207 +2948,261 @@ var StaticText = exports.StaticText = function (_Thing) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.CachedText = undefined;
+exports.g_mapview = exports.MapView = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _size = __webpack_require__(73);
+var _const = __webpack_require__(13);
+
+var _map = __webpack_require__(55);
+
+var _position = __webpack_require__(62);
+
+var _point = __webpack_require__(42);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var CachedText = exports.CachedText = function () {
-    function CachedText() {
-        _classCallCheck(this, CachedText);
+var MapView = exports.MapView = function () {
+    function MapView() {
+        _classCallCheck(this, MapView);
 
-        this.m_text = null;
-        this.m_textSize = null;
-        this.m_textMustRecache = true;
-        this.m_font = null;
-        this.m_align = null;
+        this.m_customCameraPosition = new _position.Position();
+        this.m_follow = true;
+        this.m_tileSize = 32;
+        this.m_virtualCenterOffset = new _point.Point(0, 0);
     }
 
-    _createClass(CachedText, [{
-        key: 'draw',
-        value: function draw(rect) {
-            if (!this.m_font) return;
-            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
-                this.m_textMustRecache = false;
-                this.m_textCachedScreenCoords = rect;
-                //m_textCoordsBuffer.clear();
-                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+    _createClass(MapView, [{
+        key: "init",
+        value: function init() {}
+    }, {
+        key: "followCreature",
+        value: function followCreature(creature) {
+            this.m_follow = true;
+            this.m_followingCreature = creature;
+        }
+    }, {
+        key: "isFollowingCreature",
+        value: function isFollowingCreature() {
+            return this.m_followingCreature && this.m_follow;
+        }
+    }, {
+        key: "getCameraPosition",
+        value: function getCameraPosition() {
+            if (this.isFollowingCreature()) return this.m_followingCreature.getPosition();
+            return this.m_customCameraPosition;
+        }
+    }, {
+        key: "transformPositionTo2D",
+        value: function transformPositionTo2D(position, relativePosition) {
+            return new _point.Point((this.m_virtualCenterOffset.x + (position.x - relativePosition.x) - (relativePosition.z - position.z)) * this.m_tileSize, (this.m_virtualCenterOffset.y + (position.y - relativePosition.y) - (relativePosition.z - position.z)) * this.m_tileSize);
+        }
+    }, {
+        key: "draw",
+        value: function draw() {
+            /*
+            const awareRange = g_map.getAwareRange();
+            for (let y = 0; y < awareRange.vertical(); ++y) {
+                for (let x = 0; x < awareRange.horizontal(); ++x) {
+                    let tileContainer = this.getTile(x,y,0);
+                    let tile = g_game.getLocalPlayer().getTile();
+                    var text = '';//'<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + tile.getGround().rawGetThingType().getSprites()[0] + '.png">';
+                    var things = tile.m_things;
+                    for (const thing of things) {
+                        if (!thing.isItem())
+                            continue;
+                        const sprite = thing.rawGetThingType().getSprites()[0];
+                        console.error(thing.rawGetThingType())
+                        text = text + '<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + sprite + '.png">';
+                    }
+                    var creatures = tile.getCreatures();
+                    for (const creature of creatures) {
+                         text = text + '<img src="http://outfit-images.ots.me/idleOutfits1092/outfit.php?id=' + creature.m_outfit.m_id
+                            +'&addons=' + creature.m_outfit.m_addons
+                            + '&head=' + creature.m_outfit.m_head
+                            + '&body=' + creature.m_outfit.m_body
+                            + '&legs=' + creature.m_outfit.m_legs
+                            + '&feet=' + creature.m_outfit.m_feet
+                            + '&mount=' + creature.m_outfit.m_mount
+                            + '&direction=' + creature.m_direction
+                            + '">';
+                    }
+                    tileContainer.innerHTML = text;
+                 }
             }
-            //if(m_font->getTexture())
-            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
-        }
-    }, {
-        key: 'wrapText',
-        value: function wrapText(maxWidth) {
-            if (this.m_font) {
-                // update new line positions
-                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
-                this.update();
+            */
+            /*
+                    // update visible tiles cache when needed
+                    if(m_mustUpdateVisibleTilesCache || m_updateTilesPos > 0)
+                        updateVisibleTilesCache(m_mustUpdateVisibleTilesCache ? 0 : m_updateTilesPos);
+            */
+            var scaleFactor = this.m_tileSize / _const.Otc.TILE_PIXELS;
+            var cameraPosition = this.getCameraPosition();
+            var drawFlags = 0;
+            drawFlags = _const.DrawFlags.DrawAnimations;
+            drawFlags |= _const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawWalls | _const.DrawFlags.DrawItems | _const.DrawFlags.DrawCreatures | _const.DrawFlags.DrawEffects | _const.DrawFlags.DrawMissiles;
+            for (var z = cameraPosition.z; z >= cameraPosition.z; --z) {
+                /*
+                if (g_map.isCovered(tilePos, m_cachedFirstVisibleFloor))
+                    tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags);
+                else
+                    tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags, m_lightView.get());
+                */
+                var awareRange = _map.g_map.getAwareRange();
+                for (var y = cameraPosition.y - awareRange.top; y <= cameraPosition.y + awareRange.bottom; ++y) {
+                    for (var x = cameraPosition.x - awareRange.left; x <= cameraPosition.x + awareRange.right; ++x) {
+                        var tilePos = new _position.Position(x, y, z); //cameraPosition.translated(x, y, 0);
+                        //tilePos.z = z;
+                        var tile = _map.g_map.getTile(tilePos);
+                        //console.error('draw', cameraPosition.x, cameraPosition.y, tilePos.x, tilePos.y, tilePos.z, tile);
+                        if (tile) {
+                            var _tilePos = tile.getPosition();
+                            var pos = this.transformPositionTo2D(_tilePos, cameraPosition);
+                            //console.error('draw', tilePos.x, tilePos.y, tilePos.z, cameraPosition.x, cameraPosition.y, scaleFactor);
+                            tile.draw(pos.add(new _point.Point(0, 0)), scaleFactor, drawFlags);
+                            //tile.draw(new Point(), scaleFactor, drawFlags);
+                            //return;
+                        }
+                    }
+                }
+                /*
+                            if(drawFlags & DrawFlags.DrawMissiles) {
+                                for(let missile of g_map.getFloorMissiles(z)) {
+                                    missile->draw(transformPositionTo2D(missile->getPosition(), cameraPosition), scaleFactor, drawFlags & DrawFlags.DrawAnimations, m_lightView.get());
+                                }
+                            }
+                */
             }
+            /*
+            float fadeOpacity = 1.0f;
+            if(!m_shaderSwitchDone && m_fadeOutTime > 0) {
+                fadeOpacity = 1.0f - (m_fadeTimer.timeElapsed() / m_fadeOutTime);
+                if(fadeOpacity < 0.0f) {
+                    m_shader = m_nextShader;
+                    m_nextShader = nullptr;
+                    m_shaderSwitchDone = true;
+                    m_fadeTimer.restart();
+                }
+            }
+             if(m_shaderSwitchDone && m_shader && m_fadeInTime > 0)
+                fadeOpacity = std::min<float>(m_fadeTimer.timeElapsed() / m_fadeInTime, 1.0f);
+             Rect srcRect = calcFramebufferSource(rect.size());
+            Point drawOffset = srcRect.topLeft();
+             if(m_shader && g_painter->hasShaders() && g_graphics.shouldUseShaders() && m_viewMode == NEAR_VIEW) {
+                Rect framebufferRect = Rect(0,0, m_drawDimension * m_tileSize);
+                Point center = srcRect.center();
+                Point globalCoord = Point(cameraPosition.x - m_drawDimension.width()/2, -(cameraPosition.y - m_drawDimension.height()/2)) * m_tileSize;
+                m_shader->bind();
+                m_shader->setUniformValue(ShaderManager::MAP_CENTER_COORD, center.x / (float)framebufferRect.width(), 1.0f - center.y / (float)framebufferRect.height());
+                m_shader->setUniformValue(ShaderManager::MAP_GLOBAL_COORD, globalCoord.x / (float)framebufferRect.height(), globalCoord.y / (float)framebufferRect.height());
+                m_shader->setUniformValue(ShaderManager::MAP_ZOOM, scaleFactor);
+                g_painter->setShaderProgram(m_shader);
+            }
+             g_painter->setColor(Color::white);
+            g_painter->setOpacity(fadeOpacity);
+            glDisable(GL_BLEND);
+            #if 0
+            // debug source area
+                g_painter->saveAndResetState();
+            m_framebuffer->bind();
+            g_painter->setColor(Color::green);
+            g_painter->drawBoundingRect(srcRect, 2);
+            m_framebuffer->release();
+            g_painter->restoreSavedState();
+            m_framebuffer->draw(rect);
+            #else
+            m_framebuffer->draw(rect, srcRect);
+            #endif
+            g_painter->resetShaderProgram();
+            g_painter->resetOpacity();
+            glEnable(GL_BLEND);
+            */
+            // this could happen if the player position is not known yet
+            if (!cameraPosition.isValid()) return;
+            /*
+                    float horizontalStretchFactor = rect.width() / (float)srcRect.width();
+                    float verticalStretchFactor = rect.height() / (float)srcRect.height();
+                     // avoid drawing texts on map in far zoom outs
+                    for(const CreaturePtr& creature : m_cachedFloorVisibleCreatures) {
+                        if(!creature->canBeSeen())
+                        continue;
+                         PointF jumpOffset = creature->getJumpOffset() * scaleFactor;
+                        Point creatureOffset = Point(16 - creature->getDisplacementX(), - creature->getDisplacementY() - 2);
+                        Position pos = creature->getPosition();
+                        Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                        p += (creature->getDrawOffset() + creatureOffset) * scaleFactor - Point(stdext::round(jumpOffset.x), stdext::round(jumpOffset.y));
+                        p.x = p.x * horizontalStretchFactor;
+                        p.y = p.y * verticalStretchFactor;
+                        p += rect.topLeft();
+                         int flags = 0;
+                        if(m_drawNames){ flags = DrawFlags.DrawNames; }
+                        if(m_drawHealthBars) { flags |= DrawFlags.DrawBars; }
+                        if(m_drawManaBar) { flags |= DrawFlags.DrawManaBar; }
+                        creature->drawInformation(p, g_map.isCovered(pos, m_cachedFirstVisibleFloor), rect, flags);
+                    }
+                     // lights are drawn after names and before texts
+                    if(m_drawLights)
+                        m_lightView->draw(rect, srcRect);
+                     if(m_viewMode == NEAR_VIEW && m_drawTexts) {
+                        for(const StaticTextPtr& staticText : g_map.getStaticTexts()) {
+                            Position pos = staticText->getPosition();
+                             // ony draw static texts from current camera floor, unless yells
+                            //if(pos.z != cameraPosition.z && !staticText->isYell())
+                            //    continue;
+                             if(pos.z != cameraPosition.z && staticText->getMessageMode() == Otc::MessageNone)
+                            continue;
+                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                            p.x = p.x * horizontalStretchFactor;
+                            p.y = p.y * verticalStretchFactor;
+                            p += rect.topLeft();
+                            staticText->drawText(p, rect);
+                        }
+                         for(const AnimatedTextPtr& animatedText : g_map.getAnimatedTexts()) {
+                            Position pos = animatedText->getPosition();
+                             if(pos.z != cameraPosition.z)
+                                continue;
+                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                            p.x = p.x * horizontalStretchFactor;
+                            p.y = p.y * verticalStretchFactor;
+                            p += rect.topLeft();
+                            animatedText->drawText(p, rect);
+                        }
+                    }
+                    */
         }
     }, {
-        key: 'setFont',
-        value: function setFont(font) {
-            this.m_font = font;
-            this.update();
+        key: "clear",
+        value: function clear() {}
+    }, {
+        key: "getTileId",
+        value: function getTileId(x, y, z) {
+            return 'tile-' + x + '-' + y;
         }
     }, {
-        key: 'setText',
-        value: function setText(text) {
-            this.m_text = text;
-            this.update();
-        }
-    }, {
-        key: 'setAlign',
-        value: function setAlign(align) {
-            this.m_align = align;
-            this.update();
-        }
-    }, {
-        key: 'getTextSize',
-        value: function getTextSize() {
-            return this.m_textSize;
-        }
-    }, {
-        key: 'getText',
-        value: function getText() {
-            return this.m_text;
-        }
-    }, {
-        key: 'getFont',
-        value: function getFont() {
-            return this.m_font;
-        }
-    }, {
-        key: 'getAlign',
-        value: function getAlign() {
-            return this.m_align;
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            if (this.m_font) this.m_textSize = new _size.Size();
-            /* todo */ //m_font->calculateTextRectSize(m_text);
-            this.m_textMustRecache = true;
+        key: "getTile",
+        value: function getTile(x, y, z) {
+            return document.getElementById(this.getTileId(x, y, z));
         }
     }]);
 
-    return CachedText;
+    return MapView;
 }();
 
-CachedText.ALIGN_LEFT = 'left';
-CachedText.ALIGN_RIGHT = 'right';
+var g_mapview = new MapView();
+exports.g_mapview = g_mapview;
 
 /***/ }),
 
-/***/ 146:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var g_clock = exports.g_clock = function () {
-    function g_clock() {
-        _classCallCheck(this, g_clock);
-    }
-
-    _createClass(g_clock, null, [{
-        key: "millis",
-        value: function millis() {
-            return +new Date();
-        }
-    }]);
-
-    return g_clock;
-}();
-
-/***/ }),
-
-/***/ 147:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Timer = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _g_clock = __webpack_require__(146);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Timer = exports.Timer = function () {
-    function Timer() {
-        _classCallCheck(this, Timer);
-
-        this.m_startTicks = 0;
-        this.m_stopped = false;
-        this.restart();
-    }
-
-    _createClass(Timer, [{
-        key: "restart",
-        value: function restart() {
-            this.m_startTicks = _g_clock.g_clock.millis();
-            this.m_stopped = false;
-        }
-    }, {
-        key: "stop",
-        value: function stop() {
-            this.m_stopped = true;
-        }
-    }, {
-        key: "startTicks",
-        value: function startTicks() {
-            return this.m_startTicks;
-        }
-    }, {
-        key: "ticksElapsed",
-        value: function ticksElapsed() {
-            return _g_clock.g_clock.millis() - this.m_startTicks;
-        }
-    }, {
-        key: "timeElapsed",
-        value: function timeElapsed() {
-            return this.ticksElapsed() / 1000;
-        }
-    }, {
-        key: "running",
-        value: function running() {
-            return !this.m_stopped;
-        }
-    }]);
-
-    return Timer;
-}();
-
-/***/ }),
-
-/***/ 148:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(149);
-module.exports = __webpack_require__(351);
+__webpack_require__(242);
+module.exports = __webpack_require__(444);
 
 
 /***/ }),
 
-/***/ 23:
+/***/ 34:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2004,27 +3278,36 @@ exports.error = error;
 
 /***/ }),
 
-/***/ 351:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jquery = __webpack_require__(352);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_game = exports.Game = undefined;
 
-var $ = _interopRequireWildcard(_jquery);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(11);
+var _localplayer = __webpack_require__(445);
 
-var _game = __webpack_require__(49);
+var _const = __webpack_require__(13);
 
-var _resources = __webpack_require__(143);
+var _thingtypemanager = __webpack_require__(64);
 
-var _movie = __webpack_require__(379);
+var _protocolgame = __webpack_require__(454);
 
-var _mapview = __webpack_require__(380);
+var _map = __webpack_require__(55);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _container = __webpack_require__(464);
+
+var _chatbox = __webpack_require__(465);
+
+var _spritemanager = __webpack_require__(182);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2050,11 +3333,563 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-//import 'jqueryui';
+
+var Game = exports.Game = function () {
+    function Game() {
+        _classCallCheck(this, Game);
+
+        this.m_clientVersion = 0;
+        this.messageModesMap = {};
+        this.m_features = [];
+        this.m_localPlayer = new _localplayer.LocalPlayer();
+    }
+
+    _createClass(Game, [{
+        key: "processCloseChannel",
+        value: function processCloseChannel(channelId) {
+            _chatbox.g_chat.removeTab(channelId);
+        }
+    }, {
+        key: "processOpenChannel",
+        value: function processOpenChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processOpenOwnPrivateChannel",
+        value: function processOpenOwnPrivateChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processTalk",
+        value: function processTalk(name, level, mode, message, channelId, creaturePos) {
+            //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+            _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        }
+    }, {
+        key: "setClientVersion",
+        value: function setClientVersion(version) {
+            this.m_clientVersion = version;
+            this.updateMessageModesMap(version);
+            this.updateFeatures(version);
+        }
+    }, {
+        key: "loadDatFile",
+        value: function loadDatFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return _thingtypemanager.g_things.loadDat(file);
+
+                            case 2:
+                                return _context.abrupt("return", _context.sent);
+
+                            case 3:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+        }
+    }, {
+        key: "loadSprFile",
+        value: function loadSprFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return _spritemanager.g_sprites.loadSpr(file);
+
+                            case 2:
+                                return _context2.abrupt("return", _context2.sent);
+
+                            case 3:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+        }
+    }, {
+        key: "updateMessageModesMap",
+        value: function updateMessageModesMap(version) {
+            this.messageModesMap = {};
+            if (version >= 1094) {
+                this.messageModesMap[_const.MessageMode.MessageMana] = 43;
+            }
+            if (version >= 1055) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 5;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 8;
+                this.messageModesMap[_const.MessageMode.MessageSpell] = 9;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 10;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18; // Admin
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageGameHighlight] = 20;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageDamageDealed] = 23;
+                this.messageModesMap[_const.MessageMode.MessageDamageReceived] = 24;
+                this.messageModesMap[_const.MessageMode.MessageHeal] = 25;
+                this.messageModesMap[_const.MessageMode.MessageExp] = 26;
+                this.messageModesMap[_const.MessageMode.MessageDamageOthers] = 27;
+                this.messageModesMap[_const.MessageMode.MessageHealOthers] = 28;
+                this.messageModesMap[_const.MessageMode.MessageExpOthers] = 29;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 30;
+                this.messageModesMap[_const.MessageMode.MessageLoot] = 31;
+                this.messageModesMap[_const.MessageMode.MessageTradeNpc] = 32;
+                this.messageModesMap[_const.MessageMode.MessageGuild] = 33;
+                this.messageModesMap[_const.MessageMode.MessagePartyManagement] = 34;
+                this.messageModesMap[_const.MessageMode.MessageParty] = 35;
+                this.messageModesMap[_const.MessageMode.MessageBarkLow] = 36;
+                this.messageModesMap[_const.MessageMode.MessageBarkLoud] = 37;
+                this.messageModesMap[_const.MessageMode.MessageReport] = 38;
+                this.messageModesMap[_const.MessageMode.MessageHotkeyUse] = 39;
+                this.messageModesMap[_const.MessageMode.MessageTutorialHint] = 40;
+                this.messageModesMap[_const.MessageMode.MessageThankyou] = 41;
+                this.messageModesMap[_const.MessageMode.MessageMarket] = 42;
+            } else if (version >= 1036) {
+                for (var i = _const.MessageMode.MessageNone; i <= _const.MessageMode.MessageBeyondLast; ++i) {
+                    if (i >= _const.MessageMode.MessageNpcTo) this.messageModesMap[i] = i + 1;else this.messageModesMap[i] = i;
+                }
+            } else if (version >= 900) {
+                for (var _i = _const.MessageMode.MessageNone; _i <= _const.MessageMode.MessageBeyondLast; ++_i) {
+                    this.messageModesMap[_i] = _i;
+                }
+            } else if (version >= 861) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 13;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 14;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 18;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 19;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 20;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 21;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 22;
+            } else if (version >= 840) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 9;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 10;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 14;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 15;
+                // 16, 17 ??
+                this.messageModesMap[_const.MessageMode.MessageRed] = 18;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 19;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 20;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 21;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 22;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 23;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 24;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 25;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 26;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 27;
+            } else if (version >= 760) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 5;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 6;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 7;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                // 13, 14, 15 ??
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 16;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 20;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 23;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 24;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 25;
+            }
+        }
+    }, {
+        key: "updateFeatures",
+        value: function updateFeatures(version) {
+            this.m_features = [];
+            this.enableFeature(_const.GameFeature.GameFormatCreatureName);
+            if (version >= 770) {
+                this.enableFeature(_const.GameFeature.GameLooktypeU16);
+                this.enableFeature(_const.GameFeature.GameMessageStatements);
+                this.enableFeature(_const.GameFeature.GameLoginPacketEncryption);
+            }
+            if (version >= 780) {
+                this.enableFeature(_const.GameFeature.GamePlayerAddons);
+                this.enableFeature(_const.GameFeature.GamePlayerStamina);
+                this.enableFeature(_const.GameFeature.GameNewFluids);
+                this.enableFeature(_const.GameFeature.GameMessageLevel);
+                this.enableFeature(_const.GameFeature.GamePlayerStateU16);
+                this.enableFeature(_const.GameFeature.GameNewOutfitProtocol);
+            }
+            if (version >= 790) {
+                this.enableFeature(_const.GameFeature.GameWritableDate);
+            }
+            if (version >= 840) {
+                this.enableFeature(_const.GameFeature.GameProtocolChecksum);
+                this.enableFeature(_const.GameFeature.GameAccountNames);
+                this.enableFeature(_const.GameFeature.GameDoubleFreeCapacity);
+            }
+            if (version >= 841) {
+                this.enableFeature(_const.GameFeature.GameChallengeOnLogin);
+                this.enableFeature(_const.GameFeature.GameMessageSizeCheck);
+            }
+            if (version >= 854) {
+                this.enableFeature(_const.GameFeature.GameCreatureEmblems);
+            }
+            if (version >= 860) {
+                this.enableFeature(_const.GameFeature.GameAttackSeq);
+            }
+            if (version >= 862) {
+                this.enableFeature(_const.GameFeature.GamePenalityOnDeath);
+            }
+            if (version >= 870) {
+                this.enableFeature(_const.GameFeature.GameDoubleExperience);
+                this.enableFeature(_const.GameFeature.GamePlayerMounts);
+                this.enableFeature(_const.GameFeature.GameSpellList);
+            }
+            if (version >= 910) {
+                this.enableFeature(_const.GameFeature.GameNameOnNpcTrade);
+                this.enableFeature(_const.GameFeature.GameTotalCapacity);
+                this.enableFeature(_const.GameFeature.GameSkillsBase);
+                this.enableFeature(_const.GameFeature.GamePlayerRegenerationTime);
+                this.enableFeature(_const.GameFeature.GameChannelPlayerList);
+                this.enableFeature(_const.GameFeature.GameEnvironmentEffect);
+                this.enableFeature(_const.GameFeature.GameItemAnimationPhase);
+            }
+            if (version >= 940) {
+                this.enableFeature(_const.GameFeature.GamePlayerMarket);
+            }
+            if (version >= 953) {
+                this.enableFeature(_const.GameFeature.GamePurseSlot);
+                this.enableFeature(_const.GameFeature.GameClientPing);
+            }
+            if (version >= 960) {
+                this.enableFeature(_const.GameFeature.GameSpritesU32);
+                this.enableFeature(_const.GameFeature.GameOfflineTrainingTime);
+            }
+            if (version >= 963) {
+                this.enableFeature(_const.GameFeature.GameAdditionalVipInfo);
+            }
+            if (version >= 980) {
+                this.enableFeature(_const.GameFeature.GamePreviewState);
+                this.enableFeature(_const.GameFeature.GameClientVersion);
+            }
+            if (version >= 981) {
+                this.enableFeature(_const.GameFeature.GameLoginPending);
+                this.enableFeature(_const.GameFeature.GameNewSpeedLaw);
+            }
+            if (version >= 984) {
+                this.enableFeature(_const.GameFeature.GameContainerPagination);
+                this.enableFeature(_const.GameFeature.GameBrowseField);
+            }
+            if (version >= 1000) {
+                this.enableFeature(_const.GameFeature.GameThingMarks);
+                this.enableFeature(_const.GameFeature.GamePVPMode);
+            }
+            if (version >= 1035) {
+                this.enableFeature(_const.GameFeature.GameDoubleSkills);
+                this.enableFeature(_const.GameFeature.GameBaseSkillU16);
+            }
+            if (version >= 1036) {
+                this.enableFeature(_const.GameFeature.GameCreatureIcons);
+                this.enableFeature(_const.GameFeature.GameHideNpcNames);
+            }
+            if (version >= 1038) {
+                this.enableFeature(_const.GameFeature.GamePremiumExpiration);
+            }
+            if (version >= 1050) {
+                this.enableFeature(_const.GameFeature.GameEnhancedAnimations);
+            }
+            if (version >= 1053) {
+                this.enableFeature(_const.GameFeature.GameUnjustifiedPoints);
+            }
+            if (version >= 1054) {
+                this.enableFeature(_const.GameFeature.GameExperienceBonus);
+            }
+            if (version >= 1055) {
+                this.enableFeature(_const.GameFeature.GameDeathType);
+            }
+            if (version >= 1057) {
+                this.enableFeature(_const.GameFeature.GameIdleAnimations);
+            }
+            if (version >= 1061) {
+                this.enableFeature(_const.GameFeature.GameOGLInformation);
+            }
+            if (version >= 1071) {
+                this.enableFeature(_const.GameFeature.GameContentRevision);
+            }
+            if (version >= 1072) {
+                this.enableFeature(_const.GameFeature.GameAuthenticator);
+            }
+            if (version >= 1074) {
+                this.enableFeature(_const.GameFeature.GameSessionKey);
+            }
+            if (version >= 1080) {
+                this.enableFeature(_const.GameFeature.GameIngameStore);
+            }
+            if (version >= 1092) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreServiceType);
+            }
+            if (version >= 1093) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreHighlights);
+            }
+            if (version >= 1094) {
+                this.enableFeature(_const.GameFeature.GameAdditionalSkills);
+            }
+        }
+    }, {
+        key: "enableFeature",
+        value: function enableFeature(feature) {
+            this.m_features[feature] = true;
+        }
+    }, {
+        key: "disableFeature",
+        value: function disableFeature(feature) {
+            this.m_features[feature] = false;
+        }
+    }, {
+        key: "getFeature",
+        value: function getFeature(feature) {
+            return this.m_features[feature] == true;
+        }
+    }, {
+        key: "translateMessageModeFromServer",
+        value: function translateMessageModeFromServer(mode) {
+            for (var i in this.messageModesMap) {
+                if (this.messageModesMap[i] == mode) {
+                    return parseInt(i);
+                }
+            }
+            return _const.MessageMode.MessageInvalid;
+        }
+    }, {
+        key: "getContainer",
+        value: function getContainer(containerId) {
+            return new _container.Container();
+        }
+    }, {
+        key: "getClientVersion",
+        value: function getClientVersion() {
+            return this.m_clientVersion;
+        }
+    }, {
+        key: "getProtocolVersion",
+        value: function getProtocolVersion() {
+            return 10009;
+        }
+    }, {
+        key: "getOs",
+        value: function getOs() {
+            return 3;
+        }
+    }, {
+        key: "processConnectionError",
+        value: function processConnectionError() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "getLocalPlayer",
+        value: function getLocalPlayer() {
+            return this.m_localPlayer;
+        }
+    }, {
+        key: "login",
+        value: function login(accountName, accountPassword, characterName) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+        }
+    }, {
+        key: "watchMovie",
+        value: function watchMovie(movie) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.watch(movie);
+        }
+    }, {
+        key: "formatCreatureName",
+        value: function formatCreatureName(string) {
+            return string;
+        }
+    }, {
+        key: "g_things",
+        get: function get() {
+            return new _thingtypemanager.ThingTypeManager();
+        }
+    }, {
+        key: "g_map",
+        get: function get() {
+            return new _map.Map();
+        }
+    }]);
+
+    return Game;
+}();
+
+var g_game = new Game();
+exports.g_game = g_game;
+
+/***/ }),
+
+/***/ 42:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Point = exports.Point = function () {
+    function Point() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: "equals",
+        value: function equals(otherPoint) {
+            return this.x == otherPoint.x && this.y == otherPoint.y;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Point(this.x, this.y);
+        }
+    }, {
+        key: "add",
+        value: function add(point) {
+            return new Point(this.x + point.x, this.y + point.y);
+        }
+    }, {
+        key: "sub",
+        value: function sub(point) {
+            return new Point(this.x - point.x, this.y - point.y);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Point(this.x * ratio, this.y * ratio);
+        }
+    }]);
+
+    return Point;
+}();
+
+/***/ }),
+
+/***/ 444:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _const = __webpack_require__(13);
+
+var _game = __webpack_require__(41);
+
+var _resources = __webpack_require__(125);
+
+var _movie = __webpack_require__(467);
+
+var _mapview = __webpack_require__(189);
+
+__webpack_require__(468);
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 var x = _const.Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
-console.log($);
+
+console.log('pixi', PIXI);
 function test() {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var movieData, movie;
@@ -2068,11 +3903,15 @@ function test() {
                         return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
                     case 4:
-                        console.log('load file');
-                        _context.next = 7;
-                        return _resources.g_resources.openFile('http://inditex.localhost/small.ukcam');
+                        _context.next = 6;
+                        return _game.g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
 
-                    case 7:
+                    case 6:
+                        console.log('load file');
+                        _context.next = 9;
+                        return _resources.g_resources.openFile('http://inditex.localhost/poh.ukcam');
+
+                    case 9:
                         movieData = _context.sent;
 
                         //movieData.setReadPos(8);
@@ -2084,8 +3923,8 @@ function test() {
                         _mapview.g_mapview.draw();
                         //g_game.login('', '', 'GOD Spider Local');
 
-                    case 13:
-                    case 'end':
+                    case 15:
+                    case "end":
                         return _context.stop();
                 }
             }
@@ -2096,7 +3935,7 @@ test();
 
 /***/ }),
 
-/***/ 353:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2109,7 +3948,7 @@ exports.LocalPlayer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _player = __webpack_require__(138);
+var _player = __webpack_require__(179);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2154,7 +3993,7 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
 
 /***/ }),
 
-/***/ 354:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2167,9 +4006,9 @@ exports.TileBlock = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tile = __webpack_require__(355);
+var _tile = __webpack_require__(447);
 
-var _helpers = __webpack_require__(140);
+var _helpers = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2223,7 +4062,7 @@ TileBlock.BLOCK_SIZE = 32;
 
 /***/ }),
 
-/***/ 355:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2236,17 +4075,17 @@ exports.Tile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(100);
+var _game = __webpack_require__(41);
 
-var _game = __webpack_require__(49);
+var _map = __webpack_require__(55);
 
-var _map = __webpack_require__(50);
+var _const = __webpack_require__(13);
 
-var _const = __webpack_require__(11);
-
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var cc = 0;
 
 var Tile = exports.Tile = function () {
     function Tile(position) {
@@ -2267,8 +4106,10 @@ var Tile = exports.Tile = function () {
             var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
             var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
+            console.log('pp', this.m_position, dest, cc++);
             // first bottom items
             if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
+                this.m_drawElevation = 0;
                 var _iteratorNormalCompletion = true;
                 var _didIteratorError = false;
                 var _iteratorError = undefined;
@@ -2278,7 +4119,9 @@ var Tile = exports.Tile = function () {
                         var thing = _step.value;
 
                         if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
-                        thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                        var toPos = dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
+                        //console.log('topos', toPos);
+                        thing.draw(toPos, scaleFactor, animate, lightView);
                         this.m_drawElevation += thing.getElevation();
                         if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
                     }
@@ -2301,7 +4144,7 @@ var Tile = exports.Tile = function () {
             var redrawPreviousTopH = 0;
             // now common items in reverse order
             if (drawFlags & _const.DrawFlags.DrawItems) {
-                for (var it = this.m_things.length - 1; it >= 0; ++it) {
+                for (var it = this.m_things.length - 1; it >= 0; --it) {
                     var _thing = this.m_things[it];
                     if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
                     _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
@@ -2314,18 +4157,22 @@ var Tile = exports.Tile = function () {
                 }
             }
             // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
-            if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
-                var topRedrawFlags = drawFlags & (_const.DrawFlags.DrawCreatures | _const.DrawFlags.DrawEffects | _const.DrawFlags.DrawOnTop | _const.DrawFlags.DrawAnimations);
-                if (topRedrawFlags) {
-                    for (var x = -redrawPreviousTopW; x <= 0; ++x) {
-                        for (var y = -redrawPreviousTopH; y <= 0; ++y) {
-                            if (x == 0 && y == 0) continue;
-                            var tile = _map.g_map.getTile(this.m_position.translated(x, y));
-                            if (tile) tile.draw(dest.add(new _point.Point(x * _const.Otc.TILE_PIXELS * scaleFactor, y * _const.Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+            /*
+                    if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+                        let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
+                        if (topRedrawFlags) {
+                            for (let x = -redrawPreviousTopW; x <= 0; ++x) {
+                                for (let y = -redrawPreviousTopH; y <= 0; ++y) {
+                                    if (x == 0 && y == 0)
+                                        continue;
+                                    let tile = g_map.getTile(this.m_position.translated(x, y));
+                                    if (tile)
+                                        tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                                }
+                            }
                         }
                     }
-                }
-            }
+            */
             // creatures
             if (drawFlags & _const.DrawFlags.DrawCreatures) {
                 if (animate) {
@@ -2354,11 +4201,15 @@ var Tile = exports.Tile = function () {
                         }
                     }
                 }
-                for (var _it = this.m_things.length - 1; _it >= 0; ++_it) {
+                for (var _it = this.m_things.length - 1; _it >= 0; --_it) {
                     var _thing2 = this.m_things[_it];
+                    //console.log(this.m_things, this.m_position, it);
                     if (!_thing2.isCreature()) continue;
                     var _creature = _thing2;
-                    if (_creature && (!_creature.isWalking() || !animate)) _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    if (_creature && (!_creature.isWalking() || !animate)) {
+                        console.log('pp1', dest);
+                        _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    }
                 }
             }
             /*
@@ -2376,7 +4227,9 @@ var Tile = exports.Tile = function () {
                     for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                         var _thing3 = _step3.value;
 
-                        if (_thing3.isOnTop()) _thing3.draw(dest, scaleFactor, animate, lightView);
+                        if (_thing3.isOnTop()) {
+                            _thing3.draw(dest, scaleFactor, animate, lightView);
+                        }
                     }
                 } catch (err) {
                     _didIteratorError3 = true;
@@ -2425,7 +4278,6 @@ var Tile = exports.Tile = function () {
     }, {
         key: "addThing",
         value: function addThing(thing, stackPos) {
-            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('add', thing, stackPos);
             if (!thing) return;
             if (thing.isEffect()) {
                 if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
@@ -2479,7 +4331,6 @@ var Tile = exports.Tile = function () {
     }, {
         key: "removeThing",
         value: function removeThing(thing) {
-            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('rem', thing);
             if (!thing) return false;
             var removed = false;
             if (thing.isEffect()) {
@@ -2492,7 +4343,6 @@ var Tile = exports.Tile = function () {
                 var _index = this.m_things.indexOf(thing);
                 if (_index > -1) {
                     this.m_things.splice(_index, 1);
-                    if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('rem', _index);
                     removed = true;
                 }
             }
@@ -2503,7 +4353,6 @@ var Tile = exports.Tile = function () {
     }, {
         key: "getThing",
         value: function getThing(stackPos) {
-            if (this.m_position.equals(new _position.Position(32944, 32673, 7))) console.error('get', stackPos);
             if (stackPos >= 0 && stackPos < this.m_things.length) {
                 //Log.debug('tile thing: ', this.m_things[stackPos]);
                 return this.m_things[stackPos];
@@ -3276,14 +5125,816 @@ Tile.MAX_THINGS = 10;
 
 /***/ }),
 
-/***/ 356:
-/***/ (function(module, exports) {
+/***/ 448:
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (564:25)\n\n\u001b[0m \u001b[90m 562 | \u001b[39m        f\u001b[33m;\u001b[39m\n \u001b[90m 563 | \u001b[39m        \u001b[36mif\u001b[39m (useOpacity)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 564 | \u001b[39m            g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m setColor(\u001b[33mColor\u001b[39m(\u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m \u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m \u001b[35m1.0\u001b[39m\u001b[33m,\u001b[39m f\u001b[33m,\u001b[39m m_opacity))\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 565 | \u001b[39m        g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m drawTexturedRect(screenRect\u001b[33m,\u001b[39m texture\u001b[33m,\u001b[39m textureRect)\u001b[33m;\u001b[39m\n \u001b[90m 566 | \u001b[39m        \u001b[36mif\u001b[39m (useOpacity)\n \u001b[90m 567 | \u001b[39m            g_painter \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m setColor(\u001b[33mColor\u001b[39m\u001b[33m,\u001b[39m white)\u001b[33m;\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ThingType = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(13);
+
+var _game = __webpack_require__(41);
+
+var _log = __webpack_require__(34);
+
+var _animator = __webpack_require__(449);
+
+var _image = __webpack_require__(181);
+
+var _color = __webpack_require__(56);
+
+var _spritemanager = __webpack_require__(182);
+
+var _thingtypeattribs = __webpack_require__(451);
+
+var _size = __webpack_require__(91);
+
+var _point = __webpack_require__(42);
+
+var _texture = __webpack_require__(452);
+
+var _rect = __webpack_require__(184);
+
+var _marketdata = __webpack_require__(453);
+
+var _light = __webpack_require__(124);
+
+var _painter = __webpack_require__(183);
+
+var _helpers = __webpack_require__(63);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ThingType = exports.ThingType = function () {
+    function ThingType() {
+        _classCallCheck(this, ThingType);
+
+        this.m_id = 0;
+        this.m_null = true;
+        this.m_attribs = new _thingtypeattribs.ThingTypeAttribs();
+        this.m_size = new _size.Size();
+        this.m_displacement = new _point.Point();
+        this.m_animator = null;
+        this.m_animationPhases = 0;
+        this.m_exactSize = 0;
+        this.m_realSize = 0;
+        this.m_numPatternX = 0;
+        this.m_numPatternY = 0;
+        this.m_numPatternZ = 0;
+        this.m_layers = 0;
+        this.m_elevation = 0;
+        this.m_opacity = 1.0;
+        this.m_spritesIndex = [];
+        this.m_textures = [];
+        this.m_texturesFramesRects = [];
+        this.m_texturesFramesOriginRects = [];
+        this.m_texturesFramesOffsets = [];
+    }
+
+    _createClass(ThingType, [{
+        key: "unserialize",
+        value: function unserialize(clientId, category, fin) {
+            this.m_null = false;
+            this.m_id = clientId;
+            this.m_category = category;
+            //console.log('load', clientId, fin.getReadPos(), fin.data.buffer.slice(fin.getReadPos()));
+            var count = 0;
+            var attr = -1;
+            var done = false;
+            for (var i = 0; i < _const.ThingAttr.ThingLastAttr; ++i) {
+                count++;
+                attr = fin.getU8();
+                if (attr == _const.ThingAttr.ThingLastAttr) {
+                    done = true;
+                    break;
+                }
+                if (_game.g_game.getClientVersion() >= 1000) {
+                    /* In 10.10+ all attributes from 16 and up were
+                     * incremented by 1 to make space for 16 as
+                     * "No Movement Animation" flag.
+                     */
+                    if (attr == 16) attr = _const.ThingAttr.ThingAttrNoMoveAnimation;else if (attr > 16) attr -= 1;
+                } else if (_game.g_game.getClientVersion() >= 860) {
+                    /* Default attribute values follow
+                     * the format of 8.6-9.86.
+                     * Therefore no changes here.
+                     */
+                } else if (_game.g_game.getClientVersion() >= 780) {
+                    /* In 7.80-8.54 all attributes from 8 and higher were
+                     * incremented by 1 to make space for 8 as
+                     * "Item Charges" flag.
+                     */
+                    if (attr == 8) {
+                        this.m_attribs.set(_const.ThingAttr.ThingAttrChargeable, true);
+                        continue;
+                    } else if (attr > 8) attr -= 1;
+                } else if (_game.g_game.getClientVersion() >= 755) {
+                    /* In 7.55-7.72 attributes 23 is "Floor Change". */
+                    if (attr == 23) attr = _const.ThingAttr.ThingAttrFloorChange;
+                } else if (_game.g_game.getClientVersion() >= 740) {
+                    /* In 7.4-7.5 attribute "Ground Border" did not exist
+                     * attributes 1-15 have to be adjusted.
+                     * Several other changes in the format.
+                     */
+                    if (attr > 0 && attr <= 15) attr += 1;else if (attr == 16) attr = _const.ThingAttr.ThingAttrLight;else if (attr == 17) attr = _const.ThingAttr.ThingAttrFloorChange;else if (attr == 18) attr = _const.ThingAttr.ThingAttrFullGround;else if (attr == 19) attr = _const.ThingAttr.ThingAttrElevation;else if (attr == 20) attr = _const.ThingAttr.ThingAttrDisplacement;else if (attr == 22) attr = _const.ThingAttr.ThingAttrMinimapColor;else if (attr == 23) attr = _const.ThingAttr.ThingAttrRotateable;else if (attr == 24) attr = _const.ThingAttr.ThingAttrLyingCorpse;else if (attr == 25) attr = _const.ThingAttr.ThingAttrHangable;else if (attr == 26) attr = _const.ThingAttr.ThingAttrHookSouth;else if (attr == 27) attr = _const.ThingAttr.ThingAttrHookEast;else if (attr == 28) attr = _const.ThingAttr.ThingAttrAnimateAlways;
+                    /* "Multi Use" and "Force Use" are swapped */
+                    if (attr == _const.ThingAttr.ThingAttrMultiUse) attr = _const.ThingAttr.ThingAttrForceUse;else if (attr == _const.ThingAttr.ThingAttrForceUse) attr = _const.ThingAttr.ThingAttrMultiUse;
+                }
+                switch (attr) {
+                    case _const.ThingAttr.ThingAttrDisplacement:
+                        {
+                            this.m_displacement = new _point.Point(0, 0);
+                            if (_game.g_game.getClientVersion() >= 755) {
+                                this.m_displacement.x = fin.getU16();
+                                this.m_displacement.y = fin.getU16();
+                            } else {
+                                this.m_displacement.x = 8;
+                                this.m_displacement.y = 8;
+                            }
+                            this.m_attribs.set(attr, true);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrLight:
+                        {
+                            var light = new _light.Light();
+                            light.intensity = fin.getU16();
+                            light.color = fin.getU16();
+                            this.m_attribs.set(attr, light);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrMarket:
+                        {
+                            var market = new _marketdata.MarketData();
+                            market.category = fin.getU16();
+                            market.tradeAs = fin.getU16();
+                            market.showAs = fin.getU16();
+                            market.name = fin.getString();
+                            market.restrictVocation = fin.getU16();
+                            market.requiredLevel = fin.getU16();
+                            this.m_attribs.set(attr, market);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrElevation:
+                        {
+                            this.m_elevation = fin.getU16();
+                            this.m_attribs.set(attr, this.m_elevation);
+                            break;
+                        }
+                    case _const.ThingAttr.ThingAttrUsable:
+                    case _const.ThingAttr.ThingAttrGround:
+                    case _const.ThingAttr.ThingAttrWritable:
+                    case _const.ThingAttr.ThingAttrWritableOnce:
+                    case _const.ThingAttr.ThingAttrMinimapColor:
+                    case _const.ThingAttr.ThingAttrCloth:
+                    case _const.ThingAttr.ThingAttrLensHelp:
+                        this.m_attribs.set(attr, fin.getU16());
+                        break;
+                    default:
+                        this.m_attribs.set(attr, true);
+                        break;
+                }
+            }
+            if (!done) (0, _log.error)("corrupt data (id: %d, category: %d, count: %d, lastAttr: %d)", this.m_id, this.m_category, count, attr);
+            var hasFrameGroups = category == _const.ThingCategory.ThingCategoryCreature && _game.g_game.getFeature(_const.GameFeature.GameIdleAnimations);
+            var groupCount = hasFrameGroups ? fin.getU8() : 1;
+            this.m_animationPhases = 0;
+            var totalSpritesCount = 0;
+            //console.log(this.m_attribs.attribs);
+            for (var _i = 0; _i < groupCount; ++_i) {
+                var frameGroupType = _const.FrameGroupType.FrameGroupDefault;
+                if (hasFrameGroups) frameGroupType = fin.getU8();
+                var width = fin.getU8();
+                var height = fin.getU8();
+                this.m_size = new _size.Size(width, height);
+                if (width > 1 || height > 1) {
+                    this.m_realSize = fin.getU8();
+                    this.m_exactSize = Math.min(this.m_realSize, Math.max(width * 32, height * 32));
+                } else this.m_exactSize = 32;
+                this.m_layers = fin.getU8();
+                this.m_numPatternX = fin.getU8();
+                this.m_numPatternY = fin.getU8();
+                if (_game.g_game.getClientVersion() >= 755) this.m_numPatternZ = fin.getU8();else this.m_numPatternZ = 1;
+                var groupAnimationsPhases = fin.getU8();
+                this.m_animationPhases += groupAnimationsPhases;
+                if (groupAnimationsPhases > 1 && _game.g_game.getFeature(_const.GameFeature.GameEnhancedAnimations)) {
+                    this.m_animator = new _animator.Animator();
+                    this.m_animator.unserialize(groupAnimationsPhases, fin);
+                }
+                var totalSprites = this.m_size.area() * this.m_layers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ * groupAnimationsPhases;
+                if (totalSpritesCount + totalSprites > 4096) (0, _log.error)("a thing type has more than 4096 sprites", totalSprites, totalSpritesCount, this.m_size.area(), this.m_layers, this.m_numPatternX, this.m_numPatternY, this.m_numPatternZ, groupAnimationsPhases);
+                //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
+                this.m_spritesIndex = [];
+                for (var _i2 = totalSpritesCount; _i2 < totalSpritesCount + totalSprites; _i2++) {
+                    this.m_spritesIndex[_i2] = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
+                } //console.log('spr', this.m_spritesIndex);
+                totalSpritesCount += totalSprites;
+            }
+            /*
+                    this.m_textures.resize(m_animationPhases);
+                    this.m_texturesFramesRects.resize(m_animationPhases);
+                    this.m_texturesFramesOriginRects.resize(m_animationPhases);
+                    this.m_texturesFramesOffsets.resize(m_animationPhases);
+            */
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return this.m_category;
+        }
+    }, {
+        key: "isNull",
+        value: function isNull() {
+            return this.m_null;
+        }
+    }, {
+        key: "hasAttr",
+        value: function hasAttr(attr) {
+            return this.m_attribs.has(attr);
+        }
+    }, {
+        key: "getSize",
+        value: function getSize() {
+            return this.m_size;
+        }
+    }, {
+        key: "getWidth",
+        value: function getWidth() {
+            return this.m_size.width();
+        }
+    }, {
+        key: "getHeight",
+        value: function getHeight() {
+            return this.m_size.height();
+        }
+    }, {
+        key: "getExactSize",
+        value: function getExactSize() {
+            var layer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+            var xPattern = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+            var yPattern = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+            var zPattern = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+            var animationPhase = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+
+            /* todo */
+            return 0;
+        }
+    }, {
+        key: "getRealSize",
+        value: function getRealSize() {
+            return this.m_realSize;
+        }
+    }, {
+        key: "getLayers",
+        value: function getLayers() {
+            return this.m_layers;
+        }
+    }, {
+        key: "getNumPatternX",
+        value: function getNumPatternX() {
+            return this.m_numPatternX;
+        }
+    }, {
+        key: "getNumPatternY",
+        value: function getNumPatternY() {
+            return this.m_numPatternY;
+        }
+    }, {
+        key: "getNumPatternZ",
+        value: function getNumPatternZ() {
+            return this.m_numPatternZ;
+        }
+    }, {
+        key: "getAnimationPhases",
+        value: function getAnimationPhases() {
+            return this.m_animationPhases;
+        }
+    }, {
+        key: "getAnimator",
+        value: function getAnimator() {
+            return this.m_animator;
+        }
+    }, {
+        key: "getDisplacement",
+        value: function getDisplacement() {
+            return this.m_displacement;
+        }
+    }, {
+        key: "getDisplacementX",
+        value: function getDisplacementX() {
+            return this.getDisplacement().x;
+        }
+    }, {
+        key: "getDisplacementY",
+        value: function getDisplacementY() {
+            return this.getDisplacement().y;
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            return this.m_elevation;
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrGround);
+        }
+    }, {
+        key: "getMaxTextLength",
+        value: function getMaxTextLength() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce) ? this.m_attribs.get(_const.ThingAttr.ThingAttrWritableOnce) : this.m_attribs.get(_const.ThingAttr.ThingAttrWritable);
+        }
+    }, {
+        key: "getLight",
+        value: function getLight() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrLight);
+        }
+    }, {
+        key: "getMinimapColor",
+        value: function getMinimapColor() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrMinimapColor);
+        }
+    }, {
+        key: "getLensHelp",
+        value: function getLensHelp() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrLensHelp);
+        }
+    }, {
+        key: "getClothSlot",
+        value: function getClothSlot() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrCloth);
+        }
+    }, {
+        key: "getMarketData",
+        value: function getMarketData() {
+            return this.m_attribs.get(_const.ThingAttr.ThingAttrMarket);
+        }
+    }, {
+        key: "isGround",
+        value: function isGround() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrGround);
+        }
+    }, {
+        key: "isGroundBorder",
+        value: function isGroundBorder() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrGroundBorder);
+        }
+    }, {
+        key: "isOnBottom",
+        value: function isOnBottom() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnBottom);
+        }
+    }, {
+        key: "isOnTop",
+        value: function isOnTop() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrOnTop);
+        }
+    }, {
+        key: "isContainer",
+        value: function isContainer() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrContainer);
+        }
+    }, {
+        key: "isStackable",
+        value: function isStackable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrStackable);
+        }
+    }, {
+        key: "isForceUse",
+        value: function isForceUse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrForceUse);
+        }
+    }, {
+        key: "isMultiUse",
+        value: function isMultiUse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMultiUse);
+        }
+    }, {
+        key: "isWritable",
+        value: function isWritable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritable);
+        }
+    }, {
+        key: "isChargeable",
+        value: function isChargeable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrChargeable);
+        }
+    }, {
+        key: "isWritableOnce",
+        value: function isWritableOnce() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWritableOnce);
+        }
+    }, {
+        key: "isFluidContainer",
+        value: function isFluidContainer() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrFluidContainer);
+        }
+    }, {
+        key: "isSplash",
+        value: function isSplash() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrSplash);
+        }
+    }, {
+        key: "isNotWalkable",
+        value: function isNotWalkable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotWalkable);
+        }
+    }, {
+        key: "isNotMoveable",
+        value: function isNotMoveable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotMoveable);
+        }
+    }, {
+        key: "blockProjectile",
+        value: function blockProjectile() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrBlockProjectile);
+        }
+    }, {
+        key: "isNotPathable",
+        value: function isNotPathable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPathable);
+        }
+    }, {
+        key: "isPickupable",
+        value: function isPickupable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrPickupable);
+        }
+    }, {
+        key: "isHangable",
+        value: function isHangable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHangable);
+        }
+    }, {
+        key: "isHookSouth",
+        value: function isHookSouth() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookSouth);
+        }
+    }, {
+        key: "isHookEast",
+        value: function isHookEast() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrHookEast);
+        }
+    }, {
+        key: "isRotateable",
+        value: function isRotateable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrRotateable);
+        }
+    }, {
+        key: "hasLight",
+        value: function hasLight() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLight);
+        }
+    }, {
+        key: "isDontHide",
+        value: function isDontHide() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrDontHide);
+        }
+    }, {
+        key: "isTranslucent",
+        value: function isTranslucent() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrTranslucent);
+        }
+    }, {
+        key: "hasDisplacement",
+        value: function hasDisplacement() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrDisplacement);
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrElevation);
+        }
+    }, {
+        key: "isLyingCorpse",
+        value: function isLyingCorpse() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLyingCorpse);
+        }
+    }, {
+        key: "isAnimateAlways",
+        value: function isAnimateAlways() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrAnimateAlways);
+        }
+    }, {
+        key: "hasMiniMapColor",
+        value: function hasMiniMapColor() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMinimapColor);
+        }
+    }, {
+        key: "hasLensHelp",
+        value: function hasLensHelp() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLensHelp);
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrFullGround);
+        }
+    }, {
+        key: "isIgnoreLook",
+        value: function isIgnoreLook() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrLook);
+        }
+    }, {
+        key: "isCloth",
+        value: function isCloth() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrCloth);
+        }
+    }, {
+        key: "isMarketable",
+        value: function isMarketable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrMarket);
+        }
+    }, {
+        key: "isUsable",
+        value: function isUsable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrUsable);
+        }
+    }, {
+        key: "isWrapable",
+        value: function isWrapable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrWrapable);
+        }
+    }, {
+        key: "isUnwrapable",
+        value: function isUnwrapable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrUnwrapable);
+        }
+    }, {
+        key: "isTopEffect",
+        value: function isTopEffect() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrTopEffect);
+        }
+    }, {
+        key: "getSprites",
+        value: function getSprites() {
+            return this.m_spritesIndex;
+        }
+        // additional
+
+    }, {
+        key: "getOpacity",
+        value: function getOpacity() {
+            return this.m_opacity;
+        }
+    }, {
+        key: "isNotPreWalkable",
+        value: function isNotPreWalkable() {
+            return this.m_attribs.has(_const.ThingAttr.ThingAttrNotPreWalkable);
+        }
+    }, {
+        key: "setPathable",
+        value: function setPathable(v) {
+            if (v == true) this.m_attribs.remove(_const.ThingAttr.ThingAttrNotPathable);else this.m_attribs.set(_const.ThingAttr.ThingAttrNotPathable, true);
+        }
+    }, {
+        key: "getTexture",
+        value: function getTexture(animationPhase) {
+            var animationPhaseTexture = this.m_textures[animationPhase];
+            if (!animationPhaseTexture) {
+                var useCustomImage = false;
+                if (animationPhase == 0 && this.m_customImage) useCustomImage = true;
+                // we don't need layers in common items, they will be pre-drawn
+                var textureLayers = 1;
+                var numLayers = this.m_layers;
+                if (this.m_category == _const.ThingCategory.ThingCategoryCreature && numLayers >= 2) {
+                    // 5 layers: outfit base, red mask, green mask, blue mask, yellow mask
+                    textureLayers = 5;
+                    numLayers = 5;
+                }
+                var indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
+                var textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
+                console.log('dim', textureSize, this);
+                var fullImage = void 0;
+                if (useCustomImage) fullImage = _image.Image.load(this.m_customImage);else fullImage = new _image.Image(textureSize.mul(_const.Otc.TILE_PIXELS));
+                //console.log('fi', fullImage.getWidth(), fullImage.getHeight())
+                this.m_texturesFramesRects[animationPhase] = [];
+                this.m_texturesFramesOriginRects[animationPhase] = [];
+                this.m_texturesFramesOffsets[animationPhase] = [];
+                for (var z = 0; z < this.m_numPatternZ; ++z) {
+                    for (var y = 0; y < this.m_numPatternY; ++y) {
+                        for (var x = 0; x < this.m_numPatternX; ++x) {
+                            for (var l = 0; l < numLayers; ++l) {
+                                var spriteMask = this.m_category == _const.ThingCategory.ThingCategoryCreature && l > 0;
+                                var frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
+                                var framePos = new _point.Point((0, _helpers.toInt)(frameIndex % (0, _helpers.toInt)(textureSize.width() / this.m_size.width()) * this.m_size.width()) * _const.Otc.TILE_PIXELS, (0, _helpers.toInt)(frameIndex / (0, _helpers.toInt)(textureSize.width() / this.m_size.width()) * this.m_size.height()) * _const.Otc.TILE_PIXELS);
+                                //console.log('blitx', framePos);
+                                if (!useCustomImage) {
+                                    for (var h = 0; h < this.m_size.height(); ++h) {
+                                        for (var w = 0; w < this.m_size.width(); ++w) {
+                                            var spriteIndex = this.getSpriteIndex(w, h, spriteMask ? 1 : l, x, y, z, animationPhase);
+                                            var spriteImage = _spritemanager.g_sprites.getSpriteImage(this.m_spritesIndex[spriteIndex]);
+                                            if (spriteImage) {
+                                                if (spriteMask) {
+                                                    spriteImage.overwriteMask(ThingType.maskColors[l - 1]);
+                                                }
+                                                var spritePos = new _point.Point((this.m_size.width() - w - 1) * _const.Otc.TILE_PIXELS, (this.m_size.height() - h - 1) * _const.Otc.TILE_PIXELS);
+                                                fullImage.blit(framePos.add(spritePos), spriteImage);
+                                            } else {
+                                                //console.error(this.m_spritesIndex, spriteIndex);
+                                            }
+                                        }
+                                    }
+                                }
+                                var drawRect = new _rect.Rect(framePos.add(new _point.Point(this.m_size.width(), this.m_size.height())).mul(_const.Otc.TILE_PIXELS).sub(new _point.Point(1, 1)), framePos);
+                                for (var _x6 = framePos.x; _x6 < framePos.x + this.m_size.width() * _const.Otc.TILE_PIXELS; ++_x6) {
+                                    for (var _y = framePos.y; _y < framePos.y + this.m_size.height() * _const.Otc.TILE_PIXELS; ++_y) {
+                                        var p = fullImage.getPixel(_x6, _y);
+                                        if (p[3] != 0x00) {
+                                            drawRect.setTop(Math.min(_y, drawRect.top()));
+                                            drawRect.setLeft(Math.min(_x6, drawRect.left()));
+                                            drawRect.setBottom(Math.max(_y, drawRect.bottom()));
+                                            drawRect.setRight(Math.max(_x6, drawRect.right()));
+                                        }
+                                    }
+                                }
+                                console.log('blit', drawRect);
+                                this.m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
+                                this.m_texturesFramesOriginRects[animationPhase][frameIndex] = new _rect.Rect(framePos, new _size.Size(this.m_size.width(), this.m_size.height()).mul(_const.Otc.TILE_PIXELS));
+                                this.m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft().sub(framePos);
+                            }
+                        }
+                    }
+                }
+                animationPhaseTexture = new _texture.Texture(fullImage, true);
+                //animationPhaseTexture->setSmooth(true);
+                //console.log(this.m_id, animationPhase, animationPhaseTexture);
+                this.m_textures[animationPhase] = animationPhaseTexture;
+            }
+            return animationPhaseTexture;
+        }
+    }, {
+        key: "getBestTextureDimension",
+        value: function getBestTextureDimension(w, h, count) {
+            var MAX = 32;
+            var k = 1;
+            while (k < w) {
+                k <<= 1;
+            }w = k;
+            k = 1;
+            while (k < h) {
+                k <<= 1;
+            }h = k;
+            var numSprites = w * h * count;
+            /*
+            assert(numSprites <= MAX*MAX);
+            assert(w <= MAX);
+            assert(h <= MAX);
+            */
+            var bestDimension = new _size.Size(MAX, MAX);
+            for (var i = w; i <= MAX; i <<= 1) {
+                for (var j = h; j <= MAX; j <<= 1) {
+                    var candidateDimension = new _size.Size(i, j);
+                    if (candidateDimension.area() < numSprites) continue;
+                    if (candidateDimension.area() < bestDimension.area() || candidateDimension.area() == bestDimension.area() && candidateDimension.width() + candidateDimension.height() < bestDimension.width() + bestDimension.height()) bestDimension = candidateDimension;
+                }
+            }
+            console.log('dim', this.m_id, bestDimension);
+            return bestDimension;
+            //return new Size(w, h);
+        }
+    }, {
+        key: "getSpriteIndex",
+        value: function getSpriteIndex(w, h, l, x, y, z, a) {
+            var index = (((((a % this.m_animationPhases * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x) * this.m_layers + l) * this.m_size.height() + h) * this.m_size.width() + w;
+            if (!(index < this.m_spritesIndex.length)) {
+                throw new Error('index < this.m_spritesIndex.length');
+            }
+            return index;
+        }
+    }, {
+        key: "getTextureIndex",
+        value: function getTextureIndex(l, x, y, z) {
+            return ((l * this.m_numPatternZ + z) * this.m_numPatternY + y) * this.m_numPatternX + x;
+        }
+    }, {
+        key: "draw",
+        value: function draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase) {
+            var lightView = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : null;
+
+            //console.log('draw thingtype', this.m_null, this.m_id, animationPhase, this.m_animationPhases);
+            if (this.m_null) return;
+            if (animationPhase >= this.m_animationPhases) return;
+            var texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
+            console.log('tx', texture);
+            if (!texture) return;
+            var frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
+            if (frameIndex >= this.m_texturesFramesRects[animationPhase].length) return;
+            var textureOffset = new _point.Point();
+            var textureRect = new _rect.Rect();
+            if (scaleFactor != 1.0) {
+                textureRect = this.m_texturesFramesOriginRects[animationPhase][frameIndex];
+            } else {
+                textureOffset = this.m_texturesFramesOffsets[animationPhase][frameIndex];
+                textureRect = this.m_texturesFramesRects[animationPhase][frameIndex];
+            }
+            if (this.m_size.toPoint().x > 1) {
+                console.log('ds', this.m_id, this.m_size);
+            }
+            var screenRect = new _rect.Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new _point.Point(1, 1)).mul(32))).mul(scaleFactor), textureRect.size().mul(scaleFactor));
+            if (dest.x == 0 && dest.y == 0) console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint());
+            /*
+                    let useOpacity = m_opacity < 1.0f;
+                     if(useOpacity)
+                        g_painter->setColor(Color(1.0f,1.0f,1.0f,m_opacity));
+             */
+            //g_painter.drawTexturedRect(dest, texture);
+            _painter.g_painter.drawTexturedRect(screenRect, texture, textureRect);
+            //throw new Error('aa');
+            /*
+                    if(useOpacity)
+                        g_painter->setColor(Color::white);
+                     if(lightView && hasLight()) {
+                        Light light = getLight();
+                        if(light.intensity > 0)
+                            lightView->addLightSource(screenRect.center(), scaleFactor, light);
+                    }
+                    */
+        }
+    }]);
+
+    return ThingType;
+}();
+
+ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue, _color.Color.yellow];
 
 /***/ }),
 
-/***/ 362:
+/***/ 449:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Animator = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(13);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Animator = exports.Animator = function () {
+    function Animator() {
+        _classCallCheck(this, Animator);
+
+        this.m_animationPhases = 0;
+        this.m_startPhase = 0;
+        this.m_loopCount = 0;
+        this.m_async = false;
+        this.m_phaseDurations = [];
+        this.m_currentDuration = 0;
+        this.m_currentDirection = _const.AnimationDirection.AnimDirForward;
+        this.m_currentLoop = 0;
+        this.m_lastPhaseTicks = 0;
+        this.m_isComplete = false;
+        this.m_phase = 0;
+    }
+
+    _createClass(Animator, [{
+        key: "unserialize",
+        value: function unserialize(animationPhases, fin) {
+            this.m_animationPhases = animationPhases;
+            this.m_async = fin.getU8() == 0;
+            this.m_loopCount = fin.get32();
+            this.m_startPhase = fin.get8();
+            for (var i = 0; i < this.m_animationPhases; ++i) {
+                var minimum = fin.getU32();
+                var maximum = fin.getU32();
+                this.m_phaseDurations.push([minimum, maximum]);
+            }
+            /*
+            m_phase = getStartPhase();
+             assert(m_animationPhases == (int)m_phaseDurations.size());
+            assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
+            */
+        }
+    }, {
+        key: "getPhase",
+        value: function getPhase() {
+            return this.m_phase;
+        }
+    }]);
+
+    return Animator;
+}();
+
+/***/ }),
+
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3294,7 +5945,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InputFile = undefined;
 
-var _binarydatareader = __webpack_require__(102);
+var _binarydatareader = __webpack_require__(126);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3316,7 +5967,146 @@ var InputFile = exports.InputFile = function (_BinaryDataReader) {
 
 /***/ }),
 
-/***/ 363:
+/***/ 451:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
+    function ThingTypeAttribs() {
+        _classCallCheck(this, ThingTypeAttribs);
+
+        this.attribs = {};
+    }
+
+    _createClass(ThingTypeAttribs, [{
+        key: "has",
+        value: function has(attr) {
+            return this.attribs.hasOwnProperty(attr.toString());
+        }
+    }, {
+        key: "get",
+        value: function get(attr) {
+            return this.attribs[attr];
+        }
+    }, {
+        key: "set",
+        value: function set(attr, value) {
+            //console.log(attr, value);
+            this.attribs[attr] = value;
+        }
+    }, {
+        key: "remove",
+        value: function remove(attr) {
+            delete this.attribs[attr];
+        }
+    }]);
+
+    return ThingTypeAttribs;
+}();
+
+/***/ }),
+
+/***/ 452:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Texture = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _painter = __webpack_require__(183);
+
+var _helpers = __webpack_require__(63);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var x = 0;
+
+var Texture = exports.Texture = function () {
+    function Texture(image) {
+        var buildMipmaps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+        var compress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+        _classCallCheck(this, Texture);
+
+        this.m_id = 0;
+        this.m_time = 0;
+        this.m_hasMipmaps = false;
+        this.m_smooth = false;
+        this.m_upsideDown = false;
+        this.m_repeat = false;
+        this.m_texture = null;
+        this.tmp_img = image;
+    }
+
+    _createClass(Texture, [{
+        key: "getPixiTexture",
+        value: function getPixiTexture() {
+            if (this.m_texture) {
+                return this.m_texture;
+            }
+            var graphics = new PIXI.Graphics();
+            graphics.width = this.tmp_img.m_size.width();
+            graphics.height = this.tmp_img.m_size.height();
+            graphics.beginFill(0, 0);
+            graphics.drawRect(0, 0, graphics.width, graphics.height);
+            graphics.endFill();
+            //this.tmp_img.getPixelData();
+            var other = this.tmp_img;
+            for (var p = 0; p < other.getPixelCount(); ++p) {
+                var _x3 = (0, _helpers.toInt)(p % other.getWidth());
+                var y = (0, _helpers.toInt)(p / other.getWidth());
+                if (other.m_pixels[p * 4 + 3] != 0) {
+                    graphics.beginFill(other.m_pixels[p * 4] * 256 * 256 + other.m_pixels[p * 4 + 1] * 256 + other.m_pixels[p * 4 + 2], 1);
+                    graphics.drawRect(_x3, y, 1, 1);
+                    graphics.endFill();
+                }
+            }
+            this.m_texture = _painter.g_painter.app.renderer.generateTexture(graphics);
+            return this.m_texture;
+            //return PIXI.Texture.fromImage('/prv/webclient/fronttypescript/favicon.png');
+        }
+    }]);
+
+    return Texture;
+}();
+
+/***/ }),
+
+/***/ 453:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MarketData = exports.MarketData = function MarketData() {
+  _classCallCheck(this, MarketData);
+};
+
+/***/ }),
+
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3331,51 +6121,53 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(364);
+var _protocol = __webpack_require__(455);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(41);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(34);
 
-var _outputmessage = __webpack_require__(366);
+var _outputmessage = __webpack_require__(456);
 
-var _proto = __webpack_require__(368);
+var _proto = __webpack_require__(186);
 
-var _inputmessage = __webpack_require__(365);
+var _inputmessage = __webpack_require__(187);
 
-var _outfit = __webpack_require__(369);
+var _outfit = __webpack_require__(185);
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _position = __webpack_require__(100);
+var _position = __webpack_require__(62);
 
-var _item = __webpack_require__(370);
+var _item = __webpack_require__(458);
 
-var _statictext = __webpack_require__(144);
+var _statictext = __webpack_require__(188);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(64);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _effect = __webpack_require__(371);
+var _effect = __webpack_require__(459);
 
-var _animatedtext = __webpack_require__(372);
+var _animatedtext = __webpack_require__(460);
 
-var _missile = __webpack_require__(373);
+var _missile = __webpack_require__(461);
 
-var _color2 = __webpack_require__(55);
+var _color2 = __webpack_require__(56);
 
-var _player = __webpack_require__(138);
+var _player = __webpack_require__(179);
 
-var _light = __webpack_require__(101);
+var _light = __webpack_require__(124);
 
-var _npc = __webpack_require__(374);
+var _npc = __webpack_require__(462);
 
-var _monster = __webpack_require__(375);
+var _monster = __webpack_require__(463);
 
-var _awarerange = __webpack_require__(139);
+var _awarerange = __webpack_require__(180);
+
+var _mapview = __webpack_require__(189);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3412,6 +6204,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         value: function watch(m_movieData) {
             var i = 0;
             this.m_localPlayer = _game.g_game.getLocalPlayer();
+            _mapview.g_mapview.followCreature(_game.g_game.getLocalPlayer());
             this.m_movieData = m_movieData;
             var first = 0;
             while (this.m_movieData.getUnreadSize() >= 10) {
@@ -3428,10 +6221,9 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                 var packetLength = this.m_movieData.getU16();
                 var packetData = this.m_movieData.getBytes(packetLength);
                 if (first === 0) first = timestamp;
-                if (i >= 70000) _log.Log.debug(parseInt("" + (timestamp - first) / 1000), i, timestamp, packetLength, packetData);
                 var inputMessage = new _inputmessage.InputMessage(new DataView(packetData));
                 this.parseMessage(inputMessage);
-                if (++i >= 220000) break;
+                if (++i >= 12) break;
             }
             console.error('loaded packets', i);
         }
@@ -5523,7 +8315,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 364:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5536,9 +8328,9 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(365);
+var _inputmessage = __webpack_require__(187);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(34);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5690,49 +8482,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 365:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.InputMessage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _binarydatareader = __webpack_require__(102);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
-    _inherits(InputMessage, _BinaryDataReader);
-
-    function InputMessage() {
-        _classCallCheck(this, InputMessage);
-
-        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
-    }
-
-    _createClass(InputMessage, [{
-        key: "validateChecksum",
-        value: function validateChecksum() {
-            return true;
-        }
-    }]);
-
-    return InputMessage;
-}(_binarydatareader.BinaryDataReader);
-
-/***/ }),
-
-/***/ 366:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5745,7 +8495,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(367);
+var _jspack = __webpack_require__(457);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5832,7 +8582,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 367:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6120,428 +8870,7 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 368:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var Proto;
-(function (Proto) {
-    Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
-    Proto[Proto["LoginServerMotd"] = 20] = "LoginServerMotd";
-    Proto[Proto["LoginServerUpdateNeeded"] = 30] = "LoginServerUpdateNeeded";
-    Proto[Proto["LoginServerCharacterList"] = 100] = "LoginServerCharacterList";
-    Proto[Proto["StaticText"] = 96] = "StaticText";
-    Proto[Proto["UnknownCreature"] = 97] = "UnknownCreature";
-    Proto[Proto["OutdatedCreature"] = 98] = "OutdatedCreature";
-    Proto[Proto["Creature"] = 99] = "Creature";
-    Proto[Proto["GameServerLoginOrPendingState"] = 10] = "GameServerLoginOrPendingState";
-    Proto[Proto["GameServerGMActions"] = 11] = "GameServerGMActions";
-    Proto[Proto["GameServerEnterGame"] = 15] = "GameServerEnterGame";
-    Proto[Proto["GameServerUpdateNeeded"] = 17] = "GameServerUpdateNeeded";
-    Proto[Proto["GameServerLoginError"] = 20] = "GameServerLoginError";
-    Proto[Proto["GameServerLoginAdvice"] = 21] = "GameServerLoginAdvice";
-    Proto[Proto["GameServerLoginWait"] = 22] = "GameServerLoginWait";
-    Proto[Proto["GameServerLoginSuccess"] = 23] = "GameServerLoginSuccess";
-    Proto[Proto["GameServerLoginToken"] = 24] = "GameServerLoginToken";
-    Proto[Proto["GameServerStoreButtonIndicators"] = 25] = "GameServerStoreButtonIndicators";
-    Proto[Proto["GameServerPingBack"] = 29] = "GameServerPingBack";
-    Proto[Proto["GameServerPing"] = 30] = "GameServerPing";
-    Proto[Proto["GameServerChallenge"] = 31] = "GameServerChallenge";
-    Proto[Proto["GameServerDeath"] = 40] = "GameServerDeath";
-    Proto[Proto["GameServerFirstGameOpcode"] = 50] = "GameServerFirstGameOpcode";
-    Proto[Proto["GameServerExtendedOpcode"] = 50] = "GameServerExtendedOpcode";
-    Proto[Proto["GameServerChangeMapAwareRange"] = 51] = "GameServerChangeMapAwareRange";
-    Proto[Proto["GameServerFullMap"] = 100] = "GameServerFullMap";
-    Proto[Proto["GameServerMapTopRow"] = 101] = "GameServerMapTopRow";
-    Proto[Proto["GameServerMapRightRow"] = 102] = "GameServerMapRightRow";
-    Proto[Proto["GameServerMapBottomRow"] = 103] = "GameServerMapBottomRow";
-    Proto[Proto["GameServerMapLeftRow"] = 104] = "GameServerMapLeftRow";
-    Proto[Proto["GameServerUpdateTile"] = 105] = "GameServerUpdateTile";
-    Proto[Proto["GameServerCreateOnMap"] = 106] = "GameServerCreateOnMap";
-    Proto[Proto["GameServerChangeOnMap"] = 107] = "GameServerChangeOnMap";
-    Proto[Proto["GameServerDeleteOnMap"] = 108] = "GameServerDeleteOnMap";
-    Proto[Proto["GameServerMoveCreature"] = 109] = "GameServerMoveCreature";
-    Proto[Proto["GameServerOpenContainer"] = 110] = "GameServerOpenContainer";
-    Proto[Proto["GameServerCloseContainer"] = 111] = "GameServerCloseContainer";
-    Proto[Proto["GameServerCreateContainer"] = 112] = "GameServerCreateContainer";
-    Proto[Proto["GameServerChangeInContainer"] = 113] = "GameServerChangeInContainer";
-    Proto[Proto["GameServerDeleteInContainer"] = 114] = "GameServerDeleteInContainer";
-    Proto[Proto["GameServerSetInventory"] = 120] = "GameServerSetInventory";
-    Proto[Proto["GameServerDeleteInventory"] = 121] = "GameServerDeleteInventory";
-    Proto[Proto["GameServerOpenNpcTrade"] = 122] = "GameServerOpenNpcTrade";
-    Proto[Proto["GameServerPlayerGoods"] = 123] = "GameServerPlayerGoods";
-    Proto[Proto["GameServerCloseNpcTrade"] = 124] = "GameServerCloseNpcTrade";
-    Proto[Proto["GameServerOwnTrade"] = 125] = "GameServerOwnTrade";
-    Proto[Proto["GameServerCounterTrade"] = 126] = "GameServerCounterTrade";
-    Proto[Proto["GameServerCloseTrade"] = 127] = "GameServerCloseTrade";
-    Proto[Proto["GameServerAmbient"] = 130] = "GameServerAmbient";
-    Proto[Proto["GameServerGraphicalEffect"] = 131] = "GameServerGraphicalEffect";
-    Proto[Proto["GameServerTextEffect"] = 132] = "GameServerTextEffect";
-    Proto[Proto["GameServerMissleEffect"] = 133] = "GameServerMissleEffect";
-    Proto[Proto["GameServerMarkCreature"] = 134] = "GameServerMarkCreature";
-    Proto[Proto["GameServerTrappers"] = 135] = "GameServerTrappers";
-    Proto[Proto["GameServerCreatureHealth"] = 140] = "GameServerCreatureHealth";
-    Proto[Proto["GameServerCreatureLight"] = 141] = "GameServerCreatureLight";
-    Proto[Proto["GameServerCreatureOutfit"] = 142] = "GameServerCreatureOutfit";
-    Proto[Proto["GameServerCreatureSpeed"] = 143] = "GameServerCreatureSpeed";
-    Proto[Proto["GameServerCreatureSkull"] = 144] = "GameServerCreatureSkull";
-    Proto[Proto["GameServerCreatureParty"] = 145] = "GameServerCreatureParty";
-    Proto[Proto["GameServerCreatureUnpass"] = 146] = "GameServerCreatureUnpass";
-    Proto[Proto["GameServerCreatureMarks"] = 147] = "GameServerCreatureMarks";
-    Proto[Proto["GameServerPlayerHelpers"] = 148] = "GameServerPlayerHelpers";
-    Proto[Proto["GameServerCreatureType"] = 149] = "GameServerCreatureType";
-    Proto[Proto["GameServerEditText"] = 150] = "GameServerEditText";
-    Proto[Proto["GameServerEditList"] = 151] = "GameServerEditList";
-    Proto[Proto["GameServerBlessings"] = 156] = "GameServerBlessings";
-    Proto[Proto["GameServerPreset"] = 157] = "GameServerPreset";
-    Proto[Proto["GameServerPremiumTrigger"] = 158] = "GameServerPremiumTrigger";
-    Proto[Proto["GameServerPlayerDataBasic"] = 159] = "GameServerPlayerDataBasic";
-    Proto[Proto["GameServerPlayerData"] = 160] = "GameServerPlayerData";
-    Proto[Proto["GameServerPlayerSkills"] = 161] = "GameServerPlayerSkills";
-    Proto[Proto["GameServerPlayerState"] = 162] = "GameServerPlayerState";
-    Proto[Proto["GameServerClearTarget"] = 163] = "GameServerClearTarget";
-    Proto[Proto["GameServerPlayerModes"] = 167] = "GameServerPlayerModes";
-    Proto[Proto["GameServerSpellDelay"] = 164] = "GameServerSpellDelay";
-    Proto[Proto["GameServerSpellGroupDelay"] = 165] = "GameServerSpellGroupDelay";
-    Proto[Proto["GameServerMultiUseDelay"] = 166] = "GameServerMultiUseDelay";
-    Proto[Proto["GameServerSetStoreDeepLink"] = 168] = "GameServerSetStoreDeepLink";
-    Proto[Proto["GameServerTalk"] = 170] = "GameServerTalk";
-    Proto[Proto["GameServerChannels"] = 171] = "GameServerChannels";
-    Proto[Proto["GameServerOpenChannel"] = 172] = "GameServerOpenChannel";
-    Proto[Proto["GameServerOpenPrivateChannel"] = 173] = "GameServerOpenPrivateChannel";
-    Proto[Proto["GameServerRuleViolationChannel"] = 174] = "GameServerRuleViolationChannel";
-    Proto[Proto["GameServerRuleViolationRemove"] = 175] = "GameServerRuleViolationRemove";
-    Proto[Proto["GameServerRuleViolationCancel"] = 176] = "GameServerRuleViolationCancel";
-    Proto[Proto["GameServerRuleViolationLock"] = 177] = "GameServerRuleViolationLock";
-    Proto[Proto["GameServerOpenOwnChannel"] = 178] = "GameServerOpenOwnChannel";
-    Proto[Proto["GameServerCloseChannel"] = 179] = "GameServerCloseChannel";
-    Proto[Proto["GameServerTextMessage"] = 180] = "GameServerTextMessage";
-    Proto[Proto["GameServerCancelWalk"] = 181] = "GameServerCancelWalk";
-    Proto[Proto["GameServerWalkWait"] = 182] = "GameServerWalkWait";
-    Proto[Proto["GameServerUnjustifiedStats"] = 183] = "GameServerUnjustifiedStats";
-    Proto[Proto["GameServerPvpSituations"] = 184] = "GameServerPvpSituations";
-    Proto[Proto["GameServerFloorChangeUp"] = 190] = "GameServerFloorChangeUp";
-    Proto[Proto["GameServerFloorChangeDown"] = 191] = "GameServerFloorChangeDown";
-    Proto[Proto["GameServerChooseOutfit"] = 200] = "GameServerChooseOutfit";
-    Proto[Proto["GameServerVipAdd"] = 210] = "GameServerVipAdd";
-    Proto[Proto["GameServerVipState"] = 211] = "GameServerVipState";
-    Proto[Proto["GameServerVipLogout"] = 212] = "GameServerVipLogout";
-    Proto[Proto["GameServerTutorialHint"] = 220] = "GameServerTutorialHint";
-    Proto[Proto["GameServerAutomapFlag"] = 221] = "GameServerAutomapFlag";
-    Proto[Proto["GameServerCoinBalance"] = 223] = "GameServerCoinBalance";
-    Proto[Proto["GameServerStoreError"] = 224] = "GameServerStoreError";
-    Proto[Proto["GameServerRequestPurchaseData"] = 225] = "GameServerRequestPurchaseData";
-    Proto[Proto["GameServerQuestLog"] = 240] = "GameServerQuestLog";
-    Proto[Proto["GameServerQuestLine"] = 241] = "GameServerQuestLine";
-    Proto[Proto["GameServerCoinBalanceUpdating"] = 242] = "GameServerCoinBalanceUpdating";
-    Proto[Proto["GameServerChannelEvent"] = 243] = "GameServerChannelEvent";
-    Proto[Proto["GameServerItemInfo"] = 244] = "GameServerItemInfo";
-    Proto[Proto["GameServerPlayerInventory"] = 245] = "GameServerPlayerInventory";
-    Proto[Proto["GameServerMarketEnter"] = 246] = "GameServerMarketEnter";
-    Proto[Proto["GameServerMarketLeave"] = 247] = "GameServerMarketLeave";
-    Proto[Proto["GameServerMarketDetail"] = 248] = "GameServerMarketDetail";
-    Proto[Proto["GameServerMarketBrowse"] = 249] = "GameServerMarketBrowse";
-    Proto[Proto["GameServerModalDialog"] = 250] = "GameServerModalDialog";
-    Proto[Proto["GameServerStore"] = 251] = "GameServerStore";
-    Proto[Proto["GameServerStoreOffers"] = 252] = "GameServerStoreOffers";
-    Proto[Proto["GameServerStoreTransactionHistory"] = 253] = "GameServerStoreTransactionHistory";
-    Proto[Proto["GameServerStoreCompletePurchase"] = 254] = "GameServerStoreCompletePurchase";
-    Proto[Proto["ClientEnterAccount"] = 1] = "ClientEnterAccount";
-    Proto[Proto["ClientPendingGame"] = 10] = "ClientPendingGame";
-    Proto[Proto["ClientEnterGame"] = 15] = "ClientEnterGame";
-    Proto[Proto["ClientLeaveGame"] = 20] = "ClientLeaveGame";
-    Proto[Proto["ClientPing"] = 29] = "ClientPing";
-    Proto[Proto["ClientPingBack"] = 30] = "ClientPingBack";
-    Proto[Proto["ClientFirstGameOpcode"] = 50] = "ClientFirstGameOpcode";
-    Proto[Proto["ClientExtendedOpcode"] = 50] = "ClientExtendedOpcode";
-    Proto[Proto["ClientChangeMapAwareRange"] = 51] = "ClientChangeMapAwareRange";
-    Proto[Proto["ClientAutoWalk"] = 100] = "ClientAutoWalk";
-    Proto[Proto["ClientWalkNorth"] = 101] = "ClientWalkNorth";
-    Proto[Proto["ClientWalkEast"] = 102] = "ClientWalkEast";
-    Proto[Proto["ClientWalkSouth"] = 103] = "ClientWalkSouth";
-    Proto[Proto["ClientWalkWest"] = 104] = "ClientWalkWest";
-    Proto[Proto["ClientStop"] = 105] = "ClientStop";
-    Proto[Proto["ClientWalkNorthEast"] = 106] = "ClientWalkNorthEast";
-    Proto[Proto["ClientWalkSouthEast"] = 107] = "ClientWalkSouthEast";
-    Proto[Proto["ClientWalkSouthWest"] = 108] = "ClientWalkSouthWest";
-    Proto[Proto["ClientWalkNorthWest"] = 109] = "ClientWalkNorthWest";
-    Proto[Proto["ClientTurnNorth"] = 111] = "ClientTurnNorth";
-    Proto[Proto["ClientTurnEast"] = 112] = "ClientTurnEast";
-    Proto[Proto["ClientTurnSouth"] = 113] = "ClientTurnSouth";
-    Proto[Proto["ClientTurnWest"] = 114] = "ClientTurnWest";
-    Proto[Proto["ClientEquipItem"] = 119] = "ClientEquipItem";
-    Proto[Proto["ClientMove"] = 120] = "ClientMove";
-    Proto[Proto["ClientInspectNpcTrade"] = 121] = "ClientInspectNpcTrade";
-    Proto[Proto["ClientBuyItem"] = 122] = "ClientBuyItem";
-    Proto[Proto["ClientSellItem"] = 123] = "ClientSellItem";
-    Proto[Proto["ClientCloseNpcTrade"] = 124] = "ClientCloseNpcTrade";
-    Proto[Proto["ClientRequestTrade"] = 125] = "ClientRequestTrade";
-    Proto[Proto["ClientInspectTrade"] = 126] = "ClientInspectTrade";
-    Proto[Proto["ClientAcceptTrade"] = 127] = "ClientAcceptTrade";
-    Proto[Proto["ClientRejectTrade"] = 128] = "ClientRejectTrade";
-    Proto[Proto["ClientUseItem"] = 130] = "ClientUseItem";
-    Proto[Proto["ClientUseItemWith"] = 131] = "ClientUseItemWith";
-    Proto[Proto["ClientUseOnCreature"] = 132] = "ClientUseOnCreature";
-    Proto[Proto["ClientRotateItem"] = 133] = "ClientRotateItem";
-    Proto[Proto["ClientCloseContainer"] = 135] = "ClientCloseContainer";
-    Proto[Proto["ClientUpContainer"] = 136] = "ClientUpContainer";
-    Proto[Proto["ClientEditText"] = 137] = "ClientEditText";
-    Proto[Proto["ClientEditList"] = 138] = "ClientEditList";
-    Proto[Proto["ClientLook"] = 140] = "ClientLook";
-    Proto[Proto["ClientLookCreature"] = 141] = "ClientLookCreature";
-    Proto[Proto["ClientTalk"] = 150] = "ClientTalk";
-    Proto[Proto["ClientRequestChannels"] = 151] = "ClientRequestChannels";
-    Proto[Proto["ClientJoinChannel"] = 152] = "ClientJoinChannel";
-    Proto[Proto["ClientLeaveChannel"] = 153] = "ClientLeaveChannel";
-    Proto[Proto["ClientOpenPrivateChannel"] = 154] = "ClientOpenPrivateChannel";
-    Proto[Proto["ClientOpenRuleViolation"] = 155] = "ClientOpenRuleViolation";
-    Proto[Proto["ClientCloseRuleViolation"] = 156] = "ClientCloseRuleViolation";
-    Proto[Proto["ClientCancelRuleViolation"] = 157] = "ClientCancelRuleViolation";
-    Proto[Proto["ClientCloseNpcChannel"] = 158] = "ClientCloseNpcChannel";
-    Proto[Proto["ClientChangeFightModes"] = 160] = "ClientChangeFightModes";
-    Proto[Proto["ClientAttack"] = 161] = "ClientAttack";
-    Proto[Proto["ClientFollow"] = 162] = "ClientFollow";
-    Proto[Proto["ClientInviteToParty"] = 163] = "ClientInviteToParty";
-    Proto[Proto["ClientJoinParty"] = 164] = "ClientJoinParty";
-    Proto[Proto["ClientRevokeInvitation"] = 165] = "ClientRevokeInvitation";
-    Proto[Proto["ClientPassLeadership"] = 166] = "ClientPassLeadership";
-    Proto[Proto["ClientLeaveParty"] = 167] = "ClientLeaveParty";
-    Proto[Proto["ClientShareExperience"] = 168] = "ClientShareExperience";
-    Proto[Proto["ClientDisbandParty"] = 169] = "ClientDisbandParty";
-    Proto[Proto["ClientOpenOwnChannel"] = 170] = "ClientOpenOwnChannel";
-    Proto[Proto["ClientInviteToOwnChannel"] = 171] = "ClientInviteToOwnChannel";
-    Proto[Proto["ClientExcludeFromOwnChannel"] = 172] = "ClientExcludeFromOwnChannel";
-    Proto[Proto["ClientCancelAttackAndFollow"] = 190] = "ClientCancelAttackAndFollow";
-    Proto[Proto["ClientUpdateTile"] = 201] = "ClientUpdateTile";
-    Proto[Proto["ClientRefreshContainer"] = 202] = "ClientRefreshContainer";
-    Proto[Proto["ClientBrowseField"] = 203] = "ClientBrowseField";
-    Proto[Proto["ClientSeekInContainer"] = 204] = "ClientSeekInContainer";
-    Proto[Proto["ClientRequestOutfit"] = 210] = "ClientRequestOutfit";
-    Proto[Proto["ClientChangeOutfit"] = 211] = "ClientChangeOutfit";
-    Proto[Proto["ClientMount"] = 212] = "ClientMount";
-    Proto[Proto["ClientAddVip"] = 220] = "ClientAddVip";
-    Proto[Proto["ClientRemoveVip"] = 221] = "ClientRemoveVip";
-    Proto[Proto["ClientEditVip"] = 222] = "ClientEditVip";
-    Proto[Proto["ClientBugReport"] = 230] = "ClientBugReport";
-    Proto[Proto["ClientRuleViolation"] = 231] = "ClientRuleViolation";
-    Proto[Proto["ClientDebugReport"] = 232] = "ClientDebugReport";
-    Proto[Proto["ClientTransferCoins"] = 239] = "ClientTransferCoins";
-    Proto[Proto["ClientRequestQuestLog"] = 240] = "ClientRequestQuestLog";
-    Proto[Proto["ClientRequestQuestLine"] = 241] = "ClientRequestQuestLine";
-    Proto[Proto["ClientNewRuleViolation"] = 242] = "ClientNewRuleViolation";
-    Proto[Proto["ClientRequestItemInfo"] = 243] = "ClientRequestItemInfo";
-    Proto[Proto["ClientMarketLeave"] = 244] = "ClientMarketLeave";
-    Proto[Proto["ClientMarketBrowse"] = 245] = "ClientMarketBrowse";
-    Proto[Proto["ClientMarketCreate"] = 246] = "ClientMarketCreate";
-    Proto[Proto["ClientMarketCancel"] = 247] = "ClientMarketCancel";
-    Proto[Proto["ClientMarketAccept"] = 248] = "ClientMarketAccept";
-    Proto[Proto["ClientAnswerModalDialog"] = 249] = "ClientAnswerModalDialog";
-    Proto[Proto["ClientOpenStore"] = 250] = "ClientOpenStore";
-    Proto[Proto["ClientRequestStoreOffers"] = 251] = "ClientRequestStoreOffers";
-    Proto[Proto["ClientBuyStoreOffer"] = 252] = "ClientBuyStoreOffer";
-    Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
-    Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
-    Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
-    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
-    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
-    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
-    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
-    Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
-    Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
-    Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
-    Proto[Proto["MonsterStartId"] = 1073741824] = "MonsterStartId";
-    Proto[Proto["MonsterEndId"] = 2147483648] = "MonsterEndId";
-    Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
-    Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
-})(Proto || (exports.Proto = Proto = {}));
-exports.Proto = Proto;
-
-/***/ }),
-
-/***/ 369:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Outfit = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(11);
-
-var _color = __webpack_require__(55);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Outfit = exports.Outfit = function () {
-    function Outfit() {
-        _classCallCheck(this, Outfit);
-
-        this.m_category = _const.ThingCategory.ThingCategoryCreature;
-        this.m_id = 128;
-        this.m_auxId = 0;
-        this.resetClothes();
-    }
-
-    _createClass(Outfit, [{
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "setAuxId",
-        value: function setAuxId(id) {
-            this.m_auxId = id;
-        }
-    }, {
-        key: "setHead",
-        value: function setHead(head) {
-            this.m_head = head;
-            this.m_headColor = Outfit.getColor(head);
-        }
-    }, {
-        key: "setBody",
-        value: function setBody(body) {
-            this.m_body = body;
-            this.m_bodyColor = Outfit.getColor(body);
-        }
-    }, {
-        key: "setLegs",
-        value: function setLegs(legs) {
-            this.m_legs = legs;
-            this.m_legsColor = Outfit.getColor(legs);
-        }
-    }, {
-        key: "setFeet",
-        value: function setFeet(feet) {
-            this.m_feet = feet;
-            this.m_feetColor = Outfit.getColor(feet);
-        }
-    }, {
-        key: "setAddons",
-        value: function setAddons(addons) {
-            this.m_addons = addons;
-        }
-    }, {
-        key: "setMount",
-        value: function setMount(mount) {
-            this.m_mount = mount;
-        }
-    }, {
-        key: "setCategory",
-        value: function setCategory(category) {
-            this.m_category = category;
-        }
-    }, {
-        key: "resetClothes",
-        value: function resetClothes() {
-            this.setHead(0);
-            this.setBody(0);
-            this.setLegs(0);
-            this.setFeet(0);
-            this.setMount(0);
-        }
-    }], [{
-        key: "getColor",
-        value: function getColor(color) {
-            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
-            var loc1 = 0,
-                loc2 = 0,
-                loc3 = 0;
-            if (color % Outfit.HSI_H_STEPS != 0) {
-                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
-                loc2 = 1;
-                loc3 = 1;
-                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
-                    case 0:
-                        loc2 = 0.25;
-                        loc3 = 1.00;
-                        break;
-                    case 1:
-                        loc2 = 0.25;
-                        loc3 = 0.75;
-                        break;
-                    case 2:
-                        loc2 = 0.50;
-                        loc3 = 0.75;
-                        break;
-                    case 3:
-                        loc2 = 0.667;
-                        loc3 = 0.75;
-                        break;
-                    case 4:
-                        loc2 = 1.00;
-                        loc3 = 1.00;
-                        break;
-                    case 5:
-                        loc2 = 1.00;
-                        loc3 = 0.75;
-                        break;
-                    case 6:
-                        loc2 = 1.00;
-                        loc3 = 0.50;
-                        break;
-                }
-            } else {
-                loc1 = 0;
-                loc2 = 0;
-                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
-            }
-            if (loc3 == 0) return new _color.Color(0, 0, 0);
-            if (loc2 == 0) {
-                var loc7 = Math.floor(loc3 * 255);
-                return new _color.Color(loc7, loc7, loc7);
-            }
-            var red = 0,
-                green = 0,
-                blue = 0;
-            if (loc1 < 1.0 / 6.0) {
-                red = loc3;
-                blue = loc3 * (1 - loc2);
-                green = blue + (loc3 - blue) * 6 * loc1;
-            } else if (loc1 < 2.0 / 6.0) {
-                green = loc3;
-                blue = loc3 * (1 - loc2);
-                red = green - (loc3 - blue) * (6 * loc1 - 1);
-            } else if (loc1 < 3.0 / 6.0) {
-                green = loc3;
-                red = loc3 * (1 - loc2);
-                blue = red + (loc3 - red) * (6 * loc1 - 2);
-            } else if (loc1 < 4.0 / 6.0) {
-                blue = loc3;
-                red = loc3 * (1 - loc2);
-                green = blue - (loc3 - red) * (6 * loc1 - 3);
-            } else if (loc1 < 5.0 / 6.0) {
-                blue = loc3;
-                green = loc3 * (1 - loc2);
-                red = green + (loc3 - green) * (6 * loc1 - 4);
-            } else {
-                red = loc3;
-                green = loc3 * (1 - loc2);
-                blue = red - (loc3 - green) * (6 * loc1 - 5);
-            }
-            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
-        }
-    }]);
-
-    return Outfit;
-}();
-
-Outfit.HSI_SI_VALUES = 7;
-Outfit.HSI_H_STEPS = 19;
-
-/***/ }),
-
-/***/ 370:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6554,11 +8883,19 @@ exports.Item = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(64);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
+
+var _position = __webpack_require__(62);
+
+var _game = __webpack_require__(41);
+
+var _g_clock = __webpack_require__(92);
+
+var _helpers = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6570,21 +8907,154 @@ var Item = exports.Item = function (_Thing) {
     _inherits(Item, _Thing);
 
     function Item() {
-        var m_clientId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var clientId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
         _classCallCheck(this, Item);
 
         var _this = _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).call(this));
 
-        _this.m_clientId = m_clientId;
-        _this.subtype = -1;
-        _this.istop = _this.getThingType().isOnTop();
-        _this.isbot = _this.getThingType().isOnBottom();
-        _this.stackprio = _this.getStackPriority();
+        _this.m_clientId = 0;
+        _this.m_countOrSubType = -1;
+        _this.m_async = true;
+        _this.m_phase = 0;
+        _this.m_lastPhase = 0;
+        _this.m_clientId = clientId;
         return _this;
     }
 
     _createClass(Item, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, animate) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            if (this.m_clientId == 0) return;
+            // determine animation phase
+            var animationPhase = this.calculateAnimationPhase(animate);
+            // determine x,y,z patterns
+            var pattern = new _position.Position();
+            this.calculatePatterns(pattern);
+            //console.log('draw item', this.m_clientId, dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase);
+            this.rawGetThingType().draw(dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase, lightView);
+        }
+    }, {
+        key: "calculateAnimationPhase",
+        value: function calculateAnimationPhase(animate) {
+            if (this.getAnimationPhases() > 1) {
+                if (animate) {
+                    if (this.getAnimator() != null) return (0, _helpers.toInt)(this.getAnimator().getPhase());
+                    if (this.m_async) return (0, _helpers.toInt)(_g_clock.g_clock.millis() % (_const.Otc.ITEM_TICKS_PER_FRAME * this.getAnimationPhases()) / _const.Otc.ITEM_TICKS_PER_FRAME);else {
+                        if (_g_clock.g_clock.millis() - this.m_lastPhase >= _const.Otc.ITEM_TICKS_PER_FRAME) {
+                            this.m_phase = (this.m_phase + 1) % this.getAnimationPhases();
+                            this.m_lastPhase = _g_clock.g_clock.millis();
+                        }
+                        return (0, _helpers.toInt)(this.m_phase);
+                    }
+                } else return (0, _helpers.toInt)(this.getAnimationPhases() - 1);
+            }
+            return 0;
+        }
+    }, {
+        key: "calculatePatterns",
+        value: function calculatePatterns(pattern) {
+            // Avoid crashes with invalid items
+            if (!this.isValid()) return;
+            if (this.isStackable() && this.getNumPatternX() == 4 && this.getNumPatternY() == 2) {
+                if (this.m_countOrSubType <= 0) {
+                    pattern.x = 0;
+                    pattern.y = 0;
+                } else if (this.m_countOrSubType < 5) {
+                    pattern.x = this.m_countOrSubType - 1;
+                    pattern.y = 0;
+                } else if (this.m_countOrSubType < 10) {
+                    pattern.x = 0;
+                    pattern.y = 1;
+                } else if (this.m_countOrSubType < 25) {
+                    pattern.x = 1;
+                    pattern.y = 1;
+                } else if (this.m_countOrSubType < 50) {
+                    pattern.x = 2;
+                    pattern.y = 1;
+                } else {
+                    pattern.x = 3;
+                    pattern.y = 1;
+                }
+            } else if (this.isHangable()) {
+                var tile = this.getTile();
+                if (tile) {
+                    if (tile.mustHookSouth()) pattern.x = this.getNumPatternX() >= 2 ? 1 : 0;else if (tile.mustHookEast()) pattern.x = this.getNumPatternX() >= 3 ? 2 : 0;
+                }
+            } else if (this.isSplash() || this.isFluidContainer()) {
+                var color = _const.FluidsColor.FluidTransparent;
+                if (_game.g_game.getFeature(_const.GameFeature.GameNewFluids)) {
+                    switch (this.m_countOrSubType) {
+                        case _const.FluidsColor.FluidNone:
+                            color = _const.FluidsColor.FluidTransparent;
+                            break;
+                        case _const.FluidsColor.FluidWater:
+                            color = _const.FluidsColor.FluidBlue;
+                            break;
+                        case _const.FluidsColor.FluidMana:
+                            color = _const.FluidsColor.FluidPurple;
+                            break;
+                        case _const.FluidsColor.FluidBeer:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        case _const.FluidsColor.FluidOil:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        case _const.FluidsColor.FluidBlood:
+                            color = _const.FluidsColor.FluidRed;
+                            break;
+                        case _const.FluidsColor.FluidSlime:
+                            color = _const.FluidsColor.FluidGreen;
+                            break;
+                        case _const.FluidsColor.FluidMud:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        case _const.FluidsColor.FluidLemonade:
+                            color = _const.FluidsColor.FluidYellow;
+                            break;
+                        case _const.FluidsColor.FluidMilk:
+                            color = _const.FluidsColor.FluidWhite;
+                            break;
+                        case _const.FluidsColor.FluidWine:
+                            color = _const.FluidsColor.FluidPurple;
+                            break;
+                        case _const.FluidsColor.FluidHealth:
+                            color = _const.FluidsColor.FluidRed;
+                            break;
+                        case _const.FluidsColor.FluidUrine:
+                            color = _const.FluidsColor.FluidYellow;
+                            break;
+                        case _const.FluidsColor.FluidRum:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        case _const.FluidsColor.FluidFruidJuice:
+                            color = _const.FluidsColor.FluidYellow;
+                            break;
+                        case _const.FluidsColor.FluidCoconutMilk:
+                            color = _const.FluidsColor.FluidWhite;
+                            break;
+                        case _const.FluidsColor.FluidTea:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        case _const.FluidsColor.FluidMead:
+                            color = _const.FluidsColor.FluidBrown;
+                            break;
+                        default:
+                            color = _const.FluidsColor.FluidTransparent;
+                            break;
+                    }
+                } else color = this.m_countOrSubType;
+                pattern.x = color % 4 % this.getNumPatternX();
+                pattern.y = color / 4 % this.getNumPatternY();
+            } else {
+                pattern.x = this.m_position.x % this.getNumPatternX();
+                pattern.y = this.m_position.y % this.getNumPatternY();
+                pattern.z = this.m_position.z % this.getNumPatternZ();
+            }
+        }
+    }, {
         key: "isItem",
         value: function isItem() {
             return true;
@@ -6600,9 +9070,14 @@ var Item = exports.Item = function (_Thing) {
             this.m_clientId = id;
         }
     }, {
+        key: "isValid",
+        value: function isValid() {
+            return _thingtypemanager.g_things.isValidDatId(this.m_clientId, _const.ThingCategory.ThingCategoryItem);
+        }
+    }, {
         key: "setCountOrSubType",
         value: function setCountOrSubType(count) {
-            this.subtype = count;
+            this.m_countOrSubType = count;
         }
     }, {
         key: "getThingType",
@@ -6621,7 +9096,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 371:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6634,13 +9109,13 @@ exports.Effect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(64);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _timer = __webpack_require__(147);
+var _timer = __webpack_require__(128);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6725,7 +9200,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 372:
+/***/ 460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6738,15 +9213,15 @@ exports.AnimatedText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _timer = __webpack_require__(147);
+var _timer = __webpack_require__(128);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(56);
 
-var _cachedtext = __webpack_require__(145);
+var _cachedtext = __webpack_require__(127);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6874,7 +9349,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 373:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6887,7 +9362,7 @@ exports.Missile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6929,7 +9404,7 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
-/***/ 374:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6942,7 +9417,7 @@ exports.Npc = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(123);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6971,7 +9446,7 @@ var Npc = exports.Npc = function (_Creature) {
 
 /***/ }),
 
-/***/ 375:
+/***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6984,7 +9459,7 @@ exports.Monster = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(123);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7013,7 +9488,7 @@ var Monster = exports.Monster = function (_Creature) {
 
 /***/ }),
 
-/***/ 376:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7042,7 +9517,7 @@ var Container = exports.Container = function () {
 
 /***/ }),
 
-/***/ 377:
+/***/ 465:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7057,17 +9532,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _SpeakTypes;
 
-var _chatboxtab = __webpack_require__(378);
+var _chatboxtab = __webpack_require__(466);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(34);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(41);
 
-var _statictext = __webpack_require__(144);
+var _statictext = __webpack_require__(188);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7480,7 +9955,7 @@ exports.g_chat = g_chat;
 
 /***/ }),
 
-/***/ 378:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7523,7 +9998,7 @@ var ChatboxTab = exports.ChatboxTab = function () {
 
 /***/ }),
 
-/***/ 379:
+/***/ 467:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7534,7 +10009,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Movie = undefined;
 
-var _binarydatareader = __webpack_require__(102);
+var _binarydatareader = __webpack_require__(126);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7556,145 +10031,7 @@ var Movie = exports.Movie = function (_BinaryDataReader) {
 
 /***/ }),
 
-/***/ 380:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_mapview = exports.MapView = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _map = __webpack_require__(50);
-
-var _game = __webpack_require__(49);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MapView = exports.MapView = function () {
-    function MapView() {
-        _classCallCheck(this, MapView);
-    }
-
-    _createClass(MapView, [{
-        key: "init",
-        value: function init() {
-            var awareRange = _map.g_map.getAwareRange();
-            var mapViewContainer = document.getElementById('mapview');
-            //for (let z = 0; z <= Otc.MAX_Z + 1; ++z) {
-            for (var y = 0; y < awareRange.vertical(); ++y) {
-                for (var x = 0; x < awareRange.horizontal(); ++x) {
-                    var content = document.createElement('div');
-                    content.setAttribute('id', this.getTileId(x, y, 0));
-                    content.innerText = this.getTileId(x, y, 0);
-                    mapViewContainer.appendChild(content);
-                }
-            }
-            //}
-        }
-    }, {
-        key: "draw",
-        value: function draw() {
-            var awareRange = _map.g_map.getAwareRange();
-            for (var y = 0; y < awareRange.vertical(); ++y) {
-                for (var x = 0; x < awareRange.horizontal(); ++x) {
-                    var tileContainer = this.getTile(x, y, 0);
-                    var tile = _game.g_game.getLocalPlayer().getTile();
-                    var text = ''; //'<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + tile.getGround().rawGetThingType().getSprites()[0] + '.png">';
-                    var things = tile.m_things;
-                    var _iteratorNormalCompletion = true;
-                    var _didIteratorError = false;
-                    var _iteratorError = undefined;
-
-                    try {
-                        for (var _iterator = things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                            var thing = _step.value;
-
-                            var sprite = thing.rawGetThingType().getSprites()[0];
-                            console.error(thing.rawGetThingType());
-                            text = text + '<img src="http://inditex.localhost/prv/imgup/mynet/X_datain_854/' + sprite + '.png">';
-                        }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
-                        }
-                    }
-
-                    var creatures = tile.getCreatures();
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
-
-                    try {
-                        for (var _iterator2 = creatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var creature = _step2.value;
-
-                            text = text + '<img src="http://outfit-images.ots.me/idleOutfits1092/outfit.php?id=' + creature.m_outfit.m_id + '&addons=' + creature.m_outfit.m_addons + '&head=' + creature.m_outfit.m_head + '&body=' + creature.m_outfit.m_body + '&legs=' + creature.m_outfit.m_legs + '&feet=' + creature.m_outfit.m_feet + '&mount=' + creature.m_outfit.m_mount + '&direction=' + creature.m_direction + '">';
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-
-                    tileContainer.innerHTML = text;
-                }
-            }
-        }
-    }, {
-        key: "clear",
-        value: function clear() {
-            var awareRange = _map.g_map.getAwareRange();
-            for (var y = 0; y < awareRange.vertical(); ++y) {
-                for (var x = 0; x < awareRange.horizontal(); ++x) {
-                    var tile = this.getTile(x, y, 0);
-                    tile.innerHTML = '<img src="https://avatars2.githubusercontent.com/u/864393?s=40&v=4" alt="@bigtimebuddy">';
-                }
-            }
-        }
-    }, {
-        key: "getTileId",
-        value: function getTileId(x, y, z) {
-            return 'tile-' + x + '-' + y;
-        }
-    }, {
-        key: "getTile",
-        value: function getTile(x, y, z) {
-            return document.getElementById(this.getTileId(x, y, z));
-        }
-    }]);
-
-    return MapView;
-}();
-
-var g_mapview = new MapView();
-exports.g_mapview = g_mapview;
-
-/***/ }),
-
-/***/ 44:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7707,13 +10044,13 @@ exports.Thing = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(41);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(34);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(64);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8156,491 +10493,7 @@ var Thing = exports.Thing = function () {
 
 /***/ }),
 
-/***/ 49:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_game = exports.Game = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _localplayer = __webpack_require__(353);
-
-var _const = __webpack_require__(11);
-
-var _thingtypemanager = __webpack_require__(54);
-
-var _protocolgame = __webpack_require__(363);
-
-var _map = __webpack_require__(50);
-
-var _container = __webpack_require__(376);
-
-var _chatbox = __webpack_require__(377);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Game = exports.Game = function () {
-    function Game() {
-        _classCallCheck(this, Game);
-
-        this.m_clientVersion = 0;
-        this.messageModesMap = {};
-        this.m_features = [];
-        this.m_localPlayer = new _localplayer.LocalPlayer();
-    }
-
-    _createClass(Game, [{
-        key: "processCloseChannel",
-        value: function processCloseChannel(channelId) {
-            _chatbox.g_chat.removeTab(channelId);
-        }
-    }, {
-        key: "processOpenChannel",
-        value: function processOpenChannel(channelId, name) {
-            _chatbox.g_chat.addChannel(name, channelId);
-        }
-    }, {
-        key: "processOpenOwnPrivateChannel",
-        value: function processOpenOwnPrivateChannel(channelId, name) {
-            _chatbox.g_chat.addChannel(name, channelId);
-        }
-    }, {
-        key: "processTalk",
-        value: function processTalk(name, level, mode, message, channelId, creaturePos) {
-            console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
-            _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
-        }
-    }, {
-        key: "setClientVersion",
-        value: function setClientVersion(version) {
-            this.m_clientVersion = version;
-            this.updateMessageModesMap(version);
-            this.updateFeatures(version);
-        }
-    }, {
-        key: "loadDatFile",
-        value: function loadDatFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.next = 2;
-                                return _thingtypemanager.g_things.loadDat(file);
-
-                            case 2:
-                                return _context.abrupt("return", _context.sent);
-
-                            case 3:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-        }
-    }, {
-        key: "updateMessageModesMap",
-        value: function updateMessageModesMap(version) {
-            this.messageModesMap = {};
-            if (version >= 1094) {
-                this.messageModesMap[_const.MessageMode.MessageMana] = 43;
-            }
-            if (version >= 1055) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 5;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 8;
-                this.messageModesMap[_const.MessageMode.MessageSpell] = 9;
-                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 10;
-                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 12;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 13;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 14;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 15;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 16;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 18; // Admin
-                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
-                this.messageModesMap[_const.MessageMode.MessageGameHighlight] = 20;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 21;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
-                this.messageModesMap[_const.MessageMode.MessageDamageDealed] = 23;
-                this.messageModesMap[_const.MessageMode.MessageDamageReceived] = 24;
-                this.messageModesMap[_const.MessageMode.MessageHeal] = 25;
-                this.messageModesMap[_const.MessageMode.MessageExp] = 26;
-                this.messageModesMap[_const.MessageMode.MessageDamageOthers] = 27;
-                this.messageModesMap[_const.MessageMode.MessageHealOthers] = 28;
-                this.messageModesMap[_const.MessageMode.MessageExpOthers] = 29;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 30;
-                this.messageModesMap[_const.MessageMode.MessageLoot] = 31;
-                this.messageModesMap[_const.MessageMode.MessageTradeNpc] = 32;
-                this.messageModesMap[_const.MessageMode.MessageGuild] = 33;
-                this.messageModesMap[_const.MessageMode.MessagePartyManagement] = 34;
-                this.messageModesMap[_const.MessageMode.MessageParty] = 35;
-                this.messageModesMap[_const.MessageMode.MessageBarkLow] = 36;
-                this.messageModesMap[_const.MessageMode.MessageBarkLoud] = 37;
-                this.messageModesMap[_const.MessageMode.MessageReport] = 38;
-                this.messageModesMap[_const.MessageMode.MessageHotkeyUse] = 39;
-                this.messageModesMap[_const.MessageMode.MessageTutorialHint] = 40;
-                this.messageModesMap[_const.MessageMode.MessageThankyou] = 41;
-                this.messageModesMap[_const.MessageMode.MessageMarket] = 42;
-            } else if (version >= 1036) {
-                for (var i = _const.MessageMode.MessageNone; i <= _const.MessageMode.MessageBeyondLast; ++i) {
-                    if (i >= _const.MessageMode.MessageNpcTo) this.messageModesMap[i] = i + 1;else this.messageModesMap[i] = i;
-                }
-            } else if (version >= 900) {
-                for (var _i = _const.MessageMode.MessageNone; _i <= _const.MessageMode.MessageBeyondLast; ++_i) {
-                    this.messageModesMap[_i] = _i;
-                }
-            } else if (version >= 861) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 5;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 13;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 14;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 15;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 16;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 18;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 19;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 20;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 21;
-                this.messageModesMap[_const.MessageMode.MessageRed] = 22;
-            } else if (version >= 840) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 5;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
-                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 9;
-                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 10;
-                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 12;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 13;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 14;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 14;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 15;
-                // 16, 17 ??
-                this.messageModesMap[_const.MessageMode.MessageRed] = 18;
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 19;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 20;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 21;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 22;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 23;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 24;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 25;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 26;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 27;
-            } else if (version >= 760) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 5;
-                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 6;
-                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 7;
-                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 8;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
-                // 13, 14, 15 ??
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 16;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 17;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 18;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 20;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 21;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 23;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 24;
-                this.messageModesMap[_const.MessageMode.MessageRed] = 25;
-            }
-        }
-    }, {
-        key: "updateFeatures",
-        value: function updateFeatures(version) {
-            this.m_features = [];
-            this.enableFeature(_const.GameFeature.GameFormatCreatureName);
-            if (version >= 770) {
-                this.enableFeature(_const.GameFeature.GameLooktypeU16);
-                this.enableFeature(_const.GameFeature.GameMessageStatements);
-                this.enableFeature(_const.GameFeature.GameLoginPacketEncryption);
-            }
-            if (version >= 780) {
-                this.enableFeature(_const.GameFeature.GamePlayerAddons);
-                this.enableFeature(_const.GameFeature.GamePlayerStamina);
-                this.enableFeature(_const.GameFeature.GameNewFluids);
-                this.enableFeature(_const.GameFeature.GameMessageLevel);
-                this.enableFeature(_const.GameFeature.GamePlayerStateU16);
-                this.enableFeature(_const.GameFeature.GameNewOutfitProtocol);
-            }
-            if (version >= 790) {
-                this.enableFeature(_const.GameFeature.GameWritableDate);
-            }
-            if (version >= 840) {
-                this.enableFeature(_const.GameFeature.GameProtocolChecksum);
-                this.enableFeature(_const.GameFeature.GameAccountNames);
-                this.enableFeature(_const.GameFeature.GameDoubleFreeCapacity);
-            }
-            if (version >= 841) {
-                this.enableFeature(_const.GameFeature.GameChallengeOnLogin);
-                this.enableFeature(_const.GameFeature.GameMessageSizeCheck);
-            }
-            if (version >= 854) {
-                this.enableFeature(_const.GameFeature.GameCreatureEmblems);
-            }
-            if (version >= 860) {
-                this.enableFeature(_const.GameFeature.GameAttackSeq);
-            }
-            if (version >= 862) {
-                this.enableFeature(_const.GameFeature.GamePenalityOnDeath);
-            }
-            if (version >= 870) {
-                this.enableFeature(_const.GameFeature.GameDoubleExperience);
-                this.enableFeature(_const.GameFeature.GamePlayerMounts);
-                this.enableFeature(_const.GameFeature.GameSpellList);
-            }
-            if (version >= 910) {
-                this.enableFeature(_const.GameFeature.GameNameOnNpcTrade);
-                this.enableFeature(_const.GameFeature.GameTotalCapacity);
-                this.enableFeature(_const.GameFeature.GameSkillsBase);
-                this.enableFeature(_const.GameFeature.GamePlayerRegenerationTime);
-                this.enableFeature(_const.GameFeature.GameChannelPlayerList);
-                this.enableFeature(_const.GameFeature.GameEnvironmentEffect);
-                this.enableFeature(_const.GameFeature.GameItemAnimationPhase);
-            }
-            if (version >= 940) {
-                this.enableFeature(_const.GameFeature.GamePlayerMarket);
-            }
-            if (version >= 953) {
-                this.enableFeature(_const.GameFeature.GamePurseSlot);
-                this.enableFeature(_const.GameFeature.GameClientPing);
-            }
-            if (version >= 960) {
-                this.enableFeature(_const.GameFeature.GameSpritesU32);
-                this.enableFeature(_const.GameFeature.GameOfflineTrainingTime);
-            }
-            if (version >= 963) {
-                this.enableFeature(_const.GameFeature.GameAdditionalVipInfo);
-            }
-            if (version >= 980) {
-                this.enableFeature(_const.GameFeature.GamePreviewState);
-                this.enableFeature(_const.GameFeature.GameClientVersion);
-            }
-            if (version >= 981) {
-                this.enableFeature(_const.GameFeature.GameLoginPending);
-                this.enableFeature(_const.GameFeature.GameNewSpeedLaw);
-            }
-            if (version >= 984) {
-                this.enableFeature(_const.GameFeature.GameContainerPagination);
-                this.enableFeature(_const.GameFeature.GameBrowseField);
-            }
-            if (version >= 1000) {
-                this.enableFeature(_const.GameFeature.GameThingMarks);
-                this.enableFeature(_const.GameFeature.GamePVPMode);
-            }
-            if (version >= 1035) {
-                this.enableFeature(_const.GameFeature.GameDoubleSkills);
-                this.enableFeature(_const.GameFeature.GameBaseSkillU16);
-            }
-            if (version >= 1036) {
-                this.enableFeature(_const.GameFeature.GameCreatureIcons);
-                this.enableFeature(_const.GameFeature.GameHideNpcNames);
-            }
-            if (version >= 1038) {
-                this.enableFeature(_const.GameFeature.GamePremiumExpiration);
-            }
-            if (version >= 1050) {
-                this.enableFeature(_const.GameFeature.GameEnhancedAnimations);
-            }
-            if (version >= 1053) {
-                this.enableFeature(_const.GameFeature.GameUnjustifiedPoints);
-            }
-            if (version >= 1054) {
-                this.enableFeature(_const.GameFeature.GameExperienceBonus);
-            }
-            if (version >= 1055) {
-                this.enableFeature(_const.GameFeature.GameDeathType);
-            }
-            if (version >= 1057) {
-                this.enableFeature(_const.GameFeature.GameIdleAnimations);
-            }
-            if (version >= 1061) {
-                this.enableFeature(_const.GameFeature.GameOGLInformation);
-            }
-            if (version >= 1071) {
-                this.enableFeature(_const.GameFeature.GameContentRevision);
-            }
-            if (version >= 1072) {
-                this.enableFeature(_const.GameFeature.GameAuthenticator);
-            }
-            if (version >= 1074) {
-                this.enableFeature(_const.GameFeature.GameSessionKey);
-            }
-            if (version >= 1080) {
-                this.enableFeature(_const.GameFeature.GameIngameStore);
-            }
-            if (version >= 1092) {
-                this.enableFeature(_const.GameFeature.GameIngameStoreServiceType);
-            }
-            if (version >= 1093) {
-                this.enableFeature(_const.GameFeature.GameIngameStoreHighlights);
-            }
-            if (version >= 1094) {
-                this.enableFeature(_const.GameFeature.GameAdditionalSkills);
-            }
-        }
-    }, {
-        key: "enableFeature",
-        value: function enableFeature(feature) {
-            this.m_features[feature] = true;
-        }
-    }, {
-        key: "disableFeature",
-        value: function disableFeature(feature) {
-            this.m_features[feature] = false;
-        }
-    }, {
-        key: "getFeature",
-        value: function getFeature(feature) {
-            return this.m_features[feature] == true;
-        }
-    }, {
-        key: "translateMessageModeFromServer",
-        value: function translateMessageModeFromServer(mode) {
-            for (var i in this.messageModesMap) {
-                if (this.messageModesMap[i] == mode) {
-                    return parseInt(i);
-                }
-            }
-            return _const.MessageMode.MessageInvalid;
-        }
-    }, {
-        key: "getContainer",
-        value: function getContainer(containerId) {
-            return new _container.Container();
-        }
-    }, {
-        key: "getClientVersion",
-        value: function getClientVersion() {
-            return this.m_clientVersion;
-        }
-    }, {
-        key: "getProtocolVersion",
-        value: function getProtocolVersion() {
-            return 10009;
-        }
-    }, {
-        key: "getOs",
-        value: function getOs() {
-            return 3;
-        }
-    }, {
-        key: "processConnectionError",
-        value: function processConnectionError() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "getLocalPlayer",
-        value: function getLocalPlayer() {
-            return this.m_localPlayer;
-        }
-    }, {
-        key: "login",
-        value: function login(accountName, accountPassword, characterName) {
-            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
-            this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-        }
-    }, {
-        key: "watchMovie",
-        value: function watchMovie(movie) {
-            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
-            this.m_protocolGame.watch(movie);
-        }
-    }, {
-        key: "formatCreatureName",
-        value: function formatCreatureName(string) {
-            return string;
-        }
-    }, {
-        key: "g_things",
-        get: function get() {
-            return new _thingtypemanager.ThingTypeManager();
-        }
-    }, {
-        key: "g_map",
-        get: function get() {
-            return new _map.Map();
-        }
-    }]);
-
-    return Game;
-}();
-
-var g_game = new Game();
-exports.g_game = g_game;
-
-/***/ }),
-
-/***/ 50:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8653,19 +10506,19 @@ exports.g_map = exports.Map = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(100);
+var _position = __webpack_require__(62);
 
-var _awarerange = __webpack_require__(139);
+var _awarerange = __webpack_require__(180);
 
-var _light = __webpack_require__(101);
+var _light = __webpack_require__(124);
 
-var _tileblock = __webpack_require__(354);
+var _tileblock = __webpack_require__(446);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _helpers = __webpack_require__(140);
+var _helpers = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8957,174 +10810,7 @@ exports.g_map = g_map;
 
 /***/ }),
 
-/***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_things = exports.ThingTypeManager = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _thingtype = __webpack_require__(356);
-
-var _const = __webpack_require__(11);
-
-var _log = __webpack_require__(23);
-
-var _resources = __webpack_require__(143);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var nullThingType = new _thingtype.ThingType();
-
-var ThingTypeManager = exports.ThingTypeManager = function () {
-    function ThingTypeManager() {
-        _classCallCheck(this, ThingTypeManager);
-
-        this.m_nullThingType = new _thingtype.ThingType();
-        this.m_thingTypes = null;
-        this.m_datLoaded = false;
-        this.m_datSignature = 0;
-        this.m_contentRevision = 0;
-        this.m_thingTypes = [];
-        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
-            this.m_thingTypes[i] = [];
-        }
-    }
-
-    _createClass(ThingTypeManager, [{
-        key: "getThingType",
-        value: function getThingType(id, category) {
-            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
-                _log.Log.error("invalid thing type client id %d in category %d", id, category);
-                return this.m_nullThingType;
-            }
-            return this.m_thingTypes[category][id];
-        }
-    }, {
-        key: "rawGetThingType",
-        value: function rawGetThingType(id, category) {
-            return this.getThingType(id, category);
-        }
-    }, {
-        key: "isValidDatId",
-        value: function isValidDatId(id, category) {
-            return true;
-        }
-    }, {
-        key: "getNullThingType",
-        value: function getNullThingType() {
-            return nullThingType;
-        }
-    }, {
-        key: "getContentRevision",
-        value: function getContentRevision() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "loadDat",
-        value: function loadDat(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var fin, category, count, thingCount, _category, firstId, id, type;
-
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.m_datLoaded = false;
-                                this.m_datSignature = 0;
-                                this.m_contentRevision = 0;
-                                _context.prev = 3;
-
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                _context.next = 7;
-                                return _resources.g_resources.openFile(file);
-
-                            case 7:
-                                fin = _context.sent;
-
-                                this.m_datSignature = fin.getU32();
-                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
-                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
-                                    count = fin.getU16() + 1;
-
-                                    this.m_thingTypes[category] = [];
-                                    for (thingCount = 0; thingCount < count; ++thingCount) {
-                                        this.m_thingTypes[category][thingCount] = nullThingType;
-                                    }
-                                }
-                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
-                                    firstId = 1;
-
-                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
-                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
-                                        type = new _thingtype.ThingType();
-
-                                        type.unserialize(id, _category, fin);
-                                        this.m_thingTypes[_category][id] = type;
-                                    }
-                                }
-                                this.m_datLoaded = true;
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
-                                return _context.abrupt("return", true);
-
-                            case 17:
-                                _context.prev = 17;
-                                _context.t0 = _context["catch"](3);
-
-                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
-                                return _context.abrupt("return", false);
-
-                            case 21:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[3, 17]]);
-            }));
-        }
-    }]);
-
-    return ThingTypeManager;
-}();
-
-var g_things = new ThingTypeManager();
-exports.g_things = g_things;
-
-/***/ }),
-
-/***/ 55:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9283,7 +10969,7 @@ Color.orange = 0xff008cff;
 
 /***/ }),
 
-/***/ 71:
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9292,226 +10978,143 @@ Color.orange = 0xff008cff;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Creature = undefined;
+exports.Position = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
-
-var _outfit = __webpack_require__(369);
-
-var _const = __webpack_require__(11);
-
-var _color = __webpack_require__(55);
-
-var _cachedtext = __webpack_require__(145);
-
-var _timer = __webpack_require__(147);
+var _const = __webpack_require__(13);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Creature = exports.Creature = function (_Thing) {
-    _inherits(Creature, _Thing);
-
-    function Creature() {
-        _classCallCheck(this, Creature);
-
-        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
-
-        _this.m_id = 0;
-        _this.m_showShieldTexture = true;
-        _this.m_shieldBlink = false;
-        _this.m_passable = false;
-        _this.m_showTimedSquare = false;
-        _this.m_showStaticSquare = false;
-        _this.m_removed = true;
-        _this.m_nameCache = new _cachedtext.CachedText();
-        _this.m_informationColor = new _color.Color();
-        _this.m_outfitColor = new _color.Color();
-        //ScheduledEventPtr m_outfitColorUpdateEvent;
-        _this.m_outfitColorTimer = new _timer.Timer();
-        _this.m_walkTimer = new _timer.Timer();
-        _this.m_footTimer = new _timer.Timer();
-        _this.m_walking = false;
-        _this.m_allowAppearWalk = false;
-        _this.m_footStepDrawn = false;
-        _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
-        _this.m_lastStepDirection = _const.Direction.InvalidDirection;
-        _this.m_outfit = new _outfit.Outfit();
-        return _this;
-    }
-
-    _createClass(Creature, [{
-        key: "draw",
-        value: function draw(dest, scaleFactor, animate) {
-            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-        }
-    }, {
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "getName",
-        value: function getName() {
-            return this.m_name;
-        }
-    }, {
-        key: "setName",
-        value: function setName(name) {
-            this.m_name = name;
-        }
-    }, {
-        key: "isCreature",
-        value: function isCreature() {
-            return true;
-        }
-    }, {
-        key: "addTimedSquare",
-        value: function addTimedSquare(arg0) {
-            // throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "hideStaticSquare",
-        value: function hideStaticSquare() {
-            //throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "showStaticSquare",
-        value: function showStaticSquare(arg0) {
-            // throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "setType",
-        value: function setType(type) {
-            this.m_type = type;
-        }
-    }, {
-        key: "allowAppearWalk",
-        value: function allowAppearWalk() {}
-    }, {
-        key: "setHealthPercent",
-        value: function setHealthPercent(healthPercent) {
-            this.m_healthPercent = healthPercent;
-        }
-    }, {
-        key: "setLight",
-        value: function setLight(light) {}
-    }, {
-        key: "setOutfit",
-        value: function setOutfit(outfit) {
-            this.m_outfit = outfit;
-        }
-    }, {
-        key: "setSpeed",
-        value: function setSpeed(speed) {}
-    }, {
-        key: "setBaseSpeed",
-        value: function setBaseSpeed(baseSpeed) {}
-    }, {
-        key: "setSkull",
-        value: function setSkull(skull) {}
-    }, {
-        key: "setShield",
-        value: function setShield(shield) {}
-    }, {
-        key: "setPassable",
-        value: function setPassable(v) {}
-    }, {
-        key: "setEmblem",
-        value: function setEmblem(emblem) {}
-    }, {
-        key: "setIcon",
-        value: function setIcon(icon) {}
-    }, {
-        key: "setDirection",
-        value: function setDirection(direction) {
-            this.m_direction = direction;
-        }
-    }, {
-        key: "turn",
-        value: function turn(direction) {
-            if (!this.m_walking) this.setDirection(direction);else this.m_walkTurnDirection = direction;
-        }
-    }, {
-        key: "isWalking",
-        value: function isWalking() {
-            return this.m_walking;
-        }
-    }]);
-
-    return Creature;
-}(_thing.Thing);
-
-/***/ }),
-
-/***/ 72:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Point = exports.Point = function () {
-    function Point() {
+var Position = exports.Position = function () {
+    function Position() {
         var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
         var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-        _classCallCheck(this, Point);
+        _classCallCheck(this, Position);
 
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
-    _createClass(Point, [{
+    _createClass(Position, [{
         key: "equals",
-        value: function equals(otherPoint) {
-            return this.x == otherPoint.x && this.y == otherPoint.y;
+        value: function equals(otherPosition) {
+            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
         }
     }, {
         key: "clone",
         value: function clone() {
-            return new Point(this.x, this.y);
+            return new Position(this.x, this.y, this.z);
         }
     }, {
-        key: "add",
-        value: function add(point) {
-            return new Point(this.x + point.x, this.y + point.y);
+        key: "isMapPosition",
+        value: function isMapPosition() {
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
         }
     }, {
-        key: "sub",
-        value: function sub(point) {
-            return new Point(this.x - point.x, this.y - point.y);
+        key: "isValid",
+        value: function isValid() {
+            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
         }
     }, {
-        key: "mul",
-        value: function mul(ratio) {
-            return new Point(this.x * ratio, this.y * ratio);
+        key: "distance",
+        value: function distance(pos) {
+            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
+        }
+    }, {
+        key: "translate",
+        value: function translate(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            this.x += dx;
+            this.y += dy;
+            this.z += dz;
+        }
+    }, {
+        key: "translated",
+        value: function translated(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+    }, {
+        key: "isInRange",
+        value: function isInRange(pos, xRange, yRange) {
+            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+        }
+        /*
+            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
+                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+            }
+        */
+
+    }, {
+        key: "up",
+        value: function up() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z - n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "down",
+        value: function down() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z + n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredUp",
+        value: function coveredUp() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x + n,
+                ny = this.y + n,
+                nz = this.z - n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredDown",
+        value: function coveredDown() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x - n,
+                ny = this.y - n,
+                nz = this.z + n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
         }
     }]);
 
-    return Point;
+    return Position;
 }();
 
 /***/ }),
 
-/***/ 73:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9520,8 +11123,194 @@ var Point = exports.Point = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
+};
+exports.toInt = toInt;
+
+/***/ }),
+
+/***/ 64:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_things = exports.ThingTypeManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _thingtype = __webpack_require__(448);
+
+var _const = __webpack_require__(13);
+
+var _log = __webpack_require__(34);
+
+var _resources = __webpack_require__(125);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var nullThingType = new _thingtype.ThingType();
+
+var ThingTypeManager = exports.ThingTypeManager = function () {
+    function ThingTypeManager() {
+        _classCallCheck(this, ThingTypeManager);
+
+        this.m_nullThingType = new _thingtype.ThingType();
+        this.m_thingTypes = null;
+        this.m_datLoaded = false;
+        this.m_datSignature = 0;
+        this.m_contentRevision = 0;
+        this.m_thingTypes = [];
+        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
+            this.m_thingTypes[i] = [];
+        }
+    }
+
+    _createClass(ThingTypeManager, [{
+        key: "getThingType",
+        value: function getThingType(id, category) {
+            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
+                _log.Log.error("invalid thing type client id %d in category %d", id, category);
+                return this.m_nullThingType;
+            }
+            return this.m_thingTypes[category][id];
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType(id, category) {
+            return this.getThingType(id, category);
+        }
+    }, {
+        key: "isValidDatId",
+        value: function isValidDatId(id, category) {
+            return true;
+        }
+    }, {
+        key: "getNullThingType",
+        value: function getNullThingType() {
+            return nullThingType;
+        }
+    }, {
+        key: "getContentRevision",
+        value: function getContentRevision() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "loadDat",
+        value: function loadDat(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var fin, category, count, thingCount, _category, firstId, id, type;
+
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.m_datLoaded = false;
+                                this.m_datSignature = 0;
+                                this.m_contentRevision = 0;
+                                _context.prev = 3;
+
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                _context.next = 7;
+                                return _resources.g_resources.openFile(file);
+
+                            case 7:
+                                fin = _context.sent;
+
+                                this.m_datSignature = fin.getU32();
+                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
+                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
+                                    count = fin.getU16() + 1;
+
+                                    this.m_thingTypes[category] = [];
+                                    for (thingCount = 0; thingCount < count; ++thingCount) {
+                                        this.m_thingTypes[category][thingCount] = nullThingType;
+                                    }
+                                }
+                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
+                                    firstId = 1;
+
+                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
+                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
+                                        type = new _thingtype.ThingType();
+
+                                        type.unserialize(id, _category, fin);
+                                        this.m_thingTypes[_category][id] = type;
+                                    }
+                                }
+                                this.m_datLoaded = true;
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
+                                return _context.abrupt("return", true);
+
+                            case 17:
+                                _context.prev = 17;
+                                _context.t0 = _context["catch"](3);
+
+                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
+                                return _context.abrupt("return", false);
+
+                            case 21:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[3, 17]]);
+            }));
+        }
+    }]);
+
+    return ThingTypeManager;
+}();
+
+var g_things = new ThingTypeManager();
+exports.g_things = g_things;
+
+/***/ }),
+
+/***/ 91:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Size = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _point = __webpack_require__(42);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9612,11 +11401,50 @@ var Size = exports.Size = function () {
         value: function area() {
             return this.wd * this.ht;
         }
+    }, {
+        key: "toPoint",
+        value: function toPoint() {
+            return new _point.Point(this.wd, this.ht);
+        }
     }]);
 
     return Size;
 }();
 
+/***/ }),
+
+/***/ 92:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Clock = function () {
+    function Clock() {
+        _classCallCheck(this, Clock);
+    }
+
+    _createClass(Clock, [{
+        key: "millis",
+        value: function millis() {
+            return +new Date();
+        }
+    }]);
+
+    return Clock;
+}();
+
+var g_clock = new Clock();
+exports.g_clock = g_clock;
+
 /***/ })
 
-},[148]);
+},[241]);

@@ -1,4 +1,5 @@
 import {Position} from "../position";
+import {Point} from "./point";
 
 export class Size {
     constructor(private wd: number = -1, private ht: number = -1) {
@@ -62,5 +63,9 @@ export class Size {
 
     area(): number {
         return this.wd * this.ht;
+    }
+
+    toPoint() : Point {
+        return new Point(this.wd, this.ht);
     }
 }

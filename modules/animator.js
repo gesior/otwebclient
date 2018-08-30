@@ -30,5 +30,8 @@ export class Animator {
         assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
         */
     }
+    getPhase() {
+        return this.m_phase;
+    }
 }
 //# sourceMappingURL=animator.js.map

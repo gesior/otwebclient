@@ -7,6 +7,33 @@ export class Outfit {
         this.m_auxId = 0;
         this.resetClothes();
     }
+    getId() {
+        return this.m_id;
+    }
+    getAuxId() {
+        return this.m_auxId;
+    }
+    getHead() {
+        return this.m_head;
+    }
+    getBody() {
+        return this.m_body;
+    }
+    getLegs() {
+        return this.m_legs;
+    }
+    getFeet() {
+        return this.m_feet;
+    }
+    getAddons() {
+        return this.m_addons;
+    }
+    getMount() {
+        return this.m_mount;
+    }
+    getCategory() {
+        return this.m_category;
+    }
     setId(id) {
         this.m_id = id;
     }
