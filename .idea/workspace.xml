@@ -1,77 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/modules/painter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/war_bonus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fronttypescript.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fronttypescript.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/init.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/init.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/vendor.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/vendor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/abstract/binarydatareader.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/abstract/binarydatareader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/abstract/binarydatareader.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/abstract/binarydatareader.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/abstract/binarydatareader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/abstract/binarydatareader.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/animator.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/animator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/constants/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/const.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/constants/const.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/const.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/constants/const.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/constants/const.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/creature.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/creature.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/creature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/game.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/game.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/image.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/image.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/image.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/image.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/image.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/inputfile.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/inputfile.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/inputfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/inputfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/item.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/log.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/log.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/log.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/log.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/outfit.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/outfit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/outfit.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/outfit.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/outfit.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/outfit.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/spritemanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/spritemanager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/spritemanager.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/spritemanager.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/spritemanager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/spritemanager.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/g_clock.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/g_clock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/g_clock.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/g_clock.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/g_clock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/g_clock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/size.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/size.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/size.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/size.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/size.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/size.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/texture.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/texture.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/texture.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/texture.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/structures/texture.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/structures/texture.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/thingtype.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/thingtype.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/thingtype.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/tile.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/tile.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/tile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/view/mapview.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/view/mapview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/view/mapview.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/view/mapview.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/view/mapview.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/view/mapview.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@types/pixi.js/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/pixi.js/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +12,7 @@
     <session id="1178514901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.4" value="2" />
@@ -159,7 +89,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
+            <state relative-caret-position="178">
               <caret line="715" column="137" selection-start-line="715" selection-start-column="137" selection-end-line="715" selection-end-column="137" />
               <folding>
                 <element signature="e#0#93#0" expanded="true" />
@@ -486,7 +416,7 @@
   <component name="PropertiesComponent">
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../eloth/data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../inditex-auth" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -542,12 +472,12 @@
       <workItem from="1533706382682" duration="18305000" />
       <workItem from="1533794218326" duration="69246000" />
       <workItem from="1534934991794" duration="11221000" />
-      <workItem from="1535118773577" duration="33296000" />
+      <workItem from="1535118773577" duration="35140000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275176000" />
+    <option name="totallyTimeSpent" value="277020000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -560,9 +490,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1080" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4990792" visible="true" weight="0.13553895" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990792" visible="true" weight="0.13553895" />
       <window_info id="Structure" order="1" sideWeight="0.5005225" side_tool="true" weight="0.12433298" />
       <window_info id="Favorites" order="2" sideWeight="0.50092083" side_tool="true" weight="0.12433298" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -576,7 +505,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3291536" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" weight="0.35945663" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" visible="true" weight="0.35945663" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.4336468" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -1465,7 +1394,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
+        <state relative-caret-position="178">
           <caret line="715" column="137" selection-start-line="715" selection-start-column="137" selection-end-line="715" selection-end-column="137" />
           <folding>
             <element signature="e#0#93#0" expanded="true" />
