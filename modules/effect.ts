@@ -7,7 +7,7 @@ import {Timer} from "./structures/timer";
 import {Point} from "./structures/point";
 
 export class Effect extends Thing {
-    public static readonly EFFECT_TICKS_PER_FRAME = 75
+    public static readonly EFFECT_TICKS_PER_FRAME = 75;
 
     m_animationTimer: Timer = new Timer();
     m_phaseDuration: number;
@@ -15,25 +15,6 @@ export class Effect extends Thing {
 
     isEffect() {
         return true;
-    }
-
-    drawEffect(dest: Point, scaleFactor, animate: boolean, offsetX: number = 0, offsetY: number = 0, lightView: LightView = null) {
-        if (this.m_id == 0)
-            return;
-
-        let animationPhase = 0;
-        if (animate)
-            animationPhase = Math.min((this.m_animationTimer.ticksElapsed() / this.m_phaseDuration), this.getAnimationPhases() - 1);
-
-        let xPattern = offsetX % this.getNumPatternX();
-        if (xPattern < 0)
-            xPattern += this.getNumPatternX();
-
-        let yPattern = offsetY % this.getNumPatternY();
-        if (yPattern < 0)
-            yPattern += this.getNumPatternY();
-
-        this.rawGetThingType().draw(dest, scaleFactor, 0, xPattern, yPattern, 0, animationPhase, lightView);
     }
 
     getId(): number {

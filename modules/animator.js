@@ -23,12 +23,6 @@ export class Animator {
             let maximum = fin.getU32();
             this.m_phaseDurations.push([minimum, maximum]);
         }
-        /*
-        m_phase = getStartPhase();
-
-        assert(m_animationPhases == (int)m_phaseDurations.size());
-        assert(m_startPhase >= -1 && m_startPhase < m_animationPhases);
-        */
     }
     getPhase() {
         return this.m_phase;

@@ -1,7 +1,647 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="" />
+    <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/init.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/vendor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/animator.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/animator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/animator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/big.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cachedtext.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cachedtext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cachedtext.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cachedtext.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/cachedtext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/cachedtext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/creature.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/creature.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/creature.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/creature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/effect.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/effect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/effect.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/effect.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/effect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/effect.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/game.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/game.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/game.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/game.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/item.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/item.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/map.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/map.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/map.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/map.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/network/protocolgame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/network/protocolgame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/painter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/painter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/painter.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/spritemanager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/spritemanager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/spritemanager.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/statictext.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/statictext.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/statictext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/statictext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/texture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/texture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/structures/texture.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtype.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtype.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtypemanager.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtypemanager.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/thingtypemanager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/thingtypemanager.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tile.js" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tile.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/tile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/tile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatbox.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatbox.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatbox.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatboxtab.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatboxtab.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/chatboxtab.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/mapview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/mapview.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/view/mapview.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jquery/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jqueryui/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jqueryui/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jqueryui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/jqueryui/types-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/pixi.js/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/pixi.js/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/pixi.js/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/pixi.js/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/test/interleave2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/test/interleave3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/test/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/bit-twiddle/twiddle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/dist/earcut.dev.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/dist/earcut.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/earcut.sublime-project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/earcut.sublime-workspace" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/src/earcut.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/earcut/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/eventemitter3/umd/eventemitter3.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/CONTRIBUTORS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/Gruntfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/isMobile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/isMobile.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/AmazonSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/AndroidSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/AppleSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/DesktopSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/OtherSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/SevenInchSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/ismobilejs/tests/spec/WindowsSpec.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/AUTHORS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/dist/jquery.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/external/sizzle/dist/sizzle.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/jsonp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/load.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/parseJSON.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/parseXML.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/location.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/nonce.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/var/rquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/ajax/xhr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes/attr.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes/classes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes/prop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/attributes/val.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/callbacks.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core/access.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core/init.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core/parseHTML.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core/ready.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/core/var/rsingleTag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/addGetHookIf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/adjustCSS.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/curCSS.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/defaultDisplay.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/hiddenVisibleSelectors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/showHide.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/var/cssExpand.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/var/isHidden.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rmargin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/var/rnumnonpx.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/css/var/swap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/data/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/data/var/acceptData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/deferred.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/deprecated.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/dimensions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/effects.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/effects/Tween.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/effects/animatedSelector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/effects/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/event.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/event/ajax.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/event/alias.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/event/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/exports/amd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/exports/global.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/intro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/_evalUrl.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/buildFragment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/createSafeFragment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/getAll.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/setGlobalEval.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/nodeNames.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rcheckableType.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rleadingWhitespace.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rscriptType.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/var/rtagName.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/manipulation/wrapMap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/offset.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/outro.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/queue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/queue/delay.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/selector-sizzle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/selector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/serialize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/traversing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/traversing/findFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/dir.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/rneedsContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/traversing/var/siblings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/class2type.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/concat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/deletedIds.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/document.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/documentElement.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/hasOwn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/indexOf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/pnum.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/push.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/rcssNum.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/rnotwhite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/slice.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/support.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/var/toString.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jquery/src/wrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/external/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_diagonals-thick_18_b81900_40x40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_diagonals-thick_20_666666_40x40.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_flat_10_000000_40x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_glass_100_f6f6f6_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_glass_100_fdf5ce_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_glass_65_ffffff_1x400.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_gloss-wave_35_f6a828_500x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-icons_222222_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-icons_228ef1_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-icons_ef8c08_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-icons_ffd27a_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/images/ui-icons_ffffff_256x240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.structure.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.structure.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/jquery-ui.theme.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/jqueryui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/browser.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/lib/mini-signals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/src/mini-signals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/mini-signals/typings/mini-signals.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/.bumpedrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/dist/parse-uri.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/gulpfile.coffee" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/parse-uri/test/mocha.opts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/bin/pixi-gl-core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/bin/pixi-gl-core.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/bin/pixi-gl-core.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/bin/pixi-gl-core.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/GLBuffer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/GLFramebuffer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/GLShader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/GLTexture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/VertexArrayObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/createContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/setVertexAttribArrays.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/compileProgram.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/defaultValue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/extractAttributes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/extractUniforms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/generateUniformAccessObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/mapSize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/mapType.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi-gl-core/src/shader/setPrecision.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/dist/pixi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/dist/pixi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/dist/pixi.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/dist/pixi.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/AccessibilityManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/AccessibilityManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/accessibleTarget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/accessibleTarget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/accessibility/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/Application.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/Application.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/Shader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/Shader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/autoDetectRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/autoDetectRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/const.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/const.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Bounds.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Bounds.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Container.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Container.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/DisplayObject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/DisplayObject.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Transform.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/Transform.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/TransformBase.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/TransformBase.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/TransformStatic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/display/TransformStatic.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/Graphics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/Graphics.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/GraphicsData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/GraphicsData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/canvas/CanvasGraphicsRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/canvas/CanvasGraphicsRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/utils/bezierCurveTo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/utils/bezierCurveTo.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/GraphicsRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/GraphicsRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/WebGLGraphicsData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/WebGLGraphicsData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/shaders/PrimitiveShader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/shaders/PrimitiveShader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildCircle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildCircle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildComplexPoly.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildComplexPoly.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildLine.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildLine.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildPoly.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildPoly.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildRectangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildRectangle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildRoundedRectangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/graphics/webgl/utils/buildRoundedRectangle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/GroupD8.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/GroupD8.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/Matrix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/Matrix.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/ObservablePoint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/ObservablePoint.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/Point.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/Point.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Circle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Circle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Ellipse.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Ellipse.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Polygon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Polygon.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Rectangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/Rectangle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/RoundedRectangle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/math/shapes/RoundedRectangle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/SystemRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/SystemRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/CanvasRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/CanvasRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/CanvasMaskManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/CanvasMaskManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/CanvasRenderTarget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/CanvasRenderTarget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/canUseNewCanvasBlendModes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/canUseNewCanvasBlendModes.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/mapCanvasBlendModesToPixi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/canvas/utils/mapCanvasBlendModesToPixi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/TextureGarbageCollector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/TextureGarbageCollector.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/TextureManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/TextureManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/WebGLRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/WebGLRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/WebGLState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/Filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/Filter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/extractUniformsFromSrc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/extractUniformsFromSrc.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/filterTransforms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/filterTransforms.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/spriteMask/SpriteMaskFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/filters/spriteMask/SpriteMaskFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/BlendModeManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/BlendModeManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/FilterManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/FilterManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/MaskManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/MaskManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/StencilManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/StencilManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/WebGLManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/managers/WebGLManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/ObjectRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/ObjectRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/Quad.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/Quad.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/RenderTarget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/RenderTarget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/checkMaxIfStatmentsInShader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/checkMaxIfStatmentsInShader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/mapWebGLBlendModesToPixi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/mapWebGLBlendModesToPixi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/mapWebGLDrawModesToPixi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/mapWebGLDrawModesToPixi.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/validateContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/renderers/webgl/utils/validateContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/settings.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/settings.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/Sprite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/Sprite.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/canvas/CanvasSpriteRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/canvas/CanvasSpriteRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/canvas/CanvasTinter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/canvas/CanvasTinter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/BatchBuffer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/BatchBuffer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/SpriteRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/SpriteRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/generateMultiTextureShader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/sprites/webgl/generateMultiTextureShader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/Text.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/Text.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/TextMetrics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/TextMetrics.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/TextStyle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/text/TextStyle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/BaseRenderTexture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/BaseRenderTexture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/BaseTexture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/BaseTexture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/RenderTexture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/RenderTexture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/Spritesheet.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/Spritesheet.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/Texture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/Texture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/TextureMatrix.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/TextureMatrix.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/TextureUvs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/TextureUvs.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/VideoBaseTexture.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/textures/VideoBaseTexture.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/Ticker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/Ticker.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/TickerListener.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/TickerListener.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/ticker/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/canUploadSameBuffer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/canUploadSameBuffer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/createIndicesForQuads.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/createIndicesForQuads.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/determineCrossOrigin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/determineCrossOrigin.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/mapPremultipliedBlendModes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/mapPremultipliedBlendModes.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/maxRecommendedTextures.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/maxRecommendedTextures.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/mixin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/mixin.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/pluginTarget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/pluginTarget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/trimCanvas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/core/utils/trimCanvas.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/deprecation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/deprecation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/canvas/CanvasExtract.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/canvas/CanvasExtract.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/webgl/WebGLExtract.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extract/webgl/WebGLExtract.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/AnimatedSprite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/AnimatedSprite.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/BitmapText.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/BitmapText.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/TilingSprite.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/TilingSprite.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/cacheAsBitmap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/cacheAsBitmap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/getChildByName.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/getChildByName.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/getGlobalPosition.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/getGlobalPosition.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/webgl/TilingSpriteRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/extras/webgl/TilingSpriteRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/alpha/AlphaFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/alpha/AlphaFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurXFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurXFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurYFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/BlurYFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/generateBlurFragSource.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/generateBlurFragSource.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/generateBlurVertSource.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/generateBlurVertSource.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/getMaxBlurKernelSize.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/blur/getMaxBlurKernelSize.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/colormatrix/ColorMatrixFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/colormatrix/ColorMatrixFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/displacement/DisplacementFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/displacement/DisplacementFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/fxaa/FXAAFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/fxaa/FXAAFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/noise/NoiseFilter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/filters/noise/NoiseFilter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionEvent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionEvent.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionManager.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionTrackingData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/InteractionTrackingData.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/interactiveTarget.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/interaction/interactiveTarget.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/bitmapFontParser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/bitmapFontParser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/loader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/loader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/spritesheetParser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/spritesheetParser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/textureParser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/loaders/textureParser.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Mesh.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Mesh.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/NineSlicePlane.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/NineSlicePlane.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Plane.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Plane.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Rope.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/Rope.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/canvas/CanvasMeshRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/canvas/CanvasMeshRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/webgl/MeshRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/mesh/webgl/MeshRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/ParticleContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/ParticleContainer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleBuffer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleBuffer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleRenderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleRenderer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleShader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/particles/webgl/ParticleShader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Math.sign.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Math.sign.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Number.isInteger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Number.isInteger.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Object.assign.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/Object.assign.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/requestAnimationFrame.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/polyfill/requestAnimationFrame.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/BasePrepare.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/BasePrepare.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/canvas/CanvasPrepare.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/canvas/CanvasPrepare.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/limiters/CountLimiter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/limiters/CountLimiter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/limiters/TimeLimiter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/limiters/TimeLimiter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/webgl/WebGLPrepare.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/lib/prepare/webgl/WebGLPrepare.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/pixi.js/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/remove-array-items/test/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/dist/resource-loader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/dist/resource-loader.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/Loader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/Loader.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/Resource.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/Resource.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/async.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/async.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/b64.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/b64.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/middlewares/caching/memory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/middlewares/caching/memory.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/middlewares/parsing/blob.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/lib/middlewares/parsing/blob.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/resource-loader/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,38 +652,41 @@
     <session id="1178514901">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="11" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="2" />
           <entry key="project.open.time.5" value="6" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="TypeScriptServerServiceImpl" value="10" />
+          <entry key="TypeScriptServerServiceImpl" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="1" />
-          <entry key="html" value="7" />
-          <entry key="js" value="8" />
-          <entry key="json" value="3" />
+          <entry key="Dokument bez nazwy" value="1" />
+          <entry key="css" value="2" />
+          <entry key="html" value="9" />
+          <entry key="js" value="24" />
+          <entry key="json" value="7" />
           <entry key="php" value="7" />
-          <entry key="ts" value="130" />
+          <entry key="ts" value="155" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="1" />
-          <entry key="HTML" value="7" />
-          <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="8" />
+          <entry key="CSS" value="2" />
+          <entry key="HTML" value="9" />
+          <entry key="JSON" value="3" />
+          <entry key="JavaScript" value="24" />
           <entry key="PHP" value="7" />
-          <entry key="TypeScript" value="130" />
-          <entry key="tsconfig" value="2" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="TypeScript" value="155" />
+          <entry key="tsconfig" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.command.options" />
@@ -52,20 +695,23 @@
       <usages-collector id="statistics.php.new.test" />
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1177" />
-          <entry key="JavaScript" value="5" />
+          <entry key="HTML" value="1178" />
+          <entry key="JSON" value="26" />
+          <entry key="JavaScript" value="42" />
           <entry key="PHP" value="6678" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="2" />
-          <entry key="TypeScript" value="11423" />
+          <entry key="TypeScript" value="11627" />
+          <entry key="tsconfig" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="1134" />
-          <entry key="js" value="5" />
+          <entry key="html" value="1135" />
+          <entry key="js" value="42" />
+          <entry key="json" value="48" />
           <entry key="php" value="6723" />
-          <entry key="ts" value="11423" />
+          <entry key="ts" value="11627" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
@@ -78,46 +724,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/structures/rect.ts">
+        <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="715" column="137" selection-start-line="715" selection-start-column="137" selection-end-line="715" selection-end-column="137" />
-              <folding>
-                <element signature="e#0#93#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="6615">
+              <caret line="245" column="16" selection-start-line="245" selection-start-column="4" selection-end-line="245" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/creature.ts">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="772">
-              <caret line="163" column="26" lean-forward="true" selection-start-line="163" selection-start-column="26" selection-end-line="163" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="297">
+              <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/view/mapview.ts">
+        <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="95" column="37" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
-              <folding>
-                <element signature="e#0#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="513">
+              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -125,53 +762,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/init.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+            <state relative-caret-position="432">
+              <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
               <folding>
-                <element signature="e#1#59#0" expanded="true" />
+                <element signature="e#1#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/tile.ts">
+        <entry file="file://$PROJECT_DIR$/modules/game.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="738">
+              <caret line="402" column="31" selection-start-line="402" selection-start-column="31" selection-end-line="402" selection-end-column="31" />
               <folding>
-                <element signature="e#0#30#0" expanded="true" />
+                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/item.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/structures/texture.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+            <state relative-caret-position="641">
+              <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -180,13 +796,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/painter.ts">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="37" column="47" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-10">
+              <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -195,36 +808,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getsprite</find>
-      <find>nsole.log(id, pixe</find>
-      <find>blit</find>
-      <find>viewX</find>
-      <find>'aa'</find>
-      <find>'color</find>
-      <find>'img'</find>
-      <find>console.log</find>
-      <find>e.log(pixi</find>
-      <find>grap'</find>
-      <find>gettexture</find>
-      <find>'tx</find>
-      <find>drawTexturedRect</find>
-      <find>'fi</find>
-      <find>gettext</find>
-      <find>m_drawElevation</find>
-      <find>onsole.log</find>
-      <find>getpixite</find>
-      <find>nsole.log('di</find>
-      <find>nsole.log('bl</find>
-      <find>blit'</find>
-      <find>'dim</find>
-      <find>32;</find>
-      <find>alphaf</find>
-      <find>scaleFactor</find>
-      <find>m_displacement</find>
-      <find>blit2</find>
-      <find>console.lo</find>
-      <find>m_cate</find>
-      <find>dest</find>
+      <find>Texture</find>
+      <find>mapview</find>
+      <find>followCreature</find>
+      <find>draw(</find>
+      <find>spritema</find>
+      <find>lightv</find>
+      <find>m_clientVersion</find>
+      <find>texture</find>
+      <find>GameFeature</find>
+      <find>x</find>
+      <find>send</find>
+      <find>drawEffect</find>
+      <find>drawText</find>
+      <find>ThingTypeManager</find>
+      <find>Map</find>
+      <find>PlayerStates</find>
+      <find>icon</find>
+      <find>setheal</find>
+      <find>$</find>
+      <find>jquery</find>
+      <find>vendor</find>
+      <find>import</find>
+      <find>window</find>
+      <find>parentJsonpFunction</find>
+      <find>index.js</find>
+      <find>node_modules</find>
+      <find>XMLHttpRequest</find>
+      <find>webpackJsonp</find>
+      <find>icons</find>
+      <find>index</find>
     </findStrings>
     <replaceStrings>
       <replace>GameFeature.Gam</replace>
@@ -260,6 +873,9 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/modules</dir>
+      <dir>$PROJECT_DIR$/</dir>
+      <dir>$PROJECT_DIR$/node_modules</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -268,20 +884,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modules/resources.ts" />
-        <option value="$PROJECT_DIR$/modules/structures/thingtypeattribs.ts" />
-        <option value="$PROJECT_DIR$/modules/game.js" />
-        <option value="$PROJECT_DIR$/modules/thingtypemanager.ts" />
-        <option value="$PROJECT_DIR$/modules/constants/const.ts" />
-        <option value="$PROJECT_DIR$/modules/cachedtext.ts" />
-        <option value="$PROJECT_DIR$/modules/color.ts" />
-        <option value="$PROJECT_DIR$/modules/structures/rect.ts" />
         <option value="$PROJECT_DIR$/modules/position.ts" />
         <option value="$PROJECT_DIR$/modules/constants/helpers.ts" />
         <option value="$PROJECT_DIR$/modules/tileblock.ts" />
         <option value="$PROJECT_DIR$/modules/localplayer.ts" />
-        <option value="$PROJECT_DIR$/modules/statictext.ts" />
-        <option value="$PROJECT_DIR$/modules/view/chatboxtab.ts" />
         <option value="$PROJECT_DIR$/modules/view/chatbox.ts" />
         <option value="$PROJECT_DIR$/../../../ergo_test_rekrutacyjny_app/nowa/index.htm" />
         <option value="$PROJECT_DIR$/modules/abstract/inputmessage.ts" />
@@ -290,13 +896,10 @@
         <option value="$PROJECT_DIR$/modules/animatedtext.ts" />
         <option value="$PROJECT_DIR$/modules/thing.ts" />
         <option value="$PROJECT_DIR$/modules/structures/point.ts" />
-        <option value="$PROJECT_DIR$/modules/game.ts" />
         <option value="$PROJECT_DIR$/modules/inputfile.ts" />
         <option value="$PROJECT_DIR$/modules/abstract/binarydatareader.ts" />
         <option value="$PROJECT_DIR$/modules/outfit.ts" />
         <option value="$PROJECT_DIR$/modules/structures/g_clock.ts" />
-        <option value="$PROJECT_DIR$/modules/animator.ts" />
-        <option value="$PROJECT_DIR$/modules/map.ts" />
         <option value="$PROJECT_DIR$/../../examples-gh-pages/required/examples/layers/lighting.js" />
         <option value="$PROJECT_DIR$/../../examples-gh-pages/required/examples/layers/normals-drag.js" />
         <option value="$PROJECT_DIR$/modules/log.ts" />
@@ -304,21 +907,34 @@
         <option value="$PROJECT_DIR$/modules/structures/size.ts" />
         <option value="/tmp/fz3temp-1/war_bonus.php" />
         <option value="/tmp/fz3temp-1/guilds.php" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/../benchmark/test_1.html" />
         <option value="$PROJECT_DIR$/../benchmark/test_2.html" />
         <option value="$PROJECT_DIR$/war_bonus.php" />
         <option value="$PROJECT_DIR$/modules/image.ts" />
         <option value="$PROJECT_DIR$/modules/spritemanager.ts" />
         <option value="$PROJECT_DIR$/modules/structures/awarerange.ts" />
-        <option value="$PROJECT_DIR$/init.ts" />
-        <option value="$PROJECT_DIR$/modules/structures/texture.ts" />
         <option value="$PROJECT_DIR$/modules/view/mapview.ts" />
-        <option value="$PROJECT_DIR$/modules/network/protocolgame.ts" />
         <option value="$PROJECT_DIR$/modules/tile.ts" />
-        <option value="$PROJECT_DIR$/modules/creature.ts" />
+        <option value="$PROJECT_DIR$/modules/view/chatboxtab.ts" />
+        <option value="$PROJECT_DIR$/modules/game.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/modules/structures/texture.ts" />
         <option value="$PROJECT_DIR$/modules/painter.ts" />
         <option value="$PROJECT_DIR$/modules/thingtype.ts" />
+        <option value="$PROJECT_DIR$/modules/game.ts" />
+        <option value="$PROJECT_DIR$/modules/thingtypemanager.ts" />
+        <option value="$PROJECT_DIR$/modules/map.ts" />
+        <option value="$PROJECT_DIR$/modules/animator.ts" />
+        <option value="$PROJECT_DIR$/modules/statictext.ts" />
+        <option value="$PROJECT_DIR$/modules/effect.ts" />
+        <option value="$PROJECT_DIR$/modules/creature.ts" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/js/vendor.js" />
+        <option value="$PROJECT_DIR$/dump.js" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/init.ts" />
+        <option value="$PROJECT_DIR$/modules/network/protocolgame.ts" />
       </list>
     </option>
   </component>
@@ -354,9 +970,9 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="width" value="1922" />
-    <option name="height" value="1080" />
+    <option name="x" value="3840" />
+    <option name="width" value="1920" />
+    <option name="height" value="2094" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -374,37 +990,7 @@
             <path>
               <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
               <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="abstract" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="network" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="structures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fronttypescript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fronttypescript" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -473,11 +1059,13 @@
       <workItem from="1533794218326" duration="69246000" />
       <workItem from="1534934991794" duration="11221000" />
       <workItem from="1535118773577" duration="35140000" />
+      <workItem from="1536221148867" duration="12938000" />
+      <workItem from="1537179642706" duration="165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277020000" />
+    <option name="totallyTimeSpent" value="290123000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -489,13 +1077,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1922" height="1080" extended-state="6" />
+    <frame x="1918" y="0" width="3844" height="2094" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990792" visible="true" weight="0.13553895" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990792" visible="true" weight="0.13866666" />
       <window_info id="Structure" order="1" sideWeight="0.5005225" side_tool="true" weight="0.12433298" />
       <window_info id="Favorites" order="2" sideWeight="0.50092083" side_tool="true" weight="0.12433298" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32984293" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32900432" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32879582" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -505,9 +1094,9 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3291536" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" visible="true" weight="0.35945663" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49893278" visible="true" weight="0.35818475" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3291536" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50053364" side_tool="true" weight="0.4336468" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5010672" side_tool="true" weight="0.3584117" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -537,8 +1126,6 @@
         <option value="$PROJECT_DIR$/modules/animator.js.map" />
         <option value="$PROJECT_DIR$/modules/image.js" />
         <option value="$PROJECT_DIR$/modules/image.js.map" />
-        <option value="$PROJECT_DIR$/modules/spritemanager.js.map" />
-        <option value="$PROJECT_DIR$/modules/spritemanager.js" />
         <option value="$PROJECT_DIR$/modules/structures/unjustifiedpoints.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/unjustifiedpoints.js" />
         <option value="$PROJECT_DIR$/modules/structures/awarerange.js" />
@@ -550,14 +1137,11 @@
         <option value="$PROJECT_DIR$/modules/structures/g_clock.js" />
         <option value="$PROJECT_DIR$/modules/structures/g_clock.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/timer.js" />
-        <option value="$PROJECT_DIR$/modules/view/mapview.js" />
         <option value="$PROJECT_DIR$/modules/structures/timer.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/point.js" />
         <option value="$PROJECT_DIR$/modules/structures/point.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/rect.js" />
         <option value="$PROJECT_DIR$/modules/structures/rect.js.map" />
-        <option value="$PROJECT_DIR$/modules/structures/texture.js.map" />
-        <option value="$PROJECT_DIR$/modules/structures/texture.js" />
         <option value="$PROJECT_DIR$/modules/structures/size.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/size.js" />
         <option value="$PROJECT_DIR$/modules/structures/thingtypeattribs.js.map" />
@@ -567,7 +1151,6 @@
         <option value="$PROJECT_DIR$/modules/structures/monster.js.map" />
         <option value="$PROJECT_DIR$/modules/structures/monster.js" />
         <option value="$PROJECT_DIR$/modules/resources.js" />
-        <option value="$PROJECT_DIR$/modules/view/mapview.js.map" />
         <option value="$PROJECT_DIR$/modules/resources.js.map" />
         <option value="$PROJECT_DIR$/modules/tileblock.js.map" />
         <option value="$PROJECT_DIR$/modules/tileblock.js" />
@@ -575,8 +1158,6 @@
         <option value="$PROJECT_DIR$/modules/cachedtext.js.map" />
         <option value="$PROJECT_DIR$/modules/constants/helpers.js.map" />
         <option value="$PROJECT_DIR$/modules/constants/helpers.js" />
-        <option value="$PROJECT_DIR$/modules/view/chatboxtab.js.map" />
-        <option value="$PROJECT_DIR$/modules/view/chatboxtab.js" />
         <option value="$PROJECT_DIR$/../../angular-components/src/app/name-parent.component.js" />
         <option value="$PROJECT_DIR$/../../angular-components/src/app/name-parent.component.js.map" />
         <option value="$PROJECT_DIR$/../../angular-components/src/app/name-child.component.js.map" />
@@ -602,182 +1183,13 @@
         <option value="$PROJECT_DIR$/modules/network/movie.js" />
         <option value="$PROJECT_DIR$/modules/effect.js.map" />
         <option value="$PROJECT_DIR$/modules/effect.js" />
-        <option value="$PROJECT_DIR$/modules/painter.js" />
-        <option value="$PROJECT_DIR$/modules/painter.js.map" />
       </list>
     </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/tile.ts</url>
-          <line>155</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/network/protocolgame.ts</url>
-          <line>994</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/modules/map.ts</url>
-          <line>241</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modules/view/chatbox.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/view/chatboxtab.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="8" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/structures/npc.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/localplayer.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/player.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/typescript/lib/lib.es6.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="1137" column="4" selection-start-line="1137" selection-start-column="4" selection-end-line="1137" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/inputfile.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/abstract/binarydatareader.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="147" column="30" selection-start-line="147" selection-start-column="30" selection-end-line="147" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/color.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/outfit.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1485">
-          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/structures.ts" />
-    <entry file="file://$PROJECT_DIR$/modules/structures/g_clock.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="4" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/thingtypemanager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="71" column="29" lean-forward="true" selection-start-line="71" selection-start-column="29" selection-end-line="71" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/animator.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="39" lean-forward="true" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/game.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/tileblock.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="157" column="12" selection-start-line="157" selection-start-column="12" selection-end-line="157" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/structures/point.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/constants/helpers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/position.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../examples-gh-pages/required/examples/layers/normals-drag.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -795,23 +1207,6 @@
     <entry file="file://$PROJECT_DIR$/modules/log.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_cdnjs.cloudflare.com_ajax_libs_pixi.js_4.8.0_pixi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
@@ -819,410 +1214,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///tmp/fz3temp-1/war_bonus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2277">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="126" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///tmp/fz3temp-1/guilds.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="334" column="75" selection-start-line="334" selection-start-column="75" selection-end-line="334" selection-end-column="75" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#form#0;n#table#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#form#0;n#table#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#td#0;n#tr#0;n#form#0;n#table#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#!!top" expanded="true" />
-            <element signature="e#0#6#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="e#9#15#0" expanded="true" />
-            <element signature="e#20#26#0" expanded="true" />
-            <element signature="e#9#15#0" expanded="true" />
-            <element signature="e#15#21#0" expanded="true" />
-            <element signature="e#21#27#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="e#715#721#0" expanded="true" />
-            <element signature="e#721#727#0" expanded="true" />
-            <element signature="e#818#824#0" expanded="true" />
-            <element signature="e#824#830#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="e#318#324#0" expanded="true" />
-            <element signature="e#324#330#0" expanded="true" />
-            <element signature="e#361#367#0" expanded="true" />
-            <element signature="e#367#373#0" expanded="true" />
-            <element signature="e#373#379#0" expanded="true" />
-            <element signature="e#379#385#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="e#690#696#0" expanded="true" />
-            <element signature="e#696#702#0" expanded="true" />
-            <element signature="e#793#799#0" expanded="true" />
-            <element signature="e#799#805#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#form#0;n#!!top" expanded="true" />
-            <element signature="e#400#406#0" expanded="true" />
-            <element signature="e#406#412#0" expanded="true" />
-            <element signature="e#412#418#0" expanded="true" />
-            <element signature="e#418#424#0" expanded="true" />
-            <element signature="e#424#430#0" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#3;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#4;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#5;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#6;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#7;n#div#0;n#div#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#form#0;n#center#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///tmp/fz3temp-1/war_bonus.php" />
+    <entry file="file:///tmp/fz3temp-1/guilds.php" />
     <entry file="file://$PROJECT_DIR$/../benchmark/test_1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1248,19 +1241,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="990">
           <caret line="66" selection-start-line="66" selection-end-line="66" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/map.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="36" column="35" lean-forward="true" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1281,107 +1261,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/spritemanager.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1204">
-          <caret line="108" column="26" lean-forward="true" selection-start-line="108" selection-start-column="26" selection-end-line="108" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/pixi.js/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2962">
-          <caret line="3498" column="12" selection-start-line="3498" selection-start-column="12" selection-end-line="3498" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/spritemanager.ts" />
     <entry file="file://$PROJECT_DIR$/modules/image.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/structures/texture.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/view/mapview.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="95" column="37" selection-start-line="95" selection-start-column="37" selection-end-line="95" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-          <folding>
-            <element signature="e#1#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/item.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/tile.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/painter.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="37" column="47" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/creature.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="163" column="26" lean-forward="true" selection-start-line="163" selection-start-column="26" selection-end-line="163" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1392,12 +1276,223 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modules/tile.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/item.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Dokument bez nazwy" />
+    <entry file="file://$PROJECT_DIR$/modules/view/mapview.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/view/chatboxtab.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="37" column="39" lean-forward="true" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/view/chatbox.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/image.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="59" column="16" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/pixi.js/index.d.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/structures/texture.ts" />
+    <entry file="file://$PROJECT_DIR$/modules/painter.ts" />
     <entry file="file://$PROJECT_DIR$/modules/thingtype.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="715" column="137" selection-start-line="715" selection-start-column="137" selection-end-line="715" selection-end-column="137" />
+        <state relative-caret-position="585">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/thingtypemanager.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-509">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
           <folding>
-            <element signature="e#0#93#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/map.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1964">
+          <caret line="89" column="42" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/animator.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/structures/monster.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/cachedtext.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/statictext.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1240">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/missile.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/outfit.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/creature.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="156" column="24" selection-start-line="156" selection-start-column="18" selection-end-line="156" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+          <folding>
+            <element signature="e#601#641#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/webpack/lib/webpack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="111" column="4" selection-start-line="111" selection-start-column="4" selection-end-line="111" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/constants/const.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6615">
+          <caret line="245" column="16" selection-start-line="245" selection-start-column="4" selection-end-line="245" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/vendor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244917">
+          <caret line="9071" column="6" selection-start-line="9071" selection-start-column="6" selection-end-line="9071" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dump.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294678">
+          <caret line="10914" column="88" selection-start-line="10914" selection-start-column="88" selection-end-line="10914" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/effect.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding>
+            <element signature="e#1#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/game.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="402" column="31" selection-start-line="402" selection-start-column="31" selection-end-line="402" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/network/protocolgame.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="75" column="16" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
           </folding>
         </state>
       </provider>

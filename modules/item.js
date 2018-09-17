@@ -1,7 +1,6 @@
 import { Thing } from "./thing";
 import { g_things } from "./thingtypemanager";
 import { FluidsColor, GameFeature, Otc, ThingCategory } from "./constants/const";
-import { Position } from "./position";
 import { g_game } from "./game";
 import { g_clock } from "./structures/g_clock";
 import { toInt } from "./constants/helpers";
@@ -16,15 +15,6 @@ export class Item extends Thing {
         this.m_clientId = clientId;
     }
     draw(dest, scaleFactor, animate, lightView = null) {
-        if (this.m_clientId == 0)
-            return;
-        // determine animation phase
-        let animationPhase = this.calculateAnimationPhase(animate);
-        // determine x,y,z patterns
-        let pattern = new Position();
-        this.calculatePatterns(pattern);
-        //console.log('draw item', this.m_clientId, dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase);
-        this.rawGetThingType().draw(dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase, lightView);
     }
     calculateAnimationPhase(animate) {
         if (this.getAnimationPhases() > 1) {

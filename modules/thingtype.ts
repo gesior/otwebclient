@@ -2,20 +2,13 @@ import {FrameGroupType, GameFeature, Otc, ThingAttr, ThingCategory} from "./cons
 import {g_game} from "./game";
 import {InputFile} from "./inputfile";
 import {error} from "./log";
-import {LightView} from "./lightview";
 import {Animator} from "./animator";
-import {Image} from "./image";
 import {Color} from "./color";
-import {g_sprites} from "./spritemanager";
 import {ThingTypeAttribs} from "./structures/thingtypeattribs";
 import {Size} from "./structures/size";
 import {Point} from "./structures/point";
-import {Texture} from "./structures/texture";
-import {Rect} from "./structures/rect";
 import {MarketData} from "./structures/marketdata";
-import {Light} from "./structures/light";
-import {g_painter} from "./painter";
-import {toInt} from "./constants/helpers";
+import {Light} from "./structures/light";;
 
 export class ThingType {
     static maskColors = [Color.red, Color.green, Color.blue, Color.yellow];
@@ -37,13 +30,8 @@ export class ThingType {
     m_layers: number = 0;
     m_elevation: number = 0;
     m_opacity: number = 1.0;
-    m_customImage: string;
 
     m_spritesIndex: number[] = [];
-    m_textures: Texture[] = [];
-    m_texturesFramesRects: Rect[][] = [];
-    m_texturesFramesOriginRects: Rect[][] = [];
-    m_texturesFramesOffsets: Point[][] = [];
 
     unserialize(clientId: number, category: ThingCategory, fin: InputFile) {
         this.m_null = false;
@@ -189,7 +177,6 @@ export class ThingType {
         this.m_animationPhases = 0;
         let totalSpritesCount = 0;
 
-        //console.log(this.m_attribs.attribs);
         for (let i = 0; i < groupCount; ++i) {
             let frameGroupType = FrameGroupType.FrameGroupDefault;
             if (hasFrameGroups)
@@ -226,20 +213,12 @@ export class ThingType {
             if ((totalSpritesCount + totalSprites) > 4096)
                 error("a thing type has more than 4096 sprites", totalSprites, totalSpritesCount, this.m_size.area(), this.m_layers, this.m_numPatternX, this.m_numPatternY, this.m_numPatternZ, groupAnimationsPhases);
 
-            //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
             this.m_spritesIndex = [];
             for (let i = totalSpritesCount; i < (totalSpritesCount + totalSprites); i++)
                 this.m_spritesIndex[i] = g_game.getFeature(GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
 
-            //console.log('spr', this.m_spritesIndex);
             totalSpritesCount += totalSprites;
         }
-        /*
-                this.m_textures.resize(m_animationPhases);
-                this.m_texturesFramesRects.resize(m_animationPhases);
-                this.m_texturesFramesOriginRects.resize(m_animationPhases);
-                this.m_texturesFramesOffsets.resize(m_animationPhases);
-        */
     }
 
     getId(): number {
@@ -521,221 +500,5 @@ export class ThingType {
             this.m_attribs.remove(ThingAttr.ThingAttrNotPathable);
         else
             this.m_attribs.set(ThingAttr.ThingAttrNotPathable, true);
-    }
-
-
-    getTexture(animationPhase: number): Texture {
-
-        let animationPhaseTexture = this.m_textures[animationPhase];
-        if (!animationPhaseTexture) {
-            let useCustomImage = false;
-            if (animationPhase == 0 && this.m_customImage)
-                useCustomImage = true;
-
-            // we don't need layers in common items, they will be pre-drawn
-            let textureLayers = 1;
-            let numLayers = this.m_layers;
-            if (this.m_category == ThingCategory.ThingCategoryCreature && numLayers >= 2) {
-                // 5 layers: outfit base, red mask, green mask, blue mask, yellow mask
-                textureLayers = 5;
-                numLayers = 5;
-            }
-
-            let indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
-            let textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
-            console.log('dim', textureSize, this);
-            let fullImage: Image;
-
-            if (useCustomImage)
-                fullImage = Image.load(this.m_customImage);
-            else
-                fullImage = new Image(textureSize.mul(Otc.TILE_PIXELS));
-
-            //console.log('fi', fullImage.getWidth(), fullImage.getHeight())
-            this.m_texturesFramesRects[animationPhase] = [];
-            this.m_texturesFramesOriginRects[animationPhase] = [];
-            this.m_texturesFramesOffsets[animationPhase] = [];
-
-            for (let z = 0; z < this.m_numPatternZ; ++z) {
-                for (let y = 0; y < this.m_numPatternY; ++y) {
-                    for (let x = 0; x < this.m_numPatternX; ++x) {
-                        for (let l = 0; l < numLayers; ++l) {
-                            let spriteMask = (this.m_category == ThingCategory.ThingCategoryCreature && l > 0);
-                            let frameIndex = this.getTextureIndex(l % textureLayers, x, y, z);
-                            let framePos = new Point(toInt(frameIndex % toInt(textureSize.width() / this.m_size.width()) * this.m_size.width()) * Otc.TILE_PIXELS,
-                                toInt(frameIndex / toInt(textureSize.width() / this.m_size.width()) * this.m_size.height()) * Otc.TILE_PIXELS);
-
-                            //console.log('blitx', framePos);
-                            if (!useCustomImage) {
-                                for (let h = 0; h < this.m_size.height(); ++h) {
-                                    for (let w = 0; w < this.m_size.width(); ++w) {
-                                        let spriteIndex = this.getSpriteIndex(w, h, spriteMask ? 1 : l, x, y, z, animationPhase);
-                                        let spriteImage = g_sprites.getSpriteImage(this.m_spritesIndex[spriteIndex]);
-
-                                        if (spriteImage) {
-                                            if (spriteMask) {
-                                                spriteImage.overwriteMask(ThingType.maskColors[l - 1]);
-                                            }
-                                            let spritePos = new Point((this.m_size.width() - w - 1) * Otc.TILE_PIXELS,
-                                                (this.m_size.height() - h - 1) * Otc.TILE_PIXELS);
-
-                                            fullImage.blit(framePos.add(spritePos), spriteImage);
-                                        } else {
-                                            //console.error(this.m_spritesIndex, spriteIndex);
-                                        }
-                                    }
-                                }
-                            }
-
-                            let drawRect = new Rect(
-                                framePos.add(new Point(this.m_size.width(), this.m_size.height()))
-                                    .mul(Otc.TILE_PIXELS)
-                                    .sub(new Point(1, 1)),
-                                framePos);
-
-                            for (let x = framePos.x; x < framePos.x + this.m_size.width() * Otc.TILE_PIXELS; ++x) {
-                                for (let y = framePos.y; y < framePos.y + this.m_size.height() * Otc.TILE_PIXELS; ++y) {
-
-                                    let p = fullImage.getPixel(x, y);
-                                    if (p[3] != 0x00) {
-                                        drawRect.setTop(Math.min(y, drawRect.top()));
-                                        drawRect.setLeft(Math.min(x, drawRect.left()));
-                                        drawRect.setBottom(Math.max(y, drawRect.bottom()));
-                                        drawRect.setRight(Math.max(x, drawRect.right()));
-                                    }
-
-                                }
-                            }
-                            console.log('blit', drawRect);
-
-                            this.m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
-                            this.m_texturesFramesOriginRects[animationPhase][frameIndex] = new Rect(framePos, new Size(this.m_size.width(), this.m_size.height()).mul(Otc.TILE_PIXELS));
-                            this.m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft().sub(framePos);
-
-                        }
-                    }
-                }
-            }
-            animationPhaseTexture = new Texture(fullImage, true);
-            //animationPhaseTexture->setSmooth(true);
-            //console.log(this.m_id, animationPhase, animationPhaseTexture);
-            this.m_textures[animationPhase] = animationPhaseTexture;
-        }
-        return animationPhaseTexture;
-    }
-
-    getBestTextureDimension(w: number, h: number, count: number): Size {
-        const MAX = 32;
-
-        let k = 1;
-        while (k < w)
-            k <<= 1;
-        w = k;
-
-        k = 1;
-        while (k < h)
-            k <<= 1;
-        h = k;
-
-        let numSprites = w * h * count;
-        /*
-        assert(numSprites <= MAX*MAX);
-        assert(w <= MAX);
-        assert(h <= MAX);
-        */
-        let bestDimension = new Size(MAX, MAX);
-        for (let i = w; i <= MAX; i <<= 1) {
-            for (let j = h; j <= MAX; j <<= 1) {
-                let candidateDimension = new Size(i, j);
-                if (candidateDimension.area() < numSprites)
-                    continue;
-                if ((candidateDimension.area() < bestDimension.area()) ||
-                    (candidateDimension.area() == bestDimension.area() && candidateDimension.width() + candidateDimension.height() < bestDimension.width() + bestDimension.height()))
-                    bestDimension = candidateDimension;
-            }
-        }
-        console.log('dim', this.m_id, bestDimension);
-        return bestDimension;
-        //return new Size(w, h);
-    }
-
-    getSpriteIndex(w: number, h: number, l: number, x: number, y: number, z: number, a: number): number {
-
-        let index =
-            ((((((a % this.m_animationPhases)
-                * this.m_numPatternZ + z)
-                * this.m_numPatternY + y)
-                * this.m_numPatternX + x)
-                * this.m_layers + l)
-                * this.m_size.height() + h)
-            * this.m_size.width() + w;
-        if (!(index < this.m_spritesIndex.length)) {
-            throw new Error('index < this.m_spritesIndex.length');
-        }
-        return index;
-    }
-
-    getTextureIndex(l: number, x: number, y: number, z: number) {
-        return ((l * this.m_numPatternZ + z)
-            * this.m_numPatternY + y)
-            * this.m_numPatternX + x;
-    }
-
-    draw(dest: Point, scaleFactor: number, layer: number, xPattern: number, yPattern: number, zPattern: number, animationPhase: number, lightView: LightView = null) {
-        //console.log('draw thingtype', this.m_null, this.m_id, animationPhase, this.m_animationPhases);
-        if (this.m_null)
-            return;
-
-        if (animationPhase >= this.m_animationPhases)
-            return;
-
-        let texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
-        console.log('tx', texture);
-        if (!texture)
-            return;
-
-
-        let frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
-
-        if (frameIndex >= this.m_texturesFramesRects[animationPhase].length)
-            return;
-
-        let textureOffset = new Point();
-        let textureRect = new Rect();
-
-        if (scaleFactor != 1.0) {
-            textureRect = this.m_texturesFramesOriginRects[animationPhase][frameIndex];
-        } else {
-            textureOffset = this.m_texturesFramesOffsets[animationPhase][frameIndex];
-            textureRect = this.m_texturesFramesRects[animationPhase][frameIndex];
-        }
-
-        if (this.m_size.toPoint().x > 1) {
-            console.log('ds', this.m_id,this.m_size);
-        }
-        let screenRect = new Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new Point(1, 1)).mul(32))).mul(scaleFactor),
-            textureRect.size().mul(scaleFactor));
-        if (dest.x == 0 && dest.y == 0)
-        console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint());
-        /*
-                let useOpacity = m_opacity < 1.0f;
-
-                if(useOpacity)
-                    g_painter->setColor(Color(1.0f,1.0f,1.0f,m_opacity));
-
-        */
-        //g_painter.drawTexturedRect(dest, texture);
-        g_painter.drawTexturedRect(screenRect, texture, textureRect);
-        //throw new Error('aa');
-        /*
-                if(useOpacity)
-                    g_painter->setColor(Color::white);
-
-                if(lightView && hasLight()) {
-                    Light light = getLight();
-                    if(light.intensity > 0)
-                        lightView->addLightSource(screenRect.center(), scaleFactor, light);
-                }
-                */
     }
 }

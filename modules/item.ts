@@ -25,18 +25,6 @@ export class Item extends Thing {
     }
 
     draw(dest: Point, scaleFactor: number, animate: boolean, lightView: LightView = null) {
-        if (this.m_clientId == 0)
-            return;
-
-        // determine animation phase
-        let animationPhase = this.calculateAnimationPhase(animate);
-
-        // determine x,y,z patterns
-        let pattern = new Position();
-        this.calculatePatterns(pattern);
-
-        //console.log('draw item', this.m_clientId, dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase);
-        this.rawGetThingType().draw(dest, scaleFactor, 0, pattern.x, pattern.y, pattern.z, animationPhase, lightView);
 
     }
 

@@ -14,19 +14,7 @@ export class CachedText {
     m_align: string = null;
 
     draw(rect: Rect) {
-        if (!this.m_font)
-            return;
 
-        if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
-            this.m_textMustRecache = false;
-            this.m_textCachedScreenCoords = rect;
-
-            //m_textCoordsBuffer.clear();
-            //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
-        }
-
-        //if(m_font->getTexture())
-        //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
     }
 
     wrapText(maxWidth: number) {

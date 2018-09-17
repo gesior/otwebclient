@@ -8,12 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { LocalPlayer } from "./localplayer";
 import { GameFeature, MessageMode } from "./constants/const";
-import { g_things, ThingTypeManager } from "./thingtypemanager";
+import { g_things } from "./thingtypemanager";
 import { ProtocolGame } from "./network/protocolgame";
-import { Map } from "./map";
 import { Container } from "./container";
-import { g_chat } from "./view/chatbox";
-import { g_sprites } from "./spritemanager";
 export class Game {
     constructor() {
         this.m_clientVersion = 0;
@@ -22,17 +19,17 @@ export class Game {
         this.m_localPlayer = new LocalPlayer();
     }
     processCloseChannel(channelId) {
-        g_chat.removeTab(channelId);
+        //g_chat.removeTab(channelId);
     }
     processOpenChannel(channelId, name) {
-        g_chat.addChannel(name, channelId);
+        //g_chat.addChannel(name, channelId);
     }
     processOpenOwnPrivateChannel(channelId, name) {
-        g_chat.addChannel(name, channelId);
+        //g_chat.addChannel(name, channelId);
     }
     processTalk(name, level, mode, message, channelId, creaturePos) {
         //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
-        g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        //g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
     setClientVersion(version) {
         this.m_clientVersion = version;
@@ -42,11 +39,6 @@ export class Game {
     loadDatFile(file) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield g_things.loadDat(file);
-        });
-    }
-    loadSprFile(file) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return yield g_sprites.loadSpr(file);
         });
     }
     updateMessageModesMap(version) {
@@ -350,20 +342,8 @@ export class Game {
     getContainer(containerId) {
         return new Container();
     }
-    get g_things() {
-        return new ThingTypeManager();
-    }
-    get g_map() {
-        return new Map();
-    }
     getClientVersion() {
         return this.m_clientVersion;
-    }
-    getProtocolVersion() {
-        return 10009;
-    }
-    getOs() {
-        return 3;
     }
     processConnectionError() {
         throw new Error("Method not implemented.");

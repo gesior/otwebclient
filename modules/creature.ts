@@ -10,7 +10,6 @@ import {
     ThingCategory
 } from "./constants/const";
 import {Light} from "./structures/light";
-import {Texture} from "./structures/texture";
 import {Color} from "./color";
 import {CachedText} from "./cachedtext";
 import {Timer} from "./structures/timer";
@@ -37,16 +36,9 @@ export class Creature extends Thing {
     m_emblem: PlayerEmblems = PlayerEmblems.EmblemNone;
     m_type: Proto = Proto.CreatureTypeUnknown;
     m_icon: CreatureIcons = CreatureIcons.NpcIconNone;
-    m_skullTexture: Texture;
-    m_shieldTexture: Texture;
-    m_emblemTexture: Texture;
-    m_typeTexture: Texture;
-    m_iconTexture: Texture;
     m_showShieldTexture: boolean = true;
     m_shieldBlink: boolean = false;
     m_passable: boolean = false;
-    m_timedSquareColor: Color;
-    m_staticSquareColor: Color;
     m_showTimedSquare: boolean = false;
     m_showStaticSquare: boolean = false;
     m_removed: boolean = true;
@@ -55,8 +47,6 @@ export class Creature extends Thing {
     m_outfitColor: Color = new Color(255, 255, 255);
     //ScheduledEventPtr m_outfitColorUpdateEvent;
     m_outfitColorTimer: Timer = new Timer();
-
-    //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
 
     // walk related
     m_walkAnimationPhase: number = 0;
@@ -68,15 +58,9 @@ export class Creature extends Thing {
     m_walking: boolean = false;
     m_allowAppearWalk: boolean = false;
     m_footStepDrawn: boolean = false;
-    //ScheduledEventPtr m_walkUpdateEvent;
-    //ScheduledEventPtr m_walkFinishAnimEvent;
-    //EventPtr m_disappearEvent;
     m_walkOffset: Point = new Point();
     m_walkTurnDirection: Direction = Direction.InvalidDirection;
     m_lastStepDirection: Direction = Direction.InvalidDirection;
-    m_lastStepFromPosition: Position;
-    m_lastStepToPosition: Position;
-    m_oldPosition: Position;
 
     constructor() {
         super();
@@ -84,135 +68,6 @@ export class Creature extends Thing {
 
     draw(dest: Point, scaleFactor: number, animate: boolean, lightView: LightView = null) {
 
-        if (!this.canBeSeen())
-            return;
-
-        let animationOffset: Point = animate ? this.m_walkOffset : new Point(0, 0);
-        /*
-                if(m_showTimedSquare && animate) {
-                    g_painter.setColor(m_timedSquareColor);
-                    g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement() + 2)*scaleFactor, Size(28, 28)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
-                    g_painter.setColor(Color::white);
-                }
-
-                if(m_showStaticSquare && animate) {
-                    g_painter.setColor(m_staticSquareColor);
-                    g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement())*scaleFactor, Size(Otc::TILE_PIXELS, Otc::TILE_PIXELS)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
-                    g_painter.setColor(Color::white);
-                }
-        */
-        this.internalDrawOutfit(dest.add(animationOffset).mul(scaleFactor), scaleFactor, animate, animate, this.m_direction);
-        this.m_footStepDrawn = true;
-        /*
-                if(lightView) {
-                    Light light = rawGetThingType().getLight();
-                    if(m_light.intensity != light.intensity || m_light.color != light.color)
-                        light = m_light;
-
-                    // local player always have a minimum light in complete darkness
-                    if(isLocalPlayer() && (g_map.getLight().intensity < 64 || m_position.z > Otc::SEA_FLOOR)) {
-                        light.intensity = std::max<uint8>(light.intensity, 3);
-                        if(light.color == 0 || light.color > 215)
-                            light.color = 215;
-                    }
-
-                    if(light.intensity > 0)
-                        lightView.addLightSource(dest + (animationOffset + Point(16,16)) * scaleFactor, scaleFactor, light);
-                }
-                */
-    }
-
-    internalDrawOutfit(dest: Point, scaleFactor: number, animateWalk: boolean, animateIdle: boolean, direction: Direction, lightView: LightView = null) {
-        //g_painter.setColor(m_outfitColor);
-
-        // outfit is a real creature
-        if (this.m_outfit.getCategory() == ThingCategory.ThingCategoryCreature) {
-            let animationPhase = animateWalk ? this.m_walkAnimationPhase : 0;
-
-            if (this.isAnimateAlways() && animateIdle) {
-                let ticksPerFrame = 1000 / this.getAnimationPhases();
-                animationPhase = (g_clock.millis() % (ticksPerFrame * this.getAnimationPhases())) / ticksPerFrame;
-            }
-
-            // xPattern => creature direction
-            let xPattern;
-            if (direction == Direction.NorthEast || direction == Direction.SouthEast)
-                xPattern = Direction.East;
-            else if (direction == Direction.NorthWest || direction == Direction.SouthWest)
-                xPattern = Direction.West;
-            else
-                xPattern = direction;
-
-            let zPattern = 0;
-            if (this.m_outfit.getMount() != 0) {
-                let datType = g_things.rawGetThingType(this.m_outfit.getMount(), ThingCategory.ThingCategoryCreature);
-                dest = dest.sub(datType.getDisplacement().mul(scaleFactor));
-                datType.draw(dest, scaleFactor, 0, xPattern, 0, 0, animationPhase, lightView);
-                dest = dest.add(this.getDisplacement().mul(scaleFactor));
-                zPattern = Math.min(1, this.getNumPatternZ() - 1);
-            }
-
-            // yPattern => creature addon
-            for (let yPattern = 0; yPattern < this.getNumPatternY(); yPattern++) {
-
-                // continue if we dont have this addon
-                if (yPattern > 0 && !(this.m_outfit.getAddons() & (1 << (yPattern - 1))))
-                    continue;
-
-                let datType = this.rawGetThingType();
-                console.log('pp', dest, datType);
-                datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
-
-                if (this.getLayers() > 1) {
-                    /*
-                    Color oldColor = g_painter.getColor();
-                    Painter::CompositionMode oldComposition = g_painter.getCompositionMode();
-                    g_painter.setCompositionMode(Painter::CompositionMode_Multiply);
-                    g_painter.setColor(m_outfit.getHeadColor());
-                    datType.draw(dest, scaleFactor, SpriteMaskYellow, xPattern, yPattern, zPattern, animationPhase);
-                    g_painter.setColor(m_outfit.getBodyColor());
-                    datType.draw(dest, scaleFactor, SpriteMaskRed, xPattern, yPattern, zPattern, animationPhase);
-                    g_painter.setColor(m_outfit.getLegsColor());
-                    datType.draw(dest, scaleFactor, SpriteMaskGreen, xPattern, yPattern, zPattern, animationPhase);
-                    g_painter.setColor(m_outfit.getFeetColor());
-                    datType.draw(dest, scaleFactor, SpriteMaskBlue, xPattern, yPattern, zPattern, animationPhase);
-                    g_painter.setColor(oldColor);
-                    g_painter.setCompositionMode(oldComposition);
-                    */
-                }
-            }
-            // outfit is a creature imitating an item or the invisible effect
-        }
-        /*
-        else  {
-            ThingType *type = g_things.rawGetThingType(m_outfit.getAuxId(), m_outfit.getCategory());
-
-            int animationPhase = 0;
-            int animationPhases = type.getAnimationPhases();
-            int animateTicks = Otc::ITEM_TICKS_PER_FRAME;
-
-            // when creature is an effect we cant render the first and last animation phase,
-            // instead we should loop in the phases between
-            if(m_outfit.getCategory() == ThingCategoryEffect) {
-                animationPhases = std::max<int>(1, animationPhases-2);
-                animateTicks = Otc::INVISIBLE_TICKS_PER_FRAME;
-            }
-
-            if(animationPhases > 1) {
-                if(animateIdle)
-                    animationPhase = (g_clock.millis() % (animateTicks * animationPhases)) / animateTicks;
-                else
-                    animationPhase = animationPhases-1;
-            }
-
-            if(m_outfit.getCategory() == ThingCategoryEffect)
-                animationPhase = std::min<int>(animationPhase+1, animationPhases);
-
-            type.draw(dest - (getDisplacement() * scaleFactor), scaleFactor, 0, 0, 0, 0, animationPhase, lightView);
-        }
-        */
-
-//g_painter.resetColor();
     }
 
     getId() {

@@ -6,26 +6,24 @@ import {error} from "./log";
 import {Map} from "./map";
 import {Container} from "./container";
 import {Item} from "./item";
-import {g_chat} from "./view/chatbox";
 import {Position} from "./position";
 import {Movie} from "./network/movie";
-import {g_sprites} from "./spritemanager";
 
 export class Game {
     processCloseChannel(channelId: number): any {
-        g_chat.removeTab(channelId);
+        //g_chat.removeTab(channelId);
     }
 
     processOpenChannel(channelId: number, name: string) {
-        g_chat.addChannel(name, channelId);
+        //g_chat.addChannel(name, channelId);
     }
 
     processOpenOwnPrivateChannel(channelId: number, name: string) {
-        g_chat.addChannel(name, channelId);
+        //g_chat.addChannel(name, channelId);
     }
     processTalk(name: string, level: number, mode: MessageMode, message: string, channelId: number, creaturePos: Position) {
         //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
-        g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        //g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
 
     m_clientVersion = 0;
@@ -42,10 +40,6 @@ export class Game {
 
     async loadDatFile(file: string) {
         return await g_things.loadDat(file);
-    }
-
-    async loadSprFile(file: string) {
-        return await g_sprites.loadSpr(file);
     }
 
     updateMessageModesMap(version: number) {
@@ -387,24 +381,8 @@ export class Game {
         return new Container();
     }
 
-    get g_things(): ThingTypeManager {
-        return new ThingTypeManager();
-    }
-
-    get g_map(): Map {
-        return new Map();
-    }
-
     getClientVersion(): number {
         return this.m_clientVersion;
-    }
-
-    getProtocolVersion(): number {
-        return 10009;
-    }
-
-    getOs(): number {
-        return 3;
     }
 
     processConnectionError(): void {

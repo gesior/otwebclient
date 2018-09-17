@@ -1,6 +1,4 @@
 import { Thing } from "./thing";
-import { Rect } from "./structures/rect";
-import { Point } from "./structures/point";
 import { Color } from "./color";
 import { MessageMode, Otc } from "./constants/const";
 import { CachedText } from "./cachedtext";
@@ -15,14 +13,6 @@ export class StaticText extends Thing {
         this.m_messages = [];
         this.m_cachedText = new CachedText();
         this.m_updateEvent = null;
-    }
-    drawText(dest, parentRect) {
-        let textSize = this.m_cachedText.getTextSize();
-        let rect = new Rect(dest.sub(new Point(textSize.width() / 2, textSize.height())).add(new Point(20, 5)), textSize);
-        let boundRect = rect.clone();
-        boundRect.bind(parentRect);
-        //g_painter->setColor(m_color);
-        this.m_cachedText.draw(boundRect);
     }
     getName() {
         return this.m_name;

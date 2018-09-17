@@ -64,7 +64,6 @@ export class Map {
             throw new Error('get ' + id);
         }
         return g_map.m_knownCreatures[id];
-        //        return new Creature();
     }
     getAwareRange() {
         return this.m_awareRange;

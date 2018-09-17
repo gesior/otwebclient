@@ -10,20 +10,6 @@ export class Effect extends Thing {
     isEffect() {
         return true;
     }
-    drawEffect(dest, scaleFactor, animate, offsetX = 0, offsetY = 0, lightView = null) {
-        if (this.m_id == 0)
-            return;
-        let animationPhase = 0;
-        if (animate)
-            animationPhase = Math.min((this.m_animationTimer.ticksElapsed() / this.m_phaseDuration), this.getAnimationPhases() - 1);
-        let xPattern = offsetX % this.getNumPatternX();
-        if (xPattern < 0)
-            xPattern += this.getNumPatternX();
-        let yPattern = offsetY % this.getNumPatternY();
-        if (yPattern < 0)
-            yPattern += this.getNumPatternY();
-        this.rawGetThingType().draw(dest, scaleFactor, 0, xPattern, yPattern, 0, animationPhase, lightView);
-    }
     getId() {
         return this.m_id;
     }

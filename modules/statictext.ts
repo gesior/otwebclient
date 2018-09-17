@@ -19,17 +19,6 @@ export class StaticText extends Thing {
     m_cachedText: CachedText = new CachedText();
     m_updateEvent: number = null;
 
-    drawText(dest: Point, parentRect: Rect) {
-
-        let textSize = this.m_cachedText.getTextSize();
-        let rect = new Rect(dest.sub(new Point(textSize.width() / 2, textSize.height())).add(new Point(20, 5)), textSize);
-        let boundRect = rect.clone();
-        boundRect.bind(parentRect);
-
-        //g_painter->setColor(m_color);
-        this.m_cachedText.draw(boundRect);
-    }
-
     getName(): string {
         return this.m_name;
     }

@@ -2,7 +2,6 @@ import { Protocol } from "./protocol";
 import { g_game } from "../game";
 import { DeathType, GameFeature, MessageMode, Otc, Skill, ThingCategory } from "../constants/const";
 import { Log } from "../log";
-import { OutputMessage } from "./outputmessage";
 import { Proto } from "../constants/proto";
 import { InputMessage } from "./inputmessage";
 import { Outfit } from "../outfit";
@@ -21,7 +20,6 @@ import { Light } from "../structures/light";
 import { Npc } from "../structures/npc";
 import { Monster } from "../structures/monster";
 import { AwareRange } from "../structures/awarerange";
-import { g_mapview } from "../view/mapview";
 export class ProtocolGame extends Protocol {
     constructor(game) {
         super();
@@ -39,8 +37,8 @@ export class ProtocolGame extends Protocol {
     }
     watch(m_movieData) {
         var i = 0;
+        Log.debug('start', +new Date());
         this.m_localPlayer = g_game.getLocalPlayer();
-        g_mapview.followCreature(g_game.getLocalPlayer());
         this.m_movieData = m_movieData;
         var first = 0;
         while (this.m_movieData.getUnreadSize() >= 10) {
@@ -53,26 +51,23 @@ export class ProtocolGame extends Protocol {
                     continue;
                 }
             }
+            i++;
             this.m_movieData.setReadPos(s);
             let packetLength = this.m_movieData.getU16();
             let packetData = this.m_movieData.getBytes(packetLength);
             if (first === 0)
                 first = timestamp;
             var inputMessage = new InputMessage(new DataView(packetData));
-            this.parseMessage(inputMessage);
-            if (++i >= 12)
+            try {
+                this.parseMessage(inputMessage);
+            }
+            catch (e) {
+                // debug client, stop movie
                 break;
+            }
         }
+        Log.debug('end', +new Date());
         console.error('loaded packets', i);
-    }
-    onConnect() {
-        this.m_firstRecv = true;
-        super.onConnect(null);
-        this.m_localPlayer = g_game.getLocalPlayer();
-        if (g_game.getFeature(GameFeature.GameProtocolChecksum))
-            this.enableChecksum();
-        if (!g_game.getFeature(GameFeature.GameChallengeOnLogin))
-            this.sendLoginPacket(0, 0);
     }
     onRecv(inputMessage) {
         Log.debug("Game onRecv", inputMessage);
@@ -92,24 +87,6 @@ export class ProtocolGame extends Protocol {
     onError(evt) {
         g_game.processConnectionError();
         this.disconnect();
-    }
-    sendLoginPacket(challengeTimestamp, challengeRandom) {
-        let msg = new OutputMessage();
-        msg.addU8(Proto.ClientPendingGame);
-        msg.addU16(g_game.getOs());
-        msg.addU16(g_game.getProtocolVersion());
-        msg.addU8(0); // is GM
-        msg.addString(this.m_accountName);
-        msg.addString(this.m_characterName);
-        msg.addString(this.m_accountPassword);
-        msg.addU8(0); // RSA start
-        msg.addU32(challengeTimestamp);
-        msg.addU8(challengeRandom);
-        if (g_game.getFeature(GameFeature.GameProtocolChecksum))
-            this.enableChecksum();
-        this.send(msg);
-        if (g_game.getFeature(GameFeature.GameLoginPacketEncryption))
-            this.enableXteaEncryption();
     }
     parseMessage(msg) {
         let opcode = -1;
@@ -486,28 +463,6 @@ export class ProtocolGame extends Protocol {
             throw new Error('parser');
         }
     }
-    sendPingBack() {
-        //console.log('sendPingBack');
-        //console.log(g_map.m_floorMissiles);
-        console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
-        if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
-            let pos = this.m_localPlayer.getPosition();
-            for (let y = pos.y - 7; y <= pos.y + 7; y++) {
-                let row = [];
-                for (let x = pos.x - 7; x <= pos.x + 7; x++) {
-                    if (g_map.getTile(new Position(x, y, 7)))
-                        row.push(g_map.getTile(new Position(x, y, 7)).getItems());
-                    else
-                        row.push([]);
-                }
-                //console.log(row);
-            }
-            //console.log()
-        }
-        let msg = new OutputMessage();
-        msg.addU8(Proto.ClientPingBack);
-        this.send(msg);
-    }
     parseLogin(msg) {
         let playerId = msg.getU32();
         let serverBeat = msg.getU16();
@@ -735,7 +690,6 @@ export class ProtocolGame extends Protocol {
     parseChallenge(msg) {
         let timestamp = msg.getU32();
         let random = msg.getU8();
-        this.sendLoginPacket(timestamp, random);
     }
     parseDeath(msg) {
         let penality = 100;
@@ -751,7 +705,7 @@ export class ProtocolGame extends Protocol {
         if (!this.m_mapKnown)
             this.m_localPlayer.setPosition(pos);
         g_map.setCentralPosition(pos);
-        Log.debug(this.m_localPlayer, g_map.getCentralPosition());
+        //Log.debug(this.m_localPlayer, g_map.getCentralPosition());
         let range = g_map.getAwareRange();
         this.setMapDescription(msg, pos.x - range.left, pos.y - range.top, pos.z, range.horizontal(), range.vertical());
         if (!this.m_mapKnown) {
@@ -1062,12 +1016,6 @@ export class ProtocolGame extends Protocol {
         let creature = g_map.getCreatureById(id);
         if (creature)
             creature.setHealthPercent(healthPercent);
-        // some servers has a bug in get spectators and sends unknown creatures updates
-        // so this code is disabled
-        /*
-        else
-            g_logger.traceError("could not get creature");
-        */
     }
     parseCreatureLight(msg) {
         let id = msg.getU32();
@@ -1101,12 +1049,6 @@ export class ProtocolGame extends Protocol {
             if (baseSpeed != -1)
                 creature.setBaseSpeed(baseSpeed);
         }
-        // some servers has a bug in get spectators and sends unknown creatures updates
-        // so this code is disabled
-        /*
-        else
-            g_logger.traceError("could not get creature");
-        */
     }
     parseCreatureSkulls(msg) {
         let id = msg.getU32();
@@ -1257,20 +1199,20 @@ export class ProtocolGame extends Protocol {
             }
         }
         /*
-            m_localPlayer.setHealth(health, maxHealth);
-            m_localPlayer.setFreeCapacity(freeCapacity);
-            m_localPlayer.setTotalCapacity(totalCapacity);
-            m_localPlayer.setExperience(experience);
-            m_localPlayer.setLevel(level, levelPercent);
-            m_localPlayer.setMana(mana, maxMana);
-            m_localPlayer.setMagicLevel(magicLevel, magicLevelPercent);
-            m_localPlayer.setBaseMagicLevel(baseMagicLevel);
-            m_localPlayer.setStamina(stamina);
-            m_localPlayer.setSoul(soul);
-            m_localPlayer.setBaseSpeed(baseSpeed);
-            m_localPlayer.setRegenerationTime(regeneration);
-            m_localPlayer.setOfflineTrainingTime(training);
-            */
+        m_localPlayer.setHealth(health, maxHealth);
+        m_localPlayer.setFreeCapacity(freeCapacity);
+        m_localPlayer.setTotalCapacity(totalCapacity);
+        m_localPlayer.setExperience(experience);
+        m_localPlayer.setLevel(level, levelPercent);
+        m_localPlayer.setMana(mana, maxMana);
+        m_localPlayer.setMagicLevel(magicLevel, magicLevelPercent);
+        m_localPlayer.setBaseMagicLevel(baseMagicLevel);
+        m_localPlayer.setStamina(stamina);
+        m_localPlayer.setSoul(soul);
+        m_localPlayer.setBaseSpeed(baseSpeed);
+        m_localPlayer.setRegenerationTime(regeneration);
+        m_localPlayer.setOfflineTrainingTime(training);
+        */
     }
     parsePlayerSkills(msg) {
         let lastSkill = Skill.Fishing + 1;
@@ -1404,7 +1346,6 @@ export class ProtocolGame extends Protocol {
             for (let i = 0; i < invitedPlayers; ++i)
                 g_game.formatCreatureName(msg.getString()); // player name
         }
-        console.error('open channel', channelId, name);
         g_game.processOpenChannel(channelId, name);
     }
     parseOpenPrivateChannel(msg) {
@@ -1790,7 +1731,6 @@ export class ProtocolGame extends Protocol {
             skip = this.setFloorDescription(msg, x, y, nz, width, height, z - nz, skip);
     }
     setFloorDescription(msg, x, y, z, width, height, offset, skip) {
-        //Log.debug('setFloorDescription', x, y, z, width, height, offset, skip);
         for (let nx = 0; nx < width; nx++) {
             for (let ny = 0; ny < height; ny++) {
                 let tilePos = new Position(x + nx + offset, y + ny + offset, z);
@@ -1806,7 +1746,6 @@ export class ProtocolGame extends Protocol {
         return skip;
     }
     setTileDescription(msg, position) {
-        //Log.debug('setTileDescription', position);
         g_map.cleanTile(position);
         let gotEffect = false;
         for (let stackPos = 0; stackPos < 256; stackPos++) {
@@ -1876,7 +1815,6 @@ export class ProtocolGame extends Protocol {
     }
     getThing(msg) {
         let thing = new Thing();
-        //Log.debug('getThing', msg.peekU16());
         let id = msg.getU16();
         if (id == 0)
             Log.error("invalid thing id");

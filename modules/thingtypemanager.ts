@@ -4,7 +4,7 @@ import {Log} from "./log";
 import {InputFile} from "./inputfile";
 import {g_resources} from "./resources";
 
-let nullThingType = new ThingType()
+let nullThingType = new ThingType();
 
 export class ThingTypeManager {
     m_nullThingType = new ThingType();
