@@ -1,7 +1,7 @@
 import {FrameGroupType, GameFeature, Otc, ThingAttr, ThingCategory} from "./constants/const";
 import {g_game} from "./game";
 import {InputFile} from "./inputfile";
-import {error} from "./log";
+import {error, Log} from "./log";
 import {LightView} from "./lightview";
 import {Animator} from "./animator";
 import {Image} from "./image";
@@ -228,8 +228,9 @@ export class ThingType {
 
             //this.m_spritesIndex.resize((totalSpritesCount + totalSprites));
             this.m_spritesIndex = [];
-            for (let i = totalSpritesCount; i < (totalSpritesCount + totalSprites); i++)
+            for (let i = totalSpritesCount; i < (totalSpritesCount + totalSprites); i++) {
                 this.m_spritesIndex[i] = g_game.getFeature(GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
+            }
 
             //console.log('spr', this.m_spritesIndex);
             totalSpritesCount += totalSprites;
@@ -543,7 +544,7 @@ export class ThingType {
 
             let indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
             let textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
-            console.log('dim', textureSize, this);
+            //console.log('dim', textureSize, this);
             let fullImage: Image;
 
             if (useCustomImage)
@@ -606,7 +607,7 @@ export class ThingType {
 
                                 }
                             }
-                            console.log('blit', drawRect);
+                            //console.log('blit', drawRect);
 
                             this.m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
                             this.m_texturesFramesOriginRects[animationPhase][frameIndex] = new Rect(framePos, new Size(this.m_size.width(), this.m_size.height()).mul(Otc.TILE_PIXELS));
@@ -654,7 +655,7 @@ export class ThingType {
                     bestDimension = candidateDimension;
             }
         }
-        console.log('dim', this.m_id, bestDimension);
+        //console.log('dim', this.m_id, bestDimension);
         return bestDimension;
         //return new Size(w, h);
     }
@@ -690,7 +691,7 @@ export class ThingType {
             return;
 
         let texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
-        console.log('tx', texture);
+
         if (!texture)
             return;
 
@@ -710,13 +711,10 @@ export class ThingType {
             textureRect = this.m_texturesFramesRects[animationPhase][frameIndex];
         }
 
-        if (this.m_size.toPoint().x > 1) {
-            console.log('ds', this.m_id,this.m_size);
-        }
         let screenRect = new Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new Point(1, 1)).mul(32))).mul(scaleFactor),
             textureRect.size().mul(scaleFactor));
-        if (dest.x == 0 && dest.y == 0)
-        console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint());
+        //if (dest.x == 0 && dest.y == 0)
+        //console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
         /*
                 let useOpacity = m_opacity < 1.0f;
 

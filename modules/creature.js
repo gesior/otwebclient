@@ -117,7 +117,7 @@ export class Creature extends Thing {
                 if (yPattern > 0 && !(this.m_outfit.getAddons() & (1 << (yPattern - 1))))
                     continue;
                 let datType = this.rawGetThingType();
-                console.log('pp', dest, datType);
+                //console.log('pp', dest, datType);
                 datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
                 if (this.getLayers() > 1) {
                     /*

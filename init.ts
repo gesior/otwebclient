@@ -11,15 +11,13 @@ let x = Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
 import 'pixi.js'
-console.log('pixi', PIXI);
+//console.log('pixi', PIXI);
 
 async function test() {
     g_game.setClientVersion(854);
-    console.log('load');
     await g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
     await g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
-    console.log('load file');
-    var movieData: InputFile = await g_resources.openFile('http://inditex.localhost/poh.ukcam');
+    var movieData: InputFile = await g_resources.openFile('http://inditex.localhost/itembug3.ukcam');
     //movieData.setReadPos(8);
     var movie: Movie = new Movie(new DataView(movieData.getBytes(-1)));
     g_mapview.init();

@@ -37,6 +37,7 @@ export class ProtocolGame extends Protocol {
     private m_localPlayer: LocalPlayer;
     private m_gameInitialized: boolean;
     private m_mapKnown: boolean;
+    public m_lastPacketTime: number;
 
     private m_movieData: Movie;
 
@@ -81,10 +82,11 @@ export class ProtocolGame extends Protocol {
             if (first === 0)
                 first = timestamp;
 
+            this.m_lastPacketTime = timestamp;
             var inputMessage = new InputMessage(new DataView(packetData));
             this.parseMessage(inputMessage);
-            if (++i >= 12)
-                break;
+            if (++i >= 40000)
+                continue;
         }
         console.error('loaded packets', i);
     }
@@ -517,6 +519,7 @@ export class ProtocolGame extends Protocol {
                         break;
 
                     case 55:
+                        this.parseBotPackage(msg);
                         return;
                     default:
                         Log.error("unhandled opcode %d", opcode, msg);
@@ -2044,6 +2047,32 @@ export class ProtocolGame extends Protocol {
         */
     }
 
+    parseBotPackage(msg: InputMessage) {
+        let actionType = msg.getU8();
+        let attackedCreatureId = msg.getU32();
+        let mouseRightClickX = msg.getU32();
+        let mouseRightClickY = msg.getU32();
+        let mouseX = msg.getU32();
+        let mouseY = msg.getU32();
+        let gameX = msg.getU32();
+        let gameY = msg.getU32();
+        let gameW = msg.getU32();
+        let gameH = msg.getU32();
+        let isForeground = msg.getU8();
+        let modulesCount = msg.getU16();
+        let isHotkey = msg.getU8();
+        let targetDiffX = 100;
+        let targetDiffY = 100;
+        if (attackedCreatureId) {
+            targetDiffX = msg.getU32();
+            targetDiffY = msg.getU32();
+        }
+
+        if (actionType == 6) {
+            Log.log("botpackage throw", new Date(this.m_lastPacketTime).toISOString(), g_game.getLocalPlayer().getPosition(),
+                mouseRightClickX, mouseRightClickY, mouseX, mouseY, gameX, gameY, gameW, gameH, isForeground, modulesCount, isHotkey);
+        }
+    }
     parseChangeMapAwareRange(msg: InputMessage) {
         let xrange = msg.getU8();
         let yrange = msg.getU8();

@@ -4,6 +4,7 @@ import {g_map} from "./map";
 import {Image} from "./image";
 import {toInt} from "./constants/helpers";
 import {Rect} from "./structures/rect";
+import ObservablePoint = PIXI.ObservablePoint;
 
 class Painter {
     app: PIXI.Application;
@@ -37,9 +38,9 @@ class Painter {
         let pixiSprite = new PIXI.Sprite(pixiTexture);
         pixiSprite.position.x = dest.left() + 400;
         pixiSprite.position.y = dest.top() + 300;
-        pixiSprite.width = src.width();
-        pixiSprite.height = src.height();
-        console.log('addchild', dest, src, pixiTexture.width, pixiTexture.height);
+        pixiSprite.width = dest.width();
+        pixiSprite.height = dest.height();
+        //console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height);
 
         this.app.stage.addChild(pixiSprite);
 

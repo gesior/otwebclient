@@ -160,7 +160,7 @@ export class Creature extends Thing {
                     continue;
 
                 let datType = this.rawGetThingType();
-                console.log('pp', dest, datType);
+                //console.log('pp', dest, datType);
                 datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
 
                 if (this.getLayers() > 1) {

@@ -117,7 +117,7 @@ export class Chatbox {
         */
     }
     addChannel(name, id) {
-        console.log('add chanel', name, id);
+        //console.log('add chanel', name, id);
         this.channels[id] = name;
         let tab = this.addTab(name, true);
         tab.channelId = id;

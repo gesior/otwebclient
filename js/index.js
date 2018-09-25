@@ -31,7 +31,7 @@ var _proto = __webpack_require__(186);
 
 var _g_clock = __webpack_require__(92);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -492,7 +492,7 @@ exports.BinaryDataReader = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(62);
+var _position = __webpack_require__(69);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1513,7 +1513,7 @@ var _log = __webpack_require__(34);
 
 var _color = __webpack_require__(56);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1832,9 +1832,9 @@ var Painter = function () {
             var pixiSprite = new PIXI.Sprite(pixiTexture);
             pixiSprite.position.x = dest.left() + 400;
             pixiSprite.position.y = dest.top() + 300;
-            pixiSprite.width = src.width();
-            pixiSprite.height = src.height();
-            console.log('addchild', dest, src, pixiTexture.width, pixiTexture.height);
+            pixiSprite.width = dest.width();
+            pixiSprite.height = dest.height();
+            console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height);
             this.app.stage.addChild(pixiSprite);
             // const awareRange = g_map.getAwareRange();
             // var painterview = document.getElementById('painterview');
@@ -2956,7 +2956,7 @@ var _const = __webpack_require__(13);
 
 var _map = __webpack_require__(55);
 
-var _position = __webpack_require__(62);
+var _position = __webpack_require__(69);
 
 var _point = __webpack_require__(42);
 
@@ -3295,7 +3295,7 @@ var _localplayer = __webpack_require__(445);
 
 var _const = __webpack_require__(13);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 var _protocolgame = __webpack_require__(454);
 
@@ -3909,7 +3909,7 @@ function test() {
                     case 6:
                         console.log('load file');
                         _context.next = 9;
-                        return _resources.g_resources.openFile('http://inditex.localhost/poh.ukcam');
+                        return _resources.g_resources.openFile('http://inditex.localhost/itembug3.ukcam');
 
                     case 9:
                         movieData = _context.sent;
@@ -4008,7 +4008,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _tile = __webpack_require__(447);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4082,6 +4082,8 @@ var _map = __webpack_require__(55);
 var _const = __webpack_require__(13);
 
 var _point = __webpack_require__(42);
+
+var _log = __webpack_require__(34);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4283,9 +4285,11 @@ var Tile = exports.Tile = function () {
                 if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
             } else {
                 /*
-                if (thing.isCreature())
-                    console.log('tile.addThing', thing, stackPos, this.m_things);
+                            if (thing.isCreature())
+                                console.log('tile.addThing', thing, stackPos, this.m_things);
                 */
+                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing add', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
                 // priority                                    854
                 // 0 - ground,                        -.      -.
                 // 1 - ground borders                 -.      -.
@@ -4340,6 +4344,8 @@ var Tile = exports.Tile = function () {
                     removed = true;
                 }
             } else {
+                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing rem', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
                 var _index = this.m_things.indexOf(thing);
                 if (_index > -1) {
                     this.m_things.splice(_index, 1);
@@ -5168,7 +5174,7 @@ var _light = __webpack_require__(124);
 
 var _painter = __webpack_require__(183);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5333,7 +5339,8 @@ var ThingType = exports.ThingType = function () {
                 this.m_spritesIndex = [];
                 for (var _i2 = totalSpritesCount; _i2 < totalSpritesCount + totalSprites; _i2++) {
                     this.m_spritesIndex[_i2] = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? fin.getU32() : fin.getU16();
-                } //console.log('spr', this.m_spritesIndex);
+                }
+                //console.log('spr', this.m_spritesIndex);
                 totalSpritesCount += totalSprites;
             }
             /*
@@ -5842,7 +5849,7 @@ var ThingType = exports.ThingType = function () {
                 console.log('ds', this.m_id, this.m_size);
             }
             var screenRect = new _rect.Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new _point.Point(1, 1)).mul(32))).mul(scaleFactor), textureRect.size().mul(scaleFactor));
-            if (dest.x == 0 && dest.y == 0) console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint());
+            if (dest.x == 0 && dest.y == 0) console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
             /*
                     let useOpacity = m_opacity < 1.0f;
                      if(useOpacity)
@@ -6031,7 +6038,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _painter = __webpack_require__(183);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6139,13 +6146,13 @@ var _outfit = __webpack_require__(185);
 
 var _thing = __webpack_require__(54);
 
-var _position = __webpack_require__(62);
+var _position = __webpack_require__(69);
 
 var _item = __webpack_require__(458);
 
 var _statictext = __webpack_require__(188);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 var _map = __webpack_require__(55);
 
@@ -6221,9 +6228,10 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                 var packetLength = this.m_movieData.getU16();
                 var packetData = this.m_movieData.getBytes(packetLength);
                 if (first === 0) first = timestamp;
+                this.m_lastPacketTime = timestamp;
                 var inputMessage = new _inputmessage.InputMessage(new DataView(packetData));
                 this.parseMessage(inputMessage);
-                if (++i >= 12) break;
+                if (++i >= 40000) continue;
             }
             console.error('loaded packets', i);
         }
@@ -6637,6 +6645,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                             this.parseChangeMapAwareRange(msg);
                             break;
                         case 55:
+                            this.parseBotPackage(msg);
                             return;
                         default:
                             _log.Log.error("unhandled opcode %d", opcode, msg);
@@ -7991,6 +8000,32 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             */
         }
     }, {
+        key: "parseBotPackage",
+        value: function parseBotPackage(msg) {
+            var actionType = msg.getU8();
+            var attackedCreatureId = msg.getU32();
+            var mouseRightClickX = msg.getU32();
+            var mouseRightClickY = msg.getU32();
+            var mouseX = msg.getU32();
+            var mouseY = msg.getU32();
+            var gameX = msg.getU32();
+            var gameY = msg.getU32();
+            var gameW = msg.getU32();
+            var gameH = msg.getU32();
+            var isForeground = msg.getU8();
+            var modulesCount = msg.getU16();
+            var isHotkey = msg.getU8();
+            var targetDiffX = 100;
+            var targetDiffY = 100;
+            if (attackedCreatureId) {
+                targetDiffX = msg.getU32();
+                targetDiffY = msg.getU32();
+            }
+            if (actionType == 6) {
+                _log.Log.log("botpackage throw", new Date(this.m_lastPacketTime).toISOString(), _game.g_game.getLocalPlayer().getPosition(), mouseRightClickX, mouseRightClickY, mouseX, mouseY, gameX, gameY, gameW, gameH, isForeground, modulesCount, isHotkey);
+            }
+        }
+    }, {
         key: "parseChangeMapAwareRange",
         value: function parseChangeMapAwareRange(msg) {
             var xrange = msg.getU8();
@@ -8885,17 +8920,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 var _const = __webpack_require__(13);
 
-var _position = __webpack_require__(62);
+var _position = __webpack_require__(69);
 
 var _game = __webpack_require__(41);
 
 var _g_clock = __webpack_require__(92);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9111,7 +9146,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 var _const = __webpack_require__(13);
 
@@ -9985,11 +10020,13 @@ var ChatboxTab = exports.ChatboxTab = function () {
     _createClass(ChatboxTab, [{
         key: 'addText',
         value: function addText(text, speaktype, creatureName) {
+            /*
             var div = document.getElementById('chatboxtab-' + this.name);
             var content = document.createElement('div');
             content.innerText = creatureName + ', ' + text;
             div.appendChild(content);
-            console.log('tab', this.name, text, speaktype, creatureName);
+             console.log('tab', this.name, text, speaktype, creatureName);
+            */
         }
     }]);
 
@@ -10050,7 +10087,7 @@ var _game = __webpack_require__(41);
 
 var _log = __webpack_require__(34);
 
-var _thingtypemanager = __webpack_require__(64);
+var _thingtypemanager = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10506,7 +10543,7 @@ exports.g_map = exports.Map = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(62);
+var _position = __webpack_require__(69);
 
 var _awarerange = __webpack_require__(180);
 
@@ -10518,7 +10555,7 @@ var _const = __webpack_require__(13);
 
 var _point = __webpack_require__(42);
 
-var _helpers = __webpack_require__(63);
+var _helpers = __webpack_require__(62);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10978,151 +11015,6 @@ Color.orange = 0xff008cff;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Position = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(13);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Position = exports.Position = function () {
-    function Position() {
-        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-        _classCallCheck(this, Position);
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    _createClass(Position, [{
-        key: "equals",
-        value: function equals(otherPosition) {
-            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Position(this.x, this.y, this.z);
-        }
-    }, {
-        key: "isMapPosition",
-        value: function isMapPosition() {
-            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
-        }
-    }, {
-        key: "isValid",
-        value: function isValid() {
-            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
-        }
-    }, {
-        key: "distance",
-        value: function distance(pos) {
-            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
-        }
-    }, {
-        key: "translate",
-        value: function translate(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            this.x += dx;
-            this.y += dy;
-            this.z += dz;
-        }
-    }, {
-        key: "translated",
-        value: function translated(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            return new Position(this.x + dx, this.y + dy, this.z + dz);
-        }
-    }, {
-        key: "isInRange",
-        value: function isInRange(pos, xRange, yRange) {
-            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
-        }
-        /*
-            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
-                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
-            }
-        */
-
-    }, {
-        key: "up",
-        value: function up() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z - n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "down",
-        value: function down() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z + n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "coveredUp",
-        value: function coveredUp() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x + n,
-                ny = this.y + n,
-                nz = this.z - n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "coveredDown",
-        value: function coveredDown() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x - n,
-                ny = this.y - n,
-                nz = this.z + n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }]);
-
-    return Position;
-}();
-
-/***/ }),
-
-/***/ 63:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
 var toInt = function toInt(int) {
     return parseInt(int.toString());
 };
@@ -11130,7 +11022,7 @@ exports.toInt = toInt;
 
 /***/ }),
 
-/***/ 64:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11294,6 +11186,151 @@ var ThingTypeManager = exports.ThingTypeManager = function () {
 
 var g_things = new ThingTypeManager();
 exports.g_things = g_things;
+
+/***/ }),
+
+/***/ 69:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Position = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(13);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Position = exports.Position = function () {
+    function Position() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+        _classCallCheck(this, Position);
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    _createClass(Position, [{
+        key: "equals",
+        value: function equals(otherPosition) {
+            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Position(this.x, this.y, this.z);
+        }
+    }, {
+        key: "isMapPosition",
+        value: function isMapPosition() {
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
+        }
+    }, {
+        key: "isValid",
+        value: function isValid() {
+            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
+        }
+    }, {
+        key: "distance",
+        value: function distance(pos) {
+            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
+        }
+    }, {
+        key: "translate",
+        value: function translate(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            this.x += dx;
+            this.y += dy;
+            this.z += dz;
+        }
+    }, {
+        key: "translated",
+        value: function translated(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+    }, {
+        key: "isInRange",
+        value: function isInRange(pos, xRange, yRange) {
+            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+        }
+        /*
+            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
+                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+            }
+        */
+
+    }, {
+        key: "up",
+        value: function up() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z - n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "down",
+        value: function down() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z + n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredUp",
+        value: function coveredUp() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x + n,
+                ny = this.y + n,
+                nz = this.z - n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredDown",
+        value: function coveredDown() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x - n,
+                ny = this.y - n,
+                nz = this.z + n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }]);
+
+    return Position;
+}();
 
 /***/ }),
 

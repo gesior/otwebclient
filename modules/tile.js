@@ -2,6 +2,7 @@ import { g_game } from "./game";
 import { g_map } from "./map";
 import { DrawFlags, Otc, Tilestate } from "./constants/const";
 import { Point } from "./structures/point";
+import { Log } from "./log";
 let cc = 0;
 export class Tile {
     constructor(position) {
@@ -15,7 +16,7 @@ export class Tile {
     }
     draw(dest, scaleFactor, drawFlags, lightView = null) {
         let animate = (drawFlags & DrawFlags.DrawAnimations) > 0;
-        console.log('pp', this.m_position, dest, cc++);
+        //console.log('pp', this.m_position, dest, cc++);
         // first bottom items
         if (drawFlags & (DrawFlags.DrawGround | DrawFlags.DrawGroundBorders | DrawFlags.DrawOnBottom)) {
             this.m_drawElevation = 0;
@@ -79,7 +80,7 @@ export class Tile {
                     continue;
                 let creature = thing;
                 if (creature && (!creature.isWalking() || !animate)) {
-                    console.log('pp1', dest);
+                    //console.log('pp1', dest);
                     creature.draw(dest.sub(new Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
                 }
             }
@@ -130,9 +131,12 @@ export class Tile {
         }
         else {
             /*
-            if (thing.isCreature())
-                console.log('tile.addThing', thing, stackPos, this.m_things);
+                        if (thing.isCreature())
+                            console.log('tile.addThing', thing, stackPos, this.m_things);
             */
+            //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+            //if (thing.isItem() && thing.getId() == 2869)
+            //    Log.log('testthing add', new Date(g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
             // priority                                    854
             // 0 - ground,                        -.      -.
             // 1 - ground borders                 -.      -.
@@ -195,6 +199,9 @@ export class Tile {
             }
         }
         else {
+            //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+            if (thing.isItem() && thing.getId() == 2869)
+                Log.log('testthing rem', new Date(g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
             let index = this.m_things.indexOf(thing);
             if (index > -1) {
                 this.m_things.splice(index, 1);

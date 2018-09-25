@@ -31,7 +31,7 @@ export class Game {
     m_clientVersion = 0;
     messageModesMap = {};
     m_features: boolean[] = [];
-    private m_protocolGame: ProtocolGame;
+    m_protocolGame: ProtocolGame;
     m_localPlayer = new LocalPlayer();
 
     setClientVersion(version: number) {

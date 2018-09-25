@@ -14,15 +14,13 @@ import { g_mapview } from "./modules/view/mapview";
 let x = Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 import 'pixi.js';
-console.log('pixi', PIXI);
+//console.log('pixi', PIXI);
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
         g_game.setClientVersion(854);
-        console.log('load');
         yield g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
         yield g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
-        console.log('load file');
-        var movieData = yield g_resources.openFile('http://inditex.localhost/poh.ukcam');
+        var movieData = yield g_resources.openFile('http://inditex.localhost/itembug3.ukcam');
         //movieData.setReadPos(8);
         var movie = new Movie(new DataView(movieData.getBytes(-1)));
         g_mapview.init();

@@ -754,7 +754,7 @@ Object.defineProperty(exports, 'TextureMatrix', {
   }
 });
 
-var _BaseTexture = __webpack_require__(65);
+var _BaseTexture = __webpack_require__(64);
 
 Object.defineProperty(exports, 'BaseTexture', {
   enumerable: true,
@@ -1936,7 +1936,7 @@ module.exports = function (it, key) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(67);
+var IObject = __webpack_require__(66);
 var defined = __webpack_require__(30);
 module.exports = function (it) {
   return IObject(defined(it));
@@ -1947,7 +1947,7 @@ module.exports = function (it) {
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(68);
+var pIE = __webpack_require__(67);
 var createDesc = __webpack_require__(44);
 var toIObject = __webpack_require__(21);
 var toPrimitive = __webpack_require__(29);
@@ -2145,7 +2145,7 @@ module.exports = function (KEY, exec) {
 // 5 -> Array#find
 // 6 -> Array#findIndex
 var ctx = __webpack_require__(26);
-var IObject = __webpack_require__(67);
+var IObject = __webpack_require__(66);
 var toObject = __webpack_require__(12);
 var toLength = __webpack_require__(11);
 var asc = __webpack_require__(116);
@@ -2439,7 +2439,7 @@ if (__webpack_require__(9)) {
   var toAbsoluteIndex = __webpack_require__(47);
   var toPrimitive = __webpack_require__(29);
   var has = __webpack_require__(20);
-  var classof = __webpack_require__(69);
+  var classof = __webpack_require__(68);
   var isObject = __webpack_require__(6);
   var toObject = __webpack_require__(12);
   var isArrayIter = __webpack_require__(113);
@@ -3051,7 +3051,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _BaseTexture = __webpack_require__(65);
+var _BaseTexture = __webpack_require__(64);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
@@ -4312,8 +4312,7 @@ module.exports = function (it, TYPE) {
 /***/ }),
 /* 62 */,
 /* 63 */,
-/* 64 */,
-/* 65 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5164,7 +5163,7 @@ exports.default = BaseTexture;
 //# sourceMappingURL=BaseTexture.js.map
 
 /***/ }),
-/* 66 */
+/* 65 */
 /***/ (function(module, exports) {
 
 var g;
@@ -5191,7 +5190,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 67 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
@@ -5203,14 +5202,14 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 68 */
+/* 67 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 69 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
@@ -5239,6 +5238,7 @@ module.exports = function (it) {
 
 
 /***/ }),
+/* 69 */,
 /* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7333,7 +7333,7 @@ var _TextureManager = __webpack_require__(509);
 
 var _TextureManager2 = _interopRequireDefault(_TextureManager);
 
-var _BaseTexture = __webpack_require__(65);
+var _BaseTexture = __webpack_require__(64);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
@@ -9077,7 +9077,7 @@ module.exports = function (object, index, value) {
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(69);
+var classof = __webpack_require__(68);
 var ITERATOR = __webpack_require__(8)('iterator');
 var Iterators = __webpack_require__(60);
 module.exports = __webpack_require__(25).getIteratorMethod = function (it) {
@@ -14953,9 +14953,9 @@ module.exports.f = function getOwnPropertyNames(it) {
 // 19.1.2.1 Object.assign(target, source, ...)
 var getKeys = __webpack_require__(46);
 var gOPS = __webpack_require__(78);
-var pIE = __webpack_require__(68);
+var pIE = __webpack_require__(67);
 var toObject = __webpack_require__(12);
-var IObject = __webpack_require__(67);
+var IObject = __webpack_require__(66);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
@@ -15154,7 +15154,7 @@ module.exports = function (iterator, fn, value, entries) {
 
 var aFunction = __webpack_require__(16);
 var toObject = __webpack_require__(12);
-var IObject = __webpack_require__(67);
+var IObject = __webpack_require__(66);
 var toLength = __webpack_require__(11);
 
 module.exports = function (that, callbackfn, aLen, memo, isRight) {
@@ -15728,7 +15728,7 @@ module.exports = function (that, maxLength, fillString, left) {
 
 var getKeys = __webpack_require__(46);
 var toIObject = __webpack_require__(21);
-var isEnum = __webpack_require__(68).f;
+var isEnum = __webpack_require__(67).f;
 module.exports = function (isEntries) {
   return function (it) {
     var O = toIObject(it);
@@ -15749,7 +15749,7 @@ module.exports = function (isEntries) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var classof = __webpack_require__(69);
+var classof = __webpack_require__(68);
 var from = __webpack_require__(177);
 module.exports = function (NAME) {
   return function toJSON() {
@@ -18889,7 +18889,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _BaseTexture2 = __webpack_require__(65);
+var _BaseTexture2 = __webpack_require__(64);
 
 var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 
@@ -19714,7 +19714,7 @@ exports.default = SystemRenderer;
 
 exports.__esModule = true;
 
-var _BaseTexture2 = __webpack_require__(65);
+var _BaseTexture2 = __webpack_require__(64);
 
 var _BaseTexture3 = _interopRequireDefault(_BaseTexture2);
 
@@ -24875,7 +24875,7 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)))
 
 /***/ }),
 /* 243 */
@@ -25235,7 +25235,7 @@ if (!USE_NATIVE) {
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
   __webpack_require__(49).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(68).f = $propertyIsEnumerable;
+  __webpack_require__(67).f = $propertyIsEnumerable;
   __webpack_require__(78).f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(39)) {
@@ -25328,7 +25328,7 @@ setToStringTag(global.JSON, 'JSON', true);
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(46);
 var gOPS = __webpack_require__(78);
-var pIE = __webpack_require__(68);
+var pIE = __webpack_require__(67);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -25557,7 +25557,7 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(102).set });
 "use strict";
 
 // 19.1.3.6 Object.prototype.toString()
-var classof = __webpack_require__(69);
+var classof = __webpack_require__(68);
 var test = {};
 test[__webpack_require__(8)('toStringTag')] = 'z';
 if (test + '' != '[object z]') {
@@ -26831,7 +26831,7 @@ var toIObject = __webpack_require__(21);
 var arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(67) != Object || !__webpack_require__(28)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(66) != Object || !__webpack_require__(28)(arrayJoin)), 'Array', {
   join: function join(separator) {
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
@@ -27386,7 +27386,7 @@ __webpack_require__(83)('split', 2, function (defined, SPLIT, $split) {
 var LIBRARY = __webpack_require__(39);
 var global = __webpack_require__(2);
 var ctx = __webpack_require__(26);
-var classof = __webpack_require__(69);
+var classof = __webpack_require__(68);
 var $export = __webpack_require__(0);
 var isObject = __webpack_require__(6);
 var aFunction = __webpack_require__(16);
@@ -30128,7 +30128,7 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
   typeof self === "object" ? self : this
 );
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)))
 
 /***/ }),
 /* 441 */
@@ -30303,7 +30303,7 @@ if (typeof _deprecation2.default === 'function') {
 // Always export PixiJS globally.
 global.PIXI = exports; // eslint-disable-line
 //# sourceMappingURL=index.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)))
 
 /***/ }),
 /* 469 */
@@ -30533,7 +30533,7 @@ if (!global.cancelAnimationFrame) {
     };
 }
 //# sourceMappingURL=requestAnimationFrame.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(65)))
 
 /***/ }),
 /* 473 */
@@ -32675,7 +32675,7 @@ function mapPremultipliedBlendModes() {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)(module), __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(492)(module), __webpack_require__(65)))
 
 /***/ }),
 /* 492 */
@@ -44360,7 +44360,7 @@ var _Texture = __webpack_require__(43);
 
 var _Texture2 = _interopRequireDefault(_Texture);
 
-var _BaseTexture = __webpack_require__(65);
+var _BaseTexture = __webpack_require__(64);
 
 var _BaseTexture2 = _interopRequireDefault(_BaseTexture);
 
