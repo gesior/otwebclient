@@ -4,5 +4,14 @@
     "module": "es6",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true
-  }
+  },
+  "files": [
+    "./node_modules/@types/node/index.d.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

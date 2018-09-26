@@ -1,19 +1,20 @@
+import {g_game} from "./src/game";
+import {g_resources} from "./src/resources";
+import {InputFile} from "./src/inputfile";
+import {Movie} from "./src/network/movie";
+import * as pako from "./node_modules/pako/dist/pako.js"
 
-import {g_game} from "./modules/game";
-import {g_resources} from "./modules/resources";
-import {InputFile} from "./modules/inputfile";
-import {Movie} from "./modules/network/movie";
+g_game.setClientVersion(854);
+g_game.loadDatFile('Kasteria.dat');
+var movieData: InputFile = g_resources.openFile('itembug3.kcam');
 
-//g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+movieData.setReadPos(8);
 
-async function test() {
-    g_game.setClientVersion(854);
-    console.log('load');
-    await g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
-    console.log('load file');
-    var movieData: InputFile = await g_resources.openFile('http://inditex.localhost/small.ukcam');
-    //movieData.setReadPos(8);
-    var movie: Movie = new Movie(new DataView(movieData.getBytes(-1)));
-    g_game.watchMovie(movie);
+var result;
+try {
+    result = pako.inflate(movieData.getBytes(-1));
+} catch (err) {
+    throw new Error(err);
 }
-test();
+var movie: Movie = new Movie(new DataView(result.buffer));
+g_game.watchMovie(movie);
