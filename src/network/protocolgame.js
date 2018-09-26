@@ -21,6 +21,7 @@ import { Npc } from "../structures/npc";
 import { Monster } from "../structures/monster";
 import { AwareRange } from "../structures/awarerange";
 import { g_movieEvent } from "../movieevent";
+import { g_mapview } from "../mapview";
 export class ProtocolGame extends Protocol {
     constructor(game) {
         super();
@@ -484,6 +485,7 @@ export class ProtocolGame extends Protocol {
             msg.getU16();
         }
         this.m_localPlayer.setId(playerId);
+        g_mapview.followCreature(this.m_localPlayer);
         Log.debug('local pid', playerId);
         //g_game.setServerBeat(serverBeat);
         //g_game.setCanReportBugs(canReportBugs);

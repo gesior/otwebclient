@@ -25,6 +25,7 @@ import {Monster} from "../structures/monster";
 import {AwareRange} from "../structures/awarerange";
 import {Movie} from "./movie";
 import {g_movieEvent} from "../movieevent";
+import {g_mapview} from "../mapview";
 
 export class ProtocolGame extends Protocol {
     private m_firstRecv: boolean;
@@ -521,6 +522,7 @@ export class ProtocolGame extends Protocol {
         }
 
         this.m_localPlayer.setId(playerId);
+        g_mapview.followCreature(this.m_localPlayer);
         Log.debug('local pid', playerId)
 //g_game.setServerBeat(serverBeat);
 //g_game.setCanReportBugs(canReportBugs);
