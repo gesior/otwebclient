@@ -2,19 +2,28 @@ import { g_game } from "./src/game";
 import { g_resources } from "./src/resources";
 import { Movie } from "./src/network/movie";
 import * as pako from "./node_modules/pako/dist/pako.js";
-import { g_mapview } from "./src/mapview";
+var moviePath = 'test.cam';
+var compressed = false;
+console.log(+new Date());
 g_game.setClientVersion(854);
 g_game.loadDatFile('Kasteria.dat');
-var movieData = g_resources.openFile('small.kcam');
-movieData.setReadPos(8);
-var result;
-try {
-    result = pako.inflate(movieData.getBytes(-1));
+var movieData = g_resources.openFile(moviePath);
+var movie;
+if (compressed) {
+    movieData.setReadPos(8);
+    try {
+        var result = pako.inflate(movieData.getBytes(-1));
+        movie = new Movie(new DataView(result.buffer));
+    }
+    catch (err) {
+        throw new Error(err);
+    }
 }
-catch (err) {
-    throw new Error(err);
+else {
+    movie = new Movie(movieData.getDataView());
 }
-var movie = new Movie(new DataView(result.buffer));
+console.log(+new Date());
 g_game.watchMovie(movie);
-g_mapview.draw();
+console.log(+new Date());
+//g_mapview.draw(); 
 //# sourceMappingURL=init.js.map

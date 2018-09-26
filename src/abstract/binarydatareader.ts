@@ -93,6 +93,10 @@ export abstract class BinaryDataReader {
         return bytes;
     }
 
+    getDataView(): DataView {
+        return this.data;
+    }
+
     peekU8(): number {
         const v = this.getU8();
         this.offset -= 1;
