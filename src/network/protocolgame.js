@@ -25,6 +25,7 @@ import { g_mapview } from "../mapview";
 export class ProtocolGame extends Protocol {
     constructor(game) {
         super();
+        this.m_lastPacketTime = 0;
         this.m_gameInitialized = false;
         this.m_mapKnown = false;
     }
@@ -44,6 +45,7 @@ export class ProtocolGame extends Protocol {
         var first = 0;
         while (m_movieData.getUnreadSize() >= 10) {
             let timestamp = m_movieData.getU64();
+            this.m_lastPacketTime = timestamp;
             let s = m_movieData.getReadPos();
             if (m_movieData.getUnreadSize() >= 10) {
                 var next = m_movieData.peekU64();
@@ -454,7 +456,8 @@ export class ProtocolGame extends Protocol {
                         this.parseChangeMapAwareRange(msg);
                         break;
                     case 55:
-                        return;
+                        this.parseBotPacket(msg);
+                        break;
                     default:
                         Log.error("unhandled opcode %d", opcode, msg);
                         throw new Error('opcode');
@@ -1681,6 +1684,46 @@ export class ProtocolGame extends Protocol {
         range.bottom = yrange / 2;
         g_map.setAwareRange(range);
         //g_lua.callGlobalField("g_game", "onMapChangeAwareRange", xrange, yrange);
+    }
+    parseBotPacket(msg) {
+        function buf2hex(buffer) {
+            return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+        }
+        let actionType = msg.getU8();
+        if (actionType == 10) {
+            let packetSize = msg.getU32();
+            /*
+            let checksum = msg.getBytes(packetSize);
+            let packetType = msg.getU8();
+             */
+            //let packetH = msg.getBytes(8);
+            let packet = msg.getBytes(packetSize);
+            Log.log('received', packetSize, buf2hex(packet));
+        }
+        else {
+            Log.log('received2', actionType);
+            let attackedCreatureId = msg.getU32();
+            let mouseRightClickX = msg.getU32();
+            let mouseRightClickY = msg.getU32();
+            let mouseX = msg.getU32();
+            let mouseY = msg.getU32();
+            let gameX = msg.getU32();
+            let gameY = msg.getU32();
+            let gameW = msg.getU32();
+            let gameH = msg.getU32();
+            let isForeground = msg.getU8();
+            let modulesCount = msg.getU16();
+            let isHotkey = msg.getU8();
+            let targetDiffX = 100;
+            let targetDiffY = 100;
+            if (attackedCreatureId) {
+                targetDiffX = msg.getU32();
+                targetDiffY = msg.getU32();
+            }
+            if (actionType == 6) {
+                Log.log("botpacket throw", new Date(this.m_lastPacketTime).toISOString(), g_game.getLocalPlayer().getPosition(), mouseRightClickX, mouseRightClickY, mouseX, mouseY, gameX, gameY, gameW, gameH, isForeground, modulesCount, isHotkey);
+            }
+        }
     }
     parseCreaturesMark(msg) {
         let len;

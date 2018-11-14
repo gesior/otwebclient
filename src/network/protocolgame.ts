@@ -38,6 +38,8 @@ export class ProtocolGame extends Protocol {
     private m_gameInitialized: boolean;
     private m_mapKnown: boolean;
 
+    public m_lastPacketTime = 0;
+
     constructor(game: Game) {
         super();
         this.m_gameInitialized = false;
@@ -57,21 +59,23 @@ export class ProtocolGame extends Protocol {
     }
 
     watch(m_movieData: Movie) {
-        var i  =0;
+        var i = 0;
         Log.debug('start', +new Date());
         this.m_localPlayer = g_game.getLocalPlayer();
 
         var first = 0;
         while (m_movieData.getUnreadSize() >= 10) {
             let timestamp = m_movieData.getU64();
+            this.m_lastPacketTime = timestamp;
             let s = m_movieData.getReadPos();
-            if(m_movieData.getUnreadSize() >= 10) {
+            if (m_movieData.getUnreadSize() >= 10) {
                 var next = m_movieData.peekU64();
                 //console.log('com', timestamp, next);
                 if (next - timestamp < 5000 && next - timestamp >= 0) {
                     continue;
                 }
             }
+
             i++;
             m_movieData.setReadPos(s);
             let packetLength = m_movieData.getU16();
@@ -483,7 +487,8 @@ export class ProtocolGame extends Protocol {
                         break;
 
                     case 55:
-                        return;
+                        this.parseBotPacket(msg);
+                        break;
                     default:
                         Log.error("unhandled opcode %d", opcode, msg);
                         throw new Error('opcode');
@@ -1982,6 +1987,48 @@ export class ProtocolGame extends Protocol {
 
         g_map.setAwareRange(range);
         //g_lua.callGlobalField("g_game", "onMapChangeAwareRange", xrange, yrange);
+    }
+
+    parseBotPacket(msg: InputMessage) {
+        function buf2hex(buffer) { // buffer is an ArrayBuffer
+            return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+        }
+        let actionType = msg.getU8();
+
+        if (actionType == 10) {
+            let packetSize = msg.getU32();
+            /*
+            let checksum = msg.getBytes(packetSize);
+            let packetType = msg.getU8();
+             */
+            //let packetH = msg.getBytes(8);
+            let packet = msg.getBytes(packetSize);
+            Log.log('received', packetSize, buf2hex(packet))
+        } else {
+            Log.log('received2', actionType)
+            let attackedCreatureId = msg.getU32();
+            let mouseRightClickX = msg.getU32();
+            let mouseRightClickY = msg.getU32();
+            let mouseX = msg.getU32();
+            let mouseY = msg.getU32();
+            let gameX = msg.getU32();
+            let gameY = msg.getU32();
+            let gameW = msg.getU32();
+            let gameH = msg.getU32();
+            let isForeground = msg.getU8();
+            let modulesCount = msg.getU16();
+            let isHotkey = msg.getU8();
+            let targetDiffX = 100;
+            let targetDiffY = 100;
+            if (attackedCreatureId) {
+                targetDiffX = msg.getU32();
+                targetDiffY = msg.getU32();
+            }
+            if (actionType == 6) {
+                Log.log("botpacket throw", new Date(this.m_lastPacketTime).toISOString(), g_game.getLocalPlayer().getPosition(),
+                    mouseRightClickX, mouseRightClickY, mouseX, mouseY, gameX, gameY, gameW, gameH, isForeground, modulesCount, isHotkey);
+            }
+        }
     }
 
     parseCreaturesMark(msg: InputMessage) {
