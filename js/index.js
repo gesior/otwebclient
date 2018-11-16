@@ -153,7 +153,7 @@ var Creature = exports.Creature = function (_Thing) {
                     // continue if we dont have this addon
                     if (yPattern > 0 && !(this.m_outfit.getAddons() & 1 << yPattern - 1)) continue;
                     var _datType = this.rawGetThingType();
-                    console.log('pp', dest, _datType);
+                    //console.log('pp', dest, datType);
                     _datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
                     if (this.getLayers() > 1) {
                         /*
@@ -360,7 +360,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inputfile = __webpack_require__(450);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1509,7 +1509,7 @@ exports.Image = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _color = __webpack_require__(56);
 
@@ -1629,7 +1629,7 @@ var _image = __webpack_require__(181);
 
 var _resources = __webpack_require__(125);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _game = __webpack_require__(41);
 
@@ -1828,13 +1828,13 @@ var Painter = function () {
                 throw new Error('empty');
                 //return;
             }
-            var pixiTexture = texture.getPixiTexture();
+            var pixiTexture = texture.getPixiTexture(src);
             var pixiSprite = new PIXI.Sprite(pixiTexture);
             pixiSprite.position.x = dest.left() + 400;
             pixiSprite.position.y = dest.top() + 300;
-            pixiSprite.width = dest.width();
-            pixiSprite.height = dest.height();
-            console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height);
+            pixiSprite.width = pixiTexture.width;
+            pixiSprite.height = pixiTexture.height;
+            if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height) console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height, pixiTexture.width, pixiTexture.height);
             this.app.stage.addChild(pixiSprite);
             // const awareRange = g_map.getAwareRange();
             // var painterview = document.getElementById('painterview');
@@ -2770,7 +2770,7 @@ var _g_clock = __webpack_require__(92);
 
 var _map = __webpack_require__(55);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3202,7 +3202,7 @@ module.exports = __webpack_require__(444);
 
 /***/ }),
 
-/***/ 34:
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3889,7 +3889,7 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 var x = _const.Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
-console.log('pixi', PIXI);
+//console.log('pixi', PIXI);
 function test() {
     return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var movieData, movie;
@@ -3898,20 +3898,18 @@ function test() {
                 switch (_context.prev = _context.next) {
                     case 0:
                         _game.g_game.setClientVersion(854);
-                        console.log('load');
-                        _context.next = 4;
+                        _context.next = 3;
                         return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
-                    case 4:
-                        _context.next = 6;
+                    case 3:
+                        _context.next = 5;
                         return _game.g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
 
-                    case 6:
-                        console.log('load file');
-                        _context.next = 9;
-                        return _resources.g_resources.openFile('http://inditex.localhost/itembug3.ukcam');
+                    case 5:
+                        _context.next = 7;
+                        return _resources.g_resources.openFile('http://inditex.localhost/small.ukcam');
 
-                    case 9:
+                    case 7:
                         movieData = _context.sent;
 
                         //movieData.setReadPos(8);
@@ -3923,7 +3921,7 @@ function test() {
                         _mapview.g_mapview.draw();
                         //g_game.login('', '', 'GOD Spider Local');
 
-                    case 15:
+                    case 13:
                     case "end":
                         return _context.stop();
                 }
@@ -4083,7 +4081,7 @@ var _const = __webpack_require__(13);
 
 var _point = __webpack_require__(42);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4108,7 +4106,7 @@ var Tile = exports.Tile = function () {
             var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
             var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
-            console.log('pp', this.m_position, dest, cc++);
+            //console.log('pp', this.m_position, dest, cc++);
             // first bottom items
             if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
                 this.m_drawElevation = 0;
@@ -4209,7 +4207,7 @@ var Tile = exports.Tile = function () {
                     if (!_thing2.isCreature()) continue;
                     var _creature = _thing2;
                     if (_creature && (!_creature.isWalking() || !animate)) {
-                        console.log('pp1', dest);
+                        //console.log('pp1', dest);
                         _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
                     }
                 }
@@ -4289,7 +4287,8 @@ var Tile = exports.Tile = function () {
                                 console.log('tile.addThing', thing, stackPos, this.m_things);
                 */
                 //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
-                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing add', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
+                //if (thing.isItem() && thing.getId() == 2869)
+                //    Log.log('testthing add', new Date(g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
                 // priority                                    854
                 // 0 - ground,                        -.      -.
                 // 1 - ground borders                 -.      -.
@@ -5148,7 +5147,7 @@ var _const = __webpack_require__(13);
 
 var _game = __webpack_require__(41);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _animator = __webpack_require__(449);
 
@@ -5721,7 +5720,7 @@ var ThingType = exports.ThingType = function () {
                 }
                 var indexSize = textureLayers * this.m_numPatternX * this.m_numPatternY * this.m_numPatternZ;
                 var textureSize = this.getBestTextureDimension(this.m_size.width(), this.m_size.height(), indexSize);
-                console.log('dim', textureSize, this);
+                //console.log('dim', textureSize, this);
                 var fullImage = void 0;
                 if (useCustomImage) fullImage = _image.Image.load(this.m_customImage);else fullImage = new _image.Image(textureSize.mul(_const.Otc.TILE_PIXELS));
                 //console.log('fi', fullImage.getWidth(), fullImage.getHeight())
@@ -5765,7 +5764,7 @@ var ThingType = exports.ThingType = function () {
                                         }
                                     }
                                 }
-                                console.log('blit', drawRect);
+                                //console.log('blit', drawRect);
                                 this.m_texturesFramesRects[animationPhase][frameIndex] = drawRect;
                                 this.m_texturesFramesOriginRects[animationPhase][frameIndex] = new _rect.Rect(framePos, new _size.Size(this.m_size.width(), this.m_size.height()).mul(_const.Otc.TILE_PIXELS));
                                 this.m_texturesFramesOffsets[animationPhase][frameIndex] = drawRect.topLeft().sub(framePos);
@@ -5806,7 +5805,7 @@ var ThingType = exports.ThingType = function () {
                     if (candidateDimension.area() < bestDimension.area() || candidateDimension.area() == bestDimension.area() && candidateDimension.width() + candidateDimension.height() < bestDimension.width() + bestDimension.height()) bestDimension = candidateDimension;
                 }
             }
-            console.log('dim', this.m_id, bestDimension);
+            //console.log('dim', this.m_id, bestDimension);
             return bestDimension;
             //return new Size(w, h);
         }
@@ -5833,7 +5832,6 @@ var ThingType = exports.ThingType = function () {
             if (this.m_null) return;
             if (animationPhase >= this.m_animationPhases) return;
             var texture = this.getTexture(animationPhase); // texture might not exists, neither its rects.
-            console.log('tx', texture);
             if (!texture) return;
             var frameIndex = this.getTextureIndex(layer, xPattern, yPattern, zPattern);
             if (frameIndex >= this.m_texturesFramesRects[animationPhase].length) return;
@@ -5845,11 +5843,9 @@ var ThingType = exports.ThingType = function () {
                 textureOffset = this.m_texturesFramesOffsets[animationPhase][frameIndex];
                 textureRect = this.m_texturesFramesRects[animationPhase][frameIndex];
             }
-            if (this.m_size.toPoint().x > 1) {
-                console.log('ds', this.m_id, this.m_size);
-            }
             var screenRect = new _rect.Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new _point.Point(1, 1)).mul(32))).mul(scaleFactor), textureRect.size().mul(scaleFactor));
-            if (dest.x == 0 && dest.y == 0) console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
+            //if (dest.x == 0 && dest.y == 0)
+            console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
             /*
                     let useOpacity = m_opacity < 1.0f;
                      if(useOpacity)
@@ -6063,13 +6059,14 @@ var Texture = exports.Texture = function () {
 
     _createClass(Texture, [{
         key: "getPixiTexture",
-        value: function getPixiTexture() {
+        value: function getPixiTexture(src) {
             if (this.m_texture) {
-                return this.m_texture;
+                //return this.m_texture;
             }
             var graphics = new PIXI.Graphics();
-            graphics.width = this.tmp_img.m_size.width();
-            graphics.height = this.tmp_img.m_size.height();
+            console.log('kkk', src.left(), src.top(), src.right(), src.bottom(), src.height(), src.width());
+            graphics.width = src.width();
+            graphics.height = src.height();
             graphics.beginFill(0, 0);
             graphics.drawRect(0, 0, graphics.width, graphics.height);
             graphics.endFill();
@@ -6078,12 +6075,37 @@ var Texture = exports.Texture = function () {
             for (var p = 0; p < other.getPixelCount(); ++p) {
                 var _x3 = (0, _helpers.toInt)(p % other.getWidth());
                 var y = (0, _helpers.toInt)(p / other.getWidth());
-                if (other.m_pixels[p * 4 + 3] != 0) {
-                    graphics.beginFill(other.m_pixels[p * 4] * 256 * 256 + other.m_pixels[p * 4 + 1] * 256 + other.m_pixels[p * 4 + 2], 1);
-                    graphics.drawRect(_x3, y, 1, 1);
-                    graphics.endFill();
+                if (_x3 >= src.left() && _x3 <= src.right()) {
+                    if (y >= src.top() && y <= src.bottom()) {
+                        if (other.m_pixels[p * 4 + 3] != 0) {
+                            graphics.beginFill(other.m_pixels[p * 4] * 256 * 256 + other.m_pixels[p * 4 + 1] * 256 + other.m_pixels[p * 4 + 2], 1);
+                            graphics.drawRect(_x3 - src.left(), y - src.top(), 1, 1);
+                            graphics.endFill();
+                        }
+                    }
                 }
             }
+            /*
+                    let graphics = new PIXI.Graphics();
+                    graphics.width = this.tmp_img.m_size.width();
+                    graphics.height = this.tmp_img.m_size.height();
+            
+                    graphics.beginFill(0, 0);
+                    graphics.drawRect(0,0, graphics.width,graphics.height);
+                    graphics.endFill();
+                    //this.tmp_img.getPixelData();
+                    let other = this.tmp_img;
+                    for (let p = 0; p < other.getPixelCount(); ++p) {
+                        let x = toInt(p % other.getWidth());
+                        let y = toInt(p / other.getWidth());
+            
+                        if (other.m_pixels[p * 4 + 3] != 0) {
+                            graphics.beginFill(other.m_pixels[p * 4] * 256  * 256 + other.m_pixels[p * 4 + 1] * 256 + other.m_pixels[p * 4 + 2], 1);
+                            graphics.drawRect(x, y, 1, 1);
+                            graphics.endFill();
+                        }
+                    }
+                    */
             this.m_texture = _painter.g_painter.app.renderer.generateTexture(graphics);
             return this.m_texture;
             //return PIXI.Texture.fromImage('/prv/webclient/fronttypescript/favicon.png');
@@ -6134,7 +6156,7 @@ var _game = __webpack_require__(41);
 
 var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _outputmessage = __webpack_require__(456);
 
@@ -6231,7 +6253,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                 this.m_lastPacketTime = timestamp;
                 var inputMessage = new _inputmessage.InputMessage(new DataView(packetData));
                 this.parseMessage(inputMessage);
-                if (++i >= 40000) continue;
+                if (++i >= 120) break;
             }
             console.error('loaded packets', i);
         }
@@ -8365,7 +8387,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _inputmessage = __webpack_require__(187);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9571,7 +9593,7 @@ var _chatboxtab = __webpack_require__(466);
 
 var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _game = __webpack_require__(41);
 
@@ -9684,7 +9706,7 @@ var Chatbox = exports.Chatbox = function () {
     }, {
         key: "addChannel",
         value: function addChannel(name, id) {
-            console.log('add chanel', name, id);
+            //console.log('add chanel', name, id);
             this.channels[id] = name;
             var tab = this.addTab(name, true);
             tab.channelId = id;
@@ -10085,7 +10107,7 @@ var _map = __webpack_require__(55);
 
 var _game = __webpack_require__(41);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _thingtypemanager = __webpack_require__(63);
 
@@ -11039,7 +11061,7 @@ var _thingtype = __webpack_require__(448);
 
 var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(34);
+var _log = __webpack_require__(29);
 
 var _resources = __webpack_require__(125);
 

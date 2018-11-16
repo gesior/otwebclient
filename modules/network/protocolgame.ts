@@ -85,8 +85,8 @@ export class ProtocolGame extends Protocol {
             this.m_lastPacketTime = timestamp;
             var inputMessage = new InputMessage(new DataView(packetData));
             this.parseMessage(inputMessage);
-            if (++i >= 40000)
-                continue;
+            if (++i >= 120)
+                break;
         }
         console.error('loaded packets', i);
     }

@@ -20,7 +20,7 @@ function test() {
         g_game.setClientVersion(854);
         yield g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
         yield g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
-        var movieData = yield g_resources.openFile('http://inditex.localhost/itembug3.ukcam');
+        var movieData = yield g_resources.openFile('http://inditex.localhost/small.ukcam');
         //movieData.setReadPos(8);
         var movie = new Movie(new DataView(movieData.getBytes(-1)));
         g_mapview.init();

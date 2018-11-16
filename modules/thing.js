@@ -32,7 +32,7 @@ export class Thing {
             return 3;
         else if (this.isCreature())
             return 4;
-        else
+        else // common items
             return 5;
     }
     getTile() {
@@ -46,7 +46,7 @@ export class Thing {
         return null;
     }
     getStackPos() {
-        if (this.m_position.x == 65535 && this.isItem())
+        if (this.m_position.x == 65535 && this.isItem()) // is inside a container
             return this.m_position.z;
         else {
             let tile = this.getTile();

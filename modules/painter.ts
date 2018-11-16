@@ -33,14 +33,14 @@ class Painter {
             throw new Error('empty');
             //return;
         }
-
-        let pixiTexture = texture.getPixiTexture();
+        let pixiTexture = texture.getPixiTexture(src);
         let pixiSprite = new PIXI.Sprite(pixiTexture);
         pixiSprite.position.x = dest.left() + 400;
         pixiSprite.position.y = dest.top() + 300;
-        pixiSprite.width = dest.width();
-        pixiSprite.height = dest.height();
-        //console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height);
+        pixiSprite.width = pixiTexture.width
+        pixiSprite.height = pixiTexture.height
+        if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height)
+        console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height, pixiTexture.width, pixiTexture.height);
 
         this.app.stage.addChild(pixiSprite);
 

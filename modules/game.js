@@ -54,7 +54,7 @@ export class Game {
         if (version >= 1094) {
             this.messageModesMap[MessageMode.MessageMana] = 43;
         }
-        if (version >= 1055) {
+        if (version >= 1055) { // might be 1054
             this.messageModesMap[MessageMode.MessageNone] = 0;
             this.messageModesMap[MessageMode.MessageSay] = 1;
             this.messageModesMap[MessageMode.MessageWhisper] = 2;

@@ -1,1 +1,1 @@
-{"version":3,"file":"monster.js","sourceRoot":"","sources":["monster.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,QAAQ,EAAC,MAAM,aAAa,CAAC;AAErC,MAAM,cAAe,SAAQ,QAAQ;IAEjC,SAAS,KAAK,MAAM,CAAC,IAAI,CAAC,CAAC,CAAC;CAC/B"}
+{"version":3,"file":"monster.js","sourceRoot":"","sources":["monster.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,QAAQ,EAAC,MAAM,aAAa,CAAC;AAErC,MAAM,OAAO,OAAQ,SAAQ,QAAQ;IAEjC,SAAS,KAAK,OAAO,IAAI,CAAC,CAAC,CAAC;CAC/B"}

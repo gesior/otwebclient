@@ -126,7 +126,7 @@ export class Map {
                     if (prevAnimatedText) {
                         let offset = prevAnimatedText.getOffset();
                         let t = prevAnimatedText.getTimer().ticksElapsed();
-                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) {
+                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) { // didnt move 12 pixels
                             let y = 12 - 48 * t / Otc.ANIMATED_TEXT_DURATION;
                             offset.add(new Point(0, y));
                         }
