@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
@@ -13,6 +14,9 @@
       <change beforePath="$PROJECT_DIR$/src/tile.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/tile.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/tile.ts" afterDir="false" />
     </list>
+=======
+    <list default="true" id="064df188-9b38-4c1d-ae4c-dca4d7a1ddf5" name="Default" comment="" />
+>>>>>>> Stashed changes
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,23 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/init.ts">
+=======
+        <entry file="file://$PROJECT_DIR$/modules/view/mapview.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211">
+              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/map.ts">
+>>>>>>> Stashed changes
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
               <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
@@ -381,13 +401,25 @@
       <workItem from="1533794218326" duration="69246000" />
       <workItem from="1534934991794" duration="11221000" />
       <workItem from="1535118773577" duration="35140000" />
+<<<<<<< Updated upstream
       <workItem from="1536221148867" duration="12938000" />
       <workItem from="1537179642706" duration="165000" />
+=======
+      <workItem from="1537261554438" duration="8000" />
+      <workItem from="1537445658221" duration="9753000" />
+      <workItem from="1537775767588" duration="1211000" />
+      <workItem from="1537863925324" duration="259000" />
+      <workItem from="1542179980915" duration="29567000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="311634000" />
+=======
+    <option name="totallyTimeSpent" value="323595000" />
+>>>>>>> Stashed changes
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -399,8 +431,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-1" y="0" width="1922" height="1080" extended-state="6" />
     <editor active="true" />
+=======
+    <frame x="1919" y="0" width="1922" height="1047" extended-state="6" />
+>>>>>>> Stashed changes
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4990792" visible="true" weight="0.14514408" />
       <window_info id="Structure" order="1" sideWeight="0.5005225" side_tool="true" weight="0.12433298" />
@@ -416,7 +452,11 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3291536" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" auto_hide="true" id="Terminal" order="11" sideWeight="0.49839914" weight="0.30825496" />
+=======
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4994664" visible="true" weight="0.21212122" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50160086" side_tool="true" weight="0.30825496" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -873,8 +913,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/init.ts">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="126">
           <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+=======
+        <state relative-caret-position="211">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
