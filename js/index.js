@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 100:
+/***/ 124:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9,143 +9,120 @@ webpackJsonp([0],{
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Position = undefined;
+exports.Creature = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(11);
+var _thing = __webpack_require__(54);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Position = exports.Position = function () {
-    function Position() {
-        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-        _classCallCheck(this, Position);
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-        this.x = x;
-        this.y = y;
-        this.z = z;
+var Creature = exports.Creature = function (_Thing) {
+    _inherits(Creature, _Thing);
+
+    function Creature() {
+        _classCallCheck(this, Creature);
+
+        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
+
+        _this.m_id = 0;
+        return _this;
     }
 
-    _createClass(Position, [{
-        key: "equals",
-        value: function equals(otherPosition) {
-            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
+    _createClass(Creature, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
         }
     }, {
-        key: "clone",
-        value: function clone() {
-            return new Position(this.x, this.y, this.z);
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
         }
     }, {
-        key: "isMapPosition",
-        value: function isMapPosition() {
-            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
         }
     }, {
-        key: "isValid",
-        value: function isValid() {
-            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
+        key: "setName",
+        value: function setName(name) {
+            this.m_name = name;
         }
     }, {
-        key: "distance",
-        value: function distance(pos) {
-            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
+        key: "isCreature",
+        value: function isCreature() {
+            return true;
         }
     }, {
-        key: "translate",
-        value: function translate(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            this.x += dx;
-            this.y += dy;
-            this.z += dz;
+        key: "addTimedSquare",
+        value: function addTimedSquare(arg0) {
+            throw new Error("Method not implemented.");
         }
     }, {
-        key: "translated",
-        value: function translated(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        key: "hideStaticSquare",
+        value: function hideStaticSquare() {
+            throw new Error("Method not implemented.");
         }
     }, {
-        key: "isInRange",
-        value: function isInRange(pos, xRange, yRange) {
-            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
-        }
-        /*
-            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
-                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
-            }
-        */
-
-    }, {
-        key: "up",
-        value: function up() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z - n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
+        key: "showStaticSquare",
+        value: function showStaticSquare(arg0) {
+            throw new Error("Method not implemented.");
         }
     }, {
-        key: "down",
-        value: function down() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z + n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
+        key: "setType",
+        value: function setType(type) {}
     }, {
-        key: "coveredUp",
-        value: function coveredUp() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x + n,
-                ny = this.y + n,
-                nz = this.z - n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
+        key: "allowAppearWalk",
+        value: function allowAppearWalk() {}
     }, {
-        key: "coveredDown",
-        value: function coveredDown() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x - n,
-                ny = this.y - n,
-                nz = this.z + n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
+        key: "setHealthPercent",
+        value: function setHealthPercent(healthPercent) {}
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "setOutfit",
+        value: function setOutfit(outfit) {}
+    }, {
+        key: "setSpeed",
+        value: function setSpeed(speed) {}
+    }, {
+        key: "setBaseSpeed",
+        value: function setBaseSpeed(baseSpeed) {}
+    }, {
+        key: "setSkull",
+        value: function setSkull(skull) {}
+    }, {
+        key: "setShield",
+        value: function setShield(shield) {}
+    }, {
+        key: "setPassable",
+        value: function setPassable(v) {}
+    }, {
+        key: "setEmblem",
+        value: function setEmblem(emblem) {}
+    }, {
+        key: "setIcon",
+        value: function setIcon(icon) {}
+    }, {
+        key: "setDirection",
+        value: function setDirection(direction) {}
+    }, {
+        key: "turn",
+        value: function turn(direction) {}
     }]);
 
-    return Position;
-}();
+    return Creature;
+}(_thing.Thing);
 
 /***/ }),
 
-/***/ 101:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -166,7 +143,246 @@ var Light = exports.Light = function Light() {
 
 /***/ }),
 
-/***/ 11:
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_resources = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputfile = __webpack_require__(451);
+
+var _log = __webpack_require__(20);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
+    }
+
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
+
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+
+                                console.log('r', response);
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 10:
+                                _context2.prev = 10;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 14:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[1, 10]]);
+            }));
+        }
+    }]);
+
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CachedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _size = __webpack_require__(70);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CachedText = exports.CachedText = function () {
+    function CachedText() {
+        _classCallCheck(this, CachedText);
+
+        this.m_text = null;
+        this.m_textSize = null;
+        this.m_textMustRecache = true;
+        this.m_font = null;
+        this.m_align = null;
+    }
+
+    _createClass(CachedText, [{
+        key: 'draw',
+        value: function draw(rect) {
+            if (!this.m_font) return;
+            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
+                this.m_textMustRecache = false;
+                this.m_textCachedScreenCoords = rect;
+                //m_textCoordsBuffer.clear();
+                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+            }
+            //if(m_font->getTexture())
+            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
+        }
+    }, {
+        key: 'wrapText',
+        value: function wrapText(maxWidth) {
+            if (this.m_font) {
+                // update new line positions
+                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
+                this.update();
+            }
+        }
+    }, {
+        key: 'setFont',
+        value: function setFont(font) {
+            this.m_font = font;
+            this.update();
+        }
+    }, {
+        key: 'setText',
+        value: function setText(text) {
+            this.m_text = text;
+            this.update();
+        }
+    }, {
+        key: 'setAlign',
+        value: function setAlign(align) {
+            this.m_align = align;
+            this.update();
+        }
+    }, {
+        key: 'getTextSize',
+        value: function getTextSize() {
+            return this.m_textSize;
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            return this.m_text;
+        }
+    }, {
+        key: 'getFont',
+        value: function getFont() {
+            return this.m_font;
+        }
+    }, {
+        key: 'getAlign',
+        value: function getAlign() {
+            return this.m_align;
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.m_font) this.m_textSize = new _size.Size();
+            /* todo */ //m_font->calculateTextRectSize(m_text);
+            this.m_textMustRecache = true;
+        }
+    }]);
+
+    return CachedText;
+}();
+
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -756,7 +972,7 @@ var Tilestate = exports.Tilestate = undefined;
 
 /***/ }),
 
-/***/ 137:
+/***/ 180:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -769,7 +985,7 @@ exports.Player = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(124);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -798,7 +1014,7 @@ var Player = exports.Player = function (_Creature) {
 
 /***/ }),
 
-/***/ 138:
+/***/ 181:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -839,23 +1055,7 @@ var AwareRange = exports.AwareRange = function () {
 
 /***/ }),
 
-/***/ 139:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toInt = function toInt(int) {
-    return parseInt(int.toString());
-};
-exports.toInt = toInt;
-
-/***/ }),
-
-/***/ 140:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -868,11 +1068,11 @@ exports.Image = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(57);
 
-var _size = __webpack_require__(73);
+var _size = __webpack_require__(70);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -910,7 +1110,50 @@ var Image = exports.Image = function () {
 
 /***/ }),
 
-/***/ 141:
+/***/ 183:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_sprites = exports.SpriteManager = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _image = __webpack_require__(182);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SpriteManager = exports.SpriteManager = function () {
+    function SpriteManager() {
+        _classCallCheck(this, SpriteManager);
+
+        this.m_loaded = false;
+        this.m_signature = 0;
+        this.m_spritesCount = 0;
+        this.m_spritesOffset = 0;
+        this.m_spritesFile = null;
+    }
+
+    _createClass(SpriteManager, [{
+        key: "getSpriteImage",
+        value: function getSpriteImage(id) {
+            return new _image.Image(0);
+        }
+    }]);
+
+    return SpriteManager;
+}();
+
+var g_sprites = new SpriteManager();
+exports.g_sprites = g_sprites;
+
+/***/ }),
+
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -923,9 +1166,9 @@ exports.Rect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _size2 = __webpack_require__(73);
+var _size2 = __webpack_require__(70);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1276,7 +1519,433 @@ var Rect = exports.Rect = function () {
 
 /***/ }),
 
-/***/ 142:
+/***/ 186:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Outfit = exports.Outfit = function () {
+    function Outfit() {
+        _classCallCheck(this, Outfit);
+    }
+
+    _createClass(Outfit, [{
+        key: "setMount",
+        value: function setMount(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setCategory",
+        value: function setCategory(ThingCategoryCreature) {}
+    }, {
+        key: "setId",
+        value: function setId(lookType) {}
+    }, {
+        key: "setHead",
+        value: function setHead(head) {}
+    }, {
+        key: "setBody",
+        value: function setBody(body) {}
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {}
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {}
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {}
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(auxId) {}
+    }]);
+
+    return Outfit;
+}();
+
+/***/ }),
+
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Proto;
+(function (Proto) {
+    Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
+    Proto[Proto["LoginServerMotd"] = 20] = "LoginServerMotd";
+    Proto[Proto["LoginServerUpdateNeeded"] = 30] = "LoginServerUpdateNeeded";
+    Proto[Proto["LoginServerCharacterList"] = 100] = "LoginServerCharacterList";
+    Proto[Proto["StaticText"] = 96] = "StaticText";
+    Proto[Proto["UnknownCreature"] = 97] = "UnknownCreature";
+    Proto[Proto["OutdatedCreature"] = 98] = "OutdatedCreature";
+    Proto[Proto["Creature"] = 99] = "Creature";
+    Proto[Proto["GameServerLoginOrPendingState"] = 10] = "GameServerLoginOrPendingState";
+    Proto[Proto["GameServerGMActions"] = 11] = "GameServerGMActions";
+    Proto[Proto["GameServerEnterGame"] = 15] = "GameServerEnterGame";
+    Proto[Proto["GameServerUpdateNeeded"] = 17] = "GameServerUpdateNeeded";
+    Proto[Proto["GameServerLoginError"] = 20] = "GameServerLoginError";
+    Proto[Proto["GameServerLoginAdvice"] = 21] = "GameServerLoginAdvice";
+    Proto[Proto["GameServerLoginWait"] = 22] = "GameServerLoginWait";
+    Proto[Proto["GameServerLoginSuccess"] = 23] = "GameServerLoginSuccess";
+    Proto[Proto["GameServerLoginToken"] = 24] = "GameServerLoginToken";
+    Proto[Proto["GameServerStoreButtonIndicators"] = 25] = "GameServerStoreButtonIndicators";
+    Proto[Proto["GameServerPingBack"] = 29] = "GameServerPingBack";
+    Proto[Proto["GameServerPing"] = 30] = "GameServerPing";
+    Proto[Proto["GameServerChallenge"] = 31] = "GameServerChallenge";
+    Proto[Proto["GameServerDeath"] = 40] = "GameServerDeath";
+    Proto[Proto["GameServerFirstGameOpcode"] = 50] = "GameServerFirstGameOpcode";
+    Proto[Proto["GameServerExtendedOpcode"] = 50] = "GameServerExtendedOpcode";
+    Proto[Proto["GameServerChangeMapAwareRange"] = 51] = "GameServerChangeMapAwareRange";
+    Proto[Proto["GameServerFullMap"] = 100] = "GameServerFullMap";
+    Proto[Proto["GameServerMapTopRow"] = 101] = "GameServerMapTopRow";
+    Proto[Proto["GameServerMapRightRow"] = 102] = "GameServerMapRightRow";
+    Proto[Proto["GameServerMapBottomRow"] = 103] = "GameServerMapBottomRow";
+    Proto[Proto["GameServerMapLeftRow"] = 104] = "GameServerMapLeftRow";
+    Proto[Proto["GameServerUpdateTile"] = 105] = "GameServerUpdateTile";
+    Proto[Proto["GameServerCreateOnMap"] = 106] = "GameServerCreateOnMap";
+    Proto[Proto["GameServerChangeOnMap"] = 107] = "GameServerChangeOnMap";
+    Proto[Proto["GameServerDeleteOnMap"] = 108] = "GameServerDeleteOnMap";
+    Proto[Proto["GameServerMoveCreature"] = 109] = "GameServerMoveCreature";
+    Proto[Proto["GameServerOpenContainer"] = 110] = "GameServerOpenContainer";
+    Proto[Proto["GameServerCloseContainer"] = 111] = "GameServerCloseContainer";
+    Proto[Proto["GameServerCreateContainer"] = 112] = "GameServerCreateContainer";
+    Proto[Proto["GameServerChangeInContainer"] = 113] = "GameServerChangeInContainer";
+    Proto[Proto["GameServerDeleteInContainer"] = 114] = "GameServerDeleteInContainer";
+    Proto[Proto["GameServerSetInventory"] = 120] = "GameServerSetInventory";
+    Proto[Proto["GameServerDeleteInventory"] = 121] = "GameServerDeleteInventory";
+    Proto[Proto["GameServerOpenNpcTrade"] = 122] = "GameServerOpenNpcTrade";
+    Proto[Proto["GameServerPlayerGoods"] = 123] = "GameServerPlayerGoods";
+    Proto[Proto["GameServerCloseNpcTrade"] = 124] = "GameServerCloseNpcTrade";
+    Proto[Proto["GameServerOwnTrade"] = 125] = "GameServerOwnTrade";
+    Proto[Proto["GameServerCounterTrade"] = 126] = "GameServerCounterTrade";
+    Proto[Proto["GameServerCloseTrade"] = 127] = "GameServerCloseTrade";
+    Proto[Proto["GameServerAmbient"] = 130] = "GameServerAmbient";
+    Proto[Proto["GameServerGraphicalEffect"] = 131] = "GameServerGraphicalEffect";
+    Proto[Proto["GameServerTextEffect"] = 132] = "GameServerTextEffect";
+    Proto[Proto["GameServerMissleEffect"] = 133] = "GameServerMissleEffect";
+    Proto[Proto["GameServerMarkCreature"] = 134] = "GameServerMarkCreature";
+    Proto[Proto["GameServerTrappers"] = 135] = "GameServerTrappers";
+    Proto[Proto["GameServerCreatureHealth"] = 140] = "GameServerCreatureHealth";
+    Proto[Proto["GameServerCreatureLight"] = 141] = "GameServerCreatureLight";
+    Proto[Proto["GameServerCreatureOutfit"] = 142] = "GameServerCreatureOutfit";
+    Proto[Proto["GameServerCreatureSpeed"] = 143] = "GameServerCreatureSpeed";
+    Proto[Proto["GameServerCreatureSkull"] = 144] = "GameServerCreatureSkull";
+    Proto[Proto["GameServerCreatureParty"] = 145] = "GameServerCreatureParty";
+    Proto[Proto["GameServerCreatureUnpass"] = 146] = "GameServerCreatureUnpass";
+    Proto[Proto["GameServerCreatureMarks"] = 147] = "GameServerCreatureMarks";
+    Proto[Proto["GameServerPlayerHelpers"] = 148] = "GameServerPlayerHelpers";
+    Proto[Proto["GameServerCreatureType"] = 149] = "GameServerCreatureType";
+    Proto[Proto["GameServerEditText"] = 150] = "GameServerEditText";
+    Proto[Proto["GameServerEditList"] = 151] = "GameServerEditList";
+    Proto[Proto["GameServerBlessings"] = 156] = "GameServerBlessings";
+    Proto[Proto["GameServerPreset"] = 157] = "GameServerPreset";
+    Proto[Proto["GameServerPremiumTrigger"] = 158] = "GameServerPremiumTrigger";
+    Proto[Proto["GameServerPlayerDataBasic"] = 159] = "GameServerPlayerDataBasic";
+    Proto[Proto["GameServerPlayerData"] = 160] = "GameServerPlayerData";
+    Proto[Proto["GameServerPlayerSkills"] = 161] = "GameServerPlayerSkills";
+    Proto[Proto["GameServerPlayerState"] = 162] = "GameServerPlayerState";
+    Proto[Proto["GameServerClearTarget"] = 163] = "GameServerClearTarget";
+    Proto[Proto["GameServerPlayerModes"] = 167] = "GameServerPlayerModes";
+    Proto[Proto["GameServerSpellDelay"] = 164] = "GameServerSpellDelay";
+    Proto[Proto["GameServerSpellGroupDelay"] = 165] = "GameServerSpellGroupDelay";
+    Proto[Proto["GameServerMultiUseDelay"] = 166] = "GameServerMultiUseDelay";
+    Proto[Proto["GameServerSetStoreDeepLink"] = 168] = "GameServerSetStoreDeepLink";
+    Proto[Proto["GameServerTalk"] = 170] = "GameServerTalk";
+    Proto[Proto["GameServerChannels"] = 171] = "GameServerChannels";
+    Proto[Proto["GameServerOpenChannel"] = 172] = "GameServerOpenChannel";
+    Proto[Proto["GameServerOpenPrivateChannel"] = 173] = "GameServerOpenPrivateChannel";
+    Proto[Proto["GameServerRuleViolationChannel"] = 174] = "GameServerRuleViolationChannel";
+    Proto[Proto["GameServerRuleViolationRemove"] = 175] = "GameServerRuleViolationRemove";
+    Proto[Proto["GameServerRuleViolationCancel"] = 176] = "GameServerRuleViolationCancel";
+    Proto[Proto["GameServerRuleViolationLock"] = 177] = "GameServerRuleViolationLock";
+    Proto[Proto["GameServerOpenOwnChannel"] = 178] = "GameServerOpenOwnChannel";
+    Proto[Proto["GameServerCloseChannel"] = 179] = "GameServerCloseChannel";
+    Proto[Proto["GameServerTextMessage"] = 180] = "GameServerTextMessage";
+    Proto[Proto["GameServerCancelWalk"] = 181] = "GameServerCancelWalk";
+    Proto[Proto["GameServerWalkWait"] = 182] = "GameServerWalkWait";
+    Proto[Proto["GameServerUnjustifiedStats"] = 183] = "GameServerUnjustifiedStats";
+    Proto[Proto["GameServerPvpSituations"] = 184] = "GameServerPvpSituations";
+    Proto[Proto["GameServerFloorChangeUp"] = 190] = "GameServerFloorChangeUp";
+    Proto[Proto["GameServerFloorChangeDown"] = 191] = "GameServerFloorChangeDown";
+    Proto[Proto["GameServerChooseOutfit"] = 200] = "GameServerChooseOutfit";
+    Proto[Proto["GameServerVipAdd"] = 210] = "GameServerVipAdd";
+    Proto[Proto["GameServerVipState"] = 211] = "GameServerVipState";
+    Proto[Proto["GameServerVipLogout"] = 212] = "GameServerVipLogout";
+    Proto[Proto["GameServerTutorialHint"] = 220] = "GameServerTutorialHint";
+    Proto[Proto["GameServerAutomapFlag"] = 221] = "GameServerAutomapFlag";
+    Proto[Proto["GameServerCoinBalance"] = 223] = "GameServerCoinBalance";
+    Proto[Proto["GameServerStoreError"] = 224] = "GameServerStoreError";
+    Proto[Proto["GameServerRequestPurchaseData"] = 225] = "GameServerRequestPurchaseData";
+    Proto[Proto["GameServerQuestLog"] = 240] = "GameServerQuestLog";
+    Proto[Proto["GameServerQuestLine"] = 241] = "GameServerQuestLine";
+    Proto[Proto["GameServerCoinBalanceUpdating"] = 242] = "GameServerCoinBalanceUpdating";
+    Proto[Proto["GameServerChannelEvent"] = 243] = "GameServerChannelEvent";
+    Proto[Proto["GameServerItemInfo"] = 244] = "GameServerItemInfo";
+    Proto[Proto["GameServerPlayerInventory"] = 245] = "GameServerPlayerInventory";
+    Proto[Proto["GameServerMarketEnter"] = 246] = "GameServerMarketEnter";
+    Proto[Proto["GameServerMarketLeave"] = 247] = "GameServerMarketLeave";
+    Proto[Proto["GameServerMarketDetail"] = 248] = "GameServerMarketDetail";
+    Proto[Proto["GameServerMarketBrowse"] = 249] = "GameServerMarketBrowse";
+    Proto[Proto["GameServerModalDialog"] = 250] = "GameServerModalDialog";
+    Proto[Proto["GameServerStore"] = 251] = "GameServerStore";
+    Proto[Proto["GameServerStoreOffers"] = 252] = "GameServerStoreOffers";
+    Proto[Proto["GameServerStoreTransactionHistory"] = 253] = "GameServerStoreTransactionHistory";
+    Proto[Proto["GameServerStoreCompletePurchase"] = 254] = "GameServerStoreCompletePurchase";
+    Proto[Proto["ClientEnterAccount"] = 1] = "ClientEnterAccount";
+    Proto[Proto["ClientPendingGame"] = 10] = "ClientPendingGame";
+    Proto[Proto["ClientEnterGame"] = 15] = "ClientEnterGame";
+    Proto[Proto["ClientLeaveGame"] = 20] = "ClientLeaveGame";
+    Proto[Proto["ClientPing"] = 29] = "ClientPing";
+    Proto[Proto["ClientPingBack"] = 30] = "ClientPingBack";
+    Proto[Proto["ClientFirstGameOpcode"] = 50] = "ClientFirstGameOpcode";
+    Proto[Proto["ClientExtendedOpcode"] = 50] = "ClientExtendedOpcode";
+    Proto[Proto["ClientChangeMapAwareRange"] = 51] = "ClientChangeMapAwareRange";
+    Proto[Proto["ClientAutoWalk"] = 100] = "ClientAutoWalk";
+    Proto[Proto["ClientWalkNorth"] = 101] = "ClientWalkNorth";
+    Proto[Proto["ClientWalkEast"] = 102] = "ClientWalkEast";
+    Proto[Proto["ClientWalkSouth"] = 103] = "ClientWalkSouth";
+    Proto[Proto["ClientWalkWest"] = 104] = "ClientWalkWest";
+    Proto[Proto["ClientStop"] = 105] = "ClientStop";
+    Proto[Proto["ClientWalkNorthEast"] = 106] = "ClientWalkNorthEast";
+    Proto[Proto["ClientWalkSouthEast"] = 107] = "ClientWalkSouthEast";
+    Proto[Proto["ClientWalkSouthWest"] = 108] = "ClientWalkSouthWest";
+    Proto[Proto["ClientWalkNorthWest"] = 109] = "ClientWalkNorthWest";
+    Proto[Proto["ClientTurnNorth"] = 111] = "ClientTurnNorth";
+    Proto[Proto["ClientTurnEast"] = 112] = "ClientTurnEast";
+    Proto[Proto["ClientTurnSouth"] = 113] = "ClientTurnSouth";
+    Proto[Proto["ClientTurnWest"] = 114] = "ClientTurnWest";
+    Proto[Proto["ClientEquipItem"] = 119] = "ClientEquipItem";
+    Proto[Proto["ClientMove"] = 120] = "ClientMove";
+    Proto[Proto["ClientInspectNpcTrade"] = 121] = "ClientInspectNpcTrade";
+    Proto[Proto["ClientBuyItem"] = 122] = "ClientBuyItem";
+    Proto[Proto["ClientSellItem"] = 123] = "ClientSellItem";
+    Proto[Proto["ClientCloseNpcTrade"] = 124] = "ClientCloseNpcTrade";
+    Proto[Proto["ClientRequestTrade"] = 125] = "ClientRequestTrade";
+    Proto[Proto["ClientInspectTrade"] = 126] = "ClientInspectTrade";
+    Proto[Proto["ClientAcceptTrade"] = 127] = "ClientAcceptTrade";
+    Proto[Proto["ClientRejectTrade"] = 128] = "ClientRejectTrade";
+    Proto[Proto["ClientUseItem"] = 130] = "ClientUseItem";
+    Proto[Proto["ClientUseItemWith"] = 131] = "ClientUseItemWith";
+    Proto[Proto["ClientUseOnCreature"] = 132] = "ClientUseOnCreature";
+    Proto[Proto["ClientRotateItem"] = 133] = "ClientRotateItem";
+    Proto[Proto["ClientCloseContainer"] = 135] = "ClientCloseContainer";
+    Proto[Proto["ClientUpContainer"] = 136] = "ClientUpContainer";
+    Proto[Proto["ClientEditText"] = 137] = "ClientEditText";
+    Proto[Proto["ClientEditList"] = 138] = "ClientEditList";
+    Proto[Proto["ClientLook"] = 140] = "ClientLook";
+    Proto[Proto["ClientLookCreature"] = 141] = "ClientLookCreature";
+    Proto[Proto["ClientTalk"] = 150] = "ClientTalk";
+    Proto[Proto["ClientRequestChannels"] = 151] = "ClientRequestChannels";
+    Proto[Proto["ClientJoinChannel"] = 152] = "ClientJoinChannel";
+    Proto[Proto["ClientLeaveChannel"] = 153] = "ClientLeaveChannel";
+    Proto[Proto["ClientOpenPrivateChannel"] = 154] = "ClientOpenPrivateChannel";
+    Proto[Proto["ClientOpenRuleViolation"] = 155] = "ClientOpenRuleViolation";
+    Proto[Proto["ClientCloseRuleViolation"] = 156] = "ClientCloseRuleViolation";
+    Proto[Proto["ClientCancelRuleViolation"] = 157] = "ClientCancelRuleViolation";
+    Proto[Proto["ClientCloseNpcChannel"] = 158] = "ClientCloseNpcChannel";
+    Proto[Proto["ClientChangeFightModes"] = 160] = "ClientChangeFightModes";
+    Proto[Proto["ClientAttack"] = 161] = "ClientAttack";
+    Proto[Proto["ClientFollow"] = 162] = "ClientFollow";
+    Proto[Proto["ClientInviteToParty"] = 163] = "ClientInviteToParty";
+    Proto[Proto["ClientJoinParty"] = 164] = "ClientJoinParty";
+    Proto[Proto["ClientRevokeInvitation"] = 165] = "ClientRevokeInvitation";
+    Proto[Proto["ClientPassLeadership"] = 166] = "ClientPassLeadership";
+    Proto[Proto["ClientLeaveParty"] = 167] = "ClientLeaveParty";
+    Proto[Proto["ClientShareExperience"] = 168] = "ClientShareExperience";
+    Proto[Proto["ClientDisbandParty"] = 169] = "ClientDisbandParty";
+    Proto[Proto["ClientOpenOwnChannel"] = 170] = "ClientOpenOwnChannel";
+    Proto[Proto["ClientInviteToOwnChannel"] = 171] = "ClientInviteToOwnChannel";
+    Proto[Proto["ClientExcludeFromOwnChannel"] = 172] = "ClientExcludeFromOwnChannel";
+    Proto[Proto["ClientCancelAttackAndFollow"] = 190] = "ClientCancelAttackAndFollow";
+    Proto[Proto["ClientUpdateTile"] = 201] = "ClientUpdateTile";
+    Proto[Proto["ClientRefreshContainer"] = 202] = "ClientRefreshContainer";
+    Proto[Proto["ClientBrowseField"] = 203] = "ClientBrowseField";
+    Proto[Proto["ClientSeekInContainer"] = 204] = "ClientSeekInContainer";
+    Proto[Proto["ClientRequestOutfit"] = 210] = "ClientRequestOutfit";
+    Proto[Proto["ClientChangeOutfit"] = 211] = "ClientChangeOutfit";
+    Proto[Proto["ClientMount"] = 212] = "ClientMount";
+    Proto[Proto["ClientAddVip"] = 220] = "ClientAddVip";
+    Proto[Proto["ClientRemoveVip"] = 221] = "ClientRemoveVip";
+    Proto[Proto["ClientEditVip"] = 222] = "ClientEditVip";
+    Proto[Proto["ClientBugReport"] = 230] = "ClientBugReport";
+    Proto[Proto["ClientRuleViolation"] = 231] = "ClientRuleViolation";
+    Proto[Proto["ClientDebugReport"] = 232] = "ClientDebugReport";
+    Proto[Proto["ClientTransferCoins"] = 239] = "ClientTransferCoins";
+    Proto[Proto["ClientRequestQuestLog"] = 240] = "ClientRequestQuestLog";
+    Proto[Proto["ClientRequestQuestLine"] = 241] = "ClientRequestQuestLine";
+    Proto[Proto["ClientNewRuleViolation"] = 242] = "ClientNewRuleViolation";
+    Proto[Proto["ClientRequestItemInfo"] = 243] = "ClientRequestItemInfo";
+    Proto[Proto["ClientMarketLeave"] = 244] = "ClientMarketLeave";
+    Proto[Proto["ClientMarketBrowse"] = 245] = "ClientMarketBrowse";
+    Proto[Proto["ClientMarketCreate"] = 246] = "ClientMarketCreate";
+    Proto[Proto["ClientMarketCancel"] = 247] = "ClientMarketCancel";
+    Proto[Proto["ClientMarketAccept"] = 248] = "ClientMarketAccept";
+    Proto[Proto["ClientAnswerModalDialog"] = 249] = "ClientAnswerModalDialog";
+    Proto[Proto["ClientOpenStore"] = 250] = "ClientOpenStore";
+    Proto[Proto["ClientRequestStoreOffers"] = 251] = "ClientRequestStoreOffers";
+    Proto[Proto["ClientBuyStoreOffer"] = 252] = "ClientBuyStoreOffer";
+    Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
+    Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
+    Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
+    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
+    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
+    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
+    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
+    Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
+    Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
+    Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
+    Proto[Proto["MonsterStartId"] = 1073741824] = "MonsterStartId";
+    Proto[Proto["MonsterEndId"] = 2147483648] = "MonsterEndId";
+    Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
+    Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
+})(Proto || (exports.Proto = Proto = {}));
+exports.Proto = Proto;
+
+/***/ }),
+
+/***/ 188:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.InputMessage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _log = __webpack_require__(20);
+
+var _position = __webpack_require__(69);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var InputMessage = exports.InputMessage = function () {
+    function InputMessage(msg) {
+        _classCallCheck(this, InputMessage);
+
+        this.data = msg; // new DataView(msg.buffer.slice(0));
+        this.offset = 0;
+        this.size = this.data.byteLength;
+    }
+
+    _createClass(InputMessage, [{
+        key: "getU8",
+        value: function getU8() {
+            //log('InputMessage.getU8', this.offset, this.size);
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "getDouble",
+        value: function getDouble() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getFloat64(this.offset);
+            this.offset += 8;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
+        }
+    }, {
+        key: "skipBytes",
+        value: function skipBytes(byteCount) {
+            (0, _log.log)('InputMessage.skipBytes', this.offset, this.size);
+            if (this.offset + byteCount > this.size) throw new Error("Koniec pakietu");
+            this.offset += byteCount;
+        }
+    }, {
+        key: "skip",
+        value: function skip(bytes) {
+            this.skipBytes(bytes);
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "peekU16",
+        value: function peekU16() {
+            var v = this.getU16();
+            this.offset -= 2;
+            return v;
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }, {
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
+        }
+    }]);
+
+    return InputMessage;
+}();
+
+/***/ }),
+
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1289,23 +1958,23 @@ exports.StaticText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _rect = __webpack_require__(141);
+var _rect = __webpack_require__(185);
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(57);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _cachedtext = __webpack_require__(143);
+var _cachedtext = __webpack_require__(129);
 
-var _g_clock = __webpack_require__(144);
+var _g_clock = __webpack_require__(93);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1474,216 +2143,7 @@ var StaticText = exports.StaticText = function (_Thing) {
 
 /***/ }),
 
-/***/ 143:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.CachedText = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _size = __webpack_require__(73);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var CachedText = exports.CachedText = function () {
-    function CachedText() {
-        _classCallCheck(this, CachedText);
-
-        this.m_text = null;
-        this.m_textSize = null;
-        this.m_textMustRecache = true;
-        this.m_font = null;
-        this.m_align = null;
-    }
-
-    _createClass(CachedText, [{
-        key: 'draw',
-        value: function draw(rect) {
-            if (!this.m_font) return;
-            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
-                this.m_textMustRecache = false;
-                this.m_textCachedScreenCoords = rect;
-                //m_textCoordsBuffer.clear();
-                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
-            }
-            //if(m_font->getTexture())
-            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
-        }
-    }, {
-        key: 'wrapText',
-        value: function wrapText(maxWidth) {
-            if (this.m_font) {
-                // update new line positions
-                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
-                this.update();
-            }
-        }
-    }, {
-        key: 'setFont',
-        value: function setFont(font) {
-            this.m_font = font;
-            this.update();
-        }
-    }, {
-        key: 'setText',
-        value: function setText(text) {
-            this.m_text = text;
-            this.update();
-        }
-    }, {
-        key: 'setAlign',
-        value: function setAlign(align) {
-            this.m_align = align;
-            this.update();
-        }
-    }, {
-        key: 'getTextSize',
-        value: function getTextSize() {
-            return this.m_textSize;
-        }
-    }, {
-        key: 'getText',
-        value: function getText() {
-            return this.m_text;
-        }
-    }, {
-        key: 'getFont',
-        value: function getFont() {
-            return this.m_font;
-        }
-    }, {
-        key: 'getAlign',
-        value: function getAlign() {
-            return this.m_align;
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            if (this.m_font) this.m_textSize = new _size.Size();
-            /* todo */ //m_font->calculateTextRectSize(m_text);
-            this.m_textMustRecache = true;
-        }
-    }]);
-
-    return CachedText;
-}();
-
-CachedText.ALIGN_LEFT = 'left';
-CachedText.ALIGN_RIGHT = 'right';
-
-/***/ }),
-
-/***/ 144:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var g_clock = exports.g_clock = function () {
-    function g_clock() {
-        _classCallCheck(this, g_clock);
-    }
-
-    _createClass(g_clock, null, [{
-        key: "millis",
-        value: function millis() {
-            return +new Date();
-        }
-    }]);
-
-    return g_clock;
-}();
-
-/***/ }),
-
-/***/ 145:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Timer = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _g_clock = __webpack_require__(144);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Timer = exports.Timer = function () {
-    function Timer() {
-        _classCallCheck(this, Timer);
-
-        this.m_startTicks = 0;
-        this.m_stopped = false;
-        this.restart();
-    }
-
-    _createClass(Timer, [{
-        key: "restart",
-        value: function restart() {
-            this.m_startTicks = _g_clock.g_clock.millis();
-            this.m_stopped = false;
-        }
-    }, {
-        key: "stop",
-        value: function stop() {
-            this.m_stopped = true;
-        }
-    }, {
-        key: "startTicks",
-        value: function startTicks() {
-            return this.m_startTicks;
-        }
-    }, {
-        key: "ticksElapsed",
-        value: function ticksElapsed() {
-            return _g_clock.g_clock.millis() - this.m_startTicks;
-        }
-    }, {
-        key: "timeElapsed",
-        value: function timeElapsed() {
-            return this.ticksElapsed() / 1000;
-        }
-    }, {
-        key: "running",
-        value: function running() {
-            return !this.m_stopped;
-        }
-    }]);
-
-    return Timer;
-}();
-
-/***/ }),
-
-/***/ 146:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(147);
-module.exports = __webpack_require__(349);
-
-
-/***/ }),
-
-/***/ 23:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1759,19 +2219,559 @@ exports.error = error;
 
 /***/ }),
 
-/***/ 349:
+/***/ 241:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(242);
+module.exports = __webpack_require__(444);
+
+
+/***/ }),
+
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _jquery = __webpack_require__(350);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_game = exports.Game = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _localplayer = __webpack_require__(445);
+
+var _const = __webpack_require__(13);
+
+var _thingtypemanager = __webpack_require__(63);
+
+var _protocolgame = __webpack_require__(455);
+
+var _map = __webpack_require__(55);
+
+var _container = __webpack_require__(465);
+
+var _chatbox = __webpack_require__(466);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Game = exports.Game = function () {
+    function Game() {
+        _classCallCheck(this, Game);
+
+        this.m_clientVersion = 0;
+        this.messageModesMap = {};
+        this.m_features = [];
+    }
+
+    _createClass(Game, [{
+        key: "processCloseChannel",
+        value: function processCloseChannel(channelId) {
+            _chatbox.g_chat.removeTab(channelId);
+        }
+    }, {
+        key: "processOpenChannel",
+        value: function processOpenChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processOpenOwnPrivateChannel",
+        value: function processOpenOwnPrivateChannel(channelId, name) {
+            _chatbox.g_chat.addChannel(name, channelId);
+        }
+    }, {
+        key: "processTalk",
+        value: function processTalk(name, level, mode, message, channelId, creaturePos) {
+            console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
+            _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        }
+    }, {
+        key: "setClientVersion",
+        value: function setClientVersion(version) {
+            this.m_clientVersion = version;
+            this.updateMessageModesMap(version);
+            this.updateFeatures(version);
+        }
+    }, {
+        key: "loadDatFile",
+        value: function loadDatFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return _thingtypemanager.g_things.loadDat(file);
+
+                            case 2:
+                                return _context.abrupt("return", _context.sent);
+
+                            case 3:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+        }
+    }, {
+        key: "updateMessageModesMap",
+        value: function updateMessageModesMap(version) {
+            this.messageModesMap = {};
+            if (version >= 1094) {
+                this.messageModesMap[_const.MessageMode.MessageMana] = 43;
+            }
+            if (version >= 1055) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 5;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 8;
+                this.messageModesMap[_const.MessageMode.MessageSpell] = 9;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 10;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18; // Admin
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageGameHighlight] = 20;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageDamageDealed] = 23;
+                this.messageModesMap[_const.MessageMode.MessageDamageReceived] = 24;
+                this.messageModesMap[_const.MessageMode.MessageHeal] = 25;
+                this.messageModesMap[_const.MessageMode.MessageExp] = 26;
+                this.messageModesMap[_const.MessageMode.MessageDamageOthers] = 27;
+                this.messageModesMap[_const.MessageMode.MessageHealOthers] = 28;
+                this.messageModesMap[_const.MessageMode.MessageExpOthers] = 29;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 30;
+                this.messageModesMap[_const.MessageMode.MessageLoot] = 31;
+                this.messageModesMap[_const.MessageMode.MessageTradeNpc] = 32;
+                this.messageModesMap[_const.MessageMode.MessageGuild] = 33;
+                this.messageModesMap[_const.MessageMode.MessagePartyManagement] = 34;
+                this.messageModesMap[_const.MessageMode.MessageParty] = 35;
+                this.messageModesMap[_const.MessageMode.MessageBarkLow] = 36;
+                this.messageModesMap[_const.MessageMode.MessageBarkLoud] = 37;
+                this.messageModesMap[_const.MessageMode.MessageReport] = 38;
+                this.messageModesMap[_const.MessageMode.MessageHotkeyUse] = 39;
+                this.messageModesMap[_const.MessageMode.MessageTutorialHint] = 40;
+                this.messageModesMap[_const.MessageMode.MessageThankyou] = 41;
+                this.messageModesMap[_const.MessageMode.MessageMarket] = 42;
+            } else if (version >= 1036) {
+                for (var i = _const.MessageMode.MessageNone; i <= _const.MessageMode.MessageBeyondLast; ++i) {
+                    if (i >= _const.MessageMode.MessageNpcTo) this.messageModesMap[i] = i + 1;else this.messageModesMap[i] = i;
+                }
+            } else if (version >= 900) {
+                for (var _i = _const.MessageMode.MessageNone; _i <= _const.MessageMode.MessageBeyondLast; ++_i) {
+                    this.messageModesMap[_i] = _i;
+                }
+            } else if (version >= 861) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 13;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 14;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 15;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 16;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 18;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 19;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 20;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 21;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 22;
+            } else if (version >= 840) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 5;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
+                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 9;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 10;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 12;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 13;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 14;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 14;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 15;
+                // 16, 17 ??
+                this.messageModesMap[_const.MessageMode.MessageRed] = 18;
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 19;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 20;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 21;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 22;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 23;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 24;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 25;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 26;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 27;
+            } else if (version >= 760) {
+                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
+                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
+                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
+                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
+                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
+                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 4;
+                this.messageModesMap[_const.MessageMode.MessageChannel] = 5;
+                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 6;
+                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 7;
+                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 8;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
+                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
+                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
+                // 13, 14, 15 ??
+                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 16;
+                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 17;
+                this.messageModesMap[_const.MessageMode.MessageWarning] = 18;
+                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
+                this.messageModesMap[_const.MessageMode.MessageLogin] = 20;
+                this.messageModesMap[_const.MessageMode.MessageStatus] = 21;
+                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
+                this.messageModesMap[_const.MessageMode.MessageFailure] = 23;
+                this.messageModesMap[_const.MessageMode.MessageBlue] = 24;
+                this.messageModesMap[_const.MessageMode.MessageRed] = 25;
+            }
+        }
+    }, {
+        key: "updateFeatures",
+        value: function updateFeatures(version) {
+            this.m_features = [];
+            this.enableFeature(_const.GameFeature.GameFormatCreatureName);
+            if (version >= 770) {
+                this.enableFeature(_const.GameFeature.GameLooktypeU16);
+                this.enableFeature(_const.GameFeature.GameMessageStatements);
+                this.enableFeature(_const.GameFeature.GameLoginPacketEncryption);
+            }
+            if (version >= 780) {
+                this.enableFeature(_const.GameFeature.GamePlayerAddons);
+                this.enableFeature(_const.GameFeature.GamePlayerStamina);
+                this.enableFeature(_const.GameFeature.GameNewFluids);
+                this.enableFeature(_const.GameFeature.GameMessageLevel);
+                this.enableFeature(_const.GameFeature.GamePlayerStateU16);
+                this.enableFeature(_const.GameFeature.GameNewOutfitProtocol);
+            }
+            if (version >= 790) {
+                this.enableFeature(_const.GameFeature.GameWritableDate);
+            }
+            if (version >= 840) {
+                this.enableFeature(_const.GameFeature.GameProtocolChecksum);
+                this.enableFeature(_const.GameFeature.GameAccountNames);
+                this.enableFeature(_const.GameFeature.GameDoubleFreeCapacity);
+            }
+            if (version >= 841) {
+                this.enableFeature(_const.GameFeature.GameChallengeOnLogin);
+                this.enableFeature(_const.GameFeature.GameMessageSizeCheck);
+            }
+            if (version >= 854) {
+                this.enableFeature(_const.GameFeature.GameCreatureEmblems);
+            }
+            if (version >= 860) {
+                this.enableFeature(_const.GameFeature.GameAttackSeq);
+            }
+            if (version >= 862) {
+                this.enableFeature(_const.GameFeature.GamePenalityOnDeath);
+            }
+            if (version >= 870) {
+                this.enableFeature(_const.GameFeature.GameDoubleExperience);
+                this.enableFeature(_const.GameFeature.GamePlayerMounts);
+                this.enableFeature(_const.GameFeature.GameSpellList);
+            }
+            if (version >= 910) {
+                this.enableFeature(_const.GameFeature.GameNameOnNpcTrade);
+                this.enableFeature(_const.GameFeature.GameTotalCapacity);
+                this.enableFeature(_const.GameFeature.GameSkillsBase);
+                this.enableFeature(_const.GameFeature.GamePlayerRegenerationTime);
+                this.enableFeature(_const.GameFeature.GameChannelPlayerList);
+                this.enableFeature(_const.GameFeature.GameEnvironmentEffect);
+                this.enableFeature(_const.GameFeature.GameItemAnimationPhase);
+            }
+            if (version >= 940) {
+                this.enableFeature(_const.GameFeature.GamePlayerMarket);
+            }
+            if (version >= 953) {
+                this.enableFeature(_const.GameFeature.GamePurseSlot);
+                this.enableFeature(_const.GameFeature.GameClientPing);
+            }
+            if (version >= 960) {
+                this.enableFeature(_const.GameFeature.GameSpritesU32);
+                this.enableFeature(_const.GameFeature.GameOfflineTrainingTime);
+            }
+            if (version >= 963) {
+                this.enableFeature(_const.GameFeature.GameAdditionalVipInfo);
+            }
+            if (version >= 980) {
+                this.enableFeature(_const.GameFeature.GamePreviewState);
+                this.enableFeature(_const.GameFeature.GameClientVersion);
+            }
+            if (version >= 981) {
+                this.enableFeature(_const.GameFeature.GameLoginPending);
+                this.enableFeature(_const.GameFeature.GameNewSpeedLaw);
+            }
+            if (version >= 984) {
+                this.enableFeature(_const.GameFeature.GameContainerPagination);
+                this.enableFeature(_const.GameFeature.GameBrowseField);
+            }
+            if (version >= 1000) {
+                this.enableFeature(_const.GameFeature.GameThingMarks);
+                this.enableFeature(_const.GameFeature.GamePVPMode);
+            }
+            if (version >= 1035) {
+                this.enableFeature(_const.GameFeature.GameDoubleSkills);
+                this.enableFeature(_const.GameFeature.GameBaseSkillU16);
+            }
+            if (version >= 1036) {
+                this.enableFeature(_const.GameFeature.GameCreatureIcons);
+                this.enableFeature(_const.GameFeature.GameHideNpcNames);
+            }
+            if (version >= 1038) {
+                this.enableFeature(_const.GameFeature.GamePremiumExpiration);
+            }
+            if (version >= 1050) {
+                this.enableFeature(_const.GameFeature.GameEnhancedAnimations);
+            }
+            if (version >= 1053) {
+                this.enableFeature(_const.GameFeature.GameUnjustifiedPoints);
+            }
+            if (version >= 1054) {
+                this.enableFeature(_const.GameFeature.GameExperienceBonus);
+            }
+            if (version >= 1055) {
+                this.enableFeature(_const.GameFeature.GameDeathType);
+            }
+            if (version >= 1057) {
+                this.enableFeature(_const.GameFeature.GameIdleAnimations);
+            }
+            if (version >= 1061) {
+                this.enableFeature(_const.GameFeature.GameOGLInformation);
+            }
+            if (version >= 1071) {
+                this.enableFeature(_const.GameFeature.GameContentRevision);
+            }
+            if (version >= 1072) {
+                this.enableFeature(_const.GameFeature.GameAuthenticator);
+            }
+            if (version >= 1074) {
+                this.enableFeature(_const.GameFeature.GameSessionKey);
+            }
+            if (version >= 1080) {
+                this.enableFeature(_const.GameFeature.GameIngameStore);
+            }
+            if (version >= 1092) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreServiceType);
+            }
+            if (version >= 1093) {
+                this.enableFeature(_const.GameFeature.GameIngameStoreHighlights);
+            }
+            if (version >= 1094) {
+                this.enableFeature(_const.GameFeature.GameAdditionalSkills);
+            }
+        }
+    }, {
+        key: "enableFeature",
+        value: function enableFeature(feature) {
+            this.m_features[feature] = true;
+        }
+    }, {
+        key: "disableFeature",
+        value: function disableFeature(feature) {
+            this.m_features[feature] = false;
+        }
+    }, {
+        key: "getFeature",
+        value: function getFeature(feature) {
+            return this.m_features[feature] == true;
+        }
+    }, {
+        key: "translateMessageModeFromServer",
+        value: function translateMessageModeFromServer(mode) {
+            for (var i in this.messageModesMap) {
+                if (this.messageModesMap[i] == mode) {
+                    return parseInt(i);
+                }
+            }
+            return _const.MessageMode.MessageInvalid;
+        }
+    }, {
+        key: "getContainer",
+        value: function getContainer(containerId) {
+            return new _container.Container();
+        }
+    }, {
+        key: "getClientVersion",
+        value: function getClientVersion() {
+            return this.m_clientVersion;
+        }
+    }, {
+        key: "getProtocolVersion",
+        value: function getProtocolVersion() {
+            return 10009;
+        }
+    }, {
+        key: "getOs",
+        value: function getOs() {
+            return 3;
+        }
+    }, {
+        key: "processConnectionError",
+        value: function processConnectionError() {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "getLocalPlayer",
+        value: function getLocalPlayer() {
+            return new _localplayer.LocalPlayer();
+        }
+    }, {
+        key: "login",
+        value: function login(accountName, accountPassword, characterName) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
+        }
+    }, {
+        key: "formatCreatureName",
+        value: function formatCreatureName(string) {
+            return string;
+        }
+    }, {
+        key: "g_things",
+        get: function get() {
+            return new _thingtypemanager.ThingTypeManager();
+        }
+    }, {
+        key: "g_map",
+        get: function get() {
+            return new _map.Map();
+        }
+    }]);
+
+    return Game;
+}();
+
+var g_game = new Game();
+exports.g_game = g_game;
+
+/***/ }),
+
+/***/ 42:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Point = exports.Point = function () {
+    function Point(x, y) {
+        _classCallCheck(this, Point);
+
+        this.x = x;
+        this.y = y;
+    }
+
+    _createClass(Point, [{
+        key: "equals",
+        value: function equals(otherPoint) {
+            return this.x == otherPoint.x && this.y == otherPoint.y;
+        }
+    }, {
+        key: "clone",
+        value: function clone() {
+            return new Point(this.x, this.y);
+        }
+    }, {
+        key: "add",
+        value: function add(point) {
+            return new Point(this.x + point.x, this.y + point.y);
+        }
+    }, {
+        key: "sub",
+        value: function sub(point) {
+            return new Point(this.x - point.x, this.y - point.y);
+        }
+    }, {
+        key: "mul",
+        value: function mul(ratio) {
+            return new Point(this.x * ratio, this.y * ratio);
+        }
+    }]);
+
+    return Point;
+}();
+
+/***/ }),
+
+/***/ 444:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _jquery = __webpack_require__(572);
 
 var $ = _interopRequireWildcard(_jquery);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -1831,7 +2831,7 @@ test();
 
 /***/ }),
 
-/***/ 351:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1844,7 +2844,7 @@ exports.LocalPlayer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _player = __webpack_require__(137);
+var _player = __webpack_require__(180);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1889,7 +2889,7 @@ var LocalPlayer = exports.LocalPlayer = function (_Player) {
 
 /***/ }),
 
-/***/ 352:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1902,9 +2902,9 @@ exports.TileBlock = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _tile = __webpack_require__(353);
+var _tile = __webpack_require__(447);
 
-var _helpers = __webpack_require__(139);
+var _helpers = __webpack_require__(56);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1958,7 +2958,7 @@ TileBlock.BLOCK_SIZE = 32;
 
 /***/ }),
 
-/***/ 353:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1971,13 +2971,13 @@ exports.Tile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2861,7 +3861,7 @@ Tile.MAX_THINGS = 10;
 
 /***/ }),
 
-/***/ 354:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2874,33 +3874,33 @@ exports.ThingType = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
-var _animator = __webpack_require__(355);
+var _animator = __webpack_require__(450);
 
-var _image = __webpack_require__(140);
+var _image = __webpack_require__(182);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(57);
 
-var _spritemanager = __webpack_require__(356);
+var _spritemanager = __webpack_require__(183);
 
-var _thingtypeattribs = __webpack_require__(357);
+var _thingtypeattribs = __webpack_require__(452);
 
-var _size = __webpack_require__(73);
+var _size = __webpack_require__(70);
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _texture = __webpack_require__(358);
+var _texture = __webpack_require__(453);
 
-var _rect = __webpack_require__(141);
+var _rect = __webpack_require__(185);
 
-var _marketdata = __webpack_require__(359);
+var _marketdata = __webpack_require__(454);
 
-var _light = __webpack_require__(101);
+var _light = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3522,7 +4522,7 @@ ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue,
 
 /***/ }),
 
-/***/ 355:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3535,7 +4535,7 @@ exports.Animator = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3581,279 +4581,7 @@ var Animator = exports.Animator = function () {
 
 /***/ }),
 
-/***/ 356:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_sprites = exports.SpriteManager = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _image = __webpack_require__(140);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var SpriteManager = exports.SpriteManager = function () {
-    function SpriteManager() {
-        _classCallCheck(this, SpriteManager);
-
-        this.m_loaded = false;
-        this.m_signature = 0;
-        this.m_spritesCount = 0;
-        this.m_spritesOffset = 0;
-        this.m_spritesFile = null;
-    }
-
-    _createClass(SpriteManager, [{
-        key: "getSpriteImage",
-        value: function getSpriteImage(id) {
-            return new _image.Image(0);
-        }
-    }]);
-
-    return SpriteManager;
-}();
-
-var g_sprites = new SpriteManager();
-exports.g_sprites = g_sprites;
-
-/***/ }),
-
-/***/ 357:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
-    function ThingTypeAttribs() {
-        _classCallCheck(this, ThingTypeAttribs);
-
-        this.attribs = {};
-    }
-
-    _createClass(ThingTypeAttribs, [{
-        key: "has",
-        value: function has(attr) {
-            return this.attribs.hasOwnProperty(attr.toString());
-        }
-    }, {
-        key: "get",
-        value: function get(attr) {
-            return this.attribs[attr];
-        }
-    }, {
-        key: "set",
-        value: function set(attr, value) {
-            //console.log(attr, value);
-            this.attribs[attr] = value;
-        }
-    }, {
-        key: "remove",
-        value: function remove(attr) {
-            delete this.attribs[attr];
-        }
-    }]);
-
-    return ThingTypeAttribs;
-}();
-
-/***/ }),
-
-/***/ 358:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Texture = exports.Texture = function Texture(image) {
-    var buildMipmaps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var compress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    _classCallCheck(this, Texture);
-
-    this.m_id = 0;
-    this.m_time = 0;
-    this.m_hasMipmaps = false;
-    this.m_smooth = false;
-    this.m_upsideDown = false;
-    this.m_repeat = false;
-};
-
-/***/ }),
-
-/***/ 359:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MarketData = exports.MarketData = function MarketData() {
-  _classCallCheck(this, MarketData);
-};
-
-/***/ }),
-
-/***/ 360:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_resources = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inputfile = __webpack_require__(361);
-
-var _log = __webpack_require__(23);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Resources = function () {
-    function Resources() {
-        _classCallCheck(this, Resources);
-    }
-
-    _createClass(Resources, [{
-        key: "openFile",
-        value: function openFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var get, response, uInt8Array;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                get = function get(url) {
-                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                        return regeneratorRuntime.wrap(function _callee$(_context) {
-                                            while (1) {
-                                                switch (_context.prev = _context.next) {
-                                                    case 0:
-                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.responseType = 'arraybuffer';
-                                                            xhr.onload = function (e) {
-                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
-                                                            };
-                                                            xhr.onerror = function (e) {
-                                                                reject(e);
-                                                            };
-                                                            xhr.open('GET', url, true); //Async
-                                                            xhr.send();
-                                                        }));
-
-                                                    case 1:
-                                                    case "end":
-                                                        return _context.stop();
-                                                }
-                                            }
-                                        }, _callee, this);
-                                    }));
-                                };
-
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return get(file);
-
-                            case 4:
-                                response = _context2.sent;
-
-                                console.log('r', response);
-                                uInt8Array = new Uint8Array(response);
-                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
-
-                            case 10:
-                                _context2.prev = 10;
-                                _context2.t0 = _context2["catch"](1);
-
-                                _log.Log.debug('failed to openFile', _context2.t0);
-                                throw _context2.t0;
-
-                            case 14:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 10]]);
-            }));
-        }
-    }]);
-
-    return Resources;
-}();
-
-var g_resources = new Resources();
-exports.g_resources = g_resources;
-/*
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
-xhr.responseType = 'arraybuffer';
-xhr.onload = function(e) {
-  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
-  // var byte3 = uInt8Array[4]; // byte at offset 4
-console.log(uInt8Array);
-};
-
-xhr.send();
- */
-
-/***/ }),
-
-/***/ 361:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3967,7 +4695,102 @@ var InputFile = exports.InputFile = function () {
 
 /***/ }),
 
-/***/ 362:
+/***/ 452:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
+    function ThingTypeAttribs() {
+        _classCallCheck(this, ThingTypeAttribs);
+
+        this.attribs = {};
+    }
+
+    _createClass(ThingTypeAttribs, [{
+        key: "has",
+        value: function has(attr) {
+            return this.attribs.hasOwnProperty(attr.toString());
+        }
+    }, {
+        key: "get",
+        value: function get(attr) {
+            return this.attribs[attr];
+        }
+    }, {
+        key: "set",
+        value: function set(attr, value) {
+            //console.log(attr, value);
+            this.attribs[attr] = value;
+        }
+    }, {
+        key: "remove",
+        value: function remove(attr) {
+            delete this.attribs[attr];
+        }
+    }]);
+
+    return ThingTypeAttribs;
+}();
+
+/***/ }),
+
+/***/ 453:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Texture = exports.Texture = function Texture(image) {
+    var buildMipmaps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var compress = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    _classCallCheck(this, Texture);
+
+    this.m_id = 0;
+    this.m_time = 0;
+    this.m_hasMipmaps = false;
+    this.m_smooth = false;
+    this.m_upsideDown = false;
+    this.m_repeat = false;
+};
+
+/***/ }),
+
+/***/ 454:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MarketData = exports.MarketData = function MarketData() {
+  _classCallCheck(this, MarketData);
+};
+
+/***/ }),
+
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3982,49 +4805,49 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(363);
+var _protocol = __webpack_require__(456);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
-var _outputmessage = __webpack_require__(365);
+var _outputmessage = __webpack_require__(457);
 
-var _proto = __webpack_require__(367);
+var _proto = __webpack_require__(187);
 
-var _outfit = __webpack_require__(368);
+var _outfit = __webpack_require__(186);
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _position = __webpack_require__(100);
+var _position = __webpack_require__(69);
 
-var _item = __webpack_require__(369);
+var _item = __webpack_require__(459);
 
-var _statictext = __webpack_require__(142);
+var _statictext = __webpack_require__(189);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(63);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _effect = __webpack_require__(370);
+var _effect = __webpack_require__(460);
 
-var _animatedtext = __webpack_require__(371);
+var _animatedtext = __webpack_require__(461);
 
-var _missile = __webpack_require__(372);
+var _missile = __webpack_require__(462);
 
-var _color2 = __webpack_require__(55);
+var _color2 = __webpack_require__(57);
 
-var _player = __webpack_require__(137);
+var _player = __webpack_require__(180);
 
-var _light = __webpack_require__(101);
+var _light = __webpack_require__(125);
 
-var _npc = __webpack_require__(373);
+var _npc = __webpack_require__(463);
 
-var _monster = __webpack_require__(374);
+var _monster = __webpack_require__(464);
 
-var _awarerange = __webpack_require__(138);
+var _awarerange = __webpack_require__(181);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6134,7 +6957,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 363:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6147,9 +6970,9 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(364);
+var _inputmessage = __webpack_require__(188);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6301,135 +7124,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 364:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.InputMessage = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _log = __webpack_require__(23);
-
-var _position = __webpack_require__(100);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var InputMessage = exports.InputMessage = function () {
-    function InputMessage(msg) {
-        _classCallCheck(this, InputMessage);
-
-        this.data = msg; // new DataView(msg.buffer.slice(0));
-        this.offset = 0;
-        this.size = this.data.byteLength;
-    }
-
-    _createClass(InputMessage, [{
-        key: "getU8",
-        value: function getU8() {
-            //log('InputMessage.getU8', this.offset, this.size);
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getUint8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "getU16",
-        value: function getU16() {
-            return this.getU8() + this.getU8() * 256;
-        }
-    }, {
-        key: "getU32",
-        value: function getU32() {
-            return this.getU16() + this.getU16() * 256 * 256;
-        }
-    }, {
-        key: "getU64",
-        value: function getU64() {
-            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-        }
-    }, {
-        key: "getDouble",
-        value: function getDouble() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getFloat64(this.offset);
-            this.offset += 8;
-            return v;
-        }
-    }, {
-        key: "getString",
-        value: function getString() {
-            var length = this.getU16();
-            var text = '';
-            for (var i = 0; i < length; i++) {
-                text += String.fromCharCode(this.getU8());
-            }
-            return text;
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
-        }
-    }, {
-        key: "skipBytes",
-        value: function skipBytes(byteCount) {
-            (0, _log.log)('InputMessage.skipBytes', this.offset, this.size);
-            if (this.offset + byteCount > this.size) throw new Error("Koniec pakietu");
-            this.offset += byteCount;
-        }
-    }, {
-        key: "skip",
-        value: function skip(bytes) {
-            this.skipBytes(bytes);
-        }
-    }, {
-        key: "peekU8",
-        value: function peekU8() {
-            var v = this.getU8();
-            this.offset -= 1;
-            return v;
-        }
-    }, {
-        key: "peekU16",
-        value: function peekU16() {
-            var v = this.getU16();
-            this.offset -= 2;
-            return v;
-        }
-    }, {
-        key: "getUnreadSize",
-        value: function getUnreadSize() {
-            return this.size - this.offset;
-        }
-    }, {
-        key: "getReadPos",
-        value: function getReadPos() {
-            return this.offset;
-        }
-    }, {
-        key: "setReadPos",
-        value: function setReadPos(offset) {
-            this.offset = offset;
-        }
-    }, {
-        key: "validateChecksum",
-        value: function validateChecksum() {
-            return true;
-        }
-    }]);
-
-    return InputMessage;
-}();
-
-/***/ }),
-
-/***/ 365:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6442,7 +7137,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(366);
+var _jspack = __webpack_require__(458);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6529,7 +7224,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 366:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6817,305 +7512,7 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 367:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var Proto;
-(function (Proto) {
-    Proto[Proto["LoginServerError"] = 10] = "LoginServerError";
-    Proto[Proto["LoginServerMotd"] = 20] = "LoginServerMotd";
-    Proto[Proto["LoginServerUpdateNeeded"] = 30] = "LoginServerUpdateNeeded";
-    Proto[Proto["LoginServerCharacterList"] = 100] = "LoginServerCharacterList";
-    Proto[Proto["StaticText"] = 96] = "StaticText";
-    Proto[Proto["UnknownCreature"] = 97] = "UnknownCreature";
-    Proto[Proto["OutdatedCreature"] = 98] = "OutdatedCreature";
-    Proto[Proto["Creature"] = 99] = "Creature";
-    Proto[Proto["GameServerLoginOrPendingState"] = 10] = "GameServerLoginOrPendingState";
-    Proto[Proto["GameServerGMActions"] = 11] = "GameServerGMActions";
-    Proto[Proto["GameServerEnterGame"] = 15] = "GameServerEnterGame";
-    Proto[Proto["GameServerUpdateNeeded"] = 17] = "GameServerUpdateNeeded";
-    Proto[Proto["GameServerLoginError"] = 20] = "GameServerLoginError";
-    Proto[Proto["GameServerLoginAdvice"] = 21] = "GameServerLoginAdvice";
-    Proto[Proto["GameServerLoginWait"] = 22] = "GameServerLoginWait";
-    Proto[Proto["GameServerLoginSuccess"] = 23] = "GameServerLoginSuccess";
-    Proto[Proto["GameServerLoginToken"] = 24] = "GameServerLoginToken";
-    Proto[Proto["GameServerStoreButtonIndicators"] = 25] = "GameServerStoreButtonIndicators";
-    Proto[Proto["GameServerPingBack"] = 29] = "GameServerPingBack";
-    Proto[Proto["GameServerPing"] = 30] = "GameServerPing";
-    Proto[Proto["GameServerChallenge"] = 31] = "GameServerChallenge";
-    Proto[Proto["GameServerDeath"] = 40] = "GameServerDeath";
-    Proto[Proto["GameServerFirstGameOpcode"] = 50] = "GameServerFirstGameOpcode";
-    Proto[Proto["GameServerExtendedOpcode"] = 50] = "GameServerExtendedOpcode";
-    Proto[Proto["GameServerChangeMapAwareRange"] = 51] = "GameServerChangeMapAwareRange";
-    Proto[Proto["GameServerFullMap"] = 100] = "GameServerFullMap";
-    Proto[Proto["GameServerMapTopRow"] = 101] = "GameServerMapTopRow";
-    Proto[Proto["GameServerMapRightRow"] = 102] = "GameServerMapRightRow";
-    Proto[Proto["GameServerMapBottomRow"] = 103] = "GameServerMapBottomRow";
-    Proto[Proto["GameServerMapLeftRow"] = 104] = "GameServerMapLeftRow";
-    Proto[Proto["GameServerUpdateTile"] = 105] = "GameServerUpdateTile";
-    Proto[Proto["GameServerCreateOnMap"] = 106] = "GameServerCreateOnMap";
-    Proto[Proto["GameServerChangeOnMap"] = 107] = "GameServerChangeOnMap";
-    Proto[Proto["GameServerDeleteOnMap"] = 108] = "GameServerDeleteOnMap";
-    Proto[Proto["GameServerMoveCreature"] = 109] = "GameServerMoveCreature";
-    Proto[Proto["GameServerOpenContainer"] = 110] = "GameServerOpenContainer";
-    Proto[Proto["GameServerCloseContainer"] = 111] = "GameServerCloseContainer";
-    Proto[Proto["GameServerCreateContainer"] = 112] = "GameServerCreateContainer";
-    Proto[Proto["GameServerChangeInContainer"] = 113] = "GameServerChangeInContainer";
-    Proto[Proto["GameServerDeleteInContainer"] = 114] = "GameServerDeleteInContainer";
-    Proto[Proto["GameServerSetInventory"] = 120] = "GameServerSetInventory";
-    Proto[Proto["GameServerDeleteInventory"] = 121] = "GameServerDeleteInventory";
-    Proto[Proto["GameServerOpenNpcTrade"] = 122] = "GameServerOpenNpcTrade";
-    Proto[Proto["GameServerPlayerGoods"] = 123] = "GameServerPlayerGoods";
-    Proto[Proto["GameServerCloseNpcTrade"] = 124] = "GameServerCloseNpcTrade";
-    Proto[Proto["GameServerOwnTrade"] = 125] = "GameServerOwnTrade";
-    Proto[Proto["GameServerCounterTrade"] = 126] = "GameServerCounterTrade";
-    Proto[Proto["GameServerCloseTrade"] = 127] = "GameServerCloseTrade";
-    Proto[Proto["GameServerAmbient"] = 130] = "GameServerAmbient";
-    Proto[Proto["GameServerGraphicalEffect"] = 131] = "GameServerGraphicalEffect";
-    Proto[Proto["GameServerTextEffect"] = 132] = "GameServerTextEffect";
-    Proto[Proto["GameServerMissleEffect"] = 133] = "GameServerMissleEffect";
-    Proto[Proto["GameServerMarkCreature"] = 134] = "GameServerMarkCreature";
-    Proto[Proto["GameServerTrappers"] = 135] = "GameServerTrappers";
-    Proto[Proto["GameServerCreatureHealth"] = 140] = "GameServerCreatureHealth";
-    Proto[Proto["GameServerCreatureLight"] = 141] = "GameServerCreatureLight";
-    Proto[Proto["GameServerCreatureOutfit"] = 142] = "GameServerCreatureOutfit";
-    Proto[Proto["GameServerCreatureSpeed"] = 143] = "GameServerCreatureSpeed";
-    Proto[Proto["GameServerCreatureSkull"] = 144] = "GameServerCreatureSkull";
-    Proto[Proto["GameServerCreatureParty"] = 145] = "GameServerCreatureParty";
-    Proto[Proto["GameServerCreatureUnpass"] = 146] = "GameServerCreatureUnpass";
-    Proto[Proto["GameServerCreatureMarks"] = 147] = "GameServerCreatureMarks";
-    Proto[Proto["GameServerPlayerHelpers"] = 148] = "GameServerPlayerHelpers";
-    Proto[Proto["GameServerCreatureType"] = 149] = "GameServerCreatureType";
-    Proto[Proto["GameServerEditText"] = 150] = "GameServerEditText";
-    Proto[Proto["GameServerEditList"] = 151] = "GameServerEditList";
-    Proto[Proto["GameServerBlessings"] = 156] = "GameServerBlessings";
-    Proto[Proto["GameServerPreset"] = 157] = "GameServerPreset";
-    Proto[Proto["GameServerPremiumTrigger"] = 158] = "GameServerPremiumTrigger";
-    Proto[Proto["GameServerPlayerDataBasic"] = 159] = "GameServerPlayerDataBasic";
-    Proto[Proto["GameServerPlayerData"] = 160] = "GameServerPlayerData";
-    Proto[Proto["GameServerPlayerSkills"] = 161] = "GameServerPlayerSkills";
-    Proto[Proto["GameServerPlayerState"] = 162] = "GameServerPlayerState";
-    Proto[Proto["GameServerClearTarget"] = 163] = "GameServerClearTarget";
-    Proto[Proto["GameServerPlayerModes"] = 167] = "GameServerPlayerModes";
-    Proto[Proto["GameServerSpellDelay"] = 164] = "GameServerSpellDelay";
-    Proto[Proto["GameServerSpellGroupDelay"] = 165] = "GameServerSpellGroupDelay";
-    Proto[Proto["GameServerMultiUseDelay"] = 166] = "GameServerMultiUseDelay";
-    Proto[Proto["GameServerSetStoreDeepLink"] = 168] = "GameServerSetStoreDeepLink";
-    Proto[Proto["GameServerTalk"] = 170] = "GameServerTalk";
-    Proto[Proto["GameServerChannels"] = 171] = "GameServerChannels";
-    Proto[Proto["GameServerOpenChannel"] = 172] = "GameServerOpenChannel";
-    Proto[Proto["GameServerOpenPrivateChannel"] = 173] = "GameServerOpenPrivateChannel";
-    Proto[Proto["GameServerRuleViolationChannel"] = 174] = "GameServerRuleViolationChannel";
-    Proto[Proto["GameServerRuleViolationRemove"] = 175] = "GameServerRuleViolationRemove";
-    Proto[Proto["GameServerRuleViolationCancel"] = 176] = "GameServerRuleViolationCancel";
-    Proto[Proto["GameServerRuleViolationLock"] = 177] = "GameServerRuleViolationLock";
-    Proto[Proto["GameServerOpenOwnChannel"] = 178] = "GameServerOpenOwnChannel";
-    Proto[Proto["GameServerCloseChannel"] = 179] = "GameServerCloseChannel";
-    Proto[Proto["GameServerTextMessage"] = 180] = "GameServerTextMessage";
-    Proto[Proto["GameServerCancelWalk"] = 181] = "GameServerCancelWalk";
-    Proto[Proto["GameServerWalkWait"] = 182] = "GameServerWalkWait";
-    Proto[Proto["GameServerUnjustifiedStats"] = 183] = "GameServerUnjustifiedStats";
-    Proto[Proto["GameServerPvpSituations"] = 184] = "GameServerPvpSituations";
-    Proto[Proto["GameServerFloorChangeUp"] = 190] = "GameServerFloorChangeUp";
-    Proto[Proto["GameServerFloorChangeDown"] = 191] = "GameServerFloorChangeDown";
-    Proto[Proto["GameServerChooseOutfit"] = 200] = "GameServerChooseOutfit";
-    Proto[Proto["GameServerVipAdd"] = 210] = "GameServerVipAdd";
-    Proto[Proto["GameServerVipState"] = 211] = "GameServerVipState";
-    Proto[Proto["GameServerVipLogout"] = 212] = "GameServerVipLogout";
-    Proto[Proto["GameServerTutorialHint"] = 220] = "GameServerTutorialHint";
-    Proto[Proto["GameServerAutomapFlag"] = 221] = "GameServerAutomapFlag";
-    Proto[Proto["GameServerCoinBalance"] = 223] = "GameServerCoinBalance";
-    Proto[Proto["GameServerStoreError"] = 224] = "GameServerStoreError";
-    Proto[Proto["GameServerRequestPurchaseData"] = 225] = "GameServerRequestPurchaseData";
-    Proto[Proto["GameServerQuestLog"] = 240] = "GameServerQuestLog";
-    Proto[Proto["GameServerQuestLine"] = 241] = "GameServerQuestLine";
-    Proto[Proto["GameServerCoinBalanceUpdating"] = 242] = "GameServerCoinBalanceUpdating";
-    Proto[Proto["GameServerChannelEvent"] = 243] = "GameServerChannelEvent";
-    Proto[Proto["GameServerItemInfo"] = 244] = "GameServerItemInfo";
-    Proto[Proto["GameServerPlayerInventory"] = 245] = "GameServerPlayerInventory";
-    Proto[Proto["GameServerMarketEnter"] = 246] = "GameServerMarketEnter";
-    Proto[Proto["GameServerMarketLeave"] = 247] = "GameServerMarketLeave";
-    Proto[Proto["GameServerMarketDetail"] = 248] = "GameServerMarketDetail";
-    Proto[Proto["GameServerMarketBrowse"] = 249] = "GameServerMarketBrowse";
-    Proto[Proto["GameServerModalDialog"] = 250] = "GameServerModalDialog";
-    Proto[Proto["GameServerStore"] = 251] = "GameServerStore";
-    Proto[Proto["GameServerStoreOffers"] = 252] = "GameServerStoreOffers";
-    Proto[Proto["GameServerStoreTransactionHistory"] = 253] = "GameServerStoreTransactionHistory";
-    Proto[Proto["GameServerStoreCompletePurchase"] = 254] = "GameServerStoreCompletePurchase";
-    Proto[Proto["ClientEnterAccount"] = 1] = "ClientEnterAccount";
-    Proto[Proto["ClientPendingGame"] = 10] = "ClientPendingGame";
-    Proto[Proto["ClientEnterGame"] = 15] = "ClientEnterGame";
-    Proto[Proto["ClientLeaveGame"] = 20] = "ClientLeaveGame";
-    Proto[Proto["ClientPing"] = 29] = "ClientPing";
-    Proto[Proto["ClientPingBack"] = 30] = "ClientPingBack";
-    Proto[Proto["ClientFirstGameOpcode"] = 50] = "ClientFirstGameOpcode";
-    Proto[Proto["ClientExtendedOpcode"] = 50] = "ClientExtendedOpcode";
-    Proto[Proto["ClientChangeMapAwareRange"] = 51] = "ClientChangeMapAwareRange";
-    Proto[Proto["ClientAutoWalk"] = 100] = "ClientAutoWalk";
-    Proto[Proto["ClientWalkNorth"] = 101] = "ClientWalkNorth";
-    Proto[Proto["ClientWalkEast"] = 102] = "ClientWalkEast";
-    Proto[Proto["ClientWalkSouth"] = 103] = "ClientWalkSouth";
-    Proto[Proto["ClientWalkWest"] = 104] = "ClientWalkWest";
-    Proto[Proto["ClientStop"] = 105] = "ClientStop";
-    Proto[Proto["ClientWalkNorthEast"] = 106] = "ClientWalkNorthEast";
-    Proto[Proto["ClientWalkSouthEast"] = 107] = "ClientWalkSouthEast";
-    Proto[Proto["ClientWalkSouthWest"] = 108] = "ClientWalkSouthWest";
-    Proto[Proto["ClientWalkNorthWest"] = 109] = "ClientWalkNorthWest";
-    Proto[Proto["ClientTurnNorth"] = 111] = "ClientTurnNorth";
-    Proto[Proto["ClientTurnEast"] = 112] = "ClientTurnEast";
-    Proto[Proto["ClientTurnSouth"] = 113] = "ClientTurnSouth";
-    Proto[Proto["ClientTurnWest"] = 114] = "ClientTurnWest";
-    Proto[Proto["ClientEquipItem"] = 119] = "ClientEquipItem";
-    Proto[Proto["ClientMove"] = 120] = "ClientMove";
-    Proto[Proto["ClientInspectNpcTrade"] = 121] = "ClientInspectNpcTrade";
-    Proto[Proto["ClientBuyItem"] = 122] = "ClientBuyItem";
-    Proto[Proto["ClientSellItem"] = 123] = "ClientSellItem";
-    Proto[Proto["ClientCloseNpcTrade"] = 124] = "ClientCloseNpcTrade";
-    Proto[Proto["ClientRequestTrade"] = 125] = "ClientRequestTrade";
-    Proto[Proto["ClientInspectTrade"] = 126] = "ClientInspectTrade";
-    Proto[Proto["ClientAcceptTrade"] = 127] = "ClientAcceptTrade";
-    Proto[Proto["ClientRejectTrade"] = 128] = "ClientRejectTrade";
-    Proto[Proto["ClientUseItem"] = 130] = "ClientUseItem";
-    Proto[Proto["ClientUseItemWith"] = 131] = "ClientUseItemWith";
-    Proto[Proto["ClientUseOnCreature"] = 132] = "ClientUseOnCreature";
-    Proto[Proto["ClientRotateItem"] = 133] = "ClientRotateItem";
-    Proto[Proto["ClientCloseContainer"] = 135] = "ClientCloseContainer";
-    Proto[Proto["ClientUpContainer"] = 136] = "ClientUpContainer";
-    Proto[Proto["ClientEditText"] = 137] = "ClientEditText";
-    Proto[Proto["ClientEditList"] = 138] = "ClientEditList";
-    Proto[Proto["ClientLook"] = 140] = "ClientLook";
-    Proto[Proto["ClientLookCreature"] = 141] = "ClientLookCreature";
-    Proto[Proto["ClientTalk"] = 150] = "ClientTalk";
-    Proto[Proto["ClientRequestChannels"] = 151] = "ClientRequestChannels";
-    Proto[Proto["ClientJoinChannel"] = 152] = "ClientJoinChannel";
-    Proto[Proto["ClientLeaveChannel"] = 153] = "ClientLeaveChannel";
-    Proto[Proto["ClientOpenPrivateChannel"] = 154] = "ClientOpenPrivateChannel";
-    Proto[Proto["ClientOpenRuleViolation"] = 155] = "ClientOpenRuleViolation";
-    Proto[Proto["ClientCloseRuleViolation"] = 156] = "ClientCloseRuleViolation";
-    Proto[Proto["ClientCancelRuleViolation"] = 157] = "ClientCancelRuleViolation";
-    Proto[Proto["ClientCloseNpcChannel"] = 158] = "ClientCloseNpcChannel";
-    Proto[Proto["ClientChangeFightModes"] = 160] = "ClientChangeFightModes";
-    Proto[Proto["ClientAttack"] = 161] = "ClientAttack";
-    Proto[Proto["ClientFollow"] = 162] = "ClientFollow";
-    Proto[Proto["ClientInviteToParty"] = 163] = "ClientInviteToParty";
-    Proto[Proto["ClientJoinParty"] = 164] = "ClientJoinParty";
-    Proto[Proto["ClientRevokeInvitation"] = 165] = "ClientRevokeInvitation";
-    Proto[Proto["ClientPassLeadership"] = 166] = "ClientPassLeadership";
-    Proto[Proto["ClientLeaveParty"] = 167] = "ClientLeaveParty";
-    Proto[Proto["ClientShareExperience"] = 168] = "ClientShareExperience";
-    Proto[Proto["ClientDisbandParty"] = 169] = "ClientDisbandParty";
-    Proto[Proto["ClientOpenOwnChannel"] = 170] = "ClientOpenOwnChannel";
-    Proto[Proto["ClientInviteToOwnChannel"] = 171] = "ClientInviteToOwnChannel";
-    Proto[Proto["ClientExcludeFromOwnChannel"] = 172] = "ClientExcludeFromOwnChannel";
-    Proto[Proto["ClientCancelAttackAndFollow"] = 190] = "ClientCancelAttackAndFollow";
-    Proto[Proto["ClientUpdateTile"] = 201] = "ClientUpdateTile";
-    Proto[Proto["ClientRefreshContainer"] = 202] = "ClientRefreshContainer";
-    Proto[Proto["ClientBrowseField"] = 203] = "ClientBrowseField";
-    Proto[Proto["ClientSeekInContainer"] = 204] = "ClientSeekInContainer";
-    Proto[Proto["ClientRequestOutfit"] = 210] = "ClientRequestOutfit";
-    Proto[Proto["ClientChangeOutfit"] = 211] = "ClientChangeOutfit";
-    Proto[Proto["ClientMount"] = 212] = "ClientMount";
-    Proto[Proto["ClientAddVip"] = 220] = "ClientAddVip";
-    Proto[Proto["ClientRemoveVip"] = 221] = "ClientRemoveVip";
-    Proto[Proto["ClientEditVip"] = 222] = "ClientEditVip";
-    Proto[Proto["ClientBugReport"] = 230] = "ClientBugReport";
-    Proto[Proto["ClientRuleViolation"] = 231] = "ClientRuleViolation";
-    Proto[Proto["ClientDebugReport"] = 232] = "ClientDebugReport";
-    Proto[Proto["ClientTransferCoins"] = 239] = "ClientTransferCoins";
-    Proto[Proto["ClientRequestQuestLog"] = 240] = "ClientRequestQuestLog";
-    Proto[Proto["ClientRequestQuestLine"] = 241] = "ClientRequestQuestLine";
-    Proto[Proto["ClientNewRuleViolation"] = 242] = "ClientNewRuleViolation";
-    Proto[Proto["ClientRequestItemInfo"] = 243] = "ClientRequestItemInfo";
-    Proto[Proto["ClientMarketLeave"] = 244] = "ClientMarketLeave";
-    Proto[Proto["ClientMarketBrowse"] = 245] = "ClientMarketBrowse";
-    Proto[Proto["ClientMarketCreate"] = 246] = "ClientMarketCreate";
-    Proto[Proto["ClientMarketCancel"] = 247] = "ClientMarketCancel";
-    Proto[Proto["ClientMarketAccept"] = 248] = "ClientMarketAccept";
-    Proto[Proto["ClientAnswerModalDialog"] = 249] = "ClientAnswerModalDialog";
-    Proto[Proto["ClientOpenStore"] = 250] = "ClientOpenStore";
-    Proto[Proto["ClientRequestStoreOffers"] = 251] = "ClientRequestStoreOffers";
-    Proto[Proto["ClientBuyStoreOffer"] = 252] = "ClientBuyStoreOffer";
-    Proto[Proto["ClientOpenTransactionHistory"] = 253] = "ClientOpenTransactionHistory";
-    Proto[Proto["ClientRequestTransactionHistory"] = 254] = "ClientRequestTransactionHistory";
-    Proto[Proto["CreatureTypePlayer"] = 0] = "CreatureTypePlayer";
-    Proto[Proto["CreatureTypeMonster"] = 1] = "CreatureTypeMonster";
-    Proto[Proto["CreatureTypeNpc"] = 2] = "CreatureTypeNpc";
-    Proto[Proto["CreatureTypeSummonOwn"] = 3] = "CreatureTypeSummonOwn";
-    Proto[Proto["CreatureTypeSummonOther"] = 4] = "CreatureTypeSummonOther";
-    Proto[Proto["CreatureTypeUnknown"] = 255] = "CreatureTypeUnknown";
-    Proto[Proto["PlayerStartId"] = 268435456] = "PlayerStartId";
-    Proto[Proto["PlayerEndId"] = 1073741824] = "PlayerEndId";
-    Proto[Proto["MonsterStartId"] = 1073741824] = "MonsterStartId";
-    Proto[Proto["MonsterEndId"] = 2147483648] = "MonsterEndId";
-    Proto[Proto["NpcStartId"] = 2147483648] = "NpcStartId";
-    Proto[Proto["NpcEndId"] = 4294967295] = "NpcEndId";
-})(Proto || (exports.Proto = Proto = {}));
-exports.Proto = Proto;
-
-/***/ }),
-
-/***/ 368:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Outfit = exports.Outfit = function () {
-    function Outfit() {
-        _classCallCheck(this, Outfit);
-    }
-
-    _createClass(Outfit, [{
-        key: "setMount",
-        value: function setMount(arg0) {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "setCategory",
-        value: function setCategory(ThingCategoryCreature) {}
-    }, {
-        key: "setId",
-        value: function setId(lookType) {}
-    }, {
-        key: "setHead",
-        value: function setHead(head) {}
-    }, {
-        key: "setBody",
-        value: function setBody(body) {}
-    }, {
-        key: "setLegs",
-        value: function setLegs(legs) {}
-    }, {
-        key: "setFeet",
-        value: function setFeet(feet) {}
-    }, {
-        key: "setAddons",
-        value: function setAddons(addons) {}
-    }, {
-        key: "setAuxId",
-        value: function setAuxId(auxId) {}
-    }]);
-
-    return Outfit;
-}();
-
-/***/ }),
-
-/***/ 369:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7128,11 +7525,11 @@ exports.Item = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(63);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7192,7 +7589,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 370:
+/***/ 460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7205,13 +7602,13 @@ exports.Effect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(63);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _timer = __webpack_require__(145);
+var _timer = __webpack_require__(92);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7296,7 +7693,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 371:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7309,15 +7706,15 @@ exports.AnimatedText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
-var _timer = __webpack_require__(145);
+var _timer = __webpack_require__(92);
 
-var _color = __webpack_require__(55);
+var _color = __webpack_require__(57);
 
-var _cachedtext = __webpack_require__(143);
+var _cachedtext = __webpack_require__(129);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7444,7 +7841,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 372:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7457,7 +7854,7 @@ exports.Missile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thing = __webpack_require__(54);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7499,7 +7896,7 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
-/***/ 373:
+/***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7512,7 +7909,7 @@ exports.Npc = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(124);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7541,7 +7938,7 @@ var Npc = exports.Npc = function (_Creature) {
 
 /***/ }),
 
-/***/ 374:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7554,7 +7951,7 @@ exports.Monster = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(124);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7583,7 +7980,7 @@ var Monster = exports.Monster = function (_Creature) {
 
 /***/ }),
 
-/***/ 375:
+/***/ 465:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7612,7 +8009,7 @@ var Container = exports.Container = function () {
 
 /***/ }),
 
-/***/ 376:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7627,17 +8024,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _SpeakTypes;
 
-var _chatboxtab = __webpack_require__(377);
+var _chatboxtab = __webpack_require__(467);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
-var _statictext = __webpack_require__(142);
+var _statictext = __webpack_require__(189);
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8050,7 +8447,7 @@ exports.g_chat = g_chat;
 
 /***/ }),
 
-/***/ 377:
+/***/ 467:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8093,7 +8490,7 @@ var ChatboxTab = exports.ChatboxTab = function () {
 
 /***/ }),
 
-/***/ 44:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8106,13 +8503,13 @@ exports.Thing = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _map = __webpack_require__(50);
+var _map = __webpack_require__(55);
 
-var _game = __webpack_require__(49);
+var _game = __webpack_require__(38);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
-var _thingtypemanager = __webpack_require__(54);
+var _thingtypemanager = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8553,484 +8950,7 @@ var Thing = exports.Thing = function () {
 
 /***/ }),
 
-/***/ 49:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_game = exports.Game = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _localplayer = __webpack_require__(351);
-
-var _const = __webpack_require__(11);
-
-var _thingtypemanager = __webpack_require__(54);
-
-var _protocolgame = __webpack_require__(362);
-
-var _map = __webpack_require__(50);
-
-var _container = __webpack_require__(375);
-
-var _chatbox = __webpack_require__(376);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Game = exports.Game = function () {
-    function Game() {
-        _classCallCheck(this, Game);
-
-        this.m_clientVersion = 0;
-        this.messageModesMap = {};
-        this.m_features = [];
-    }
-
-    _createClass(Game, [{
-        key: "processCloseChannel",
-        value: function processCloseChannel(channelId) {
-            _chatbox.g_chat.removeTab(channelId);
-        }
-    }, {
-        key: "processOpenChannel",
-        value: function processOpenChannel(channelId, name) {
-            _chatbox.g_chat.addChannel(name, channelId);
-        }
-    }, {
-        key: "processOpenOwnPrivateChannel",
-        value: function processOpenOwnPrivateChannel(channelId, name) {
-            _chatbox.g_chat.addChannel(name, channelId);
-        }
-    }, {
-        key: "processTalk",
-        value: function processTalk(name, level, mode, message, channelId, creaturePos) {
-            console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
-            _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
-        }
-    }, {
-        key: "setClientVersion",
-        value: function setClientVersion(version) {
-            this.m_clientVersion = version;
-            this.updateMessageModesMap(version);
-            this.updateFeatures(version);
-        }
-    }, {
-        key: "loadDatFile",
-        value: function loadDatFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.next = 2;
-                                return _thingtypemanager.g_things.loadDat(file);
-
-                            case 2:
-                                return _context.abrupt("return", _context.sent);
-
-                            case 3:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-        }
-    }, {
-        key: "updateMessageModesMap",
-        value: function updateMessageModesMap(version) {
-            this.messageModesMap = {};
-            if (version >= 1094) {
-                this.messageModesMap[_const.MessageMode.MessageMana] = 43;
-            }
-            if (version >= 1055) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 5;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 8;
-                this.messageModesMap[_const.MessageMode.MessageSpell] = 9;
-                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 10;
-                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 12;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 13;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 14;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 15;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 16;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 18; // Admin
-                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
-                this.messageModesMap[_const.MessageMode.MessageGameHighlight] = 20;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 21;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
-                this.messageModesMap[_const.MessageMode.MessageDamageDealed] = 23;
-                this.messageModesMap[_const.MessageMode.MessageDamageReceived] = 24;
-                this.messageModesMap[_const.MessageMode.MessageHeal] = 25;
-                this.messageModesMap[_const.MessageMode.MessageExp] = 26;
-                this.messageModesMap[_const.MessageMode.MessageDamageOthers] = 27;
-                this.messageModesMap[_const.MessageMode.MessageHealOthers] = 28;
-                this.messageModesMap[_const.MessageMode.MessageExpOthers] = 29;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 30;
-                this.messageModesMap[_const.MessageMode.MessageLoot] = 31;
-                this.messageModesMap[_const.MessageMode.MessageTradeNpc] = 32;
-                this.messageModesMap[_const.MessageMode.MessageGuild] = 33;
-                this.messageModesMap[_const.MessageMode.MessagePartyManagement] = 34;
-                this.messageModesMap[_const.MessageMode.MessageParty] = 35;
-                this.messageModesMap[_const.MessageMode.MessageBarkLow] = 36;
-                this.messageModesMap[_const.MessageMode.MessageBarkLoud] = 37;
-                this.messageModesMap[_const.MessageMode.MessageReport] = 38;
-                this.messageModesMap[_const.MessageMode.MessageHotkeyUse] = 39;
-                this.messageModesMap[_const.MessageMode.MessageTutorialHint] = 40;
-                this.messageModesMap[_const.MessageMode.MessageThankyou] = 41;
-                this.messageModesMap[_const.MessageMode.MessageMarket] = 42;
-            } else if (version >= 1036) {
-                for (var i = _const.MessageMode.MessageNone; i <= _const.MessageMode.MessageBeyondLast; ++i) {
-                    if (i >= _const.MessageMode.MessageNpcTo) this.messageModesMap[i] = i + 1;else this.messageModesMap[i] = i;
-                }
-            } else if (version >= 900) {
-                for (var _i = _const.MessageMode.MessageNone; _i <= _const.MessageMode.MessageBeyondLast; ++_i) {
-                    this.messageModesMap[_i] = _i;
-                }
-            } else if (version >= 861) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageNpcFrom] = 5;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 13;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 14;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 15;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 16;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 17;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 18;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 19;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 20;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 21;
-                this.messageModesMap[_const.MessageMode.MessageRed] = 22;
-            } else if (version >= 840) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessageNpcTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageNpcFromStartBlock] = 5;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 6;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 6;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 7;
-                this.messageModesMap[_const.MessageMode.MessageChannelManagement] = 8;
-                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 9;
-                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 10;
-                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 12;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 13;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 14;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 14;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 15;
-                // 16, 17 ??
-                this.messageModesMap[_const.MessageMode.MessageRed] = 18;
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 19;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 20;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 21;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 22;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 23;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 24;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 25;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 26;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 27;
-            } else if (version >= 760) {
-                this.messageModesMap[_const.MessageMode.MessageNone] = 0;
-                this.messageModesMap[_const.MessageMode.MessageSay] = 1;
-                this.messageModesMap[_const.MessageMode.MessageWhisper] = 2;
-                this.messageModesMap[_const.MessageMode.MessageYell] = 3;
-                this.messageModesMap[_const.MessageMode.MessagePrivateFrom] = 4;
-                this.messageModesMap[_const.MessageMode.MessagePrivateTo] = 4;
-                this.messageModesMap[_const.MessageMode.MessageChannel] = 5;
-                this.messageModesMap[_const.MessageMode.MessageRVRChannel] = 6;
-                this.messageModesMap[_const.MessageMode.MessageRVRAnswer] = 7;
-                this.messageModesMap[_const.MessageMode.MessageRVRContinue] = 8;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterBroadcast] = 9;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterChannel] = 10;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateFrom] = 11;
-                this.messageModesMap[_const.MessageMode.MessageGamemasterPrivateTo] = 11;
-                this.messageModesMap[_const.MessageMode.MessageChannelHighlight] = 12;
-                // 13, 14, 15 ??
-                this.messageModesMap[_const.MessageMode.MessageMonsterSay] = 16;
-                this.messageModesMap[_const.MessageMode.MessageMonsterYell] = 17;
-                this.messageModesMap[_const.MessageMode.MessageWarning] = 18;
-                this.messageModesMap[_const.MessageMode.MessageGame] = 19;
-                this.messageModesMap[_const.MessageMode.MessageLogin] = 20;
-                this.messageModesMap[_const.MessageMode.MessageStatus] = 21;
-                this.messageModesMap[_const.MessageMode.MessageLook] = 22;
-                this.messageModesMap[_const.MessageMode.MessageFailure] = 23;
-                this.messageModesMap[_const.MessageMode.MessageBlue] = 24;
-                this.messageModesMap[_const.MessageMode.MessageRed] = 25;
-            }
-        }
-    }, {
-        key: "updateFeatures",
-        value: function updateFeatures(version) {
-            this.m_features = [];
-            this.enableFeature(_const.GameFeature.GameFormatCreatureName);
-            if (version >= 770) {
-                this.enableFeature(_const.GameFeature.GameLooktypeU16);
-                this.enableFeature(_const.GameFeature.GameMessageStatements);
-                this.enableFeature(_const.GameFeature.GameLoginPacketEncryption);
-            }
-            if (version >= 780) {
-                this.enableFeature(_const.GameFeature.GamePlayerAddons);
-                this.enableFeature(_const.GameFeature.GamePlayerStamina);
-                this.enableFeature(_const.GameFeature.GameNewFluids);
-                this.enableFeature(_const.GameFeature.GameMessageLevel);
-                this.enableFeature(_const.GameFeature.GamePlayerStateU16);
-                this.enableFeature(_const.GameFeature.GameNewOutfitProtocol);
-            }
-            if (version >= 790) {
-                this.enableFeature(_const.GameFeature.GameWritableDate);
-            }
-            if (version >= 840) {
-                this.enableFeature(_const.GameFeature.GameProtocolChecksum);
-                this.enableFeature(_const.GameFeature.GameAccountNames);
-                this.enableFeature(_const.GameFeature.GameDoubleFreeCapacity);
-            }
-            if (version >= 841) {
-                this.enableFeature(_const.GameFeature.GameChallengeOnLogin);
-                this.enableFeature(_const.GameFeature.GameMessageSizeCheck);
-            }
-            if (version >= 854) {
-                this.enableFeature(_const.GameFeature.GameCreatureEmblems);
-            }
-            if (version >= 860) {
-                this.enableFeature(_const.GameFeature.GameAttackSeq);
-            }
-            if (version >= 862) {
-                this.enableFeature(_const.GameFeature.GamePenalityOnDeath);
-            }
-            if (version >= 870) {
-                this.enableFeature(_const.GameFeature.GameDoubleExperience);
-                this.enableFeature(_const.GameFeature.GamePlayerMounts);
-                this.enableFeature(_const.GameFeature.GameSpellList);
-            }
-            if (version >= 910) {
-                this.enableFeature(_const.GameFeature.GameNameOnNpcTrade);
-                this.enableFeature(_const.GameFeature.GameTotalCapacity);
-                this.enableFeature(_const.GameFeature.GameSkillsBase);
-                this.enableFeature(_const.GameFeature.GamePlayerRegenerationTime);
-                this.enableFeature(_const.GameFeature.GameChannelPlayerList);
-                this.enableFeature(_const.GameFeature.GameEnvironmentEffect);
-                this.enableFeature(_const.GameFeature.GameItemAnimationPhase);
-            }
-            if (version >= 940) {
-                this.enableFeature(_const.GameFeature.GamePlayerMarket);
-            }
-            if (version >= 953) {
-                this.enableFeature(_const.GameFeature.GamePurseSlot);
-                this.enableFeature(_const.GameFeature.GameClientPing);
-            }
-            if (version >= 960) {
-                this.enableFeature(_const.GameFeature.GameSpritesU32);
-                this.enableFeature(_const.GameFeature.GameOfflineTrainingTime);
-            }
-            if (version >= 963) {
-                this.enableFeature(_const.GameFeature.GameAdditionalVipInfo);
-            }
-            if (version >= 980) {
-                this.enableFeature(_const.GameFeature.GamePreviewState);
-                this.enableFeature(_const.GameFeature.GameClientVersion);
-            }
-            if (version >= 981) {
-                this.enableFeature(_const.GameFeature.GameLoginPending);
-                this.enableFeature(_const.GameFeature.GameNewSpeedLaw);
-            }
-            if (version >= 984) {
-                this.enableFeature(_const.GameFeature.GameContainerPagination);
-                this.enableFeature(_const.GameFeature.GameBrowseField);
-            }
-            if (version >= 1000) {
-                this.enableFeature(_const.GameFeature.GameThingMarks);
-                this.enableFeature(_const.GameFeature.GamePVPMode);
-            }
-            if (version >= 1035) {
-                this.enableFeature(_const.GameFeature.GameDoubleSkills);
-                this.enableFeature(_const.GameFeature.GameBaseSkillU16);
-            }
-            if (version >= 1036) {
-                this.enableFeature(_const.GameFeature.GameCreatureIcons);
-                this.enableFeature(_const.GameFeature.GameHideNpcNames);
-            }
-            if (version >= 1038) {
-                this.enableFeature(_const.GameFeature.GamePremiumExpiration);
-            }
-            if (version >= 1050) {
-                this.enableFeature(_const.GameFeature.GameEnhancedAnimations);
-            }
-            if (version >= 1053) {
-                this.enableFeature(_const.GameFeature.GameUnjustifiedPoints);
-            }
-            if (version >= 1054) {
-                this.enableFeature(_const.GameFeature.GameExperienceBonus);
-            }
-            if (version >= 1055) {
-                this.enableFeature(_const.GameFeature.GameDeathType);
-            }
-            if (version >= 1057) {
-                this.enableFeature(_const.GameFeature.GameIdleAnimations);
-            }
-            if (version >= 1061) {
-                this.enableFeature(_const.GameFeature.GameOGLInformation);
-            }
-            if (version >= 1071) {
-                this.enableFeature(_const.GameFeature.GameContentRevision);
-            }
-            if (version >= 1072) {
-                this.enableFeature(_const.GameFeature.GameAuthenticator);
-            }
-            if (version >= 1074) {
-                this.enableFeature(_const.GameFeature.GameSessionKey);
-            }
-            if (version >= 1080) {
-                this.enableFeature(_const.GameFeature.GameIngameStore);
-            }
-            if (version >= 1092) {
-                this.enableFeature(_const.GameFeature.GameIngameStoreServiceType);
-            }
-            if (version >= 1093) {
-                this.enableFeature(_const.GameFeature.GameIngameStoreHighlights);
-            }
-            if (version >= 1094) {
-                this.enableFeature(_const.GameFeature.GameAdditionalSkills);
-            }
-        }
-    }, {
-        key: "enableFeature",
-        value: function enableFeature(feature) {
-            this.m_features[feature] = true;
-        }
-    }, {
-        key: "disableFeature",
-        value: function disableFeature(feature) {
-            this.m_features[feature] = false;
-        }
-    }, {
-        key: "getFeature",
-        value: function getFeature(feature) {
-            return this.m_features[feature] == true;
-        }
-    }, {
-        key: "translateMessageModeFromServer",
-        value: function translateMessageModeFromServer(mode) {
-            for (var i in this.messageModesMap) {
-                if (this.messageModesMap[i] == mode) {
-                    return parseInt(i);
-                }
-            }
-            return _const.MessageMode.MessageInvalid;
-        }
-    }, {
-        key: "getContainer",
-        value: function getContainer(containerId) {
-            return new _container.Container();
-        }
-    }, {
-        key: "getClientVersion",
-        value: function getClientVersion() {
-            return this.m_clientVersion;
-        }
-    }, {
-        key: "getProtocolVersion",
-        value: function getProtocolVersion() {
-            return 10009;
-        }
-    }, {
-        key: "getOs",
-        value: function getOs() {
-            return 3;
-        }
-    }, {
-        key: "processConnectionError",
-        value: function processConnectionError() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "getLocalPlayer",
-        value: function getLocalPlayer() {
-            return new _localplayer.LocalPlayer();
-        }
-    }, {
-        key: "login",
-        value: function login(accountName, accountPassword, characterName) {
-            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
-            this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-        }
-    }, {
-        key: "formatCreatureName",
-        value: function formatCreatureName(string) {
-            return string;
-        }
-    }, {
-        key: "g_things",
-        get: function get() {
-            return new _thingtypemanager.ThingTypeManager();
-        }
-    }, {
-        key: "g_map",
-        get: function get() {
-            return new _map.Map();
-        }
-    }]);
-
-    return Game;
-}();
-
-var g_game = new Game();
-exports.g_game = g_game;
-
-/***/ }),
-
-/***/ 50:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9043,23 +8963,23 @@ exports.g_map = exports.Map = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(71);
+var _creature = __webpack_require__(124);
 
-var _position = __webpack_require__(100);
+var _position = __webpack_require__(69);
 
-var _awarerange = __webpack_require__(138);
+var _awarerange = __webpack_require__(181);
 
-var _light = __webpack_require__(101);
+var _light = __webpack_require__(125);
 
-var _tileblock = __webpack_require__(352);
+var _tileblock = __webpack_require__(446);
 
-var _const = __webpack_require__(11);
+var _const = __webpack_require__(13);
 
-var _point = __webpack_require__(72);
+var _point = __webpack_require__(42);
 
-var _helpers = __webpack_require__(139);
+var _helpers = __webpack_require__(56);
 
-var _log = __webpack_require__(23);
+var _log = __webpack_require__(20);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9345,7 +9265,7 @@ exports.g_map = g_map;
 
 /***/ }),
 
-/***/ 54:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9354,165 +9274,14 @@ exports.g_map = g_map;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.g_things = exports.ThingTypeManager = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _thingtype = __webpack_require__(354);
-
-var _const = __webpack_require__(11);
-
-var _log = __webpack_require__(23);
-
-var _resources = __webpack_require__(360);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
 };
-
-var nullThingType = new _thingtype.ThingType();
-
-var ThingTypeManager = exports.ThingTypeManager = function () {
-    function ThingTypeManager() {
-        _classCallCheck(this, ThingTypeManager);
-
-        this.m_nullThingType = new _thingtype.ThingType();
-        this.m_thingTypes = null;
-        this.m_datLoaded = false;
-        this.m_datSignature = 0;
-        this.m_contentRevision = 0;
-        this.m_thingTypes = [];
-        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
-            this.m_thingTypes[i] = [];
-        }
-    }
-
-    _createClass(ThingTypeManager, [{
-        key: "getThingType",
-        value: function getThingType(id, category) {
-            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
-                _log.Log.error("invalid thing type client id %d in category %d", id, category);
-                return this.m_nullThingType;
-            }
-            return this.m_thingTypes[category][id];
-        }
-    }, {
-        key: "rawGetThingType",
-        value: function rawGetThingType(id, category) {
-            return this.getThingType(id, category);
-        }
-    }, {
-        key: "isValidDatId",
-        value: function isValidDatId(id, category) {
-            return true;
-        }
-    }, {
-        key: "getNullThingType",
-        value: function getNullThingType() {
-            return nullThingType;
-        }
-    }, {
-        key: "getContentRevision",
-        value: function getContentRevision() {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "loadDat",
-        value: function loadDat(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                var fin, category, count, thingCount, _category, firstId, id, type;
-
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.m_datLoaded = false;
-                                this.m_datSignature = 0;
-                                this.m_contentRevision = 0;
-                                _context.prev = 3;
-
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                _context.next = 7;
-                                return _resources.g_resources.openFile(file);
-
-                            case 7:
-                                fin = _context.sent;
-
-                                this.m_datSignature = fin.getU32();
-                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
-                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
-                                    count = fin.getU16() + 1;
-
-                                    this.m_thingTypes[category] = [];
-                                    for (thingCount = 0; thingCount < count; ++thingCount) {
-                                        this.m_thingTypes[category][thingCount] = nullThingType;
-                                    }
-                                }
-                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
-                                    firstId = 1;
-
-                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
-                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
-                                        type = new _thingtype.ThingType();
-
-                                        type.unserialize(id, _category, fin);
-                                        this.m_thingTypes[_category][id] = type;
-                                    }
-                                }
-                                this.m_datLoaded = true;
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
-                                return _context.abrupt("return", true);
-
-                            case 17:
-                                _context.prev = 17;
-                                _context.t0 = _context["catch"](3);
-
-                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
-                                return _context.abrupt("return", false);
-
-                            case 21:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[3, 17]]);
-            }));
-        }
-    }]);
-
-    return ThingTypeManager;
-}();
-
-var g_things = new ThingTypeManager();
-exports.g_things = g_things;
+exports.toInt = toInt;
 
 /***/ }),
 
-/***/ 55:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9671,7 +9440,7 @@ Color.orange = 0xff008cff;
 
 /***/ }),
 
-/***/ 71:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9680,120 +9449,165 @@ Color.orange = 0xff008cff;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Creature = undefined;
+exports.g_things = exports.ThingTypeManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(44);
+var _thingtype = __webpack_require__(449);
+
+var _const = __webpack_require__(13);
+
+var _log = __webpack_require__(20);
+
+var _resources = __webpack_require__(127);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var nullThingType = new _thingtype.ThingType();
 
-var Creature = exports.Creature = function (_Thing) {
-    _inherits(Creature, _Thing);
+var ThingTypeManager = exports.ThingTypeManager = function () {
+    function ThingTypeManager() {
+        _classCallCheck(this, ThingTypeManager);
 
-    function Creature() {
-        _classCallCheck(this, Creature);
-
-        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
-
-        _this.m_id = 0;
-        return _this;
+        this.m_nullThingType = new _thingtype.ThingType();
+        this.m_thingTypes = null;
+        this.m_datLoaded = false;
+        this.m_datSignature = 0;
+        this.m_contentRevision = 0;
+        this.m_thingTypes = [];
+        for (var i = _const.ThingCategory.ThingCategoryItem; i < _const.ThingCategory.ThingLastCategory; ++i) {
+            this.m_thingTypes[i] = [];
+        }
     }
 
-    _createClass(Creature, [{
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
+    _createClass(ThingTypeManager, [{
+        key: "getThingType",
+        value: function getThingType(id, category) {
+            if (category >= _const.ThingCategory.ThingLastCategory || id >= this.m_thingTypes[category].length) {
+                _log.Log.error("invalid thing type client id %d in category %d", id, category);
+                return this.m_nullThingType;
+            }
+            return this.m_thingTypes[category][id];
         }
     }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
+        key: "rawGetThingType",
+        value: function rawGetThingType(id, category) {
+            return this.getThingType(id, category);
         }
     }, {
-        key: "getName",
-        value: function getName() {
-            return this.m_name;
-        }
-    }, {
-        key: "setName",
-        value: function setName(name) {
-            this.m_name = name;
-        }
-    }, {
-        key: "isCreature",
-        value: function isCreature() {
+        key: "isValidDatId",
+        value: function isValidDatId(id, category) {
             return true;
         }
     }, {
-        key: "addTimedSquare",
-        value: function addTimedSquare(arg0) {
+        key: "getNullThingType",
+        value: function getNullThingType() {
+            return nullThingType;
+        }
+    }, {
+        key: "getContentRevision",
+        value: function getContentRevision() {
             throw new Error("Method not implemented.");
         }
     }, {
-        key: "hideStaticSquare",
-        value: function hideStaticSquare() {
-            throw new Error("Method not implemented.");
+        key: "loadDat",
+        value: function loadDat(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var fin, category, count, thingCount, _category, firstId, id, type;
+
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                this.m_datLoaded = false;
+                                this.m_datSignature = 0;
+                                this.m_contentRevision = 0;
+                                _context.prev = 3;
+
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                _context.next = 7;
+                                return _resources.g_resources.openFile(file);
+
+                            case 7:
+                                fin = _context.sent;
+
+                                this.m_datSignature = fin.getU32();
+                                this.m_contentRevision = this.m_datSignature & 0xFFFF;
+                                for (category = _const.ThingCategory.ThingCategoryItem; category < _const.ThingCategory.ThingLastCategory; ++category) {
+                                    count = fin.getU16() + 1;
+
+                                    this.m_thingTypes[category] = [];
+                                    for (thingCount = 0; thingCount < count; ++thingCount) {
+                                        this.m_thingTypes[category][thingCount] = nullThingType;
+                                    }
+                                }
+                                for (_category = 0; _category < _const.ThingCategory.ThingLastCategory; ++_category) {
+                                    firstId = 1;
+
+                                    if (_category == _const.ThingCategory.ThingCategoryItem) firstId = 100;
+                                    for (id = firstId; id < this.m_thingTypes[_category].length; ++id) {
+                                        type = new _thingtype.ThingType();
+
+                                        type.unserialize(id, _category, fin);
+                                        this.m_thingTypes[_category][id] = type;
+                                    }
+                                }
+                                this.m_datLoaded = true;
+                                console.log(new Date().getTime(), this.m_thingTypes);
+                                //g_lua.callGlobalField("g_things", "onLoadDat", file);
+                                return _context.abrupt("return", true);
+
+                            case 17:
+                                _context.prev = 17;
+                                _context.t0 = _context["catch"](3);
+
+                                _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
+                                return _context.abrupt("return", false);
+
+                            case 21:
+                            case "end":
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this, [[3, 17]]);
+            }));
         }
-    }, {
-        key: "showStaticSquare",
-        value: function showStaticSquare(arg0) {
-            throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "setType",
-        value: function setType(type) {}
-    }, {
-        key: "allowAppearWalk",
-        value: function allowAppearWalk() {}
-    }, {
-        key: "setHealthPercent",
-        value: function setHealthPercent(healthPercent) {}
-    }, {
-        key: "setLight",
-        value: function setLight(light) {}
-    }, {
-        key: "setOutfit",
-        value: function setOutfit(outfit) {}
-    }, {
-        key: "setSpeed",
-        value: function setSpeed(speed) {}
-    }, {
-        key: "setBaseSpeed",
-        value: function setBaseSpeed(baseSpeed) {}
-    }, {
-        key: "setSkull",
-        value: function setSkull(skull) {}
-    }, {
-        key: "setShield",
-        value: function setShield(shield) {}
-    }, {
-        key: "setPassable",
-        value: function setPassable(v) {}
-    }, {
-        key: "setEmblem",
-        value: function setEmblem(emblem) {}
-    }, {
-        key: "setIcon",
-        value: function setIcon(icon) {}
-    }, {
-        key: "setDirection",
-        value: function setDirection(direction) {}
-    }, {
-        key: "turn",
-        value: function turn(direction) {}
     }]);
 
-    return Creature;
-}(_thing.Thing);
+    return ThingTypeManager;
+}();
+
+var g_things = new ThingTypeManager();
+exports.g_things = g_things;
 
 /***/ }),
 
-/***/ 72:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9802,52 +9616,143 @@ var Creature = exports.Creature = function (_Thing) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Position = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _const = __webpack_require__(13);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Point = exports.Point = function () {
-    function Point(x, y) {
-        _classCallCheck(this, Point);
+var Position = exports.Position = function () {
+    function Position() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+        _classCallCheck(this, Position);
 
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
-    _createClass(Point, [{
+    _createClass(Position, [{
         key: "equals",
-        value: function equals(otherPoint) {
-            return this.x == otherPoint.x && this.y == otherPoint.y;
+        value: function equals(otherPosition) {
+            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
         }
     }, {
         key: "clone",
         value: function clone() {
-            return new Point(this.x, this.y);
+            return new Position(this.x, this.y, this.z);
         }
     }, {
-        key: "add",
-        value: function add(point) {
-            return new Point(this.x + point.x, this.y + point.y);
+        key: "isMapPosition",
+        value: function isMapPosition() {
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
         }
     }, {
-        key: "sub",
-        value: function sub(point) {
-            return new Point(this.x - point.x, this.y - point.y);
+        key: "isValid",
+        value: function isValid() {
+            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
         }
     }, {
-        key: "mul",
-        value: function mul(ratio) {
-            return new Point(this.x * ratio, this.y * ratio);
+        key: "distance",
+        value: function distance(pos) {
+            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
+        }
+    }, {
+        key: "translate",
+        value: function translate(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            this.x += dx;
+            this.y += dy;
+            this.z += dz;
+        }
+    }, {
+        key: "translated",
+        value: function translated(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+    }, {
+        key: "isInRange",
+        value: function isInRange(pos, xRange, yRange) {
+            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+        }
+        /*
+            isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
+                return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+            }
+        */
+
+    }, {
+        key: "up",
+        value: function up() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z - n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "down",
+        value: function down() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z + n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredUp",
+        value: function coveredUp() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x + n,
+                ny = this.y + n,
+                nz = this.z - n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: "coveredDown",
+        value: function coveredDown() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x - n,
+                ny = this.y - n,
+                nz = this.z + n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
+            }
+            return false;
         }
     }]);
 
-    return Point;
+    return Position;
 }();
 
 /***/ }),
 
-/***/ 73:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9953,6 +9858,101 @@ var Size = exports.Size = function () {
     return Size;
 }();
 
+/***/ }),
+
+/***/ 92:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Timer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _g_clock = __webpack_require__(93);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Timer = exports.Timer = function () {
+    function Timer() {
+        _classCallCheck(this, Timer);
+
+        this.m_startTicks = 0;
+        this.m_stopped = false;
+        this.restart();
+    }
+
+    _createClass(Timer, [{
+        key: "restart",
+        value: function restart() {
+            this.m_startTicks = _g_clock.g_clock.millis();
+            this.m_stopped = false;
+        }
+    }, {
+        key: "stop",
+        value: function stop() {
+            this.m_stopped = true;
+        }
+    }, {
+        key: "startTicks",
+        value: function startTicks() {
+            return this.m_startTicks;
+        }
+    }, {
+        key: "ticksElapsed",
+        value: function ticksElapsed() {
+            return _g_clock.g_clock.millis() - this.m_startTicks;
+        }
+    }, {
+        key: "timeElapsed",
+        value: function timeElapsed() {
+            return this.ticksElapsed() / 1000;
+        }
+    }, {
+        key: "running",
+        value: function running() {
+            return !this.m_stopped;
+        }
+    }]);
+
+    return Timer;
+}();
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var g_clock = exports.g_clock = function () {
+    function g_clock() {
+        _classCallCheck(this, g_clock);
+    }
+
+    _createClass(g_clock, null, [{
+        key: "millis",
+        value: function millis() {
+            return +new Date();
+        }
+    }]);
+
+    return g_clock;
+}();
+
 /***/ })
 
-},[146]);
+},[241]);
