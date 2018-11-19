@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var InputFile = /** @class */ (function () {
+var InputFile = (function () {
     function InputFile(msg) {
         this.data = msg;
         this.offset = 0;

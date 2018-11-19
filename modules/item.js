@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var thing_1 = require("./thing");
-var Item = /** @class */ (function (_super) {
+var Item = (function (_super) {
     __extends(Item, _super);
     function Item(id) {
         if (id === void 0) { id = 0; }

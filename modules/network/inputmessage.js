@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var log_1 = require("../log");
 var position_1 = require("../position");
-var InputMessage = /** @class */ (function () {
+var InputMessage = (function () {
     function InputMessage(msg) {
         this.data = new DataView(msg.buffer.slice(8));
         this.offset = 0;

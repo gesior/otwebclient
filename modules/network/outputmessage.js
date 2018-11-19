@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var jspack_1 = require("../jspack");
-var OutputMessage = /** @class */ (function () {
+var OutputMessage = (function () {
     function OutputMessage() {
         this.data = [];
     }
@@ -36,8 +36,8 @@ var OutputMessage = /** @class */ (function () {
     OutputMessage.prototype.getBuffer = function () {
         return new Uint8Array(this.data).buffer; //OutputMessage.packer.Pack('<H', [this.data.length]).concat(this.data);
     };
-    OutputMessage.packer = (new jspack_1.JSPack());
     return OutputMessage;
 }());
+OutputMessage.packer = (new jspack_1.JSPack());
 exports.OutputMessage = OutputMessage;
 //# sourceMappingURL=outputmessage.js.map

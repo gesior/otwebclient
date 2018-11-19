@@ -4,7 +4,7 @@ var map_1 = require("./map");
 var game_1 = require("./game");
 var log_1 = require("./log");
 var thingtypemanager_1 = require("./thingtypemanager");
-var Thing = /** @class */ (function () {
+var Thing = (function () {
     function Thing() {
     }
     Thing.prototype.draw = function (dest, scaleFactor, animate, lightView) {
@@ -36,7 +36,7 @@ var Thing = /** @class */ (function () {
             return 3;
         else if (this.isCreature())
             return 4;
-        else // common items
+        else
             return 5;
     };
     Thing.prototype.getTile = function () {
@@ -50,7 +50,7 @@ var Thing = /** @class */ (function () {
         return null;
     };
     Thing.prototype.getStackPos = function () {
-        if (this.m_position.x == 65535 && this.isItem()) // is inside a container
+        if (this.m_position.x == 65535 && this.isItem())
             return this.m_position.z;
         else {
             var tile = this.getTile();

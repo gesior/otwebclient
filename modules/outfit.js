@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Outfit = /** @class */ (function () {
+var Outfit = (function () {
     function Outfit() {
     }
     Outfit.prototype.setMount = function (arg0) {

@@ -14,7 +14,7 @@ var structures_1 = require("./structures");
 var thing_1 = require("./thing");
 var thingtypemanager_1 = require("./thingtypemanager");
 var const_1 = require("./constants/const");
-var Effect = /** @class */ (function (_super) {
+var Effect = (function (_super) {
     __extends(Effect, _super);
     function Effect() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -66,8 +66,8 @@ var Effect = /** @class */ (function (_super) {
             this.m_phaseDuration <<= 2;
         //g_dispatcher.scheduleEvent([this]() { g_map.removeThing(this); }, this.m_phaseDuration * this.getAnimationPhases());
     };
-    Effect.EFFECT_TICKS_PER_FRAME = 75;
     return Effect;
 }(thing_1.Thing));
+Effect.EFFECT_TICKS_PER_FRAME = 75;
 exports.Effect = Effect;
 //# sourceMappingURL=effect.js.map

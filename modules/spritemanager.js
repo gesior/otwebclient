@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var image_1 = require("./image");
-var SpriteManager = /** @class */ (function () {
+var SpriteManager = (function () {
     function SpriteManager() {
         this.m_loaded = false;
         this.m_signature = 0;

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var log_1 = require("./log");
 var color_1 = require("./color");
 var structures_1 = require("./structures");
-var Image = /** @class */ (function () {
+var Image = (function () {
     function Image(size) {
         if (size instanceof structures_1.Size) {
         }

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var StaticText = /** @class */ (function () {
+var StaticText = (function () {
     function StaticText() {
     }
     return StaticText;

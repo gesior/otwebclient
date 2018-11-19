@@ -1,8 +1,8 @@
-"use strict";
 /*!
  *  Copyright © 2008 Fair Oaks Labs, Inc.
  *  All rights reserved.
  */
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // Utility object:  Encode/Decode C-style binary primitives to/from octet arrays
 function JSPack() {

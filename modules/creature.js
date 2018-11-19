@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var thing_1 = require("./thing");
-var Creature = /** @class */ (function (_super) {
+var Creature = (function (_super) {
     __extends(Creature, _super);
     function Creature() {
         return _super !== null && _super.apply(this, arguments) || this;

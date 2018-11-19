@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Tile = /** @class */ (function () {
+var Tile = (function () {
     function Tile() {
     }
     Tile.prototype.getThingStackPos = function (thing) {

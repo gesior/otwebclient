@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var inputmessage_1 = require("./inputmessage");
 var log_1 = require("../log");
-var Protocol = /** @class */ (function () {
+var Protocol = (function () {
     function Protocol() {
         this.m_xteaEncryptionEnabled = false;
         this.m_checksumEnabled = null;

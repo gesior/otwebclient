@@ -4,7 +4,7 @@ var thingtype_1 = require("./thingtype");
 var const_1 = require("./constants/const");
 var log_1 = require("./log");
 var nullThingType = new thingtype_1.ThingType();
-var ThingTypeManager = /** @class */ (function () {
+var ThingTypeManager = (function () {
     function ThingTypeManager() {
         this.m_nullThingType = new thingtype_1.ThingType();
         this.m_thingTypes = null;

@@ -7,7 +7,7 @@ var protocolgame_1 = require("./network/protocolgame");
 var log_1 = require("./log");
 var map_1 = require("./map");
 var container_1 = require("./container");
-var Game = /** @class */ (function () {
+var Game = (function () {
     function Game() {
     }
     Game.prototype.setUnjustifiedPoints = function (arg0) {

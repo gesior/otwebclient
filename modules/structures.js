@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var UnjustifiedPoints = /** @class */ (function () {
+var UnjustifiedPoints = (function () {
     function UnjustifiedPoints() {
     }
     return UnjustifiedPoints;
 }());
 exports.UnjustifiedPoints = UnjustifiedPoints;
-var AwareRange = /** @class */ (function () {
+var AwareRange = (function () {
     function AwareRange() {
         this.top = 6;
         this.right = 9;
@@ -22,13 +22,13 @@ var AwareRange = /** @class */ (function () {
     return AwareRange;
 }());
 exports.AwareRange = AwareRange;
-var MarketData = /** @class */ (function () {
+var MarketData = (function () {
     function MarketData() {
     }
     return MarketData;
 }());
 exports.MarketData = MarketData;
-var Light = /** @class */ (function () {
+var Light = (function () {
     function Light() {
         this.intensity = 0;
         this.color = 215;
@@ -36,7 +36,7 @@ var Light = /** @class */ (function () {
     return Light;
 }());
 exports.Light = Light;
-var g_clock = /** @class */ (function () {
+var g_clock = (function () {
     function g_clock() {
     }
     g_clock.millis = function () {
@@ -45,7 +45,7 @@ var g_clock = /** @class */ (function () {
     return g_clock;
 }());
 exports.g_clock = g_clock;
-var Timer = /** @class */ (function () {
+var Timer = (function () {
     function Timer() {
         this.m_startTicks = 0;
         this.m_stopped = false;
@@ -73,7 +73,7 @@ var Timer = /** @class */ (function () {
     return Timer;
 }());
 exports.Timer = Timer;
-var Point = /** @class */ (function () {
+var Point = (function () {
     function Point(x, y) {
         this.x = x;
         this.y = y;
@@ -90,13 +90,13 @@ var Point = /** @class */ (function () {
     return Point;
 }());
 exports.Point = Point;
-var Rect = /** @class */ (function () {
+var Rect = (function () {
     function Rect(p1, p2) {
     }
     return Rect;
 }());
 exports.Rect = Rect;
-var Texture = /** @class */ (function () {
+var Texture = (function () {
     function Texture(image, buildMipmaps, compress) {
         if (buildMipmaps === void 0) { buildMipmaps = false; }
         if (compress === void 0) { compress = false; }
@@ -110,7 +110,7 @@ var Texture = /** @class */ (function () {
     return Texture;
 }());
 exports.Texture = Texture;
-var Size = /** @class */ (function () {
+var Size = (function () {
     function Size(wd, ht) {
         if (wd === void 0) { wd = -1; }
         if (ht === void 0) { ht = -1; }
@@ -160,7 +160,7 @@ var Size = /** @class */ (function () {
     return Size;
 }());
 exports.Size = Size;
-var ThingTypeAttribs = /** @class */ (function () {
+var ThingTypeAttribs = (function () {
     function ThingTypeAttribs() {
         this.attribs = {};
     }

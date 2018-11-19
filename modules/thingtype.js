@@ -8,7 +8,7 @@ var animator_1 = require("./animator");
 var image_1 = require("./image");
 var color_1 = require("./color");
 var spritemanager_1 = require("./spritemanager");
-var ThingType = /** @class */ (function () {
+var ThingType = (function () {
     function ThingType() {
         this.m_attribs = new structures_1.ThingTypeAttribs();
     }
@@ -513,8 +513,8 @@ var ThingType = /** @class */ (function () {
             * this.m_numPatternY + y)
             * this.m_numPatternX + x;
     };
-    ThingType.maskColors = [color_1.Color.red, color_1.Color.green, color_1.Color.blue, color_1.Color.yellow];
     return ThingType;
 }());
+ThingType.maskColors = [color_1.Color.red, color_1.Color.green, color_1.Color.blue, color_1.Color.yellow];
 exports.ThingType = ThingType;
 //# sourceMappingURL=thingtype.js.map

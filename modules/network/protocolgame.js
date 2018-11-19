@@ -29,7 +29,7 @@ var animatedtext_1 = require("../animatedtext");
 var missile_1 = require("../missile");
 var color_1 = require("../color");
 var player_1 = require("../player");
-var ProtocolGame = /** @class */ (function (_super) {
+var ProtocolGame = (function (_super) {
     __extends(ProtocolGame, _super);
     function ProtocolGame(game) {
         var _this = _super.call(this) || this;
@@ -1822,9 +1822,9 @@ var ProtocolGame = /** @class */ (function (_super) {
             log_1.error("invalid thing id");
         else if (id == proto_1.Proto.UnknownCreature || id == proto_1.Proto.OutdatedCreature || id == proto_1.Proto.Creature)
             thing = this.getCreature(msg, id);
-        else if (id == proto_1.Proto.StaticText) // otclient only
+        else if (id == proto_1.Proto.StaticText)
             thing = this.getStaticText(msg, id);
-        else // item
+        else
             thing = this.getItem(msg, id);
         return thing;
     };

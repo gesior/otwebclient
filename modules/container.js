@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Container = /** @class */ (function () {
+var Container = (function () {
     function Container() {
     }
     Container.prototype.setId = function (id) {

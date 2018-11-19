@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var player_1 = require("./player");
-var LocalPlayer = /** @class */ (function (_super) {
+var LocalPlayer = (function (_super) {
     __extends(LocalPlayer, _super);
     function LocalPlayer() {
         return _super !== null && _super.apply(this, arguments) || this;

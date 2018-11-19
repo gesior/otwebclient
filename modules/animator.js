@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var const_1 = require("./constants/const");
-var Animator = /** @class */ (function () {
+var Animator = (function () {
     function Animator() {
         this.m_animationPhases = 0;
         this.m_startPhase = 0;

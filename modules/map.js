@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var structures_1 = require("./structures");
 var creature_1 = require("./creature");
 var tile_1 = require("./tile");
-var Map = /** @class */ (function () {
+var Map = (function () {
     function Map() {
         this.m_awareRange = new structures_1.AwareRange();
         this.tmpCreature = new creature_1.Creature();
