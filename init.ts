@@ -11,6 +11,7 @@ let x = Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 
 import 'pixi.js'
+import {Log} from "./modules/log";
 //console.log('pixi', PIXI);
 
 async function test() {
@@ -23,7 +24,11 @@ async function test() {
     g_mapview.init();
     g_mapview.clear();
     g_game.watchMovie(movie);
+    Log.debug('qwestart1', +new Date());
     g_mapview.draw();
+    Log.debug('qwestart2', +new Date());
+    g_mapview.draw();
+    Log.debug('qweend', +new Date());
     //g_game.login('', '', 'GOD Spider Local');
 }
 test();

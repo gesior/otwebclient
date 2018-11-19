@@ -303,4 +303,7 @@ export class Rect {
             this.moveTop(r.top());
     }
 
+    hash() : string {
+        return this.left() + '_' + this.top() + '_' + this.right() + '_' + this.bottom();
+    }
 }

@@ -13,13 +13,14 @@ class Painter {
     }
     drawTexturedRect(dest, texture, src) {
         if (dest.isEmpty() || src.isEmpty()) {
+            console.log('empty', dest.width(), dest.height(), src);
             throw new Error('empty');
             //return;
         }
         let pixiTexture = texture.getPixiTexture(src);
         let pixiSprite = new PIXI.Sprite(pixiTexture);
-        pixiSprite.position.x = dest.left() + 400;
-        pixiSprite.position.y = dest.top() + 300;
+        pixiSprite.position.x = dest.left() + 40;
+        pixiSprite.position.y = dest.top() + 30;
         pixiSprite.width = pixiTexture.width;
         pixiSprite.height = pixiTexture.height;
         if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height)

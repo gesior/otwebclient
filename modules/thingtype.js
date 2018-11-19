@@ -589,7 +589,7 @@ export class ThingType {
         }
         let screenRect = new Rect(dest.add(textureOffset.sub(this.m_displacement).sub(this.m_size.toPoint().sub(new Point(1, 1)).mul(32))).mul(scaleFactor), textureRect.size().mul(scaleFactor));
         //if (dest.x == 0 && dest.y == 0)
-        console.log('sr', this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
+        //console.log('sr', dest, this.m_id, texture, frameIndex, screenRect, textureOffset, this.m_displacement, this.m_size.toPoint(), this.m_texturesFramesRects[animationPhase]);
         /*
                 let useOpacity = m_opacity < 1.0f;
 

@@ -5,6 +5,8 @@ import {toInt} from "../constants/helpers";
 import {Rect} from "./rect";
 
 let x = 0;
+let y = 0;
+let z = 0;
 export class Texture {
     m_id = 0;
     m_time = 0;
@@ -14,17 +16,22 @@ export class Texture {
     m_smooth = false;
     m_upsideDown = false;
     m_repeat = false;
-    m_texture : PIXI.Texture = null;
+    m_texture : PIXI.Texture[] = [];
 
-    tmp_img :Image;
+    m_image :Image;
     constructor(image: Image, buildMipmaps: boolean = false, compress: boolean = false) {
-        this.tmp_img = image;
+        console.log('texture load', x++);
+        this.m_image = image;
     }
 
     getPixiTexture(src: Rect) : PIXI.Texture {
-        if (this.m_texture) {
-            //return this.m_texture;
+        let hash = src.hash();
+        let textureCache = this.m_texture[hash];
+        if (textureCache) {
+            console.log('getPixiTexture CACHE', +new Date(), y++);
+            return textureCache;
         }
+        console.log('getPixiTexture LOAD', z++);
         let graphics = new PIXI.Graphics();
         console.log('kkk', src.left(), src.top(),src.right(), src.bottom(), src.height(), src.width());
         graphics.width = src.width();
@@ -33,8 +40,8 @@ export class Texture {
         graphics.beginFill(0, 0);
         graphics.drawRect(0,0, graphics.width,graphics.height);
         graphics.endFill();
-        //this.tmp_img.getPixelData();
-        let other = this.tmp_img;
+        //this.m_image.getPixelData();
+        let other = this.m_image;
         for (let p = 0; p < other.getPixelCount(); ++p) {
             let x = toInt(p % other.getWidth());
             let y = toInt(p / other.getWidth());
@@ -51,14 +58,14 @@ export class Texture {
         }
 /*
         let graphics = new PIXI.Graphics();
-        graphics.width = this.tmp_img.m_size.width();
-        graphics.height = this.tmp_img.m_size.height();
+        graphics.width = this.m_image.m_size.width();
+        graphics.height = this.m_image.m_size.height();
 
         graphics.beginFill(0, 0);
         graphics.drawRect(0,0, graphics.width,graphics.height);
         graphics.endFill();
-        //this.tmp_img.getPixelData();
-        let other = this.tmp_img;
+        //this.m_image.getPixelData();
+        let other = this.m_image;
         for (let p = 0; p < other.getPixelCount(); ++p) {
             let x = toInt(p % other.getWidth());
             let y = toInt(p / other.getWidth());
@@ -70,9 +77,9 @@ export class Texture {
             }
         }
         */
-        this.m_texture = g_painter.app.renderer.generateTexture(graphics);
+        this.m_texture[hash] = g_painter.app.renderer.generateTexture(graphics);
 
-        return this.m_texture;
+        return this.m_texture[hash];
 
         //return PIXI.Texture.fromImage('/prv/webclient/fronttypescript/favicon.png');
     }

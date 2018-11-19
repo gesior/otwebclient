@@ -255,5 +255,8 @@ export class Rect {
         if (this.top() < r.top())
             this.moveTop(r.top());
     }
+    hash() {
+        return this.left() + '_' + this.top() + '_' + this.right() + '_' + this.bottom();
+    }
 }
 //# sourceMappingURL=rect.js.map

@@ -34,15 +34,15 @@ export class Position {
         return new Position(this.x + dx, this.y + dy, this.z + dz);
     }
 
-    isInRange(pos: Position, xRange: number, yRange: number): boolean {
-        return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+    // isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number
+    isInRange(pos: Position, xRange: number, yRange: number, minYRange: number = null, maxYRange: number = null): boolean {
+        if (minYRange !== null && maxYRange !== null)
+            return (pos.x >= this.x - xRange && pos.x <= this.x + yRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
+        else
+
+            return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
     }
 
-    /*
-        isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number): boolean {
-            return (pos.x >= this.x - minXRange && pos.x <= this.x + maxXRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z);
-        }
-    */
     up(n: number = 1): boolean {
         let nz = this.z - n;
         if (nz >= 0 && nz <= Otc.MAX_Z) {

@@ -2,9 +2,11 @@ import { Position } from "./position";
 import { AwareRange } from "./structures/awarerange";
 import { Light } from "./structures/light";
 import { TileBlock } from "./tileblock";
-import { MessageMode, Otc } from "./constants/const";
+import { GameFeature, MessageMode, Otc } from "./constants/const";
 import { Point } from "./structures/point";
 import { toInt } from "./constants/helpers";
+import { g_mapview } from "./view/mapview";
+import { g_game } from "./game";
 export class Map {
     constructor() {
         this.m_tileBlocks = [];
@@ -64,7 +66,6 @@ export class Map {
             throw new Error('get ' + id);
         }
         return g_map.m_knownCreatures[id];
-        //        return new Creature();
     }
     getAwareRange() {
         return this.m_awareRange;
@@ -72,8 +73,35 @@ export class Map {
     getCentralPosition() {
         return this.m_centralPosition;
     }
-    setCentralPosition(pos) {
-        this.m_centralPosition = pos;
+    setCentralPosition(centralPosition) {
+        if (this.m_centralPosition.equals(centralPosition))
+            return;
+        this.m_centralPosition = centralPosition;
+        this.removeUnawareThings();
+        // this fixes local player position when the local player is removed from the map,
+        // the local player is removed from the map when there are too many creatures on his tile,
+        // so there is no enough stackpos to the server send him
+        /*
+        g_dispatcher.addEvent([this] {
+            LocalPlayerPtr localPlayer = g_game.getLocalPlayer();
+            if(!localPlayer || localPlayer->getPosition() == m_centralPosition)
+            return;
+            TilePtr tile = localPlayer->getTile();
+            if(tile && tile->hasThing(localPlayer))
+            return;
+
+            Position oldPos = localPlayer->getPosition();
+            Position pos = m_centralPosition;
+            if(oldPos != pos) {
+                if(!localPlayer->isRemoved())
+                localPlayer->onDisappear();
+                localPlayer->setPosition(pos);
+                localPlayer->onAppear();
+                g_logger.debug("forced player position update");
+            }
+        });
+        */
+        g_mapview.onMapCenterChange(centralPosition);
     }
     cleanTile(pos) {
         if (!pos.isMapPosition())
@@ -126,7 +154,7 @@ export class Map {
                     if (prevAnimatedText) {
                         let offset = prevAnimatedText.getOffset();
                         let t = prevAnimatedText.getTimer().ticksElapsed();
-                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) { // didnt move 12 pixels
+                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) {
                             let y = 12 - 48 * t / Otc.ANIMATED_TEXT_DURATION;
                             offset.add(new Point(0, y));
                         }
@@ -215,11 +243,155 @@ export class Map {
         if (id == 0)
             return;
         if (this.m_knownCreatures[id]) {
-            //this.m_knownCreatures.splice(id, 1);
+            this.m_knownCreatures.splice(id, 1);
         }
     }
+    getSightSpectators(centerPos, multiFloor) {
+        return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left - 1, this.m_awareRange.right - 2, this.m_awareRange.top - 1, this.m_awareRange.bottom - 2);
+    }
+    getSpectators(centerPos, multiFloor) {
+        return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
+    }
+    getSpectatorsInRange(centerPos, multiFloor, xRange, yRange) {
+        return this.getSpectatorsInRangeEx(centerPos, multiFloor, xRange, xRange, yRange, yRange);
+    }
+    getSpectatorsInRangeEx(centerPos, multiFloor, minXRange, maxXRange, minYRange, maxYRange) {
+        let minZRange = 0;
+        let maxZRange = 0;
+        let creatures = [];
+        if (multiFloor) {
+            minZRange = 0;
+            maxZRange = Otc.MAX_Z;
+        }
+        //TODO: optimize
+        //TODO: get creatures from other floors corretly
+        //TODO: delivery creatures in distance order
+        for (let iz = -minZRange; iz <= maxZRange; ++iz) {
+            for (let iy = -minYRange; iy <= maxYRange; ++iy) {
+                for (let ix = -minXRange; ix <= maxXRange; ++ix) {
+                    let tile = this.getTile(centerPos.translated(ix, iy, iz));
+                    if (!tile)
+                        continue;
+                    let tileCreatures = tile.getCreatures();
+                    for (let creature of tileCreatures) {
+                        creatures.push(creature);
+                    }
+                    // TODO: WEB - REVERSE?
+                    //creatures.insert(creatures.end(), tileCreatures.rbegin(), tileCreatures.rend());
+                }
+            }
+        }
+        return creatures;
+    }
+    isLookPossible(position) {
+        let tile = this.getTile(position);
+        return tile && tile.isLookPossible();
+    }
+    isCovered(pos, firstFloor) {
+        // check for tiles on top of the postion
+        let tilePos = pos.clone();
+        while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
+            let tile = this.getTile(tilePos);
+            // the below tile is covered when the above tile has a full ground
+            if (tile && tile.isFullGround())
+                return true;
+        }
+        return false;
+    }
+    isCompletelyCovered(pos, firstFloor) {
+        const checkTile = this.getTile(pos);
+        let tilePos = pos.clone();
+        while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
+            let covered = true;
+            let done = false;
+            // check in 2x2 range tiles that has no transparent pixels
+            for (let x = 0; x < 2 && !done; ++x) {
+                for (let y = 0; y < 2 && !done; ++y) {
+                    const tile = this.getTile(tilePos.translated(-x, -y));
+                    if (!tile || !tile.isFullyOpaque()) {
+                        covered = false;
+                        done = true;
+                    }
+                    else if (x == 0 && y == 0 && (!checkTile || checkTile.isSingleDimension())) {
+                        done = true;
+                    }
+                }
+            }
+            if (covered)
+                return true;
+        }
+        return false;
+    }
+    getFirstAwareFloor() {
+        if (this.m_centralPosition.z > Otc.SEA_FLOOR)
+            return this.m_centralPosition.z - Otc.AWARE_UNDEGROUND_FLOOR_RANGE;
+        else
+            return 0;
+    }
+    getLastAwareFloor() {
+        if (this.m_centralPosition.z > Otc.SEA_FLOOR)
+            return Math.min(this.m_centralPosition.z + Otc.AWARE_UNDEGROUND_FLOOR_RANGE, Otc.MAX_Z);
+        else
+            return Otc.SEA_FLOOR;
+    }
+    getFloorMissiles(z) { return this.m_floorMissiles[z]; }
+    isAwareOfPosition(pos) {
+        if (pos.z < this.getFirstAwareFloor() || pos.z > this.getLastAwareFloor())
+            return false;
+        let groundedPos = pos.clone();
+        while (groundedPos.z != this.m_centralPosition.z) {
+            if (groundedPos.z > this.m_centralPosition.z) {
+                if (groundedPos.x == 65535 || groundedPos.y == 65535)
+                    break;
+                groundedPos.coveredUp();
+            }
+            else {
+                if (groundedPos.x == 0 || groundedPos.y == 0)
+                    break;
+                groundedPos.coveredDown();
+            }
+        }
+        return this.m_centralPosition.isInRange(groundedPos, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
+    }
     removeUnawareThings() {
-        /* todo */
+        // remove creatures from tiles that we are not aware of anymore
+        for (let creature of this.m_knownCreatures) {
+            if (!this.isAwareOfPosition(creature.getPosition()))
+                this.removeThing(creature);
+        }
+        // remove static texts from tiles that we are not aware anymore
+        for (let i = 0; i < this.m_staticTexts.length;) {
+            let staticText = this.m_staticTexts[i];
+            if (staticText.getMessageMode() == MessageMode.MessageNone && !this.isAwareOfPosition(staticText.getPosition()))
+                this.m_staticTexts.splice(i, 1);
+            else
+                ++i;
+        }
+        if (!g_game.getFeature(GameFeature.GameKeepUnawareTiles)) {
+            // remove tiles that we are not aware anymore
+            for (let z = 0; z <= Otc.MAX_Z; ++z) {
+                let tileBlocks = this.m_tileBlocks[z];
+                for (let i = 0; i < tileBlocks.length;) {
+                    let block = tileBlocks[i];
+                    let blockEmpty = true;
+                    for (const tile of block.getTiles()) {
+                        /*
+                        if(!tile)
+                            continue;
+                        */
+                        const pos = tile.getPosition();
+                        if (!this.isAwareOfPosition(pos))
+                            block.remove(pos);
+                        else
+                            blockEmpty = false;
+                    }
+                    if (blockEmpty)
+                        tileBlocks.splice(i, 1);
+                    else
+                        ++i;
+                }
+            }
+        }
     }
     getBlockIndex(pos) {
         return (toInt(pos.y / TileBlock.BLOCK_SIZE) * toInt(65536 / TileBlock.BLOCK_SIZE)) + toInt(pos.x / TileBlock.BLOCK_SIZE);

@@ -543,7 +543,7 @@ export class Tile {
     }
 
     isLookPossible(): boolean {
-        for (let thing of this.m_things)
+        for (const thing of this.m_things)
             if (thing.blockProjectile())
                 return false;
         return true;
