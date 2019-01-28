@@ -1,5 +1,5 @@
 let log = function(...v: any[]) {
-    console.log.apply(this, v);
+  ///  console.log.apply(this, v);
     //$('#status').text(v.join(','));
 };
 
@@ -10,11 +10,11 @@ let error = function(...v: any[]) {
 
 export class Log{
     public static log(...v: any[]) {
-        console.log.apply(this, v);
+      ///  console.log.apply(this, v);
         //$('#status').text(v.join(','));
     }
     public static debug(...v: any[]) {
-        console.log.apply(this, v);
+      ///  console.log.apply(this, v);
         //$('#status').text(v.join(','));
     }
     public static error(...v: any[]) {

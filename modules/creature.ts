@@ -21,6 +21,7 @@ import {Proto} from "./constants/proto";
 import {g_clock} from "./structures/g_clock";
 import {ThingType} from "./thingtype";
 import {g_things} from "./thingtypemanager";
+import {Position} from "./position";
 
 export class Creature extends Thing {
     m_id: number = 0;
@@ -102,6 +103,7 @@ export class Creature extends Thing {
                 }
         */
         this.internalDrawOutfit(dest.add(animationOffset).mul(scaleFactor), scaleFactor, animate, animate, this.m_direction);
+      ///  console.log('direct', this.m_name, this.m_direction);
         this.m_footStepDrawn = true;
         /*
                 if(lightView) {
@@ -307,18 +309,54 @@ export class Creature extends Thing {
         this.m_direction = direction;
     }
 
+    isWalking(): boolean {
+        return this.m_walking;
+    }
+
     turn(direction: Direction) {
+        ///  console.log('turn', this.m_name, direction)
         if (!this.m_walking)
             this.setDirection(direction);
         else
             this.m_walkTurnDirection = direction;
     }
 
-    isWalking(): boolean {
-        return this.m_walking;
+    onAppear()
+    {
+        /*
+        // cancel any disappear event
+        if(m_disappearEvent) {
+            m_disappearEvent->cancel();
+            m_disappearEvent = nullptr;
+        }
+        */
+
+        // creature appeared the first time or wasn't seen for a long time
+        if(this.m_removed) {
+            this.stopWalk();
+            this.m_removed = false;
+            //callLuaField("onAppear");
+            // walk
+        } else if(!this.m_oldPosition.equals(this.m_position) && this.m_oldPosition.isInRange(this.m_position,1,1) && this.m_allowAppearWalk) {
+            this.m_allowAppearWalk = false;
+            this.walk(this.m_oldPosition, this.m_position);
+            //callLuaField("onWalk", m_oldPosition, m_position);
+            // teleport
+        } else if(this.m_oldPosition != this.m_position) {
+            this.stopWalk();
+            //callLuaField("onDisappear");
+            //callLuaField("onAppear");
+        } // else turn
     }
 
+    stopWalk()
+    {
+        if(!this.m_walking)
+            return;
 
+        // stops the walk right away
+        this.terminateWalk();
+    }
     getThingType(): ThingType {
         return g_things.getThingType(this.m_outfit.getId(), ThingCategory.ThingCategoryCreature);
     }

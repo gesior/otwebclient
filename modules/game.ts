@@ -10,6 +10,8 @@ import {g_chat} from "./view/chatbox";
 import {Position} from "./position";
 import {Movie} from "./network/movie";
 import {g_sprites} from "./spritemanager";
+import {g_painter} from "./painter";
+import {g_mapview} from "./view/mapview";
 
 export class Game {
     processCloseChannel(channelId: number): any {
@@ -28,6 +30,17 @@ export class Game {
         g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
 
+    loadMovie(movie: Movie) {
+        this.m_protocolGame = new ProtocolGame(this);
+        this.m_protocolGame.loadMovie(movie);
+    }
+
+    updateView(deltaTime: number) {
+    }
+
+    updateMovie(deltaTime: number) {
+        this.m_protocolGame.updateMovie(deltaTime * 5);
+    }
     m_clientVersion = 0;
     messageModesMap = {};
     m_features: boolean[] = [];
@@ -418,11 +431,6 @@ export class Game {
     login(accountName: string, accountPassword: string, characterName: string) {
         this.m_protocolGame = new ProtocolGame(this);
         this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-    }
-
-    watchMovie(movie: Movie) {
-        this.m_protocolGame = new ProtocolGame(this);
-        this.m_protocolGame.watch(movie);
     }
 
     formatCreatureName(string: string): string {

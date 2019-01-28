@@ -40,6 +40,7 @@ export class ProtocolGame extends Protocol {
     public m_lastPacketTime: number;
 
     private m_movieData: Movie;
+    private m_movieCurrentTime: number;
 
     constructor(game: Game) {
         super();
@@ -59,36 +60,41 @@ export class ProtocolGame extends Protocol {
         this.connect(host, port);
     }
 
-    watch(m_movieData: Movie) {
-        var i  =0;
+    loadMovie(m_movieData: Movie) {
         this.m_localPlayer = g_game.getLocalPlayer();
-        g_mapview.followCreature(g_game.getLocalPlayer())
+        g_mapview.followCreature(g_game.getLocalPlayer());
 
         this.m_movieData = m_movieData;
-        var first = 0;
+        this.m_movieCurrentTime = this.m_movieData.peekU64();
+        console.error('loaded packets');
+    }
+
+    updateMovie(deltaTime: number) {
+        this.m_movieCurrentTime += deltaTime;
         while (this.m_movieData.getUnreadSize() >= 10) {
-            let timestamp = this.m_movieData.getU64();
-            let s = this.m_movieData.getReadPos();
-            if(this.m_movieData.getUnreadSize() >= 10) {
+            let timestamp = this.m_movieData.peekU64();
+
+            if (timestamp > this.m_movieCurrentTime)
+                break;
+
+            this.m_movieData.getU64(); // skip bytes
+
+            let currentReadPosition = this.m_movieData.getReadPos();
+            if (this.m_movieData.getUnreadSize() >= 10) {
                 var next = this.m_movieData.peekU64();
                 //console.log('com', timestamp, next);
                 if (next - timestamp < 5000 && next - timestamp >= 0) {
                     continue;
                 }
             }
-            this.m_movieData.setReadPos(s);
+            this.m_movieData.setReadPos(currentReadPosition);
             let packetLength = this.m_movieData.getU16();
             let packetData = this.m_movieData.getBytes(packetLength);
-            if (first === 0)
-                first = timestamp;
 
             this.m_lastPacketTime = timestamp;
             var inputMessage = new InputMessage(new DataView(packetData));
             this.parseMessage(inputMessage);
-            if (++i >= 120)
-                break;
         }
-        console.error('loaded packets', i);
     }
 
     onConnect() {
@@ -538,7 +544,7 @@ export class ProtocolGame extends Protocol {
     sendPingBack() {
         //console.log('sendPingBack');
         //console.log(g_map.m_floorMissiles);
-        console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+      ///  console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
         if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
             let pos = this.m_localPlayer.getPosition();
             for (let y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -1693,26 +1699,26 @@ export class ProtocolGame extends Protocol {
     parseRuleViolationChannel(msg: InputMessage) {
         let channelId = msg.getU16();
 
-        console.log('g_game.processRuleViolationChannel', channelId);
+      ///  console.log('g_game.processRuleViolationChannel', channelId);
         //g_game.processRuleViolationChannel(channelId);
     }
 
     parseRuleViolationRemove(msg: InputMessage) {
         let name = msg.getString();
 
-        console.log('g_game.processRuleViolationRemove', name);
+      ///  console.log('g_game.processRuleViolationRemove', name);
         //g_game.processRuleViolationRemove(name);
     }
 
     parseRuleViolationCancel(msg: InputMessage) {
         let name = msg.getString();
 
-        console.log('g_game.processRuleViolationCancel', name);
+      ///  console.log('g_game.processRuleViolationCancel', name);
         //g_game.processRuleViolationCancel(name);
     }
 
     parseRuleViolationLock(msg: InputMessage) {
-        console.log('g_game.processRuleViolationLock');
+      ///  console.log('g_game.processRuleViolationLock');
         //g_game.processRuleViolationLock();
     }
 
@@ -2073,6 +2079,7 @@ export class ProtocolGame extends Protocol {
                 mouseRightClickX, mouseRightClickY, mouseX, mouseY, gameX, gameY, gameW, gameH, isForeground, modulesCount, isHotkey);
         }
     }
+
     parseChangeMapAwareRange(msg: InputMessage) {
         let xrange = msg.getU8();
         let yrange = msg.getU8();

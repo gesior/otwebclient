@@ -1,1 +1,1 @@
-{"version":3,"file":"light.js","sourceRoot":"","sources":["light.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,KAAK;IAAlB;QACI,cAAS,GAAW,CAAC,CAAC;QACtB,UAAK,GAAW,GAAG,CAAC;IACxB,CAAC;CAAA"}
+{"version":3,"file":"light.js","sourceRoot":"","sources":["light.ts"],"names":[],"mappings":"AAAA,MAAM;IAAN;QACI,cAAS,GAAW,CAAC,CAAC;QACtB,UAAK,GAAW,GAAG,CAAC;IACxB,CAAC;CAAA"}

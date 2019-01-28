@@ -87,6 +87,9 @@ export class MapView {
 
     draw() {
         console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
+        // dev
+        this.m_mustUpdateVisibleTilesCache = true;
+
         if(this.m_mustUpdateVisibleTilesCache || this.m_updateTilesPos > 0) {
             console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
             this.updateVisibleTilesCache(this.m_mustUpdateVisibleTilesCache ? 0 : this.m_updateTilesPos);
@@ -286,7 +289,7 @@ export class MapView {
 
 
     updateVisibleTilesCache(start: Number): void {
-        console.log('updateVisibleTilesCache', start)
+      ///  console.log('updateVisibleTilesCache', start)
         if (start == 0) {
             this.m_cachedFirstVisibleFloor = this.calcFirstVisibleFloor();
             this.m_cachedLastVisibleFloor = this.calcLastVisibleFloor();
@@ -476,7 +479,7 @@ export class MapView {
         this.m_virtualCenterOffset = virtualCenterOffset;
         this.m_visibleCenterOffset = visibleCenterOffset;
         this.m_optimizedSize = optimizedSize;
-        console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
+      ///  console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
         this.requestVisibleTilesCacheUpdate();
     }
 

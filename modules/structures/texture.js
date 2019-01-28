@@ -12,19 +12,19 @@ export class Texture {
         this.m_upsideDown = false;
         this.m_repeat = false;
         this.m_texture = [];
-        console.log('texture load', x++);
+        ///  console.log('texture load', x++);
         this.m_image = image;
     }
     getPixiTexture(src) {
         let hash = src.hash();
         let textureCache = this.m_texture[hash];
         if (textureCache) {
-            console.log('getPixiTexture CACHE', +new Date(), y++);
+            ///  console.log('getPixiTexture CACHE', +new Date(), y++);
             return textureCache;
         }
-        console.log('getPixiTexture LOAD', z++);
+        ///  console.log('getPixiTexture LOAD', z++);
         let graphics = new PIXI.Graphics();
-        console.log('kkk', src.left(), src.top(), src.right(), src.bottom(), src.height(), src.width());
+        ///  console.log('kkk', src.left(), src.top(),src.right(), src.bottom(), src.height(), src.width());
         graphics.width = src.width();
         graphics.height = src.height();
         graphics.beginFill(0, 0);

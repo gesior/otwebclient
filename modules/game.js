@@ -34,6 +34,15 @@ export class Game {
         //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
         g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
     }
+    loadMovie(movie) {
+        this.m_protocolGame = new ProtocolGame(this);
+        this.m_protocolGame.loadMovie(movie);
+    }
+    updateView(deltaTime) {
+    }
+    updateMovie(deltaTime) {
+        this.m_protocolGame.updateMovie(deltaTime * 5);
+    }
     setClientVersion(version) {
         this.m_clientVersion = version;
         this.updateMessageModesMap(version);
@@ -54,7 +63,7 @@ export class Game {
         if (version >= 1094) {
             this.messageModesMap[MessageMode.MessageMana] = 43;
         }
-        if (version >= 1055) { // might be 1054
+        if (version >= 1055) {
             this.messageModesMap[MessageMode.MessageNone] = 0;
             this.messageModesMap[MessageMode.MessageSay] = 1;
             this.messageModesMap[MessageMode.MessageWhisper] = 2;
@@ -374,10 +383,6 @@ export class Game {
     login(accountName, accountPassword, characterName) {
         this.m_protocolGame = new ProtocolGame(this);
         this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
-    }
-    watchMovie(movie) {
-        this.m_protocolGame = new ProtocolGame(this);
-        this.m_protocolGame.watch(movie);
     }
     formatCreatureName(string) {
         return string;

@@ -30,7 +30,6 @@ class Painter {
 
         if (dest.isEmpty() || src.isEmpty())// || texture.isEmpty())
         {
-            console.log('empty', dest.width(), dest.height(), src)
             throw new Error('empty');
             //return;
         }
@@ -40,8 +39,6 @@ class Painter {
         pixiSprite.position.y = dest.top() + 30;
         pixiSprite.width = pixiTexture.width
         pixiSprite.height = pixiTexture.height
-        if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height)
-        console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height, pixiTexture.width, pixiTexture.height);
 
         this.app.stage.addChild(pixiSprite);
 

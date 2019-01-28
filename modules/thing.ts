@@ -371,7 +371,7 @@ export class Thing {
         return this.rawGetThingType().getMarketData();
     }
 
-    onPositionChange(newPos: Position, oldPos: Position) {
+    onPositionChange(newPos: Position, oldPos: Position): void {
     }
 
     onAppear() {

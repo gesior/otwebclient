@@ -27,7 +27,6 @@ class Resources {
         try {
 
             let response: any = await get(file);
-            console.log('r', response);
             let uInt8Array = new Uint8Array(response);
             return new InputFile(new DataView(uInt8Array.buffer));
         } catch (e) {

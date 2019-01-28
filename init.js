@@ -15,6 +15,7 @@ let x = Otc.MAX_AUTOWALK_DIST;
 //g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
 import 'pixi.js';
 import { Log } from "./modules/log";
+import { g_painter } from "./modules/painter";
 //console.log('pixi', PIXI);
 function test() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -26,11 +27,19 @@ function test() {
         var movie = new Movie(new DataView(movieData.getBytes(-1)));
         g_mapview.init();
         g_mapview.clear();
-        g_game.watchMovie(movie);
+        g_painter.app.ticker.add(function (deltaTime) {
+            Log.debug('ticker', deltaTime);
+            g_game.updateMovie(deltaTime);
+            g_game.updateView(deltaTime);
+            Log.debug('drawstart', +new Date());
+            g_mapview.draw();
+            Log.debug('drawend', +new Date());
+        });
+        g_game.loadMovie(movie);
         Log.debug('qwestart1', +new Date());
-        g_mapview.draw();
+        //g_mapview.draw();
         Log.debug('qwestart2', +new Date());
-        g_mapview.draw();
+        //g_mapview.draw();
         Log.debug('qweend', +new Date());
         //g_game.login('', '', 'GOD Spider Local');
     });

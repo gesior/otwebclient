@@ -13,7 +13,6 @@ class Painter {
     }
     drawTexturedRect(dest, texture, src) {
         if (dest.isEmpty() || src.isEmpty()) {
-            console.log('empty', dest.width(), dest.height(), src);
             throw new Error('empty');
             //return;
         }
@@ -23,8 +22,6 @@ class Painter {
         pixiSprite.position.y = dest.top() + 30;
         pixiSprite.width = pixiTexture.width;
         pixiSprite.height = pixiTexture.height;
-        if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height)
-            console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height, pixiTexture.width, pixiTexture.height);
         this.app.stage.addChild(pixiSprite);
         // const awareRange = g_map.getAwareRange();
         // var painterview = document.getElementById('painterview');

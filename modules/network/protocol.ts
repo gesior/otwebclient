@@ -23,22 +23,22 @@ export class Protocol {
         let protocol = this;
 
         this.m_connection.onopen = function (evt) {
-            console.log('m_connectiononopen', evt);
+          ///  console.log('m_connectiononopen', evt);
             protocol.onConnect(evt);
         };
 
         this.m_connection.onerror = function (evt) {
-            console.log('m_connectiononerror', evt);
+          ///  console.log('m_connectiononerror', evt);
             protocol.onError(evt);
         };
 
         this.m_connection.onclose = (evt: CloseEvent) => {
-            console.log('m_connectiononclose', evt);
+          ///  console.log('m_connectiononclose', evt);
             protocol.onClose(evt);
         };
 
         this.m_connection.onmessage = function (evt) {
-            console.log('m_connectiononmessage', evt);
+          ///  console.log('m_connectiononmessage', evt);
             protocol.internalRecvData(evt);
         };
     }

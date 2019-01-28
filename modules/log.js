@@ -1,5 +1,5 @@
 let log = function (...v) {
-    console.log.apply(this, v);
+    ///  console.log.apply(this, v);
     //$('#status').text(v.join(','));
 };
 let error = function (...v) {
@@ -8,11 +8,11 @@ let error = function (...v) {
 };
 export class Log {
     static log(...v) {
-        console.log.apply(this, v);
+        ///  console.log.apply(this, v);
         //$('#status').text(v.join(','));
     }
     static debug(...v) {
-        console.log.apply(this, v);
+        ///  console.log.apply(this, v);
         //$('#status').text(v.join(','));
     }
     static error(...v) {

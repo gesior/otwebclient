@@ -32,7 +32,6 @@ class Resources {
             };
             try {
                 let response = yield get(file);
-                console.log('r', response);
                 let uInt8Array = new Uint8Array(response);
                 return new InputFile(new DataView(uInt8Array.buffer));
             }

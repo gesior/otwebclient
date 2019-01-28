@@ -62,7 +62,7 @@ export class Map {
     getCreatureById(id) {
         //console.log('known creatures', g_map.m_knownCreatures);
         if (!g_map.m_knownCreatures[id]) {
-            console.log('known creatures failed', id, g_map.m_knownCreatures);
+            ///  console.log('known creatures failed', id, g_map.m_knownCreatures);
             throw new Error('get ' + id);
         }
         return g_map.m_knownCreatures[id];

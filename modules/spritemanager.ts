@@ -22,14 +22,14 @@ export class SpriteManager {
         this.m_signature = 0;
         this.m_loaded = false;
         try {
-            console.log(new Date().getTime(), 'spr');
+          ///  console.log(new Date().getTime(), 'spr');
             this.m_spritesFile = await g_resources.openFile(file);
 
             this.m_signature = this.m_spritesFile.getU32();
             this.m_spritesCount = g_game.getFeature(GameFeature.GameSpritesU32) ? this.m_spritesFile.getU32() : this.m_spritesFile.getU16();
             this.m_spritesOffset = this.m_spritesFile.tell();
             this.m_loaded = true;
-            console.log(new Date().getTime(), 'spr');
+          ///  console.log(new Date().getTime(), 'spr');
             return true;
         } catch (e) {
             Log.error("Failed to load sprites from '%s': %s", file, e);

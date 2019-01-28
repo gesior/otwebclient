@@ -48,7 +48,7 @@ export class ThingTypeManager {
             this.m_datSignature = 0;
             this.m_contentRevision = 0;
             try {
-                console.log(new Date().getTime(), this.m_thingTypes);
+                ///  console.log(new Date().getTime(), this.m_thingTypes);
                 let fin = yield g_resources.openFile(file);
                 this.m_datSignature = fin.getU32();
                 this.m_contentRevision = this.m_datSignature & 0xFFFF;
@@ -70,7 +70,7 @@ export class ThingTypeManager {
                     }
                 }
                 this.m_datLoaded = true;
-                console.log(new Date().getTime(), this.m_thingTypes);
+                ///  console.log(new Date().getTime(), this.m_thingTypes);
                 //g_lua.callGlobalField("g_things", "onLoadDat", file);
                 return true;
             }

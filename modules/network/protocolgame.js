@@ -37,15 +37,21 @@ export class ProtocolGame extends Protocol {
         this.m_characterName = characterName;
         this.connect(host, port);
     }
-    watch(m_movieData) {
-        var i = 0;
+    loadMovie(m_movieData) {
         this.m_localPlayer = g_game.getLocalPlayer();
         g_mapview.followCreature(g_game.getLocalPlayer());
         this.m_movieData = m_movieData;
-        var first = 0;
+        this.m_movieCurrentTime = this.m_movieData.peekU64();
+        console.error('loaded packets');
+    }
+    updateMovie(deltaTime) {
+        this.m_movieCurrentTime += deltaTime;
         while (this.m_movieData.getUnreadSize() >= 10) {
-            let timestamp = this.m_movieData.getU64();
-            let s = this.m_movieData.getReadPos();
+            let timestamp = this.m_movieData.peekU64();
+            if (timestamp > this.m_movieCurrentTime)
+                break;
+            this.m_movieData.getU64(); // skip bytes
+            let currentReadPosition = this.m_movieData.getReadPos();
             if (this.m_movieData.getUnreadSize() >= 10) {
                 var next = this.m_movieData.peekU64();
                 //console.log('com', timestamp, next);
@@ -53,18 +59,13 @@ export class ProtocolGame extends Protocol {
                     continue;
                 }
             }
-            this.m_movieData.setReadPos(s);
+            this.m_movieData.setReadPos(currentReadPosition);
             let packetLength = this.m_movieData.getU16();
             let packetData = this.m_movieData.getBytes(packetLength);
-            if (first === 0)
-                first = timestamp;
             this.m_lastPacketTime = timestamp;
             var inputMessage = new InputMessage(new DataView(packetData));
             this.parseMessage(inputMessage);
-            if (++i >= 120)
-                break;
         }
-        console.error('loaded packets', i);
     }
     onConnect() {
         this.m_firstRecv = true;
@@ -491,7 +492,7 @@ export class ProtocolGame extends Protocol {
     sendPingBack() {
         //console.log('sendPingBack');
         //console.log(g_map.m_floorMissiles);
-        console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
+        ///  console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
         if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
             let pos = this.m_localPlayer.getPosition();
             for (let y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -1424,21 +1425,21 @@ export class ProtocolGame extends Protocol {
     }
     parseRuleViolationChannel(msg) {
         let channelId = msg.getU16();
-        console.log('g_game.processRuleViolationChannel', channelId);
+        ///  console.log('g_game.processRuleViolationChannel', channelId);
         //g_game.processRuleViolationChannel(channelId);
     }
     parseRuleViolationRemove(msg) {
         let name = msg.getString();
-        console.log('g_game.processRuleViolationRemove', name);
+        ///  console.log('g_game.processRuleViolationRemove', name);
         //g_game.processRuleViolationRemove(name);
     }
     parseRuleViolationCancel(msg) {
         let name = msg.getString();
-        console.log('g_game.processRuleViolationCancel', name);
+        ///  console.log('g_game.processRuleViolationCancel', name);
         //g_game.processRuleViolationCancel(name);
     }
     parseRuleViolationLock(msg) {
-        console.log('g_game.processRuleViolationLock');
+        ///  console.log('g_game.processRuleViolationLock');
         //g_game.processRuleViolationLock();
     }
     parseTextMessage(msg) {

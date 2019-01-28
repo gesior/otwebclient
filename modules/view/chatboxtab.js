@@ -15,7 +15,7 @@ export class ChatboxTab {
         content.innerText = creatureName + ', ' + text;
         div.appendChild(content);
 
-        console.log('tab', this.name, text, speaktype, creatureName);
+      ///  console.log('tab', this.name, text, speaktype, creatureName);
         */
     }
 }

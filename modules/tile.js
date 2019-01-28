@@ -130,13 +130,6 @@ export class Tile {
                 this.m_effects.push(thing);
         }
         else {
-            /*
-                        if (thing.isCreature())
-                            console.log('tile.addThing', thing, stackPos, this.m_things);
-            */
-            //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
-            //if (thing.isItem() && thing.getId() == 2869)
-            //    Log.log('testthing add', new Date(g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
             // priority                                    854
             // 0 - ground,                        -.      -.
             // 1 - ground borders                 -.      -.

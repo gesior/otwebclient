@@ -9,322 +9,378 @@ webpackJsonp([0],{
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Creature = undefined;
+exports.g_resources = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _inputfile = __webpack_require__(447);
 
-var _outfit = __webpack_require__(186);
-
-var _const = __webpack_require__(13);
-
-var _color = __webpack_require__(57);
-
-var _cachedtext = __webpack_require__(129);
-
-var _timer = __webpack_require__(92);
-
-var _point = __webpack_require__(42);
-
-var _proto = __webpack_require__(187);
-
-var _g_clock = __webpack_require__(93);
-
-var _thingtypemanager = __webpack_require__(63);
+var _log = __webpack_require__(20);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Creature = exports.Creature = function (_Thing) {
-    _inherits(Creature, _Thing);
-
-    function Creature() {
-        _classCallCheck(this, Creature);
-
-        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
-
-        _this.m_id = 0;
-        _this.m_healthPercent = 100;
-        _this.m_direction = _const.Direction.South;
-        _this.m_outfit = new _outfit.Outfit();
-        _this.m_speed = 200;
-        _this.m_skull = _const.PlayerSkulls.SkullNone;
-        _this.m_shield = _const.PlayerShields.ShieldNone;
-        _this.m_emblem = _const.PlayerEmblems.EmblemNone;
-        _this.m_type = _proto.Proto.CreatureTypeUnknown;
-        _this.m_icon = _const.CreatureIcons.NpcIconNone;
-        _this.m_showShieldTexture = true;
-        _this.m_shieldBlink = false;
-        _this.m_passable = false;
-        _this.m_showTimedSquare = false;
-        _this.m_showStaticSquare = false;
-        _this.m_removed = true;
-        _this.m_nameCache = new _cachedtext.CachedText();
-        _this.m_informationColor = new _color.Color(96, 96, 96);
-        _this.m_outfitColor = new _color.Color(255, 255, 255);
-        //ScheduledEventPtr m_outfitColorUpdateEvent;
-        _this.m_outfitColorTimer = new _timer.Timer();
-        //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
-        // walk related
-        _this.m_walkAnimationPhase = 0;
-        _this.m_walkedPixels = 0;
-        _this.m_footStep = 0;
-        _this.m_walkTimer = new _timer.Timer();
-        _this.m_footTimer = new _timer.Timer();
-        _this.m_walking = false;
-        _this.m_allowAppearWalk = false;
-        _this.m_footStepDrawn = false;
-        //ScheduledEventPtr m_walkUpdateEvent;
-        //ScheduledEventPtr m_walkFinishAnimEvent;
-        //EventPtr m_disappearEvent;
-        _this.m_walkOffset = new _point.Point();
-        _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
-        _this.m_lastStepDirection = _const.Direction.InvalidDirection;
-        return _this;
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
     }
 
-    _createClass(Creature, [{
-        key: "draw",
-        value: function draw(dest, scaleFactor, animate) {
-            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
 
-            if (!this.canBeSeen()) return;
-            var animationOffset = animate ? this.m_walkOffset : new _point.Point(0, 0);
-            /*
-                    if(m_showTimedSquare && animate) {
-                        g_painter.setColor(m_timedSquareColor);
-                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement() + 2)*scaleFactor, Size(28, 28)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
-                        g_painter.setColor(Color::white);
-                    }
-                     if(m_showStaticSquare && animate) {
-                        g_painter.setColor(m_staticSquareColor);
-                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement())*scaleFactor, Size(Otc::TILE_PIXELS, Otc::TILE_PIXELS)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
-                        g_painter.setColor(Color::white);
-                    }
-            */
-            this.internalDrawOutfit(dest.add(animationOffset).mul(scaleFactor), scaleFactor, animate, animate, this.m_direction);
-            this.m_footStepDrawn = true;
-            /*
-                    if(lightView) {
-                        Light light = rawGetThingType().getLight();
-                        if(m_light.intensity != light.intensity || m_light.color != light.color)
-                            light = m_light;
-                         // local player always have a minimum light in complete darkness
-                        if(isLocalPlayer() && (g_map.getLight().intensity < 64 || m_position.z > Otc::SEA_FLOOR)) {
-                            light.intensity = std::max<uint8>(light.intensity, 3);
-                            if(light.color == 0 || light.color > 215)
-                                light.color = 215;
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 9:
+                                _context2.prev = 9;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 13:
+                            case "end":
+                                return _context2.stop();
                         }
-                         if(light.intensity > 0)
-                            lightView.addLightSource(dest + (animationOffset + Point(16,16)) * scaleFactor, scaleFactor, light);
                     }
-                    */
-        }
-    }, {
-        key: "internalDrawOutfit",
-        value: function internalDrawOutfit(dest, scaleFactor, animateWalk, animateIdle, direction) {
-            var lightView = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-
-            //g_painter.setColor(m_outfitColor);
-            // outfit is a real creature
-            if (this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryCreature) {
-                var animationPhase = animateWalk ? this.m_walkAnimationPhase : 0;
-                if (this.isAnimateAlways() && animateIdle) {
-                    var ticksPerFrame = 1000 / this.getAnimationPhases();
-                    animationPhase = _g_clock.g_clock.millis() % (ticksPerFrame * this.getAnimationPhases()) / ticksPerFrame;
-                }
-                // xPattern => creature direction
-                var xPattern = void 0;
-                if (direction == _const.Direction.NorthEast || direction == _const.Direction.SouthEast) xPattern = _const.Direction.East;else if (direction == _const.Direction.NorthWest || direction == _const.Direction.SouthWest) xPattern = _const.Direction.West;else xPattern = direction;
-                var zPattern = 0;
-                if (this.m_outfit.getMount() != 0) {
-                    var datType = _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getMount(), _const.ThingCategory.ThingCategoryCreature);
-                    dest = dest.sub(datType.getDisplacement().mul(scaleFactor));
-                    datType.draw(dest, scaleFactor, 0, xPattern, 0, 0, animationPhase, lightView);
-                    dest = dest.add(this.getDisplacement().mul(scaleFactor));
-                    zPattern = Math.min(1, this.getNumPatternZ() - 1);
-                }
-                // yPattern => creature addon
-                for (var yPattern = 0; yPattern < this.getNumPatternY(); yPattern++) {
-                    // continue if we dont have this addon
-                    if (yPattern > 0 && !(this.m_outfit.getAddons() & 1 << yPattern - 1)) continue;
-                    var _datType = this.rawGetThingType();
-                    //console.log('pp', dest, datType);
-                    _datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
-                    if (this.getLayers() > 1) {
-                        /*
-                        Color oldColor = g_painter.getColor();
-                        Painter::CompositionMode oldComposition = g_painter.getCompositionMode();
-                        g_painter.setCompositionMode(Painter::CompositionMode_Multiply);
-                        g_painter.setColor(m_outfit.getHeadColor());
-                        datType.draw(dest, scaleFactor, SpriteMaskYellow, xPattern, yPattern, zPattern, animationPhase);
-                        g_painter.setColor(m_outfit.getBodyColor());
-                        datType.draw(dest, scaleFactor, SpriteMaskRed, xPattern, yPattern, zPattern, animationPhase);
-                        g_painter.setColor(m_outfit.getLegsColor());
-                        datType.draw(dest, scaleFactor, SpriteMaskGreen, xPattern, yPattern, zPattern, animationPhase);
-                        g_painter.setColor(m_outfit.getFeetColor());
-                        datType.draw(dest, scaleFactor, SpriteMaskBlue, xPattern, yPattern, zPattern, animationPhase);
-                        g_painter.setColor(oldColor);
-                        g_painter.setCompositionMode(oldComposition);
-                        */
-                    }
-                }
-                // outfit is a creature imitating an item or the invisible effect
-            }
-            /*
-            else  {
-                ThingType *type = g_things.rawGetThingType(m_outfit.getAuxId(), m_outfit.getCategory());
-                 int animationPhase = 0;
-                int animationPhases = type.getAnimationPhases();
-                int animateTicks = Otc::ITEM_TICKS_PER_FRAME;
-                 // when creature is an effect we cant render the first and last animation phase,
-                // instead we should loop in the phases between
-                if(m_outfit.getCategory() == ThingCategoryEffect) {
-                    animationPhases = std::max<int>(1, animationPhases-2);
-                    animateTicks = Otc::INVISIBLE_TICKS_PER_FRAME;
-                }
-                 if(animationPhases > 1) {
-                    if(animateIdle)
-                        animationPhase = (g_clock.millis() % (animateTicks * animationPhases)) / animateTicks;
-                    else
-                        animationPhase = animationPhases-1;
-                }
-                 if(m_outfit.getCategory() == ThingCategoryEffect)
-                    animationPhase = std::min<int>(animationPhase+1, animationPhases);
-                 type.draw(dest - (getDisplacement() * scaleFactor), scaleFactor, 0, 0, 0, 0, animationPhase, lightView);
-            }
-            */
-            //g_painter.resetColor();
-        }
-    }, {
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "getName",
-        value: function getName() {
-            return this.m_name;
-        }
-    }, {
-        key: "setName",
-        value: function setName(name) {
-            this.m_name = name;
-        }
-    }, {
-        key: "isCreature",
-        value: function isCreature() {
-            return true;
-        }
-    }, {
-        key: "canBeSeen",
-        value: function canBeSeen() {
-            return !this.isInvisible() || this.isPlayer();
-        }
-    }, {
-        key: "isInvisible",
-        value: function isInvisible() {
-            return this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryEffect && this.m_outfit.getAuxId() == 13;
-        }
-    }, {
-        key: "addTimedSquare",
-        value: function addTimedSquare(arg0) {
-            // throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "hideStaticSquare",
-        value: function hideStaticSquare() {
-            //throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "showStaticSquare",
-        value: function showStaticSquare(arg0) {
-            // throw new Error("Method not implemented.");
-        }
-    }, {
-        key: "setType",
-        value: function setType(type) {
-            this.m_type = type;
-        }
-    }, {
-        key: "allowAppearWalk",
-        value: function allowAppearWalk() {}
-    }, {
-        key: "setHealthPercent",
-        value: function setHealthPercent(healthPercent) {
-            this.m_healthPercent = healthPercent;
-        }
-    }, {
-        key: "setLight",
-        value: function setLight(light) {}
-    }, {
-        key: "setOutfit",
-        value: function setOutfit(outfit) {
-            this.m_outfit = outfit;
-        }
-    }, {
-        key: "setSpeed",
-        value: function setSpeed(speed) {}
-    }, {
-        key: "setBaseSpeed",
-        value: function setBaseSpeed(baseSpeed) {}
-    }, {
-        key: "setSkull",
-        value: function setSkull(skull) {}
-    }, {
-        key: "setShield",
-        value: function setShield(shield) {}
-    }, {
-        key: "setPassable",
-        value: function setPassable(v) {}
-    }, {
-        key: "setEmblem",
-        value: function setEmblem(emblem) {}
-    }, {
-        key: "setIcon",
-        value: function setIcon(icon) {}
-    }, {
-        key: "setDirection",
-        value: function setDirection(direction) {
-            this.m_direction = direction;
-        }
-    }, {
-        key: "turn",
-        value: function turn(direction) {
-            if (!this.m_walking) this.setDirection(direction);else this.m_walkTurnDirection = direction;
-        }
-    }, {
-        key: "isWalking",
-        value: function isWalking() {
-            return this.m_walking;
-        }
-    }, {
-        key: "getThingType",
-        value: function getThingType() {
-            return _thingtypemanager.g_things.getThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
-        }
-    }, {
-        key: "rawGetThingType",
-        value: function rawGetThingType() {
-            return _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
+                }, _callee2, this, [[1, 9]]);
+            }));
         }
     }]);
 
-    return Creature;
-}(_thing.Thing);
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
 
 /***/ }),
 
 /***/ 125:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.BinaryDataReader = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _position = __webpack_require__(69);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BinaryDataReader = exports.BinaryDataReader = function () {
+    function BinaryDataReader(msg) {
+        _classCallCheck(this, BinaryDataReader);
+
+        this.data = msg;
+        this.offset = 0;
+        this.size = this.data.byteLength;
+    }
+
+    _createClass(BinaryDataReader, [{
+        key: "getU8",
+        value: function getU8() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "get8",
+        value: function get8() {
+            if (this.offset + 1 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "get16",
+        value: function get16() {
+            if (this.offset + 2 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt16(this.offset);
+            this.offset += 2;
+            return v;
+        }
+    }, {
+        key: "get32",
+        value: function get32() {
+            if (this.offset + 4 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt32(this.offset);
+            this.offset += 4;
+            return v;
+        }
+    }, {
+        key: "getDouble",
+        value: function getDouble() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getFloat64(this.offset);
+            this.offset += 8;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
+        }
+    }, {
+        key: "getBytes",
+        value: function getBytes(bytesCount) {
+            if (bytesCount == -1) bytesCount = this.size - this.offset;
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            var bytes = this.data.buffer.slice(this.offset, this.offset + bytesCount);
+            this.offset += bytesCount;
+            return bytes;
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "peekU16",
+        value: function peekU16() {
+            var v = this.getU16();
+            this.offset -= 2;
+            return v;
+        }
+    }, {
+        key: "peekU32",
+        value: function peekU32() {
+            var v = this.getU32();
+            this.offset -= 4;
+            return v;
+        }
+    }, {
+        key: "peekU64",
+        value: function peekU64() {
+            var v = this.getU64();
+            this.offset -= 8;
+            return v;
+        }
+    }, {
+        key: "skipBytes",
+        value: function skipBytes(bytesCount) {
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            this.offset += bytesCount;
+        }
+    }, {
+        key: "skip",
+        value: function skip(bytesCount) {
+            this.skipBytes(bytesCount);
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }, {
+        key: "tell",
+        value: function tell() {
+            return this.getReadPos();
+        }
+    }, {
+        key: "seek",
+        value: function seek(offset) {
+            this.setReadPos(offset);
+        }
+    }]);
+
+    return BinaryDataReader;
+}();
+
+/***/ }),
+
+/***/ 126:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Painter = function () {
+    function Painter() {
+        _classCallCheck(this, Painter);
+
+        this.app = new PIXI.Application(800, 600, { transparent: true });
+        document.body.appendChild(this.app.view);
+        this.app.stage.interactive = true;
+        //this.container = new PIXI.particles.ParticleContainer();
+        //this.app.stage.addChild(this.container);
+        this.app.stage.on('mousemove', onPointerMove).on('touchmove', onPointerMove);
+        function onPointerMove(eventData) {}
+    }
+
+    _createClass(Painter, [{
+        key: 'drawTexturedRect',
+        value: function drawTexturedRect(dest, texture, src) {
+            if (dest.isEmpty() || src.isEmpty()) {
+                throw new Error('empty');
+                //return;
+            }
+            var pixiTexture = texture.getPixiTexture(src);
+            var pixiSprite = new PIXI.Sprite(pixiTexture);
+            pixiSprite.position.x = dest.left() + 40;
+            pixiSprite.position.y = dest.top() + 30;
+            pixiSprite.width = pixiTexture.width;
+            pixiSprite.height = pixiTexture.height;
+            this.app.stage.addChild(pixiSprite);
+            // const awareRange = g_map.getAwareRange();
+            // var painterview = document.getElementById('painterview');
+            // let image : Image = texture.tmp_img;
+            // var el = <HTMLCanvasElement> document.getElementById("myCanvas");
+            // var $ctx = el.getContext('2d');
+            // var id = $ctx.createImageData(1,1);
+            // for (let i = 0; i < image.getPixelCount(); ++i) {
+            //
+            //     let x = i % image.getWidth();
+            //     let y = toInt(i / image.getWidth());
+            //     let pos = ((y) * image.getWidth() + (x)) * 4;
+            //     let r = image.m_pixels[pos];
+            //     let g = image.m_pixels[pos+1];
+            //     let b = image.m_pixels[pos+2];
+            //     let a = image.m_pixels[pos+3];
+            //
+            //     //a=128;
+            //     $ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (a / 255) + ')';
+            //     $ctx.fillRect(dest.x + x + 260, dest.y + y+270, 1, 1);
+            // }
+        }
+    }]);
+
+    return Painter;
+}();
+
+var g_painter = new Painter();
+exports.g_painter = g_painter;
+
+/***/ }),
+
+/***/ 127:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -345,7 +401,7 @@ var Light = exports.Light = function Light() {
 
 /***/ }),
 
-/***/ 126:
+/***/ 128:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -362,7 +418,7 @@ var _const = __webpack_require__(13);
 
 var _log = __webpack_require__(20);
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
 var _position = __webpack_require__(69);
 
@@ -370,11 +426,11 @@ var _point = __webpack_require__(42);
 
 var _size = __webpack_require__(70);
 
-var _lightview = __webpack_require__(448);
+var _lightview = __webpack_require__(457);
 
 var _timer = __webpack_require__(92);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -450,6 +506,8 @@ var MapView = exports.MapView = function () {
         key: "draw",
         value: function draw() {
             console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
+            // dev
+            this.m_mustUpdateVisibleTilesCache = true;
             if (this.m_mustUpdateVisibleTilesCache || this.m_updateTilesPos > 0) {
                 console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
                 this.updateVisibleTilesCache(this.m_mustUpdateVisibleTilesCache ? 0 : this.m_updateTilesPos);
@@ -634,7 +692,7 @@ var MapView = exports.MapView = function () {
     }, {
         key: "updateVisibleTilesCache",
         value: function updateVisibleTilesCache(start) {
-            console.log('updateVisibleTilesCache', start);
+            ///  console.log('updateVisibleTilesCache', start)
             if (start == 0) {
                 this.m_cachedFirstVisibleFloor = this.calcFirstVisibleFloor();
                 this.m_cachedLastVisibleFloor = this.calcLastVisibleFloor();
@@ -788,7 +846,7 @@ var MapView = exports.MapView = function () {
             this.m_virtualCenterOffset = virtualCenterOffset;
             this.m_visibleCenterOffset = visibleCenterOffset;
             this.m_optimizedSize = optimizedSize;
-            console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
+            ///  console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
             this.requestVisibleTilesCacheUpdate();
         }
     }, {
@@ -840,316 +898,6 @@ var MapView = exports.MapView = function () {
 MapView.MAX_TILE_DRAWS = 32 * 32 * 7;
 var g_mapview = new MapView();
 exports.g_mapview = g_mapview;
-
-/***/ }),
-
-/***/ 127:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_resources = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inputfile = __webpack_require__(451);
-
-var _log = __webpack_require__(20);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Resources = function () {
-    function Resources() {
-        _classCallCheck(this, Resources);
-    }
-
-    _createClass(Resources, [{
-        key: "openFile",
-        value: function openFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var get, response, uInt8Array;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                get = function get(url) {
-                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                        return regeneratorRuntime.wrap(function _callee$(_context) {
-                                            while (1) {
-                                                switch (_context.prev = _context.next) {
-                                                    case 0:
-                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.responseType = 'arraybuffer';
-                                                            xhr.onload = function (e) {
-                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
-                                                            };
-                                                            xhr.onerror = function (e) {
-                                                                reject(e);
-                                                            };
-                                                            xhr.open('GET', url, true); //Async
-                                                            xhr.send();
-                                                        }));
-
-                                                    case 1:
-                                                    case "end":
-                                                        return _context.stop();
-                                                }
-                                            }
-                                        }, _callee, this);
-                                    }));
-                                };
-
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return get(file);
-
-                            case 4:
-                                response = _context2.sent;
-
-                                console.log('r', response);
-                                uInt8Array = new Uint8Array(response);
-                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
-
-                            case 10:
-                                _context2.prev = 10;
-                                _context2.t0 = _context2["catch"](1);
-
-                                _log.Log.debug('failed to openFile', _context2.t0);
-                                throw _context2.t0;
-
-                            case 14:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 10]]);
-            }));
-        }
-    }]);
-
-    return Resources;
-}();
-
-var g_resources = new Resources();
-exports.g_resources = g_resources;
-/*
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
-xhr.responseType = 'arraybuffer';
-xhr.onload = function(e) {
-  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
-  // var byte3 = uInt8Array[4]; // byte at offset 4
-console.log(uInt8Array);
-};
-
-xhr.send();
- */
-
-/***/ }),
-
-/***/ 128:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.BinaryDataReader = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _position = __webpack_require__(69);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var BinaryDataReader = exports.BinaryDataReader = function () {
-    function BinaryDataReader(msg) {
-        _classCallCheck(this, BinaryDataReader);
-
-        this.data = msg;
-        this.offset = 0;
-        this.size = this.data.byteLength;
-    }
-
-    _createClass(BinaryDataReader, [{
-        key: "getU8",
-        value: function getU8() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getUint8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "getU16",
-        value: function getU16() {
-            return this.getU8() + this.getU8() * 256;
-        }
-    }, {
-        key: "getU32",
-        value: function getU32() {
-            return this.getU16() + this.getU16() * 256 * 256;
-        }
-    }, {
-        key: "getU64",
-        value: function getU64() {
-            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-        }
-    }, {
-        key: "get8",
-        value: function get8() {
-            if (this.offset + 1 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "get16",
-        value: function get16() {
-            if (this.offset + 2 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt16(this.offset);
-            this.offset += 2;
-            return v;
-        }
-    }, {
-        key: "get32",
-        value: function get32() {
-            if (this.offset + 4 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt32(this.offset);
-            this.offset += 4;
-            return v;
-        }
-    }, {
-        key: "getDouble",
-        value: function getDouble() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getFloat64(this.offset);
-            this.offset += 8;
-            return v;
-        }
-    }, {
-        key: "getString",
-        value: function getString() {
-            var length = this.getU16();
-            var text = '';
-            for (var i = 0; i < length; i++) {
-                text += String.fromCharCode(this.getU8());
-            }
-            return text;
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
-        }
-    }, {
-        key: "getBytes",
-        value: function getBytes(bytesCount) {
-            if (bytesCount == -1) bytesCount = this.size - this.offset;
-            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
-            var bytes = this.data.buffer.slice(this.offset, this.offset + bytesCount);
-            this.offset += bytesCount;
-            return bytes;
-        }
-    }, {
-        key: "peekU8",
-        value: function peekU8() {
-            var v = this.getU8();
-            this.offset -= 1;
-            return v;
-        }
-    }, {
-        key: "peekU16",
-        value: function peekU16() {
-            var v = this.getU16();
-            this.offset -= 2;
-            return v;
-        }
-    }, {
-        key: "peekU32",
-        value: function peekU32() {
-            var v = this.getU32();
-            this.offset -= 4;
-            return v;
-        }
-    }, {
-        key: "peekU64",
-        value: function peekU64() {
-            var v = this.getU64();
-            this.offset -= 8;
-            return v;
-        }
-    }, {
-        key: "skipBytes",
-        value: function skipBytes(bytesCount) {
-            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
-            this.offset += bytesCount;
-        }
-    }, {
-        key: "skip",
-        value: function skip(bytesCount) {
-            this.skipBytes(bytesCount);
-        }
-    }, {
-        key: "getUnreadSize",
-        value: function getUnreadSize() {
-            return this.size - this.offset;
-        }
-    }, {
-        key: "getReadPos",
-        value: function getReadPos() {
-            return this.offset;
-        }
-    }, {
-        key: "setReadPos",
-        value: function setReadPos(offset) {
-            this.offset = offset;
-        }
-    }, {
-        key: "tell",
-        value: function tell() {
-            return this.getReadPos();
-        }
-    }, {
-        key: "seek",
-        value: function seek(offset) {
-            this.setReadPos(offset);
-        }
-    }]);
-
-    return BinaryDataReader;
-}();
 
 /***/ }),
 
@@ -1847,7 +1595,7 @@ var Tilestate = exports.Tilestate = undefined;
 
 /***/ }),
 
-/***/ 180:
+/***/ 130:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1856,11 +1604,29 @@ var Tilestate = exports.Tilestate = undefined;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Player = undefined;
+exports.Creature = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(124);
+var _thing = __webpack_require__(56);
+
+var _outfit = __webpack_require__(186);
+
+var _const = __webpack_require__(13);
+
+var _color = __webpack_require__(54);
+
+var _cachedtext = __webpack_require__(129);
+
+var _timer = __webpack_require__(92);
+
+var _point = __webpack_require__(42);
+
+var _proto = __webpack_require__(185);
+
+var _g_clock = __webpack_require__(93);
+
+var _thingtypemanager = __webpack_require__(63);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1868,69 +1634,328 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Player = exports.Player = function (_Creature) {
-    _inherits(Player, _Creature);
+var Creature = exports.Creature = function (_Thing) {
+    _inherits(Creature, _Thing);
 
-    function Player() {
-        _classCallCheck(this, Player);
+    function Creature() {
+        _classCallCheck(this, Creature);
 
-        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Creature.__proto__ || Object.getPrototypeOf(Creature)).call(this));
+
+        _this.m_id = 0;
+        _this.m_healthPercent = 100;
+        _this.m_direction = _const.Direction.South;
+        _this.m_outfit = new _outfit.Outfit();
+        _this.m_speed = 200;
+        _this.m_skull = _const.PlayerSkulls.SkullNone;
+        _this.m_shield = _const.PlayerShields.ShieldNone;
+        _this.m_emblem = _const.PlayerEmblems.EmblemNone;
+        _this.m_type = _proto.Proto.CreatureTypeUnknown;
+        _this.m_icon = _const.CreatureIcons.NpcIconNone;
+        _this.m_showShieldTexture = true;
+        _this.m_shieldBlink = false;
+        _this.m_passable = false;
+        _this.m_showTimedSquare = false;
+        _this.m_showStaticSquare = false;
+        _this.m_removed = true;
+        _this.m_nameCache = new _cachedtext.CachedText();
+        _this.m_informationColor = new _color.Color(96, 96, 96);
+        _this.m_outfitColor = new _color.Color(255, 255, 255);
+        //ScheduledEventPtr m_outfitColorUpdateEvent;
+        _this.m_outfitColorTimer = new _timer.Timer();
+        //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
+        // walk related
+        _this.m_walkAnimationPhase = 0;
+        _this.m_walkedPixels = 0;
+        _this.m_footStep = 0;
+        _this.m_walkTimer = new _timer.Timer();
+        _this.m_footTimer = new _timer.Timer();
+        _this.m_walking = false;
+        _this.m_allowAppearWalk = false;
+        _this.m_footStepDrawn = false;
+        //ScheduledEventPtr m_walkUpdateEvent;
+        //ScheduledEventPtr m_walkFinishAnimEvent;
+        //EventPtr m_disappearEvent;
+        _this.m_walkOffset = new _point.Point();
+        _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
+        _this.m_lastStepDirection = _const.Direction.InvalidDirection;
+        return _this;
     }
 
-    _createClass(Player, [{
-        key: 'isPlayer',
-        value: function isPlayer() {
+    _createClass(Creature, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, animate) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            if (!this.canBeSeen()) return;
+            var animationOffset = animate ? this.m_walkOffset : new _point.Point(0, 0);
+            /*
+                    if(m_showTimedSquare && animate) {
+                        g_painter.setColor(m_timedSquareColor);
+                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement() + 2)*scaleFactor, Size(28, 28)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
+                        g_painter.setColor(Color::white);
+                    }
+                     if(m_showStaticSquare && animate) {
+                        g_painter.setColor(m_staticSquareColor);
+                        g_painter.drawBoundingRect(Rect(dest + (animationOffset - getDisplacement())*scaleFactor, Size(Otc::TILE_PIXELS, Otc::TILE_PIXELS)*scaleFactor), std::max<int>((int)(2*scaleFactor), 1));
+                        g_painter.setColor(Color::white);
+                    }
+            */
+            this.internalDrawOutfit(dest.add(animationOffset).mul(scaleFactor), scaleFactor, animate, animate, this.m_direction);
+            ///  console.log('direct', this.m_name, this.m_direction);
+            this.m_footStepDrawn = true;
+            /*
+                    if(lightView) {
+                        Light light = rawGetThingType().getLight();
+                        if(m_light.intensity != light.intensity || m_light.color != light.color)
+                            light = m_light;
+                         // local player always have a minimum light in complete darkness
+                        if(isLocalPlayer() && (g_map.getLight().intensity < 64 || m_position.z > Otc::SEA_FLOOR)) {
+                            light.intensity = std::max<uint8>(light.intensity, 3);
+                            if(light.color == 0 || light.color > 215)
+                                light.color = 215;
+                        }
+                         if(light.intensity > 0)
+                            lightView.addLightSource(dest + (animationOffset + Point(16,16)) * scaleFactor, scaleFactor, light);
+                    }
+                    */
+        }
+    }, {
+        key: "internalDrawOutfit",
+        value: function internalDrawOutfit(dest, scaleFactor, animateWalk, animateIdle, direction) {
+            var lightView = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+
+            //g_painter.setColor(m_outfitColor);
+            // outfit is a real creature
+            if (this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryCreature) {
+                var animationPhase = animateWalk ? this.m_walkAnimationPhase : 0;
+                if (this.isAnimateAlways() && animateIdle) {
+                    var ticksPerFrame = 1000 / this.getAnimationPhases();
+                    animationPhase = _g_clock.g_clock.millis() % (ticksPerFrame * this.getAnimationPhases()) / ticksPerFrame;
+                }
+                // xPattern => creature direction
+                var xPattern = void 0;
+                if (direction == _const.Direction.NorthEast || direction == _const.Direction.SouthEast) xPattern = _const.Direction.East;else if (direction == _const.Direction.NorthWest || direction == _const.Direction.SouthWest) xPattern = _const.Direction.West;else xPattern = direction;
+                var zPattern = 0;
+                if (this.m_outfit.getMount() != 0) {
+                    var datType = _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getMount(), _const.ThingCategory.ThingCategoryCreature);
+                    dest = dest.sub(datType.getDisplacement().mul(scaleFactor));
+                    datType.draw(dest, scaleFactor, 0, xPattern, 0, 0, animationPhase, lightView);
+                    dest = dest.add(this.getDisplacement().mul(scaleFactor));
+                    zPattern = Math.min(1, this.getNumPatternZ() - 1);
+                }
+                // yPattern => creature addon
+                for (var yPattern = 0; yPattern < this.getNumPatternY(); yPattern++) {
+                    // continue if we dont have this addon
+                    if (yPattern > 0 && !(this.m_outfit.getAddons() & 1 << yPattern - 1)) continue;
+                    var _datType = this.rawGetThingType();
+                    //console.log('pp', dest, datType);
+                    _datType.draw(dest, scaleFactor, 0, xPattern, yPattern, zPattern, animationPhase, yPattern == 0 ? lightView : null);
+                    if (this.getLayers() > 1) {
+                        /*
+                        Color oldColor = g_painter.getColor();
+                        Painter::CompositionMode oldComposition = g_painter.getCompositionMode();
+                        g_painter.setCompositionMode(Painter::CompositionMode_Multiply);
+                        g_painter.setColor(m_outfit.getHeadColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskYellow, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getBodyColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskRed, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getLegsColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskGreen, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(m_outfit.getFeetColor());
+                        datType.draw(dest, scaleFactor, SpriteMaskBlue, xPattern, yPattern, zPattern, animationPhase);
+                        g_painter.setColor(oldColor);
+                        g_painter.setCompositionMode(oldComposition);
+                        */
+                    }
+                }
+                // outfit is a creature imitating an item or the invisible effect
+            }
+            /*
+            else  {
+                ThingType *type = g_things.rawGetThingType(m_outfit.getAuxId(), m_outfit.getCategory());
+                 int animationPhase = 0;
+                int animationPhases = type.getAnimationPhases();
+                int animateTicks = Otc::ITEM_TICKS_PER_FRAME;
+                 // when creature is an effect we cant render the first and last animation phase,
+                // instead we should loop in the phases between
+                if(m_outfit.getCategory() == ThingCategoryEffect) {
+                    animationPhases = std::max<int>(1, animationPhases-2);
+                    animateTicks = Otc::INVISIBLE_TICKS_PER_FRAME;
+                }
+                 if(animationPhases > 1) {
+                    if(animateIdle)
+                        animationPhase = (g_clock.millis() % (animateTicks * animationPhases)) / animateTicks;
+                    else
+                        animationPhase = animationPhases-1;
+                }
+                 if(m_outfit.getCategory() == ThingCategoryEffect)
+                    animationPhase = std::min<int>(animationPhase+1, animationPhases);
+                 type.draw(dest - (getDisplacement() * scaleFactor), scaleFactor, 0, 0, 0, 0, animationPhase, lightView);
+            }
+            */
+            //g_painter.resetColor();
+        }
+    }, {
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "getName",
+        value: function getName() {
+            return this.m_name;
+        }
+    }, {
+        key: "setName",
+        value: function setName(name) {
+            this.m_name = name;
+        }
+    }, {
+        key: "isCreature",
+        value: function isCreature() {
             return true;
+        }
+    }, {
+        key: "canBeSeen",
+        value: function canBeSeen() {
+            return !this.isInvisible() || this.isPlayer();
+        }
+    }, {
+        key: "isInvisible",
+        value: function isInvisible() {
+            return this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryEffect && this.m_outfit.getAuxId() == 13;
+        }
+    }, {
+        key: "addTimedSquare",
+        value: function addTimedSquare(arg0) {
+            // throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "hideStaticSquare",
+        value: function hideStaticSquare() {
+            //throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "showStaticSquare",
+        value: function showStaticSquare(arg0) {
+            // throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "setType",
+        value: function setType(type) {
+            this.m_type = type;
+        }
+    }, {
+        key: "allowAppearWalk",
+        value: function allowAppearWalk() {}
+    }, {
+        key: "setHealthPercent",
+        value: function setHealthPercent(healthPercent) {
+            this.m_healthPercent = healthPercent;
+        }
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "setOutfit",
+        value: function setOutfit(outfit) {
+            this.m_outfit = outfit;
+        }
+    }, {
+        key: "setSpeed",
+        value: function setSpeed(speed) {}
+    }, {
+        key: "setBaseSpeed",
+        value: function setBaseSpeed(baseSpeed) {}
+    }, {
+        key: "setSkull",
+        value: function setSkull(skull) {}
+    }, {
+        key: "setShield",
+        value: function setShield(shield) {}
+    }, {
+        key: "setPassable",
+        value: function setPassable(v) {}
+    }, {
+        key: "setEmblem",
+        value: function setEmblem(emblem) {}
+    }, {
+        key: "setIcon",
+        value: function setIcon(icon) {}
+    }, {
+        key: "setDirection",
+        value: function setDirection(direction) {
+            this.m_direction = direction;
+        }
+    }, {
+        key: "isWalking",
+        value: function isWalking() {
+            return this.m_walking;
+        }
+    }, {
+        key: "turn",
+        value: function turn(direction) {
+            ///  console.log('turn', this.m_name, direction)
+            if (!this.m_walking) this.setDirection(direction);else this.m_walkTurnDirection = direction;
+        }
+    }, {
+        key: "onAppear",
+        value: function onAppear() {
+            /*
+            // cancel any disappear event
+            if(m_disappearEvent) {
+                m_disappearEvent->cancel();
+                m_disappearEvent = nullptr;
+            }
+            */
+            // creature appeared the first time or wasn't seen for a long time
+            if (this.m_removed) {
+                this.stopWalk();
+                this.m_removed = false;
+                //callLuaField("onAppear");
+                // walk
+            } else if (!this.m_oldPosition.equals(this.m_position) && this.m_oldPosition.isInRange(this.m_position, 1, 1) && this.m_allowAppearWalk) {
+                this.m_allowAppearWalk = false;
+                this.walk(this.m_oldPosition, this.m_position);
+                //callLuaField("onWalk", m_oldPosition, m_position);
+                // teleport
+            } else if (this.m_oldPosition != this.m_position) {
+                this.stopWalk();
+                //callLuaField("onDisappear");
+                //callLuaField("onAppear");
+            } // else turn
+        }
+    }, {
+        key: "stopWalk",
+        value: function stopWalk() {
+            if (!this.m_walking) return;
+            // stops the walk right away
+            this.terminateWalk();
+        }
+    }, {
+        key: "getThingType",
+        value: function getThingType() {
+            return _thingtypemanager.g_things.getThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
+        }
+    }, {
+        key: "rawGetThingType",
+        value: function rawGetThingType() {
+            return _thingtypemanager.g_things.rawGetThingType(this.m_outfit.getId(), _const.ThingCategory.ThingCategoryCreature);
         }
     }]);
 
-    return Player;
-}(_creature.Creature);
+    return Creature;
+}(_thing.Thing);
 
 /***/ }),
 
 /***/ 181:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AwareRange = exports.AwareRange = function () {
-    function AwareRange() {
-        _classCallCheck(this, AwareRange);
-
-        this.top = 6;
-        this.right = 9;
-        this.bottom = 7;
-        this.left = 8;
-    }
-
-    _createClass(AwareRange, [{
-        key: "horizontal",
-        value: function horizontal() {
-            return this.left + this.right + 1;
-        }
-    }, {
-        key: "vertical",
-        value: function vertical() {
-            return this.top + this.bottom + 1;
-        }
-    }]);
-
-    return AwareRange;
-}();
-
-/***/ }),
-
-/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1945,9 +1970,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _log = __webpack_require__(20);
 
-var _color = __webpack_require__(57);
+var _color = __webpack_require__(54);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2046,7 +2071,7 @@ var Image = exports.Image = function () {
 
 /***/ }),
 
-/***/ 183:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2059,9 +2084,9 @@ exports.g_sprites = exports.SpriteManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _image = __webpack_require__(182);
+var _image = __webpack_require__(181);
 
-var _resources = __webpack_require__(127);
+var _resources = __webpack_require__(124);
 
 var _log = __webpack_require__(20);
 
@@ -2122,34 +2147,32 @@ var SpriteManager = exports.SpriteManager = function () {
                                 this.m_signature = 0;
                                 this.m_loaded = false;
                                 _context.prev = 3;
-
-                                console.log(new Date().getTime(), 'spr');
-                                _context.next = 7;
+                                _context.next = 6;
                                 return _resources.g_resources.openFile(file);
 
-                            case 7:
+                            case 6:
                                 this.m_spritesFile = _context.sent;
 
                                 this.m_signature = this.m_spritesFile.getU32();
                                 this.m_spritesCount = _game.g_game.getFeature(_const.GameFeature.GameSpritesU32) ? this.m_spritesFile.getU32() : this.m_spritesFile.getU16();
                                 this.m_spritesOffset = this.m_spritesFile.tell();
                                 this.m_loaded = true;
-                                console.log(new Date().getTime(), 'spr');
+                                ///  console.log(new Date().getTime(), 'spr');
                                 return _context.abrupt("return", true);
 
-                            case 16:
-                                _context.prev = 16;
+                            case 14:
+                                _context.prev = 14;
                                 _context.t0 = _context["catch"](3);
 
                                 _log.Log.error("Failed to load sprites from '%s': %s", file, _context.t0);
                                 return _context.abrupt("return", false);
 
-                            case 20:
+                            case 18:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[3, 16]]);
+                }, _callee, this, [[3, 14]]);
             }));
         }
     }, {
@@ -2228,81 +2251,7 @@ exports.g_sprites = g_sprites;
 
 /***/ }),
 
-/***/ 184:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Painter = function () {
-    function Painter() {
-        _classCallCheck(this, Painter);
-
-        this.app = new PIXI.Application(800, 600, { transparent: true });
-        document.body.appendChild(this.app.view);
-        this.app.stage.interactive = true;
-        //this.container = new PIXI.particles.ParticleContainer();
-        //this.app.stage.addChild(this.container);
-        this.app.stage.on('mousemove', onPointerMove).on('touchmove', onPointerMove);
-        function onPointerMove(eventData) {}
-    }
-
-    _createClass(Painter, [{
-        key: 'drawTexturedRect',
-        value: function drawTexturedRect(dest, texture, src) {
-            if (dest.isEmpty() || src.isEmpty()) {
-                console.log('empty', dest.width(), dest.height(), src);
-                throw new Error('empty');
-                //return;
-            }
-            var pixiTexture = texture.getPixiTexture(src);
-            var pixiSprite = new PIXI.Sprite(pixiTexture);
-            pixiSprite.position.x = dest.left() + 40;
-            pixiSprite.position.y = dest.top() + 30;
-            pixiSprite.width = pixiTexture.width;
-            pixiSprite.height = pixiTexture.height;
-            if (pixiSprite.width != pixiTexture.width || pixiSprite.height != pixiTexture.height) console.log('addchild', dest, src, pixiSprite.width, pixiSprite.height, pixiTexture.width, pixiTexture.height);
-            this.app.stage.addChild(pixiSprite);
-            // const awareRange = g_map.getAwareRange();
-            // var painterview = document.getElementById('painterview');
-            // let image : Image = texture.tmp_img;
-            // var el = <HTMLCanvasElement> document.getElementById("myCanvas");
-            // var $ctx = el.getContext('2d');
-            // var id = $ctx.createImageData(1,1);
-            // for (let i = 0; i < image.getPixelCount(); ++i) {
-            //
-            //     let x = i % image.getWidth();
-            //     let y = toInt(i / image.getWidth());
-            //     let pos = ((y) * image.getWidth() + (x)) * 4;
-            //     let r = image.m_pixels[pos];
-            //     let g = image.m_pixels[pos+1];
-            //     let b = image.m_pixels[pos+2];
-            //     let a = image.m_pixels[pos+3];
-            //
-            //     //a=128;
-            //     $ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (a / 255) + ')';
-            //     $ctx.fillRect(dest.x + x + 260, dest.y + y+270, 1, 1);
-            // }
-        }
-    }]);
-
-    return Painter;
-}();
-
-var g_painter = new Painter();
-exports.g_painter = g_painter;
-
-/***/ }),
-
-/***/ 185:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2673,7 +2622,7 @@ var Rect = exports.Rect = function () {
 
 /***/ }),
 
-/***/ 186:
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2682,221 +2631,40 @@ var Rect = exports.Rect = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Outfit = undefined;
+exports.InputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(13);
-
-var _color = __webpack_require__(57);
+var _binarydatareader = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Outfit = exports.Outfit = function () {
-    function Outfit() {
-        _classCallCheck(this, Outfit);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-        this.m_category = _const.ThingCategory.ThingCategoryCreature;
-        this.m_id = 128;
-        this.m_auxId = 0;
-        this.resetClothes();
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
+    _inherits(InputMessage, _BinaryDataReader);
+
+    function InputMessage() {
+        _classCallCheck(this, InputMessage);
+
+        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
     }
 
-    _createClass(Outfit, [{
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "getAuxId",
-        value: function getAuxId() {
-            return this.m_auxId;
-        }
-    }, {
-        key: "getHead",
-        value: function getHead() {
-            return this.m_head;
-        }
-    }, {
-        key: "getBody",
-        value: function getBody() {
-            return this.m_body;
-        }
-    }, {
-        key: "getLegs",
-        value: function getLegs() {
-            return this.m_legs;
-        }
-    }, {
-        key: "getFeet",
-        value: function getFeet() {
-            return this.m_feet;
-        }
-    }, {
-        key: "getAddons",
-        value: function getAddons() {
-            return this.m_addons;
-        }
-    }, {
-        key: "getMount",
-        value: function getMount() {
-            return this.m_mount;
-        }
-    }, {
-        key: "getCategory",
-        value: function getCategory() {
-            return this.m_category;
-        }
-    }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "setAuxId",
-        value: function setAuxId(id) {
-            this.m_auxId = id;
-        }
-    }, {
-        key: "setHead",
-        value: function setHead(head) {
-            this.m_head = head;
-            this.m_headColor = Outfit.getColor(head);
-        }
-    }, {
-        key: "setBody",
-        value: function setBody(body) {
-            this.m_body = body;
-            this.m_bodyColor = Outfit.getColor(body);
-        }
-    }, {
-        key: "setLegs",
-        value: function setLegs(legs) {
-            this.m_legs = legs;
-            this.m_legsColor = Outfit.getColor(legs);
-        }
-    }, {
-        key: "setFeet",
-        value: function setFeet(feet) {
-            this.m_feet = feet;
-            this.m_feetColor = Outfit.getColor(feet);
-        }
-    }, {
-        key: "setAddons",
-        value: function setAddons(addons) {
-            this.m_addons = addons;
-        }
-    }, {
-        key: "setMount",
-        value: function setMount(mount) {
-            this.m_mount = mount;
-        }
-    }, {
-        key: "setCategory",
-        value: function setCategory(category) {
-            this.m_category = category;
-        }
-    }, {
-        key: "resetClothes",
-        value: function resetClothes() {
-            this.setHead(0);
-            this.setBody(0);
-            this.setLegs(0);
-            this.setFeet(0);
-            this.setMount(0);
-        }
-    }], [{
-        key: "getColor",
-        value: function getColor(color) {
-            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
-            var loc1 = 0,
-                loc2 = 0,
-                loc3 = 0;
-            if (color % Outfit.HSI_H_STEPS != 0) {
-                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
-                loc2 = 1;
-                loc3 = 1;
-                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
-                    case 0:
-                        loc2 = 0.25;
-                        loc3 = 1.00;
-                        break;
-                    case 1:
-                        loc2 = 0.25;
-                        loc3 = 0.75;
-                        break;
-                    case 2:
-                        loc2 = 0.50;
-                        loc3 = 0.75;
-                        break;
-                    case 3:
-                        loc2 = 0.667;
-                        loc3 = 0.75;
-                        break;
-                    case 4:
-                        loc2 = 1.00;
-                        loc3 = 1.00;
-                        break;
-                    case 5:
-                        loc2 = 1.00;
-                        loc3 = 0.75;
-                        break;
-                    case 6:
-                        loc2 = 1.00;
-                        loc3 = 0.50;
-                        break;
-                }
-            } else {
-                loc1 = 0;
-                loc2 = 0;
-                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
-            }
-            if (loc3 == 0) return new _color.Color(0, 0, 0);
-            if (loc2 == 0) {
-                var loc7 = Math.floor(loc3 * 255);
-                return new _color.Color(loc7, loc7, loc7);
-            }
-            var red = 0,
-                green = 0,
-                blue = 0;
-            if (loc1 < 1.0 / 6.0) {
-                red = loc3;
-                blue = loc3 * (1 - loc2);
-                green = blue + (loc3 - blue) * 6 * loc1;
-            } else if (loc1 < 2.0 / 6.0) {
-                green = loc3;
-                blue = loc3 * (1 - loc2);
-                red = green - (loc3 - blue) * (6 * loc1 - 1);
-            } else if (loc1 < 3.0 / 6.0) {
-                green = loc3;
-                red = loc3 * (1 - loc2);
-                blue = red + (loc3 - red) * (6 * loc1 - 2);
-            } else if (loc1 < 4.0 / 6.0) {
-                blue = loc3;
-                red = loc3 * (1 - loc2);
-                green = blue - (loc3 - red) * (6 * loc1 - 3);
-            } else if (loc1 < 5.0 / 6.0) {
-                blue = loc3;
-                green = loc3 * (1 - loc2);
-                red = green + (loc3 - green) * (6 * loc1 - 4);
-            } else {
-                red = loc3;
-                green = loc3 * (1 - loc2);
-                blue = red - (loc3 - green) * (6 * loc1 - 5);
-            }
-            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
+    _createClass(InputMessage, [{
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
         }
     }]);
 
-    return Outfit;
-}();
-
-Outfit.HSI_SI_VALUES = 7;
-Outfit.HSI_H_STEPS = 19;
+    return InputMessage;
+}(_binarydatareader.BinaryDataReader);
 
 /***/ }),
 
-/***/ 187:
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3139,7 +2907,7 @@ exports.Proto = Proto;
 
 /***/ }),
 
-/***/ 188:
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3148,40 +2916,262 @@ exports.Proto = Proto;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.InputMessage = undefined;
+exports.Outfit = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _binarydatareader = __webpack_require__(128);
+var _const = __webpack_require__(13);
+
+var _color = __webpack_require__(54);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var Outfit = exports.Outfit = function () {
+    function Outfit() {
+        _classCallCheck(this, Outfit);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
-    _inherits(InputMessage, _BinaryDataReader);
-
-    function InputMessage() {
-        _classCallCheck(this, InputMessage);
-
-        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
+        this.m_category = _const.ThingCategory.ThingCategoryCreature;
+        this.m_id = 128;
+        this.m_auxId = 0;
+        this.resetClothes();
     }
 
-    _createClass(InputMessage, [{
-        key: "validateChecksum",
-        value: function validateChecksum() {
-            return true;
+    _createClass(Outfit, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "getAuxId",
+        value: function getAuxId() {
+            return this.m_auxId;
+        }
+    }, {
+        key: "getHead",
+        value: function getHead() {
+            return this.m_head;
+        }
+    }, {
+        key: "getBody",
+        value: function getBody() {
+            return this.m_body;
+        }
+    }, {
+        key: "getLegs",
+        value: function getLegs() {
+            return this.m_legs;
+        }
+    }, {
+        key: "getFeet",
+        value: function getFeet() {
+            return this.m_feet;
+        }
+    }, {
+        key: "getAddons",
+        value: function getAddons() {
+            return this.m_addons;
+        }
+    }, {
+        key: "getMount",
+        value: function getMount() {
+            return this.m_mount;
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return this.m_category;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(id) {
+            this.m_auxId = id;
+        }
+    }, {
+        key: "setHead",
+        value: function setHead(head) {
+            this.m_head = head;
+            this.m_headColor = Outfit.getColor(head);
+        }
+    }, {
+        key: "setBody",
+        value: function setBody(body) {
+            this.m_body = body;
+            this.m_bodyColor = Outfit.getColor(body);
+        }
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {
+            this.m_legs = legs;
+            this.m_legsColor = Outfit.getColor(legs);
+        }
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {
+            this.m_feet = feet;
+            this.m_feetColor = Outfit.getColor(feet);
+        }
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {
+            this.m_addons = addons;
+        }
+    }, {
+        key: "setMount",
+        value: function setMount(mount) {
+            this.m_mount = mount;
+        }
+    }, {
+        key: "setCategory",
+        value: function setCategory(category) {
+            this.m_category = category;
+        }
+    }, {
+        key: "resetClothes",
+        value: function resetClothes() {
+            this.setHead(0);
+            this.setBody(0);
+            this.setLegs(0);
+            this.setFeet(0);
+            this.setMount(0);
+        }
+    }], [{
+        key: "getColor",
+        value: function getColor(color) {
+            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
+            var loc1 = 0,
+                loc2 = 0,
+                loc3 = 0;
+            if (color % Outfit.HSI_H_STEPS != 0) {
+                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
+                loc2 = 1;
+                loc3 = 1;
+                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
+                    case 0:
+                        loc2 = 0.25;
+                        loc3 = 1.00;
+                        break;
+                    case 1:
+                        loc2 = 0.25;
+                        loc3 = 0.75;
+                        break;
+                    case 2:
+                        loc2 = 0.50;
+                        loc3 = 0.75;
+                        break;
+                    case 3:
+                        loc2 = 0.667;
+                        loc3 = 0.75;
+                        break;
+                    case 4:
+                        loc2 = 1.00;
+                        loc3 = 1.00;
+                        break;
+                    case 5:
+                        loc2 = 1.00;
+                        loc3 = 0.75;
+                        break;
+                    case 6:
+                        loc2 = 1.00;
+                        loc3 = 0.50;
+                        break;
+                }
+            } else {
+                loc1 = 0;
+                loc2 = 0;
+                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
+            }
+            if (loc3 == 0) return new _color.Color(0, 0, 0);
+            if (loc2 == 0) {
+                var loc7 = Math.floor(loc3 * 255);
+                return new _color.Color(loc7, loc7, loc7);
+            }
+            var red = 0,
+                green = 0,
+                blue = 0;
+            if (loc1 < 1.0 / 6.0) {
+                red = loc3;
+                blue = loc3 * (1 - loc2);
+                green = blue + (loc3 - blue) * 6 * loc1;
+            } else if (loc1 < 2.0 / 6.0) {
+                green = loc3;
+                blue = loc3 * (1 - loc2);
+                red = green - (loc3 - blue) * (6 * loc1 - 1);
+            } else if (loc1 < 3.0 / 6.0) {
+                green = loc3;
+                red = loc3 * (1 - loc2);
+                blue = red + (loc3 - red) * (6 * loc1 - 2);
+            } else if (loc1 < 4.0 / 6.0) {
+                blue = loc3;
+                red = loc3 * (1 - loc2);
+                green = blue - (loc3 - red) * (6 * loc1 - 3);
+            } else if (loc1 < 5.0 / 6.0) {
+                blue = loc3;
+                green = loc3 * (1 - loc2);
+                red = green + (loc3 - green) * (6 * loc1 - 4);
+            } else {
+                red = loc3;
+                green = loc3 * (1 - loc2);
+                blue = red - (loc3 - green) * (6 * loc1 - 5);
+            }
+            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
         }
     }]);
 
-    return InputMessage;
-}(_binarydatareader.BinaryDataReader);
+    return Outfit;
+}();
+
+Outfit.HSI_SI_VALUES = 7;
+Outfit.HSI_H_STEPS = 19;
 
 /***/ }),
 
-/***/ 189:
+/***/ 187:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AwareRange = exports.AwareRange = function () {
+    function AwareRange() {
+        _classCallCheck(this, AwareRange);
+
+        this.top = 6;
+        this.right = 9;
+        this.bottom = 7;
+        this.left = 8;
+    }
+
+    _createClass(AwareRange, [{
+        key: "horizontal",
+        value: function horizontal() {
+            return this.left + this.right + 1;
+        }
+    }, {
+        key: "vertical",
+        value: function vertical() {
+            return this.top + this.bottom + 1;
+        }
+    }]);
+
+    return AwareRange;
+}();
+
+/***/ }),
+
+/***/ 188:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3194,13 +3184,13 @@ exports.StaticText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
-var _rect = __webpack_require__(185);
+var _rect = __webpack_require__(183);
 
 var _point = __webpack_require__(42);
 
-var _color = __webpack_require__(57);
+var _color = __webpack_require__(54);
 
 var _const = __webpack_require__(13);
 
@@ -3208,7 +3198,7 @@ var _cachedtext = __webpack_require__(129);
 
 var _g_clock = __webpack_require__(93);
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
 var _log = __webpack_require__(20);
 
@@ -3394,16 +3384,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var log = function log() {
-    for (var _len = arguments.length, v = Array(_len), _key = 0; _key < _len; _key++) {
-        v[_key] = arguments[_key];
-    }
-
-    console.log.apply(this, v);
+    ///  console.log.apply(this, v);
     //$('#status').text(v.join(','));
 };
 var error = function error() {
-    for (var _len2 = arguments.length, v = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        v[_key2] = arguments[_key2];
+    for (var _len = arguments.length, v = Array(_len), _key = 0; _key < _len; _key++) {
+        v[_key] = arguments[_key];
     }
 
     console.error.apply(this, v);
@@ -3418,28 +3404,20 @@ var Log = exports.Log = function () {
     _createClass(Log, null, [{
         key: "log",
         value: function log() {
-            for (var _len3 = arguments.length, v = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-                v[_key3] = arguments[_key3];
-            }
-
-            console.log.apply(this, v);
+            ///  console.log.apply(this, v);
             //$('#status').text(v.join(','));
         }
     }, {
         key: "debug",
         value: function debug() {
-            for (var _len4 = arguments.length, v = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-                v[_key4] = arguments[_key4];
-            }
-
-            console.log.apply(this, v);
+            ///  console.log.apply(this, v);
             //$('#status').text(v.join(','));
         }
     }, {
         key: "error",
         value: function error() {
-            for (var _len5 = arguments.length, v = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-                v[_key5] = arguments[_key5];
+            for (var _len2 = arguments.length, v = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                v[_key2] = arguments[_key2];
             }
 
             console.error.apply(this, v);
@@ -3455,11 +3433,11 @@ exports.error = error;
 
 /***/ }),
 
-/***/ 241:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(242);
-module.exports = __webpack_require__(444);
+__webpack_require__(241);
+module.exports = __webpack_require__(443);
 
 
 /***/ }),
@@ -3477,21 +3455,21 @@ exports.g_game = exports.Game = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _localplayer = __webpack_require__(445);
+var _localplayer = __webpack_require__(444);
 
 var _const = __webpack_require__(13);
 
 var _thingtypemanager = __webpack_require__(63);
 
-var _protocolgame = __webpack_require__(455);
+var _protocolgame = __webpack_require__(451);
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
 var _container = __webpack_require__(465);
 
 var _chatbox = __webpack_require__(466);
 
-var _spritemanager = __webpack_require__(183);
+var _spritemanager = __webpack_require__(182);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3550,6 +3528,20 @@ var Game = exports.Game = function () {
         value: function processTalk(name, level, mode, message, channelId, creaturePos) {
             //console.log('Game.processTalk', name, level, mode, message, channelId, creaturePos);
             _chatbox.g_chat.handleMessage(name, level, mode, message, channelId, creaturePos);
+        }
+    }, {
+        key: "loadMovie",
+        value: function loadMovie(movie) {
+            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
+            this.m_protocolGame.loadMovie(movie);
+        }
+    }, {
+        key: "updateView",
+        value: function updateView(deltaTime) {}
+    }, {
+        key: "updateMovie",
+        value: function updateMovie(deltaTime) {
+            this.m_protocolGame.updateMovie(deltaTime * 5);
         }
     }, {
         key: "setClientVersion",
@@ -3942,12 +3934,6 @@ var Game = exports.Game = function () {
             this.m_protocolGame.login(accountName, accountPassword, '127.0.0.1', 7176, characterName, '', '');
         }
     }, {
-        key: "watchMovie",
-        value: function watchMovie(movie) {
-            this.m_protocolGame = new _protocolgame.ProtocolGame(this);
-            this.m_protocolGame.watch(movie);
-        }
-    }, {
         key: "formatCreatureName",
         value: function formatCreatureName(string) {
             return string;
@@ -4029,7 +4015,7 @@ var Point = exports.Point = function () {
 
 /***/ }),
 
-/***/ 444:
+/***/ 443:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4039,15 +4025,17 @@ var _const = __webpack_require__(13);
 
 var _game = __webpack_require__(38);
 
-var _resources = __webpack_require__(127);
+var _resources = __webpack_require__(124);
 
 var _movie = __webpack_require__(468);
 
-var _mapview = __webpack_require__(126);
+var _mapview = __webpack_require__(128);
 
 __webpack_require__(469);
 
 var _log = __webpack_require__(20);
+
+var _painter = __webpack_require__(126);
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -4105,15 +4093,23 @@ function test() {
 
                         _mapview.g_mapview.init();
                         _mapview.g_mapview.clear();
-                        _game.g_game.watchMovie(movie);
+                        _painter.g_painter.app.ticker.add(function (deltaTime) {
+                            _log.Log.debug('ticker', deltaTime);
+                            _game.g_game.updateMovie(deltaTime);
+                            _game.g_game.updateView(deltaTime);
+                            _log.Log.debug('drawstart', +new Date());
+                            _mapview.g_mapview.draw();
+                            _log.Log.debug('drawend', +new Date());
+                        });
+                        _game.g_game.loadMovie(movie);
                         _log.Log.debug('qwestart1', +new Date());
-                        _mapview.g_mapview.draw();
+                        //g_mapview.draw();
                         _log.Log.debug('qwestart2', +new Date());
-                        _mapview.g_mapview.draw();
+                        //g_mapview.draw();
                         _log.Log.debug('qweend', +new Date());
                         //g_game.login('', '', 'GOD Spider Local');
 
-                    case 17:
+                    case 16:
                     case "end":
                         return _context.stop();
                 }
@@ -4125,1233 +4121,14 @@ test();
 
 /***/ }),
 
+/***/ 444:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token (418:41)\n\n\u001b[0m \u001b[90m 416 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_preWalking \u001b[33m=\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 417 | \u001b[39m        \u001b[36mif\u001b[39m (\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_serverWalkEndEvent)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 418 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_serverWalkEndEvent \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m cancel()\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 419 | \u001b[39m        \u001b[90m// start walking to direction\u001b[39m\n \u001b[90m 420 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_lastPrewalkDone \u001b[33m=\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 421 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_lastPrewalkDestination \u001b[33m=\u001b[39m newPos\u001b[33m;\u001b[39m\u001b[0m\n");
+
+/***/ }),
+
 /***/ 445:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.LocalPlayer = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _player = __webpack_require__(180);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var LocalPlayer = exports.LocalPlayer = function (_Player) {
-    _inherits(LocalPlayer, _Player);
-
-    function LocalPlayer() {
-        _classCallCheck(this, LocalPlayer);
-
-        var _this = _possibleConstructorReturn(this, (LocalPlayer.__proto__ || Object.getPrototypeOf(LocalPlayer)).apply(this, arguments));
-
-        _this.m_known = false;
-        return _this;
-    }
-
-    _createClass(LocalPlayer, [{
-        key: 'isLocalPlayer',
-        value: function isLocalPlayer() {
-            return true;
-        }
-    }, {
-        key: 'setBlessings',
-        value: function setBlessings(blessings) {}
-    }, {
-        key: 'setKnown',
-        value: function setKnown(v) {
-            this.m_known = v;
-        }
-    }, {
-        key: 'isKnown',
-        value: function isKnown() {
-            return this.m_known;
-        }
-    }]);
-
-    return LocalPlayer;
-}(_player.Player);
-
-/***/ }),
-
-/***/ 446:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.TileBlock = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tile = __webpack_require__(447);
-
-var _helpers = __webpack_require__(56);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TileBlock = exports.TileBlock = function () {
-    function TileBlock() {
-        _classCallCheck(this, TileBlock);
-
-        this.m_tiles = [];
-    }
-
-    _createClass(TileBlock, [{
-        key: "create",
-        value: function create(pos) {
-            var tile = new _tile.Tile(pos);
-            this.m_tiles[this.getTileIndex(pos)] = tile;
-            return tile;
-        }
-    }, {
-        key: "getOrCreate",
-        value: function getOrCreate(pos) {
-            var tile = this.get(pos);
-            if (!tile) tile = this.create(pos);
-            return tile;
-        }
-    }, {
-        key: "get",
-        value: function get(pos) {
-            return this.m_tiles[this.getTileIndex(pos)];
-        }
-    }, {
-        key: "remove",
-        value: function remove(pos) {
-            this.m_tiles[this.getTileIndex(pos)] = null;
-        }
-    }, {
-        key: "getTileIndex",
-        value: function getTileIndex(pos) {
-            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
-        }
-    }, {
-        key: "getTiles",
-        value: function getTiles() {
-            return this.m_tiles;
-        }
-    }]);
-
-    return TileBlock;
-}();
-
-TileBlock.BLOCK_SIZE = 32;
-
-/***/ }),
-
-/***/ 447:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Tile = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _game = __webpack_require__(38);
-
-var _map = __webpack_require__(55);
-
-var _const = __webpack_require__(13);
-
-var _point = __webpack_require__(42);
-
-var _log = __webpack_require__(20);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var cc = 0;
-
-var Tile = exports.Tile = function () {
-    function Tile(position) {
-        _classCallCheck(this, Tile);
-
-        this.m_drawElevation = 0;
-        this.m_minimapColor = 0;
-        this.m_flags = 0;
-        this.m_walkingCreatures = [];
-        this.m_effects = [];
-        this.m_things = [];
-        this.m_position = position;
-    }
-
-    _createClass(Tile, [{
-        key: "draw",
-        value: function draw(dest, scaleFactor, drawFlags) {
-            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-            var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
-            //console.log('pp', this.m_position, dest, cc++);
-            // first bottom items
-            if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
-                this.m_drawElevation = 0;
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = this.m_things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var thing = _step.value;
-
-                        if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
-                        var toPos = dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
-                        //console.log('topos', toPos);
-                        thing.draw(toPos, scaleFactor, animate, lightView);
-                        this.m_drawElevation += thing.getElevation();
-                        if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-            var redrawPreviousTopW = 0;
-            var redrawPreviousTopH = 0;
-            // now common items in reverse order
-            if (drawFlags & _const.DrawFlags.DrawItems) {
-                for (var it = this.m_things.length - 1; it >= 0; --it) {
-                    var _thing = this.m_things[it];
-                    if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
-                    _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
-                    if (_thing.isLyingCorpse()) {
-                        redrawPreviousTopW = Math.max(_thing.getWidth(), redrawPreviousTopW);
-                        redrawPreviousTopH = Math.max(_thing.getHeight(), redrawPreviousTopH);
-                    }
-                    this.m_drawElevation += _thing.getElevation();
-                    if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
-                }
-            }
-            // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
-            /*
-                    if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
-                        let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
-                        if (topRedrawFlags) {
-                            for (let x = -redrawPreviousTopW; x <= 0; ++x) {
-                                for (let y = -redrawPreviousTopH; y <= 0; ++y) {
-                                    if (x == 0 && y == 0)
-                                        continue;
-                                    let tile = g_map.getTile(this.m_position.translated(x, y));
-                                    if (tile)
-                                        tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
-                                }
-                            }
-                        }
-                    }
-            */
-            // creatures
-            if (drawFlags & _const.DrawFlags.DrawCreatures) {
-                if (animate) {
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
-
-                    try {
-                        for (var _iterator2 = this.m_walkingCreatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var creature = _step2.value;
-
-                            creature.draw(new _point.Point(dest.x + ((creature.getPosition().x - this.m_position.x) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-                }
-                for (var _it = this.m_things.length - 1; _it >= 0; --_it) {
-                    var _thing2 = this.m_things[_it];
-                    //console.log(this.m_things, this.m_position, it);
-                    if (!_thing2.isCreature()) continue;
-                    var _creature = _thing2;
-                    if (_creature && (!_creature.isWalking() || !animate)) {
-                        //console.log('pp1', dest);
-                        _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
-                    }
-                }
-            }
-            /*
-                    // effects
-                    for(const EffectPtr& effect : m_effects)
-                    effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
-            */
-            // top items
-            if (drawFlags & _const.DrawFlags.DrawOnTop) {
-                var _iteratorNormalCompletion3 = true;
-                var _didIteratorError3 = false;
-                var _iteratorError3 = undefined;
-
-                try {
-                    for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                        var _thing3 = _step3.value;
-
-                        if (_thing3.isOnTop()) {
-                            _thing3.draw(dest, scaleFactor, animate, lightView);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError3 = true;
-                    _iteratorError3 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                            _iterator3.return();
-                        }
-                    } finally {
-                        if (_didIteratorError3) {
-                            throw _iteratorError3;
-                        }
-                    }
-                }
-            }
-            /*
-            // draw translucent light (for tiles beneath holes)
-            if(hasTranslucentLight() && lightView) {
-                Light light;
-                light.intensity = 1;
-                lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
-            }
-            */
-        }
-    }, {
-        key: "clean",
-        value: function clean() {
-            while (this.m_things.length > 0) {
-                this.removeThing(this.m_things.pop());
-            }
-        }
-    }, {
-        key: "addWalkingCreature",
-        value: function addWalkingCreature(creature) {
-            this.m_walkingCreatures.push(creature);
-        }
-    }, {
-        key: "removeWalkingCreature",
-        value: function removeWalkingCreature(creature) {
-            var index = this.m_walkingCreatures.indexOf(creature);
-            if (index > -1) {
-                this.m_walkingCreatures.splice(index, 1);
-            }
-        }
-    }, {
-        key: "addThing",
-        value: function addThing(thing, stackPos) {
-            if (!thing) return;
-            if (thing.isEffect()) {
-                if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
-            } else {
-                /*
-                            if (thing.isCreature())
-                                console.log('tile.addThing', thing, stackPos, this.m_things);
-                */
-                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
-                //if (thing.isItem() && thing.getId() == 2869)
-                //    Log.log('testthing add', new Date(g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, stackPos, this.m_things);
-                // priority                                    854
-                // 0 - ground,                        -.      -.
-                // 1 - ground borders                 -.      -.
-                // 2 - bottom (walls),                -.      -.
-                // 3 - on top (doors)                 -.      -.
-                // 4 - creatures, from top to bottom  <--      -.
-                // 5 - items, from top to bottom      <--      <--
-                if (stackPos < 0 || stackPos == 255) {
-                    var priority = thing.getStackPriority();
-                    // -1 or 255 => auto detect position
-                    // -2        => append
-                    var append = void 0;
-                    if (stackPos == -2) append = true;else {
-                        append = priority <= 3;
-                        // newer protocols does not store creatures in reverse order
-                        if (_game.g_game.getClientVersion() >= 854 && priority == 4) append = !append;
-                    }
-                    for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
-                        var otherPriority = this.m_things[stackPos].getStackPriority();
-                        //console.log('prior', stackPos, priority, otherPriority);
-                        if (append && otherPriority > priority || !append && otherPriority >= priority) break;
-                    }
-                } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
-                //this.m_things.insert(this.m_things.begin() + stackPos, thing);
-                this.m_things.splice(stackPos, 0, thing);
-                //this.m_things[stackPos] = thing;
-                if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
-                /*
-                // check stack priorities
-                // this code exists to find stackpos bugs faster
-                int lastPriority = 0;
-                for(const ThingPtr& thing :this.m_things) {
-                    int priority = thing.getStackPriority();
-                    assert(lastPriority <= priority);
-                    lastPriority = priority;
-                }
-                */
-            }
-            thing.setPosition(this.m_position);
-            thing.onAppear();
-            if (thing.isTranslucent()) this.checkTranslucentLight();
-        }
-    }, {
-        key: "removeThing",
-        value: function removeThing(thing) {
-            if (!thing) return false;
-            var removed = false;
-            if (thing.isEffect()) {
-                var index = this.m_effects.indexOf(thing);
-                if (index > -1) {
-                    this.m_effects.splice(index, 1);
-                    removed = true;
-                }
-            } else {
-                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
-                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing rem', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
-                var _index = this.m_things.indexOf(thing);
-                if (_index > -1) {
-                    this.m_things.splice(_index, 1);
-                    removed = true;
-                }
-            }
-            thing.onDisappear();
-            if (thing.isTranslucent()) this.checkTranslucentLight();
-            return removed;
-        }
-    }, {
-        key: "getThing",
-        value: function getThing(stackPos) {
-            if (stackPos >= 0 && stackPos < this.m_things.length) {
-                //Log.debug('tile thing: ', this.m_things[stackPos]);
-                return this.m_things[stackPos];
-            }
-            return null;
-        }
-    }, {
-        key: "getEffect",
-        value: function getEffect(id) {
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
-
-            try {
-                for (var _iterator4 = this.m_effects[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var effect = _step4.value;
-
-                    if (effect.getId() == id) return effect;
-                }
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
-                    }
-                }
-            }
-
-            return null;
-        }
-    }, {
-        key: "hasThing",
-        value: function hasThing(thing) {
-            return this.m_things.indexOf(thing) > -1;
-        }
-    }, {
-        key: "getThingStackPos",
-        value: function getThingStackPos(thing) {
-            /*
-            for(let stackpos = 0; stackpos < this.m_things.length; ++stackpos)
-            if(thing == this.m_things[stackpos])
-                return stackpos;
-             */
-            return this.m_things.indexOf(thing);
-        }
-    }, {
-        key: "getTopThing",
-        value: function getTopThing() {
-            if (this.isEmpty()) return null;
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
-
-            try {
-                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var thing = _step5.value;
-
-                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
-                }
-            } catch (err) {
-                _didIteratorError5 = true;
-                _iteratorError5 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                        _iterator5.return();
-                    }
-                } finally {
-                    if (_didIteratorError5) {
-                        throw _iteratorError5;
-                    }
-                }
-            }
-
-            return this.m_things[this.m_things.length - 1];
-        }
-    }, {
-        key: "getTopLookThing",
-        value: function getTopLookThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (!thing.isIgnoreLook() && !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) return thing;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopUseThing",
-        value: function getTopUseThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
-            }
-            for (var _i = 0; _i < this.m_things.length; ++_i) {
-                var _thing4 = this.m_things[_i];
-                if (!_thing4.isGround() && !_thing4.isGroundBorder() && !_thing4.isCreature() && !_thing4.isSplash()) return _thing4;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopCreature",
-        value: function getTopCreature() {
-            var creature = void 0;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isLocalPlayer()) creature = thing;else if (thing.isCreature() && !thing.isLocalPlayer()) return thing;
-            }
-            if (!creature && this.m_walkingCreatures.length > 0) creature = this.m_walkingCreatures[this.m_walkingCreatures.length - 1];
-            // check for walking creatures in tiles around
-            if (!creature) {
-                for (var xi = -1; xi <= 1; ++xi) {
-                    for (var yi = -1; yi <= 1; ++yi) {
-                        var pos = this.m_position.translated(xi, yi);
-                        if (pos == this.m_position) continue;
-                        var tile = _map.g_map.getTile(pos);
-                        if (tile) {
-                            var _iteratorNormalCompletion6 = true;
-                            var _didIteratorError6 = false;
-                            var _iteratorError6 = undefined;
-
-                            try {
-                                for (var _iterator6 = tile.getCreatures()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                                    var c = _step6.value;
-
-                                    /* todo */
-                                    //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
-                                    creature = c;
-                                    //}
-                                }
-                            } catch (err) {
-                                _didIteratorError6 = true;
-                                _iteratorError6 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                                        _iterator6.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError6) {
-                                        throw _iteratorError6;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return creature;
-        }
-    }, {
-        key: "getTopMoveThing",
-        value: function getTopMoveThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) {
-                    if (i > 0 && thing.isNotMoveable()) return this.m_things[i - 1];
-                    return thing;
-                }
-            }
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
-
-            try {
-                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                    var _thing5 = _step7.value;
-
-                    if (_thing5.isCreature()) return _thing5;
-                }
-            } catch (err) {
-                _didIteratorError7 = true;
-                _iteratorError7 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                        _iterator7.return();
-                    }
-                } finally {
-                    if (_didIteratorError7) {
-                        throw _iteratorError7;
-                    }
-                }
-            }
-
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopMultiUseThing",
-        value: function getTopMultiUseThing() {
-            if (this.isEmpty()) return null;
-            var topCreature = this.getTopCreature();
-            if (topCreature) return topCreature;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isForceUse()) return thing;
-            }
-            for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
-                var _thing6 = this.m_things[_i2];
-                if (!_thing6.isGround() && !_thing6.isGroundBorder() && !_thing6.isOnBottom() && !_thing6.isOnTop()) {
-                    if (_i2 > 0 && _thing6.isSplash()) return this.m_things[_i2 - 1];
-                    return _thing6;
-                }
-            }
-            for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
-                var _thing7 = this.m_things[_i3];
-                if (!_thing7.isGround() && !_thing7.isOnTop()) return _thing7;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return this.m_position;
-        }
-    }, {
-        key: "getDrawElevation",
-        value: function getDrawElevation() {
-            return this.m_drawElevation;
-        }
-    }, {
-        key: "getItems",
-        value: function getItems() {
-            var items = [];
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
-
-            try {
-                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                    var thing = _step8.value;
-
-                    if (thing.isItem()) items.push(thing);
-                }
-            } catch (err) {
-                _didIteratorError8 = true;
-                _iteratorError8 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                        _iterator8.return();
-                    }
-                } finally {
-                    if (_didIteratorError8) {
-                        throw _iteratorError8;
-                    }
-                }
-            }
-
-            return items;
-        }
-    }, {
-        key: "getCreatures",
-        value: function getCreatures() {
-            var creatures = [];
-            var _iteratorNormalCompletion9 = true;
-            var _didIteratorError9 = false;
-            var _iteratorError9 = undefined;
-
-            try {
-                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                    var thing = _step9.value;
-
-                    if (thing.isCreature()) creatures.push(thing);
-                }
-            } catch (err) {
-                _didIteratorError9 = true;
-                _iteratorError9 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                        _iterator9.return();
-                    }
-                } finally {
-                    if (_didIteratorError9) {
-                        throw _iteratorError9;
-                    }
-                }
-            }
-
-            return creatures;
-        }
-    }, {
-        key: "getWalkingCreatures",
-        value: function getWalkingCreatures() {
-            return this.m_walkingCreatures;
-        }
-    }, {
-        key: "getThings",
-        value: function getThings() {
-            return this.m_things;
-        }
-    }, {
-        key: "getGround",
-        value: function getGround() {
-            var firstObject = this.getThing(0);
-            if (!firstObject) return null;
-            if (firstObject.isGround() && firstObject.isItem()) return firstObject;
-            return null;
-        }
-    }, {
-        key: "getGroundSpeed",
-        value: function getGroundSpeed() {
-            var groundSpeed = 100;
-            var ground = this.getGround();
-            if (ground) groundSpeed = ground.getGroundSpeed();
-            return groundSpeed;
-        }
-    }, {
-        key: "getMinimapColorByte",
-        value: function getMinimapColorByte() {
-            var color = 255; // alpha
-            if (this.m_minimapColor != 0) return this.m_minimapColor;
-            var _iteratorNormalCompletion10 = true;
-            var _didIteratorError10 = false;
-            var _iteratorError10 = undefined;
-
-            try {
-                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                    var thing = _step10.value;
-
-                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
-                    var c = thing.getMinimapColor();
-                    if (c != 0) color = c;
-                }
-            } catch (err) {
-                _didIteratorError10 = true;
-                _iteratorError10 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                        _iterator10.return();
-                    }
-                } finally {
-                    if (_didIteratorError10) {
-                        throw _iteratorError10;
-                    }
-                }
-            }
-
-            return color;
-        }
-    }, {
-        key: "getThingCount",
-        value: function getThingCount() {
-            return this.m_things.length + this.m_effects.length;
-        }
-    }, {
-        key: "isPathable",
-        value: function isPathable() {
-            var _iteratorNormalCompletion11 = true;
-            var _didIteratorError11 = false;
-            var _iteratorError11 = undefined;
-
-            try {
-                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-                    var thing = _step11.value;
-
-                    if (thing.isNotPathable()) return false;
-                }
-            } catch (err) {
-                _didIteratorError11 = true;
-                _iteratorError11 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                        _iterator11.return();
-                    }
-                } finally {
-                    if (_didIteratorError11) {
-                        throw _iteratorError11;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isWalkable",
-        value: function isWalkable() {
-            var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            if (!this.getGround()) return false;
-            var _iteratorNormalCompletion12 = true;
-            var _didIteratorError12 = false;
-            var _iteratorError12 = undefined;
-
-            try {
-                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-                    var thing = _step12.value;
-
-                    if (thing.isNotWalkable()) return false;
-                    if (!ignoreCreatures) {
-                        if (thing.isCreature()) {
-                            var creature = thing;
-                            /* todo */
-                            //if(!creature.isPassable() && creature.canBeSeen())
-                            return false;
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError12 = true;
-                _iteratorError12 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
-                        _iterator12.return();
-                    }
-                } finally {
-                    if (_didIteratorError12) {
-                        throw _iteratorError12;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isFullGround",
-        value: function isFullGround() {
-            var ground = this.getGround();
-            if (ground && ground.isFullGround()) return true;
-            return false;
-        }
-    }, {
-        key: "isFullyOpaque",
-        value: function isFullyOpaque() {
-            var firstObject = this.getThing(0);
-            return firstObject && firstObject.isFullGround();
-        }
-    }, {
-        key: "isSingleDimension",
-        value: function isSingleDimension() {
-            if (this.m_walkingCreatures.length > 0) return false;
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
-
-            try {
-                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                    var thing = _step13.value;
-
-                    if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
-                }
-            } catch (err) {
-                _didIteratorError13 = true;
-                _iteratorError13 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                        _iterator13.return();
-                    }
-                } finally {
-                    if (_didIteratorError13) {
-                        throw _iteratorError13;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isLookPossible",
-        value: function isLookPossible() {
-            var _iteratorNormalCompletion14 = true;
-            var _didIteratorError14 = false;
-            var _iteratorError14 = undefined;
-
-            try {
-                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-                    var thing = _step14.value;
-
-                    if (thing.blockProjectile()) return false;
-                }
-            } catch (err) {
-                _didIteratorError14 = true;
-                _iteratorError14 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
-                        _iterator14.return();
-                    }
-                } finally {
-                    if (_didIteratorError14) {
-                        throw _iteratorError14;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isClickable",
-        value: function isClickable() {
-            var hasGround = false;
-            var hasOnBottom = false;
-            var hasIgnoreLook = false;
-            var _iteratorNormalCompletion15 = true;
-            var _didIteratorError15 = false;
-            var _iteratorError15 = undefined;
-
-            try {
-                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-                    var thing = _step15.value;
-
-                    if (thing.isGround()) hasGround = true;
-                    if (thing.isOnBottom()) hasOnBottom = true;
-                    if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
-                }
-            } catch (err) {
-                _didIteratorError15 = true;
-                _iteratorError15 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                        _iterator15.return();
-                    }
-                } finally {
-                    if (_didIteratorError15) {
-                        throw _iteratorError15;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "isEmpty",
-        value: function isEmpty() {
-            return this.m_things.length == 0;
-        }
-    }, {
-        key: "isDrawable",
-        value: function isDrawable() {
-            return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
-        }
-    }, {
-        key: "hasTranslucentLight",
-        value: function hasTranslucentLight() {
-            return (this.m_flags & _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
-        }
-    }, {
-        key: "mustHookSouth",
-        value: function mustHookSouth() {
-            var _iteratorNormalCompletion16 = true;
-            var _didIteratorError16 = false;
-            var _iteratorError16 = undefined;
-
-            try {
-                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-                    var thing = _step16.value;
-
-                    if (thing.isHookSouth()) return true;
-                }
-            } catch (err) {
-                _didIteratorError16 = true;
-                _iteratorError16 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
-                        _iterator16.return();
-                    }
-                } finally {
-                    if (_didIteratorError16) {
-                        throw _iteratorError16;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "mustHookEast",
-        value: function mustHookEast() {
-            var _iteratorNormalCompletion17 = true;
-            var _didIteratorError17 = false;
-            var _iteratorError17 = undefined;
-
-            try {
-                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-                    var thing = _step17.value;
-
-                    if (thing.isHookEast()) return true;
-                }
-            } catch (err) {
-                _didIteratorError17 = true;
-                _iteratorError17 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
-                        _iterator17.return();
-                    }
-                } finally {
-                    if (_didIteratorError17) {
-                        throw _iteratorError17;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "hasCreature",
-        value: function hasCreature() {
-            var _iteratorNormalCompletion18 = true;
-            var _didIteratorError18 = false;
-            var _iteratorError18 = undefined;
-
-            try {
-                for (var _iterator18 = this.m_things[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
-                    var thing = _step18.value;
-
-                    if (thing.isCreature()) return true;
-                }
-            } catch (err) {
-                _didIteratorError18 = true;
-                _iteratorError18 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
-                        _iterator18.return();
-                    }
-                } finally {
-                    if (_didIteratorError18) {
-                        throw _iteratorError18;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "limitsFloorsView",
-        value: function limitsFloorsView() {
-            var isFreeView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            // ground and walls limits the view
-            var firstThing = this.getThing(0);
-            if (isFreeView) {
-                if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom())) return true;
-            } else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom() && firstThing.blockProjectile())) return true;
-            return false;
-        }
-    }, {
-        key: "canErase",
-        value: function canErase() {
-            return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
-        }
-    }, {
-        key: "getElevation",
-        value: function getElevation() {
-            var elevation = 0;
-            var _iteratorNormalCompletion19 = true;
-            var _didIteratorError19 = false;
-            var _iteratorError19 = undefined;
-
-            try {
-                for (var _iterator19 = this.m_things[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
-                    var thing = _step19.value;
-
-                    if (thing.getElevation() > 0) elevation++;
-                }
-            } catch (err) {
-                _didIteratorError19 = true;
-                _iteratorError19 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion19 && _iterator19.return) {
-                        _iterator19.return();
-                    }
-                } finally {
-                    if (_didIteratorError19) {
-                        throw _iteratorError19;
-                    }
-                }
-            }
-
-            return elevation;
-        }
-    }, {
-        key: "hasElevation",
-        value: function hasElevation() {
-            var elevation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            return this.getElevation() >= elevation;
-        }
-    }, {
-        key: "overwriteMinimapColor",
-        value: function overwriteMinimapColor(color) {
-            this.m_minimapColor = color;
-        }
-    }, {
-        key: "remFlag",
-        value: function remFlag(flag) {
-            this.m_flags &= ~flag;
-        }
-    }, {
-        key: "setFlag",
-        value: function setFlag(flag) {
-            this.m_flags |= flag;
-        }
-    }, {
-        key: "setFlags",
-        value: function setFlags(flags) {
-            this.m_flags = flags;
-        }
-    }, {
-        key: "hasFlag",
-        value: function hasFlag(flag) {
-            return (this.m_flags & flag) == flag;
-        }
-    }, {
-        key: "getFlags",
-        value: function getFlags() {
-            return this.m_flags;
-        }
-    }, {
-        key: "checkTranslucentLight",
-        value: function checkTranslucentLight() {
-            if (this.m_position.z != _const.Otc.SEA_FLOOR) return;
-            var downPos = this.m_position.clone();
-            if (!downPos.down()) return;
-            var tile = _map.g_map.getOrCreateTile(downPos);
-            if (!tile) return;
-            var translucent = false;
-            var _iteratorNormalCompletion20 = true;
-            var _didIteratorError20 = false;
-            var _iteratorError20 = undefined;
-
-            try {
-                for (var _iterator20 = this.m_things[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
-                    var thing = _step20.value;
-
-                    if (thing.isTranslucent() || thing.hasLensHelp()) {
-                        translucent = true;
-                        break;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError20 = true;
-                _iteratorError20 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
-                        _iterator20.return();
-                    }
-                } finally {
-                    if (_didIteratorError20) {
-                        throw _iteratorError20;
-                    }
-                }
-            }
-
-            if (translucent) tile.m_flags |= _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;else tile.m_flags &= ~_const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
-        }
-    }]);
-
-    return Tile;
-}();
-
-Tile.MAX_THINGS = 10;
-
-/***/ }),
-
-/***/ 448:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var LightView = exports.LightView = function () {
-    function LightView() {
-        _classCallCheck(this, LightView);
-    }
-
-    _createClass(LightView, [{
-        key: "setId",
-        value: function setId(id) {}
-    }]);
-
-    return LightView;
-}();
-
-/***/ }),
-
-/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5370,31 +4147,31 @@ var _game = __webpack_require__(38);
 
 var _log = __webpack_require__(20);
 
-var _animator = __webpack_require__(450);
+var _animator = __webpack_require__(446);
 
-var _image = __webpack_require__(182);
+var _image = __webpack_require__(181);
 
-var _color = __webpack_require__(57);
+var _color = __webpack_require__(54);
 
-var _spritemanager = __webpack_require__(183);
+var _spritemanager = __webpack_require__(182);
 
-var _thingtypeattribs = __webpack_require__(452);
+var _thingtypeattribs = __webpack_require__(448);
 
 var _size = __webpack_require__(70);
 
 var _point = __webpack_require__(42);
 
-var _texture = __webpack_require__(453);
+var _texture = __webpack_require__(449);
 
-var _rect = __webpack_require__(185);
+var _rect = __webpack_require__(183);
 
-var _marketdata = __webpack_require__(454);
+var _marketdata = __webpack_require__(450);
 
-var _light = __webpack_require__(125);
+var _light = __webpack_require__(127);
 
-var _painter = __webpack_require__(184);
+var _painter = __webpack_require__(126);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6094,7 +4871,7 @@ ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue,
 
 /***/ }),
 
-/***/ 450:
+/***/ 446:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6158,7 +4935,7 @@ var Animator = exports.Animator = function () {
 
 /***/ }),
 
-/***/ 451:
+/***/ 447:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6169,7 +4946,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InputFile = undefined;
 
-var _binarydatareader = __webpack_require__(128);
+var _binarydatareader = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6191,7 +4968,7 @@ var InputFile = exports.InputFile = function (_BinaryDataReader) {
 
 /***/ }),
 
-/***/ 452:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6240,7 +5017,7 @@ var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
 
 /***/ }),
 
-/***/ 453:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6253,9 +5030,9 @@ exports.Texture = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _painter = __webpack_require__(184);
+var _painter = __webpack_require__(126);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6277,7 +5054,7 @@ var Texture = exports.Texture = function () {
         this.m_upsideDown = false;
         this.m_repeat = false;
         this.m_texture = [];
-        console.log('texture load', x++);
+        ///  console.log('texture load', x++);
         this.m_image = image;
     }
 
@@ -6287,12 +5064,12 @@ var Texture = exports.Texture = function () {
             var hash = src.hash();
             var textureCache = this.m_texture[hash];
             if (textureCache) {
-                console.log('getPixiTexture CACHE', +new Date(), y++);
+                ///  console.log('getPixiTexture CACHE', +new Date(), y++);
                 return textureCache;
             }
-            console.log('getPixiTexture LOAD', z++);
+            ///  console.log('getPixiTexture LOAD', z++);
             var graphics = new PIXI.Graphics();
-            console.log('kkk', src.left(), src.top(), src.right(), src.bottom(), src.height(), src.width());
+            ///  console.log('kkk', src.left(), src.top(),src.right(), src.bottom(), src.height(), src.width());
             graphics.width = src.width();
             graphics.height = src.height();
             graphics.beginFill(0, 0);
@@ -6345,7 +5122,7 @@ var Texture = exports.Texture = function () {
 
 /***/ }),
 
-/***/ 454:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6363,7 +5140,7 @@ var MarketData = exports.MarketData = function MarketData() {
 
 /***/ }),
 
-/***/ 455:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6378,7 +5155,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(456);
+var _protocol = __webpack_require__(452);
 
 var _game = __webpack_require__(38);
 
@@ -6386,45 +5163,45 @@ var _const = __webpack_require__(13);
 
 var _log = __webpack_require__(20);
 
-var _outputmessage = __webpack_require__(457);
+var _outputmessage = __webpack_require__(453);
 
-var _proto = __webpack_require__(187);
+var _proto = __webpack_require__(185);
 
-var _inputmessage = __webpack_require__(188);
+var _inputmessage = __webpack_require__(184);
 
 var _outfit = __webpack_require__(186);
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
 var _position = __webpack_require__(69);
 
-var _item = __webpack_require__(459);
+var _item = __webpack_require__(458);
 
-var _statictext = __webpack_require__(189);
+var _statictext = __webpack_require__(188);
 
 var _thingtypemanager = __webpack_require__(63);
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
-var _effect = __webpack_require__(460);
+var _effect = __webpack_require__(459);
 
-var _animatedtext = __webpack_require__(461);
+var _animatedtext = __webpack_require__(460);
 
-var _missile = __webpack_require__(462);
+var _missile = __webpack_require__(461);
 
-var _color2 = __webpack_require__(57);
+var _color2 = __webpack_require__(54);
 
-var _player = __webpack_require__(180);
+var _player = __webpack_require__(462);
 
-var _light = __webpack_require__(125);
+var _light = __webpack_require__(127);
 
 var _npc = __webpack_require__(463);
 
 var _monster = __webpack_require__(464);
 
-var _awarerange = __webpack_require__(181);
+var _awarerange = __webpack_require__(187);
 
-var _mapview = __webpack_require__(126);
+var _mapview = __webpack_require__(128);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6457,16 +5234,23 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
             this.connect(host, port);
         }
     }, {
-        key: "watch",
-        value: function watch(m_movieData) {
-            var i = 0;
+        key: "loadMovie",
+        value: function loadMovie(m_movieData) {
             this.m_localPlayer = _game.g_game.getLocalPlayer();
             _mapview.g_mapview.followCreature(_game.g_game.getLocalPlayer());
             this.m_movieData = m_movieData;
-            var first = 0;
+            this.m_movieCurrentTime = this.m_movieData.peekU64();
+            console.error('loaded packets');
+        }
+    }, {
+        key: "updateMovie",
+        value: function updateMovie(deltaTime) {
+            this.m_movieCurrentTime += deltaTime;
             while (this.m_movieData.getUnreadSize() >= 10) {
-                var timestamp = this.m_movieData.getU64();
-                var s = this.m_movieData.getReadPos();
+                var timestamp = this.m_movieData.peekU64();
+                if (timestamp > this.m_movieCurrentTime) break;
+                this.m_movieData.getU64(); // skip bytes
+                var currentReadPosition = this.m_movieData.getReadPos();
                 if (this.m_movieData.getUnreadSize() >= 10) {
                     var next = this.m_movieData.peekU64();
                     //console.log('com', timestamp, next);
@@ -6474,16 +5258,13 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
                         continue;
                     }
                 }
-                this.m_movieData.setReadPos(s);
+                this.m_movieData.setReadPos(currentReadPosition);
                 var packetLength = this.m_movieData.getU16();
                 var packetData = this.m_movieData.getBytes(packetLength);
-                if (first === 0) first = timestamp;
                 this.m_lastPacketTime = timestamp;
                 var inputMessage = new _inputmessage.InputMessage(new DataView(packetData));
                 this.parseMessage(inputMessage);
-                if (++i >= 120) break;
             }
-            console.error('loaded packets', i);
         }
     }, {
         key: "onConnect",
@@ -6913,7 +5694,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         value: function sendPingBack() {
             //console.log('sendPingBack');
             //console.log(g_map.m_floorMissiles);
-            console.log(_map.g_map.m_tileBlocks, _map.g_map.m_knownCreatures, this.m_localPlayer);
+            ///  console.log(g_map.m_tileBlocks, g_map.m_knownCreatures, this.m_localPlayer);
             if (this.m_localPlayer && this.m_localPlayer.isKnown()) {
                 var pos = this.m_localPlayer.getPosition();
                 for (var y = pos.y - 7; y <= pos.y + 7; y++) {
@@ -7910,27 +6691,27 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
         key: "parseRuleViolationChannel",
         value: function parseRuleViolationChannel(msg) {
             var channelId = msg.getU16();
-            console.log('g_game.processRuleViolationChannel', channelId);
+            ///  console.log('g_game.processRuleViolationChannel', channelId);
             //g_game.processRuleViolationChannel(channelId);
         }
     }, {
         key: "parseRuleViolationRemove",
         value: function parseRuleViolationRemove(msg) {
             var name = msg.getString();
-            console.log('g_game.processRuleViolationRemove', name);
+            ///  console.log('g_game.processRuleViolationRemove', name);
             //g_game.processRuleViolationRemove(name);
         }
     }, {
         key: "parseRuleViolationCancel",
         value: function parseRuleViolationCancel(msg) {
             var name = msg.getString();
-            console.log('g_game.processRuleViolationCancel', name);
+            ///  console.log('g_game.processRuleViolationCancel', name);
             //g_game.processRuleViolationCancel(name);
         }
     }, {
         key: "parseRuleViolationLock",
         value: function parseRuleViolationLock(msg) {
-            console.log('g_game.processRuleViolationLock');
+            ///  console.log('g_game.processRuleViolationLock');
             //g_game.processRuleViolationLock();
         }
     }, {
@@ -8600,7 +7381,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 456:
+/***/ 452:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8613,7 +7394,7 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(188);
+var _inputmessage = __webpack_require__(184);
 
 var _log = __webpack_require__(20);
 
@@ -8637,19 +7418,19 @@ var Protocol = exports.Protocol = function () {
             this.m_connection.binaryType = 'arraybuffer';
             var protocol = this;
             this.m_connection.onopen = function (evt) {
-                console.log('m_connectiononopen', evt);
+                ///  console.log('m_connectiononopen', evt);
                 protocol.onConnect(evt);
             };
             this.m_connection.onerror = function (evt) {
-                console.log('m_connectiononerror', evt);
+                ///  console.log('m_connectiononerror', evt);
                 protocol.onError(evt);
             };
             this.m_connection.onclose = function (evt) {
-                console.log('m_connectiononclose', evt);
+                ///  console.log('m_connectiononclose', evt);
                 protocol.onClose(evt);
             };
             this.m_connection.onmessage = function (evt) {
-                console.log('m_connectiononmessage', evt);
+                ///  console.log('m_connectiononmessage', evt);
                 protocol.internalRecvData(evt);
             };
         }
@@ -8767,7 +7548,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 457:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8780,7 +7561,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(458);
+var _jspack = __webpack_require__(454);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -8867,7 +7648,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 458:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9155,7 +7936,1168 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 459:
+/***/ 455:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TileBlock = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _tile = __webpack_require__(456);
+
+var _helpers = __webpack_require__(55);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TileBlock = exports.TileBlock = function () {
+    function TileBlock() {
+        _classCallCheck(this, TileBlock);
+
+        this.m_tiles = [];
+    }
+
+    _createClass(TileBlock, [{
+        key: "create",
+        value: function create(pos) {
+            var tile = new _tile.Tile(pos);
+            this.m_tiles[this.getTileIndex(pos)] = tile;
+            return tile;
+        }
+    }, {
+        key: "getOrCreate",
+        value: function getOrCreate(pos) {
+            var tile = this.get(pos);
+            if (!tile) tile = this.create(pos);
+            return tile;
+        }
+    }, {
+        key: "get",
+        value: function get(pos) {
+            return this.m_tiles[this.getTileIndex(pos)];
+        }
+    }, {
+        key: "remove",
+        value: function remove(pos) {
+            this.m_tiles[this.getTileIndex(pos)] = null;
+        }
+    }, {
+        key: "getTileIndex",
+        value: function getTileIndex(pos) {
+            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
+        }
+    }, {
+        key: "getTiles",
+        value: function getTiles() {
+            return this.m_tiles;
+        }
+    }]);
+
+    return TileBlock;
+}();
+
+TileBlock.BLOCK_SIZE = 32;
+
+/***/ }),
+
+/***/ 456:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Tile = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _game = __webpack_require__(38);
+
+var _map = __webpack_require__(57);
+
+var _const = __webpack_require__(13);
+
+var _point = __webpack_require__(42);
+
+var _log = __webpack_require__(20);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var cc = 0;
+
+var Tile = exports.Tile = function () {
+    function Tile(position) {
+        _classCallCheck(this, Tile);
+
+        this.m_drawElevation = 0;
+        this.m_minimapColor = 0;
+        this.m_flags = 0;
+        this.m_walkingCreatures = [];
+        this.m_effects = [];
+        this.m_things = [];
+        this.m_position = position;
+    }
+
+    _createClass(Tile, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, drawFlags) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
+            //console.log('pp', this.m_position, dest, cc++);
+            // first bottom items
+            if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
+                this.m_drawElevation = 0;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.m_things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var thing = _step.value;
+
+                        if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
+                        var toPos = dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
+                        //console.log('topos', toPos);
+                        thing.draw(toPos, scaleFactor, animate, lightView);
+                        this.m_drawElevation += thing.getElevation();
+                        if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+            var redrawPreviousTopW = 0;
+            var redrawPreviousTopH = 0;
+            // now common items in reverse order
+            if (drawFlags & _const.DrawFlags.DrawItems) {
+                for (var it = this.m_things.length - 1; it >= 0; --it) {
+                    var _thing = this.m_things[it];
+                    if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
+                    _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    if (_thing.isLyingCorpse()) {
+                        redrawPreviousTopW = Math.max(_thing.getWidth(), redrawPreviousTopW);
+                        redrawPreviousTopH = Math.max(_thing.getHeight(), redrawPreviousTopH);
+                    }
+                    this.m_drawElevation += _thing.getElevation();
+                    if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                }
+            }
+            // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
+            /*
+                    if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+                        let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
+                        if (topRedrawFlags) {
+                            for (let x = -redrawPreviousTopW; x <= 0; ++x) {
+                                for (let y = -redrawPreviousTopH; y <= 0; ++y) {
+                                    if (x == 0 && y == 0)
+                                        continue;
+                                    let tile = g_map.getTile(this.m_position.translated(x, y));
+                                    if (tile)
+                                        tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                                }
+                            }
+                        }
+                    }
+            */
+            // creatures
+            if (drawFlags & _const.DrawFlags.DrawCreatures) {
+                if (animate) {
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = this.m_walkingCreatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var creature = _step2.value;
+
+                            creature.draw(new _point.Point(dest.x + ((creature.getPosition().x - this.m_position.x) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                }
+                for (var _it = this.m_things.length - 1; _it >= 0; --_it) {
+                    var _thing2 = this.m_things[_it];
+                    //console.log(this.m_things, this.m_position, it);
+                    if (!_thing2.isCreature()) continue;
+                    var _creature = _thing2;
+                    if (_creature && (!_creature.isWalking() || !animate)) {
+                        //console.log('pp1', dest);
+                        _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    }
+                }
+            }
+            /*
+                    // effects
+                    for(const EffectPtr& effect : m_effects)
+                    effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
+            */
+            // top items
+            if (drawFlags & _const.DrawFlags.DrawOnTop) {
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                    for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var _thing3 = _step3.value;
+
+                        if (_thing3.isOnTop()) {
+                            _thing3.draw(dest, scaleFactor, animate, lightView);
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
+                        }
+                    } finally {
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
+                        }
+                    }
+                }
+            }
+            /*
+            // draw translucent light (for tiles beneath holes)
+            if(hasTranslucentLight() && lightView) {
+                Light light;
+                light.intensity = 1;
+                lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
+            }
+            */
+        }
+    }, {
+        key: "clean",
+        value: function clean() {
+            while (this.m_things.length > 0) {
+                this.removeThing(this.m_things.pop());
+            }
+        }
+    }, {
+        key: "addWalkingCreature",
+        value: function addWalkingCreature(creature) {
+            this.m_walkingCreatures.push(creature);
+        }
+    }, {
+        key: "removeWalkingCreature",
+        value: function removeWalkingCreature(creature) {
+            var index = this.m_walkingCreatures.indexOf(creature);
+            if (index > -1) {
+                this.m_walkingCreatures.splice(index, 1);
+            }
+        }
+    }, {
+        key: "addThing",
+        value: function addThing(thing, stackPos) {
+            if (!thing) return;
+            if (thing.isEffect()) {
+                if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
+            } else {
+                // priority                                    854
+                // 0 - ground,                        -.      -.
+                // 1 - ground borders                 -.      -.
+                // 2 - bottom (walls),                -.      -.
+                // 3 - on top (doors)                 -.      -.
+                // 4 - creatures, from top to bottom  <--      -.
+                // 5 - items, from top to bottom      <--      <--
+                if (stackPos < 0 || stackPos == 255) {
+                    var priority = thing.getStackPriority();
+                    // -1 or 255 => auto detect position
+                    // -2        => append
+                    var append = void 0;
+                    if (stackPos == -2) append = true;else {
+                        append = priority <= 3;
+                        // newer protocols does not store creatures in reverse order
+                        if (_game.g_game.getClientVersion() >= 854 && priority == 4) append = !append;
+                    }
+                    for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
+                        var otherPriority = this.m_things[stackPos].getStackPriority();
+                        //console.log('prior', stackPos, priority, otherPriority);
+                        if (append && otherPriority > priority || !append && otherPriority >= priority) break;
+                    }
+                } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
+                //this.m_things.insert(this.m_things.begin() + stackPos, thing);
+                this.m_things.splice(stackPos, 0, thing);
+                //this.m_things[stackPos] = thing;
+                if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
+                /*
+                // check stack priorities
+                // this code exists to find stackpos bugs faster
+                int lastPriority = 0;
+                for(const ThingPtr& thing :this.m_things) {
+                    int priority = thing.getStackPriority();
+                    assert(lastPriority <= priority);
+                    lastPriority = priority;
+                }
+                */
+            }
+            thing.setPosition(this.m_position);
+            thing.onAppear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+        }
+    }, {
+        key: "removeThing",
+        value: function removeThing(thing) {
+            if (!thing) return false;
+            var removed = false;
+            if (thing.isEffect()) {
+                var index = this.m_effects.indexOf(thing);
+                if (index > -1) {
+                    this.m_effects.splice(index, 1);
+                    removed = true;
+                }
+            } else {
+                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing rem', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
+                var _index = this.m_things.indexOf(thing);
+                if (_index > -1) {
+                    this.m_things.splice(_index, 1);
+                    removed = true;
+                }
+            }
+            thing.onDisappear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+            return removed;
+        }
+    }, {
+        key: "getThing",
+        value: function getThing(stackPos) {
+            if (stackPos >= 0 && stackPos < this.m_things.length) {
+                //Log.debug('tile thing: ', this.m_things[stackPos]);
+                return this.m_things[stackPos];
+            }
+            return null;
+        }
+    }, {
+        key: "getEffect",
+        value: function getEffect(id) {
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = this.m_effects[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var effect = _step4.value;
+
+                    if (effect.getId() == id) return effect;
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+
+            return null;
+        }
+    }, {
+        key: "hasThing",
+        value: function hasThing(thing) {
+            return this.m_things.indexOf(thing) > -1;
+        }
+    }, {
+        key: "getThingStackPos",
+        value: function getThingStackPos(thing) {
+            /*
+            for(let stackpos = 0; stackpos < this.m_things.length; ++stackpos)
+            if(thing == this.m_things[stackpos])
+                return stackpos;
+             */
+            return this.m_things.indexOf(thing);
+        }
+    }, {
+        key: "getTopThing",
+        value: function getTopThing() {
+            if (this.isEmpty()) return null;
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
+
+            try {
+                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var thing = _step5.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
+                }
+            } catch (err) {
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
+                }
+            }
+
+            return this.m_things[this.m_things.length - 1];
+        }
+    }, {
+        key: "getTopLookThing",
+        value: function getTopLookThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isIgnoreLook() && !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) return thing;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopUseThing",
+        value: function getTopUseThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
+            }
+            for (var _i = 0; _i < this.m_things.length; ++_i) {
+                var _thing4 = this.m_things[_i];
+                if (!_thing4.isGround() && !_thing4.isGroundBorder() && !_thing4.isCreature() && !_thing4.isSplash()) return _thing4;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopCreature",
+        value: function getTopCreature() {
+            var creature = void 0;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isLocalPlayer()) creature = thing;else if (thing.isCreature() && !thing.isLocalPlayer()) return thing;
+            }
+            if (!creature && this.m_walkingCreatures.length > 0) creature = this.m_walkingCreatures[this.m_walkingCreatures.length - 1];
+            // check for walking creatures in tiles around
+            if (!creature) {
+                for (var xi = -1; xi <= 1; ++xi) {
+                    for (var yi = -1; yi <= 1; ++yi) {
+                        var pos = this.m_position.translated(xi, yi);
+                        if (pos == this.m_position) continue;
+                        var tile = _map.g_map.getTile(pos);
+                        if (tile) {
+                            var _iteratorNormalCompletion6 = true;
+                            var _didIteratorError6 = false;
+                            var _iteratorError6 = undefined;
+
+                            try {
+                                for (var _iterator6 = tile.getCreatures()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                                    var c = _step6.value;
+
+                                    /* todo */
+                                    //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
+                                    creature = c;
+                                    //}
+                                }
+                            } catch (err) {
+                                _didIteratorError6 = true;
+                                _iteratorError6 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                                        _iterator6.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError6) {
+                                        throw _iteratorError6;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return creature;
+        }
+    }, {
+        key: "getTopMoveThing",
+        value: function getTopMoveThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) {
+                    if (i > 0 && thing.isNotMoveable()) return this.m_things[i - 1];
+                    return thing;
+                }
+            }
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
+
+            try {
+                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var _thing5 = _step7.value;
+
+                    if (_thing5.isCreature()) return _thing5;
+                }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
+                }
+            }
+
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopMultiUseThing",
+        value: function getTopMultiUseThing() {
+            if (this.isEmpty()) return null;
+            var topCreature = this.getTopCreature();
+            if (topCreature) return topCreature;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse()) return thing;
+            }
+            for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
+                var _thing6 = this.m_things[_i2];
+                if (!_thing6.isGround() && !_thing6.isGroundBorder() && !_thing6.isOnBottom() && !_thing6.isOnTop()) {
+                    if (_i2 > 0 && _thing6.isSplash()) return this.m_things[_i2 - 1];
+                    return _thing6;
+                }
+            }
+            for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
+                var _thing7 = this.m_things[_i3];
+                if (!_thing7.isGround() && !_thing7.isOnTop()) return _thing7;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return this.m_position;
+        }
+    }, {
+        key: "getDrawElevation",
+        value: function getDrawElevation() {
+            return this.m_drawElevation;
+        }
+    }, {
+        key: "getItems",
+        value: function getItems() {
+            var items = [];
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
+
+            try {
+                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var thing = _step8.value;
+
+                    if (thing.isItem()) items.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
+                    }
+                } finally {
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
+                    }
+                }
+            }
+
+            return items;
+        }
+    }, {
+        key: "getCreatures",
+        value: function getCreatures() {
+            var creatures = [];
+            var _iteratorNormalCompletion9 = true;
+            var _didIteratorError9 = false;
+            var _iteratorError9 = undefined;
+
+            try {
+                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                    var thing = _step9.value;
+
+                    if (thing.isCreature()) creatures.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError9 = true;
+                _iteratorError9 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                        _iterator9.return();
+                    }
+                } finally {
+                    if (_didIteratorError9) {
+                        throw _iteratorError9;
+                    }
+                }
+            }
+
+            return creatures;
+        }
+    }, {
+        key: "getWalkingCreatures",
+        value: function getWalkingCreatures() {
+            return this.m_walkingCreatures;
+        }
+    }, {
+        key: "getThings",
+        value: function getThings() {
+            return this.m_things;
+        }
+    }, {
+        key: "getGround",
+        value: function getGround() {
+            var firstObject = this.getThing(0);
+            if (!firstObject) return null;
+            if (firstObject.isGround() && firstObject.isItem()) return firstObject;
+            return null;
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            var groundSpeed = 100;
+            var ground = this.getGround();
+            if (ground) groundSpeed = ground.getGroundSpeed();
+            return groundSpeed;
+        }
+    }, {
+        key: "getMinimapColorByte",
+        value: function getMinimapColorByte() {
+            var color = 255; // alpha
+            if (this.m_minimapColor != 0) return this.m_minimapColor;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
+
+            try {
+                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var thing = _step10.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
+                    var c = thing.getMinimapColor();
+                    if (c != 0) color = c;
+                }
+            } catch (err) {
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
+                    }
+                } finally {
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
+                    }
+                }
+            }
+
+            return color;
+        }
+    }, {
+        key: "getThingCount",
+        value: function getThingCount() {
+            return this.m_things.length + this.m_effects.length;
+        }
+    }, {
+        key: "isPathable",
+        value: function isPathable() {
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
+
+            try {
+                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var thing = _step11.value;
+
+                    if (thing.isNotPathable()) return false;
+                }
+            } catch (err) {
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
+                    }
+                } finally {
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isWalkable",
+        value: function isWalkable() {
+            var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            if (!this.getGround()) return false;
+            var _iteratorNormalCompletion12 = true;
+            var _didIteratorError12 = false;
+            var _iteratorError12 = undefined;
+
+            try {
+                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                    var thing = _step12.value;
+
+                    if (thing.isNotWalkable()) return false;
+                    if (!ignoreCreatures) {
+                        if (thing.isCreature()) {
+                            var creature = thing;
+                            /* todo */
+                            //if(!creature.isPassable() && creature.canBeSeen())
+                            return false;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError12 = true;
+                _iteratorError12 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                        _iterator12.return();
+                    }
+                } finally {
+                    if (_didIteratorError12) {
+                        throw _iteratorError12;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            var ground = this.getGround();
+            if (ground && ground.isFullGround()) return true;
+            return false;
+        }
+    }, {
+        key: "isFullyOpaque",
+        value: function isFullyOpaque() {
+            var firstObject = this.getThing(0);
+            return firstObject && firstObject.isFullGround();
+        }
+    }, {
+        key: "isSingleDimension",
+        value: function isSingleDimension() {
+            if (this.m_walkingCreatures.length > 0) return false;
+            var _iteratorNormalCompletion13 = true;
+            var _didIteratorError13 = false;
+            var _iteratorError13 = undefined;
+
+            try {
+                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                    var thing = _step13.value;
+
+                    if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
+                }
+            } catch (err) {
+                _didIteratorError13 = true;
+                _iteratorError13 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                        _iterator13.return();
+                    }
+                } finally {
+                    if (_didIteratorError13) {
+                        throw _iteratorError13;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isLookPossible",
+        value: function isLookPossible() {
+            var _iteratorNormalCompletion14 = true;
+            var _didIteratorError14 = false;
+            var _iteratorError14 = undefined;
+
+            try {
+                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+                    var thing = _step14.value;
+
+                    if (thing.blockProjectile()) return false;
+                }
+            } catch (err) {
+                _didIteratorError14 = true;
+                _iteratorError14 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                        _iterator14.return();
+                    }
+                } finally {
+                    if (_didIteratorError14) {
+                        throw _iteratorError14;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isClickable",
+        value: function isClickable() {
+            var hasGround = false;
+            var hasOnBottom = false;
+            var hasIgnoreLook = false;
+            var _iteratorNormalCompletion15 = true;
+            var _didIteratorError15 = false;
+            var _iteratorError15 = undefined;
+
+            try {
+                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                    var thing = _step15.value;
+
+                    if (thing.isGround()) hasGround = true;
+                    if (thing.isOnBottom()) hasOnBottom = true;
+                    if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
+                }
+            } catch (err) {
+                _didIteratorError15 = true;
+                _iteratorError15 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                        _iterator15.return();
+                    }
+                } finally {
+                    if (_didIteratorError15) {
+                        throw _iteratorError15;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.m_things.length == 0;
+        }
+    }, {
+        key: "isDrawable",
+        value: function isDrawable() {
+            return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
+        }
+    }, {
+        key: "hasTranslucentLight",
+        value: function hasTranslucentLight() {
+            return (this.m_flags & _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
+        }
+    }, {
+        key: "mustHookSouth",
+        value: function mustHookSouth() {
+            var _iteratorNormalCompletion16 = true;
+            var _didIteratorError16 = false;
+            var _iteratorError16 = undefined;
+
+            try {
+                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                    var thing = _step16.value;
+
+                    if (thing.isHookSouth()) return true;
+                }
+            } catch (err) {
+                _didIteratorError16 = true;
+                _iteratorError16 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                        _iterator16.return();
+                    }
+                } finally {
+                    if (_didIteratorError16) {
+                        throw _iteratorError16;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "mustHookEast",
+        value: function mustHookEast() {
+            var _iteratorNormalCompletion17 = true;
+            var _didIteratorError17 = false;
+            var _iteratorError17 = undefined;
+
+            try {
+                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                    var thing = _step17.value;
+
+                    if (thing.isHookEast()) return true;
+                }
+            } catch (err) {
+                _didIteratorError17 = true;
+                _iteratorError17 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                        _iterator17.return();
+                    }
+                } finally {
+                    if (_didIteratorError17) {
+                        throw _iteratorError17;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "hasCreature",
+        value: function hasCreature() {
+            var _iteratorNormalCompletion18 = true;
+            var _didIteratorError18 = false;
+            var _iteratorError18 = undefined;
+
+            try {
+                for (var _iterator18 = this.m_things[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+                    var thing = _step18.value;
+
+                    if (thing.isCreature()) return true;
+                }
+            } catch (err) {
+                _didIteratorError18 = true;
+                _iteratorError18 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                        _iterator18.return();
+                    }
+                } finally {
+                    if (_didIteratorError18) {
+                        throw _iteratorError18;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "limitsFloorsView",
+        value: function limitsFloorsView() {
+            var isFreeView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            // ground and walls limits the view
+            var firstThing = this.getThing(0);
+            if (isFreeView) {
+                if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom())) return true;
+            } else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom() && firstThing.blockProjectile())) return true;
+            return false;
+        }
+    }, {
+        key: "canErase",
+        value: function canErase() {
+            return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            var elevation = 0;
+            var _iteratorNormalCompletion19 = true;
+            var _didIteratorError19 = false;
+            var _iteratorError19 = undefined;
+
+            try {
+                for (var _iterator19 = this.m_things[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+                    var thing = _step19.value;
+
+                    if (thing.getElevation() > 0) elevation++;
+                }
+            } catch (err) {
+                _didIteratorError19 = true;
+                _iteratorError19 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion19 && _iterator19.return) {
+                        _iterator19.return();
+                    }
+                } finally {
+                    if (_didIteratorError19) {
+                        throw _iteratorError19;
+                    }
+                }
+            }
+
+            return elevation;
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            var elevation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            return this.getElevation() >= elevation;
+        }
+    }, {
+        key: "overwriteMinimapColor",
+        value: function overwriteMinimapColor(color) {
+            this.m_minimapColor = color;
+        }
+    }, {
+        key: "remFlag",
+        value: function remFlag(flag) {
+            this.m_flags &= ~flag;
+        }
+    }, {
+        key: "setFlag",
+        value: function setFlag(flag) {
+            this.m_flags |= flag;
+        }
+    }, {
+        key: "setFlags",
+        value: function setFlags(flags) {
+            this.m_flags = flags;
+        }
+    }, {
+        key: "hasFlag",
+        value: function hasFlag(flag) {
+            return (this.m_flags & flag) == flag;
+        }
+    }, {
+        key: "getFlags",
+        value: function getFlags() {
+            return this.m_flags;
+        }
+    }, {
+        key: "checkTranslucentLight",
+        value: function checkTranslucentLight() {
+            if (this.m_position.z != _const.Otc.SEA_FLOOR) return;
+            var downPos = this.m_position.clone();
+            if (!downPos.down()) return;
+            var tile = _map.g_map.getOrCreateTile(downPos);
+            if (!tile) return;
+            var translucent = false;
+            var _iteratorNormalCompletion20 = true;
+            var _didIteratorError20 = false;
+            var _iteratorError20 = undefined;
+
+            try {
+                for (var _iterator20 = this.m_things[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+                    var thing = _step20.value;
+
+                    if (thing.isTranslucent() || thing.hasLensHelp()) {
+                        translucent = true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError20 = true;
+                _iteratorError20 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                        _iterator20.return();
+                    }
+                } finally {
+                    if (_didIteratorError20) {
+                        throw _iteratorError20;
+                    }
+                }
+            }
+
+            if (translucent) tile.m_flags |= _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;else tile.m_flags &= ~_const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
+        }
+    }]);
+
+    return Tile;
+}();
+
+Tile.MAX_THINGS = 10;
+
+/***/ }),
+
+/***/ 457:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LightView = exports.LightView = function () {
+    function LightView() {
+        _classCallCheck(this, LightView);
+    }
+
+    _createClass(LightView, [{
+        key: "setId",
+        value: function setId(id) {}
+    }]);
+
+    return LightView;
+}();
+
+/***/ }),
+
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9168,7 +9110,7 @@ exports.Item = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
 var _thingtypemanager = __webpack_require__(63);
 
@@ -9180,7 +9122,7 @@ var _game = __webpack_require__(38);
 
 var _g_clock = __webpack_require__(93);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9381,7 +9323,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 460:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9394,7 +9336,7 @@ exports.Effect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
 var _thingtypemanager = __webpack_require__(63);
 
@@ -9485,7 +9427,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 461:
+/***/ 460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9498,11 +9440,11 @@ exports.AnimatedText = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
 var _timer = __webpack_require__(92);
 
-var _color = __webpack_require__(57);
+var _color = __webpack_require__(54);
 
 var _cachedtext = __webpack_require__(129);
 
@@ -9634,7 +9576,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 462:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9647,7 +9589,7 @@ exports.Missile = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thing = __webpack_require__(54);
+var _thing = __webpack_require__(56);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9689,6 +9631,48 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
+/***/ 462:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Player = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(130);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Player = exports.Player = function (_Creature) {
+    _inherits(Player, _Creature);
+
+    function Player() {
+        _classCallCheck(this, Player);
+
+        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+    }
+
+    _createClass(Player, [{
+        key: 'isPlayer',
+        value: function isPlayer() {
+            return true;
+        }
+    }]);
+
+    return Player;
+}(_creature.Creature);
+
+/***/ }),
+
 /***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9702,7 +9686,7 @@ exports.Npc = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(124);
+var _creature = __webpack_require__(130);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9744,7 +9728,7 @@ exports.Monster = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(124);
+var _creature = __webpack_require__(130);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9825,9 +9809,9 @@ var _log = __webpack_require__(20);
 
 var _game = __webpack_require__(38);
 
-var _statictext = __webpack_require__(189);
+var _statictext = __webpack_require__(188);
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10275,7 +10259,7 @@ var ChatboxTab = exports.ChatboxTab = function () {
             var content = document.createElement('div');
             content.innerText = creatureName + ', ' + text;
             div.appendChild(content);
-             console.log('tab', this.name, text, speaktype, creatureName);
+            ///  console.log('tab', this.name, text, speaktype, creatureName);
             */
         }
     }]);
@@ -10296,7 +10280,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Movie = undefined;
 
-var _binarydatareader = __webpack_require__(128);
+var _binarydatareader = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10327,11 +10311,198 @@ var Movie = exports.Movie = function (_BinaryDataReader) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Color = exports.Color = function () {
+    //Color() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f) { }
+    //Color(uint32 rgba) { setRGBA(rgba); }
+    function Color() {
+        _classCallCheck(this, Color);
+
+        if (arguments.length == 0) {
+            this.m_r = 1;
+            this.m_g = 1;
+            this.m_b = 1;
+            this.m_a = 1;
+            return;
+        } else if (arguments.length == 1) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number') {
+                this.setRGBA(arguments.length <= 0 ? undefined : arguments[0]);
+                return;
+            }
+        } else if (arguments.length == 3) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
+                var r = (arguments.length <= 0 ? undefined : arguments[0]) / 255;
+                var g = (arguments.length <= 1 ? undefined : arguments[1]) / 255;
+                var b = (arguments.length <= 2 ? undefined : arguments[2]) / 255;
+                this.m_r = r;
+                this.m_g = g;
+                this.m_b = b;
+                this.m_a = 1;
+                return;
+            }
+        }
+        throw new Error('Unhandled constructor');
+    }
+
+    _createClass(Color, [{
+        key: 'equals',
+        value: function equals(otherColor) {
+            return this.m_r == otherColor.m_r && this.m_g == otherColor.m_g && this.m_b == otherColor.m_b && this.m_a == otherColor.m_a;
+        }
+    }, {
+        key: 'clone',
+        value: function clone() {
+            var color = new Color();
+            color.m_r = this.m_r;
+            color.m_g = this.m_g;
+            color.m_b = this.m_b;
+            color.m_a = this.m_a;
+            return color;
+        }
+    }, {
+        key: 'a',
+        value: function a() {
+            return this.m_a * 255.0;
+        }
+    }, {
+        key: 'b',
+        value: function b() {
+            return this.m_b * 255.0;
+        }
+    }, {
+        key: 'g',
+        value: function g() {
+            return this.m_g * 255.0;
+        }
+    }, {
+        key: 'r',
+        value: function r() {
+            return this.m_r * 255.0;
+        }
+    }, {
+        key: 'aF',
+        value: function aF() {
+            return this.m_a;
+        }
+    }, {
+        key: 'bF',
+        value: function bF() {
+            return this.m_b;
+        }
+    }, {
+        key: 'gF',
+        value: function gF() {
+            return this.m_g;
+        }
+    }, {
+        key: 'rF',
+        value: function rF() {
+            return this.m_r;
+        }
+    }, {
+        key: 'rgba',
+        value: function rgba() {
+            return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
+        }
+    }, {
+        key: 'setRGBA',
+        value: function setRGBA(r) {
+            var g = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+            var b = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+            var a = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 255;
+
+            if (g == -1) {
+                var rgba = r;
+                this.setRGBA(rgba >> 0 & 0xff, rgba >> 8 & 0xff, rgba >> 16 & 0xff, rgba >> 24 & 0xff);
+            } else {
+                this.m_r = r / 255;
+                this.m_g = g / 255;
+                this.m_b = b / 255;
+                this.m_a = a / 255;
+            }
+        }
+    }], [{
+        key: 'from8bit',
+        value: function from8bit(color) {
+            if (color >= 216 || color <= 0) return new Color(0, 0, 0);
+            var r = parseInt((color / 36).toString()) % 6 * 51;
+            var g = parseInt((color / 6).toString()) % 6 * 51;
+            var b = color % 6 * 51;
+            return new Color(r, g, b);
+        }
+    }]);
+
+    return Color;
+}();
+
+Color.alpha = 0x00000000;
+Color.white = 0xffffffff;
+Color.black = 0xff000000;
+Color.red = 0xff0000ff;
+Color.darkRed = 0xff000080;
+Color.green = 0xff00ff00;
+Color.darkGreen = 0xff008000;
+Color.blue = 0xffff0000;
+Color.darkBlue = 0xff800000;
+Color.pink = 0xffff00ff;
+Color.darkPink = 0xff800080;
+Color.yellow = 0xff00ffff;
+Color.darkYellow = 0xff008080;
+Color.teal = 0xffffff00;
+Color.darkTeal = 0xff808000;
+Color.gray = 0xffa0a0a0;
+Color.darkGray = 0xff808080;
+Color.lightGray = 0xffc0c0c0;
+Color.orange = 0xff008cff;
+
+/***/ }),
+
+/***/ 55:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
+};
+var clamp = function clamp(number, lower, upper) {
+    if (number === number) {
+        if (upper !== undefined) {
+            number = number <= upper ? number : upper;
+        }
+        if (lower !== undefined) {
+            number = number >= lower ? number : lower;
+        }
+    }
+    return number;
+};
+exports.toInt = toInt;
+exports.clamp = clamp;
+
+/***/ }),
+
+/***/ 56:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.Thing = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _map = __webpack_require__(55);
+var _map = __webpack_require__(57);
 
 var _game = __webpack_require__(38);
 
@@ -10780,7 +10951,7 @@ var Thing = exports.Thing = function () {
 
 /***/ }),
 
-/***/ 55:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10795,19 +10966,19 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _position = __webpack_require__(69);
 
-var _awarerange = __webpack_require__(181);
+var _awarerange = __webpack_require__(187);
 
-var _light = __webpack_require__(125);
+var _light = __webpack_require__(127);
 
-var _tileblock = __webpack_require__(446);
+var _tileblock = __webpack_require__(455);
 
 var _const = __webpack_require__(13);
 
 var _point = __webpack_require__(42);
 
-var _helpers = __webpack_require__(56);
+var _helpers = __webpack_require__(55);
 
-var _mapview = __webpack_require__(126);
+var _mapview = __webpack_require__(128);
 
 var _game = __webpack_require__(38);
 
@@ -10877,7 +11048,7 @@ var Map = exports.Map = function () {
         value: function getCreatureById(id) {
             //console.log('known creatures', g_map.m_knownCreatures);
             if (!g_map.m_knownCreatures[id]) {
-                console.log('known creatures failed', id, g_map.m_knownCreatures);
+                ///  console.log('known creatures failed', id, g_map.m_knownCreatures);
                 throw new Error('get ' + id);
             }
             return g_map.m_knownCreatures[id];
@@ -11334,193 +11505,6 @@ exports.g_map = g_map;
 
 /***/ }),
 
-/***/ 56:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toInt = function toInt(int) {
-    return parseInt(int.toString());
-};
-var clamp = function clamp(number, lower, upper) {
-    if (number === number) {
-        if (upper !== undefined) {
-            number = number <= upper ? number : upper;
-        }
-        if (lower !== undefined) {
-            number = number >= lower ? number : lower;
-        }
-    }
-    return number;
-};
-exports.toInt = toInt;
-exports.clamp = clamp;
-
-/***/ }),
-
-/***/ 57:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Color = exports.Color = function () {
-    //Color() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f) { }
-    //Color(uint32 rgba) { setRGBA(rgba); }
-    function Color() {
-        _classCallCheck(this, Color);
-
-        if (arguments.length == 0) {
-            this.m_r = 1;
-            this.m_g = 1;
-            this.m_b = 1;
-            this.m_a = 1;
-            return;
-        } else if (arguments.length == 1) {
-            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number') {
-                this.setRGBA(arguments.length <= 0 ? undefined : arguments[0]);
-                return;
-            }
-        } else if (arguments.length == 3) {
-            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
-                var r = (arguments.length <= 0 ? undefined : arguments[0]) / 255;
-                var g = (arguments.length <= 1 ? undefined : arguments[1]) / 255;
-                var b = (arguments.length <= 2 ? undefined : arguments[2]) / 255;
-                this.m_r = r;
-                this.m_g = g;
-                this.m_b = b;
-                this.m_a = 1;
-                return;
-            }
-        }
-        throw new Error('Unhandled constructor');
-    }
-
-    _createClass(Color, [{
-        key: 'equals',
-        value: function equals(otherColor) {
-            return this.m_r == otherColor.m_r && this.m_g == otherColor.m_g && this.m_b == otherColor.m_b && this.m_a == otherColor.m_a;
-        }
-    }, {
-        key: 'clone',
-        value: function clone() {
-            var color = new Color();
-            color.m_r = this.m_r;
-            color.m_g = this.m_g;
-            color.m_b = this.m_b;
-            color.m_a = this.m_a;
-            return color;
-        }
-    }, {
-        key: 'a',
-        value: function a() {
-            return this.m_a * 255.0;
-        }
-    }, {
-        key: 'b',
-        value: function b() {
-            return this.m_b * 255.0;
-        }
-    }, {
-        key: 'g',
-        value: function g() {
-            return this.m_g * 255.0;
-        }
-    }, {
-        key: 'r',
-        value: function r() {
-            return this.m_r * 255.0;
-        }
-    }, {
-        key: 'aF',
-        value: function aF() {
-            return this.m_a;
-        }
-    }, {
-        key: 'bF',
-        value: function bF() {
-            return this.m_b;
-        }
-    }, {
-        key: 'gF',
-        value: function gF() {
-            return this.m_g;
-        }
-    }, {
-        key: 'rF',
-        value: function rF() {
-            return this.m_r;
-        }
-    }, {
-        key: 'rgba',
-        value: function rgba() {
-            return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
-        }
-    }, {
-        key: 'setRGBA',
-        value: function setRGBA(r) {
-            var g = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-            var b = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
-            var a = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 255;
-
-            if (g == -1) {
-                var rgba = r;
-                this.setRGBA(rgba >> 0 & 0xff, rgba >> 8 & 0xff, rgba >> 16 & 0xff, rgba >> 24 & 0xff);
-            } else {
-                this.m_r = r / 255;
-                this.m_g = g / 255;
-                this.m_b = b / 255;
-                this.m_a = a / 255;
-            }
-        }
-    }], [{
-        key: 'from8bit',
-        value: function from8bit(color) {
-            if (color >= 216 || color <= 0) return new Color(0, 0, 0);
-            var r = parseInt((color / 36).toString()) % 6 * 51;
-            var g = parseInt((color / 6).toString()) % 6 * 51;
-            var b = color % 6 * 51;
-            return new Color(r, g, b);
-        }
-    }]);
-
-    return Color;
-}();
-
-Color.alpha = 0x00000000;
-Color.white = 0xffffffff;
-Color.black = 0xff000000;
-Color.red = 0xff0000ff;
-Color.darkRed = 0xff000080;
-Color.green = 0xff00ff00;
-Color.darkGreen = 0xff008000;
-Color.blue = 0xffff0000;
-Color.darkBlue = 0xff800000;
-Color.pink = 0xffff00ff;
-Color.darkPink = 0xff800080;
-Color.yellow = 0xff00ffff;
-Color.darkYellow = 0xff008080;
-Color.teal = 0xffffff00;
-Color.darkTeal = 0xff808000;
-Color.gray = 0xffa0a0a0;
-Color.darkGray = 0xff808080;
-Color.lightGray = 0xffc0c0c0;
-Color.orange = 0xff008cff;
-
-/***/ }),
-
 /***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11534,13 +11518,13 @@ exports.g_things = exports.ThingTypeManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thingtype = __webpack_require__(449);
+var _thingtype = __webpack_require__(445);
 
 var _const = __webpack_require__(13);
 
 var _log = __webpack_require__(20);
 
-var _resources = __webpack_require__(127);
+var _resources = __webpack_require__(124);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11629,12 +11613,10 @@ var ThingTypeManager = exports.ThingTypeManager = function () {
                                 this.m_datSignature = 0;
                                 this.m_contentRevision = 0;
                                 _context.prev = 3;
-
-                                console.log(new Date().getTime(), this.m_thingTypes);
-                                _context.next = 7;
+                                _context.next = 6;
                                 return _resources.g_resources.openFile(file);
 
-                            case 7:
+                            case 6:
                                 fin = _context.sent;
 
                                 this.m_datSignature = fin.getU32();
@@ -11659,23 +11641,23 @@ var ThingTypeManager = exports.ThingTypeManager = function () {
                                     }
                                 }
                                 this.m_datLoaded = true;
-                                console.log(new Date().getTime(), this.m_thingTypes);
+                                ///  console.log(new Date().getTime(), this.m_thingTypes);
                                 //g_lua.callGlobalField("g_things", "onLoadDat", file);
                                 return _context.abrupt("return", true);
 
-                            case 17:
-                                _context.prev = 17;
+                            case 15:
+                                _context.prev = 15;
                                 _context.t0 = _context["catch"](3);
 
                                 _log.Log.error("Failed to read dat '%s': %s'", file, _context.t0);
                                 return _context.abrupt("return", false);
 
-                            case 21:
+                            case 19:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[3, 17]]);
+                }, _callee, this, [[3, 15]]);
             }));
         }
     }]);
@@ -12046,4 +12028,4 @@ exports.g_clock = g_clock;
 
 /***/ })
 
-},[241]);
+},[240]);
