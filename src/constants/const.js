@@ -15,6 +15,96 @@ export var Otc;
     Otc[Otc["MAX_AUTOWALK_STEPS_RETRY"] = 10] = "MAX_AUTOWALK_STEPS_RETRY";
     Otc[Otc["MAX_AUTOWALK_DIST"] = 127] = "MAX_AUTOWALK_DIST";
 })(Otc || (Otc = {}));
+export var BonusType;
+(function (BonusType) {
+    BonusType[BonusType["BONUS_DAMAGE_BOOST"] = 0] = "BONUS_DAMAGE_BOOST";
+    BonusType[BonusType["BONUS_DAMAGE_REDUCTION"] = 1] = "BONUS_DAMAGE_REDUCTION";
+    BonusType[BonusType["BONUS_XP_BONUS"] = 2] = "BONUS_XP_BONUS";
+    BonusType[BonusType["BONUS_IMPROVED_LOOT"] = 3] = "BONUS_IMPROVED_LOOT";
+    BonusType[BonusType["BONUS_NONE"] = 4] = "BONUS_NONE";
+})(BonusType || (BonusType = {}));
+export var PreyState;
+(function (PreyState) {
+    PreyState[PreyState["STATE_LOCKED"] = 0] = "STATE_LOCKED";
+    PreyState[PreyState["STATE_INACTIVE"] = 1] = "STATE_INACTIVE";
+    PreyState[PreyState["STATE_ACTIVE"] = 2] = "STATE_ACTIVE";
+    PreyState[PreyState["STATE_SELECTION"] = 3] = "STATE_SELECTION";
+    PreyState[PreyState["STATE_SELECTION_CHANGE_MONSTER"] = 4] = "STATE_SELECTION_CHANGE_MONSTER";
+})(PreyState || (PreyState = {}));
+export var UnlockState;
+(function (UnlockState) {
+    UnlockState[UnlockState["UNLOCK_PREMIUM_OR_STORE"] = 0] = "UNLOCK_PREMIUM_OR_STORE";
+    UnlockState[UnlockState["UNLOCK_STORE"] = 1] = "UNLOCK_STORE";
+    UnlockState[UnlockState["UNLOCK_NONE"] = 2] = "UNLOCK_NONE";
+})(UnlockState || (UnlockState = {}));
+export var MarketAction;
+(function (MarketAction) {
+    MarketAction[MarketAction["Buy"] = 0] = "Buy";
+    MarketAction[MarketAction["Sell"] = 1] = "Sell";
+})(MarketAction || (MarketAction = {}));
+export var MarketRequest;
+(function (MarketRequest) {
+    MarketRequest[MarketRequest["MyOffers"] = 65534] = "MyOffers";
+    MarketRequest[MarketRequest["MyHistory"] = 65535] = "MyHistory";
+})(MarketRequest || (MarketRequest = {}));
+export var MarketOfferState;
+(function (MarketOfferState) {
+    MarketOfferState[MarketOfferState["Active"] = 0] = "Active";
+    MarketOfferState[MarketOfferState["Cancelled"] = 1] = "Cancelled";
+    MarketOfferState[MarketOfferState["Expired"] = 2] = "Expired";
+    MarketOfferState[MarketOfferState["Accepted"] = 3] = "Accepted";
+    MarketOfferState[MarketOfferState["AcceptedEx"] = 255] = "AcceptedEx";
+})(MarketOfferState || (MarketOfferState = {}));
+export var MarketCategory;
+(function (MarketCategory) {
+    MarketCategory[MarketCategory["All"] = 0] = "All";
+    MarketCategory[MarketCategory["First"] = 1] = "First";
+    MarketCategory[MarketCategory["Armors"] = 1] = "Armors";
+    MarketCategory[MarketCategory["Amulets"] = 2] = "Amulets";
+    MarketCategory[MarketCategory["Boots"] = 3] = "Boots";
+    MarketCategory[MarketCategory["Containers"] = 4] = "Containers";
+    MarketCategory[MarketCategory["Decoration"] = 5] = "Decoration";
+    MarketCategory[MarketCategory["Food"] = 6] = "Food";
+    MarketCategory[MarketCategory["HelmetsHats"] = 7] = "HelmetsHats";
+    MarketCategory[MarketCategory["Legs"] = 8] = "Legs";
+    MarketCategory[MarketCategory["Others"] = 9] = "Others";
+    MarketCategory[MarketCategory["Potions"] = 10] = "Potions";
+    MarketCategory[MarketCategory["Rings"] = 11] = "Rings";
+    MarketCategory[MarketCategory["Runes"] = 12] = "Runes";
+    MarketCategory[MarketCategory["Shields"] = 13] = "Shields";
+    MarketCategory[MarketCategory["Tools"] = 14] = "Tools";
+    MarketCategory[MarketCategory["Valuables"] = 15] = "Valuables";
+    MarketCategory[MarketCategory["Ammunition"] = 16] = "Ammunition";
+    MarketCategory[MarketCategory["Axes"] = 17] = "Axes";
+    MarketCategory[MarketCategory["Clubs"] = 18] = "Clubs";
+    MarketCategory[MarketCategory["DistanceWeapons"] = 19] = "DistanceWeapons";
+    MarketCategory[MarketCategory["Swords"] = 20] = "Swords";
+    MarketCategory[MarketCategory["WandsRods"] = 21] = "WandsRods";
+    MarketCategory[MarketCategory["PremiumScrolls"] = 22] = "PremiumScrolls";
+    MarketCategory[MarketCategory["TibiaCoins"] = 23] = "TibiaCoins";
+    MarketCategory[MarketCategory["Last"] = 23] = "Last";
+    MarketCategory[MarketCategory["MetaWeapons"] = 255] = "MetaWeapons";
+})(MarketCategory || (MarketCategory = {}));
+export var MarketItemDescription;
+(function (MarketItemDescription) {
+    MarketItemDescription[MarketItemDescription["First"] = 1] = "First";
+    MarketItemDescription[MarketItemDescription["Armor"] = 1] = "Armor";
+    MarketItemDescription[MarketItemDescription["Attack"] = 2] = "Attack";
+    MarketItemDescription[MarketItemDescription["Container"] = 3] = "Container";
+    MarketItemDescription[MarketItemDescription["Defense"] = 4] = "Defense";
+    MarketItemDescription[MarketItemDescription["General"] = 5] = "General";
+    MarketItemDescription[MarketItemDescription["DecayTime"] = 6] = "DecayTime";
+    MarketItemDescription[MarketItemDescription["Combat"] = 7] = "Combat";
+    MarketItemDescription[MarketItemDescription["MinLevel"] = 8] = "MinLevel";
+    MarketItemDescription[MarketItemDescription["MinMagicLevel"] = 9] = "MinMagicLevel";
+    MarketItemDescription[MarketItemDescription["Vocation"] = 10] = "Vocation";
+    MarketItemDescription[MarketItemDescription["Rune"] = 11] = "Rune";
+    MarketItemDescription[MarketItemDescription["Ability"] = 12] = "Ability";
+    MarketItemDescription[MarketItemDescription["Charges"] = 13] = "Charges";
+    MarketItemDescription[MarketItemDescription["WeaponName"] = 14] = "WeaponName";
+    MarketItemDescription[MarketItemDescription["Weight"] = 15] = "Weight";
+    MarketItemDescription[MarketItemDescription["Last"] = 15] = "Last";
+})(MarketItemDescription || (MarketItemDescription = {}));
 export var DrawFlags;
 (function (DrawFlags) {
     DrawFlags[DrawFlags["DrawGround"] = 1] = "DrawGround";

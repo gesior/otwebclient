@@ -120,6 +120,7 @@ export class Tile {
         }
     }
     addThing(thing, stackPos) {
+        //console.log('addt', thing);
         if (!thing)
             return;
         if (thing.isEffect()) {
@@ -267,7 +268,7 @@ export class Tile {
         let creature;
         for (let i = 0; i < this.m_things.length; ++i) {
             let thing = this.m_things[i];
-            if (thing.isLocalPlayer()) // return local player if there is no other creature
+            if (thing.isLocalPlayer())
                 creature = thing;
             else if (thing.isCreature() && !thing.isLocalPlayer())
                 return thing;

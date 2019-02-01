@@ -17,7 +17,95 @@ export enum Otc {
     MAX_AUTOWALK_DIST = 127
 }
 
+export enum BonusType {
+    BONUS_DAMAGE_BOOST = 0,
+    BONUS_DAMAGE_REDUCTION = 1,
+    BONUS_XP_BONUS = 2,
+    BONUS_IMPROVED_LOOT = 3,
+    BONUS_NONE = 4,
+}
 
+export enum PreyState {
+    STATE_LOCKED = 0,
+    STATE_INACTIVE = 1,
+    STATE_ACTIVE = 2,
+    STATE_SELECTION = 3,
+    STATE_SELECTION_CHANGE_MONSTER = 4,
+}
+
+export enum UnlockState {
+    UNLOCK_PREMIUM_OR_STORE = 0,
+    UNLOCK_STORE = 1,
+    UNLOCK_NONE = 2,
+}
+
+export enum MarketAction  {
+    Buy = 0,
+    Sell = 1
+}
+
+export enum MarketRequest {
+    MyOffers = 0xFFFE,
+    MyHistory = 0xFFFF
+}
+
+export enum MarketOfferState {
+    Active = 0,
+    Cancelled = 1,
+    Expired = 2,
+    Accepted = 3,
+    AcceptedEx = 255
+}
+
+export enum MarketCategory {
+    All = 0,
+    First = 1,
+    Armors = First,
+    Amulets = 2,
+    Boots = 3,
+    Containers = 4,
+    Decoration = 5,
+    Food = 6,
+    HelmetsHats = 7,
+    Legs = 8,
+    Others = 9,
+    Potions = 10,
+    Rings = 11,
+    Runes = 12,
+    Shields = 13,
+    Tools = 14,
+    Valuables = 15,
+    Ammunition = 16,
+    Axes = 17,
+    Clubs = 18,
+    DistanceWeapons = 19,
+    Swords = 20,
+    WandsRods = 21,
+    PremiumScrolls = 22,
+    TibiaCoins = 23,
+    Last = TibiaCoins,
+    MetaWeapons = 255,
+}
+
+export enum  MarketItemDescription {
+    First = 1,
+    Armor = First,
+    Attack = 2,
+    Container = 3,
+    Defense = 4,
+    General = 5,
+    DecayTime = 6,
+    Combat = 7,
+    MinLevel = 8,
+    MinMagicLevel = 9,
+    Vocation = 10,
+    Rune = 11,
+    Ability = 12,
+    Charges = 13,
+    WeaponName = 14,
+    Weight = 15,
+    Last = Weight
+}
 export enum DrawFlags {
     DrawGround = 1,
     DrawGroundBorders = 2,
@@ -566,8 +654,7 @@ export enum AnimationDirection {
     AnimDirBackward = 1
 }
 
-export enum Tilestate
-{
+export enum Tilestate {
     TILESTATE_NONE = 0,
     TILESTATE_PROTECTIONZONE = 1 << 0,
     TILESTATE_TRASHED = 1 << 1,

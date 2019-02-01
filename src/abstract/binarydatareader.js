@@ -57,6 +57,13 @@ export class BinaryDataReader {
         }
         return text;
     }
+    getStringWithLength(length) {
+        let text = '';
+        for (let i = 0; i < length; i++) {
+            text += String.fromCharCode(this.getU8());
+        }
+        return text;
+    }
     getPosition() {
         return new Position(this.getU16(), this.getU16(), this.getU8());
     }

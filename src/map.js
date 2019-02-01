@@ -5,7 +5,6 @@ import { TileBlock } from "./tileblock";
 import { MessageMode, Otc } from "./constants/const";
 import { Point } from "./structures/point";
 import { toInt } from "./constants/helpers";
-import { Log } from "./log";
 export class Map {
     constructor() {
         this.m_tileBlocks = [];
@@ -63,8 +62,12 @@ export class Map {
     getCreatureById(id) {
         //console.log('known creatures', g_map.m_knownCreatures);
         if (!g_map.m_knownCreatures[id]) {
-            Log.error('known creatures failed', id, g_map.m_knownCreatures);
-            throw new Error('get ' + id);
+            //Log.error('known creatures failed', id);//, g_map.m_knownCreatures);
+            for (var crea in g_map.m_knownCreatures) {
+                //Log.log('failed', crea);
+            }
+            //throw new Error('getCreatureById ' + id);
+            return null;
         }
         return g_map.m_knownCreatures[id];
     }
@@ -128,7 +131,7 @@ export class Map {
                     if (prevAnimatedText) {
                         let offset = prevAnimatedText.getOffset();
                         let t = prevAnimatedText.getTimer().ticksElapsed();
-                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) { // didnt move 12 pixels
+                        if (t < Otc.ANIMATED_TEXT_DURATION / 4.0) {
                             let y = 12 - 48 * t / Otc.ANIMATED_TEXT_DURATION;
                             offset.add(new Point(0, y));
                         }
@@ -211,12 +214,15 @@ export class Map {
         return null;
     }
     addCreature(creature) {
+        //Log.log('add creature', creature.getId(), creature.getName());
         this.m_knownCreatures[creature.getId()] = creature;
     }
     removeCreatureById(id) {
         if (id == 0)
             return;
+        //Log.log('remove creature', this.m_knownCreatures.length, id);
         if (this.m_knownCreatures[id]) {
+            //Log.log('remove creature', this.m_knownCreatures.length, id, this.m_knownCreatures[id].getName());
             //this.m_knownCreatures.splice(id, 1);
         }
     }

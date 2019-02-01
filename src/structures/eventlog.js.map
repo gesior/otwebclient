@@ -1,1 +1,1 @@
-{"version":3,"file":"eventlog.js","sourceRoot":"","sources":["eventlog.ts"],"names":[],"mappings":"AAAA,MAAM,OAAO,QAAQ;IACjB,YAAmB,IAAY,EAAS,MAAM;QAA3B,SAAI,GAAJ,IAAI,CAAQ;QAAS,WAAM,GAAN,MAAM,CAAA;IAE9C,CAAC;CACJ"}
+{"version":3,"file":"eventlog.js","sourceRoot":"","sources":["eventlog.ts"],"names":[],"mappings":"AAAA,MAAM;IACF,YAAmB,IAAY,EAAS,MAAM;QAA3B,SAAI,GAAJ,IAAI,CAAQ;QAAS,WAAM,GAAN,MAAM,CAAA;IAE9C,CAAC;CACJ"}

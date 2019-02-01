@@ -5,6 +5,9 @@ export class Position {
         this.y = y;
         this.z = z;
     }
+    toString() {
+        return 'Position { x: ' + this.x + ', y: ' + this.y + ', z: ' + this.z + ' }';
+    }
     equals(otherPosition) {
         return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
     }

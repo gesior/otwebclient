@@ -29,7 +29,6 @@ export class MapView {
     draw() {
         let scaleFactor = this.m_tileSize / Otc.TILE_PIXELS;
         let cameraPosition = this.getCameraPosition();
-        console.log(cameraPosition);
         let drawFlags = 0;
         drawFlags = DrawFlags.DrawAnimations;
         drawFlags |= DrawFlags.DrawGround | DrawFlags.DrawGroundBorders | DrawFlags.DrawWalls |

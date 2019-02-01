@@ -1,6 +1,6 @@
 import { Protocol } from "./protocol";
 import { g_game } from "../game";
-import { DeathType, GameFeature, MessageMode, Otc, Skill, ThingCategory } from "../constants/const";
+import { DeathType, GameFeature, MarketAction, MarketItemDescription, MarketOfferState, MarketRequest, MessageMode, Otc, PreyState, Skill, ThingCategory } from "../constants/const";
 import { Log } from "../log";
 import { Proto } from "../constants/proto";
 import { InputMessage } from "./inputmessage";
@@ -17,11 +17,13 @@ import { Missile } from "../missile";
 import { Color } from "../color";
 import { Player } from "../player";
 import { Light } from "../structures/light";
+import { UnjustifiedPoints } from "../structures/unjustifiedpoints";
 import { Npc } from "../structures/npc";
 import { Monster } from "../structures/monster";
 import { AwareRange } from "../structures/awarerange";
 import { g_movieEvent } from "../movieevent";
 import { g_mapview } from "../mapview";
+import { PreyData } from "../structures/preydata";
 export class ProtocolGame extends Protocol {
     constructor(game) {
         super();
@@ -40,12 +42,15 @@ export class ProtocolGame extends Protocol {
     }
     watch(m_movieData) {
         var i = 0;
+        var s = 0;
         Log.debug('start', +new Date());
         this.m_localPlayer = g_game.getLocalPlayer();
         var first = 0;
+        var timePacket = null;
         while (m_movieData.getUnreadSize() >= 10) {
             let timestamp = m_movieData.getU64();
             this.m_lastPacketTime = timestamp;
+            /*
             let s = m_movieData.getReadPos();
             if (m_movieData.getUnreadSize() >= 10) {
                 var next = m_movieData.peekU64();
@@ -54,24 +59,41 @@ export class ProtocolGame extends Protocol {
                     continue;
                 }
             }
-            i++;
             m_movieData.setReadPos(s);
+            */
+            i++;
             let packetLength = m_movieData.getU16();
-            let packetData = m_movieData.getBytes(packetLength);
+            let packetType = m_movieData.getU8();
+            let packetData = m_movieData.getBytes(packetLength - 1);
             if (first === 0) {
                 first = timestamp;
                 g_movieEvent.init(first);
             }
-            g_movieEvent.onParsePacket(timestamp);
-            var inputMessage = new InputMessage(new DataView(packetData));
-            try {
-                this.parseMessage(inputMessage);
+            //console.log('ptype', packetType);
+            if (packetType == 0x01 || packetType == 0x05) {
+                //console.log('client receive', i);
+                g_movieEvent.onParsePacket(timestamp);
+                var inputMessage = new InputMessage(new DataView(packetData));
+                try {
+                    this.parseMessage(inputMessage);
+                }
+                catch (e) {
+                    // debug client, stop movie
+                    break;
+                }
             }
-            catch (e) {
-                // debug client, stop movie
-                break;
+            else {
+                s++;
+                //console.log('client send', packetData);
             }
+            //if packetData.
+            //g_movieEvent.onParsePacket(timestamp);
+            /*
+                        if (i == 100)
+                            break;*/
         }
+        //console.log(g_game.getLocalPlayer().getPosition())
+        Log.debug('received', i, 'sent', s);
         Log.debug('end', +new Date());
         //console.error('loaded packets', i);
     }
@@ -107,6 +129,7 @@ export class ProtocolGame extends Protocol {
                         this.m_gameInitialized = true;
                     }
                 }
+                //console.log('parse msg', opcode, prevOpcode);
                 /*
                 // try to parse in lua first
                 int readPos = msg.getReadPos();
@@ -117,12 +140,10 @@ export class ProtocolGame extends Protocol {
                 */
                 switch (opcode) {
                     case Proto.GameServerLoginOrPendingState:
-                        /*
-                        if(g_game.getFeature(GameFeature.GameLoginPending))
+                        if (g_game.getFeature(GameFeature.GameLoginPending))
                             this.parsePendingGame(msg);
                         else
-                        */
-                        this.parseLogin(msg);
+                            this.parseLogin(msg);
                         break;
                     case Proto.GameServerGMActions:
                         this.parseGMActions(msg);
@@ -448,6 +469,30 @@ export class ProtocolGame extends Protocol {
                     case Proto.GameServerSetStoreDeepLink:
                         this.parseSetStoreDeepLink(msg);
                         break;
+                    case Proto.GameServerPreyData:
+                        this.parsePreyData(msg);
+                        break;
+                    case Proto.GameServerRerollPrice:
+                        this.parseRerollPrice(msg);
+                        break;
+                    case Proto.GameServerMessageDialog:
+                        this.parseMessageDialog(msg);
+                        break;
+                    case Proto.GameServerResourceData:
+                        this.parseResourceData(msg);
+                        break;
+                    case Proto.GameServerMarketEnter:
+                        this.parseMarketEnter(msg);
+                        break;
+                    case Proto.GameServerMarketLeave:
+                        this.parseMarketLeave(msg);
+                        break;
+                    case Proto.GameServerMarketDetail:
+                        this.parseMarketDetail(msg);
+                        break;
+                    case Proto.GameServerMarketBrowse:
+                        this.parseMarketBrowse(msg);
+                        break;
                     // otclient ONLY
                     case Proto.GameServerExtendedOpcode:
                         this.parseExtendedOpcode(msg);
@@ -467,12 +512,17 @@ export class ProtocolGame extends Protocol {
         }
         catch (e) {
             Log.error("ProtocolGame parse message exception (%d bytes unread, last opcode is %d, prev opcode is %d): %s", msg.getUnreadSize(), opcode, prevOpcode, e);
+            Log.error("ProtocolGame parse message exception creature", g_game.getLocalPlayer().getPosition());
             throw new Error('parser');
         }
     }
     parseLogin(msg) {
         let playerId = msg.getU32();
         let serverBeat = msg.getU16();
+        for (var i = 0; i < 3; i++) {
+            var precision = msg.getU8();
+            var speedVal = msg.getU32();
+        }
         let canReportBugs = msg.getU8();
         if (g_game.getClientVersion() >= 1054)
             msg.getU8(); // can change pvp frame option
@@ -482,14 +532,13 @@ export class ProtocolGame extends Protocol {
         }
         if (g_game.getFeature(GameFeature.GameIngameStore)) {
             // URL to ingame store images
-            msg.getString();
+            var urlStore = msg.getString();
             // premium coin package size
             // e.g you can only buy packs of 25, 50, 75, .. coins in the market
-            msg.getU16();
+            var coinPackageSize = msg.getU16();
         }
         this.m_localPlayer.setId(playerId);
         g_mapview.followCreature(this.m_localPlayer);
-        Log.debug('local pid', playerId);
         //g_game.setServerBeat(serverBeat);
         //g_game.setCanReportBugs(canReportBugs);
         //g_game.processLogin();
@@ -512,6 +561,171 @@ export class ProtocolGame extends Protocol {
     }
     parseSetStoreDeepLink(msg) {
         let currentlyFeaturedServiceType = msg.getU8();
+    }
+    parsePreyData(msg) {
+        let slotId = msg.getU8();
+        let currentPreyData = new PreyData();
+        currentPreyData.state = msg.getU8();
+        if (currentPreyData.state == PreyState.STATE_LOCKED) {
+            var unlock = msg.getU8();
+        }
+        else if (currentPreyData.state == PreyState.STATE_SELECTION || currentPreyData.state == PreyState.STATE_SELECTION_CHANGE_MONSTER) {
+            if (currentPreyData.state == PreyState.STATE_SELECTION_CHANGE_MONSTER) {
+                currentPreyData.bonusType = msg.getU8();
+                currentPreyData.bonusValue = msg.getU16();
+                currentPreyData.bonusGrade = msg.getU8();
+            }
+            var size = msg.getU8();
+            for (var i = 0; i < size; i++) {
+                var monsterName = msg.getString();
+                var lookType = msg.getU16();
+                if (lookType > 0) {
+                    var lookHead = msg.getU8();
+                    var lookBody = msg.getU8();
+                    var lookLegs = msg.getU8();
+                    var lookFeet = msg.getU8();
+                    var lookAddons = msg.getU8();
+                }
+                else {
+                    var lookItem = msg.getU16();
+                }
+            }
+        }
+        else if (currentPreyData.state == PreyState.STATE_ACTIVE) {
+            var monsterName = msg.getString();
+            var lookType = msg.getU16();
+            if (lookType > 0) {
+                var lookHead = msg.getU8();
+                var lookBody = msg.getU8();
+                var lookLegs = msg.getU8();
+                var lookFeet = msg.getU8();
+                var lookAddons = msg.getU8();
+            }
+            else {
+                var lookItem = msg.getU16();
+            }
+            currentPreyData.bonusType = msg.getU8();
+            currentPreyData.bonusValue = msg.getU16();
+            currentPreyData.bonusGrade = msg.getU8();
+            currentPreyData.timeLeft = msg.getU16();
+        }
+        var freeRerollTime = msg.getU16();
+    }
+    parseRerollPrice(msg) {
+        var rerollPrice = msg.getU32();
+    }
+    parseMessageDialog(msg) {
+        var type = msg.getU8();
+        var message = msg.getString();
+    }
+    parseResourceData(msg) {
+        var resourceType = msg.getU8();
+        var amount = msg.getU64();
+    }
+    readMarketOffer(msg, action, type) {
+        let timestamp = msg.getU32();
+        let counter = msg.getU16();
+        let itemId = 0;
+        if (type == MarketRequest.MyOffers || type == MarketRequest.MyHistory) {
+            itemId = msg.getU16();
+        }
+        else {
+            itemId = type;
+        }
+        let amount = msg.getU16();
+        let price = msg.getU32();
+        let playerName = '';
+        let state = MarketOfferState.Active;
+        if (type == MarketRequest.MyHistory)
+            state = msg.getU8();
+        else if (type == MarketRequest.MyOffers) {
+        }
+        else {
+            playerName = msg.getString();
+        }
+        //return MarketOffer.new({timestamp, counter}, action, Item.create(itemId), amount, price, playerName, state, var)
+    }
+    parseMarketEnter(msg) {
+        let balance = 0;
+        if (g_game.getClientVersion() >= 981) {
+            balance = msg.getU64();
+        }
+        else {
+            balance = msg.getU32();
+        }
+        let vocation = -1;
+        if (g_game.getClientVersion() < 950) {
+            vocation = msg.getU8();
+        }
+        let offers = msg.getU8();
+        let depotItems = {};
+        let depotCount = msg.getU16();
+        for (let i = 1; i <= depotCount; i++) {
+            let itemId = msg.getU16();
+            let itemCount = msg.getU16();
+            depotItems[itemId] = itemCount;
+        }
+    }
+    parseMarketLeave(msg) {
+        // nothing to parse
+    }
+    parseMarketDetail(msg) {
+        let itemId = msg.getU16();
+        let descriptions = {};
+        var i;
+        for (i = MarketItemDescription.First; i <= MarketItemDescription.Last; i++) {
+            if (msg.peekU16() != 0x00) {
+                msg.getString();
+                //table.insert(descriptions, {i, msg.getString()}) -- item descriptions
+            }
+            else {
+                msg.getU16();
+            }
+        }
+        //let time = (os.time() / 1000) * statistics.SECONDS_PER_DAY;
+        // 10.00 IMBUEMENTS
+        if (msg.peekU16() != 0x00) {
+            msg.getString();
+            //table.insert(descriptions, {i, msg.getString()}) -- item descriptions
+        }
+        else {
+            msg.getU16();
+        }
+        let purchaseStats = {};
+        let count = msg.getU8();
+        for (i = 1; i <= count; i++) {
+            let transactions = msg.getU32();
+            let totalPrice = msg.getU32();
+            let highestPrice = msg.getU32();
+            let lowestPrice = msg.getU32();
+            // let tmp = time - statistics.SECONDS_PER_DAY
+            //table.insert(purchaseStats, OfferStatistic.new(tmp, MarketAction.Buy, transactions, totalPrice, highestPrice, lowestPrice))
+        }
+        let saleStats = {};
+        count = msg.getU8();
+        for (i = 1; i <= count; i++) {
+            let transactions = msg.getU32();
+            let totalPrice = msg.getU32();
+            let highestPrice = msg.getU32();
+            let lowestPrice = msg.getU32();
+            //let tmp = time - statistics.SECONDS_PER_DAY
+            //table.insert(saleStats, OfferStatistic.new(tmp, MarketAction.Sell, transactions, totalPrice, highestPrice, lowestPrice))
+        }
+    }
+    parseMarketBrowse(msg) {
+        let type = msg.getU16();
+        let offers = {};
+        let buyOfferCount = msg.getU32();
+        let i;
+        for (i = 1; i <= buyOfferCount; i++) {
+            this.readMarketOffer(msg, MarketAction.Buy, type);
+            //table.insert(offers, this.readMarketOffer(msg, MarketAction.Buy, type))
+        }
+        let sellOfferCount = msg.getU32();
+        for (i = 1; i <= sellOfferCount; i++) {
+            this.readMarketOffer(msg, MarketAction.Sell, type);
+            //table.insert(offers, this.readMarketOffer(msg, MarketAction.Sell, type))
+        }
     }
     parseBlessings(msg) {
         let blessings = msg.getU16();
@@ -629,7 +843,7 @@ export class ProtocolGame extends Protocol {
         //Log.error("Store Error: %s [%i]", message, errorType);
     }
     parseUnjustifiedStats(msg) {
-        let unjustifiedPoints;
+        let unjustifiedPoints = new UnjustifiedPoints();
         unjustifiedPoints.killsDay = msg.getU8();
         unjustifiedPoints.killsDayRemaining = msg.getU8();
         unjustifiedPoints.killsWeek = msg.getU8();
@@ -1111,27 +1325,29 @@ export class ProtocolGame extends Protocol {
     }
     parsePremiumTrigger(msg) {
         let triggerCount = msg.getU8();
-        let triggers;
+        let triggers = [];
         for (let i = 0; i < triggerCount; ++i) {
-            triggers.push_back(msg.getU8());
+            triggers.push(msg.getU8());
         }
         if (g_game.getClientVersion() <= 1096) {
             let something = msg.getU8() == 1;
         }
     }
     parsePlayerInfo(msg) {
-        let premium = msg.getU8(); // premium
+        let premium = msg.getU8() > 0; // premium
         if (g_game.getFeature(GameFeature.GamePremiumExpiration)) {
             let premiumEx = msg.getU32(); // premium expiration used for premium advertisement
         }
         let vocation = msg.getU8(); // vocation
+        // prey system
+        msg.getU8();
         let spellCount = msg.getU16();
-        let spells;
+        let spells = [];
         for (let i = 0; i < spellCount; ++i)
             spells.push(msg.getU8()); // spell id
-        //m_localPlayer.setPremium(premium);
-        //m_localPlayer.setVocation(vocation);
-        //m_localPlayer.setSpells(spells);
+        this.m_localPlayer.setPremium(premium);
+        this.m_localPlayer.setVocation(vocation);
+        this.m_localPlayer.setSpells(spells);
     }
     parsePlayerStats(msg) {
         let health;
@@ -1206,21 +1422,19 @@ export class ProtocolGame extends Protocol {
                 let canBuyMoreStoreXpBoosts = msg.getU8();
             }
         }
-        /*
-        m_localPlayer.setHealth(health, maxHealth);
-        m_localPlayer.setFreeCapacity(freeCapacity);
-        m_localPlayer.setTotalCapacity(totalCapacity);
-        m_localPlayer.setExperience(experience);
-        m_localPlayer.setLevel(level, levelPercent);
-        m_localPlayer.setMana(mana, maxMana);
-        m_localPlayer.setMagicLevel(magicLevel, magicLevelPercent);
-        m_localPlayer.setBaseMagicLevel(baseMagicLevel);
-        m_localPlayer.setStamina(stamina);
-        m_localPlayer.setSoul(soul);
-        m_localPlayer.setBaseSpeed(baseSpeed);
-        m_localPlayer.setRegenerationTime(regeneration);
-        m_localPlayer.setOfflineTrainingTime(training);
-        */
+        this.m_localPlayer.setHealth(health, maxHealth);
+        this.m_localPlayer.setFreeCapacity(freeCapacity);
+        this.m_localPlayer.setTotalCapacity(totalCapacity);
+        this.m_localPlayer.setExperience(experience);
+        this.m_localPlayer.setLevel(level, levelPercent);
+        this.m_localPlayer.setMana(mana, maxMana);
+        this.m_localPlayer.setMagicLevel(magicLevel, magicLevelPercent);
+        this.m_localPlayer.setBaseMagicLevel(baseMagicLevel);
+        this.m_localPlayer.setStamina(stamina);
+        this.m_localPlayer.setSoul(soul);
+        this.m_localPlayer.setBaseSpeed(baseSpeed);
+        this.m_localPlayer.setRegenerationTime(regeneration);
+        this.m_localPlayer.setOfflineTrainingTime(training);
     }
     parsePlayerSkills(msg) {
         let lastSkill = Skill.Fishing + 1;
@@ -1244,10 +1458,8 @@ export class ProtocolGame extends Protocol {
             // Critical, Life Leech and Mana Leech have no level percent
             if (skill <= Skill.Fishing)
                 levelPercent = msg.getU8();
-            /*
-                m_localPlayer.setSkill(skill, level, levelPercent);
-                m_localPlayer.setBaseSkill(skill, baseLevel);
-                */
+            this.m_localPlayer.setSkill(skill, level, levelPercent);
+            this.m_localPlayer.setBaseSkill(skill, baseLevel);
         }
     }
     parsePlayerState(msg) {
@@ -1331,7 +1543,7 @@ export class ProtocolGame extends Protocol {
                 break;
         }
         let text = msg.getString();
-        g_movieEvent.onHear(text, name);
+        g_movieEvent.onHear(g_game.getLocalPlayer(), text, name);
         g_game.processTalk(name, level, mode, text, channelId, pos);
     }
     parseChannelList(msg) {
@@ -1621,15 +1833,12 @@ export class ProtocolGame extends Protocol {
         //g_lua.callGlobalField("g_game", "onItemInfo", list);
     }
     parsePlayerInventory(msg) {
-        msg.getU8(); // subtype
-        /*
         let size = msg.getU16();
         for (let i = 0; i < size; ++i) {
             msg.getU16(); // id
             msg.getU8(); // subtype
             msg.getU16(); // count
         }
-        */
     }
     parseModalDialog(msg) {
         let id = msg.getU32();
@@ -1869,9 +2078,9 @@ export class ProtocolGame extends Protocol {
             Log.error("invalid thing id");
         else if (id == Proto.UnknownCreature || id == Proto.OutdatedCreature || id == Proto.Creature)
             thing = this.getCreature(msg, id);
-        else if (id == Proto.StaticText) // otclient only
+        else if (id == Proto.StaticText)
             thing = this.getStaticText(msg, id);
-        else // item
+        else
             thing = this.getItem(msg, id);
         return thing;
     }

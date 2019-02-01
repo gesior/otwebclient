@@ -69,7 +69,7 @@ export class Color {
         return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
     }
     setRGBA(r, g = -1, b = -1, a = 255) {
-        if (g == -1) { // r is rgba
+        if (g == -1) {
             let rgba = r;
             this.setRGBA((rgba >> 0) & 0xff, (rgba >> 8) & 0xff, (rgba >> 16) & 0xff, (rgba >> 24) & 0xff);
         }

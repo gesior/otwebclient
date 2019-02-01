@@ -523,7 +523,7 @@ export class ThingType {
     draw(dest, scaleFactor, layer, xPattern, yPattern, zPattern, animationPhase, lightView = null) {
         if (this.m_null)
             return;
-        console.log('draw thingtype', this.m_id, dest, animationPhase, this.m_animationPhases);
+        //console.log('draw thingtype', this.m_id, dest, animationPhase, this.m_animationPhases);
         return;
         if (animationPhase >= this.m_animationPhases)
             return;

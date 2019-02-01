@@ -4,6 +4,9 @@ export class Position {
     constructor(public x: number = 0, public y: number = 0, public z: number = 0) {
     }
 
+    toString() {
+        return 'Position { x: ' + this.x + ', y: ' + this.y + ', z: ' + this.z + ' }';
+    }
     equals(otherPosition: Position) {
         return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
     }

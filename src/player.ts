@@ -5,4 +5,5 @@ export class Player extends Creature {
     isPlayer() {
         return true;
     }
+
 }

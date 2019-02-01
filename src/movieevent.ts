@@ -1,5 +1,6 @@
 import {EventLog} from "./structures/eventlog";
 import {Position} from "./position";
+import {Creature} from "./creature";
 
 class MovieEvent {
     m_startDate: number;
@@ -14,24 +15,48 @@ class MovieEvent {
 
     private log(object) {
         this.m_log.push(new EventLog(this.m_lastPacket, object));
-        //console.log('event', this.m_lastPacket, object);
+        console.log('event', this.m_lastPacket, object);
     }
 
     onParsePacket(date: number) {
         this.m_lastPacket = date;
     }
 
-    onWalk(position: Position) {
-        this.log({'type': 'p', 'x': position.x, 'y': position.y, 'z': position.z});
+    onWalk(creature: Creature, position: Position, oldPosition: Position) {
+        if (oldPosition && (oldPosition.distance(position) > 1 || oldPosition.z != position.z)) {
+            this.log({
+                'type': 'm', 'c': creature.getId(),
+                'fx': oldPosition.x, 'fy': oldPosition.y, 'fz': oldPosition.z,
+                'tx': position.x, 'ty': position.y, 'tz': position.z
+            });
+        }
+        this.log({'type': 'p', 'c': creature.getId(), 'tx': position.x, 'y': position.y, 'z': position.z});
     }
 
-    onHear(text: string, from: string = '') {
-        this.log({'type': 't', 'text': text, 'from': from});
+    onHealthChange(creature: Creature, health: number) {
+        this.log({'type': 'hc', 'c': creature.getName(), 'h': health});
     }
 
-    onViewText(text: string, author: string = '') {
-        this.log({'type': 'e', 'text': text, 'author': author});
+    onMaxHealthChange(creature: Creature, health: number) {
+        this.log({'type': 'mhc', 'c': creature.getName(), 'mh': health});
+    }
+
+    onManaChange(creature: Creature, mana: number) {
+        this.log({'type': 'mc', 'c': creature.getName(), 'm': mana});
+    }
+
+    onMaxManaChange(creature: Creature, health: number) {
+        this.log({'type': 'mmc', 'c': creature.getName(), 'mm': health});
+    }
+
+    onHear(creature: Creature, text: string, from: string = '') {
+        this.log({'type': 't', 'c': creature.getName(), 'text': text, 'from': from});
+    }
+
+    onViewText(creature: Creature, text: string, author: string = '') {
+        this.log({'type': 'e', 'c': creature.getName(), 'text': text, 'author': author});
     }
 }
+
 var g_movieEvent = new MovieEvent();
-export { g_movieEvent }
+export {g_movieEvent}

@@ -104,6 +104,12 @@ enum Proto {
     GameServerCoinBalance               = 223, // 1080
     GameServerStoreError                = 224, // 1080
     GameServerRequestPurchaseData       = 225, // 1080
+
+    GameServerPreyData                  = 232, // 1000
+    GameServerRerollPrice               = 233, // 1000
+    GameServerMessageDialog             = 234, // 1000
+    GameServerResourceData              = 238, // 1000
+
     GameServerQuestLog                  = 240,
     GameServerQuestLine                 = 241,
     GameServerCoinBalanceUpdating       = 242, // 1080

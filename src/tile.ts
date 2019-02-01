@@ -155,6 +155,7 @@ export class Tile {
     }
 
     addThing(thing: Thing, stackPos: number) {
+        //console.log('addt', thing);
         if (!thing)
             return;
 

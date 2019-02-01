@@ -77,6 +77,14 @@ export abstract class BinaryDataReader {
         return text;
     }
 
+    getStringWithLength(length: number): string {
+        let text = '';
+        for (let i = 0; i < length; i++) {
+            text += String.fromCharCode(this.getU8());
+        }
+        return text;
+    }
+
     getPosition(): Position {
         return new Position(this.getU16(), this.getU16(), this.getU8());
     }
