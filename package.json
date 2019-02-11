@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^10.11.0",
-    "fs": "0.0.1-security",
     "pako": "^1.0.6",
     "xhr2": "^0.1.4"
   },
@@ -24,6 +23,7 @@
     "babel-preset-stage-0": "^6.0.15",
     "babel-register": "^6.26.0",
     "ts-loader": "2.0.1",
-    "typescript": "2.6.2"
+    "typescript": "2.6.2",
+    "webpack": "2"
   }
 }

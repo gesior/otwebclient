@@ -8,6 +8,5 @@ require('babel-register')({
         }]
     ]
 });
-
 // Import the rest of our application.
-module.exports = require('./init.js');
+module.exports = require('./js/index.js');
