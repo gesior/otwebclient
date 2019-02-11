@@ -1,7 +1,7 @@
 {
-  "name": "emwatch",
+  "name": "masteria-cw",
   "version": "0.0.0",
-  "description": "ElothMovieWatcher",
+  "description": "MasteriaCamWatcher",
   "main": "run.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

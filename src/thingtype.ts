@@ -618,7 +618,7 @@ export class ThingType {
             return;
 
         //console.log('draw thingtype', this.m_id, dest, animationPhase, this.m_animationPhases);
-        return;
+
         if (animationPhase >= this.m_animationPhases)
             return;
 

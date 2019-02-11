@@ -15,7 +15,7 @@ class MovieEvent {
 
     private log(object) {
         this.m_log.push(new EventLog(this.m_lastPacket, object));
-        console.log('event', this.m_lastPacket, object);
+        //console.log('event', this.m_lastPacket, object);
     }
 
     onParsePacket(date: number) {
