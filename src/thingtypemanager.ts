@@ -10,6 +10,10 @@ export class ThingTypeManager {
     m_nullThingType = new ThingType();
     m_thingTypes: ThingType[][] = null;
     m_datLoaded: boolean = false;
+    m_xmlLoaded: boolean = false;
+    m_otbLoaded: boolean = false;
+    m_otbMinorVersion: number = 0;
+    m_otbMajorVersion: number = 0;
     m_datSignature: number = 0;
     m_contentRevision: number = 0;
 
@@ -33,7 +37,7 @@ export class ThingTypeManager {
     }
 
     isValidDatId(id: number, category: ThingCategory): boolean {
-        return true;
+        return id >= 1 && id < this.m_thingTypes[category].length;
     }
 
     getNullThingType(): ThingType {
@@ -45,6 +49,47 @@ export class ThingTypeManager {
     }
 
     loadDat(file: string): boolean {
+        this.m_otbLoaded = false;
+        this.m_datSignature = 0;
+        this.m_contentRevision = 0;
+        try {
+            let fin: InputFile = g_resources.openFile(file);
+
+            this.m_datSignature = fin.getU32();
+            this.m_contentRevision = this.m_datSignature & 0xFFFF;
+
+            for (let category = ThingCategory.ThingCategoryItem; category < ThingCategory.ThingLastCategory; ++category) {
+                let count = fin.getU16() + 1;
+                this.m_thingTypes[category] = [];
+                for (let thingCount = 0; thingCount < count; ++thingCount) {
+                    this.m_thingTypes[category][thingCount] = nullThingType;
+                }
+            }
+
+            for (let category = 0; category < ThingCategory.ThingLastCategory; ++category) {
+                let firstId = 1;
+                if (category == ThingCategory.ThingCategoryItem)
+                    firstId = 100;
+                for (let id = firstId; id < this.m_thingTypes[category].length; ++id) {
+                    let type = new ThingType();
+                    type.unserialize(id, category, fin);
+                    this.m_thingTypes[category][id] = type;
+                }
+            }
+
+            this.m_datLoaded = true;
+            //console.log(new Date().getTime(), this.m_thingTypes);
+            //g_lua.callGlobalField("g_things", "onLoadDat", file);
+            return true;
+
+
+        } catch (e) {
+            Log.error("Failed to read dat '%s': %s'", file, e);
+            return false;
+        }
+    }
+
+    loadOtb(file: string): boolean {
         this.m_datLoaded = false;
         this.m_datSignature = 0;
         this.m_contentRevision = 0;
@@ -63,12 +108,12 @@ export class ThingTypeManager {
                 }
             }
 
-            for(let category = 0; category < ThingCategory.ThingLastCategory; ++category) {
+            for (let category = 0; category < ThingCategory.ThingLastCategory; ++category) {
                 let firstId = 1;
-                if(category == ThingCategory.ThingCategoryItem)
+                if (category == ThingCategory.ThingCategoryItem)
                     firstId = 100;
-                for(let id = firstId; id < this.m_thingTypes[category].length; ++id) {
-                    let type  = new ThingType();
+                for (let id = firstId; id < this.m_thingTypes[category].length; ++id) {
+                    let type = new ThingType();
                     type.unserialize(id, category, fin);
                     this.m_thingTypes[category][id] = type;
                 }
