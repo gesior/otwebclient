@@ -4075,7 +4075,7 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 };
 
 var x = _const.Otc.MAX_AUTOWALK_DIST;
-//g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+//g_game.loadDatFile('http://php72.sbg.best/prv/webclient/Kasteria.dat');
 
 //console.log('pixi', PIXI);
 function test() {
@@ -4087,15 +4087,15 @@ function test() {
                     case 0:
                         _game.g_game.setClientVersion(854);
                         _context.next = 3;
-                        return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+                        return _game.g_game.loadDatFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.dat');
 
                     case 3:
                         _context.next = 5;
-                        return _game.g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
+                        return _game.g_game.loadSprFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.spr');
 
                     case 5:
                         _context.next = 7;
-                        return _resources.g_resources.openFile('http://inditex.localhost/small.ukcam');
+                        return _resources.g_resources.openFile('http://php72.sbg.best/prv/webclient/fronttypescript/small.ukcam');
 
                     case 7:
                         movieData = _context.sent;
