@@ -1,6 +1,6 @@
 import { Thing } from "./thing";
 import { Outfit } from "./outfit";
-import { CreatureIcons, Direction, PlayerEmblems, PlayerShields, PlayerSkulls, ThingCategory } from "./constants/const";
+import { CreatureIcons, Direction, GameFeature, PlayerEmblems, PlayerShields, PlayerSkulls, SpeedFormula, ThingCategory } from "./constants/const";
 import { Color } from "./color";
 import { CachedText } from "./cachedtext";
 import { Timer } from "./structures/timer";
@@ -8,6 +8,9 @@ import { Point } from "./structures/point";
 import { Proto } from "./constants/proto";
 import { g_clock } from "./structures/g_clock";
 import { g_things } from "./thingtypemanager";
+import { Position } from "./position";
+import { g_game } from "./game";
+import { g_map } from "./map";
 export class Creature extends Thing {
     constructor() {
         super();
@@ -32,7 +35,7 @@ export class Creature extends Thing {
         this.m_outfitColor = new Color(255, 255, 255);
         //ScheduledEventPtr m_outfitColorUpdateEvent;
         this.m_outfitColorTimer = new Timer();
-        //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
+        this.m_speedFormula = [];
         // walk related
         this.m_walkAnimationPhase = 0;
         this.m_walkedPixels = 0;
@@ -42,12 +45,13 @@ export class Creature extends Thing {
         this.m_walking = false;
         this.m_allowAppearWalk = false;
         this.m_footStepDrawn = false;
-        //ScheduledEventPtr m_walkUpdateEvent;
-        //ScheduledEventPtr m_walkFinishAnimEvent;
         //EventPtr m_disappearEvent;
         this.m_walkOffset = new Point();
         this.m_walkTurnDirection = Direction.InvalidDirection;
         this.m_lastStepDirection = Direction.InvalidDirection;
+        for (let i = 0; i < SpeedFormula.LastSpeedFormula; ++i) {
+            this.m_speedFormula.push(-1);
+        }
     }
     draw(dest, scaleFactor, animate, lightView = null) {
         if (!this.canBeSeen())
@@ -191,6 +195,10 @@ export class Creature extends Thing {
     isInvisible() {
         return this.m_outfit.getCategory() == ThingCategory.ThingCategoryEffect && this.m_outfit.getAuxId() == 13;
     }
+    hasSpeedFormula() {
+        return this.m_speedFormula[SpeedFormula.SpeedFormulaA] != -1 && this.m_speedFormula[SpeedFormula.SpeedFormulaB] != -1
+            && this.m_speedFormula[SpeedFormula.SpeedFormulaC] != -1;
+    }
     addTimedSquare(arg0) {
         // throw new Error("Method not implemented.");
     }
@@ -267,11 +275,79 @@ export class Creature extends Thing {
             //callLuaField("onAppear");
         } // else turn
     }
+    getStepDuration(ignoreDiagonal, dir) {
+        let speed = this.m_speed;
+        if (speed < 1)
+            return 0;
+        if (g_game.getFeature(GameFeature.GameNewSpeedLaw))
+            speed *= 2;
+        let groundSpeed = 0;
+        let tilePos = new Position();
+        /*
+            if(dir == Direction.InvalidDirection)
+            tilePos = this.m_lastStepToPosition;
+            else
+            tilePos = this.m_position.translatedToDirection(dir);
+        */
+        if (!tilePos.isValid())
+            tilePos = this.m_position;
+        const tile = g_map.getTile(tilePos);
+        if (tile) {
+            groundSpeed = tile.getGroundSpeed();
+            if (groundSpeed == 0)
+                groundSpeed = 150;
+        }
+        let interval = 1000;
+        if (groundSpeed > 0 && speed > 0)
+            interval = 1000 * groundSpeed;
+        if (g_game.getFeature(GameFeature.GameNewSpeedLaw) && this.hasSpeedFormula()) {
+            let formulatedSpeed = 1;
+            if (speed > -this.m_speedFormula[SpeedFormula.SpeedFormulaB]) {
+                formulatedSpeed = Math.max(1, Math.floor((this.m_speedFormula[SpeedFormula.SpeedFormulaA] * Math.log((speed / 2)
+                    + this.m_speedFormula[SpeedFormula.SpeedFormulaB]) + this.m_speedFormula[SpeedFormula.SpeedFormulaC]) + 0.5));
+            }
+            interval = Math.floor(interval / formulatedSpeed);
+        }
+        else
+            interval /= speed;
+        if (g_game.getClientVersion() >= 900)
+            interval = (interval / g_game.getServerBeat()) * g_game.getServerBeat();
+        let factor = 3;
+        if (g_game.getClientVersion() <= 810)
+            factor = 2;
+        interval = Math.max(interval, g_game.getServerBeat());
+        if (!ignoreDiagonal && (this.m_lastStepDirection == Direction.NorthWest || this.m_lastStepDirection == Direction.NorthEast ||
+            this.m_lastStepDirection == Direction.SouthWest || this.m_lastStepDirection == Direction.SouthEast))
+            interval *= factor;
+        return interval;
+    }
+    walk(oldPos, newPos) {
+        if (oldPos == newPos)
+            return;
+        // get walk direction
+        this.m_lastStepDirection = oldPos.getDirectionFromPosition(newPos);
+        this.m_lastStepFromPosition = oldPos;
+        this.m_lastStepToPosition = newPos;
+        // set current walking direction
+        this.setDirection(this.m_lastStepDirection);
+        // starts counting walk
+        this.m_walking = true;
+        this.m_walkTimer.restart();
+        this.m_walkedPixels = 0;
+        if (this.m_walkFinishAnimEvent) {
+            this.m_walkFinishAnimEvent.cancel();
+            this.m_walkFinishAnimEvent = null;
+        }
+        // no direction need to be changed when the walk ends
+        this.m_walkTurnDirection = Direction.InvalidDirection;
+        // starts updating walk
+        //this.nextWalkUpdate();
+    }
     stopWalk() {
         if (!this.m_walking)
             return;
         // stops the walk right away
-        this.terminateWalk();
+        //this.terminateWalk();
     }
     getThingType() {
         return g_things.getThingType(this.m_outfit.getId(), ThingCategory.ThingCategoryCreature);

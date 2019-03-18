@@ -1,6 +1,8 @@
-import {Otc} from "./constants/const";
+import {Direction, Otc} from "./constants/const";
 
 export class Position {
+    static RAD_TO_DEC = (180.0 / Math.acos(-1));
+
     constructor(public x: number = 0, public y: number = 0, public z: number = 0) {
     }
 
@@ -41,6 +43,47 @@ export class Position {
         else
 
             return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+    }
+
+    static getAngleFromPositions(fromPos: Position, toPos: Position): number {
+        // Returns angle in radians from 0 to 2Pi. -1 means positions are equal.
+        let dx = toPos.x - fromPos.x;
+        let dy = toPos.y - fromPos.y;
+        if (dx == 0 && dy == 0)
+            return -1;
+
+        let angle = Math.atan2(dy * -1, dx);
+        if (angle < 0)
+            angle += 2 * Math.PI;
+
+        return angle;
+    }
+
+    static getDirectionFromPositions(fromPos: Position, toPos: Position): Direction {
+        let angle = Position.getAngleFromPositions(fromPos, toPos) * this.RAD_TO_DEC;
+
+        if (angle >= 360 - 22.5 || angle < 0 + 22.5)
+            return Direction.East;
+        else if (angle >= 45 - 22.5 && angle < 45 + 22.5)
+            return Direction.NorthEast;
+        else if (angle >= 90 - 22.5 && angle < 90 + 22.5)
+            return Direction.North;
+        else if (angle >= 135 - 22.5 && angle < 135 + 22.5)
+            return Direction.NorthWest;
+        else if (angle >= 180 - 22.5 && angle < 180 + 22.5)
+            return Direction.West;
+        else if (angle >= 225 - 22.5 && angle < 225 + 22.5)
+            return Direction.SouthWest;
+        else if (angle >= 270 - 22.5 && angle < 270 + 22.5)
+            return Direction.South;
+        else if (angle >= 315 - 22.5 && angle < 315 + 22.5)
+            return Direction.SouthEast;
+        else
+            return Direction.InvalidDirection;
+    }
+
+    getDirectionFromPosition(position: Position): Direction {
+        return Position.getDirectionFromPositions(this, position);
     }
 
     up(n: number = 1): boolean {

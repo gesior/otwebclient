@@ -387,6 +387,21 @@ export class Game {
     formatCreatureName(string) {
         return string;
     }
+    stop() {
+        /*
+        if(!this.canPerformGameAction())
+            return;
+
+        if(this.isFollowing())
+            this.cancelFollow();
+
+        this.m_protocolGame.sendStop();
+        */
+    }
+    getServerBeat() {
+        // todo
+        return 0;
+    }
 }
 let g_game = new Game();
 export { g_game };

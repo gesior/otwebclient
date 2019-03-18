@@ -1,1012 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 124:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_resources = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _inputfile = __webpack_require__(447);
-
-var _log = __webpack_require__(20);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : new P(function (resolve) {
-                resolve(result.value);
-            }).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-
-var Resources = function () {
-    function Resources() {
-        _classCallCheck(this, Resources);
-    }
-
-    _createClass(Resources, [{
-        key: "openFile",
-        value: function openFile(file) {
-            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var get, response, uInt8Array;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                get = function get(url) {
-                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                                        return regeneratorRuntime.wrap(function _callee$(_context) {
-                                            while (1) {
-                                                switch (_context.prev = _context.next) {
-                                                    case 0:
-                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
-                                                            var xhr = new XMLHttpRequest();
-                                                            xhr.responseType = 'arraybuffer';
-                                                            xhr.onload = function (e) {
-                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
-                                                            };
-                                                            xhr.onerror = function (e) {
-                                                                reject(e);
-                                                            };
-                                                            xhr.open('GET', url, true); //Async
-                                                            xhr.send();
-                                                        }));
-
-                                                    case 1:
-                                                    case "end":
-                                                        return _context.stop();
-                                                }
-                                            }
-                                        }, _callee, this);
-                                    }));
-                                };
-
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return get(file);
-
-                            case 4:
-                                response = _context2.sent;
-                                uInt8Array = new Uint8Array(response);
-                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
-
-                            case 9:
-                                _context2.prev = 9;
-                                _context2.t0 = _context2["catch"](1);
-
-                                _log.Log.debug('failed to openFile', _context2.t0);
-                                throw _context2.t0;
-
-                            case 13:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 9]]);
-            }));
-        }
-    }]);
-
-    return Resources;
-}();
-
-var g_resources = new Resources();
-exports.g_resources = g_resources;
-/*
-var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
-xhr.responseType = 'arraybuffer';
-xhr.onload = function(e) {
-  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
-  // var byte3 = uInt8Array[4]; // byte at offset 4
-console.log(uInt8Array);
-};
-
-xhr.send();
- */
-
-/***/ }),
-
-/***/ 125:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.BinaryDataReader = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _position = __webpack_require__(69);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var BinaryDataReader = exports.BinaryDataReader = function () {
-    function BinaryDataReader(msg) {
-        _classCallCheck(this, BinaryDataReader);
-
-        this.data = msg;
-        this.offset = 0;
-        this.size = this.data.byteLength;
-    }
-
-    _createClass(BinaryDataReader, [{
-        key: "getU8",
-        value: function getU8() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getUint8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "getU16",
-        value: function getU16() {
-            return this.getU8() + this.getU8() * 256;
-        }
-    }, {
-        key: "getU32",
-        value: function getU32() {
-            return this.getU16() + this.getU16() * 256 * 256;
-        }
-    }, {
-        key: "getU64",
-        value: function getU64() {
-            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
-        }
-    }, {
-        key: "get8",
-        value: function get8() {
-            if (this.offset + 1 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt8(this.offset);
-            this.offset += 1;
-            return v;
-        }
-    }, {
-        key: "get16",
-        value: function get16() {
-            if (this.offset + 2 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt16(this.offset);
-            this.offset += 2;
-            return v;
-        }
-    }, {
-        key: "get32",
-        value: function get32() {
-            if (this.offset + 4 > this.size) throw new Error("Koniec pliku");
-            var v = this.data.getInt32(this.offset);
-            this.offset += 4;
-            return v;
-        }
-    }, {
-        key: "getDouble",
-        value: function getDouble() {
-            if (this.offset === this.size) throw new Error("Koniec pakietu");
-            var v = this.data.getFloat64(this.offset);
-            this.offset += 8;
-            return v;
-        }
-    }, {
-        key: "getString",
-        value: function getString() {
-            var length = this.getU16();
-            var text = '';
-            for (var i = 0; i < length; i++) {
-                text += String.fromCharCode(this.getU8());
-            }
-            return text;
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
-        }
-    }, {
-        key: "getBytes",
-        value: function getBytes(bytesCount) {
-            if (bytesCount == -1) bytesCount = this.size - this.offset;
-            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
-            var bytes = this.data.buffer.slice(this.offset, this.offset + bytesCount);
-            this.offset += bytesCount;
-            return bytes;
-        }
-    }, {
-        key: "peekU8",
-        value: function peekU8() {
-            var v = this.getU8();
-            this.offset -= 1;
-            return v;
-        }
-    }, {
-        key: "peekU16",
-        value: function peekU16() {
-            var v = this.getU16();
-            this.offset -= 2;
-            return v;
-        }
-    }, {
-        key: "peekU32",
-        value: function peekU32() {
-            var v = this.getU32();
-            this.offset -= 4;
-            return v;
-        }
-    }, {
-        key: "peekU64",
-        value: function peekU64() {
-            var v = this.getU64();
-            this.offset -= 8;
-            return v;
-        }
-    }, {
-        key: "skipBytes",
-        value: function skipBytes(bytesCount) {
-            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
-            this.offset += bytesCount;
-        }
-    }, {
-        key: "skip",
-        value: function skip(bytesCount) {
-            this.skipBytes(bytesCount);
-        }
-    }, {
-        key: "getUnreadSize",
-        value: function getUnreadSize() {
-            return this.size - this.offset;
-        }
-    }, {
-        key: "getReadPos",
-        value: function getReadPos() {
-            return this.offset;
-        }
-    }, {
-        key: "setReadPos",
-        value: function setReadPos(offset) {
-            this.offset = offset;
-        }
-    }, {
-        key: "tell",
-        value: function tell() {
-            return this.getReadPos();
-        }
-    }, {
-        key: "seek",
-        value: function seek(offset) {
-            this.setReadPos(offset);
-        }
-    }]);
-
-    return BinaryDataReader;
-}();
-
-/***/ }),
-
-/***/ 126:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Painter = function () {
-    function Painter() {
-        _classCallCheck(this, Painter);
-
-        this.app = new PIXI.Application(800, 600, { transparent: true });
-        document.body.appendChild(this.app.view);
-        this.app.stage.interactive = true;
-        //this.container = new PIXI.particles.ParticleContainer();
-        //this.app.stage.addChild(this.container);
-        this.app.stage.on('mousemove', onPointerMove).on('touchmove', onPointerMove);
-        function onPointerMove(eventData) {}
-    }
-
-    _createClass(Painter, [{
-        key: 'drawTexturedRect',
-        value: function drawTexturedRect(dest, texture, src) {
-            if (dest.isEmpty() || src.isEmpty()) {
-                throw new Error('empty');
-                //return;
-            }
-            var pixiTexture = texture.getPixiTexture(src);
-            var pixiSprite = new PIXI.Sprite(pixiTexture);
-            pixiSprite.position.x = dest.left() + 40;
-            pixiSprite.position.y = dest.top() + 30;
-            pixiSprite.width = pixiTexture.width;
-            pixiSprite.height = pixiTexture.height;
-            this.app.stage.addChild(pixiSprite);
-            // const awareRange = g_map.getAwareRange();
-            // var painterview = document.getElementById('painterview');
-            // let image : Image = texture.tmp_img;
-            // var el = <HTMLCanvasElement> document.getElementById("myCanvas");
-            // var $ctx = el.getContext('2d');
-            // var id = $ctx.createImageData(1,1);
-            // for (let i = 0; i < image.getPixelCount(); ++i) {
-            //
-            //     let x = i % image.getWidth();
-            //     let y = toInt(i / image.getWidth());
-            //     let pos = ((y) * image.getWidth() + (x)) * 4;
-            //     let r = image.m_pixels[pos];
-            //     let g = image.m_pixels[pos+1];
-            //     let b = image.m_pixels[pos+2];
-            //     let a = image.m_pixels[pos+3];
-            //
-            //     //a=128;
-            //     $ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (a / 255) + ')';
-            //     $ctx.fillRect(dest.x + x + 260, dest.y + y+270, 1, 1);
-            // }
-        }
-    }]);
-
-    return Painter;
-}();
-
-var g_painter = new Painter();
-exports.g_painter = g_painter;
-
-/***/ }),
-
-/***/ 127:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Light = exports.Light = function Light() {
-    _classCallCheck(this, Light);
-
-    this.intensity = 0;
-    this.color = 215;
-};
-
-/***/ }),
-
-/***/ 128:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.g_mapview = exports.MapView = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(13);
-
-var _log = __webpack_require__(20);
-
-var _map = __webpack_require__(57);
-
-var _position = __webpack_require__(69);
-
-var _point = __webpack_require__(42);
-
-var _size = __webpack_require__(70);
-
-var _lightview = __webpack_require__(457);
-
-var _timer = __webpack_require__(92);
-
-var _helpers = __webpack_require__(55);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var MapView = exports.MapView = function () {
-    function MapView() {
-        _classCallCheck(this, MapView);
-
-        this.m_lockedFirstVisibleFloor = -1;
-        this.m_cachedFirstVisibleFloor = 7;
-        this.m_cachedLastVisibleFloor = 7;
-        this.m_tileSize = 0;
-        this.m_updateTilesPos = 0;
-        this.m_drawDimension = new _size.Size();
-        this.m_visibleDimension = new _size.Size();
-        this.m_optimizedSize = new _size.Size();
-        this.m_virtualCenterOffset = new _point.Point();
-        this.m_visibleCenterOffset = new _point.Point();
-        this.m_moveOffset = new _point.Point();
-        this.m_customCameraPosition = new _position.Position();
-        this.m_mustUpdateVisibleTilesCache = true;
-        this.m_mustDrawVisibleTilesCache = true;
-        this.m_mustCleanFramebuffer = true;
-        this.m_multifloor = true;
-        this.m_animated = true;
-        this.m_autoViewMode = true;
-        this.m_drawTexts = true;
-        this.m_drawNames = true;
-        this.m_drawHealthBars = true;
-        this.m_drawLights = false;
-        this.m_drawManaBar = true;
-        this.m_smooth = true;
-        this.m_follow = true;
-        this.m_cachedVisibleTiles = [];
-        this.m_cachedFloorVisibleCreatures = [];
-        this.m_drawFlags = 0;
-        this.m_lightView = new _lightview.LightView();
-        this.m_minimumAmbientLight = 0.0;
-        this.m_fadeTimer = new _timer.Timer();
-        this.m_fadeInTime = 0.0;
-        this.m_fadeOutTime = 0.0;
-        this.m_shaderSwitchDone = true;
-    }
-
-    _createClass(MapView, [{
-        key: "init",
-        value: function init() {
-            this.m_optimizedSize = new _size.Size(_map.g_map.getAwareRange().horizontal(), _map.g_map.getAwareRange().vertical()).mul(_const.Otc.TILE_PIXELS);
-            this.setVisibleDimension(new _size.Size(15, 11));
-        }
-    }, {
-        key: "followCreature",
-        value: function followCreature(creature) {
-            this.m_follow = true;
-            this.m_followingCreature = creature;
-        }
-    }, {
-        key: "isFollowingCreature",
-        value: function isFollowingCreature() {
-            return this.m_followingCreature && this.m_follow;
-        }
-    }, {
-        key: "getCameraPosition",
-        value: function getCameraPosition() {
-            if (this.isFollowingCreature()) return this.m_followingCreature.getPosition();
-            return this.m_customCameraPosition;
-        }
-    }, {
-        key: "transformPositionTo2D",
-        value: function transformPositionTo2D(position, relativePosition) {
-            return new _point.Point((this.m_virtualCenterOffset.x + (position.x - relativePosition.x) - (relativePosition.z - position.z)) * this.m_tileSize, (this.m_virtualCenterOffset.y + (position.y - relativePosition.y) - (relativePosition.z - position.z)) * this.m_tileSize);
-        }
-    }, {
-        key: "draw",
-        value: function draw() {
-            console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
-            // dev
-            this.m_mustUpdateVisibleTilesCache = true;
-            if (this.m_mustUpdateVisibleTilesCache || this.m_updateTilesPos > 0) {
-                console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
-                this.updateVisibleTilesCache(this.m_mustUpdateVisibleTilesCache ? 0 : this.m_updateTilesPos);
-            }
-            console.error('draw mapview_2', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
-            var scaleFactor = this.m_tileSize / _const.Otc.TILE_PIXELS;
-            var cameraPosition = this.getCameraPosition();
-            var drawFlags = 0;
-            drawFlags = _const.DrawFlags.DrawAnimations;
-            drawFlags |= _const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawWalls | _const.DrawFlags.DrawItems | _const.DrawFlags.DrawCreatures | _const.DrawFlags.DrawEffects | _const.DrawFlags.DrawMissiles;
-            var tileIterator = 0;
-            for (var z = this.m_cachedLastVisibleFloor; z >= this.m_cachedFirstVisibleFloor; --z) {
-                while (tileIterator != this.m_cachedVisibleTiles.length) {
-                    var tile = this.m_cachedVisibleTiles[tileIterator];
-                    var tilePos = tile.getPosition();
-                    if (tilePos.z != z) break;else ++tileIterator;
-                    if (_map.g_map.isCovered(tilePos, this.m_cachedFirstVisibleFloor)) tile.draw(this.transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags);else tile.draw(this.transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags, this.m_lightView);
-                }
-                if (drawFlags & _const.DrawFlags.DrawMissiles) {
-                    var _iteratorNormalCompletion = true;
-                    var _didIteratorError = false;
-                    var _iteratorError = undefined;
-
-                    try {
-                        for (var _iterator = _map.g_map.getFloorMissiles(z)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                            var missile = _step.value;
-
-                            missile.draw(this.transformPositionTo2D(missile.getPosition(), cameraPosition), scaleFactor, (drawFlags & _const.DrawFlags.DrawAnimations) > 0, this.m_lightView);
-                        }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
-                        }
-                    }
-                }
-            }
-            /*
-            if (g_map.isCovered(tilePos, m_cachedFirstVisibleFloor))
-                tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags);
-            else
-                tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags, m_lightView.get());
-            */
-            /*
-                    for (let z = cameraPosition.z; z >= cameraPosition.z; --z) {
-            
-                        const awareRange = g_map.getAwareRange();
-                        for (let y = cameraPosition.y - awareRange.top; y <= cameraPosition.y + awareRange.bottom; ++y) {
-                            for (let x = cameraPosition.x - awareRange.left; x <= cameraPosition.x + awareRange.right; ++x) {
-                                let tilePos = new Position(x, y, z);//cameraPosition.translated(x, y, 0);
-                                //tilePos.z = z;
-                                let tile = g_map.getTile(tilePos);
-                                console.error('draw', cameraPosition.x, cameraPosition.y, tilePos.x, tilePos.y, tilePos.z, tile);
-            
-                                if (tile) {
-                                    let tilePos = tile.getPosition();
-                                    let pos = this.transformPositionTo2D(tilePos, cameraPosition);
-                                    //console.error('draw', tilePos.x, tilePos.y, tilePos.z, cameraPosition.x, cameraPosition.y, scaleFactor);
-                                    tile.draw(pos.add(new Point(0, 0)), scaleFactor, drawFlags);
-                                    //tile.draw(new Point(), scaleFactor, drawFlags);
-                                    //return;
-                                }
-                            }
-                        }
-                    }
-            */
-            /*
-                        if(drawFlags & DrawFlags.DrawMissiles) {
-                            for(let missile of g_map.getFloorMissiles(z)) {
-                                missile->draw(transformPositionTo2D(missile->getPosition(), cameraPosition), scaleFactor, drawFlags & DrawFlags.DrawAnimations, m_lightView.get());
-                            }
-                        }
-            */
-            /*
-            float fadeOpacity = 1.0f;
-            if(!m_shaderSwitchDone && m_fadeOutTime > 0) {
-                fadeOpacity = 1.0f - (m_fadeTimer.timeElapsed() / m_fadeOutTime);
-                if(fadeOpacity < 0.0f) {
-                    m_shader = m_nextShader;
-                    m_nextShader = nullptr;
-                    m_shaderSwitchDone = true;
-                    m_fadeTimer.restart();
-                }
-            }
-             if(m_shaderSwitchDone && m_shader && m_fadeInTime > 0)
-                fadeOpacity = std::min<float>(m_fadeTimer.timeElapsed() / m_fadeInTime, 1.0f);
-             Rect srcRect = calcFramebufferSource(rect.size());
-            Point drawOffset = srcRect.topLeft();
-             if(m_shader && g_painter->hasShaders() && g_graphics.shouldUseShaders() && m_viewMode == NEAR_VIEW) {
-                Rect framebufferRect = Rect(0,0, m_drawDimension * m_tileSize);
-                Point center = srcRect.center();
-                Point globalCoord = Point(cameraPosition.x - m_drawDimension.width()/2, -(cameraPosition.y - m_drawDimension.height()/2)) * m_tileSize;
-                m_shader->bind();
-                m_shader->setUniformValue(ShaderManager::MAP_CENTER_COORD, center.x / (float)framebufferRect.width(), 1.0f - center.y / (float)framebufferRect.height());
-                m_shader->setUniformValue(ShaderManager::MAP_GLOBAL_COORD, globalCoord.x / (float)framebufferRect.height(), globalCoord.y / (float)framebufferRect.height());
-                m_shader->setUniformValue(ShaderManager::MAP_ZOOM, scaleFactor);
-                g_painter->setShaderProgram(m_shader);
-            }
-             g_painter->setColor(Color::white);
-            g_painter->setOpacity(fadeOpacity);
-            glDisable(GL_BLEND);
-            #if 0
-            // debug source area
-                g_painter->saveAndResetState();
-            m_framebuffer->bind();
-            g_painter->setColor(Color::green);
-            g_painter->drawBoundingRect(srcRect, 2);
-            m_framebuffer->release();
-            g_painter->restoreSavedState();
-            m_framebuffer->draw(rect);
-            #else
-            m_framebuffer->draw(rect, srcRect);
-            #endif
-            g_painter->resetShaderProgram();
-            g_painter->resetOpacity();
-            glEnable(GL_BLEND);
-            */
-            // this could happen if the player position is not known yet
-            if (!cameraPosition.isValid()) return;
-            /*
-                    float horizontalStretchFactor = rect.width() / (float)srcRect.width();
-                    float verticalStretchFactor = rect.height() / (float)srcRect.height();
-                     // avoid drawing texts on map in far zoom outs
-                    for(const CreaturePtr& creature : m_cachedFloorVisibleCreatures) {
-                        if(!creature->canBeSeen())
-                        continue;
-                         PointF jumpOffset = creature->getJumpOffset() * scaleFactor;
-                        Point creatureOffset = Point(16 - creature->getDisplacementX(), - creature->getDisplacementY() - 2);
-                        Position pos = creature->getPosition();
-                        Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
-                        p += (creature->getDrawOffset() + creatureOffset) * scaleFactor - Point(stdext::round(jumpOffset.x), stdext::round(jumpOffset.y));
-                        p.x = p.x * horizontalStretchFactor;
-                        p.y = p.y * verticalStretchFactor;
-                        p += rect.topLeft();
-                         int flags = 0;
-                        if(m_drawNames){ flags = DrawFlags.DrawNames; }
-                        if(m_drawHealthBars) { flags |= DrawFlags.DrawBars; }
-                        if(m_drawManaBar) { flags |= DrawFlags.DrawManaBar; }
-                        creature->drawInformation(p, g_map.isCovered(pos, m_cachedFirstVisibleFloor), rect, flags);
-                    }
-                     // lights are drawn after names and before texts
-                    if(m_drawLights)
-                        m_lightView->draw(rect, srcRect);
-                     if(m_viewMode == NEAR_VIEW && m_drawTexts) {
-                        for(const StaticTextPtr& staticText : g_map.getStaticTexts()) {
-                            Position pos = staticText->getPosition();
-                             // ony draw static texts from current camera floor, unless yells
-                            //if(pos.z != cameraPosition.z && !staticText->isYell())
-                            //    continue;
-                             if(pos.z != cameraPosition.z && staticText->getMessageMode() == Otc::MessageNone)
-                            continue;
-                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
-                            p.x = p.x * horizontalStretchFactor;
-                            p.y = p.y * verticalStretchFactor;
-                            p += rect.topLeft();
-                            staticText->drawText(p, rect);
-                        }
-                         for(const AnimatedTextPtr& animatedText : g_map.getAnimatedTexts()) {
-                            Position pos = animatedText->getPosition();
-                             if(pos.z != cameraPosition.z)
-                                continue;
-                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
-                            p.x = p.x * horizontalStretchFactor;
-                            p.y = p.y * verticalStretchFactor;
-                            p += rect.topLeft();
-                            animatedText->drawText(p, rect);
-                        }
-                    }
-                    */
-        }
-    }, {
-        key: "clear",
-        value: function clear() {}
-    }, {
-        key: "updateVisibleTilesCache",
-        value: function updateVisibleTilesCache(start) {
-            ///  console.log('updateVisibleTilesCache', start)
-            if (start == 0) {
-                this.m_cachedFirstVisibleFloor = this.calcFirstVisibleFloor();
-                this.m_cachedLastVisibleFloor = this.calcLastVisibleFloor();
-                /*
-                    assert(m_cachedFirstVisibleFloor >= 0 && m_cachedLastVisibleFloor >= 0 &&
-                        m_cachedFirstVisibleFloor <= Otc::MAX_Z && m_cachedLastVisibleFloor <= Otc::MAX_Z);
-                */
-                //console.log('floors1', this.m_cachedFirstVisibleFloor, this.m_cachedLastVisibleFloor)
-                if (this.m_cachedLastVisibleFloor < this.m_cachedFirstVisibleFloor) this.m_cachedLastVisibleFloor = this.m_cachedFirstVisibleFloor;
-                //console.log('floors2', this.m_cachedFirstVisibleFloor, this.m_cachedLastVisibleFloor)
-                this.m_cachedFloorVisibleCreatures.length = 0;
-                this.m_cachedVisibleTiles.length = 0;
-                this.m_mustCleanFramebuffer = true;
-                this.m_mustDrawVisibleTilesCache = true;
-                this.m_mustUpdateVisibleTilesCache = false;
-                this.m_updateTilesPos = 0;
-            } else this.m_mustCleanFramebuffer = false;
-            // there is no tile to render on invalid positions
-            var cameraPosition = this.getCameraPosition();
-            if (!cameraPosition.isValid()) return;
-            //console.log('cam', cameraPosition)
-            var stop = false;
-            // clear current visible tiles cache
-            this.m_cachedVisibleTiles.length = 0;
-            this.m_mustDrawVisibleTilesCache = true;
-            this.m_updateTilesPos = 0;
-            // cache visible tiles in draw order
-            // draw from last floor (the lower) to first floor (the higher)
-            for (var iz = this.m_cachedLastVisibleFloor; iz >= this.m_cachedFirstVisibleFloor && !stop; --iz) {
-                var numDiagonals = this.m_drawDimension.width() + this.m_drawDimension.height() - 1;
-                //console.log('check z', iz, numDiagonals)
-                // loop through / diagonals beginning at top left and going to top right
-                for (var diagonal = 0; diagonal < numDiagonals && !stop; ++diagonal) {
-                    //console.log('check diagonal', iz, diagonal)
-                    // loop current diagonal tiles
-                    var advance = Math.max(diagonal - this.m_drawDimension.height(), 0);
-                    //console.log('check diagonal', iz, diagonal, advance)
-                    for (var iy = diagonal - advance, ix = advance; iy >= 0 && ix < this.m_drawDimension.width() && !stop; --iy, ++ix) {
-                        // only start really looking tiles in the desired start
-                        if (this.m_updateTilesPos < start) {
-                            this.m_updateTilesPos++;
-                            continue;
-                        }
-                        // avoid rendering too much tiles at once
-                        if (this.m_cachedVisibleTiles.length > MapView.MAX_TILE_DRAWS) {
-                            stop = true;
-                            break;
-                        }
-                        // position on current floor
-                        //TODO: check position limits
-                        var tilePos = cameraPosition.translated(ix - this.m_virtualCenterOffset.x, iy - this.m_virtualCenterOffset.y);
-                        //console.log('tilePos', tilePos)
-                        // adjust tilePos to the wanted floor
-                        tilePos.coveredUp(cameraPosition.z - iz);
-                        var tile = _map.g_map.getTile(tilePos);
-                        if (tile) {
-                            // skip tiles that have nothing
-                            if (!tile.isDrawable()) continue;
-                            // skip tiles that are completely behind another tile
-                            if (_map.g_map.isCompletelyCovered(tilePos, this.m_cachedFirstVisibleFloor)) continue;
-                            this.m_cachedVisibleTiles.push(tile);
-                        }
-                        this.m_updateTilesPos++;
-                    }
-                }
-            }
-            if (!stop) {
-                this.m_updateTilesPos = 0;
-            }
-            if (start == 0) this.m_cachedFloorVisibleCreatures = _map.g_map.getSightSpectators(cameraPosition, false);
-        }
-    }, {
-        key: "calcFirstVisibleFloor",
-        value: function calcFirstVisibleFloor() {
-            var z = 7;
-            // return forced first visible floor
-            if (this.m_lockedFirstVisibleFloor != -1) {
-                z = this.m_lockedFirstVisibleFloor;
-            } else {
-                var cameraPosition = this.getCameraPosition().clone();
-                // this could happens if the player is not known yet
-                if (cameraPosition.isValid()) {
-                    // avoid rendering multifloors in far views
-                    if (!this.m_multifloor) {
-                        z = cameraPosition.z;
-                    } else {
-                        // if nothing is limiting the view, the first visible floor is 0
-                        var firstFloor = 0;
-                        // limits to underground floors while under sea level
-                        if (cameraPosition.z > _const.Otc.SEA_FLOOR) firstFloor = Math.max(cameraPosition.z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, _const.Otc.UNDERGROUND_FLOOR);
-                        // loop in 3x3 tiles around the camera
-                        for (var ix = -1; ix <= 1 && firstFloor < cameraPosition.z; ++ix) {
-                            for (var iy = -1; iy <= 1 && firstFloor < cameraPosition.z; ++iy) {
-                                var pos = cameraPosition.translated(ix, iy);
-                                // process tiles that we can look through, e.g. windows, doors
-                                if (ix == 0 && iy == 0 || Math.abs(ix) != Math.abs(iy) && _map.g_map.isLookPossible(pos)) {
-                                    var upperPos = pos.clone();
-                                    var coveredPos = pos.clone();
-                                    while (coveredPos.coveredUp() && upperPos.up() && upperPos.z >= firstFloor) {
-                                        // check tiles physically above
-                                        var tile = _map.g_map.getTile(upperPos);
-                                        if (tile && tile.limitsFloorsView(!_map.g_map.isLookPossible(pos))) {
-                                            firstFloor = upperPos.z + 1;
-                                            break;
-                                        }
-                                        // check tiles geometrically above
-                                        tile = _map.g_map.getTile(coveredPos);
-                                        if (tile && tile.limitsFloorsView(_map.g_map.isLookPossible(pos))) {
-                                            firstFloor = coveredPos.z + 1;
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        z = firstFloor;
-                    }
-                }
-            }
-            // just ensure the that the floor is in the valid range
-            z = (0, _helpers.clamp)(z, 0, _const.Otc.MAX_Z);
-            return z;
-        }
-    }, {
-        key: "calcLastVisibleFloor",
-        value: function calcLastVisibleFloor() {
-            if (!this.m_multifloor) return this.calcFirstVisibleFloor();
-            var z = 7;
-            var cameraPosition = this.getCameraPosition().clone();
-            // this could happens if the player is not known yet
-            if (cameraPosition.isValid()) {
-                // view only underground floors when below sea level
-                if (cameraPosition.z > _const.Otc.SEA_FLOOR) z = cameraPosition.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE;else z = _const.Otc.SEA_FLOOR;
-            }
-            if (this.m_lockedFirstVisibleFloor != -1) z = Math.max(this.m_lockedFirstVisibleFloor, z);
-            // just ensure the that the floor is in the valid range
-            z = (0, _helpers.clamp)(z, 0, _const.Otc.MAX_Z);
-            return z;
-        }
-    }, {
-        key: "updateGeometry",
-        value: function updateGeometry(visibleDimension, optimizedSize) {
-            var tileSize = _const.Otc.TILE_PIXELS;
-            var drawDimension = visibleDimension.add(new _size.Size(3, 3));
-            var virtualCenterOffset = new _size.Size((0, _helpers.toInt)(drawDimension.width() / 2), (0, _helpers.toInt)(drawDimension.height() / 2)).sub(new _size.Size(1, 1)).toPoint();
-            var visibleCenterOffset = virtualCenterOffset.clone();
-            this.m_multifloor = true;
-            this.m_visibleDimension = visibleDimension;
-            this.m_drawDimension = drawDimension;
-            this.m_tileSize = tileSize;
-            this.m_virtualCenterOffset = virtualCenterOffset;
-            this.m_visibleCenterOffset = visibleCenterOffset;
-            this.m_optimizedSize = optimizedSize;
-            ///  console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
-            this.requestVisibleTilesCacheUpdate();
-        }
-    }, {
-        key: "onTileUpdate",
-        value: function onTileUpdate(position) {
-            this.requestVisibleTilesCacheUpdate();
-        }
-    }, {
-        key: "onMapCenterChange",
-        value: function onMapCenterChange(position) {
-            this.requestVisibleTilesCacheUpdate();
-        }
-    }, {
-        key: "lockFirstVisibleFloor",
-        value: function lockFirstVisibleFloor(firstVisibleFloor) {
-            this.m_lockedFirstVisibleFloor = firstVisibleFloor;
-            this.requestVisibleTilesCacheUpdate();
-        }
-    }, {
-        key: "unlockFirstVisibleFloor",
-        value: function unlockFirstVisibleFloor() {
-            this.m_lockedFirstVisibleFloor = -1;
-            this.requestVisibleTilesCacheUpdate();
-        }
-    }, {
-        key: "setVisibleDimension",
-        value: function setVisibleDimension(visibleDimension) {
-            if (visibleDimension.equals(this.m_visibleDimension)) return;
-            if (visibleDimension.width() % 2 != 1 || visibleDimension.height() % 2 != 1) {
-                _log.Log.error("visible dimension must be odd");
-                return;
-            }
-            if (visibleDimension.height() < 3 || visibleDimension.width() < 3) {
-                _log.Log.error("reach max zoom in");
-                return;
-            }
-            this.updateGeometry(visibleDimension, this.m_optimizedSize);
-        }
-    }, {
-        key: "requestVisibleTilesCacheUpdate",
-        value: function requestVisibleTilesCacheUpdate() {
-            this.m_mustUpdateVisibleTilesCache = true;
-        }
-    }]);
-
-    return MapView;
-}();
-
-MapView.MAX_TILE_DRAWS = 32 * 32 * 7;
-var g_mapview = new MapView();
-exports.g_mapview = g_mapview;
-
-/***/ }),
-
-/***/ 129:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.CachedText = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _size = __webpack_require__(70);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var CachedText = exports.CachedText = function () {
-    function CachedText() {
-        _classCallCheck(this, CachedText);
-
-        this.m_text = null;
-        this.m_textSize = null;
-        this.m_textMustRecache = true;
-        this.m_font = null;
-        this.m_align = null;
-    }
-
-    _createClass(CachedText, [{
-        key: 'draw',
-        value: function draw(rect) {
-            if (!this.m_font) return;
-            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
-                this.m_textMustRecache = false;
-                this.m_textCachedScreenCoords = rect;
-                //m_textCoordsBuffer.clear();
-                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
-            }
-            //if(m_font->getTexture())
-            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
-        }
-    }, {
-        key: 'wrapText',
-        value: function wrapText(maxWidth) {
-            if (this.m_font) {
-                // update new line positions
-                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
-                this.update();
-            }
-        }
-    }, {
-        key: 'setFont',
-        value: function setFont(font) {
-            this.m_font = font;
-            this.update();
-        }
-    }, {
-        key: 'setText',
-        value: function setText(text) {
-            this.m_text = text;
-            this.update();
-        }
-    }, {
-        key: 'setAlign',
-        value: function setAlign(align) {
-            this.m_align = align;
-            this.update();
-        }
-    }, {
-        key: 'getTextSize',
-        value: function getTextSize() {
-            return this.m_textSize;
-        }
-    }, {
-        key: 'getText',
-        value: function getText() {
-            return this.m_text;
-        }
-    }, {
-        key: 'getFont',
-        value: function getFont() {
-            return this.m_font;
-        }
-    }, {
-        key: 'getAlign',
-        value: function getAlign() {
-            return this.m_align;
-        }
-    }, {
-        key: 'update',
-        value: function update() {
-            if (this.m_font) this.m_textSize = new _size.Size();
-            /* todo */ //m_font->calculateTextRectSize(m_text);
-            this.m_textMustRecache = true;
-        }
-    }]);
-
-    return CachedText;
-}();
-
-CachedText.ALIGN_LEFT = 'left';
-CachedText.ALIGN_RIGHT = 'right';
-
-/***/ }),
-
-/***/ 13:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1595,7 +589,7 @@ var Tilestate = exports.Tilestate = undefined;
 
 /***/ }),
 
-/***/ 130:
+/***/ 125:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1612,21 +606,27 @@ var _thing = __webpack_require__(56);
 
 var _outfit = __webpack_require__(186);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _color = __webpack_require__(54);
+var _color = __webpack_require__(58);
 
-var _cachedtext = __webpack_require__(129);
+var _cachedtext = __webpack_require__(131);
 
-var _timer = __webpack_require__(92);
+var _timer = __webpack_require__(71);
 
-var _point = __webpack_require__(42);
+var _point = __webpack_require__(43);
 
-var _proto = __webpack_require__(185);
+var _proto = __webpack_require__(187);
 
-var _g_clock = __webpack_require__(93);
+var _g_clock = __webpack_require__(72);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
+
+var _position = __webpack_require__(57);
+
+var _game = __webpack_require__(30);
+
+var _map = __webpack_require__(39);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1663,7 +663,7 @@ var Creature = exports.Creature = function (_Thing) {
         _this.m_outfitColor = new _color.Color(255, 255, 255);
         //ScheduledEventPtr m_outfitColorUpdateEvent;
         _this.m_outfitColorTimer = new _timer.Timer();
-        //std::array<double, Otc::LastSpeedFormula> m_speedFormula;
+        _this.m_speedFormula = [];
         // walk related
         _this.m_walkAnimationPhase = 0;
         _this.m_walkedPixels = 0;
@@ -1673,12 +673,13 @@ var Creature = exports.Creature = function (_Thing) {
         _this.m_walking = false;
         _this.m_allowAppearWalk = false;
         _this.m_footStepDrawn = false;
-        //ScheduledEventPtr m_walkUpdateEvent;
-        //ScheduledEventPtr m_walkFinishAnimEvent;
         //EventPtr m_disappearEvent;
         _this.m_walkOffset = new _point.Point();
         _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
         _this.m_lastStepDirection = _const.Direction.InvalidDirection;
+        for (var i = 0; i < _const.SpeedFormula.LastSpeedFormula; ++i) {
+            _this.m_speedFormula.push(-1);
+        }
         return _this;
     }
 
@@ -1832,6 +833,11 @@ var Creature = exports.Creature = function (_Thing) {
             return this.m_outfit.getCategory() == _const.ThingCategory.ThingCategoryEffect && this.m_outfit.getAuxId() == 13;
         }
     }, {
+        key: "hasSpeedFormula",
+        value: function hasSpeedFormula() {
+            return this.m_speedFormula[_const.SpeedFormula.SpeedFormulaA] != -1 && this.m_speedFormula[_const.SpeedFormula.SpeedFormulaB] != -1 && this.m_speedFormula[_const.SpeedFormula.SpeedFormulaC] != -1;
+        }
+    }, {
         key: "addTimedSquare",
         value: function addTimedSquare(arg0) {
             // throw new Error("Method not implemented.");
@@ -1932,11 +938,70 @@ var Creature = exports.Creature = function (_Thing) {
             } // else turn
         }
     }, {
+        key: "getStepDuration",
+        value: function getStepDuration(ignoreDiagonal, dir) {
+            var speed = this.m_speed;
+            if (speed < 1) return 0;
+            if (_game.g_game.getFeature(_const.GameFeature.GameNewSpeedLaw)) speed *= 2;
+            var groundSpeed = 0;
+            var tilePos = new _position.Position();
+            /*
+                if(dir == Direction.InvalidDirection)
+                tilePos = this.m_lastStepToPosition;
+                else
+                tilePos = this.m_position.translatedToDirection(dir);
+            */
+            if (!tilePos.isValid()) tilePos = this.m_position;
+            var tile = _map.g_map.getTile(tilePos);
+            if (tile) {
+                groundSpeed = tile.getGroundSpeed();
+                if (groundSpeed == 0) groundSpeed = 150;
+            }
+            var interval = 1000;
+            if (groundSpeed > 0 && speed > 0) interval = 1000 * groundSpeed;
+            if (_game.g_game.getFeature(_const.GameFeature.GameNewSpeedLaw) && this.hasSpeedFormula()) {
+                var formulatedSpeed = 1;
+                if (speed > -this.m_speedFormula[_const.SpeedFormula.SpeedFormulaB]) {
+                    formulatedSpeed = Math.max(1, Math.floor(this.m_speedFormula[_const.SpeedFormula.SpeedFormulaA] * Math.log(speed / 2 + this.m_speedFormula[_const.SpeedFormula.SpeedFormulaB]) + this.m_speedFormula[_const.SpeedFormula.SpeedFormulaC] + 0.5));
+                }
+                interval = Math.floor(interval / formulatedSpeed);
+            } else interval /= speed;
+            if (_game.g_game.getClientVersion() >= 900) interval = interval / _game.g_game.getServerBeat() * _game.g_game.getServerBeat();
+            var factor = 3;
+            if (_game.g_game.getClientVersion() <= 810) factor = 2;
+            interval = Math.max(interval, _game.g_game.getServerBeat());
+            if (!ignoreDiagonal && (this.m_lastStepDirection == _const.Direction.NorthWest || this.m_lastStepDirection == _const.Direction.NorthEast || this.m_lastStepDirection == _const.Direction.SouthWest || this.m_lastStepDirection == _const.Direction.SouthEast)) interval *= factor;
+            return interval;
+        }
+    }, {
+        key: "walk",
+        value: function walk(oldPos, newPos) {
+            if (oldPos == newPos) return;
+            // get walk direction
+            this.m_lastStepDirection = oldPos.getDirectionFromPosition(newPos);
+            this.m_lastStepFromPosition = oldPos;
+            this.m_lastStepToPosition = newPos;
+            // set current walking direction
+            this.setDirection(this.m_lastStepDirection);
+            // starts counting walk
+            this.m_walking = true;
+            this.m_walkTimer.restart();
+            this.m_walkedPixels = 0;
+            if (this.m_walkFinishAnimEvent) {
+                this.m_walkFinishAnimEvent.cancel();
+                this.m_walkFinishAnimEvent = null;
+            }
+            // no direction need to be changed when the walk ends
+            this.m_walkTurnDirection = _const.Direction.InvalidDirection;
+            // starts updating walk
+            //this.nextWalkUpdate();
+        }
+    }, {
         key: "stopWalk",
         value: function stopWalk() {
             if (!this.m_walking) return;
             // stops the walk right away
-            this.terminateWalk();
+            //this.terminateWalk();
         }
     }, {
         key: "getThingType",
@@ -1955,7 +1020,1160 @@ var Creature = exports.Creature = function (_Thing) {
 
 /***/ }),
 
+/***/ 126:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Light = exports.Light = function Light() {
+    _classCallCheck(this, Light);
+
+    this.intensity = 0;
+    this.color = 215;
+};
+
+/***/ }),
+
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_mapview = exports.MapView = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _const = __webpack_require__(12);
+
+var _log = __webpack_require__(17);
+
+var _map = __webpack_require__(39);
+
+var _position = __webpack_require__(57);
+
+var _point = __webpack_require__(43);
+
+var _size = __webpack_require__(70);
+
+var _lightview = __webpack_require__(448);
+
+var _timer = __webpack_require__(71);
+
+var _helpers = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MapView = exports.MapView = function () {
+    function MapView() {
+        _classCallCheck(this, MapView);
+
+        this.m_lockedFirstVisibleFloor = -1;
+        this.m_cachedFirstVisibleFloor = 7;
+        this.m_cachedLastVisibleFloor = 7;
+        this.m_tileSize = 0;
+        this.m_updateTilesPos = 0;
+        this.m_drawDimension = new _size.Size();
+        this.m_visibleDimension = new _size.Size();
+        this.m_optimizedSize = new _size.Size();
+        this.m_virtualCenterOffset = new _point.Point();
+        this.m_visibleCenterOffset = new _point.Point();
+        this.m_moveOffset = new _point.Point();
+        this.m_customCameraPosition = new _position.Position();
+        this.m_mustUpdateVisibleTilesCache = true;
+        this.m_mustDrawVisibleTilesCache = true;
+        this.m_mustCleanFramebuffer = true;
+        this.m_multifloor = true;
+        this.m_animated = true;
+        this.m_autoViewMode = true;
+        this.m_drawTexts = true;
+        this.m_drawNames = true;
+        this.m_drawHealthBars = true;
+        this.m_drawLights = false;
+        this.m_drawManaBar = true;
+        this.m_smooth = true;
+        this.m_follow = true;
+        this.m_cachedVisibleTiles = [];
+        this.m_cachedFloorVisibleCreatures = [];
+        this.m_drawFlags = 0;
+        this.m_lightView = new _lightview.LightView();
+        this.m_minimumAmbientLight = 0.0;
+        this.m_fadeTimer = new _timer.Timer();
+        this.m_fadeInTime = 0.0;
+        this.m_fadeOutTime = 0.0;
+        this.m_shaderSwitchDone = true;
+    }
+
+    _createClass(MapView, [{
+        key: "init",
+        value: function init() {
+            this.m_optimizedSize = new _size.Size(_map.g_map.getAwareRange().horizontal(), _map.g_map.getAwareRange().vertical()).mul(_const.Otc.TILE_PIXELS);
+            this.setVisibleDimension(new _size.Size(15, 11));
+        }
+    }, {
+        key: "followCreature",
+        value: function followCreature(creature) {
+            this.m_follow = true;
+            this.m_followingCreature = creature;
+        }
+    }, {
+        key: "isFollowingCreature",
+        value: function isFollowingCreature() {
+            return this.m_followingCreature && this.m_follow;
+        }
+    }, {
+        key: "getCameraPosition",
+        value: function getCameraPosition() {
+            if (this.isFollowingCreature()) return this.m_followingCreature.getPosition();
+            return this.m_customCameraPosition;
+        }
+    }, {
+        key: "transformPositionTo2D",
+        value: function transformPositionTo2D(position, relativePosition) {
+            return new _point.Point((this.m_virtualCenterOffset.x + (position.x - relativePosition.x) - (relativePosition.z - position.z)) * this.m_tileSize, (this.m_virtualCenterOffset.y + (position.y - relativePosition.y) - (relativePosition.z - position.z)) * this.m_tileSize);
+        }
+    }, {
+        key: "draw",
+        value: function draw() {
+            console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
+            // dev
+            this.m_mustUpdateVisibleTilesCache = true;
+            if (this.m_mustUpdateVisibleTilesCache || this.m_updateTilesPos > 0) {
+                console.error('draw mapview_1', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
+                this.updateVisibleTilesCache(this.m_mustUpdateVisibleTilesCache ? 0 : this.m_updateTilesPos);
+            }
+            console.error('draw mapview_2', this.m_mustUpdateVisibleTilesCache, this.m_updateTilesPos, this.m_cachedVisibleTiles);
+            var scaleFactor = this.m_tileSize / _const.Otc.TILE_PIXELS;
+            var cameraPosition = this.getCameraPosition();
+            var drawFlags = 0;
+            drawFlags = _const.DrawFlags.DrawAnimations;
+            drawFlags |= _const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawWalls | _const.DrawFlags.DrawItems | _const.DrawFlags.DrawCreatures | _const.DrawFlags.DrawEffects | _const.DrawFlags.DrawMissiles;
+            var tileIterator = 0;
+            for (var z = this.m_cachedLastVisibleFloor; z >= this.m_cachedFirstVisibleFloor; --z) {
+                while (tileIterator != this.m_cachedVisibleTiles.length) {
+                    var tile = this.m_cachedVisibleTiles[tileIterator];
+                    var tilePos = tile.getPosition();
+                    if (tilePos.z != z) break;else ++tileIterator;
+                    if (_map.g_map.isCovered(tilePos, this.m_cachedFirstVisibleFloor)) tile.draw(this.transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags);else tile.draw(this.transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags, this.m_lightView);
+                }
+                if (drawFlags & _const.DrawFlags.DrawMissiles) {
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = _map.g_map.getFloorMissiles(z)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var missile = _step.value;
+
+                            missile.draw(this.transformPositionTo2D(missile.getPosition(), cameraPosition), scaleFactor, (drawFlags & _const.DrawFlags.DrawAnimations) > 0, this.m_lightView);
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+                }
+            }
+            /*
+            if (g_map.isCovered(tilePos, m_cachedFirstVisibleFloor))
+                tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags);
+            else
+                tile.draw(transformPositionTo2D(tilePos, cameraPosition), scaleFactor, drawFlags, m_lightView.get());
+            */
+            /*
+                    for (let z = cameraPosition.z; z >= cameraPosition.z; --z) {
+            
+                        const awareRange = g_map.getAwareRange();
+                        for (let y = cameraPosition.y - awareRange.top; y <= cameraPosition.y + awareRange.bottom; ++y) {
+                            for (let x = cameraPosition.x - awareRange.left; x <= cameraPosition.x + awareRange.right; ++x) {
+                                let tilePos = new Position(x, y, z);//cameraPosition.translated(x, y, 0);
+                                //tilePos.z = z;
+                                let tile = g_map.getTile(tilePos);
+                                console.error('draw', cameraPosition.x, cameraPosition.y, tilePos.x, tilePos.y, tilePos.z, tile);
+            
+                                if (tile) {
+                                    let tilePos = tile.getPosition();
+                                    let pos = this.transformPositionTo2D(tilePos, cameraPosition);
+                                    //console.error('draw', tilePos.x, tilePos.y, tilePos.z, cameraPosition.x, cameraPosition.y, scaleFactor);
+                                    tile.draw(pos.add(new Point(0, 0)), scaleFactor, drawFlags);
+                                    //tile.draw(new Point(), scaleFactor, drawFlags);
+                                    //return;
+                                }
+                            }
+                        }
+                    }
+            */
+            /*
+                        if(drawFlags & DrawFlags.DrawMissiles) {
+                            for(let missile of g_map.getFloorMissiles(z)) {
+                                missile->draw(transformPositionTo2D(missile->getPosition(), cameraPosition), scaleFactor, drawFlags & DrawFlags.DrawAnimations, m_lightView.get());
+                            }
+                        }
+            */
+            /*
+            float fadeOpacity = 1.0f;
+            if(!m_shaderSwitchDone && m_fadeOutTime > 0) {
+                fadeOpacity = 1.0f - (m_fadeTimer.timeElapsed() / m_fadeOutTime);
+                if(fadeOpacity < 0.0f) {
+                    m_shader = m_nextShader;
+                    m_nextShader = nullptr;
+                    m_shaderSwitchDone = true;
+                    m_fadeTimer.restart();
+                }
+            }
+             if(m_shaderSwitchDone && m_shader && m_fadeInTime > 0)
+                fadeOpacity = std::min<float>(m_fadeTimer.timeElapsed() / m_fadeInTime, 1.0f);
+             Rect srcRect = calcFramebufferSource(rect.size());
+            Point drawOffset = srcRect.topLeft();
+             if(m_shader && g_painter->hasShaders() && g_graphics.shouldUseShaders() && m_viewMode == NEAR_VIEW) {
+                Rect framebufferRect = Rect(0,0, m_drawDimension * m_tileSize);
+                Point center = srcRect.center();
+                Point globalCoord = Point(cameraPosition.x - m_drawDimension.width()/2, -(cameraPosition.y - m_drawDimension.height()/2)) * m_tileSize;
+                m_shader->bind();
+                m_shader->setUniformValue(ShaderManager::MAP_CENTER_COORD, center.x / (float)framebufferRect.width(), 1.0f - center.y / (float)framebufferRect.height());
+                m_shader->setUniformValue(ShaderManager::MAP_GLOBAL_COORD, globalCoord.x / (float)framebufferRect.height(), globalCoord.y / (float)framebufferRect.height());
+                m_shader->setUniformValue(ShaderManager::MAP_ZOOM, scaleFactor);
+                g_painter->setShaderProgram(m_shader);
+            }
+             g_painter->setColor(Color::white);
+            g_painter->setOpacity(fadeOpacity);
+            glDisable(GL_BLEND);
+            #if 0
+            // debug source area
+                g_painter->saveAndResetState();
+            m_framebuffer->bind();
+            g_painter->setColor(Color::green);
+            g_painter->drawBoundingRect(srcRect, 2);
+            m_framebuffer->release();
+            g_painter->restoreSavedState();
+            m_framebuffer->draw(rect);
+            #else
+            m_framebuffer->draw(rect, srcRect);
+            #endif
+            g_painter->resetShaderProgram();
+            g_painter->resetOpacity();
+            glEnable(GL_BLEND);
+            */
+            // this could happen if the player position is not known yet
+            if (!cameraPosition.isValid()) return;
+            /*
+                    float horizontalStretchFactor = rect.width() / (float)srcRect.width();
+                    float verticalStretchFactor = rect.height() / (float)srcRect.height();
+                     // avoid drawing texts on map in far zoom outs
+                    for(const CreaturePtr& creature : m_cachedFloorVisibleCreatures) {
+                        if(!creature->canBeSeen())
+                        continue;
+                         PointF jumpOffset = creature->getJumpOffset() * scaleFactor;
+                        Point creatureOffset = Point(16 - creature->getDisplacementX(), - creature->getDisplacementY() - 2);
+                        Position pos = creature->getPosition();
+                        Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                        p += (creature->getDrawOffset() + creatureOffset) * scaleFactor - Point(stdext::round(jumpOffset.x), stdext::round(jumpOffset.y));
+                        p.x = p.x * horizontalStretchFactor;
+                        p.y = p.y * verticalStretchFactor;
+                        p += rect.topLeft();
+                         int flags = 0;
+                        if(m_drawNames){ flags = DrawFlags.DrawNames; }
+                        if(m_drawHealthBars) { flags |= DrawFlags.DrawBars; }
+                        if(m_drawManaBar) { flags |= DrawFlags.DrawManaBar; }
+                        creature->drawInformation(p, g_map.isCovered(pos, m_cachedFirstVisibleFloor), rect, flags);
+                    }
+                     // lights are drawn after names and before texts
+                    if(m_drawLights)
+                        m_lightView->draw(rect, srcRect);
+                     if(m_viewMode == NEAR_VIEW && m_drawTexts) {
+                        for(const StaticTextPtr& staticText : g_map.getStaticTexts()) {
+                            Position pos = staticText->getPosition();
+                             // ony draw static texts from current camera floor, unless yells
+                            //if(pos.z != cameraPosition.z && !staticText->isYell())
+                            //    continue;
+                             if(pos.z != cameraPosition.z && staticText->getMessageMode() == Otc::MessageNone)
+                            continue;
+                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                            p.x = p.x * horizontalStretchFactor;
+                            p.y = p.y * verticalStretchFactor;
+                            p += rect.topLeft();
+                            staticText->drawText(p, rect);
+                        }
+                         for(const AnimatedTextPtr& animatedText : g_map.getAnimatedTexts()) {
+                            Position pos = animatedText->getPosition();
+                             if(pos.z != cameraPosition.z)
+                                continue;
+                             Point p = transformPositionTo2D(pos, cameraPosition) - drawOffset;
+                            p.x = p.x * horizontalStretchFactor;
+                            p.y = p.y * verticalStretchFactor;
+                            p += rect.topLeft();
+                            animatedText->drawText(p, rect);
+                        }
+                    }
+                    */
+        }
+    }, {
+        key: "clear",
+        value: function clear() {}
+    }, {
+        key: "updateVisibleTilesCache",
+        value: function updateVisibleTilesCache(start) {
+            ///  console.log('updateVisibleTilesCache', start)
+            if (start == 0) {
+                this.m_cachedFirstVisibleFloor = this.calcFirstVisibleFloor();
+                this.m_cachedLastVisibleFloor = this.calcLastVisibleFloor();
+                /*
+                    assert(m_cachedFirstVisibleFloor >= 0 && m_cachedLastVisibleFloor >= 0 &&
+                        m_cachedFirstVisibleFloor <= Otc::MAX_Z && m_cachedLastVisibleFloor <= Otc::MAX_Z);
+                */
+                //console.log('floors1', this.m_cachedFirstVisibleFloor, this.m_cachedLastVisibleFloor)
+                if (this.m_cachedLastVisibleFloor < this.m_cachedFirstVisibleFloor) this.m_cachedLastVisibleFloor = this.m_cachedFirstVisibleFloor;
+                //console.log('floors2', this.m_cachedFirstVisibleFloor, this.m_cachedLastVisibleFloor)
+                this.m_cachedFloorVisibleCreatures.length = 0;
+                this.m_cachedVisibleTiles.length = 0;
+                this.m_mustCleanFramebuffer = true;
+                this.m_mustDrawVisibleTilesCache = true;
+                this.m_mustUpdateVisibleTilesCache = false;
+                this.m_updateTilesPos = 0;
+            } else this.m_mustCleanFramebuffer = false;
+            // there is no tile to render on invalid positions
+            var cameraPosition = this.getCameraPosition();
+            if (!cameraPosition.isValid()) return;
+            //console.log('cam', cameraPosition)
+            var stop = false;
+            // clear current visible tiles cache
+            this.m_cachedVisibleTiles.length = 0;
+            this.m_mustDrawVisibleTilesCache = true;
+            this.m_updateTilesPos = 0;
+            // cache visible tiles in draw order
+            // draw from last floor (the lower) to first floor (the higher)
+            for (var iz = this.m_cachedLastVisibleFloor; iz >= this.m_cachedFirstVisibleFloor && !stop; --iz) {
+                var numDiagonals = this.m_drawDimension.width() + this.m_drawDimension.height() - 1;
+                //console.log('check z', iz, numDiagonals)
+                // loop through / diagonals beginning at top left and going to top right
+                for (var diagonal = 0; diagonal < numDiagonals && !stop; ++diagonal) {
+                    //console.log('check diagonal', iz, diagonal)
+                    // loop current diagonal tiles
+                    var advance = Math.max(diagonal - this.m_drawDimension.height(), 0);
+                    //console.log('check diagonal', iz, diagonal, advance)
+                    for (var iy = diagonal - advance, ix = advance; iy >= 0 && ix < this.m_drawDimension.width() && !stop; --iy, ++ix) {
+                        // only start really looking tiles in the desired start
+                        if (this.m_updateTilesPos < start) {
+                            this.m_updateTilesPos++;
+                            continue;
+                        }
+                        // avoid rendering too much tiles at once
+                        if (this.m_cachedVisibleTiles.length > MapView.MAX_TILE_DRAWS) {
+                            stop = true;
+                            break;
+                        }
+                        // position on current floor
+                        //TODO: check position limits
+                        var tilePos = cameraPosition.translated(ix - this.m_virtualCenterOffset.x, iy - this.m_virtualCenterOffset.y);
+                        //console.log('tilePos', tilePos)
+                        // adjust tilePos to the wanted floor
+                        tilePos.coveredUp(cameraPosition.z - iz);
+                        var tile = _map.g_map.getTile(tilePos);
+                        if (tile) {
+                            // skip tiles that have nothing
+                            if (!tile.isDrawable()) continue;
+                            // skip tiles that are completely behind another tile
+                            if (_map.g_map.isCompletelyCovered(tilePos, this.m_cachedFirstVisibleFloor)) continue;
+                            this.m_cachedVisibleTiles.push(tile);
+                        }
+                        this.m_updateTilesPos++;
+                    }
+                }
+            }
+            if (!stop) {
+                this.m_updateTilesPos = 0;
+            }
+            if (start == 0) this.m_cachedFloorVisibleCreatures = _map.g_map.getSightSpectators(cameraPosition, false);
+        }
+    }, {
+        key: "calcFirstVisibleFloor",
+        value: function calcFirstVisibleFloor() {
+            var z = 7;
+            // return forced first visible floor
+            if (this.m_lockedFirstVisibleFloor != -1) {
+                z = this.m_lockedFirstVisibleFloor;
+            } else {
+                var cameraPosition = this.getCameraPosition().clone();
+                // this could happens if the player is not known yet
+                if (cameraPosition.isValid()) {
+                    // avoid rendering multifloors in far views
+                    if (!this.m_multifloor) {
+                        z = cameraPosition.z;
+                    } else {
+                        // if nothing is limiting the view, the first visible floor is 0
+                        var firstFloor = 0;
+                        // limits to underground floors while under sea level
+                        if (cameraPosition.z > _const.Otc.SEA_FLOOR) firstFloor = Math.max(cameraPosition.z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, _const.Otc.UNDERGROUND_FLOOR);
+                        // loop in 3x3 tiles around the camera
+                        for (var ix = -1; ix <= 1 && firstFloor < cameraPosition.z; ++ix) {
+                            for (var iy = -1; iy <= 1 && firstFloor < cameraPosition.z; ++iy) {
+                                var pos = cameraPosition.translated(ix, iy);
+                                // process tiles that we can look through, e.g. windows, doors
+                                if (ix == 0 && iy == 0 || Math.abs(ix) != Math.abs(iy) && _map.g_map.isLookPossible(pos)) {
+                                    var upperPos = pos.clone();
+                                    var coveredPos = pos.clone();
+                                    while (coveredPos.coveredUp() && upperPos.up() && upperPos.z >= firstFloor) {
+                                        // check tiles physically above
+                                        var tile = _map.g_map.getTile(upperPos);
+                                        if (tile && tile.limitsFloorsView(!_map.g_map.isLookPossible(pos))) {
+                                            firstFloor = upperPos.z + 1;
+                                            break;
+                                        }
+                                        // check tiles geometrically above
+                                        tile = _map.g_map.getTile(coveredPos);
+                                        if (tile && tile.limitsFloorsView(_map.g_map.isLookPossible(pos))) {
+                                            firstFloor = coveredPos.z + 1;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        z = firstFloor;
+                    }
+                }
+            }
+            // just ensure the that the floor is in the valid range
+            z = (0, _helpers.clamp)(z, 0, _const.Otc.MAX_Z);
+            return z;
+        }
+    }, {
+        key: "calcLastVisibleFloor",
+        value: function calcLastVisibleFloor() {
+            if (!this.m_multifloor) return this.calcFirstVisibleFloor();
+            var z = 7;
+            var cameraPosition = this.getCameraPosition().clone();
+            // this could happens if the player is not known yet
+            if (cameraPosition.isValid()) {
+                // view only underground floors when below sea level
+                if (cameraPosition.z > _const.Otc.SEA_FLOOR) z = cameraPosition.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE;else z = _const.Otc.SEA_FLOOR;
+            }
+            if (this.m_lockedFirstVisibleFloor != -1) z = Math.max(this.m_lockedFirstVisibleFloor, z);
+            // just ensure the that the floor is in the valid range
+            z = (0, _helpers.clamp)(z, 0, _const.Otc.MAX_Z);
+            return z;
+        }
+    }, {
+        key: "updateGeometry",
+        value: function updateGeometry(visibleDimension, optimizedSize) {
+            var tileSize = _const.Otc.TILE_PIXELS;
+            var drawDimension = visibleDimension.add(new _size.Size(3, 3));
+            var virtualCenterOffset = new _size.Size((0, _helpers.toInt)(drawDimension.width() / 2), (0, _helpers.toInt)(drawDimension.height() / 2)).sub(new _size.Size(1, 1)).toPoint();
+            var visibleCenterOffset = virtualCenterOffset.clone();
+            this.m_multifloor = true;
+            this.m_visibleDimension = visibleDimension;
+            this.m_drawDimension = drawDimension;
+            this.m_tileSize = tileSize;
+            this.m_virtualCenterOffset = virtualCenterOffset;
+            this.m_visibleCenterOffset = visibleCenterOffset;
+            this.m_optimizedSize = optimizedSize;
+            ///  console.log('calc', visibleDimension, drawDimension, tileSize, virtualCenterOffset, visibleCenterOffset, optimizedSize);
+            this.requestVisibleTilesCacheUpdate();
+        }
+    }, {
+        key: "onTileUpdate",
+        value: function onTileUpdate(position) {
+            this.requestVisibleTilesCacheUpdate();
+        }
+    }, {
+        key: "onMapCenterChange",
+        value: function onMapCenterChange(position) {
+            this.requestVisibleTilesCacheUpdate();
+        }
+    }, {
+        key: "lockFirstVisibleFloor",
+        value: function lockFirstVisibleFloor(firstVisibleFloor) {
+            this.m_lockedFirstVisibleFloor = firstVisibleFloor;
+            this.requestVisibleTilesCacheUpdate();
+        }
+    }, {
+        key: "unlockFirstVisibleFloor",
+        value: function unlockFirstVisibleFloor() {
+            this.m_lockedFirstVisibleFloor = -1;
+            this.requestVisibleTilesCacheUpdate();
+        }
+    }, {
+        key: "setVisibleDimension",
+        value: function setVisibleDimension(visibleDimension) {
+            if (visibleDimension.equals(this.m_visibleDimension)) return;
+            if (visibleDimension.width() % 2 != 1 || visibleDimension.height() % 2 != 1) {
+                _log.Log.error("visible dimension must be odd");
+                return;
+            }
+            if (visibleDimension.height() < 3 || visibleDimension.width() < 3) {
+                _log.Log.error("reach max zoom in");
+                return;
+            }
+            this.updateGeometry(visibleDimension, this.m_optimizedSize);
+        }
+    }, {
+        key: "requestVisibleTilesCacheUpdate",
+        value: function requestVisibleTilesCacheUpdate() {
+            this.m_mustUpdateVisibleTilesCache = true;
+        }
+    }]);
+
+    return MapView;
+}();
+
+MapView.MAX_TILE_DRAWS = 32 * 32 * 7;
+var g_mapview = new MapView();
+exports.g_mapview = g_mapview;
+
+/***/ }),
+
+/***/ 128:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_resources = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _inputfile = __webpack_require__(451);
+
+var _log = __webpack_require__(17);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+var Resources = function () {
+    function Resources() {
+        _classCallCheck(this, Resources);
+    }
+
+    _createClass(Resources, [{
+        key: "openFile",
+        value: function openFile(file) {
+            return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                var get, response, uInt8Array;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                get = function get(url) {
+                                    return __awaiter(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                                        return regeneratorRuntime.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        return _context.abrupt("return", new Promise(function (resolve, reject) {
+                                                            var xhr = new XMLHttpRequest();
+                                                            xhr.responseType = 'arraybuffer';
+                                                            xhr.onload = function (e) {
+                                                                if (this.status >= 200 && this.status < 300) resolve(this.response);else reject('Response status: ' + this.status);
+                                                            };
+                                                            xhr.onerror = function (e) {
+                                                                reject(e);
+                                                            };
+                                                            xhr.open('GET', url, true); //Async
+                                                            xhr.send();
+                                                        }));
+
+                                                    case 1:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, this);
+                                    }));
+                                };
+
+                                _context2.prev = 1;
+                                _context2.next = 4;
+                                return get(file);
+
+                            case 4:
+                                response = _context2.sent;
+                                uInt8Array = new Uint8Array(response);
+                                return _context2.abrupt("return", new _inputfile.InputFile(new DataView(uInt8Array.buffer)));
+
+                            case 9:
+                                _context2.prev = 9;
+                                _context2.t0 = _context2["catch"](1);
+
+                                _log.Log.debug('failed to openFile', _context2.t0);
+                                throw _context2.t0;
+
+                            case 13:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this, [[1, 9]]);
+            }));
+        }
+    }]);
+
+    return Resources;
+}();
+
+var g_resources = new Resources();
+exports.g_resources = g_resources;
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function(e) {
+  var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
+  // var byte3 = uInt8Array[4]; // byte at offset 4
+console.log(uInt8Array);
+};
+
+xhr.send();
+ */
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.BinaryDataReader = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _position = __webpack_require__(57);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BinaryDataReader = exports.BinaryDataReader = function () {
+    function BinaryDataReader(msg) {
+        _classCallCheck(this, BinaryDataReader);
+
+        this.data = msg;
+        this.offset = 0;
+        this.size = this.data.byteLength;
+    }
+
+    _createClass(BinaryDataReader, [{
+        key: "getU8",
+        value: function getU8() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getUint8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "getU16",
+        value: function getU16() {
+            return this.getU8() + this.getU8() * 256;
+        }
+    }, {
+        key: "getU32",
+        value: function getU32() {
+            return this.getU16() + this.getU16() * 256 * 256;
+        }
+    }, {
+        key: "getU64",
+        value: function getU64() {
+            return this.getU32() + this.getU32() * 256 * 256 * 256 * 256;
+        }
+    }, {
+        key: "get8",
+        value: function get8() {
+            if (this.offset + 1 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt8(this.offset);
+            this.offset += 1;
+            return v;
+        }
+    }, {
+        key: "get16",
+        value: function get16() {
+            if (this.offset + 2 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt16(this.offset);
+            this.offset += 2;
+            return v;
+        }
+    }, {
+        key: "get32",
+        value: function get32() {
+            if (this.offset + 4 > this.size) throw new Error("Koniec pliku");
+            var v = this.data.getInt32(this.offset);
+            this.offset += 4;
+            return v;
+        }
+    }, {
+        key: "getDouble",
+        value: function getDouble() {
+            if (this.offset === this.size) throw new Error("Koniec pakietu");
+            var v = this.data.getFloat64(this.offset);
+            this.offset += 8;
+            return v;
+        }
+    }, {
+        key: "getString",
+        value: function getString() {
+            var length = this.getU16();
+            var text = '';
+            for (var i = 0; i < length; i++) {
+                text += String.fromCharCode(this.getU8());
+            }
+            return text;
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return new _position.Position(this.getU16(), this.getU16(), this.getU8());
+        }
+    }, {
+        key: "getBytes",
+        value: function getBytes(bytesCount) {
+            if (bytesCount == -1) bytesCount = this.size - this.offset;
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            var bytes = this.data.buffer.slice(this.offset, this.offset + bytesCount);
+            this.offset += bytesCount;
+            return bytes;
+        }
+    }, {
+        key: "peekU8",
+        value: function peekU8() {
+            var v = this.getU8();
+            this.offset -= 1;
+            return v;
+        }
+    }, {
+        key: "peekU16",
+        value: function peekU16() {
+            var v = this.getU16();
+            this.offset -= 2;
+            return v;
+        }
+    }, {
+        key: "peekU32",
+        value: function peekU32() {
+            var v = this.getU32();
+            this.offset -= 4;
+            return v;
+        }
+    }, {
+        key: "peekU64",
+        value: function peekU64() {
+            var v = this.getU64();
+            this.offset -= 8;
+            return v;
+        }
+    }, {
+        key: "skipBytes",
+        value: function skipBytes(bytesCount) {
+            if (this.offset + bytesCount > this.size) throw new Error("Koniec pakietu");
+            this.offset += bytesCount;
+        }
+    }, {
+        key: "skip",
+        value: function skip(bytesCount) {
+            this.skipBytes(bytesCount);
+        }
+    }, {
+        key: "getUnreadSize",
+        value: function getUnreadSize() {
+            return this.size - this.offset;
+        }
+    }, {
+        key: "getReadPos",
+        value: function getReadPos() {
+            return this.offset;
+        }
+    }, {
+        key: "setReadPos",
+        value: function setReadPos(offset) {
+            this.offset = offset;
+        }
+    }, {
+        key: "tell",
+        value: function tell() {
+            return this.getReadPos();
+        }
+    }, {
+        key: "seek",
+        value: function seek(offset) {
+            this.setReadPos(offset);
+        }
+    }]);
+
+    return BinaryDataReader;
+}();
+
+/***/ }),
+
+/***/ 130:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Painter = function () {
+    function Painter() {
+        _classCallCheck(this, Painter);
+
+        this.app = new PIXI.Application(800, 600, { transparent: true });
+        document.body.appendChild(this.app.view);
+        this.app.stage.interactive = true;
+        //this.container = new PIXI.particles.ParticleContainer();
+        //this.app.stage.addChild(this.container);
+        this.app.stage.on('mousemove', onPointerMove).on('touchmove', onPointerMove);
+        function onPointerMove(eventData) {}
+    }
+
+    _createClass(Painter, [{
+        key: 'drawTexturedRect',
+        value: function drawTexturedRect(dest, texture, src) {
+            if (dest.isEmpty() || src.isEmpty()) {
+                throw new Error('empty');
+                //return;
+            }
+            var pixiTexture = texture.getPixiTexture(src);
+            var pixiSprite = new PIXI.Sprite(pixiTexture);
+            pixiSprite.position.x = dest.left() + 40;
+            pixiSprite.position.y = dest.top() + 30;
+            pixiSprite.width = pixiTexture.width;
+            pixiSprite.height = pixiTexture.height;
+            this.app.stage.addChild(pixiSprite);
+            // const awareRange = g_map.getAwareRange();
+            // var painterview = document.getElementById('painterview');
+            // let image : Image = texture.tmp_img;
+            // var el = <HTMLCanvasElement> document.getElementById("myCanvas");
+            // var $ctx = el.getContext('2d');
+            // var id = $ctx.createImageData(1,1);
+            // for (let i = 0; i < image.getPixelCount(); ++i) {
+            //
+            //     let x = i % image.getWidth();
+            //     let y = toInt(i / image.getWidth());
+            //     let pos = ((y) * image.getWidth() + (x)) * 4;
+            //     let r = image.m_pixels[pos];
+            //     let g = image.m_pixels[pos+1];
+            //     let b = image.m_pixels[pos+2];
+            //     let a = image.m_pixels[pos+3];
+            //
+            //     //a=128;
+            //     $ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (a / 255) + ')';
+            //     $ctx.fillRect(dest.x + x + 260, dest.y + y+270, 1, 1);
+            // }
+        }
+    }]);
+
+    return Painter;
+}();
+
+var g_painter = new Painter();
+exports.g_painter = g_painter;
+
+/***/ }),
+
+/***/ 131:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.CachedText = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _size = __webpack_require__(70);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CachedText = exports.CachedText = function () {
+    function CachedText() {
+        _classCallCheck(this, CachedText);
+
+        this.m_text = null;
+        this.m_textSize = null;
+        this.m_textMustRecache = true;
+        this.m_font = null;
+        this.m_align = null;
+    }
+
+    _createClass(CachedText, [{
+        key: 'draw',
+        value: function draw(rect) {
+            if (!this.m_font) return;
+            if (this.m_textMustRecache || this.m_textCachedScreenCoords != rect) {
+                this.m_textMustRecache = false;
+                this.m_textCachedScreenCoords = rect;
+                //m_textCoordsBuffer.clear();
+                //m_font->calculateDrawTextCoords(m_textCoordsBuffer, m_text, rect, Fw::AlignCenter);
+            }
+            //if(m_font->getTexture())
+            //    g_painter->drawTextureCoords(m_textCoordsBuffer, m_font->getTexture());
+        }
+    }, {
+        key: 'wrapText',
+        value: function wrapText(maxWidth) {
+            if (this.m_font) {
+                // update new line positions
+                //this.m_text = this.m_font.wrapText(m_text, maxWidth);
+                this.update();
+            }
+        }
+    }, {
+        key: 'setFont',
+        value: function setFont(font) {
+            this.m_font = font;
+            this.update();
+        }
+    }, {
+        key: 'setText',
+        value: function setText(text) {
+            this.m_text = text;
+            this.update();
+        }
+    }, {
+        key: 'setAlign',
+        value: function setAlign(align) {
+            this.m_align = align;
+            this.update();
+        }
+    }, {
+        key: 'getTextSize',
+        value: function getTextSize() {
+            return this.m_textSize;
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            return this.m_text;
+        }
+    }, {
+        key: 'getFont',
+        value: function getFont() {
+            return this.m_font;
+        }
+    }, {
+        key: 'getAlign',
+        value: function getAlign() {
+            return this.m_align;
+        }
+    }, {
+        key: 'update',
+        value: function update() {
+            if (this.m_font) this.m_textSize = new _size.Size();
+            /* todo */ //m_font->calculateTextRectSize(m_text);
+            this.m_textMustRecache = true;
+        }
+    }]);
+
+    return CachedText;
+}();
+
+CachedText.ALIGN_LEFT = 'left';
+CachedText.ALIGN_RIGHT = 'right';
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var log = function log() {
+    ///  console.log.apply(this, v);
+    //$('#status').text(v.join(','));
+};
+var error = function error() {
+    for (var _len = arguments.length, v = Array(_len), _key = 0; _key < _len; _key++) {
+        v[_key] = arguments[_key];
+    }
+
+    console.error.apply(this, v);
+    //$('#status').text(v.join(','));
+};
+
+var Log = exports.Log = function () {
+    function Log() {
+        _classCallCheck(this, Log);
+    }
+
+    _createClass(Log, null, [{
+        key: "log",
+        value: function log() {
+            ///  console.log.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }, {
+        key: "debug",
+        value: function debug() {
+            ///  console.log.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }, {
+        key: "error",
+        value: function error() {
+            for (var _len2 = arguments.length, v = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                v[_key2] = arguments[_key2];
+            }
+
+            console.error.apply(this, v);
+            //$('#status').text(v.join(','));
+        }
+    }]);
+
+    return Log;
+}();
+
+exports.log = log;
+exports.error = error;
+
+/***/ }),
+
 /***/ 181:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Player = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _creature = __webpack_require__(125);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Player = exports.Player = function (_Creature) {
+    _inherits(Player, _Creature);
+
+    function Player() {
+        _classCallCheck(this, Player);
+
+        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
+    }
+
+    _createClass(Player, [{
+        key: 'isPlayer',
+        value: function isPlayer() {
+            return true;
+        }
+    }]);
+
+    return Player;
+}(_creature.Creature);
+
+/***/ }),
+
+/***/ 182:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var AwareRange = exports.AwareRange = function () {
+    function AwareRange() {
+        _classCallCheck(this, AwareRange);
+
+        this.top = 6;
+        this.right = 9;
+        this.bottom = 7;
+        this.left = 8;
+    }
+
+    _createClass(AwareRange, [{
+        key: "horizontal",
+        value: function horizontal() {
+            return this.left + this.right + 1;
+        }
+    }, {
+        key: "vertical",
+        value: function vertical() {
+            return this.top + this.bottom + 1;
+        }
+    }]);
+
+    return AwareRange;
+}();
+
+/***/ }),
+
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1968,11 +2186,11 @@ exports.Image = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _color = __webpack_require__(54);
+var _color = __webpack_require__(58);
 
-var _helpers = __webpack_require__(55);
+var _helpers = __webpack_require__(44);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2071,7 +2289,7 @@ var Image = exports.Image = function () {
 
 /***/ }),
 
-/***/ 182:
+/***/ 184:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2084,15 +2302,15 @@ exports.g_sprites = exports.SpriteManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _image = __webpack_require__(181);
+var _image = __webpack_require__(183);
 
-var _resources = __webpack_require__(124);
+var _resources = __webpack_require__(128);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
 var _size = __webpack_require__(70);
 
@@ -2251,7 +2469,7 @@ exports.g_sprites = g_sprites;
 
 /***/ }),
 
-/***/ 183:
+/***/ 185:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2264,7 +2482,7 @@ exports.Rect = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _point = __webpack_require__(42);
+var _point = __webpack_require__(43);
 
 var _size2 = __webpack_require__(70);
 
@@ -2622,7 +2840,7 @@ var Rect = exports.Rect = function () {
 
 /***/ }),
 
-/***/ 184:
+/***/ 186:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2631,40 +2849,221 @@ var Rect = exports.Rect = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.InputMessage = undefined;
+exports.Outfit = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _binarydatareader = __webpack_require__(125);
+var _const = __webpack_require__(12);
+
+var _color = __webpack_require__(58);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var Outfit = exports.Outfit = function () {
+    function Outfit() {
+        _classCallCheck(this, Outfit);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
-    _inherits(InputMessage, _BinaryDataReader);
-
-    function InputMessage() {
-        _classCallCheck(this, InputMessage);
-
-        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
+        this.m_category = _const.ThingCategory.ThingCategoryCreature;
+        this.m_id = 128;
+        this.m_auxId = 0;
+        this.resetClothes();
     }
 
-    _createClass(InputMessage, [{
-        key: "validateChecksum",
-        value: function validateChecksum() {
-            return true;
+    _createClass(Outfit, [{
+        key: "getId",
+        value: function getId() {
+            return this.m_id;
+        }
+    }, {
+        key: "getAuxId",
+        value: function getAuxId() {
+            return this.m_auxId;
+        }
+    }, {
+        key: "getHead",
+        value: function getHead() {
+            return this.m_head;
+        }
+    }, {
+        key: "getBody",
+        value: function getBody() {
+            return this.m_body;
+        }
+    }, {
+        key: "getLegs",
+        value: function getLegs() {
+            return this.m_legs;
+        }
+    }, {
+        key: "getFeet",
+        value: function getFeet() {
+            return this.m_feet;
+        }
+    }, {
+        key: "getAddons",
+        value: function getAddons() {
+            return this.m_addons;
+        }
+    }, {
+        key: "getMount",
+        value: function getMount() {
+            return this.m_mount;
+        }
+    }, {
+        key: "getCategory",
+        value: function getCategory() {
+            return this.m_category;
+        }
+    }, {
+        key: "setId",
+        value: function setId(id) {
+            this.m_id = id;
+        }
+    }, {
+        key: "setAuxId",
+        value: function setAuxId(id) {
+            this.m_auxId = id;
+        }
+    }, {
+        key: "setHead",
+        value: function setHead(head) {
+            this.m_head = head;
+            this.m_headColor = Outfit.getColor(head);
+        }
+    }, {
+        key: "setBody",
+        value: function setBody(body) {
+            this.m_body = body;
+            this.m_bodyColor = Outfit.getColor(body);
+        }
+    }, {
+        key: "setLegs",
+        value: function setLegs(legs) {
+            this.m_legs = legs;
+            this.m_legsColor = Outfit.getColor(legs);
+        }
+    }, {
+        key: "setFeet",
+        value: function setFeet(feet) {
+            this.m_feet = feet;
+            this.m_feetColor = Outfit.getColor(feet);
+        }
+    }, {
+        key: "setAddons",
+        value: function setAddons(addons) {
+            this.m_addons = addons;
+        }
+    }, {
+        key: "setMount",
+        value: function setMount(mount) {
+            this.m_mount = mount;
+        }
+    }, {
+        key: "setCategory",
+        value: function setCategory(category) {
+            this.m_category = category;
+        }
+    }, {
+        key: "resetClothes",
+        value: function resetClothes() {
+            this.setHead(0);
+            this.setBody(0);
+            this.setLegs(0);
+            this.setFeet(0);
+            this.setMount(0);
+        }
+    }], [{
+        key: "getColor",
+        value: function getColor(color) {
+            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
+            var loc1 = 0,
+                loc2 = 0,
+                loc3 = 0;
+            if (color % Outfit.HSI_H_STEPS != 0) {
+                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
+                loc2 = 1;
+                loc3 = 1;
+                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
+                    case 0:
+                        loc2 = 0.25;
+                        loc3 = 1.00;
+                        break;
+                    case 1:
+                        loc2 = 0.25;
+                        loc3 = 0.75;
+                        break;
+                    case 2:
+                        loc2 = 0.50;
+                        loc3 = 0.75;
+                        break;
+                    case 3:
+                        loc2 = 0.667;
+                        loc3 = 0.75;
+                        break;
+                    case 4:
+                        loc2 = 1.00;
+                        loc3 = 1.00;
+                        break;
+                    case 5:
+                        loc2 = 1.00;
+                        loc3 = 0.75;
+                        break;
+                    case 6:
+                        loc2 = 1.00;
+                        loc3 = 0.50;
+                        break;
+                }
+            } else {
+                loc1 = 0;
+                loc2 = 0;
+                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
+            }
+            if (loc3 == 0) return new _color.Color(0, 0, 0);
+            if (loc2 == 0) {
+                var loc7 = Math.floor(loc3 * 255);
+                return new _color.Color(loc7, loc7, loc7);
+            }
+            var red = 0,
+                green = 0,
+                blue = 0;
+            if (loc1 < 1.0 / 6.0) {
+                red = loc3;
+                blue = loc3 * (1 - loc2);
+                green = blue + (loc3 - blue) * 6 * loc1;
+            } else if (loc1 < 2.0 / 6.0) {
+                green = loc3;
+                blue = loc3 * (1 - loc2);
+                red = green - (loc3 - blue) * (6 * loc1 - 1);
+            } else if (loc1 < 3.0 / 6.0) {
+                green = loc3;
+                red = loc3 * (1 - loc2);
+                blue = red + (loc3 - red) * (6 * loc1 - 2);
+            } else if (loc1 < 4.0 / 6.0) {
+                blue = loc3;
+                red = loc3 * (1 - loc2);
+                green = blue - (loc3 - red) * (6 * loc1 - 3);
+            } else if (loc1 < 5.0 / 6.0) {
+                blue = loc3;
+                green = loc3 * (1 - loc2);
+                red = green + (loc3 - green) * (6 * loc1 - 4);
+            } else {
+                red = loc3;
+                green = loc3 * (1 - loc2);
+                blue = red - (loc3 - green) * (6 * loc1 - 5);
+            }
+            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
         }
     }]);
 
-    return InputMessage;
-}(_binarydatareader.BinaryDataReader);
+    return Outfit;
+}();
+
+Outfit.HSI_SI_VALUES = 7;
+Outfit.HSI_H_STEPS = 19;
 
 /***/ }),
 
-/***/ 185:
+/***/ 187:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2907,271 +3306,49 @@ exports.Proto = Proto;
 
 /***/ }),
 
-/***/ 186:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Outfit = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(13);
-
-var _color = __webpack_require__(54);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Outfit = exports.Outfit = function () {
-    function Outfit() {
-        _classCallCheck(this, Outfit);
-
-        this.m_category = _const.ThingCategory.ThingCategoryCreature;
-        this.m_id = 128;
-        this.m_auxId = 0;
-        this.resetClothes();
-    }
-
-    _createClass(Outfit, [{
-        key: "getId",
-        value: function getId() {
-            return this.m_id;
-        }
-    }, {
-        key: "getAuxId",
-        value: function getAuxId() {
-            return this.m_auxId;
-        }
-    }, {
-        key: "getHead",
-        value: function getHead() {
-            return this.m_head;
-        }
-    }, {
-        key: "getBody",
-        value: function getBody() {
-            return this.m_body;
-        }
-    }, {
-        key: "getLegs",
-        value: function getLegs() {
-            return this.m_legs;
-        }
-    }, {
-        key: "getFeet",
-        value: function getFeet() {
-            return this.m_feet;
-        }
-    }, {
-        key: "getAddons",
-        value: function getAddons() {
-            return this.m_addons;
-        }
-    }, {
-        key: "getMount",
-        value: function getMount() {
-            return this.m_mount;
-        }
-    }, {
-        key: "getCategory",
-        value: function getCategory() {
-            return this.m_category;
-        }
-    }, {
-        key: "setId",
-        value: function setId(id) {
-            this.m_id = id;
-        }
-    }, {
-        key: "setAuxId",
-        value: function setAuxId(id) {
-            this.m_auxId = id;
-        }
-    }, {
-        key: "setHead",
-        value: function setHead(head) {
-            this.m_head = head;
-            this.m_headColor = Outfit.getColor(head);
-        }
-    }, {
-        key: "setBody",
-        value: function setBody(body) {
-            this.m_body = body;
-            this.m_bodyColor = Outfit.getColor(body);
-        }
-    }, {
-        key: "setLegs",
-        value: function setLegs(legs) {
-            this.m_legs = legs;
-            this.m_legsColor = Outfit.getColor(legs);
-        }
-    }, {
-        key: "setFeet",
-        value: function setFeet(feet) {
-            this.m_feet = feet;
-            this.m_feetColor = Outfit.getColor(feet);
-        }
-    }, {
-        key: "setAddons",
-        value: function setAddons(addons) {
-            this.m_addons = addons;
-        }
-    }, {
-        key: "setMount",
-        value: function setMount(mount) {
-            this.m_mount = mount;
-        }
-    }, {
-        key: "setCategory",
-        value: function setCategory(category) {
-            this.m_category = category;
-        }
-    }, {
-        key: "resetClothes",
-        value: function resetClothes() {
-            this.setHead(0);
-            this.setBody(0);
-            this.setLegs(0);
-            this.setFeet(0);
-            this.setMount(0);
-        }
-    }], [{
-        key: "getColor",
-        value: function getColor(color) {
-            if (color >= Outfit.HSI_H_STEPS * Outfit.HSI_SI_VALUES) color = 0;
-            var loc1 = 0,
-                loc2 = 0,
-                loc3 = 0;
-            if (color % Outfit.HSI_H_STEPS != 0) {
-                loc1 = color % Outfit.HSI_H_STEPS / 18.0;
-                loc2 = 1;
-                loc3 = 1;
-                switch (Math.floor(color / Outfit.HSI_H_STEPS)) {
-                    case 0:
-                        loc2 = 0.25;
-                        loc3 = 1.00;
-                        break;
-                    case 1:
-                        loc2 = 0.25;
-                        loc3 = 0.75;
-                        break;
-                    case 2:
-                        loc2 = 0.50;
-                        loc3 = 0.75;
-                        break;
-                    case 3:
-                        loc2 = 0.667;
-                        loc3 = 0.75;
-                        break;
-                    case 4:
-                        loc2 = 1.00;
-                        loc3 = 1.00;
-                        break;
-                    case 5:
-                        loc2 = 1.00;
-                        loc3 = 0.75;
-                        break;
-                    case 6:
-                        loc2 = 1.00;
-                        loc3 = 0.50;
-                        break;
-                }
-            } else {
-                loc1 = 0;
-                loc2 = 0;
-                loc3 = 1 - color / Outfit.HSI_H_STEPS / Outfit.HSI_SI_VALUES;
-            }
-            if (loc3 == 0) return new _color.Color(0, 0, 0);
-            if (loc2 == 0) {
-                var loc7 = Math.floor(loc3 * 255);
-                return new _color.Color(loc7, loc7, loc7);
-            }
-            var red = 0,
-                green = 0,
-                blue = 0;
-            if (loc1 < 1.0 / 6.0) {
-                red = loc3;
-                blue = loc3 * (1 - loc2);
-                green = blue + (loc3 - blue) * 6 * loc1;
-            } else if (loc1 < 2.0 / 6.0) {
-                green = loc3;
-                blue = loc3 * (1 - loc2);
-                red = green - (loc3 - blue) * (6 * loc1 - 1);
-            } else if (loc1 < 3.0 / 6.0) {
-                green = loc3;
-                red = loc3 * (1 - loc2);
-                blue = red + (loc3 - red) * (6 * loc1 - 2);
-            } else if (loc1 < 4.0 / 6.0) {
-                blue = loc3;
-                red = loc3 * (1 - loc2);
-                green = blue - (loc3 - red) * (6 * loc1 - 3);
-            } else if (loc1 < 5.0 / 6.0) {
-                blue = loc3;
-                green = loc3 * (1 - loc2);
-                red = green + (loc3 - green) * (6 * loc1 - 4);
-            } else {
-                red = loc3;
-                green = loc3 * (1 - loc2);
-                blue = red - (loc3 - green) * (6 * loc1 - 5);
-            }
-            return new _color.Color(Math.floor(red * 255), Math.floor(green * 255), Math.floor(blue * 255));
-        }
-    }]);
-
-    return Outfit;
-}();
-
-Outfit.HSI_SI_VALUES = 7;
-Outfit.HSI_H_STEPS = 19;
-
-/***/ }),
-
-/***/ 187:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var AwareRange = exports.AwareRange = function () {
-    function AwareRange() {
-        _classCallCheck(this, AwareRange);
-
-        this.top = 6;
-        this.right = 9;
-        this.bottom = 7;
-        this.left = 8;
-    }
-
-    _createClass(AwareRange, [{
-        key: "horizontal",
-        value: function horizontal() {
-            return this.left + this.right + 1;
-        }
-    }, {
-        key: "vertical",
-        value: function vertical() {
-            return this.top + this.bottom + 1;
-        }
-    }]);
-
-    return AwareRange;
-}();
-
-/***/ }),
-
 /***/ 188:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.InputMessage = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _binarydatareader = __webpack_require__(129);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputMessage = exports.InputMessage = function (_BinaryDataReader) {
+    _inherits(InputMessage, _BinaryDataReader);
+
+    function InputMessage() {
+        _classCallCheck(this, InputMessage);
+
+        return _possibleConstructorReturn(this, (InputMessage.__proto__ || Object.getPrototypeOf(InputMessage)).apply(this, arguments));
+    }
+
+    _createClass(InputMessage, [{
+        key: "validateChecksum",
+        value: function validateChecksum() {
+            return true;
+        }
+    }]);
+
+    return InputMessage;
+}(_binarydatareader.BinaryDataReader);
+
+/***/ }),
+
+/***/ 189:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3186,21 +3363,21 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(56);
 
-var _rect = __webpack_require__(183);
+var _rect = __webpack_require__(185);
 
-var _point = __webpack_require__(42);
+var _point = __webpack_require__(43);
 
-var _color = __webpack_require__(54);
+var _color = __webpack_require__(58);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _cachedtext = __webpack_require__(129);
+var _cachedtext = __webpack_require__(131);
 
-var _g_clock = __webpack_require__(93);
+var _g_clock = __webpack_require__(72);
 
-var _map = __webpack_require__(57);
+var _map = __webpack_require__(39);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3369,80 +3546,16 @@ var StaticText = exports.StaticText = function (_Thing) {
 
 /***/ }),
 
-/***/ 20:
+/***/ 241:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var log = function log() {
-    ///  console.log.apply(this, v);
-    //$('#status').text(v.join(','));
-};
-var error = function error() {
-    for (var _len = arguments.length, v = Array(_len), _key = 0; _key < _len; _key++) {
-        v[_key] = arguments[_key];
-    }
-
-    console.error.apply(this, v);
-    //$('#status').text(v.join(','));
-};
-
-var Log = exports.Log = function () {
-    function Log() {
-        _classCallCheck(this, Log);
-    }
-
-    _createClass(Log, null, [{
-        key: "log",
-        value: function log() {
-            ///  console.log.apply(this, v);
-            //$('#status').text(v.join(','));
-        }
-    }, {
-        key: "debug",
-        value: function debug() {
-            ///  console.log.apply(this, v);
-            //$('#status').text(v.join(','));
-        }
-    }, {
-        key: "error",
-        value: function error() {
-            for (var _len2 = arguments.length, v = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                v[_key2] = arguments[_key2];
-            }
-
-            console.error.apply(this, v);
-            //$('#status').text(v.join(','));
-        }
-    }]);
-
-    return Log;
-}();
-
-exports.log = log;
-exports.error = error;
-
-/***/ }),
-
-/***/ 240:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(241);
-module.exports = __webpack_require__(443);
+__webpack_require__(242);
+module.exports = __webpack_require__(444);
 
 
 /***/ }),
 
-/***/ 38:
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3455,21 +3568,21 @@ exports.g_game = exports.Game = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _localplayer = __webpack_require__(444);
+var _localplayer = __webpack_require__(445);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
 
-var _protocolgame = __webpack_require__(451);
+var _protocolgame = __webpack_require__(455);
 
-var _map = __webpack_require__(57);
+var _map = __webpack_require__(39);
 
 var _container = __webpack_require__(465);
 
 var _chatbox = __webpack_require__(466);
 
-var _spritemanager = __webpack_require__(182);
+var _spritemanager = __webpack_require__(184);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3939,6 +4052,23 @@ var Game = exports.Game = function () {
             return string;
         }
     }, {
+        key: "stop",
+        value: function stop() {
+            /*
+            if(!this.canPerformGameAction())
+                return;
+             if(this.isFollowing())
+                this.cancelFollow();
+             this.m_protocolGame.sendStop();
+            */
+        }
+    }, {
+        key: "getServerBeat",
+        value: function getServerBeat() {
+            // todo
+            return 0;
+        }
+    }, {
         key: "g_things",
         get: function get() {
             return new _thingtypemanager.ThingTypeManager();
@@ -3958,7 +4088,561 @@ exports.g_game = g_game;
 
 /***/ }),
 
-/***/ 42:
+/***/ 39:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.g_map = exports.Map = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _position = __webpack_require__(57);
+
+var _awarerange = __webpack_require__(182);
+
+var _light = __webpack_require__(126);
+
+var _tileblock = __webpack_require__(446);
+
+var _const = __webpack_require__(12);
+
+var _point = __webpack_require__(43);
+
+var _helpers = __webpack_require__(44);
+
+var _mapview = __webpack_require__(127);
+
+var _game = __webpack_require__(30);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Map = exports.Map = function () {
+    function Map() {
+        _classCallCheck(this, Map);
+
+        this.m_tileBlocks = [];
+        this.m_knownCreatures = [];
+        this.m_floorMissiles = [];
+        this.m_animatedTexts = [];
+        this.m_staticTexts = [];
+        // std::vector<MapViewPtr> m_mapViews;
+        //std::unordered_map<Position, std::string, PositionHasher> m_waypoints;
+        this.m_animationFlags = 0;
+        this.m_zoneFlags = 0;
+        this.m_zoneColors = [];
+        this.m_zoneOpacity = 0.0;
+        this.m_light = new _light.Light();
+        this.m_centralPosition = new _position.Position();
+        this.m_attribs = [];
+        this.m_awareRange = new _awarerange.AwareRange();
+        for (var z = 0; z <= _const.Otc.MAX_Z + 1; ++z) {
+            this.m_tileBlocks[z] = [];
+            this.m_floorMissiles[z] = [];
+        }
+    }
+
+    _createClass(Map, [{
+        key: "createTile",
+        value: function createTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (!block) {
+                block = new _tileblock.TileBlock();
+                this.m_tileBlocks[pos.z][this.getBlockIndex(pos)] = block;
+            }
+            return block.create(pos);
+        }
+    }, {
+        key: "getTile",
+        value: function getTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var it = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (it) return it.get(pos);
+            return null;
+        }
+    }, {
+        key: "getOrCreateTile",
+        value: function getOrCreateTile(pos) {
+            if (!pos.isMapPosition()) return null;
+            var tile = this.getTile(pos);
+            if (!tile) {
+                tile = this.createTile(pos);
+            }
+            return tile;
+        }
+    }, {
+        key: "setAwareRange",
+        value: function setAwareRange(arg0) {
+            throw new Error("Method not implemented.");
+        }
+    }, {
+        key: "getCreatureById",
+        value: function getCreatureById(id) {
+            //console.log('known creatures', g_map.m_knownCreatures);
+            if (!g_map.m_knownCreatures[id]) {
+                ///  console.log('known creatures failed', id, g_map.m_knownCreatures);
+                throw new Error('get ' + id);
+            }
+            return g_map.m_knownCreatures[id];
+        }
+    }, {
+        key: "getAwareRange",
+        value: function getAwareRange() {
+            return this.m_awareRange;
+        }
+    }, {
+        key: "getCentralPosition",
+        value: function getCentralPosition() {
+            return this.m_centralPosition;
+        }
+    }, {
+        key: "setCentralPosition",
+        value: function setCentralPosition(centralPosition) {
+            if (this.m_centralPosition.equals(centralPosition)) return;
+            this.m_centralPosition = centralPosition;
+            this.removeUnawareThings();
+            // this fixes local player position when the local player is removed from the map,
+            // the local player is removed from the map when there are too many creatures on his tile,
+            // so there is no enough stackpos to the server send him
+            /*
+            g_dispatcher.addEvent([this] {
+                LocalPlayerPtr localPlayer = g_game.getLocalPlayer();
+                if(!localPlayer || localPlayer->getPosition() == m_centralPosition)
+                return;
+                TilePtr tile = localPlayer->getTile();
+                if(tile && tile->hasThing(localPlayer))
+                return;
+                 Position oldPos = localPlayer->getPosition();
+                Position pos = m_centralPosition;
+                if(oldPos != pos) {
+                    if(!localPlayer->isRemoved())
+                    localPlayer->onDisappear();
+                    localPlayer->setPosition(pos);
+                    localPlayer->onAppear();
+                    g_logger.debug("forced player position update");
+                }
+            });
+            */
+            _mapview.g_mapview.onMapCenterChange(centralPosition);
+        }
+    }, {
+        key: "cleanTile",
+        value: function cleanTile(pos) {
+            if (!pos.isMapPosition()) return;
+            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
+            if (block) {
+                var tile = block.get(pos);
+                if (tile) {
+                    tile.clean();
+                    if (tile.canErase()) block.remove(pos);
+                    //notificateTileUpdate(pos);
+                }
+            }
+            for (var i = 0; i < this.m_staticTexts.length;) {
+                var staticText = this.m_staticTexts[i];
+                if (staticText.getPosition().equals(pos) && staticText.getMessageMode() == _const.MessageMode.MessageNone) this.m_staticTexts.splice(i, 1);else ++i;
+            }
+        }
+    }, {
+        key: "addThing",
+        value: function addThing(thing, pos) {
+            var stackPos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+
+            if (!thing) return;
+            if (thing.isItem() || thing.isCreature() || thing.isEffect()) {
+                var tile = this.getOrCreateTile(pos);
+                if (tile) tile.addThing(thing, stackPos);
+            } else {
+                if (thing.isMissile()) {
+                    this.m_floorMissiles[pos.z].push(thing);
+                } else if (thing.isAnimatedText()) {
+                    // this code will stack animated texts of the same color
+                    var animatedText = thing;
+                    var prevAnimatedText = void 0;
+                    var merged = false;
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = this.m_animatedTexts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            var other = _step.value;
+
+                            if (other.getPosition() == pos) {
+                                prevAnimatedText = other;
+                                if (other.merge(animatedText)) {
+                                    merged = true;
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+
+                    if (!merged) {
+                        if (prevAnimatedText) {
+                            var offset = prevAnimatedText.getOffset();
+                            var t = prevAnimatedText.getTimer().ticksElapsed();
+                            if (t < _const.Otc.ANIMATED_TEXT_DURATION / 4.0) {
+                                var y = 12 - 48 * t / _const.Otc.ANIMATED_TEXT_DURATION;
+                                offset.add(new _point.Point(0, y));
+                            }
+                            offset.y = Math.min(offset.y, 12);
+                            animatedText.setOffset(offset);
+                        }
+                        this.m_animatedTexts.push(animatedText);
+                    }
+                } else if (thing.isStaticText()) {
+                    var staticText = thing;
+                    var mustAdd = true;
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = this.m_staticTexts[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var _other = _step2.value;
+
+                            // try to combine messages
+                            if (_other.getPosition() == pos && _other.addMessage(staticText.getName(), staticText.getMessageMode(), staticText.getFirstMessage())) {
+                                mustAdd = false;
+                                break;
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+
+                    if (mustAdd) this.m_staticTexts.push(staticText);else return;
+                }
+                thing.setPosition(pos);
+                thing.onAppear();
+            }
+            //notificateTileUpdate(pos);
+        }
+    }, {
+        key: "removeThing",
+        value: function removeThing(thing) {
+            if (!thing) return false;
+            var ret = false;
+            if (thing.isMissile()) {
+                var missile = thing;
+                var z = missile.getPosition().z;
+                var it = this.m_floorMissiles[z].indexOf(missile);
+                if (it > -1) {
+                    this.m_floorMissiles.splice(it, 1);
+                    ret = true;
+                }
+            } else if (thing.isAnimatedText()) {
+                var animatedText = thing;
+                var _it = this.m_animatedTexts.indexOf(animatedText);
+                if (_it > -1) {
+                    this.m_animatedTexts.splice(_it, 1);
+                    ret = true;
+                }
+            } else if (thing.isStaticText()) {
+                var staticText = thing;
+                var _it2 = this.m_staticTexts.indexOf(staticText);
+                if (_it2 > -1) {
+                    this.m_staticTexts.splice(_it2, 1);
+                    ret = true;
+                }
+            } else {
+                var tile = thing.getTile();
+                if (tile) ret = tile.removeThing(thing);
+            }
+            //notificateTileUpdate(thing.getPosition());
+            return ret;
+        }
+    }, {
+        key: "removeThingByPos",
+        value: function removeThingByPos(pos, stackPos) {
+            var tile = this.getTile(pos);
+            if (tile) return this.removeThing(tile.getThing(stackPos));
+            return false;
+        }
+    }, {
+        key: "setLight",
+        value: function setLight(light) {}
+    }, {
+        key: "getThing",
+        value: function getThing(pos, stackpos) {
+            var tile = this.getTile(pos);
+            //Log.debug('Map.getThing', pos, tile.getThing(stackpos));
+            if (tile) return tile.getThing(stackpos);
+            return null;
+        }
+    }, {
+        key: "addCreature",
+        value: function addCreature(creature) {
+            this.m_knownCreatures[creature.getId()] = creature;
+        }
+    }, {
+        key: "removeCreatureById",
+        value: function removeCreatureById(id) {
+            if (id == 0) return;
+            if (this.m_knownCreatures[id]) {
+                this.m_knownCreatures.splice(id, 1);
+            }
+        }
+    }, {
+        key: "getSightSpectators",
+        value: function getSightSpectators(centerPos, multiFloor) {
+            return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left - 1, this.m_awareRange.right - 2, this.m_awareRange.top - 1, this.m_awareRange.bottom - 2);
+        }
+    }, {
+        key: "getSpectators",
+        value: function getSpectators(centerPos, multiFloor) {
+            return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
+        }
+    }, {
+        key: "getSpectatorsInRange",
+        value: function getSpectatorsInRange(centerPos, multiFloor, xRange, yRange) {
+            return this.getSpectatorsInRangeEx(centerPos, multiFloor, xRange, xRange, yRange, yRange);
+        }
+    }, {
+        key: "getSpectatorsInRangeEx",
+        value: function getSpectatorsInRangeEx(centerPos, multiFloor, minXRange, maxXRange, minYRange, maxYRange) {
+            var minZRange = 0;
+            var maxZRange = 0;
+            var creatures = [];
+            if (multiFloor) {
+                minZRange = 0;
+                maxZRange = _const.Otc.MAX_Z;
+            }
+            //TODO: optimize
+            //TODO: get creatures from other floors corretly
+            //TODO: delivery creatures in distance order
+            for (var iz = -minZRange; iz <= maxZRange; ++iz) {
+                for (var iy = -minYRange; iy <= maxYRange; ++iy) {
+                    for (var ix = -minXRange; ix <= maxXRange; ++ix) {
+                        var tile = this.getTile(centerPos.translated(ix, iy, iz));
+                        if (!tile) continue;
+                        var tileCreatures = tile.getCreatures();
+                        var _iteratorNormalCompletion3 = true;
+                        var _didIteratorError3 = false;
+                        var _iteratorError3 = undefined;
+
+                        try {
+                            for (var _iterator3 = tileCreatures[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                                var creature = _step3.value;
+
+                                creatures.push(creature);
+                            }
+                            // TODO: WEB - REVERSE?
+                            //creatures.insert(creatures.end(), tileCreatures.rbegin(), tileCreatures.rend());
+                        } catch (err) {
+                            _didIteratorError3 = true;
+                            _iteratorError3 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                                    _iterator3.return();
+                                }
+                            } finally {
+                                if (_didIteratorError3) {
+                                    throw _iteratorError3;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return creatures;
+        }
+    }, {
+        key: "isLookPossible",
+        value: function isLookPossible(position) {
+            var tile = this.getTile(position);
+            return tile && tile.isLookPossible();
+        }
+    }, {
+        key: "isCovered",
+        value: function isCovered(pos, firstFloor) {
+            // check for tiles on top of the postion
+            var tilePos = pos.clone();
+            while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
+                var tile = this.getTile(tilePos);
+                // the below tile is covered when the above tile has a full ground
+                if (tile && tile.isFullGround()) return true;
+            }
+            return false;
+        }
+    }, {
+        key: "isCompletelyCovered",
+        value: function isCompletelyCovered(pos, firstFloor) {
+            var checkTile = this.getTile(pos);
+            var tilePos = pos.clone();
+            while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
+                var covered = true;
+                var done = false;
+                // check in 2x2 range tiles that has no transparent pixels
+                for (var x = 0; x < 2 && !done; ++x) {
+                    for (var y = 0; y < 2 && !done; ++y) {
+                        var tile = this.getTile(tilePos.translated(-x, -y));
+                        if (!tile || !tile.isFullyOpaque()) {
+                            covered = false;
+                            done = true;
+                        } else if (x == 0 && y == 0 && (!checkTile || checkTile.isSingleDimension())) {
+                            done = true;
+                        }
+                    }
+                }
+                if (covered) return true;
+            }
+            return false;
+        }
+    }, {
+        key: "getFirstAwareFloor",
+        value: function getFirstAwareFloor() {
+            if (this.m_centralPosition.z > _const.Otc.SEA_FLOOR) return this.m_centralPosition.z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE;else return 0;
+        }
+    }, {
+        key: "getLastAwareFloor",
+        value: function getLastAwareFloor() {
+            if (this.m_centralPosition.z > _const.Otc.SEA_FLOOR) return Math.min(this.m_centralPosition.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, _const.Otc.MAX_Z);else return _const.Otc.SEA_FLOOR;
+        }
+    }, {
+        key: "getFloorMissiles",
+        value: function getFloorMissiles(z) {
+            return this.m_floorMissiles[z];
+        }
+    }, {
+        key: "isAwareOfPosition",
+        value: function isAwareOfPosition(pos) {
+            if (pos.z < this.getFirstAwareFloor() || pos.z > this.getLastAwareFloor()) return false;
+            var groundedPos = pos.clone();
+            while (groundedPos.z != this.m_centralPosition.z) {
+                if (groundedPos.z > this.m_centralPosition.z) {
+                    if (groundedPos.x == 65535 || groundedPos.y == 65535) break;
+                    groundedPos.coveredUp();
+                } else {
+                    if (groundedPos.x == 0 || groundedPos.y == 0) break;
+                    groundedPos.coveredDown();
+                }
+            }
+            return this.m_centralPosition.isInRange(groundedPos, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
+        }
+    }, {
+        key: "removeUnawareThings",
+        value: function removeUnawareThings() {
+            // remove creatures from tiles that we are not aware of anymore
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = this.m_knownCreatures[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var creature = _step4.value;
+
+                    if (!this.isAwareOfPosition(creature.getPosition())) this.removeThing(creature);
+                }
+                // remove static texts from tiles that we are not aware anymore
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+
+            for (var i = 0; i < this.m_staticTexts.length;) {
+                var staticText = this.m_staticTexts[i];
+                if (staticText.getMessageMode() == _const.MessageMode.MessageNone && !this.isAwareOfPosition(staticText.getPosition())) this.m_staticTexts.splice(i, 1);else ++i;
+            }
+            if (!_game.g_game.getFeature(_const.GameFeature.GameKeepUnawareTiles)) {
+                // remove tiles that we are not aware anymore
+                for (var z = 0; z <= _const.Otc.MAX_Z; ++z) {
+                    var tileBlocks = this.m_tileBlocks[z];
+                    for (var _i = 0; _i < tileBlocks.length;) {
+                        var block = tileBlocks[_i];
+                        var blockEmpty = true;
+                        var _iteratorNormalCompletion5 = true;
+                        var _didIteratorError5 = false;
+                        var _iteratorError5 = undefined;
+
+                        try {
+                            for (var _iterator5 = block.getTiles()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                                var tile = _step5.value;
+
+                                /*
+                                if(!tile)
+                                    continue;
+                                */
+                                var pos = tile.getPosition();
+                                if (!this.isAwareOfPosition(pos)) block.remove(pos);else blockEmpty = false;
+                            }
+                        } catch (err) {
+                            _didIteratorError5 = true;
+                            _iteratorError5 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                                    _iterator5.return();
+                                }
+                            } finally {
+                                if (_didIteratorError5) {
+                                    throw _iteratorError5;
+                                }
+                            }
+                        }
+
+                        if (blockEmpty) tileBlocks.splice(_i, 1);else ++_i;
+                    }
+                }
+            }
+        }
+    }, {
+        key: "getBlockIndex",
+        value: function getBlockIndex(pos) {
+            return (0, _helpers.toInt)(pos.y / _tileblock.TileBlock.BLOCK_SIZE) * (0, _helpers.toInt)(65536 / _tileblock.TileBlock.BLOCK_SIZE) + (0, _helpers.toInt)(pos.x / _tileblock.TileBlock.BLOCK_SIZE);
+        }
+    }]);
+
+    return Map;
+}();
+
+var g_map = new Map();
+exports.g_map = g_map;
+
+/***/ }),
+
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4015,27 +4699,55 @@ var Point = exports.Point = function () {
 
 /***/ }),
 
-/***/ 443:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _const = __webpack_require__(13);
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var toInt = function toInt(int) {
+    return parseInt(int.toString());
+};
+var clamp = function clamp(number, lower, upper) {
+    if (number === number) {
+        if (upper !== undefined) {
+            number = number <= upper ? number : upper;
+        }
+        if (lower !== undefined) {
+            number = number >= lower ? number : lower;
+        }
+    }
+    return number;
+};
+exports.toInt = toInt;
+exports.clamp = clamp;
 
-var _game = __webpack_require__(38);
+/***/ }),
 
-var _resources = __webpack_require__(124);
+/***/ 444:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _const = __webpack_require__(12);
+
+var _game = __webpack_require__(30);
+
+var _resources = __webpack_require__(128);
 
 var _movie = __webpack_require__(468);
 
-var _mapview = __webpack_require__(128);
+var _mapview = __webpack_require__(127);
 
 __webpack_require__(469);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _painter = __webpack_require__(126);
+var _painter = __webpack_require__(130);
 
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -4075,15 +4787,15 @@ function test() {
                     case 0:
                         _game.g_game.setClientVersion(854);
                         _context.next = 3;
-                        return _game.g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+                        return _game.g_game.loadDatFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.dat');
 
                     case 3:
                         _context.next = 5;
-                        return _game.g_game.loadSprFile('http://inditex.localhost/Kasteria.spr');
+                        return _game.g_game.loadSprFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.spr');
 
                     case 5:
                         _context.next = 7;
-                        return _resources.g_resources.openFile('http://inditex.localhost/small.ukcam');
+                        return _resources.g_resources.openFile('http://php72.sbg.best/prv/webclient/fronttypescript/small.ukcam');
 
                     case 7:
                         movieData = _context.sent;
@@ -4121,14 +4833,1878 @@ test();
 
 /***/ }),
 
-/***/ 444:
-/***/ (function(module, exports) {
+/***/ 445:
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (418:41)\n\n\u001b[0m \u001b[90m 416 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_preWalking \u001b[33m=\u001b[39m \u001b[36mtrue\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 417 | \u001b[39m        \u001b[36mif\u001b[39m (\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_serverWalkEndEvent)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 418 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_serverWalkEndEvent \u001b[33m-\u001b[39m  \u001b[33m>\u001b[39m cancel()\u001b[33m;\u001b[39m\n \u001b[90m     | \u001b[39m                                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 419 | \u001b[39m        \u001b[90m// start walking to direction\u001b[39m\n \u001b[90m 420 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_lastPrewalkDone \u001b[33m=\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 421 | \u001b[39m        \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mm_lastPrewalkDestination \u001b[33m=\u001b[39m newPos\u001b[33m;\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.LocalPlayer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _player = __webpack_require__(181);
+
+var _const = __webpack_require__(12);
+
+var _log = __webpack_require__(17);
+
+var _map = __webpack_require__(39);
+
+var _timer = __webpack_require__(71);
+
+var _g_clock = __webpack_require__(72);
+
+var _helpers = __webpack_require__(44);
+
+var _position = __webpack_require__(57);
+
+var _game = __webpack_require__(30);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LocalPlayer = exports.LocalPlayer = function (_Player) {
+    _inherits(LocalPlayer, _Player);
+
+    function LocalPlayer() {
+        _classCallCheck(this, LocalPlayer);
+
+        var _this = _possibleConstructorReturn(this, (LocalPlayer.__proto__ || Object.getPrototypeOf(LocalPlayer)).call(this));
+
+        _this.m_lastPrewalkDestination = new _position.Position();
+        _this.m_autoWalkDestination = new _position.Position();
+        _this.m_lastAutoWalkPosition = new _position.Position();
+        _this.m_serverWalkEndEvent = null;
+        _this.m_autoWalkContinueEvent = null;
+        _this.m_walkLockExpiration = 0;
+        _this.m_preWalking = false;
+        _this.m_lastPrewalkDone = true;
+        _this.m_secondPreWalk = false;
+        _this.m_serverWalking = false;
+        _this.m_knownCompletePath = false;
+        _this.m_premium = false;
+        _this.m_known = false;
+        _this.m_pending = false;
+        _this.m_inventoryItems = [];
+        _this.m_idleTimer = new _timer.Timer();
+        _this.m_skillsLevel = [];
+        _this.m_skillsBaseLevel = [];
+        _this.m_skillsLevelPercent = [];
+        _this.m_spells = [];
+        _this.m_states = 0;
+        _this.m_vocation = 0;
+        _this.m_blessings = _const.Blessings.BlessingNone;
+        _this.m_health = -1;
+        _this.m_maxHealth = -1;
+        _this.m_freeCapacity = -1;
+        _this.m_totalCapacity = -1;
+        _this.m_experience = -1;
+        _this.m_level = -1;
+        _this.m_levelPercent = -1;
+        _this.m_mana = -1;
+        _this.m_maxMana = -1;
+        _this.m_magicLevel = -1;
+        _this.m_magicLevelPercent = -1;
+        _this.m_baseMagicLevel = -1;
+        _this.m_soul = -1;
+        _this.m_stamina = -1;
+        _this.m_regenerationTime = -1;
+        _this.m_offlineTrainingTime = -1;
+        for (var skillId = 0; skillId < _const.Skill.LastSkill; skillId++) {
+            _this.m_skillsLevel[skillId] = -1;
+            _this.m_skillsBaseLevel[skillId] = -1;
+            _this.m_skillsLevelPercent[skillId] = -1;
+        }
+        for (var slotId = 0; slotId < _const.InventorySlot.LastInventorySlot; slotId++) {
+            _this.m_inventoryItems[slotId] = null;
+        }
+        _this.m_baseSpeed = -1;
+        return _this;
+    }
+
+    _createClass(LocalPlayer, [{
+        key: "isLocalPlayer",
+        value: function isLocalPlayer() {
+            return true;
+        }
+    }, {
+        key: "unlockWalk",
+        value: function unlockWalk() {
+            this.m_walkLockExpiration = 0;
+        }
+    }, {
+        key: "lockWalk",
+        value: function lockWalk() {
+            var millis = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 250;
+
+            this.m_walkLockExpiration = (0, _helpers.toInt)(Math.max(this.m_walkLockExpiration, _g_clock.g_clock.millis() + millis));
+        }
+    }, {
+        key: "stopAutoWalk",
+        value: function stopAutoWalk() {
+            this.m_autoWalkDestination = new _position.Position();
+            this.m_lastAutoWalkPosition = new _position.Position();
+            this.m_knownCompletePath = false;
+            /*
+                    if(this.m_autoWalkContinueEvent)
+                        this.m_autoWalkContinueEvent->cancel();
+            */
+        }
+    }, {
+        key: "autoWalk",
+        value: function autoWalk(destination) {
+            /*
+                    if(g_game.getClientVersion() <= 740 && this.m_position.isInRange(destination, 1, 1))
+                        return g_game.walk(this.m_position.getDirectionFromPosition(destination));
+                     bool tryKnownPath = false;
+                    if(destination != this.m_autoWalkDestination) {
+                        this.m_knownCompletePath = false;
+                        tryKnownPath = true;
+                    }
+                     std::tuple<std::vector<Direction.Direction>, Direction.PathFindResult> result;
+                    std::vector<Direction.Direction> limitedPath;
+                     if(destination == this.m_position)
+                        return true;
+                     // try to find a path that we know
+                    if(tryKnownPath || this.m_knownCompletePath) {
+                        result = g_map.findPath(this.m_position, destination, 50000, 0);
+                        if(std::get<1>(result) == Direction.PathFindResultOk) {
+                            limitedPath = std::get<0>(result);
+                            // limit to 127 steps
+                            if(limitedPath.size() > 127)
+                                limitedPath.resize(127);
+                            this.m_knownCompletePath = true;
+                        }
+                    }
+                     // no known path found, try to discover one
+                    if(limitedPath.empty()) {
+                        result = g_map.findPath(this.m_position, destination, 50000, Direction.PathFindAllowNotSeenTiles);
+                        if(std::get<1>(result) != Direction.PathFindResultOk) {
+                           // callLuaField("onAutoWalkFail", std::get<1>(result));
+                            stopAutoWalk();
+                            return false;
+                        }
+                         Position currentPos = this.m_position;
+                        for(auto dir : std::get<0>(result)) {
+                            currentPos = currentPos.translatedToDirection(dir);
+                            if(!hasSight(currentPos))
+                                break;
+                            else
+                                limitedPath.push_back(dir);
+                        }
+                    }
+                     this.m_autoWalkDestination = destination;
+                    this.m_lastAutoWalkPosition = this.m_position.translatedToDirections(limitedPath).back();
+            */
+            /*
+            // debug calculated path using minimap
+            for(auto pos : this.m_position.translatedToDirections(limitedPath)) {
+                g_map.getOrCreateTile(pos)->overwriteMinimapColor(215);
+                g_map.notificateTileUpdate(pos);
+            }
+            */
+            /*
+                    g_game.autoWalk(limitedPath);
+                    */
+            return true;
+        }
+    }, {
+        key: "canWalk",
+        value: function canWalk(direction) {
+            /*
+            // cannot walk while locked
+            if(this.m_walkLockExpiration != 0 && g_clock.millis() < this.m_walkLockExpiration)
+                return false;
+             // paralyzed
+            if(this.m_speed == 0)
+                return false;
+             // last walk is not done yet
+            if((this.m_walkTimer.ticksElapsed() < getStepDuration()) && !isAutoWalking())
+                return false;
+             // prewalk has a timeout, because for some reason that I don't know yet the server sometimes doesn't answer the prewalk
+            bool prewalkTimeouted = this.m_walking && this.m_preWalking && this.m_walkTimer.ticksElapsed() >= getStepDuration() + PREWALK_TIMEOUT;
+             // avoid doing more walks than wanted when receiving a lot of walks from server
+            if(!this.m_lastPrewalkDone && this.m_preWalking && !prewalkTimeouted)
+                return false;
+             // cannot walk while already walking
+            if((this.m_walking && !isAutoWalking()) && (!prewalkTimeouted || this.m_secondPreWalk))
+                return false;
+            */
+            return true;
+        }
+    }, {
+        key: "setStates",
+        value: function setStates(states) {
+            /*
+                    if(this.m_states != states) {
+                        int oldStates = this.m_states;
+                        this.m_states = states;
+                        // callLuaField("onStatesChange", states, oldStates);
+                    }
+                    */
+        }
+    }, {
+        key: "setSkill",
+        value: function setSkill(skill, level, levelPercent) {
+            if (skill >= _const.Skill.LastSkill) {
+                _log.Log.error("invalid skill");
+                return;
+            }
+            var oldLevel = this.m_skillsLevel[skill];
+            var oldLevelPercent = this.m_skillsLevelPercent[skill];
+            if (level != oldLevel || levelPercent != oldLevelPercent) {
+                this.m_skillsLevel[skill] = level;
+                this.m_skillsLevelPercent[skill] = levelPercent;
+                //callLuaField("onSkillChange", skill, level, levelPercent, oldLevel, oldLevelPercent);
+            }
+        }
+    }, {
+        key: "setBaseSkill",
+        value: function setBaseSkill(skill, baseLevel) {
+            if (skill >= _const.Skill.LastSkill) {
+                _log.Log.error("invalid skill");
+                return;
+            }
+            var oldBaseLevel = this.m_skillsBaseLevel[skill];
+            if (baseLevel != oldBaseLevel) {
+                this.m_skillsBaseLevel[skill] = baseLevel;
+                //callLuaField("onBaseSkillChange", skill, baseLevel, oldBaseLevel);
+            }
+        }
+    }, {
+        key: "setHealth",
+        value: function setHealth(health, maxHealth) {
+            if (this.m_health != health || this.m_maxHealth != maxHealth) {
+                var oldHealth = this.m_health;
+                var oldMaxHealth = this.m_maxHealth;
+                this.m_health = health;
+                this.m_maxHealth = maxHealth;
+                //callLuaField("onHealthChange", health, maxHealth, oldHealth, oldMaxHealth);
+                // cannot walk while dying
+                if (health == 0) {
+                    if (this.isPreWalking()) this.stopWalk();
+                    this.lockWalk();
+                }
+            }
+        }
+    }, {
+        key: "setFreeCapacity",
+        value: function setFreeCapacity(freeCapacity) {
+            if (this.m_freeCapacity != freeCapacity) {
+                var oldFreeCapacity = this.m_freeCapacity;
+                this.m_freeCapacity = freeCapacity;
+                // callLuaField("onFreeCapacityChange", freeCapacity, oldFreeCapacity);
+            }
+        }
+    }, {
+        key: "setTotalCapacity",
+        value: function setTotalCapacity(totalCapacity) {
+            if (this.m_totalCapacity != totalCapacity) {
+                var oldTotalCapacity = this.m_totalCapacity;
+                this.m_totalCapacity = totalCapacity;
+                // callLuaField("onTotalCapacityChange", totalCapacity, oldTotalCapacity);
+            }
+        }
+    }, {
+        key: "setExperience",
+        value: function setExperience(experience) {
+            if (this.m_experience != experience) {
+                var oldExperience = this.m_experience;
+                this.m_experience = experience;
+                // callLuaField("onExperienceChange", experience, oldExperience);
+            }
+        }
+    }, {
+        key: "setLevel",
+        value: function setLevel(level, levelPercent) {
+            if (this.m_level != level || this.m_levelPercent != levelPercent) {
+                var oldLevel = this.m_level;
+                var oldLevelPercent = this.m_levelPercent;
+                this.m_level = level;
+                this.m_levelPercent = levelPercent;
+                // callLuaField("onLevelChange", level, levelPercent, oldLevel, oldLevelPercent);
+            }
+        }
+    }, {
+        key: "setMana",
+        value: function setMana(mana, maxMana) {
+            if (this.m_mana != mana || this.m_maxMana != maxMana) {
+                var oldMana = this.m_mana;
+                var oldMaxMana = void 0;
+                this.m_mana = mana;
+                this.m_maxMana = maxMana;
+                // callLuaField("onManaChange", mana, maxMana, oldMana, oldMaxMana);
+            }
+        }
+    }, {
+        key: "setMagicLevel",
+        value: function setMagicLevel(magicLevel, magicLevelPercent) {
+            if (this.m_magicLevel != magicLevel || this.m_magicLevelPercent != magicLevelPercent) {
+                var oldMagicLevel = this.m_magicLevel;
+                var oldMagicLevelPercent = this.m_magicLevelPercent;
+                this.m_magicLevel = magicLevel;
+                this.m_magicLevelPercent = magicLevelPercent;
+                // callLuaField("onMagicLevelChange", magicLevel, magicLevelPercent, oldMagicLevel, oldMagicLevelPercent);
+            }
+        }
+    }, {
+        key: "setBaseMagicLevel",
+        value: function setBaseMagicLevel(baseMagicLevel) {
+            if (this.m_baseMagicLevel != baseMagicLevel) {
+                var oldBaseMagicLevel = this.m_baseMagicLevel;
+                this.m_baseMagicLevel = baseMagicLevel;
+                // callLuaField("onBaseMagicLevelChange", baseMagicLevel, oldBaseMagicLevel);
+            }
+        }
+    }, {
+        key: "setSoul",
+        value: function setSoul(soul) {
+            if (this.m_soul != soul) {
+                var oldSoul = this.m_soul;
+                this.m_soul = soul;
+                // callLuaField("onSoulChange", soul, oldSoul);
+            }
+        }
+    }, {
+        key: "setStamina",
+        value: function setStamina(stamina) {
+            if (this.m_stamina != stamina) {
+                var oldStamina = this.m_stamina;
+                this.m_stamina = stamina;
+                // callLuaField("onStaminaChange", stamina, oldStamina);
+            }
+        }
+    }, {
+        key: "setKnown",
+        value: function setKnown(known) {
+            this.m_known = known;
+        }
+    }, {
+        key: "setPendingGame",
+        value: function setPendingGame(pending) {
+            this.m_pending = pending;
+        }
+    }, {
+        key: "setInventoryItem",
+        value: function setInventoryItem(inventory, item) {
+            if (inventory >= _const.InventorySlot.LastInventorySlot) {
+                _log.Log.error("invalid slot");
+                return;
+            }
+            if (this.m_inventoryItems[inventory] != item) {
+                var oldItem = this.m_inventoryItems[inventory];
+                this.m_inventoryItems[inventory] = item;
+                // callLuaField("onInventoryChange", inventory, item, oldItem);
+            }
+        }
+    }, {
+        key: "setVocation",
+        value: function setVocation(vocation) {
+            if (this.m_vocation != vocation) {
+                var oldVocation = this.m_vocation;
+                this.m_vocation = vocation;
+                // callLuaField("onVocationChange", vocation, oldVocation);
+            }
+        }
+    }, {
+        key: "setPremium",
+        value: function setPremium(premium) {
+            if (this.m_premium != premium) {
+                this.m_premium = premium;
+                // callLuaField("onPremiumChange", premium);
+            }
+        }
+    }, {
+        key: "setRegenerationTime",
+        value: function setRegenerationTime(regenerationTime) {
+            if (this.m_regenerationTime != regenerationTime) {
+                var oldRegenerationTime = this.m_regenerationTime;
+                this.m_regenerationTime = regenerationTime;
+                // callLuaField("onRegenerationChange", regenerationTime, oldRegenerationTime);
+            }
+        }
+    }, {
+        key: "setOfflineTrainingTime",
+        value: function setOfflineTrainingTime(offlineTrainingTime) {
+            if (this.m_offlineTrainingTime != offlineTrainingTime) {
+                var oldOfflineTrainingTime = this.m_offlineTrainingTime;
+                this.m_offlineTrainingTime = offlineTrainingTime;
+                // callLuaField("onOfflineTrainingChange", offlineTrainingTime, oldOfflineTrainingTime);
+            }
+        }
+    }, {
+        key: "setSpells",
+        value: function setSpells(spells) {
+            if (this.m_spells != spells) {
+                var oldSpells = this.m_spells.slice();
+                this.m_spells = spells;
+                // callLuaField("onSpellsChange", spells, oldSpells);
+            }
+        }
+    }, {
+        key: "setBlessings",
+        value: function setBlessings(blessings) {
+            if (blessings != this.m_blessings) {
+                var oldBlessings = this.m_blessings;
+                this.m_blessings = blessings;
+                // callLuaField("onBlessingsChange", blessings, oldBlessings);
+            }
+        }
+    }, {
+        key: "getStates",
+        value: function getStates() {
+            return this.m_states;
+        }
+    }, {
+        key: "getSkillLevel",
+        value: function getSkillLevel(skill) {
+            return this.m_skillsLevel[skill];
+        }
+    }, {
+        key: "getSkillBaseLevel",
+        value: function getSkillBaseLevel(skill) {
+            return this.m_skillsBaseLevel[skill];
+        }
+    }, {
+        key: "getSkillLevelPercent",
+        value: function getSkillLevelPercent(skill) {
+            return this.m_skillsLevelPercent[skill];
+        }
+    }, {
+        key: "getVocation",
+        value: function getVocation() {
+            return this.m_vocation;
+        }
+    }, {
+        key: "getHealth",
+        value: function getHealth() {
+            return this.m_health;
+        }
+    }, {
+        key: "getMaxHealth",
+        value: function getMaxHealth() {
+            return this.m_maxHealth;
+        }
+    }, {
+        key: "getFreeCapacity",
+        value: function getFreeCapacity() {
+            return this.m_freeCapacity;
+        }
+    }, {
+        key: "getTotalCapacity",
+        value: function getTotalCapacity() {
+            return this.m_totalCapacity;
+        }
+    }, {
+        key: "getExperience",
+        value: function getExperience() {
+            return this.m_experience;
+        }
+    }, {
+        key: "getLevel",
+        value: function getLevel() {
+            return this.m_level;
+        }
+    }, {
+        key: "getLevelPercent",
+        value: function getLevelPercent() {
+            return this.m_levelPercent;
+        }
+    }, {
+        key: "getMana",
+        value: function getMana() {
+            return this.m_mana;
+        }
+    }, {
+        key: "getMaxMana",
+        value: function getMaxMana() {
+            return this.m_maxMana;
+        }
+    }, {
+        key: "getMagicLevel",
+        value: function getMagicLevel() {
+            return this.m_magicLevel;
+        }
+    }, {
+        key: "getMagicLevelPercent",
+        value: function getMagicLevelPercent() {
+            return this.m_magicLevelPercent;
+        }
+    }, {
+        key: "getBaseMagicLevel",
+        value: function getBaseMagicLevel() {
+            return this.m_baseMagicLevel;
+        }
+    }, {
+        key: "getSoul",
+        value: function getSoul() {
+            return this.m_soul;
+        }
+    }, {
+        key: "getStamina",
+        value: function getStamina() {
+            return this.m_stamina;
+        }
+    }, {
+        key: "getRegenerationTime",
+        value: function getRegenerationTime() {
+            return this.m_regenerationTime;
+        }
+    }, {
+        key: "getOfflineTrainingTime",
+        value: function getOfflineTrainingTime() {
+            return this.m_offlineTrainingTime;
+        }
+    }, {
+        key: "getSpells",
+        value: function getSpells() {
+            return this.m_spells;
+        }
+    }, {
+        key: "getInventoryItem",
+        value: function getInventoryItem(inventory) {
+            return this.m_inventoryItems[inventory];
+        }
+    }, {
+        key: "getBlessings",
+        value: function getBlessings() {
+            return this.m_blessings;
+        }
+    }, {
+        key: "hasSight",
+        value: function hasSight(pos) {
+            return this.m_position.isInRange(pos, _map.g_map.getAwareRange().left - 1, _map.g_map.getAwareRange().top - 1);
+        }
+    }, {
+        key: "isKnown",
+        value: function isKnown() {
+            return this.m_known;
+        }
+    }, {
+        key: "isPreWalking",
+        value: function isPreWalking() {
+            return this.m_preWalking;
+        }
+    }, {
+        key: "isAutoWalking",
+        value: function isAutoWalking() {
+            return this.m_autoWalkDestination.isValid();
+        }
+    }, {
+        key: "isServerWalking",
+        value: function isServerWalking() {
+            return this.m_serverWalking;
+        }
+    }, {
+        key: "isPremium",
+        value: function isPremium() {
+            return this.m_premium;
+        }
+    }, {
+        key: "isPendingGame",
+        value: function isPendingGame() {
+            return this.m_pending;
+        }
+    }, {
+        key: "onAppear",
+        value: function onAppear() {
+            _get(LocalPlayer.prototype.__proto__ || Object.getPrototypeOf(LocalPlayer.prototype), "onAppear", this).call(this);
+            /* Does not seem to be needed anymore
+            // on teleports lock the walk
+            if(!this.m_oldPosition.isInRange(this.m_position,1,1))
+                lockWalk();
+            */
+        }
+    }, {
+        key: "onPositionChange",
+        value: function onPositionChange(newPos, oldPos) {
+            _get(LocalPlayer.prototype.__proto__ || Object.getPrototypeOf(LocalPlayer.prototype), "onPositionChange", this).call(this, newPos, oldPos);
+            if (newPos == this.m_autoWalkDestination) this.stopAutoWalk();else if (this.m_autoWalkDestination.isValid() && newPos == this.m_lastAutoWalkPosition) this.autoWalk(this.m_autoWalkDestination);
+        }
+    }, {
+        key: "walk",
+        value: function walk(oldPos, newPos) {
+            // a prewalk was going on
+            if (this.m_preWalking) {
+                // switch to normal walking
+                this.m_preWalking = false;
+                this.m_secondPreWalk = false;
+                this.m_lastPrewalkDone = true;
+                // if is to the last prewalk destination, updates the walk preserving the animation
+                if (newPos == this.m_lastPrewalkDestination) {
+                    this.updateWalk();
+                    // was to another direction, replace the walk
+                } else _get(LocalPlayer.prototype.__proto__ || Object.getPrototypeOf(LocalPlayer.prototype), "walk", this).call(this, oldPos, newPos);
+            } else {
+                this.m_serverWalking = true;
+                if (this.m_serverWalkEndEvent) this.m_serverWalkEndEvent.cancel();
+                _get(LocalPlayer.prototype.__proto__ || Object.getPrototypeOf(LocalPlayer.prototype), "walk", this).call(this, oldPos, newPos);
+            }
+        }
+    }, {
+        key: "cancelWalk",
+        value: function cancelWalk() {
+            var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _const.Direction.InvalidDirection;
+
+            // only cancel client side walks
+            if (this.m_walking && this.m_preWalking) this.stopWalk();
+            this.m_lastPrewalkDone = true;
+            this.m_idleTimer.restart();
+            this.lockWalk();
+            if (this.m_autoWalkDestination.isValid()) {
+                _game.g_game.stop();
+                //auto self = asLocalPlayer();
+                if (this.m_autoWalkContinueEvent) this.m_autoWalkContinueEvent.cancel();
+                /*
+                this.m_autoWalkContinueEvent = g_dispatcher.scheduleEvent([self]() {
+                    if(self->this.m_autoWalkDestination.isValid())
+                        self->autoWalk(self->this.m_autoWalkDestination);
+                }, 500);
+                */
+            }
+            // turn to the cancel direction
+            if (direction != _const.Direction.InvalidDirection) this.setDirection(direction);
+            //callLuaField("onCancelWalk", direction);
+        }
+    }, {
+        key: "stopWalk",
+        value: function stopWalk() {
+            _get(LocalPlayer.prototype.__proto__ || Object.getPrototypeOf(LocalPlayer.prototype), "stopWalk", this).call(this); // will call terminateWalk
+            this.m_lastPrewalkDone = true;
+            this.m_lastPrewalkDestination = new _position.Position();
+        }
+    }, {
+        key: "updateWalkOffset",
+        value: function updateWalkOffset(totalPixelsWalked) {
+            // pre walks offsets are calculated in the oposite direction
+            /*
+            if (this.m_preWalking) {
+                this.m_walkOffset = new Point(0, 0);
+                if (this.m_direction == Direction.North || this.m_direction == Direction.NorthEast || this.m_direction == Direction.NorthWest)
+                    this.m_walkOffset.y = -totalPixelsWalked;
+                else if (this.m_direction == Direction.South || this.m_direction == Direction.SouthEast || this.m_direction == Direction.SouthWest)
+                    this.m_walkOffset.y = totalPixelsWalked;
+                 if (this.m_direction == Direction.East || this.m_direction == Direction.NorthEast || this.m_direction == Direction.SouthEast)
+                    this.m_walkOffset.x = totalPixelsWalked;
+                else if (this.m_direction == Direction.West || this.m_direction == Direction.NorthWest || this.m_direction == Direction.SouthWest)
+                    this.m_walkOffset.x = -totalPixelsWalked;
+            } else
+                super.updateWalkOffset(totalPixelsWalked);
+            */
+        }
+    }, {
+        key: "updateWalk",
+        value: function updateWalk() {
+            /*
+            let stepDuration = this.getStepDuration();
+            let walkTicksPerPixel = this.getStepDuration(true) / 32.0;
+            let totalPixelsWalked = Math.floor(Math.min(this.m_walkTimer.ticksElapsed() / walkTicksPerPixel, 32.0));
+             // update walk animation and offsets
+            this.updateWalkAnimation(totalPixelsWalked);
+            this.updateWalkOffset(totalPixelsWalked);
+            this.updateWalkingTile();
+             // terminate walk only when client and server side walk are completed
+            if (this.m_walking && !this.m_preWalking && this.m_walkTimer.ticksElapsed() >= stepDuration)
+                this.terminateWalk();
+            */
+        }
+    }, {
+        key: "terminateWalk",
+        value: function terminateWalk() {
+            /*
+            super.terminateWalk();
+            this.m_preWalking = false;
+            this.m_secondPreWalk = false;
+            this.m_idleTimer.restart();
+             //auto self = asLocalPlayer();
+            */
+            if (this.m_serverWalking) {
+                if (this.m_serverWalkEndEvent) this.m_serverWalkEndEvent.cancel();
+                /*
+                this.m_serverWalkEndEvent = g_dispatcher.scheduleEvent([self] {
+                    self->this.m_serverWalking = false;
+                }, 100);
+                */
+            }
+        }
+    }]);
+
+    return LocalPlayer;
+}(_player.Player);
 
 /***/ }),
 
-/***/ 445:
+/***/ 446:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.TileBlock = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _tile = __webpack_require__(447);
+
+var _helpers = __webpack_require__(44);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var TileBlock = exports.TileBlock = function () {
+    function TileBlock() {
+        _classCallCheck(this, TileBlock);
+
+        this.m_tiles = [];
+    }
+
+    _createClass(TileBlock, [{
+        key: "create",
+        value: function create(pos) {
+            var tile = new _tile.Tile(pos);
+            this.m_tiles[this.getTileIndex(pos)] = tile;
+            return tile;
+        }
+    }, {
+        key: "getOrCreate",
+        value: function getOrCreate(pos) {
+            var tile = this.get(pos);
+            if (!tile) tile = this.create(pos);
+            return tile;
+        }
+    }, {
+        key: "get",
+        value: function get(pos) {
+            return this.m_tiles[this.getTileIndex(pos)];
+        }
+    }, {
+        key: "remove",
+        value: function remove(pos) {
+            this.m_tiles[this.getTileIndex(pos)] = null;
+        }
+    }, {
+        key: "getTileIndex",
+        value: function getTileIndex(pos) {
+            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
+        }
+    }, {
+        key: "getTiles",
+        value: function getTiles() {
+            return this.m_tiles;
+        }
+    }]);
+
+    return TileBlock;
+}();
+
+TileBlock.BLOCK_SIZE = 32;
+
+/***/ }),
+
+/***/ 447:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Tile = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _game = __webpack_require__(30);
+
+var _map = __webpack_require__(39);
+
+var _const = __webpack_require__(12);
+
+var _point = __webpack_require__(43);
+
+var _log = __webpack_require__(17);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var cc = 0;
+
+var Tile = exports.Tile = function () {
+    function Tile(position) {
+        _classCallCheck(this, Tile);
+
+        this.m_drawElevation = 0;
+        this.m_minimapColor = 0;
+        this.m_flags = 0;
+        this.m_walkingCreatures = [];
+        this.m_effects = [];
+        this.m_things = [];
+        this.m_position = position;
+    }
+
+    _createClass(Tile, [{
+        key: "draw",
+        value: function draw(dest, scaleFactor, drawFlags) {
+            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+
+            var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
+            //console.log('pp', this.m_position, dest, cc++);
+            // first bottom items
+            if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
+                this.m_drawElevation = 0;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.m_things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var thing = _step.value;
+
+                        if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
+                        var toPos = dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
+                        //console.log('topos', toPos);
+                        thing.draw(toPos, scaleFactor, animate, lightView);
+                        this.m_drawElevation += thing.getElevation();
+                        if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+            var redrawPreviousTopW = 0;
+            var redrawPreviousTopH = 0;
+            // now common items in reverse order
+            if (drawFlags & _const.DrawFlags.DrawItems) {
+                for (var it = this.m_things.length - 1; it >= 0; --it) {
+                    var _thing = this.m_things[it];
+                    if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
+                    _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    if (_thing.isLyingCorpse()) {
+                        redrawPreviousTopW = Math.max(_thing.getWidth(), redrawPreviousTopW);
+                        redrawPreviousTopH = Math.max(_thing.getHeight(), redrawPreviousTopH);
+                    }
+                    this.m_drawElevation += _thing.getElevation();
+                    if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
+                }
+            }
+            // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
+            /*
+                    if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
+                        let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
+                        if (topRedrawFlags) {
+                            for (let x = -redrawPreviousTopW; x <= 0; ++x) {
+                                for (let y = -redrawPreviousTopH; y <= 0; ++y) {
+                                    if (x == 0 && y == 0)
+                                        continue;
+                                    let tile = g_map.getTile(this.m_position.translated(x, y));
+                                    if (tile)
+                                        tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
+                                }
+                            }
+                        }
+                    }
+            */
+            // creatures
+            if (drawFlags & _const.DrawFlags.DrawCreatures) {
+                if (animate) {
+                    var _iteratorNormalCompletion2 = true;
+                    var _didIteratorError2 = false;
+                    var _iteratorError2 = undefined;
+
+                    try {
+                        for (var _iterator2 = this.m_walkingCreatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                            var creature = _step2.value;
+
+                            creature.draw(new _point.Point(dest.x + ((creature.getPosition().x - this.m_position.x) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
+                        }
+                    } catch (err) {
+                        _didIteratorError2 = true;
+                        _iteratorError2 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                                _iterator2.return();
+                            }
+                        } finally {
+                            if (_didIteratorError2) {
+                                throw _iteratorError2;
+                            }
+                        }
+                    }
+                }
+                for (var _it = this.m_things.length - 1; _it >= 0; --_it) {
+                    var _thing2 = this.m_things[_it];
+                    //console.log(this.m_things, this.m_position, it);
+                    if (!_thing2.isCreature()) continue;
+                    var _creature = _thing2;
+                    if (_creature && (!_creature.isWalking() || !animate)) {
+                        //console.log('pp1', dest);
+                        _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
+                    }
+                }
+            }
+            /*
+                    // effects
+                    for(const EffectPtr& effect : m_effects)
+                    effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
+            */
+            // top items
+            if (drawFlags & _const.DrawFlags.DrawOnTop) {
+                var _iteratorNormalCompletion3 = true;
+                var _didIteratorError3 = false;
+                var _iteratorError3 = undefined;
+
+                try {
+                    for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                        var _thing3 = _step3.value;
+
+                        if (_thing3.isOnTop()) {
+                            _thing3.draw(dest, scaleFactor, animate, lightView);
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError3 = true;
+                    _iteratorError3 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                            _iterator3.return();
+                        }
+                    } finally {
+                        if (_didIteratorError3) {
+                            throw _iteratorError3;
+                        }
+                    }
+                }
+            }
+            /*
+            // draw translucent light (for tiles beneath holes)
+            if(hasTranslucentLight() && lightView) {
+                Light light;
+                light.intensity = 1;
+                lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
+            }
+            */
+        }
+    }, {
+        key: "clean",
+        value: function clean() {
+            while (this.m_things.length > 0) {
+                this.removeThing(this.m_things.pop());
+            }
+        }
+    }, {
+        key: "addWalkingCreature",
+        value: function addWalkingCreature(creature) {
+            this.m_walkingCreatures.push(creature);
+        }
+    }, {
+        key: "removeWalkingCreature",
+        value: function removeWalkingCreature(creature) {
+            var index = this.m_walkingCreatures.indexOf(creature);
+            if (index > -1) {
+                this.m_walkingCreatures.splice(index, 1);
+            }
+        }
+    }, {
+        key: "addThing",
+        value: function addThing(thing, stackPos) {
+            if (!thing) return;
+            if (thing.isEffect()) {
+                if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
+            } else {
+                // priority                                    854
+                // 0 - ground,                        -.      -.
+                // 1 - ground borders                 -.      -.
+                // 2 - bottom (walls),                -.      -.
+                // 3 - on top (doors)                 -.      -.
+                // 4 - creatures, from top to bottom  <--      -.
+                // 5 - items, from top to bottom      <--      <--
+                if (stackPos < 0 || stackPos == 255) {
+                    var priority = thing.getStackPriority();
+                    // -1 or 255 => auto detect position
+                    // -2        => append
+                    var append = void 0;
+                    if (stackPos == -2) append = true;else {
+                        append = priority <= 3;
+                        // newer protocols does not store creatures in reverse order
+                        if (_game.g_game.getClientVersion() >= 854 && priority == 4) append = !append;
+                    }
+                    for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
+                        var otherPriority = this.m_things[stackPos].getStackPriority();
+                        //console.log('prior', stackPos, priority, otherPriority);
+                        if (append && otherPriority > priority || !append && otherPriority >= priority) break;
+                    }
+                } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
+                //this.m_things.insert(this.m_things.begin() + stackPos, thing);
+                this.m_things.splice(stackPos, 0, thing);
+                //this.m_things[stackPos] = thing;
+                if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
+                /*
+                // check stack priorities
+                // this code exists to find stackpos bugs faster
+                int lastPriority = 0;
+                for(const ThingPtr& thing :this.m_things) {
+                    int priority = thing.getStackPriority();
+                    assert(lastPriority <= priority);
+                    lastPriority = priority;
+                }
+                */
+            }
+            thing.setPosition(this.m_position);
+            thing.onAppear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+        }
+    }, {
+        key: "removeThing",
+        value: function removeThing(thing) {
+            if (!thing) return false;
+            var removed = false;
+            if (thing.isEffect()) {
+                var index = this.m_effects.indexOf(thing);
+                if (index > -1) {
+                    this.m_effects.splice(index, 1);
+                    removed = true;
+                }
+            } else {
+                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
+                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing rem', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
+                var _index = this.m_things.indexOf(thing);
+                if (_index > -1) {
+                    this.m_things.splice(_index, 1);
+                    removed = true;
+                }
+            }
+            thing.onDisappear();
+            if (thing.isTranslucent()) this.checkTranslucentLight();
+            return removed;
+        }
+    }, {
+        key: "getThing",
+        value: function getThing(stackPos) {
+            if (stackPos >= 0 && stackPos < this.m_things.length) {
+                //Log.debug('tile thing: ', this.m_things[stackPos]);
+                return this.m_things[stackPos];
+            }
+            return null;
+        }
+    }, {
+        key: "getEffect",
+        value: function getEffect(id) {
+            var _iteratorNormalCompletion4 = true;
+            var _didIteratorError4 = false;
+            var _iteratorError4 = undefined;
+
+            try {
+                for (var _iterator4 = this.m_effects[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                    var effect = _step4.value;
+
+                    if (effect.getId() == id) return effect;
+                }
+            } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                        _iterator4.return();
+                    }
+                } finally {
+                    if (_didIteratorError4) {
+                        throw _iteratorError4;
+                    }
+                }
+            }
+
+            return null;
+        }
+    }, {
+        key: "hasThing",
+        value: function hasThing(thing) {
+            return this.m_things.indexOf(thing) > -1;
+        }
+    }, {
+        key: "getThingStackPos",
+        value: function getThingStackPos(thing) {
+            /*
+            for(let stackpos = 0; stackpos < this.m_things.length; ++stackpos)
+            if(thing == this.m_things[stackpos])
+                return stackpos;
+             */
+            return this.m_things.indexOf(thing);
+        }
+    }, {
+        key: "getTopThing",
+        value: function getTopThing() {
+            if (this.isEmpty()) return null;
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
+
+            try {
+                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var thing = _step5.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
+                }
+            } catch (err) {
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
+                }
+            }
+
+            return this.m_things[this.m_things.length - 1];
+        }
+    }, {
+        key: "getTopLookThing",
+        value: function getTopLookThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isIgnoreLook() && !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) return thing;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopUseThing",
+        value: function getTopUseThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
+            }
+            for (var _i = 0; _i < this.m_things.length; ++_i) {
+                var _thing4 = this.m_things[_i];
+                if (!_thing4.isGround() && !_thing4.isGroundBorder() && !_thing4.isCreature() && !_thing4.isSplash()) return _thing4;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopCreature",
+        value: function getTopCreature() {
+            var creature = void 0;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isLocalPlayer()) creature = thing;else if (thing.isCreature() && !thing.isLocalPlayer()) return thing;
+            }
+            if (!creature && this.m_walkingCreatures.length > 0) creature = this.m_walkingCreatures[this.m_walkingCreatures.length - 1];
+            // check for walking creatures in tiles around
+            if (!creature) {
+                for (var xi = -1; xi <= 1; ++xi) {
+                    for (var yi = -1; yi <= 1; ++yi) {
+                        var pos = this.m_position.translated(xi, yi);
+                        if (pos == this.m_position) continue;
+                        var tile = _map.g_map.getTile(pos);
+                        if (tile) {
+                            var _iteratorNormalCompletion6 = true;
+                            var _didIteratorError6 = false;
+                            var _iteratorError6 = undefined;
+
+                            try {
+                                for (var _iterator6 = tile.getCreatures()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                                    var c = _step6.value;
+
+                                    /* todo */
+                                    //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
+                                    creature = c;
+                                    //}
+                                }
+                            } catch (err) {
+                                _didIteratorError6 = true;
+                                _iteratorError6 = err;
+                            } finally {
+                                try {
+                                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                                        _iterator6.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError6) {
+                                        throw _iteratorError6;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return creature;
+        }
+    }, {
+        key: "getTopMoveThing",
+        value: function getTopMoveThing() {
+            if (this.isEmpty()) return null;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) {
+                    if (i > 0 && thing.isNotMoveable()) return this.m_things[i - 1];
+                    return thing;
+                }
+            }
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
+
+            try {
+                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var _thing5 = _step7.value;
+
+                    if (_thing5.isCreature()) return _thing5;
+                }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
+                }
+            }
+
+            return this.m_things[0];
+        }
+    }, {
+        key: "getTopMultiUseThing",
+        value: function getTopMultiUseThing() {
+            if (this.isEmpty()) return null;
+            var topCreature = this.getTopCreature();
+            if (topCreature) return topCreature;
+            for (var i = 0; i < this.m_things.length; ++i) {
+                var thing = this.m_things[i];
+                if (thing.isForceUse()) return thing;
+            }
+            for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
+                var _thing6 = this.m_things[_i2];
+                if (!_thing6.isGround() && !_thing6.isGroundBorder() && !_thing6.isOnBottom() && !_thing6.isOnTop()) {
+                    if (_i2 > 0 && _thing6.isSplash()) return this.m_things[_i2 - 1];
+                    return _thing6;
+                }
+            }
+            for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
+                var _thing7 = this.m_things[_i3];
+                if (!_thing7.isGround() && !_thing7.isOnTop()) return _thing7;
+            }
+            return this.m_things[0];
+        }
+    }, {
+        key: "getPosition",
+        value: function getPosition() {
+            return this.m_position;
+        }
+    }, {
+        key: "getDrawElevation",
+        value: function getDrawElevation() {
+            return this.m_drawElevation;
+        }
+    }, {
+        key: "getItems",
+        value: function getItems() {
+            var items = [];
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
+
+            try {
+                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var thing = _step8.value;
+
+                    if (thing.isItem()) items.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
+                    }
+                } finally {
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
+                    }
+                }
+            }
+
+            return items;
+        }
+    }, {
+        key: "getCreatures",
+        value: function getCreatures() {
+            var creatures = [];
+            var _iteratorNormalCompletion9 = true;
+            var _didIteratorError9 = false;
+            var _iteratorError9 = undefined;
+
+            try {
+                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                    var thing = _step9.value;
+
+                    if (thing.isCreature()) creatures.push(thing);
+                }
+            } catch (err) {
+                _didIteratorError9 = true;
+                _iteratorError9 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                        _iterator9.return();
+                    }
+                } finally {
+                    if (_didIteratorError9) {
+                        throw _iteratorError9;
+                    }
+                }
+            }
+
+            return creatures;
+        }
+    }, {
+        key: "getWalkingCreatures",
+        value: function getWalkingCreatures() {
+            return this.m_walkingCreatures;
+        }
+    }, {
+        key: "getThings",
+        value: function getThings() {
+            return this.m_things;
+        }
+    }, {
+        key: "getGround",
+        value: function getGround() {
+            var firstObject = this.getThing(0);
+            if (!firstObject) return null;
+            if (firstObject.isGround() && firstObject.isItem()) return firstObject;
+            return null;
+        }
+    }, {
+        key: "getGroundSpeed",
+        value: function getGroundSpeed() {
+            var groundSpeed = 100;
+            var ground = this.getGround();
+            if (ground) groundSpeed = ground.getGroundSpeed();
+            return groundSpeed;
+        }
+    }, {
+        key: "getMinimapColorByte",
+        value: function getMinimapColorByte() {
+            var color = 255; // alpha
+            if (this.m_minimapColor != 0) return this.m_minimapColor;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
+
+            try {
+                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var thing = _step10.value;
+
+                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
+                    var c = thing.getMinimapColor();
+                    if (c != 0) color = c;
+                }
+            } catch (err) {
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
+                    }
+                } finally {
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
+                    }
+                }
+            }
+
+            return color;
+        }
+    }, {
+        key: "getThingCount",
+        value: function getThingCount() {
+            return this.m_things.length + this.m_effects.length;
+        }
+    }, {
+        key: "isPathable",
+        value: function isPathable() {
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
+
+            try {
+                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var thing = _step11.value;
+
+                    if (thing.isNotPathable()) return false;
+                }
+            } catch (err) {
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
+                    }
+                } finally {
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isWalkable",
+        value: function isWalkable() {
+            var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            if (!this.getGround()) return false;
+            var _iteratorNormalCompletion12 = true;
+            var _didIteratorError12 = false;
+            var _iteratorError12 = undefined;
+
+            try {
+                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                    var thing = _step12.value;
+
+                    if (thing.isNotWalkable()) return false;
+                    if (!ignoreCreatures) {
+                        if (thing.isCreature()) {
+                            var creature = thing;
+                            /* todo */
+                            //if(!creature.isPassable() && creature.canBeSeen())
+                            return false;
+                        }
+                    }
+                }
+            } catch (err) {
+                _didIteratorError12 = true;
+                _iteratorError12 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                        _iterator12.return();
+                    }
+                } finally {
+                    if (_didIteratorError12) {
+                        throw _iteratorError12;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isFullGround",
+        value: function isFullGround() {
+            var ground = this.getGround();
+            if (ground && ground.isFullGround()) return true;
+            return false;
+        }
+    }, {
+        key: "isFullyOpaque",
+        value: function isFullyOpaque() {
+            var firstObject = this.getThing(0);
+            return firstObject && firstObject.isFullGround();
+        }
+    }, {
+        key: "isSingleDimension",
+        value: function isSingleDimension() {
+            if (this.m_walkingCreatures.length > 0) return false;
+            var _iteratorNormalCompletion13 = true;
+            var _didIteratorError13 = false;
+            var _iteratorError13 = undefined;
+
+            try {
+                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                    var thing = _step13.value;
+
+                    if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
+                }
+            } catch (err) {
+                _didIteratorError13 = true;
+                _iteratorError13 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                        _iterator13.return();
+                    }
+                } finally {
+                    if (_didIteratorError13) {
+                        throw _iteratorError13;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isLookPossible",
+        value: function isLookPossible() {
+            var _iteratorNormalCompletion14 = true;
+            var _didIteratorError14 = false;
+            var _iteratorError14 = undefined;
+
+            try {
+                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+                    var thing = _step14.value;
+
+                    if (thing.blockProjectile()) return false;
+                }
+            } catch (err) {
+                _didIteratorError14 = true;
+                _iteratorError14 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
+                        _iterator14.return();
+                    }
+                } finally {
+                    if (_didIteratorError14) {
+                        throw _iteratorError14;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }, {
+        key: "isClickable",
+        value: function isClickable() {
+            var hasGround = false;
+            var hasOnBottom = false;
+            var hasIgnoreLook = false;
+            var _iteratorNormalCompletion15 = true;
+            var _didIteratorError15 = false;
+            var _iteratorError15 = undefined;
+
+            try {
+                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
+                    var thing = _step15.value;
+
+                    if (thing.isGround()) hasGround = true;
+                    if (thing.isOnBottom()) hasOnBottom = true;
+                    if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
+                }
+            } catch (err) {
+                _didIteratorError15 = true;
+                _iteratorError15 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
+                        _iterator15.return();
+                    }
+                } finally {
+                    if (_didIteratorError15) {
+                        throw _iteratorError15;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "isEmpty",
+        value: function isEmpty() {
+            return this.m_things.length == 0;
+        }
+    }, {
+        key: "isDrawable",
+        value: function isDrawable() {
+            return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
+        }
+    }, {
+        key: "hasTranslucentLight",
+        value: function hasTranslucentLight() {
+            return (this.m_flags & _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
+        }
+    }, {
+        key: "mustHookSouth",
+        value: function mustHookSouth() {
+            var _iteratorNormalCompletion16 = true;
+            var _didIteratorError16 = false;
+            var _iteratorError16 = undefined;
+
+            try {
+                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+                    var thing = _step16.value;
+
+                    if (thing.isHookSouth()) return true;
+                }
+            } catch (err) {
+                _didIteratorError16 = true;
+                _iteratorError16 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
+                        _iterator16.return();
+                    }
+                } finally {
+                    if (_didIteratorError16) {
+                        throw _iteratorError16;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "mustHookEast",
+        value: function mustHookEast() {
+            var _iteratorNormalCompletion17 = true;
+            var _didIteratorError17 = false;
+            var _iteratorError17 = undefined;
+
+            try {
+                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
+                    var thing = _step17.value;
+
+                    if (thing.isHookEast()) return true;
+                }
+            } catch (err) {
+                _didIteratorError17 = true;
+                _iteratorError17 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
+                        _iterator17.return();
+                    }
+                } finally {
+                    if (_didIteratorError17) {
+                        throw _iteratorError17;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "hasCreature",
+        value: function hasCreature() {
+            var _iteratorNormalCompletion18 = true;
+            var _didIteratorError18 = false;
+            var _iteratorError18 = undefined;
+
+            try {
+                for (var _iterator18 = this.m_things[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
+                    var thing = _step18.value;
+
+                    if (thing.isCreature()) return true;
+                }
+            } catch (err) {
+                _didIteratorError18 = true;
+                _iteratorError18 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
+                        _iterator18.return();
+                    }
+                } finally {
+                    if (_didIteratorError18) {
+                        throw _iteratorError18;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }, {
+        key: "limitsFloorsView",
+        value: function limitsFloorsView() {
+            var isFreeView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            // ground and walls limits the view
+            var firstThing = this.getThing(0);
+            if (isFreeView) {
+                if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom())) return true;
+            } else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom() && firstThing.blockProjectile())) return true;
+            return false;
+        }
+    }, {
+        key: "canErase",
+        value: function canErase() {
+            return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
+        }
+    }, {
+        key: "getElevation",
+        value: function getElevation() {
+            var elevation = 0;
+            var _iteratorNormalCompletion19 = true;
+            var _didIteratorError19 = false;
+            var _iteratorError19 = undefined;
+
+            try {
+                for (var _iterator19 = this.m_things[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
+                    var thing = _step19.value;
+
+                    if (thing.getElevation() > 0) elevation++;
+                }
+            } catch (err) {
+                _didIteratorError19 = true;
+                _iteratorError19 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion19 && _iterator19.return) {
+                        _iterator19.return();
+                    }
+                } finally {
+                    if (_didIteratorError19) {
+                        throw _iteratorError19;
+                    }
+                }
+            }
+
+            return elevation;
+        }
+    }, {
+        key: "hasElevation",
+        value: function hasElevation() {
+            var elevation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            return this.getElevation() >= elevation;
+        }
+    }, {
+        key: "overwriteMinimapColor",
+        value: function overwriteMinimapColor(color) {
+            this.m_minimapColor = color;
+        }
+    }, {
+        key: "remFlag",
+        value: function remFlag(flag) {
+            this.m_flags &= ~flag;
+        }
+    }, {
+        key: "setFlag",
+        value: function setFlag(flag) {
+            this.m_flags |= flag;
+        }
+    }, {
+        key: "setFlags",
+        value: function setFlags(flags) {
+            this.m_flags = flags;
+        }
+    }, {
+        key: "hasFlag",
+        value: function hasFlag(flag) {
+            return (this.m_flags & flag) == flag;
+        }
+    }, {
+        key: "getFlags",
+        value: function getFlags() {
+            return this.m_flags;
+        }
+    }, {
+        key: "checkTranslucentLight",
+        value: function checkTranslucentLight() {
+            if (this.m_position.z != _const.Otc.SEA_FLOOR) return;
+            var downPos = this.m_position.clone();
+            if (!downPos.down()) return;
+            var tile = _map.g_map.getOrCreateTile(downPos);
+            if (!tile) return;
+            var translucent = false;
+            var _iteratorNormalCompletion20 = true;
+            var _didIteratorError20 = false;
+            var _iteratorError20 = undefined;
+
+            try {
+                for (var _iterator20 = this.m_things[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
+                    var thing = _step20.value;
+
+                    if (thing.isTranslucent() || thing.hasLensHelp()) {
+                        translucent = true;
+                        break;
+                    }
+                }
+            } catch (err) {
+                _didIteratorError20 = true;
+                _iteratorError20 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
+                        _iterator20.return();
+                    }
+                } finally {
+                    if (_didIteratorError20) {
+                        throw _iteratorError20;
+                    }
+                }
+            }
+
+            if (translucent) tile.m_flags |= _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;else tile.m_flags &= ~_const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
+        }
+    }]);
+
+    return Tile;
+}();
+
+Tile.MAX_THINGS = 10;
+
+/***/ }),
+
+/***/ 448:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LightView = exports.LightView = function () {
+    function LightView() {
+        _classCallCheck(this, LightView);
+    }
+
+    _createClass(LightView, [{
+        key: "setId",
+        value: function setId(id) {}
+    }]);
+
+    return LightView;
+}();
+
+/***/ }),
+
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4141,37 +6717,37 @@ exports.ThingType = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _animator = __webpack_require__(446);
+var _animator = __webpack_require__(450);
 
-var _image = __webpack_require__(181);
+var _image = __webpack_require__(183);
 
-var _color = __webpack_require__(54);
+var _color = __webpack_require__(58);
 
-var _spritemanager = __webpack_require__(182);
+var _spritemanager = __webpack_require__(184);
 
-var _thingtypeattribs = __webpack_require__(448);
+var _thingtypeattribs = __webpack_require__(452);
 
 var _size = __webpack_require__(70);
 
-var _point = __webpack_require__(42);
+var _point = __webpack_require__(43);
 
-var _texture = __webpack_require__(449);
+var _texture = __webpack_require__(453);
 
-var _rect = __webpack_require__(183);
+var _rect = __webpack_require__(185);
 
-var _marketdata = __webpack_require__(450);
+var _marketdata = __webpack_require__(454);
 
-var _light = __webpack_require__(127);
+var _light = __webpack_require__(126);
 
-var _painter = __webpack_require__(126);
+var _painter = __webpack_require__(130);
 
-var _helpers = __webpack_require__(55);
+var _helpers = __webpack_require__(44);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4871,7 +7447,7 @@ ThingType.maskColors = [_color.Color.red, _color.Color.green, _color.Color.blue,
 
 /***/ }),
 
-/***/ 446:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4884,7 +7460,7 @@ exports.Animator = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4935,7 +7511,7 @@ var Animator = exports.Animator = function () {
 
 /***/ }),
 
-/***/ 447:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4946,7 +7522,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.InputFile = undefined;
 
-var _binarydatareader = __webpack_require__(125);
+var _binarydatareader = __webpack_require__(129);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4968,7 +7544,7 @@ var InputFile = exports.InputFile = function (_BinaryDataReader) {
 
 /***/ }),
 
-/***/ 448:
+/***/ 452:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5017,7 +7593,7 @@ var ThingTypeAttribs = exports.ThingTypeAttribs = function () {
 
 /***/ }),
 
-/***/ 449:
+/***/ 453:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5030,9 +7606,9 @@ exports.Texture = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _painter = __webpack_require__(126);
+var _painter = __webpack_require__(130);
 
-var _helpers = __webpack_require__(55);
+var _helpers = __webpack_require__(44);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -5064,10 +7640,10 @@ var Texture = exports.Texture = function () {
             var hash = src.hash();
             var textureCache = this.m_texture[hash];
             if (textureCache) {
-                ///  console.log('getPixiTexture CACHE', +new Date(), y++);
+                console.log('getPixiTexture CACHE', +new Date(), y++);
                 return textureCache;
             }
-            ///  console.log('getPixiTexture LOAD', z++);
+            console.log('getPixiTexture LOAD', z++);
             var graphics = new PIXI.Graphics();
             ///  console.log('kkk', src.left(), src.top(),src.right(), src.bottom(), src.height(), src.width());
             graphics.width = src.width();
@@ -5122,7 +7698,7 @@ var Texture = exports.Texture = function () {
 
 /***/ }),
 
-/***/ 450:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5140,7 +7716,7 @@ var MarketData = exports.MarketData = function MarketData() {
 
 /***/ }),
 
-/***/ 451:
+/***/ 455:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5155,53 +7731,53 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _protocol = __webpack_require__(452);
+var _protocol = __webpack_require__(456);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _outputmessage = __webpack_require__(453);
+var _outputmessage = __webpack_require__(457);
 
-var _proto = __webpack_require__(185);
+var _proto = __webpack_require__(187);
 
-var _inputmessage = __webpack_require__(184);
+var _inputmessage = __webpack_require__(188);
 
 var _outfit = __webpack_require__(186);
 
 var _thing = __webpack_require__(56);
 
-var _position = __webpack_require__(69);
+var _position = __webpack_require__(57);
 
-var _item = __webpack_require__(458);
+var _item = __webpack_require__(459);
 
-var _statictext = __webpack_require__(188);
+var _statictext = __webpack_require__(189);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
 
-var _map = __webpack_require__(57);
+var _map = __webpack_require__(39);
 
-var _effect = __webpack_require__(459);
+var _effect = __webpack_require__(460);
 
-var _animatedtext = __webpack_require__(460);
+var _animatedtext = __webpack_require__(461);
 
-var _missile = __webpack_require__(461);
+var _missile = __webpack_require__(462);
 
-var _color2 = __webpack_require__(54);
+var _color2 = __webpack_require__(58);
 
-var _player = __webpack_require__(462);
+var _player = __webpack_require__(181);
 
-var _light = __webpack_require__(127);
+var _light = __webpack_require__(126);
 
 var _npc = __webpack_require__(463);
 
 var _monster = __webpack_require__(464);
 
-var _awarerange = __webpack_require__(187);
+var _awarerange = __webpack_require__(182);
 
-var _mapview = __webpack_require__(128);
+var _mapview = __webpack_require__(127);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7381,7 +9957,7 @@ var ProtocolGame = exports.ProtocolGame = function (_Protocol) {
 
 /***/ }),
 
-/***/ 452:
+/***/ 456:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7394,9 +9970,9 @@ exports.Protocol = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _inputmessage = __webpack_require__(184);
+var _inputmessage = __webpack_require__(188);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7548,7 +10124,7 @@ var Protocol = exports.Protocol = function () {
 
 /***/ }),
 
-/***/ 453:
+/***/ 457:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7561,7 +10137,7 @@ exports.OutputMessage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jspack = __webpack_require__(454);
+var _jspack = __webpack_require__(458);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7648,7 +10224,7 @@ OutputMessage.packer = new _jspack.JSPack();
 
 /***/ }),
 
-/***/ 454:
+/***/ 458:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7936,1168 +10512,7 @@ exports.JSPack = JSPack;
 
 /***/ }),
 
-/***/ 455:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.TileBlock = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _tile = __webpack_require__(456);
-
-var _helpers = __webpack_require__(55);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TileBlock = exports.TileBlock = function () {
-    function TileBlock() {
-        _classCallCheck(this, TileBlock);
-
-        this.m_tiles = [];
-    }
-
-    _createClass(TileBlock, [{
-        key: "create",
-        value: function create(pos) {
-            var tile = new _tile.Tile(pos);
-            this.m_tiles[this.getTileIndex(pos)] = tile;
-            return tile;
-        }
-    }, {
-        key: "getOrCreate",
-        value: function getOrCreate(pos) {
-            var tile = this.get(pos);
-            if (!tile) tile = this.create(pos);
-            return tile;
-        }
-    }, {
-        key: "get",
-        value: function get(pos) {
-            return this.m_tiles[this.getTileIndex(pos)];
-        }
-    }, {
-        key: "remove",
-        value: function remove(pos) {
-            this.m_tiles[this.getTileIndex(pos)] = null;
-        }
-    }, {
-        key: "getTileIndex",
-        value: function getTileIndex(pos) {
-            return (0, _helpers.toInt)(pos.y % TileBlock.BLOCK_SIZE) * TileBlock.BLOCK_SIZE + (0, _helpers.toInt)(pos.x % TileBlock.BLOCK_SIZE);
-        }
-    }, {
-        key: "getTiles",
-        value: function getTiles() {
-            return this.m_tiles;
-        }
-    }]);
-
-    return TileBlock;
-}();
-
-TileBlock.BLOCK_SIZE = 32;
-
-/***/ }),
-
-/***/ 456:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Tile = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _game = __webpack_require__(38);
-
-var _map = __webpack_require__(57);
-
-var _const = __webpack_require__(13);
-
-var _point = __webpack_require__(42);
-
-var _log = __webpack_require__(20);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var cc = 0;
-
-var Tile = exports.Tile = function () {
-    function Tile(position) {
-        _classCallCheck(this, Tile);
-
-        this.m_drawElevation = 0;
-        this.m_minimapColor = 0;
-        this.m_flags = 0;
-        this.m_walkingCreatures = [];
-        this.m_effects = [];
-        this.m_things = [];
-        this.m_position = position;
-    }
-
-    _createClass(Tile, [{
-        key: "draw",
-        value: function draw(dest, scaleFactor, drawFlags) {
-            var lightView = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-
-            var animate = (drawFlags & _const.DrawFlags.DrawAnimations) > 0;
-            //console.log('pp', this.m_position, dest, cc++);
-            // first bottom items
-            if (drawFlags & (_const.DrawFlags.DrawGround | _const.DrawFlags.DrawGroundBorders | _const.DrawFlags.DrawOnBottom)) {
-                this.m_drawElevation = 0;
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = this.m_things[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var thing = _step.value;
-
-                        if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom()) break;
-                        var toPos = dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor));
-                        //console.log('topos', toPos);
-                        thing.draw(toPos, scaleFactor, animate, lightView);
-                        this.m_drawElevation += thing.getElevation();
-                        if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
-                }
-            }
-            var redrawPreviousTopW = 0;
-            var redrawPreviousTopH = 0;
-            // now common items in reverse order
-            if (drawFlags & _const.DrawFlags.DrawItems) {
-                for (var it = this.m_things.length - 1; it >= 0; --it) {
-                    var _thing = this.m_things[it];
-                    if (_thing.isOnTop() || _thing.isOnBottom() || _thing.isGroundBorder() || _thing.isGround() || _thing.isCreature()) break;
-                    _thing.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
-                    if (_thing.isLyingCorpse()) {
-                        redrawPreviousTopW = Math.max(_thing.getWidth(), redrawPreviousTopW);
-                        redrawPreviousTopH = Math.max(_thing.getHeight(), redrawPreviousTopH);
-                    }
-                    this.m_drawElevation += _thing.getElevation();
-                    if (this.m_drawElevation > _const.Otc.MAX_ELEVATION) this.m_drawElevation = _const.Otc.MAX_ELEVATION;
-                }
-            }
-            // after we render 2x2 lying corpses, we must redraw previous creatures/ontop above them
-            /*
-                    if (redrawPreviousTopH > 0 || redrawPreviousTopW > 0) {
-                        let topRedrawFlags = drawFlags & (DrawFlags.DrawCreatures | DrawFlags.DrawEffects | DrawFlags.DrawOnTop | DrawFlags.DrawAnimations);
-                        if (topRedrawFlags) {
-                            for (let x = -redrawPreviousTopW; x <= 0; ++x) {
-                                for (let y = -redrawPreviousTopH; y <= 0; ++y) {
-                                    if (x == 0 && y == 0)
-                                        continue;
-                                    let tile = g_map.getTile(this.m_position.translated(x, y));
-                                    if (tile)
-                                        tile.draw(dest.add(new Point(x * Otc.TILE_PIXELS * scaleFactor, y * Otc.TILE_PIXELS * scaleFactor)), scaleFactor, topRedrawFlags);
-                                }
-                            }
-                        }
-                    }
-            */
-            // creatures
-            if (drawFlags & _const.DrawFlags.DrawCreatures) {
-                if (animate) {
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
-
-                    try {
-                        for (var _iterator2 = this.m_walkingCreatures[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var creature = _step2.value;
-
-                            creature.draw(new _point.Point(dest.x + ((creature.getPosition().x - this.m_position.x) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor, dest.y + ((creature.getPosition().y - this.m_position.y) * _const.Otc.TILE_PIXELS - this.m_drawElevation) * scaleFactor), scaleFactor, animate, lightView);
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-                }
-                for (var _it = this.m_things.length - 1; _it >= 0; --_it) {
-                    var _thing2 = this.m_things[_it];
-                    //console.log(this.m_things, this.m_position, it);
-                    if (!_thing2.isCreature()) continue;
-                    var _creature = _thing2;
-                    if (_creature && (!_creature.isWalking() || !animate)) {
-                        //console.log('pp1', dest);
-                        _creature.draw(dest.sub(new _point.Point(this.m_drawElevation * scaleFactor, this.m_drawElevation * scaleFactor)), scaleFactor, animate, lightView);
-                    }
-                }
-            }
-            /*
-                    // effects
-                    for(const EffectPtr& effect : m_effects)
-                    effect->drawEffect(dest - m_drawElevation*scaleFactor, scaleFactor, animate, m_position.x - g_map.getCentralPosition().x, m_position.y - g_map.getCentralPosition().y, lightView);
-            */
-            // top items
-            if (drawFlags & _const.DrawFlags.DrawOnTop) {
-                var _iteratorNormalCompletion3 = true;
-                var _didIteratorError3 = false;
-                var _iteratorError3 = undefined;
-
-                try {
-                    for (var _iterator3 = this.m_things[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                        var _thing3 = _step3.value;
-
-                        if (_thing3.isOnTop()) {
-                            _thing3.draw(dest, scaleFactor, animate, lightView);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError3 = true;
-                    _iteratorError3 = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                            _iterator3.return();
-                        }
-                    } finally {
-                        if (_didIteratorError3) {
-                            throw _iteratorError3;
-                        }
-                    }
-                }
-            }
-            /*
-            // draw translucent light (for tiles beneath holes)
-            if(hasTranslucentLight() && lightView) {
-                Light light;
-                light.intensity = 1;
-                lightView->addLightSource(dest + Point(16,16) * scaleFactor, scaleFactor, light);
-            }
-            */
-        }
-    }, {
-        key: "clean",
-        value: function clean() {
-            while (this.m_things.length > 0) {
-                this.removeThing(this.m_things.pop());
-            }
-        }
-    }, {
-        key: "addWalkingCreature",
-        value: function addWalkingCreature(creature) {
-            this.m_walkingCreatures.push(creature);
-        }
-    }, {
-        key: "removeWalkingCreature",
-        value: function removeWalkingCreature(creature) {
-            var index = this.m_walkingCreatures.indexOf(creature);
-            if (index > -1) {
-                this.m_walkingCreatures.splice(index, 1);
-            }
-        }
-    }, {
-        key: "addThing",
-        value: function addThing(thing, stackPos) {
-            if (!thing) return;
-            if (thing.isEffect()) {
-                if (thing.isTopEffect()) this.m_effects.unshift(thing);else this.m_effects.push(thing);
-            } else {
-                // priority                                    854
-                // 0 - ground,                        -.      -.
-                // 1 - ground borders                 -.      -.
-                // 2 - bottom (walls),                -.      -.
-                // 3 - on top (doors)                 -.      -.
-                // 4 - creatures, from top to bottom  <--      -.
-                // 5 - items, from top to bottom      <--      <--
-                if (stackPos < 0 || stackPos == 255) {
-                    var priority = thing.getStackPriority();
-                    // -1 or 255 => auto detect position
-                    // -2        => append
-                    var append = void 0;
-                    if (stackPos == -2) append = true;else {
-                        append = priority <= 3;
-                        // newer protocols does not store creatures in reverse order
-                        if (_game.g_game.getClientVersion() >= 854 && priority == 4) append = !append;
-                    }
-                    for (stackPos = 0; stackPos < this.m_things.length; ++stackPos) {
-                        var otherPriority = this.m_things[stackPos].getStackPriority();
-                        //console.log('prior', stackPos, priority, otherPriority);
-                        if (append && otherPriority > priority || !append && otherPriority >= priority) break;
-                    }
-                } else if (stackPos > this.m_things.length) stackPos = this.m_things.length;
-                //this.m_things.insert(this.m_things.begin() + stackPos, thing);
-                this.m_things.splice(stackPos, 0, thing);
-                //this.m_things[stackPos] = thing;
-                if (this.m_things.length > Tile.MAX_THINGS) this.removeThing(this.m_things[Tile.MAX_THINGS]);
-                /*
-                // check stack priorities
-                // this code exists to find stackpos bugs faster
-                int lastPriority = 0;
-                for(const ThingPtr& thing :this.m_things) {
-                    int priority = thing.getStackPriority();
-                    assert(lastPriority <= priority);
-                    lastPriority = priority;
-                }
-                */
-            }
-            thing.setPosition(this.m_position);
-            thing.onAppear();
-            if (thing.isTranslucent()) this.checkTranslucentLight();
-        }
-    }, {
-        key: "removeThing",
-        value: function removeThing(thing) {
-            if (!thing) return false;
-            var removed = false;
-            if (thing.isEffect()) {
-                var index = this.m_effects.indexOf(thing);
-                if (index > -1) {
-                    this.m_effects.splice(index, 1);
-                    removed = true;
-                }
-            } else {
-                //if (this.m_position.x == 32047 && this.m_position.y == 31181 && this.m_position.z == 13)
-                if (thing.isItem() && thing.getId() == 2869) _log.Log.log('testthing rem', new Date(_game.g_game.m_protocolGame.m_lastPacketTime).toISOString(), this.m_position.x, this.m_position.y, this.m_position.z, thing, this.m_things);
-                var _index = this.m_things.indexOf(thing);
-                if (_index > -1) {
-                    this.m_things.splice(_index, 1);
-                    removed = true;
-                }
-            }
-            thing.onDisappear();
-            if (thing.isTranslucent()) this.checkTranslucentLight();
-            return removed;
-        }
-    }, {
-        key: "getThing",
-        value: function getThing(stackPos) {
-            if (stackPos >= 0 && stackPos < this.m_things.length) {
-                //Log.debug('tile thing: ', this.m_things[stackPos]);
-                return this.m_things[stackPos];
-            }
-            return null;
-        }
-    }, {
-        key: "getEffect",
-        value: function getEffect(id) {
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
-
-            try {
-                for (var _iterator4 = this.m_effects[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var effect = _step4.value;
-
-                    if (effect.getId() == id) return effect;
-                }
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
-                    }
-                }
-            }
-
-            return null;
-        }
-    }, {
-        key: "hasThing",
-        value: function hasThing(thing) {
-            return this.m_things.indexOf(thing) > -1;
-        }
-    }, {
-        key: "getThingStackPos",
-        value: function getThingStackPos(thing) {
-            /*
-            for(let stackpos = 0; stackpos < this.m_things.length; ++stackpos)
-            if(thing == this.m_things[stackpos])
-                return stackpos;
-             */
-            return this.m_things.indexOf(thing);
-        }
-    }, {
-        key: "getTopThing",
-        value: function getTopThing() {
-            if (this.isEmpty()) return null;
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
-
-            try {
-                for (var _iterator5 = this.m_things[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var thing = _step5.value;
-
-                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) return thing;
-                }
-            } catch (err) {
-                _didIteratorError5 = true;
-                _iteratorError5 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                        _iterator5.return();
-                    }
-                } finally {
-                    if (_didIteratorError5) {
-                        throw _iteratorError5;
-                    }
-                }
-            }
-
-            return this.m_things[this.m_things.length - 1];
-        }
-    }, {
-        key: "getTopLookThing",
-        value: function getTopLookThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (!thing.isIgnoreLook() && !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) return thing;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopUseThing",
-        value: function getTopUseThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isForceUse() || !thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature() && !thing.isSplash()) return thing;
-            }
-            for (var _i = 0; _i < this.m_things.length; ++_i) {
-                var _thing4 = this.m_things[_i];
-                if (!_thing4.isGround() && !_thing4.isGroundBorder() && !_thing4.isCreature() && !_thing4.isSplash()) return _thing4;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopCreature",
-        value: function getTopCreature() {
-            var creature = void 0;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isLocalPlayer()) creature = thing;else if (thing.isCreature() && !thing.isLocalPlayer()) return thing;
-            }
-            if (!creature && this.m_walkingCreatures.length > 0) creature = this.m_walkingCreatures[this.m_walkingCreatures.length - 1];
-            // check for walking creatures in tiles around
-            if (!creature) {
-                for (var xi = -1; xi <= 1; ++xi) {
-                    for (var yi = -1; yi <= 1; ++yi) {
-                        var pos = this.m_position.translated(xi, yi);
-                        if (pos == this.m_position) continue;
-                        var tile = _map.g_map.getTile(pos);
-                        if (tile) {
-                            var _iteratorNormalCompletion6 = true;
-                            var _didIteratorError6 = false;
-                            var _iteratorError6 = undefined;
-
-                            try {
-                                for (var _iterator6 = tile.getCreatures()[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                                    var c = _step6.value;
-
-                                    /* todo */
-                                    //if(c.isWalking() && c.getLastStepFromPosition() == this.m_position && c.getStepProgress() < 0.75) {
-                                    creature = c;
-                                    //}
-                                }
-                            } catch (err) {
-                                _didIteratorError6 = true;
-                                _iteratorError6 = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                                        _iterator6.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError6) {
-                                        throw _iteratorError6;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return creature;
-        }
-    }, {
-        key: "getTopMoveThing",
-        value: function getTopMoveThing() {
-            if (this.isEmpty()) return null;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop() && !thing.isCreature()) {
-                    if (i > 0 && thing.isNotMoveable()) return this.m_things[i - 1];
-                    return thing;
-                }
-            }
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
-
-            try {
-                for (var _iterator7 = this.m_things[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                    var _thing5 = _step7.value;
-
-                    if (_thing5.isCreature()) return _thing5;
-                }
-            } catch (err) {
-                _didIteratorError7 = true;
-                _iteratorError7 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                        _iterator7.return();
-                    }
-                } finally {
-                    if (_didIteratorError7) {
-                        throw _iteratorError7;
-                    }
-                }
-            }
-
-            return this.m_things[0];
-        }
-    }, {
-        key: "getTopMultiUseThing",
-        value: function getTopMultiUseThing() {
-            if (this.isEmpty()) return null;
-            var topCreature = this.getTopCreature();
-            if (topCreature) return topCreature;
-            for (var i = 0; i < this.m_things.length; ++i) {
-                var thing = this.m_things[i];
-                if (thing.isForceUse()) return thing;
-            }
-            for (var _i2 = 0; _i2 < this.m_things.length; ++_i2) {
-                var _thing6 = this.m_things[_i2];
-                if (!_thing6.isGround() && !_thing6.isGroundBorder() && !_thing6.isOnBottom() && !_thing6.isOnTop()) {
-                    if (_i2 > 0 && _thing6.isSplash()) return this.m_things[_i2 - 1];
-                    return _thing6;
-                }
-            }
-            for (var _i3 = 0; _i3 < this.m_things.length; ++_i3) {
-                var _thing7 = this.m_things[_i3];
-                if (!_thing7.isGround() && !_thing7.isOnTop()) return _thing7;
-            }
-            return this.m_things[0];
-        }
-    }, {
-        key: "getPosition",
-        value: function getPosition() {
-            return this.m_position;
-        }
-    }, {
-        key: "getDrawElevation",
-        value: function getDrawElevation() {
-            return this.m_drawElevation;
-        }
-    }, {
-        key: "getItems",
-        value: function getItems() {
-            var items = [];
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
-
-            try {
-                for (var _iterator8 = this.m_things[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                    var thing = _step8.value;
-
-                    if (thing.isItem()) items.push(thing);
-                }
-            } catch (err) {
-                _didIteratorError8 = true;
-                _iteratorError8 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                        _iterator8.return();
-                    }
-                } finally {
-                    if (_didIteratorError8) {
-                        throw _iteratorError8;
-                    }
-                }
-            }
-
-            return items;
-        }
-    }, {
-        key: "getCreatures",
-        value: function getCreatures() {
-            var creatures = [];
-            var _iteratorNormalCompletion9 = true;
-            var _didIteratorError9 = false;
-            var _iteratorError9 = undefined;
-
-            try {
-                for (var _iterator9 = this.m_things[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                    var thing = _step9.value;
-
-                    if (thing.isCreature()) creatures.push(thing);
-                }
-            } catch (err) {
-                _didIteratorError9 = true;
-                _iteratorError9 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                        _iterator9.return();
-                    }
-                } finally {
-                    if (_didIteratorError9) {
-                        throw _iteratorError9;
-                    }
-                }
-            }
-
-            return creatures;
-        }
-    }, {
-        key: "getWalkingCreatures",
-        value: function getWalkingCreatures() {
-            return this.m_walkingCreatures;
-        }
-    }, {
-        key: "getThings",
-        value: function getThings() {
-            return this.m_things;
-        }
-    }, {
-        key: "getGround",
-        value: function getGround() {
-            var firstObject = this.getThing(0);
-            if (!firstObject) return null;
-            if (firstObject.isGround() && firstObject.isItem()) return firstObject;
-            return null;
-        }
-    }, {
-        key: "getGroundSpeed",
-        value: function getGroundSpeed() {
-            var groundSpeed = 100;
-            var ground = this.getGround();
-            if (ground) groundSpeed = ground.getGroundSpeed();
-            return groundSpeed;
-        }
-    }, {
-        key: "getMinimapColorByte",
-        value: function getMinimapColorByte() {
-            var color = 255; // alpha
-            if (this.m_minimapColor != 0) return this.m_minimapColor;
-            var _iteratorNormalCompletion10 = true;
-            var _didIteratorError10 = false;
-            var _iteratorError10 = undefined;
-
-            try {
-                for (var _iterator10 = this.m_things[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                    var thing = _step10.value;
-
-                    if (!thing.isGround() && !thing.isGroundBorder() && !thing.isOnBottom() && !thing.isOnTop()) break;
-                    var c = thing.getMinimapColor();
-                    if (c != 0) color = c;
-                }
-            } catch (err) {
-                _didIteratorError10 = true;
-                _iteratorError10 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                        _iterator10.return();
-                    }
-                } finally {
-                    if (_didIteratorError10) {
-                        throw _iteratorError10;
-                    }
-                }
-            }
-
-            return color;
-        }
-    }, {
-        key: "getThingCount",
-        value: function getThingCount() {
-            return this.m_things.length + this.m_effects.length;
-        }
-    }, {
-        key: "isPathable",
-        value: function isPathable() {
-            var _iteratorNormalCompletion11 = true;
-            var _didIteratorError11 = false;
-            var _iteratorError11 = undefined;
-
-            try {
-                for (var _iterator11 = this.m_things[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-                    var thing = _step11.value;
-
-                    if (thing.isNotPathable()) return false;
-                }
-            } catch (err) {
-                _didIteratorError11 = true;
-                _iteratorError11 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
-                        _iterator11.return();
-                    }
-                } finally {
-                    if (_didIteratorError11) {
-                        throw _iteratorError11;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isWalkable",
-        value: function isWalkable() {
-            var ignoreCreatures = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            if (!this.getGround()) return false;
-            var _iteratorNormalCompletion12 = true;
-            var _didIteratorError12 = false;
-            var _iteratorError12 = undefined;
-
-            try {
-                for (var _iterator12 = this.m_things[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-                    var thing = _step12.value;
-
-                    if (thing.isNotWalkable()) return false;
-                    if (!ignoreCreatures) {
-                        if (thing.isCreature()) {
-                            var creature = thing;
-                            /* todo */
-                            //if(!creature.isPassable() && creature.canBeSeen())
-                            return false;
-                        }
-                    }
-                }
-            } catch (err) {
-                _didIteratorError12 = true;
-                _iteratorError12 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion12 && _iterator12.return) {
-                        _iterator12.return();
-                    }
-                } finally {
-                    if (_didIteratorError12) {
-                        throw _iteratorError12;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isFullGround",
-        value: function isFullGround() {
-            var ground = this.getGround();
-            if (ground && ground.isFullGround()) return true;
-            return false;
-        }
-    }, {
-        key: "isFullyOpaque",
-        value: function isFullyOpaque() {
-            var firstObject = this.getThing(0);
-            return firstObject && firstObject.isFullGround();
-        }
-    }, {
-        key: "isSingleDimension",
-        value: function isSingleDimension() {
-            if (this.m_walkingCreatures.length > 0) return false;
-            var _iteratorNormalCompletion13 = true;
-            var _didIteratorError13 = false;
-            var _iteratorError13 = undefined;
-
-            try {
-                for (var _iterator13 = this.m_things[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-                    var thing = _step13.value;
-
-                    if (thing.getHeight() != 1 || thing.getWidth() != 1) return false;
-                }
-            } catch (err) {
-                _didIteratorError13 = true;
-                _iteratorError13 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion13 && _iterator13.return) {
-                        _iterator13.return();
-                    }
-                } finally {
-                    if (_didIteratorError13) {
-                        throw _iteratorError13;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isLookPossible",
-        value: function isLookPossible() {
-            var _iteratorNormalCompletion14 = true;
-            var _didIteratorError14 = false;
-            var _iteratorError14 = undefined;
-
-            try {
-                for (var _iterator14 = this.m_things[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
-                    var thing = _step14.value;
-
-                    if (thing.blockProjectile()) return false;
-                }
-            } catch (err) {
-                _didIteratorError14 = true;
-                _iteratorError14 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion14 && _iterator14.return) {
-                        _iterator14.return();
-                    }
-                } finally {
-                    if (_didIteratorError14) {
-                        throw _iteratorError14;
-                    }
-                }
-            }
-
-            return true;
-        }
-    }, {
-        key: "isClickable",
-        value: function isClickable() {
-            var hasGround = false;
-            var hasOnBottom = false;
-            var hasIgnoreLook = false;
-            var _iteratorNormalCompletion15 = true;
-            var _didIteratorError15 = false;
-            var _iteratorError15 = undefined;
-
-            try {
-                for (var _iterator15 = this.m_things[Symbol.iterator](), _step15; !(_iteratorNormalCompletion15 = (_step15 = _iterator15.next()).done); _iteratorNormalCompletion15 = true) {
-                    var thing = _step15.value;
-
-                    if (thing.isGround()) hasGround = true;
-                    if (thing.isOnBottom()) hasOnBottom = true;
-                    if ((hasGround || hasOnBottom) && !hasIgnoreLook) return true;
-                }
-            } catch (err) {
-                _didIteratorError15 = true;
-                _iteratorError15 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion15 && _iterator15.return) {
-                        _iterator15.return();
-                    }
-                } finally {
-                    if (_didIteratorError15) {
-                        throw _iteratorError15;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "isEmpty",
-        value: function isEmpty() {
-            return this.m_things.length == 0;
-        }
-    }, {
-        key: "isDrawable",
-        value: function isDrawable() {
-            return this.m_things.length > 0 || this.m_walkingCreatures.length > 0 || this.m_effects.length > 0;
-        }
-    }, {
-        key: "hasTranslucentLight",
-        value: function hasTranslucentLight() {
-            return (this.m_flags & _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT) > 0;
-        }
-    }, {
-        key: "mustHookSouth",
-        value: function mustHookSouth() {
-            var _iteratorNormalCompletion16 = true;
-            var _didIteratorError16 = false;
-            var _iteratorError16 = undefined;
-
-            try {
-                for (var _iterator16 = this.m_things[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
-                    var thing = _step16.value;
-
-                    if (thing.isHookSouth()) return true;
-                }
-            } catch (err) {
-                _didIteratorError16 = true;
-                _iteratorError16 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion16 && _iterator16.return) {
-                        _iterator16.return();
-                    }
-                } finally {
-                    if (_didIteratorError16) {
-                        throw _iteratorError16;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "mustHookEast",
-        value: function mustHookEast() {
-            var _iteratorNormalCompletion17 = true;
-            var _didIteratorError17 = false;
-            var _iteratorError17 = undefined;
-
-            try {
-                for (var _iterator17 = this.m_things[Symbol.iterator](), _step17; !(_iteratorNormalCompletion17 = (_step17 = _iterator17.next()).done); _iteratorNormalCompletion17 = true) {
-                    var thing = _step17.value;
-
-                    if (thing.isHookEast()) return true;
-                }
-            } catch (err) {
-                _didIteratorError17 = true;
-                _iteratorError17 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion17 && _iterator17.return) {
-                        _iterator17.return();
-                    }
-                } finally {
-                    if (_didIteratorError17) {
-                        throw _iteratorError17;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "hasCreature",
-        value: function hasCreature() {
-            var _iteratorNormalCompletion18 = true;
-            var _didIteratorError18 = false;
-            var _iteratorError18 = undefined;
-
-            try {
-                for (var _iterator18 = this.m_things[Symbol.iterator](), _step18; !(_iteratorNormalCompletion18 = (_step18 = _iterator18.next()).done); _iteratorNormalCompletion18 = true) {
-                    var thing = _step18.value;
-
-                    if (thing.isCreature()) return true;
-                }
-            } catch (err) {
-                _didIteratorError18 = true;
-                _iteratorError18 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion18 && _iterator18.return) {
-                        _iterator18.return();
-                    }
-                } finally {
-                    if (_didIteratorError18) {
-                        throw _iteratorError18;
-                    }
-                }
-            }
-
-            return false;
-        }
-    }, {
-        key: "limitsFloorsView",
-        value: function limitsFloorsView() {
-            var isFreeView = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-            // ground and walls limits the view
-            var firstThing = this.getThing(0);
-            if (isFreeView) {
-                if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom())) return true;
-            } else if (firstThing && !firstThing.isDontHide() && (firstThing.isGround() || firstThing.isOnBottom() && firstThing.blockProjectile())) return true;
-            return false;
-        }
-    }, {
-        key: "canErase",
-        value: function canErase() {
-            return this.m_walkingCreatures.length == 0 && this.m_effects.length == 0 && this.m_things.length == 0 && this.m_flags == 0 && this.m_minimapColor == 0;
-        }
-    }, {
-        key: "getElevation",
-        value: function getElevation() {
-            var elevation = 0;
-            var _iteratorNormalCompletion19 = true;
-            var _didIteratorError19 = false;
-            var _iteratorError19 = undefined;
-
-            try {
-                for (var _iterator19 = this.m_things[Symbol.iterator](), _step19; !(_iteratorNormalCompletion19 = (_step19 = _iterator19.next()).done); _iteratorNormalCompletion19 = true) {
-                    var thing = _step19.value;
-
-                    if (thing.getElevation() > 0) elevation++;
-                }
-            } catch (err) {
-                _didIteratorError19 = true;
-                _iteratorError19 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion19 && _iterator19.return) {
-                        _iterator19.return();
-                    }
-                } finally {
-                    if (_didIteratorError19) {
-                        throw _iteratorError19;
-                    }
-                }
-            }
-
-            return elevation;
-        }
-    }, {
-        key: "hasElevation",
-        value: function hasElevation() {
-            var elevation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            return this.getElevation() >= elevation;
-        }
-    }, {
-        key: "overwriteMinimapColor",
-        value: function overwriteMinimapColor(color) {
-            this.m_minimapColor = color;
-        }
-    }, {
-        key: "remFlag",
-        value: function remFlag(flag) {
-            this.m_flags &= ~flag;
-        }
-    }, {
-        key: "setFlag",
-        value: function setFlag(flag) {
-            this.m_flags |= flag;
-        }
-    }, {
-        key: "setFlags",
-        value: function setFlags(flags) {
-            this.m_flags = flags;
-        }
-    }, {
-        key: "hasFlag",
-        value: function hasFlag(flag) {
-            return (this.m_flags & flag) == flag;
-        }
-    }, {
-        key: "getFlags",
-        value: function getFlags() {
-            return this.m_flags;
-        }
-    }, {
-        key: "checkTranslucentLight",
-        value: function checkTranslucentLight() {
-            if (this.m_position.z != _const.Otc.SEA_FLOOR) return;
-            var downPos = this.m_position.clone();
-            if (!downPos.down()) return;
-            var tile = _map.g_map.getOrCreateTile(downPos);
-            if (!tile) return;
-            var translucent = false;
-            var _iteratorNormalCompletion20 = true;
-            var _didIteratorError20 = false;
-            var _iteratorError20 = undefined;
-
-            try {
-                for (var _iterator20 = this.m_things[Symbol.iterator](), _step20; !(_iteratorNormalCompletion20 = (_step20 = _iterator20.next()).done); _iteratorNormalCompletion20 = true) {
-                    var thing = _step20.value;
-
-                    if (thing.isTranslucent() || thing.hasLensHelp()) {
-                        translucent = true;
-                        break;
-                    }
-                }
-            } catch (err) {
-                _didIteratorError20 = true;
-                _iteratorError20 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion20 && _iterator20.return) {
-                        _iterator20.return();
-                    }
-                } finally {
-                    if (_didIteratorError20) {
-                        throw _iteratorError20;
-                    }
-                }
-            }
-
-            if (translucent) tile.m_flags |= _const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;else tile.m_flags &= ~_const.Tilestate.TILESTATE_TRANSLUECENT_LIGHT;
-        }
-    }]);
-
-    return Tile;
-}();
-
-Tile.MAX_THINGS = 10;
-
-/***/ }),
-
-/***/ 457:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var LightView = exports.LightView = function () {
-    function LightView() {
-        _classCallCheck(this, LightView);
-    }
-
-    _createClass(LightView, [{
-        key: "setId",
-        value: function setId(id) {}
-    }]);
-
-    return LightView;
-}();
-
-/***/ }),
-
-/***/ 458:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9112,17 +10527,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(56);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _position = __webpack_require__(69);
+var _position = __webpack_require__(57);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _g_clock = __webpack_require__(93);
+var _g_clock = __webpack_require__(72);
 
-var _helpers = __webpack_require__(55);
+var _helpers = __webpack_require__(44);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9323,7 +10738,7 @@ var Item = exports.Item = function (_Thing) {
 
 /***/ }),
 
-/***/ 459:
+/***/ 460:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9338,11 +10753,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(56);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _timer = __webpack_require__(92);
+var _timer = __webpack_require__(71);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9427,7 +10842,7 @@ Effect.EFFECT_TICKS_PER_FRAME = 75;
 
 /***/ }),
 
-/***/ 460:
+/***/ 461:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9442,13 +10857,13 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _thing = __webpack_require__(56);
 
-var _timer = __webpack_require__(92);
+var _timer = __webpack_require__(71);
 
-var _color = __webpack_require__(54);
+var _color = __webpack_require__(58);
 
-var _cachedtext = __webpack_require__(129);
+var _cachedtext = __webpack_require__(131);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9576,7 +10991,7 @@ var AnimatedText = exports.AnimatedText = function (_Thing) {
 
 /***/ }),
 
-/***/ 461:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9631,48 +11046,6 @@ var Missile = exports.Missile = function (_Thing) {
 
 /***/ }),
 
-/***/ 462:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Player = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _creature = __webpack_require__(130);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Player = exports.Player = function (_Creature) {
-    _inherits(Player, _Creature);
-
-    function Player() {
-        _classCallCheck(this, Player);
-
-        return _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).apply(this, arguments));
-    }
-
-    _createClass(Player, [{
-        key: 'isPlayer',
-        value: function isPlayer() {
-            return true;
-        }
-    }]);
-
-    return Player;
-}(_creature.Creature);
-
-/***/ }),
-
 /***/ 463:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9686,7 +11059,7 @@ exports.Npc = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(130);
+var _creature = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9728,7 +11101,7 @@ exports.Monster = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _creature = __webpack_require__(130);
+var _creature = __webpack_require__(125);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -9803,15 +11176,15 @@ var _SpeakTypes;
 
 var _chatboxtab = __webpack_require__(467);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _statictext = __webpack_require__(188);
+var _statictext = __webpack_require__(189);
 
-var _map = __webpack_require__(57);
+var _map = __webpack_require__(39);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10280,7 +11653,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Movie = undefined;
 
-var _binarydatareader = __webpack_require__(125);
+var _binarydatareader = __webpack_require__(129);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10302,193 +11675,6 @@ var Movie = exports.Movie = function (_BinaryDataReader) {
 
 /***/ }),
 
-/***/ 54:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Color = exports.Color = function () {
-    //Color() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f) { }
-    //Color(uint32 rgba) { setRGBA(rgba); }
-    function Color() {
-        _classCallCheck(this, Color);
-
-        if (arguments.length == 0) {
-            this.m_r = 1;
-            this.m_g = 1;
-            this.m_b = 1;
-            this.m_a = 1;
-            return;
-        } else if (arguments.length == 1) {
-            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number') {
-                this.setRGBA(arguments.length <= 0 ? undefined : arguments[0]);
-                return;
-            }
-        } else if (arguments.length == 3) {
-            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
-                var r = (arguments.length <= 0 ? undefined : arguments[0]) / 255;
-                var g = (arguments.length <= 1 ? undefined : arguments[1]) / 255;
-                var b = (arguments.length <= 2 ? undefined : arguments[2]) / 255;
-                this.m_r = r;
-                this.m_g = g;
-                this.m_b = b;
-                this.m_a = 1;
-                return;
-            }
-        }
-        throw new Error('Unhandled constructor');
-    }
-
-    _createClass(Color, [{
-        key: 'equals',
-        value: function equals(otherColor) {
-            return this.m_r == otherColor.m_r && this.m_g == otherColor.m_g && this.m_b == otherColor.m_b && this.m_a == otherColor.m_a;
-        }
-    }, {
-        key: 'clone',
-        value: function clone() {
-            var color = new Color();
-            color.m_r = this.m_r;
-            color.m_g = this.m_g;
-            color.m_b = this.m_b;
-            color.m_a = this.m_a;
-            return color;
-        }
-    }, {
-        key: 'a',
-        value: function a() {
-            return this.m_a * 255.0;
-        }
-    }, {
-        key: 'b',
-        value: function b() {
-            return this.m_b * 255.0;
-        }
-    }, {
-        key: 'g',
-        value: function g() {
-            return this.m_g * 255.0;
-        }
-    }, {
-        key: 'r',
-        value: function r() {
-            return this.m_r * 255.0;
-        }
-    }, {
-        key: 'aF',
-        value: function aF() {
-            return this.m_a;
-        }
-    }, {
-        key: 'bF',
-        value: function bF() {
-            return this.m_b;
-        }
-    }, {
-        key: 'gF',
-        value: function gF() {
-            return this.m_g;
-        }
-    }, {
-        key: 'rF',
-        value: function rF() {
-            return this.m_r;
-        }
-    }, {
-        key: 'rgba',
-        value: function rgba() {
-            return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
-        }
-    }, {
-        key: 'setRGBA',
-        value: function setRGBA(r) {
-            var g = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
-            var b = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
-            var a = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 255;
-
-            if (g == -1) {
-                var rgba = r;
-                this.setRGBA(rgba >> 0 & 0xff, rgba >> 8 & 0xff, rgba >> 16 & 0xff, rgba >> 24 & 0xff);
-            } else {
-                this.m_r = r / 255;
-                this.m_g = g / 255;
-                this.m_b = b / 255;
-                this.m_a = a / 255;
-            }
-        }
-    }], [{
-        key: 'from8bit',
-        value: function from8bit(color) {
-            if (color >= 216 || color <= 0) return new Color(0, 0, 0);
-            var r = parseInt((color / 36).toString()) % 6 * 51;
-            var g = parseInt((color / 6).toString()) % 6 * 51;
-            var b = color % 6 * 51;
-            return new Color(r, g, b);
-        }
-    }]);
-
-    return Color;
-}();
-
-Color.alpha = 0x00000000;
-Color.white = 0xffffffff;
-Color.black = 0xff000000;
-Color.red = 0xff0000ff;
-Color.darkRed = 0xff000080;
-Color.green = 0xff00ff00;
-Color.darkGreen = 0xff008000;
-Color.blue = 0xffff0000;
-Color.darkBlue = 0xff800000;
-Color.pink = 0xffff00ff;
-Color.darkPink = 0xff800080;
-Color.yellow = 0xff00ffff;
-Color.darkYellow = 0xff008080;
-Color.teal = 0xffffff00;
-Color.darkTeal = 0xff808000;
-Color.gray = 0xffa0a0a0;
-Color.darkGray = 0xff808080;
-Color.lightGray = 0xffc0c0c0;
-Color.orange = 0xff008cff;
-
-/***/ }),
-
-/***/ 55:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var toInt = function toInt(int) {
-    return parseInt(int.toString());
-};
-var clamp = function clamp(number, lower, upper) {
-    if (number === number) {
-        if (upper !== undefined) {
-            number = number <= upper ? number : upper;
-        }
-        if (lower !== undefined) {
-            number = number >= lower ? number : lower;
-        }
-    }
-    return number;
-};
-exports.toInt = toInt;
-exports.clamp = clamp;
-
-/***/ }),
-
 /***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10502,13 +11688,13 @@ exports.Thing = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _map = __webpack_require__(57);
+var _map = __webpack_require__(39);
 
-var _game = __webpack_require__(38);
+var _game = __webpack_require__(30);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _thingtypemanager = __webpack_require__(63);
+var _thingtypemanager = __webpack_require__(64);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10960,552 +12146,325 @@ var Thing = exports.Thing = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.g_map = exports.Map = undefined;
+exports.Position = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _position = __webpack_require__(69);
-
-var _awarerange = __webpack_require__(187);
-
-var _light = __webpack_require__(127);
-
-var _tileblock = __webpack_require__(455);
-
-var _const = __webpack_require__(13);
-
-var _point = __webpack_require__(42);
-
-var _helpers = __webpack_require__(55);
-
-var _mapview = __webpack_require__(128);
-
-var _game = __webpack_require__(38);
+var _const = __webpack_require__(12);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Map = exports.Map = function () {
-    function Map() {
-        _classCallCheck(this, Map);
+var Position = exports.Position = function () {
+    function Position() {
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-        this.m_tileBlocks = [];
-        this.m_knownCreatures = [];
-        this.m_floorMissiles = [];
-        this.m_animatedTexts = [];
-        this.m_staticTexts = [];
-        // std::vector<MapViewPtr> m_mapViews;
-        //std::unordered_map<Position, std::string, PositionHasher> m_waypoints;
-        this.m_animationFlags = 0;
-        this.m_zoneFlags = 0;
-        this.m_zoneColors = [];
-        this.m_zoneOpacity = 0.0;
-        this.m_light = new _light.Light();
-        this.m_centralPosition = new _position.Position();
-        this.m_attribs = [];
-        this.m_awareRange = new _awarerange.AwareRange();
-        for (var z = 0; z <= _const.Otc.MAX_Z + 1; ++z) {
-            this.m_tileBlocks[z] = [];
-            this.m_floorMissiles[z] = [];
-        }
+        _classCallCheck(this, Position);
+
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    _createClass(Map, [{
-        key: "createTile",
-        value: function createTile(pos) {
-            if (!pos.isMapPosition()) return null;
-            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
-            if (!block) {
-                block = new _tileblock.TileBlock();
-                this.m_tileBlocks[pos.z][this.getBlockIndex(pos)] = block;
-            }
-            return block.create(pos);
+    _createClass(Position, [{
+        key: "equals",
+        value: function equals(otherPosition) {
+            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
         }
     }, {
-        key: "getTile",
-        value: function getTile(pos) {
-            if (!pos.isMapPosition()) return null;
-            var it = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
-            if (it) return it.get(pos);
-            return null;
+        key: "clone",
+        value: function clone() {
+            return new Position(this.x, this.y, this.z);
         }
     }, {
-        key: "getOrCreateTile",
-        value: function getOrCreateTile(pos) {
-            if (!pos.isMapPosition()) return null;
-            var tile = this.getTile(pos);
-            if (!tile) {
-                tile = this.createTile(pos);
-            }
-            return tile;
+        key: "isMapPosition",
+        value: function isMapPosition() {
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
         }
     }, {
-        key: "setAwareRange",
-        value: function setAwareRange(arg0) {
-            throw new Error("Method not implemented.");
+        key: "isValid",
+        value: function isValid() {
+            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
         }
     }, {
-        key: "getCreatureById",
-        value: function getCreatureById(id) {
-            //console.log('known creatures', g_map.m_knownCreatures);
-            if (!g_map.m_knownCreatures[id]) {
-                ///  console.log('known creatures failed', id, g_map.m_knownCreatures);
-                throw new Error('get ' + id);
-            }
-            return g_map.m_knownCreatures[id];
+        key: "distance",
+        value: function distance(pos) {
+            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
         }
     }, {
-        key: "getAwareRange",
-        value: function getAwareRange() {
-            return this.m_awareRange;
-        }
-    }, {
-        key: "getCentralPosition",
-        value: function getCentralPosition() {
-            return this.m_centralPosition;
-        }
-    }, {
-        key: "setCentralPosition",
-        value: function setCentralPosition(centralPosition) {
-            if (this.m_centralPosition.equals(centralPosition)) return;
-            this.m_centralPosition = centralPosition;
-            this.removeUnawareThings();
-            // this fixes local player position when the local player is removed from the map,
-            // the local player is removed from the map when there are too many creatures on his tile,
-            // so there is no enough stackpos to the server send him
-            /*
-            g_dispatcher.addEvent([this] {
-                LocalPlayerPtr localPlayer = g_game.getLocalPlayer();
-                if(!localPlayer || localPlayer->getPosition() == m_centralPosition)
-                return;
-                TilePtr tile = localPlayer->getTile();
-                if(tile && tile->hasThing(localPlayer))
-                return;
-                 Position oldPos = localPlayer->getPosition();
-                Position pos = m_centralPosition;
-                if(oldPos != pos) {
-                    if(!localPlayer->isRemoved())
-                    localPlayer->onDisappear();
-                    localPlayer->setPosition(pos);
-                    localPlayer->onAppear();
-                    g_logger.debug("forced player position update");
-                }
-            });
-            */
-            _mapview.g_mapview.onMapCenterChange(centralPosition);
-        }
-    }, {
-        key: "cleanTile",
-        value: function cleanTile(pos) {
-            if (!pos.isMapPosition()) return;
-            var block = this.m_tileBlocks[pos.z][this.getBlockIndex(pos)];
-            if (block) {
-                var tile = block.get(pos);
-                if (tile) {
-                    tile.clean();
-                    if (tile.canErase()) block.remove(pos);
-                    //notificateTileUpdate(pos);
-                }
-            }
-            for (var i = 0; i < this.m_staticTexts.length;) {
-                var staticText = this.m_staticTexts[i];
-                if (staticText.getPosition().equals(pos) && staticText.getMessageMode() == _const.MessageMode.MessageNone) this.m_staticTexts.splice(i, 1);else ++i;
-            }
-        }
-    }, {
-        key: "addThing",
-        value: function addThing(thing, pos) {
-            var stackPos = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+        key: "translate",
+        value: function translate(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-            if (!thing) return;
-            if (thing.isItem() || thing.isCreature() || thing.isEffect()) {
-                var tile = this.getOrCreateTile(pos);
-                if (tile) tile.addThing(thing, stackPos);
-            } else {
-                if (thing.isMissile()) {
-                    this.m_floorMissiles[pos.z].push(thing);
-                } else if (thing.isAnimatedText()) {
-                    // this code will stack animated texts of the same color
-                    var animatedText = thing;
-                    var prevAnimatedText = void 0;
-                    var merged = false;
-                    var _iteratorNormalCompletion = true;
-                    var _didIteratorError = false;
-                    var _iteratorError = undefined;
+            this.x += dx;
+            this.y += dy;
+            this.z += dz;
+        }
+    }, {
+        key: "translated",
+        value: function translated(dx, dy) {
+            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
-                    try {
-                        for (var _iterator = this.m_animatedTexts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                            var other = _step.value;
+            return new Position(this.x + dx, this.y + dy, this.z + dz);
+        }
+        // isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number
 
-                            if (other.getPosition() == pos) {
-                                prevAnimatedText = other;
-                                if (other.merge(animatedText)) {
-                                    merged = true;
-                                    break;
-                                }
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return) {
-                                _iterator.return();
-                            }
-                        } finally {
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
-                        }
-                    }
+    }, {
+        key: "isInRange",
+        value: function isInRange(pos, xRange, yRange) {
+            var minYRange = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+            var maxYRange = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
-                    if (!merged) {
-                        if (prevAnimatedText) {
-                            var offset = prevAnimatedText.getOffset();
-                            var t = prevAnimatedText.getTimer().ticksElapsed();
-                            if (t < _const.Otc.ANIMATED_TEXT_DURATION / 4.0) {
-                                var y = 12 - 48 * t / _const.Otc.ANIMATED_TEXT_DURATION;
-                                offset.add(new _point.Point(0, y));
-                            }
-                            offset.y = Math.min(offset.y, 12);
-                            animatedText.setOffset(offset);
-                        }
-                        this.m_animatedTexts.push(animatedText);
-                    }
-                } else if (thing.isStaticText()) {
-                    var staticText = thing;
-                    var mustAdd = true;
-                    var _iteratorNormalCompletion2 = true;
-                    var _didIteratorError2 = false;
-                    var _iteratorError2 = undefined;
+            if (minYRange !== null && maxYRange !== null) return pos.x >= this.x - xRange && pos.x <= this.x + yRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z;else return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
+        }
+    }, {
+        key: "getDirectionFromPosition",
+        value: function getDirectionFromPosition(position) {
+            return Position.getDirectionFromPositions(this, position);
+        }
+    }, {
+        key: "up",
+        value: function up() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-                    try {
-                        for (var _iterator2 = this.m_staticTexts[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            var _other = _step2.value;
-
-                            // try to combine messages
-                            if (_other.getPosition() == pos && _other.addMessage(staticText.getName(), staticText.getMessageMode(), staticText.getFirstMessage())) {
-                                mustAdd = false;
-                                break;
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError2 = true;
-                        _iteratorError2 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                                _iterator2.return();
-                            }
-                        } finally {
-                            if (_didIteratorError2) {
-                                throw _iteratorError2;
-                            }
-                        }
-                    }
-
-                    if (mustAdd) this.m_staticTexts.push(staticText);else return;
-                }
-                thing.setPosition(pos);
-                thing.onAppear();
-            }
-            //notificateTileUpdate(pos);
-        }
-    }, {
-        key: "removeThing",
-        value: function removeThing(thing) {
-            if (!thing) return false;
-            var ret = false;
-            if (thing.isMissile()) {
-                var missile = thing;
-                var z = missile.getPosition().z;
-                var it = this.m_floorMissiles[z].indexOf(missile);
-                if (it > -1) {
-                    this.m_floorMissiles.splice(it, 1);
-                    ret = true;
-                }
-            } else if (thing.isAnimatedText()) {
-                var animatedText = thing;
-                var _it = this.m_animatedTexts.indexOf(animatedText);
-                if (_it > -1) {
-                    this.m_animatedTexts.splice(_it, 1);
-                    ret = true;
-                }
-            } else if (thing.isStaticText()) {
-                var staticText = thing;
-                var _it2 = this.m_staticTexts.indexOf(staticText);
-                if (_it2 > -1) {
-                    this.m_staticTexts.splice(_it2, 1);
-                    ret = true;
-                }
-            } else {
-                var tile = thing.getTile();
-                if (tile) ret = tile.removeThing(thing);
-            }
-            //notificateTileUpdate(thing.getPosition());
-            return ret;
-        }
-    }, {
-        key: "removeThingByPos",
-        value: function removeThingByPos(pos, stackPos) {
-            var tile = this.getTile(pos);
-            if (tile) return this.removeThing(tile.getThing(stackPos));
-            return false;
-        }
-    }, {
-        key: "setLight",
-        value: function setLight(light) {}
-    }, {
-        key: "getThing",
-        value: function getThing(pos, stackpos) {
-            var tile = this.getTile(pos);
-            //Log.debug('Map.getThing', pos, tile.getThing(stackpos));
-            if (tile) return tile.getThing(stackpos);
-            return null;
-        }
-    }, {
-        key: "addCreature",
-        value: function addCreature(creature) {
-            this.m_knownCreatures[creature.getId()] = creature;
-        }
-    }, {
-        key: "removeCreatureById",
-        value: function removeCreatureById(id) {
-            if (id == 0) return;
-            if (this.m_knownCreatures[id]) {
-                this.m_knownCreatures.splice(id, 1);
-            }
-        }
-    }, {
-        key: "getSightSpectators",
-        value: function getSightSpectators(centerPos, multiFloor) {
-            return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left - 1, this.m_awareRange.right - 2, this.m_awareRange.top - 1, this.m_awareRange.bottom - 2);
-        }
-    }, {
-        key: "getSpectators",
-        value: function getSpectators(centerPos, multiFloor) {
-            return this.getSpectatorsInRangeEx(centerPos, multiFloor, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
-        }
-    }, {
-        key: "getSpectatorsInRange",
-        value: function getSpectatorsInRange(centerPos, multiFloor, xRange, yRange) {
-            return this.getSpectatorsInRangeEx(centerPos, multiFloor, xRange, xRange, yRange, yRange);
-        }
-    }, {
-        key: "getSpectatorsInRangeEx",
-        value: function getSpectatorsInRangeEx(centerPos, multiFloor, minXRange, maxXRange, minYRange, maxYRange) {
-            var minZRange = 0;
-            var maxZRange = 0;
-            var creatures = [];
-            if (multiFloor) {
-                minZRange = 0;
-                maxZRange = _const.Otc.MAX_Z;
-            }
-            //TODO: optimize
-            //TODO: get creatures from other floors corretly
-            //TODO: delivery creatures in distance order
-            for (var iz = -minZRange; iz <= maxZRange; ++iz) {
-                for (var iy = -minYRange; iy <= maxYRange; ++iy) {
-                    for (var ix = -minXRange; ix <= maxXRange; ++ix) {
-                        var tile = this.getTile(centerPos.translated(ix, iy, iz));
-                        if (!tile) continue;
-                        var tileCreatures = tile.getCreatures();
-                        var _iteratorNormalCompletion3 = true;
-                        var _didIteratorError3 = false;
-                        var _iteratorError3 = undefined;
-
-                        try {
-                            for (var _iterator3 = tileCreatures[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                                var creature = _step3.value;
-
-                                creatures.push(creature);
-                            }
-                            // TODO: WEB - REVERSE?
-                            //creatures.insert(creatures.end(), tileCreatures.rbegin(), tileCreatures.rend());
-                        } catch (err) {
-                            _didIteratorError3 = true;
-                            _iteratorError3 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                                    _iterator3.return();
-                                }
-                            } finally {
-                                if (_didIteratorError3) {
-                                    throw _iteratorError3;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return creatures;
-        }
-    }, {
-        key: "isLookPossible",
-        value: function isLookPossible(position) {
-            var tile = this.getTile(position);
-            return tile && tile.isLookPossible();
-        }
-    }, {
-        key: "isCovered",
-        value: function isCovered(pos, firstFloor) {
-            // check for tiles on top of the postion
-            var tilePos = pos.clone();
-            while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
-                var tile = this.getTile(tilePos);
-                // the below tile is covered when the above tile has a full ground
-                if (tile && tile.isFullGround()) return true;
+            var nz = this.z - n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
             }
             return false;
         }
     }, {
-        key: "isCompletelyCovered",
-        value: function isCompletelyCovered(pos, firstFloor) {
-            var checkTile = this.getTile(pos);
-            var tilePos = pos.clone();
-            while (tilePos.coveredUp() && tilePos.z >= firstFloor) {
-                var covered = true;
-                var done = false;
-                // check in 2x2 range tiles that has no transparent pixels
-                for (var x = 0; x < 2 && !done; ++x) {
-                    for (var y = 0; y < 2 && !done; ++y) {
-                        var tile = this.getTile(tilePos.translated(-x, -y));
-                        if (!tile || !tile.isFullyOpaque()) {
-                            covered = false;
-                            done = true;
-                        } else if (x == 0 && y == 0 && (!checkTile || checkTile.isSingleDimension())) {
-                            done = true;
-                        }
-                    }
-                }
-                if (covered) return true;
+        key: "down",
+        value: function down() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nz = this.z + n;
+            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.z = nz;
+                return true;
             }
             return false;
         }
     }, {
-        key: "getFirstAwareFloor",
-        value: function getFirstAwareFloor() {
-            if (this.m_centralPosition.z > _const.Otc.SEA_FLOOR) return this.m_centralPosition.z - _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE;else return 0;
-        }
-    }, {
-        key: "getLastAwareFloor",
-        value: function getLastAwareFloor() {
-            if (this.m_centralPosition.z > _const.Otc.SEA_FLOOR) return Math.min(this.m_centralPosition.z + _const.Otc.AWARE_UNDEGROUND_FLOOR_RANGE, _const.Otc.MAX_Z);else return _const.Otc.SEA_FLOOR;
-        }
-    }, {
-        key: "getFloorMissiles",
-        value: function getFloorMissiles(z) {
-            return this.m_floorMissiles[z];
-        }
-    }, {
-        key: "isAwareOfPosition",
-        value: function isAwareOfPosition(pos) {
-            if (pos.z < this.getFirstAwareFloor() || pos.z > this.getLastAwareFloor()) return false;
-            var groundedPos = pos.clone();
-            while (groundedPos.z != this.m_centralPosition.z) {
-                if (groundedPos.z > this.m_centralPosition.z) {
-                    if (groundedPos.x == 65535 || groundedPos.y == 65535) break;
-                    groundedPos.coveredUp();
-                } else {
-                    if (groundedPos.x == 0 || groundedPos.y == 0) break;
-                    groundedPos.coveredDown();
-                }
+        key: "coveredUp",
+        value: function coveredUp() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var nx = this.x + n,
+                ny = this.y + n,
+                nz = this.z - n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
             }
-            return this.m_centralPosition.isInRange(groundedPos, this.m_awareRange.left, this.m_awareRange.right, this.m_awareRange.top, this.m_awareRange.bottom);
+            return false;
         }
     }, {
-        key: "removeUnawareThings",
-        value: function removeUnawareThings() {
-            // remove creatures from tiles that we are not aware of anymore
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
+        key: "coveredDown",
+        value: function coveredDown() {
+            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
-            try {
-                for (var _iterator4 = this.m_knownCreatures[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var creature = _step4.value;
-
-                    if (!this.isAwareOfPosition(creature.getPosition())) this.removeThing(creature);
-                }
-                // remove static texts from tiles that we are not aware anymore
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
-                    }
-                }
+            var nx = this.x - n,
+                ny = this.y - n,
+                nz = this.z + n;
+            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
+                this.x = nx;
+                this.y = ny;
+                this.z = nz;
+                return true;
             }
-
-            for (var i = 0; i < this.m_staticTexts.length;) {
-                var staticText = this.m_staticTexts[i];
-                if (staticText.getMessageMode() == _const.MessageMode.MessageNone && !this.isAwareOfPosition(staticText.getPosition())) this.m_staticTexts.splice(i, 1);else ++i;
-            }
-            if (!_game.g_game.getFeature(_const.GameFeature.GameKeepUnawareTiles)) {
-                // remove tiles that we are not aware anymore
-                for (var z = 0; z <= _const.Otc.MAX_Z; ++z) {
-                    var tileBlocks = this.m_tileBlocks[z];
-                    for (var _i = 0; _i < tileBlocks.length;) {
-                        var block = tileBlocks[_i];
-                        var blockEmpty = true;
-                        var _iteratorNormalCompletion5 = true;
-                        var _didIteratorError5 = false;
-                        var _iteratorError5 = undefined;
-
-                        try {
-                            for (var _iterator5 = block.getTiles()[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                                var tile = _step5.value;
-
-                                /*
-                                if(!tile)
-                                    continue;
-                                */
-                                var pos = tile.getPosition();
-                                if (!this.isAwareOfPosition(pos)) block.remove(pos);else blockEmpty = false;
-                            }
-                        } catch (err) {
-                            _didIteratorError5 = true;
-                            _iteratorError5 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                                    _iterator5.return();
-                                }
-                            } finally {
-                                if (_didIteratorError5) {
-                                    throw _iteratorError5;
-                                }
-                            }
-                        }
-
-                        if (blockEmpty) tileBlocks.splice(_i, 1);else ++_i;
-                    }
-                }
-            }
+            return false;
+        }
+    }], [{
+        key: "getAngleFromPositions",
+        value: function getAngleFromPositions(fromPos, toPos) {
+            // Returns angle in radians from 0 to 2Pi. -1 means positions are equal.
+            var dx = toPos.x - fromPos.x;
+            var dy = toPos.y - fromPos.y;
+            if (dx == 0 && dy == 0) return -1;
+            var angle = Math.atan2(dy * -1, dx);
+            if (angle < 0) angle += 2 * Math.PI;
+            return angle;
         }
     }, {
-        key: "getBlockIndex",
-        value: function getBlockIndex(pos) {
-            return (0, _helpers.toInt)(pos.y / _tileblock.TileBlock.BLOCK_SIZE) * (0, _helpers.toInt)(65536 / _tileblock.TileBlock.BLOCK_SIZE) + (0, _helpers.toInt)(pos.x / _tileblock.TileBlock.BLOCK_SIZE);
+        key: "getDirectionFromPositions",
+        value: function getDirectionFromPositions(fromPos, toPos) {
+            var angle = Position.getAngleFromPositions(fromPos, toPos) * this.RAD_TO_DEC;
+            if (angle >= 360 - 22.5 || angle < 0 + 22.5) return _const.Direction.East;else if (angle >= 45 - 22.5 && angle < 45 + 22.5) return _const.Direction.NorthEast;else if (angle >= 90 - 22.5 && angle < 90 + 22.5) return _const.Direction.North;else if (angle >= 135 - 22.5 && angle < 135 + 22.5) return _const.Direction.NorthWest;else if (angle >= 180 - 22.5 && angle < 180 + 22.5) return _const.Direction.West;else if (angle >= 225 - 22.5 && angle < 225 + 22.5) return _const.Direction.SouthWest;else if (angle >= 270 - 22.5 && angle < 270 + 22.5) return _const.Direction.South;else if (angle >= 315 - 22.5 && angle < 315 + 22.5) return _const.Direction.SouthEast;else return _const.Direction.InvalidDirection;
         }
     }]);
 
-    return Map;
+    return Position;
 }();
 
-var g_map = new Map();
-exports.g_map = g_map;
+Position.RAD_TO_DEC = 180.0 / Math.acos(-1);
 
 /***/ }),
 
-/***/ 63:
+/***/ 58:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Color = exports.Color = function () {
+    //Color() : m_r(1.0f), m_g(1.0f), m_b(1.0f), m_a(1.0f) { }
+    //Color(uint32 rgba) { setRGBA(rgba); }
+    function Color() {
+        _classCallCheck(this, Color);
+
+        if (arguments.length == 0) {
+            this.m_r = 1;
+            this.m_g = 1;
+            this.m_b = 1;
+            this.m_a = 1;
+            return;
+        } else if (arguments.length == 1) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number') {
+                this.setRGBA(arguments.length <= 0 ? undefined : arguments[0]);
+                return;
+            }
+        } else if (arguments.length == 3) {
+            if (typeof (arguments.length <= 0 ? undefined : arguments[0]) == 'number' && typeof (arguments.length <= 1 ? undefined : arguments[1]) == 'number' && typeof (arguments.length <= 2 ? undefined : arguments[2]) == 'number') {
+                var r = (arguments.length <= 0 ? undefined : arguments[0]) / 255;
+                var g = (arguments.length <= 1 ? undefined : arguments[1]) / 255;
+                var b = (arguments.length <= 2 ? undefined : arguments[2]) / 255;
+                this.m_r = r;
+                this.m_g = g;
+                this.m_b = b;
+                this.m_a = 1;
+                return;
+            }
+        }
+        throw new Error('Unhandled constructor');
+    }
+
+    _createClass(Color, [{
+        key: 'equals',
+        value: function equals(otherColor) {
+            return this.m_r == otherColor.m_r && this.m_g == otherColor.m_g && this.m_b == otherColor.m_b && this.m_a == otherColor.m_a;
+        }
+    }, {
+        key: 'clone',
+        value: function clone() {
+            var color = new Color();
+            color.m_r = this.m_r;
+            color.m_g = this.m_g;
+            color.m_b = this.m_b;
+            color.m_a = this.m_a;
+            return color;
+        }
+    }, {
+        key: 'a',
+        value: function a() {
+            return this.m_a * 255.0;
+        }
+    }, {
+        key: 'b',
+        value: function b() {
+            return this.m_b * 255.0;
+        }
+    }, {
+        key: 'g',
+        value: function g() {
+            return this.m_g * 255.0;
+        }
+    }, {
+        key: 'r',
+        value: function r() {
+            return this.m_r * 255.0;
+        }
+    }, {
+        key: 'aF',
+        value: function aF() {
+            return this.m_a;
+        }
+    }, {
+        key: 'bF',
+        value: function bF() {
+            return this.m_b;
+        }
+    }, {
+        key: 'gF',
+        value: function gF() {
+            return this.m_g;
+        }
+    }, {
+        key: 'rF',
+        value: function rF() {
+            return this.m_r;
+        }
+    }, {
+        key: 'rgba',
+        value: function rgba() {
+            return this.a() | this.b() << 8 | this.g() << 16 | this.r() << 24;
+        }
+    }, {
+        key: 'setRGBA',
+        value: function setRGBA(r) {
+            var g = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+            var b = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+            var a = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 255;
+
+            if (g == -1) {
+                var rgba = r;
+                this.setRGBA(rgba >> 0 & 0xff, rgba >> 8 & 0xff, rgba >> 16 & 0xff, rgba >> 24 & 0xff);
+            } else {
+                this.m_r = r / 255;
+                this.m_g = g / 255;
+                this.m_b = b / 255;
+                this.m_a = a / 255;
+            }
+        }
+    }], [{
+        key: 'from8bit',
+        value: function from8bit(color) {
+            if (color >= 216 || color <= 0) return new Color(0, 0, 0);
+            var r = parseInt((color / 36).toString()) % 6 * 51;
+            var g = parseInt((color / 6).toString()) % 6 * 51;
+            var b = color % 6 * 51;
+            return new Color(r, g, b);
+        }
+    }]);
+
+    return Color;
+}();
+
+Color.alpha = 0x00000000;
+Color.white = 0xffffffff;
+Color.black = 0xff000000;
+Color.red = 0xff0000ff;
+Color.darkRed = 0xff000080;
+Color.green = 0xff00ff00;
+Color.darkGreen = 0xff008000;
+Color.blue = 0xffff0000;
+Color.darkBlue = 0xff800000;
+Color.pink = 0xffff00ff;
+Color.darkPink = 0xff800080;
+Color.yellow = 0xff00ffff;
+Color.darkYellow = 0xff008080;
+Color.teal = 0xffffff00;
+Color.darkTeal = 0xff808000;
+Color.gray = 0xffa0a0a0;
+Color.darkGray = 0xff808080;
+Color.lightGray = 0xffc0c0c0;
+Color.orange = 0xff008cff;
+
+/***/ }),
+
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11518,13 +12477,13 @@ exports.g_things = exports.ThingTypeManager = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _thingtype = __webpack_require__(445);
+var _thingtype = __webpack_require__(449);
 
-var _const = __webpack_require__(13);
+var _const = __webpack_require__(12);
 
-var _log = __webpack_require__(20);
+var _log = __webpack_require__(17);
 
-var _resources = __webpack_require__(124);
+var _resources = __webpack_require__(128);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11670,150 +12629,6 @@ exports.g_things = g_things;
 
 /***/ }),
 
-/***/ 69:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Position = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _const = __webpack_require__(13);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Position = exports.Position = function () {
-    function Position() {
-        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-        var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-        var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-        _classCallCheck(this, Position);
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    _createClass(Position, [{
-        key: "equals",
-        value: function equals(otherPosition) {
-            return this.x == otherPosition.x && this.y == otherPosition.y && this.z == otherPosition.z;
-        }
-    }, {
-        key: "clone",
-        value: function clone() {
-            return new Position(this.x, this.y, this.z);
-        }
-    }, {
-        key: "isMapPosition",
-        value: function isMapPosition() {
-            return this.x >= 0 && this.y >= 0 && this.z >= 0 && this.x < 65535 && this.y < 65535 && this.z <= _const.Otc.MAX_Z;
-        }
-    }, {
-        key: "isValid",
-        value: function isValid() {
-            return !(this.x == 65535 && this.y == 65535 && this.z == 255);
-        }
-    }, {
-        key: "distance",
-        value: function distance(pos) {
-            return Math.sqrt(Math.pow(pos.x - this.x, 2) + Math.pow(pos.y - this.y, 2));
-        }
-    }, {
-        key: "translate",
-        value: function translate(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            this.x += dx;
-            this.y += dy;
-            this.z += dz;
-        }
-    }, {
-        key: "translated",
-        value: function translated(dx, dy) {
-            var dz = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
-            return new Position(this.x + dx, this.y + dy, this.z + dz);
-        }
-        // isInRange(pos: Position, minXRange: number, maxXRange: number, minYRange: number, maxYRange: number
-
-    }, {
-        key: "isInRange",
-        value: function isInRange(pos, xRange, yRange) {
-            var minYRange = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-            var maxYRange = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-
-            if (minYRange !== null && maxYRange !== null) return pos.x >= this.x - xRange && pos.x <= this.x + yRange && pos.y >= this.y - minYRange && pos.y <= this.y + maxYRange && pos.z == this.z;else return Math.abs(this.x - pos.x) <= xRange && Math.abs(this.y - pos.y) <= yRange && this.z == pos.z;
-        }
-    }, {
-        key: "up",
-        value: function up() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z - n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "down",
-        value: function down() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nz = this.z + n;
-            if (nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "coveredUp",
-        value: function coveredUp() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x + n,
-                ny = this.y + n,
-                nz = this.z - n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: "coveredDown",
-        value: function coveredDown() {
-            var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var nx = this.x - n,
-                ny = this.y - n,
-                nz = this.z + n;
-            if (nx >= 0 && nx <= 65535 && ny >= 0 && ny <= 65535 && nz >= 0 && nz <= _const.Otc.MAX_Z) {
-                this.x = nx;
-                this.y = ny;
-                this.z = nz;
-                return true;
-            }
-            return false;
-        }
-    }]);
-
-    return Position;
-}();
-
-/***/ }),
-
 /***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11827,7 +12642,7 @@ exports.Size = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _point = __webpack_require__(42);
+var _point = __webpack_require__(43);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11930,7 +12745,7 @@ var Size = exports.Size = function () {
 
 /***/ }),
 
-/***/ 92:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11943,7 +12758,7 @@ exports.Timer = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _g_clock = __webpack_require__(93);
+var _g_clock = __webpack_require__(72);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11994,7 +12809,7 @@ var Timer = exports.Timer = function () {
 
 /***/ }),
 
-/***/ 93:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12028,4 +12843,4 @@ exports.g_clock = g_clock;
 
 /***/ })
 
-},[240]);
+},[241]);
