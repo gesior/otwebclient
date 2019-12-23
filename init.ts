@@ -8,8 +8,6 @@ import {g_mapview} from "./modules/view/mapview";
 
 let x = Otc.MAX_AUTOWALK_DIST;
 
-//g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
-
 import 'pixi.js'
 import {Log} from "./modules/log";
 import {g_painter} from "./modules/painter";
@@ -17,9 +15,9 @@ import {g_painter} from "./modules/painter";
 
 async function test() {
     g_game.setClientVersion(854);
-    await g_game.loadDatFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.dat');
-    await g_game.loadSprFile('http://php72.sbg.best/prv/webclient/fronttypescript/Kasteria.spr');
-    var movieData: InputFile = await g_resources.openFile('http://php72.sbg.best/prv/webclient/fronttypescript/small.ukcam');
+    await g_game.loadDatFile('http://localhost/prv/webclient/Kasteria.dat');
+    await g_game.loadSprFile('http://localhost/prv/webclient/Kasteria.spr');
+    var movieData: InputFile = await g_resources.openFile('http://localhost/prv/webclient/poh.ukcam');
     //movieData.setReadPos(8);
     var movie: Movie = new Movie(new DataView(movieData.getBytes(-1)));
     g_mapview.init();

@@ -78,9 +78,9 @@ export class Creature extends Thing {
     m_walkOffset: Point = new Point();
     m_walkTurnDirection: Direction = Direction.InvalidDirection;
     m_lastStepDirection: Direction = Direction.InvalidDirection;
-    m_lastStepFromPosition: Position;
-    m_lastStepToPosition: Position;
-    m_oldPosition: Position;
+    m_lastStepFromPosition: Position = new Position();
+    m_lastStepToPosition: Position = new Position();
+    m_oldPosition: Position = new Position();
 
     constructor() {
         super();

@@ -39,7 +39,7 @@ export class Game {
     }
 
     updateMovie(deltaTime: number) {
-        this.m_protocolGame.updateMovie(deltaTime * 5);
+        this.m_protocolGame.updateMovie(deltaTime * 50000);
     }
     m_clientVersion = 0;
     messageModesMap = {};

@@ -41,7 +41,7 @@ export {g_resources}
 
 /*
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.open('GET', 'http://test.test/Kasteria.dat', true);
 xhr.responseType = 'arraybuffer';
 xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer

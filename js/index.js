@@ -677,6 +677,9 @@ var Creature = exports.Creature = function (_Thing) {
         _this.m_walkOffset = new _point.Point();
         _this.m_walkTurnDirection = _const.Direction.InvalidDirection;
         _this.m_lastStepDirection = _const.Direction.InvalidDirection;
+        _this.m_lastStepFromPosition = new _position.Position();
+        _this.m_lastStepToPosition = new _position.Position();
+        _this.m_oldPosition = new _position.Position();
         for (var i = 0; i < _const.SpeedFormula.LastSpeedFormula; ++i) {
             _this.m_speedFormula.push(-1);
         }
@@ -1660,7 +1663,7 @@ var g_resources = new Resources();
 exports.g_resources = g_resources;
 /*
 var xhr = new XMLHttpRequest();
-xhr.open('GET', 'http://inditex.localhost/Kasteria.dat', true);
+xhr.open('GET', 'http://test.test/Kasteria.dat', true);
 xhr.responseType = 'arraybuffer';
 xhr.onload = function(e) {
   var uInt8Array = new Uint8Array(this.response); // this.response == uInt8Array.buffer
@@ -3654,7 +3657,7 @@ var Game = exports.Game = function () {
     }, {
         key: "updateMovie",
         value: function updateMovie(deltaTime) {
-            this.m_protocolGame.updateMovie(deltaTime * 5);
+            this.m_protocolGame.updateMovie(deltaTime * 50000);
         }
     }, {
         key: "setClientVersion",
@@ -4775,7 +4778,7 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 };
 
 var x = _const.Otc.MAX_AUTOWALK_DIST;
-//g_game.loadDatFile('http://inditex.localhost/Kasteria.dat');
+//g_game.loadDatFile('http://test.test/Kasteria.dat');
 
 //console.log('pixi', PIXI);
 function test() {
@@ -4795,7 +4798,7 @@ function test() {
 
                     case 5:
                         _context.next = 7;
-                        return _resources.g_resources.openFile('http://php72.sbg.best/prv/webclient/fronttypescript/small.ukcam');
+                        return _resources.g_resources.openFile('http://php72.sbg.best/prv/webclient/fronttypescript/poh.ukcam');
 
                     case 7:
                         movieData = _context.sent;
