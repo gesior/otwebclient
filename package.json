@@ -9,7 +9,7 @@
   "author": "Gesior.pl (Jerzy Skalski)",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^1.11.3",
+    "jquery": "^3.5.0",
     "jqueryui": "^1.11.1"
   },
   "devDependencies": {
