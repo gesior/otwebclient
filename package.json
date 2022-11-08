@@ -16,11 +16,11 @@
     "@types/jquery": "^2.0.40",
     "@types/jqueryui": "^1.11.32",
     "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
+    "babel-loader": "^9.1.0",
     "babel-preset-es2015-native-modules": "^6.9.4",
     "ts-loader": "2.0.1",
     "typescript": "2.2.1",
-    "webpack": "^2.2.1",
+    "webpack": "^5.74.0",
     "path": "*"
   }
 }
